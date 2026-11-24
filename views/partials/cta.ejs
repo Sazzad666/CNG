@@ -1,0 +1,22 @@
+<%# Final call to action with the inline enquiry form. Params: service (optional), heading (optional) %>
+<section id="cta" class="relative overflow-hidden border-t border-cream/10 py-20 sm:py-28" data-reveal>
+  <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-lime/10 blur-3xl"></div>
+  <div class="wrap relative grid gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-5">
+      <p class="eyebrow">Start a project</p>
+      <h2 class="mt-4 text-4xl font-bold sm:text-6xl"><%- accent(typeof heading !== 'undefined' && heading ? heading : 'Tell us what you’re *building.*') %></h2>
+      <p class="mt-6 max-w-md text-lg text-cream/75">Send a few lines and a senior member of the team will call you within one business day. No obligation, no sales script.</p>
+      <ul class="mt-8 space-y-3 text-cream/80">
+        <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime"></span>A fixed quote and timeline before any work starts</li>
+        <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime"></span>One senior point of contact for the whole project</li>
+        <li class="flex gap-3"><span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime"></span>You own everything we make for you</li>
+      </ul>
+      <p class="mt-8 text-cream/70">Prefer to talk? <a class="ulink text-cream" href="<%= site.phoneHref %>"><%= site.phone %></a></p>
+    </div>
+    <div class="lg:col-span-7">
+      <div class="rounded-3xl border border-cream/10 bg-ink-2 p-6 sm:p-10">
+        <%- include('enquiry-form', { formType: 'enquiry', service: typeof service !== 'undefined' ? service : '', idp: 'cta' }) %>
+      </div>
+    </div>
+  </div>
+</section>

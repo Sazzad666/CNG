@@ -47,7 +47,7 @@ app.locals.site = config.site;
 app.locals.baseUrl = config.baseUrl;
 app.locals.tracking = config.tracking;
 app.locals.year = new Date().getFullYear();
-app.use((req, res, next) => { res.locals.path = req.path; res.locals.meta = {}; next(); });
+app.use((req, res, next) => { res.locals.path = req.path; res.locals.meta = {}; Object.assign(res.locals, require('./src/content').helpers); next(); });
 
 const health = async (req, res) => {
   try { await require('./src/db').pool.query('SELECT 1'); res.set('Cache-Control', 'no-store').json({ ok: true }); }
@@ -59,8 +59,6 @@ const mount = (mod) => { try { app.use(require(mod)); } catch (e) { if (e.code !
 mount('./src/leads/routes');
 mount('./src/admin/routes');
 mount('./src/pages/routes');
-
-app.get('/', (req, res) => res.render('home', { meta: { title: 'Click & Grow — Web design, branding & growth agency in Dhaka', description: config.site.tagline } }));
 
 app.use((req, res) => res.status(404).render('not-found', { meta: { title: 'Page not found — Click & Grow' } }));
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

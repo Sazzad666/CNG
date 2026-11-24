@@ -1,0 +1,57 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main">
+  <section class="wrap grid items-end gap-10 pb-16 pt-16 sm:pt-24 lg:grid-cols-12">
+    <div class="lg:col-span-7">
+      <p class="eyebrow" data-enter data-enter-step="0"><a class="ulink" href="/services">Services</a> / <%= s.short %></p>
+      <h1 class="mt-4 text-5xl font-bold sm:text-7xl" data-enter data-enter-step="1"><%- accent(s.headline) %></h1>
+      <p class="mt-6 max-w-xl text-lg text-cream/75" data-enter data-enter-step="2"><%= s.intro %></p>
+      <div class="mt-8 flex flex-wrap gap-3" data-enter data-enter-step="3">
+        <a href="#cta" class="btn btn-lime" data-open-enquiry data-service="<%= s.key %>">Enquire about <%= s.short.toLowerCase() %> <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/estimate" class="btn btn-outline" data-open-estimate>Estimate my project</a>
+      </div>
+    </div>
+    <div class="lg:col-span-5" data-enter data-enter-step="2">
+      <div class="relative aspect-[4/5] overflow-hidden rounded-3xl"><%- img(s.photo, { cls: 'absolute inset-0 h-full w-full object-cover', eager: true, sizes: '(min-width: 1024px) 40vw, 100vw' }) %></div>
+    </div>
+  </section>
+
+  <section class="border-y border-cream/10 bg-ink-2 py-12" data-reveal>
+    <ul class="wrap grid gap-6 md:grid-cols-3">
+      <% s.outcomes.forEach(function (o) { %>
+        <li class="flex gap-4"><span class="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-lg"><%= o %></span></li>
+      <% }) %>
+    </ul>
+  </section>
+
+  <section class="wrap py-20 sm:py-28" data-reveal>
+    <p class="eyebrow">What we do</p>
+    <h2 class="mt-4 max-w-2xl text-4xl font-bold sm:text-5xl"><%= s.label %>, done properly.</h2>
+    <div class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-cream/10 bg-cream/10 sm:grid-cols-2 lg:grid-cols-3">
+      <% s.items.forEach(function (it, i) { %>
+        <article id="<%= it.id %>" class="scroll-mt-24 bg-ink p-7 transition-colors duration-200 hover:bg-ink-2" data-reveal-item>
+          <span class="font-display text-sm text-lime tabular-nums"><%= String(i + 1).padStart(2, '0') %></span>
+          <h3 class="mt-4 text-2xl font-bold"><%= it.title %></h3>
+          <p class="mt-3 text-cream/70"><%= it.text %></p>
+        </article>
+      <% }) %>
+    </div>
+  </section>
+
+  <% if (work.length) { %>
+  <section class="wrap pb-20 sm:pb-28" data-reveal>
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div><p class="eyebrow">Selected work</p><h2 class="mt-4 text-4xl font-bold sm:text-5xl">Recent <%= s.short.toLowerCase() %> projects</h2></div>
+      <a href="/work" class="ulink text-cream/80">See all work →</a>
+    </div>
+    <div class="mt-12 grid gap-10 md:grid-cols-2">
+      <% work.slice(0, 2).forEach(function (p) { %><%- include('partials/project-card', { p: p }) %><% }) %>
+    </div>
+  </section>
+  <% } %>
+
+  <%- include('partials/faq') %>
+  <%- include('partials/cta', { service: s.key, heading: 'Let’s talk about your *' + s.short.toLowerCase() + '.*' }) %>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>

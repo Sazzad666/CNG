@@ -1,0 +1,89 @@
+[
+  {
+    "key": "web-design",
+    "label": "Web design & development",
+    "short": "Websites",
+    "photo": "svc-web",
+    "headline": "Websites that look the part and *bring in* business.",
+    "intro": "Your website is where a serious customer decides whether you are serious too. We design and build fast, custom sites that make that decision easy, then hand you the keys to run them.",
+    "outcomes": ["A site that loads in under two seconds on a Dhaka 4G connection", "Pages written and laid out to turn visitors into enquiries", "A CMS your team can update without calling us"],
+    "items": [
+      { "id": "corporate", "title": "Corporate & business websites", "text": "A clear, confident home for your company: who you are, what you do, and why a buyer should call you first." },
+      { "id": "landing-pages", "title": "Campaign landing pages", "text": "Single pages built around one offer and one action, ready for Google and Meta traffic." },
+      { "id": "ecommerce", "title": "Ecommerce websites", "text": "Online stores with bKash, Nagad and card payments, delivery integration and stock that stays in sync." },
+      { "id": "shopify", "title": "Shopify stores", "text": "Custom Shopify themes, migrations and apps, set up so your team can run the store day to day." },
+      { "id": "wordpress", "title": "WordPress development", "text": "Fast, secure WordPress builds with a clean editor, not a theme stuffed with plugins." },
+      { "id": "ui-ux", "title": "UI/UX design", "text": "Research, wireframes and interface design for websites, portals and web apps." },
+      { "id": "redesign", "title": "Website redesign", "text": "We keep what works, fix what doesn’t, and protect the Google rankings you already have." },
+      { "id": "maintenance", "title": "Maintenance & support", "text": "Updates, backups, uptime checks and small changes, handled every month." }
+    ]
+  },
+  {
+    "key": "branding",
+    "label": "Branding & creative",
+    "short": "Branding",
+    "photo": "svc-branding",
+    "headline": "Brands people *remember* and trust.",
+    "intro": "A strong brand lets you charge what you’re worth. We build identities from the name and strategy outward, so every touchpoint looks like it came from the same confident company.",
+    "outcomes": ["A brand strategy your whole team can explain in one sentence", "A logo and identity system that works from a favicon to a billboard", "Guidelines that keep it consistent after we hand it over"],
+    "items": [
+      { "id": "logo", "title": "Logo design", "text": "Distinctive marks with a reason behind every curve, delivered in every format you need." },
+      { "id": "identity", "title": "Brand identity", "text": "Colour, type, imagery and tone of voice, brought together in a practical brand book." },
+      { "id": "brochure", "title": "Brochures & company profiles", "text": "Print and digital profiles that make a strong first impression in the boardroom." },
+      { "id": "packaging", "title": "Packaging design", "text": "Packaging that stands out on the shelf and photographs well online." },
+      { "id": "graphic", "title": "Graphic design", "text": "Social creatives, presentations, signage and everything in between, on brand every time." }
+    ]
+  },
+  {
+    "key": "video",
+    "label": "Video & motion",
+    "short": "Video",
+    "photo": "svc-video",
+    "headline": "Video that *stops* the scroll.",
+    "intro": "Video is how most of your customers will meet you first. We script, shoot, animate and edit films that hold attention for the first three seconds and earn the next thirty.",
+    "outcomes": ["Scripts built around one clear message", "Cuts for every platform from one shoot", "Motion graphics that match your brand exactly"],
+    "items": [
+      { "id": "ads", "title": "Ad films & commercials", "text": "Short, sharp films for Meta, YouTube and TV, made to sell." },
+      { "id": "product", "title": "Product videos", "text": "Show the product in use, close up and in the best possible light." },
+      { "id": "explainer", "title": "Explainer videos", "text": "Animated or live-action explainers that make a complex offer simple." },
+      { "id": "motion", "title": "Motion graphics", "text": "Animated logos, titles and graphics that bring your brand to life." },
+      { "id": "social", "title": "Social media videos", "text": "Reels and shorts in a steady monthly rhythm." },
+      { "id": "corporate", "title": "Corporate films", "text": "Company profiles, event coverage and leadership interviews." }
+    ]
+  },
+  {
+    "key": "apps",
+    "label": "App development",
+    "short": "Apps",
+    "photo": "svc-apps",
+    "headline": "Apps people *keep* on their phones.",
+    "intro": "From the first sketch to the App Store and beyond, we design and build mobile apps that are simple to use, quick to load and easy to grow.",
+    "outcomes": ["One codebase for iOS and Android where it makes sense", "Designs tested with real users before a line of code", "Launch support and updates after release"],
+    "items": [
+      { "id": "ios", "title": "iOS apps", "text": "Native iPhone and iPad apps that feel at home on Apple devices." },
+      { "id": "android", "title": "Android apps", "text": "Android apps tuned for the phones your customers actually use." },
+      { "id": "flutter", "title": "Flutter & React Native", "text": "Cross-platform apps from one codebase, for speed and lower cost." },
+      { "id": "ecommerce-app", "title": "Ecommerce apps", "text": "Shopping apps with local payments, push offers and order tracking." },
+      { "id": "backend", "title": "Backends & dashboards", "text": "The admin panels, APIs and integrations that keep an app running." }
+    ]
+  },
+  {
+    "key": "growth",
+    "label": "Digital marketing, social & SEO",
+    "short": "Growth",
+    "photo": "svc-growth",
+    "headline": "Marketing that shows up in your *numbers*.",
+    "intro": "Traffic is easy to buy and hard to turn into revenue. We plan, run and measure campaigns against the number you care about, and report it in plain language every month.",
+    "outcomes": ["A plan tied to leads and sales, not likes", "Monthly reports you can read in five minutes", "Creative, media and landing pages under one roof"],
+    "items": [
+      { "id": "google-ads", "title": "Google Ads", "text": "Search, Performance Max and YouTube campaigns, managed weekly." },
+      { "id": "meta-ads", "title": "Meta ads", "text": "Facebook and Instagram campaigns with creative that is built to convert." },
+      { "id": "social", "title": "Social media management", "text": "Content calendars, design, posting and community replies." },
+      { "id": "seo", "title": "SEO", "text": "Technical fixes, content and links that move you up Google, including local search in Dhaka." },
+      { "id": "influencer", "title": "Influencer marketing", "text": "Creators matched to your audience, with clear briefs and tracked results." },
+      { "id": "email", "title": "Email marketing", "text": "Newsletters and automated sequences that bring customers back." },
+      { "id": "leads", "title": "Lead generation & CRO", "text": "Funnels, forms and testing that turn more of your traffic into enquiries." },
+      { "id": "reputation", "title": "Reputation management", "text": "Reviews and search results that reflect the business you really are." }
+    ]
+  }
+]

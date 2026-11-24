@@ -1,0 +1,14 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main" class="wrap max-w-3xl py-16 sm:py-24">
+  <p class="eyebrow">Privacy</p>
+  <h1 class="mt-4 text-5xl font-bold">Your details, kept simply.</h1>
+  <div class="mt-10 space-y-6 text-lg text-cream/80">
+    <p>When you send a form on this website we collect what you type (your name, phone number, and anything else you choose to share), the page you sent it from, and the campaign that brought you here, if any. We store a one-way fingerprint of your network address to stop spam; we can’t turn it back into the address.</p>
+    <p>We use these details only to reply to you and prepare a quote. We don’t sell them, share them with other companies, or add you to a mailing list without asking.</p>
+    <p>We keep enquiries for up to two years so we can pick up the conversation again if you come back. To see, correct or delete what we hold about you, call <a class="ulink text-cream" href="<%= site.phoneHref %>"><%= site.phone %></a> or email <a class="ulink text-cream" href="mailto:<%= site.email %>"><%= site.email %></a>.</p>
+    <p>This website uses a small amount of browser storage to remember the page you arrived on and whether you’ve already seen our audit offer. If analytics is switched on, Google Analytics and Meta may set their own cookies.</p>
+  </div>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>
