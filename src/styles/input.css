@@ -9,6 +9,7 @@
 @tailwind utilities;
 
 @layer base {
+  [hidden] { display: none !important; }
   :root { --ink:#0B0F0C; --ink-2:#151B16; --ink-3:#222A23; --cream:#F3F1EA; --sage:#8A998C; --lime:#C6F432; --lime-deep:#9BC41A; --error:#FF6B5B; --ease-out:cubic-bezier(0.23,1,0.32,1); color-scheme: dark; }
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
   body { @apply bg-ink text-cream font-sans antialiased; font-size: 16px; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
@@ -111,3 +112,17 @@ details.faq > summary { -webkit-user-select: none; user-select: none; }
   .mobile-bar, .mega, .svc-arrow { transition: none; }
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
+
+/* ---- Estimator ------------------------------------------------------- */
+.est-choice { position: relative; display: inline-flex; cursor: pointer; }
+.est-input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.est-choice-box { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; width: 100%; min-height: 52px; padding: 0.75rem 1.1rem; border-radius: 1rem; border: 1px solid rgba(243,241,234,0.15); background: var(--ink); font-weight: 500; transition: border-color 160ms, background-color 160ms, transform 160ms var(--ease-out); }
+.grid > .est-choice { display: flex; }
+.est-choice:active .est-choice-box { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) { .est-choice:hover .est-choice-box { border-color: rgba(243,241,234,0.4); } }
+.est-choice input:checked + .est-choice-box { border-color: var(--lime); background: rgba(198,244,50,0.08); }
+.est-choice input:focus-visible + .est-choice-box { outline: 2px solid var(--lime); outline-offset: 2px; }
+.est-tick { width: 18px; height: 18px; flex-shrink: 0; border-radius: 999px; border: 1.5px solid rgba(243,241,234,0.3); transition: background-color 160ms, border-color 160ms; }
+.est-choice input[type="checkbox"] + .est-choice-box .est-tick { border-radius: 5px; }
+.est-choice input:checked + .est-choice-box .est-tick { background: var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%230B0F0C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; border-color: var(--lime); }
+.est-step { min-width: 0; }

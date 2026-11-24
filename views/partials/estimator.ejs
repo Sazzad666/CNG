@@ -1,5 +1,116 @@
-<%# Replaced by the interactive estimator in Task 7. Without JS, the enquiry form is the fallback. %>
-<div data-estimator>
+<%
+  var Q = {
+    'web-design': [
+      { name: 'pages', label: 'How many pages, roughly?', type: 'radio', options: [['1-5', '1–5 pages'], ['6-15', '6–15 pages'], ['16-plus', '16+ pages']] },
+      { name: 'ecommerce', label: 'Will you sell online?', type: 'radio', options: [['no', 'No, it’s informational'], ['yes', 'Yes, an online store']] },
+      { name: 'products', label: 'How many products?', type: 'radio', showIf: 'ecommerce=yes', options: [['up-to-50', 'Up to 50'], ['51-500', '51–500'], ['500-plus', '500+']] }
+    ],
+    'branding': [
+      { name: 'branding_need', label: 'What do you need?', type: 'radio', options: [['logo', 'Logo only'], ['identity', 'Full brand identity'], ['packaging', 'Packaging'], ['print', 'Print & stationery']] }
+    ],
+    'video': [
+      { name: 'video_type', label: 'What kind of video?', type: 'radio', options: [['ad', 'Ad or commercial'], ['explainer', 'Explainer'], ['corporate', 'Corporate film'], ['social', 'Social media series']] },
+      { name: 'video_length', label: 'How long?', type: 'radio', options: [['short', 'Under 30 seconds'], ['medium', '1–2 minutes'], ['long', '3 minutes or more']] }
+    ],
+    'apps': [
+      { name: 'app_platforms', label: 'Which platforms?', type: 'radio', options: [['ios', 'iPhone'], ['android', 'Android'], ['both', 'Both']] },
+      { name: 'app_backend', label: 'Do you need a backend or admin panel?', type: 'radio', options: [['yes', 'Yes'], ['no', 'No'], ['not-sure', 'Not sure']] }
+    ],
+    'growth': [
+      { name: 'channels', label: 'Which channels?', type: 'checkbox', options: [['google-ads', 'Google Ads'], ['meta-ads', 'Facebook & Instagram ads'], ['seo', 'SEO'], ['social', 'Social media management'], ['email', 'Email marketing']] }
+    ]
+  };
+  var EXTRAS = [['cms', 'Content management (CMS)'], ['booking', 'Booking or appointments'], ['payments', 'Online payments (bKash, card)'], ['bilingual', 'English & Bangla'], ['copywriting', 'Copywriting'], ['photography', 'Photography or video shoot'], ['support', 'Monthly support after launch']];
+  var TIMELINE = [['asap', 'As soon as possible'], ['month', 'Within a month'], ['quarter', 'In 1–3 months'], ['exploring', 'Just exploring']];
+  function choice(type, name, value, label, extra) {
+    return '<label class="est-choice"><input type="' + type + '" name="a_' + name + '" value="' + value + '" class="est-input"' + (extra || '') + '><span class="est-choice-box">' + label.replace(/&(?!amp;)/g, '&amp;') + '<span class="est-tick" aria-hidden="true"></span></span></label>';
+  }
+%>
+<div data-estimator-fallback>
   <p class="mb-6 text-cream/75">Tell us about your project and we’ll send a custom quote.</p>
-  <%- include('enquiry-form', { formType: 'enquiry', idp: 'est' }) %>
+  <%- include('enquiry-form', { formType: 'enquiry', idp: 'est-fb' }) %>
 </div>
+
+<form action="/api/leads" method="post" class="est" data-lead-form data-estimator hidden novalidate>
+  <input type="hidden" name="type" value="estimate">
+  <input type="hidden" name="_t" value="<%= Date.now() %>">
+  <input type="hidden" name="source_page" value="<%= path %>">
+  <input type="hidden" name="utm_source" value=""><input type="hidden" name="utm_medium" value=""><input type="hidden" name="utm_campaign" value=""><input type="hidden" name="referrer" value="">
+  <input type="hidden" name="service" value=""><input type="hidden" name="budget" value="">
+  <div class="hp" aria-hidden="true"><label>Company website <input type="text" name="company_site" tabindex="-1" autocomplete="off"></label></div>
+
+  <div class="flex items-center justify-between gap-4 text-sm">
+    <p class="font-medium" data-est-label aria-live="polite">Step 1 of 5</p>
+    <p class="text-sage" data-est-hint>About a minute</p>
+  </div>
+  <div class="mt-3 h-1 overflow-hidden rounded-full bg-cream/10" aria-hidden="true"><div class="h-full origin-left rounded-full bg-lime transition-transform duration-300 ease-out" style="transform: scaleX(0.2)" data-est-bar></div></div>
+
+  <div class="relative mt-8 min-h-[320px]" data-est-stage>
+    <fieldset class="est-step" data-step="1">
+      <legend class="text-2xl font-bold sm:text-3xl">What do you need?</legend>
+      <p class="mt-2 text-cream/70">Pick everything that applies.</p>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2">
+        <% site.services.forEach(function (s) { %><%- choice('checkbox', 'services', s.key, s.label) %><% }) %>
+      </div>
+      <p class="est-error mt-4 text-sm text-error" data-est-error hidden></p>
+    </fieldset>
+
+    <fieldset class="est-step" data-step="2" hidden>
+      <legend class="text-2xl font-bold sm:text-3xl">Tell us about the scope.</legend>
+      <p class="mt-2 text-cream/70">Best guesses are fine. We’ll confirm the details on a call.</p>
+      <div class="mt-6 space-y-8">
+        <% Object.keys(Q).forEach(function (key) { %>
+          <div data-for-service="<%= key %>" hidden>
+            <p class="eyebrow mb-4"><%= site.services.find(function (s) { return s.key === key; }).label %></p>
+            <div class="space-y-6">
+              <% Q[key].forEach(function (q) { %>
+                <div role="group" aria-label="<%= q.label %>" <%- q.showIf ? 'data-show-if="' + q.showIf + '" hidden' : '' %>>
+                  <p class="mb-3 font-medium"><%= q.label %></p>
+                  <div class="flex flex-wrap gap-2"><% q.options.forEach(function (o) { %><%- choice(q.type, q.name, o[0], o[1]) %><% }) %></div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </fieldset>
+
+    <fieldset class="est-step" data-step="3" hidden>
+      <legend class="text-2xl font-bold sm:text-3xl">Anything extra?</legend>
+      <p class="mt-2 text-cream/70">Optional. Skip it if you’re not sure.</p>
+      <div class="mt-6 grid gap-3 sm:grid-cols-2"><% EXTRAS.forEach(function (o) { %><%- choice('checkbox', 'extras', o[0], o[1]) %><% }) %></div>
+    </fieldset>
+
+    <fieldset class="est-step" data-step="4" hidden>
+      <legend class="text-2xl font-bold sm:text-3xl">When, and roughly what budget?</legend>
+      <div class="mt-6" role="group" aria-label="Timeline">
+        <p class="mb-3 font-medium">When do you need it?</p>
+        <div class="flex flex-wrap gap-2"><% TIMELINE.forEach(function (o) { %><%- choice('radio', 'timeline', o[0], o[1]) %><% }) %></div>
+      </div>
+      <div class="mt-8" role="group" aria-label="Budget">
+        <p class="mb-3 font-medium">Budget <span class="font-normal text-sage">(optional)</span></p>
+        <div class="flex flex-wrap gap-2"><% site.budgets.forEach(function (b) { %><%- choice('radio', 'budget', b.key, b.label) %><% }) %><%- choice('radio', 'budget', '', 'Prefer to discuss') %></div>
+      </div>
+    </fieldset>
+
+    <fieldset class="est-step" data-step="5" hidden>
+      <legend class="text-2xl font-bold sm:text-3xl">Where should we send your quote?</legend>
+      <p class="mt-2 text-cream/70">A real person writes it, usually the same day.</p>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        <div class="field"><label for="est-name">Your name</label><input class="input" id="est-name" name="name" autocomplete="name" maxlength="120" aria-describedby="est-name-err"><p class="error" id="est-name-err" hidden></p></div>
+        <div class="field"><label for="est-phone">Mobile number</label><input class="input" id="est-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01712-345678" aria-describedby="est-phone-err"><p class="error" id="est-phone-err" hidden></p></div>
+        <div class="field sm:col-span-2"><label for="est-email">Email</label><input class="input" id="est-email" name="email" type="email" autocomplete="email" maxlength="190" aria-describedby="est-email-err"><p class="error" id="est-email-err" hidden></p></div>
+        <div class="field sm:col-span-2"><label for="est-message">Anything else? <span class="font-normal opacity-60">(optional)</span></label><textarea class="input" id="est-message" name="message" rows="2" maxlength="2000"></textarea></div>
+      </div>
+      <div class="mt-6 rounded-2xl border border-cream/10 bg-ink p-4 text-sm"><p class="font-medium">Your project</p><ul class="mt-2 space-y-1 text-cream/70" data-est-summary></ul></div>
+    </fieldset>
+  </div>
+
+  <p class="form-status mt-4 text-sm text-error" role="status" aria-live="polite" hidden></p>
+  <div class="mt-8 flex items-center justify-between gap-3 border-t border-cream/10 pt-6">
+    <button type="button" class="btn btn-outline" data-est-back hidden>Back</button>
+    <span></span>
+    <button type="button" class="btn btn-lime" data-est-next>Next <span class="arrow" aria-hidden="true">→</span></button>
+    <button type="submit" class="btn btn-lime" data-submit data-est-submit hidden><span data-label>Send my project</span> <span class="arrow" aria-hidden="true">→</span></button>
+  </div>
+</form>
