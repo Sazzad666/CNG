@@ -1,11 +1,11 @@
 'use strict';
-// Renders the running site into a static, browsable preview (flat .html files with relative links),
-// plus one thumbnail per page. Forms don't post in the preview: they go to the matching thank-you page.
+// Renders the running site into a static, browsable copy (flat .html files with relative links).
+// The homepage becomes index.html with its document wrapper removed, so it can be the front page of a
+// published Artifact (which supplies its own <html>/<head>/<body>). Forms don't post here: they go to the
+// matching thank-you page.
 // Usage: node scripts/export-preview.js [baseUrl] [outDir]
 const fs = require('fs');
 const path = require('path');
-const sharp = require('sharp');
-const { chromium } = require('playwright');
 
 const base = process.argv[2] || 'http://localhost:3000';
 const out = path.resolve(process.argv[3] || '.preview');
@@ -13,7 +13,7 @@ const content = require('../src/content');
 const ROOT = path.join(__dirname, '..');
 
 const pages = [
-  ['/', 'home'], ['/services', 'services'], ...content.services().map((s) => [`/services/${s.key}`, `services-${s.key}`]),
+  ['/', 'index'], ['/services', 'services'], ...content.services().map((s) => [`/services/${s.key}`, `services-${s.key}`]),
   ['/work', 'work'], ...content.projects().map((p) => [`/work/${p.slug}`, `work-${p.slug}`]),
   ['/about', 'about'], ['/estimate', 'estimate'], ['/contact', 'contact'],
   ['/thank-you?type=enquiry', 'thank-you-enquiry'], ['/thank-you?type=estimate', 'thank-you-estimate'], ['/thank-you?type=audit', 'thank-you-audit'],
@@ -41,7 +41,7 @@ function rewrite(html) {
 
 (async () => {
   fs.rmSync(out, { recursive: true, force: true });
-  for (const d of ['img', 'css', 'js', 'fonts', 'brand', 'vendor', 'thumbs']) fs.mkdirSync(path.join(out, d), { recursive: true });
+  for (const d of ['img', 'css', 'js', 'fonts', 'brand', 'vendor']) fs.mkdirSync(path.join(out, d), { recursive: true });
   for (const d of ['img', 'js', 'fonts', 'brand']) for (const f of fs.readdirSync(path.join(ROOT, 'public', d))) {
     if (f.startsWith('_')) continue;
     fs.copyFileSync(path.join(ROOT, 'public', d, f), path.join(out, d, f));
@@ -50,10 +50,6 @@ function rewrite(html) {
   fs.copyFileSync(path.join(ROOT, 'node_modules/motion/dist/motion.js'), path.join(out, 'vendor', 'motion.js'));
   fs.writeFileSync(path.join(out, 'js', 'preview.js'), `/* Preview only: forms have no server here, so a submit goes to the matching thank-you page. */
 (function () {
-  var pill = document.createElement('a');
-  pill.href = 'index.html'; pill.textContent = 'Preview \\u00b7 all pages';
-  pill.style.cssText = 'position:fixed;z-index:90;left:max(12px,env(safe-area-inset-left,0px));bottom:calc(88px + env(safe-area-inset-bottom,0px));padding:8px 14px;border-radius:999px;background:#F3F1EA;color:#0B0F0C;font:600 13px "Inter Tight",system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 24px rgba(0,0,0,.35)';
-  document.body.appendChild(pill);
   document.addEventListener('submit', function (e) {
     var f = e.target;
     if (!f.matches || !f.matches('[data-lead-form]')) return;
@@ -67,17 +63,16 @@ function rewrite(html) {
   }, true);
 })();
 `);
-  const browser = await chromium.launch();
   for (const [url, name] of pages) {
     const res = await fetch(base + url);
-    fs.writeFileSync(path.join(out, name + '.html'), rewrite(await res.text()));
-    const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
-    await page.goto(base + url, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(1500);
-    const buf = await page.screenshot();
-    await sharp(buf).resize({ width: 640 }).webp({ quality: 78 }).toFile(path.join(out, 'thumbs', name + '.webp'));
-    await page.close();
+    let html = rewrite(await res.text());
+    if (name === 'index') {
+      // front page of the Artifact: keep the head's contents and the body's contents, drop the wrapper tags
+      html = html.replace(/<!doctype html>\s*/i, '').replace(/<html[^>]*>\s*/i, '').replace(/<head>\s*/i, '')
+        .replace(/<meta charset="utf-8">\s*/i, '').replace(/<meta name="viewport"[^>]*>\s*/i, '')
+        .replace(/<\/head>\s*/i, '').replace(/<body[^>]*>/i, '').replace(/<\/body>\s*<\/html>\s*$/i, '');
+    }
+    fs.writeFileSync(path.join(out, name + '.html'), html);
   }
-  await browser.close();
   console.log(`${pages.length} pages exported to ${out}`);
 })().catch((e) => { console.error(e); process.exit(1); });
