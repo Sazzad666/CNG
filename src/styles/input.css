@@ -64,9 +64,7 @@
 }
 
 /* Motion: hidden start states only when JS has loaded and motion is allowed. */
-@media (prefers-reduced-motion: no-preference) {
-  .js [data-enter], .js [data-reveal-item], .js [data-reveal]:not(:has([data-reveal-item])) { opacity: 0; }
-}
+.js [data-enter], .js [data-reveal-item], .js [data-reveal]:not(:has([data-reveal-item])) { opacity: 0; }
 
 /* ---- Layout pieces ---------------------------------------------------- */
 .site-header { background: transparent; }

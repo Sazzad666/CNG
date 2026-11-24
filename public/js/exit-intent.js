@@ -34,7 +34,7 @@
     if (!dlg.open) return;
     var done = function () { dlg.close(); document.documentElement.classList.remove('panel-open'); };
     if (reduce || !M) return done();
-    M.animate(dlg, { opacity: 0, transform: 'scale(0.97)' }, { duration: 0.15, ease: [0.4, 0, 1, 1] }).then(done);
+    M.animate(dlg, { opacity: 0, transform: 'scale(0.97)' }, { duration: 0.14, ease: [0.23, 1, 0.32, 1] }).then(done);
   }
 
   if (seenRecently()) return;

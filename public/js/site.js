@@ -7,7 +7,10 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var M = window.Motion;
   var EASE = [0.23, 1, 0.32, 1];
-  if (!reduce && M) doc.classList.add('js');
+  if (M) doc.classList.add('js');
+  // reduced motion: keep gentle opacity fades, drop all movement
+  var move = function (from, to) { return reduce ? {} : { transform: [from, to] }; };
+  var fx = function (props, extra) { return Object.assign({ opacity: [0, 1] }, props, extra || {}); };
 
   // Safety net: if anything below fails, never leave content hidden.
   var revealAll = function () { document.querySelectorAll('[data-enter],[data-reveal],[data-reveal-item]').forEach(function (el) { el.style.opacity = 1; }); };
@@ -17,10 +20,11 @@
   function enter() {
     var items = Array.prototype.slice.call(document.querySelectorAll('[data-enter]'));
     if (!items.length) return;
-    if (reduce || !M) { items.forEach(function (el) { el.style.opacity = 1; }); return; }
+    if (!M) { items.forEach(function (el) { el.style.opacity = 1; }); return; }
     items.forEach(function (el) {
       var step = Number(el.getAttribute('data-enter-step') || 0);
       var isLine = el.classList.contains('line');
+      if (reduce) return M.animate(el, { opacity: [0, 1] }, { duration: 0.4, delay: step * 0.05 });
       M.animate(el, isLine ? { opacity: [0, 1], transform: ['translateY(0.45em)', 'translateY(0)'], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 -20% 0)'] } : { opacity: [0, 1], transform: ['translateY(18px)', 'translateY(0)'] },
         { duration: isLine ? 0.7 : 0.6, delay: 0.08 + step * 0.11, ease: EASE });
     });
@@ -29,16 +33,16 @@
   // ---- Section reveals: the section is one beat; its items follow it closely --
   function reveals() {
     var sections = document.querySelectorAll('[data-reveal]');
-    if (reduce || !M || !M.inView) return;
+    if (!M || !M.inView) return;
     sections.forEach(function (section) {
       M.inView(section, function () {
         var items = section.querySelectorAll('[data-reveal-item]');
         // one entrance per container: the items carry it, or the section does when it has none
-        if (!items.length) M.animate(section, { opacity: [0, 1], transform: ['translateY(16px)', 'translateY(0)'] }, { duration: 0.6, ease: EASE });
+        if (!items.length) M.animate(section, fx(move('translateY(16px)', 'translateY(0)')), { duration: reduce ? 0.4 : 0.6, ease: EASE });
         items.forEach(function (it, i) {
           // shrinking gaps, capped: a long list never makes the last item wait
           var delay = Math.min(0.35, 0.06 * i + 0.02 * Math.sqrt(i));
-          M.animate(it, { opacity: [0, 1], transform: ['translateY(24px)', 'translateY(0)'] }, { duration: 0.6, delay: delay, ease: EASE });
+          M.animate(it, fx(move('translateY(24px)', 'translateY(0)')), { duration: reduce ? 0.4 : 0.6, delay: reduce ? 0 : delay, ease: EASE });
         });
       }, { amount: 0.15 });
     });
@@ -111,7 +115,7 @@
       if (sel && service) sel.value = service;
       dlg.showModal();
       doc.classList.add('panel-open');
-      if (!reduce && M) M.animate(dlg, { transform: ['translateX(40px)', 'translateX(0)'], opacity: [0, 1] }, { duration: 0.28, ease: EASE });
+      if (M) M.animate(dlg, fx(move('translateX(40px)', 'translateX(0)')), { duration: reduce ? 0.2 : 0.28, ease: EASE });
       var first = dlg.querySelector('input[name="name"]');
       if (first && window.matchMedia('(pointer: fine)').matches) first.focus();
       dlg._opener = opener;
@@ -120,7 +124,7 @@
       if (!dlg.open) return;
       var done = function () { dlg.close(); doc.classList.remove('panel-open'); if (dlg._opener) dlg._opener.focus(); };
       if (reduce || !M) return done();
-      M.animate(dlg, { transform: 'translateX(40px)', opacity: 0 }, { duration: 0.2, ease: [0.4, 0, 1, 1] }).then(done);
+      M.animate(dlg, { transform: 'translateX(40px)', opacity: 0 }, { duration: 0.16, ease: EASE }).then(done);
     };
     document.addEventListener('click', function (e) {
       var a = e.target.closest('[data-open-enquiry]');

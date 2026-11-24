@@ -1,0 +1,28 @@
+# Click & Grow behind nginx (TLS via certbot). Replace clickandgrow.example with the real domain.
+server {
+  listen 80;
+  server_name clickandgrow.example www.clickandgrow.example;
+  return 301 https://clickandgrow.example$request_uri;
+}
+server {
+  listen 443 ssl http2;
+  server_name clickandgrow.example;
+  # ssl_certificate /etc/letsencrypt/live/clickandgrow.example/fullchain.pem;
+  # ssl_certificate_key /etc/letsencrypt/live/clickandgrow.example/privkey.pem;
+
+  client_max_body_size 1m;
+  gzip on; gzip_types text/css application/javascript image/svg+xml application/json;
+
+  location ~* ^/(img|fonts|brand)/ {
+    root /var/www/click-and-grow/public;
+    expires 30d; add_header Cache-Control "public, immutable";
+    try_files $uri @app;
+  }
+  location / { try_files /dev/null @app; }
+  location @app {
+    proxy_pass http://127.0.0.1:3100;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
