@@ -2,7 +2,7 @@
 
 Every prototype built while exploring the Click & Grow homepage, oldest first. Each folder holds one self-contained `index.html` (fonts and scripts load from Google Fonts and CDNs). Open it in a browser to view it.
 
-The current direction is **12-daytime-compare**.
+The current direction is **13-dhaka-slides**.
 
 | Folder | Concept | Published preview |
 |---|---|---|
@@ -18,7 +18,8 @@ The current direction is **12-daytime-compare**.
 | `09-search-results` | "Your search ends here" as a search results page | same link, version 4 |
 | `10-claw-machine` | Claw machine game for "Your search ends here" | same link, version 5 |
 | `11-night-mela` | Night street, neon stalls, claw machine, cousin slider | same link, version 6 |
-| `12-daytime-compare` | **Current:** daytime street (from version 3), cousin vs us drag slider as section 2, calmer motion | same link, version 7 |
+| `12-daytime-compare` | Daytime street (from version 3), cousin vs us drag slider as section 2, calmer motion | same link, version 7 |
+| `13-dhaka-slides` | **Current:** back to the Dhaka daytime template (05). Rickshaws face forward, and the CNG in the rain scene is now a swipeable 5-slide story. Works on phones first | https://claude.ai/artifact/SPdTAU9vXaXSN8qYTrDgS1 (version 2) |
 
 The published previews are private until shared from their Share menu.
 
