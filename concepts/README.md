@@ -2,7 +2,7 @@
 
 Every prototype built while exploring the Click & Grow homepage, oldest first. Each folder holds one self-contained `index.html` (fonts and scripts load from Google Fonts and CDNs). Open it in a browser to view it.
 
-The current direction is **11-night-mela**.
+The current direction is **12-daytime-compare**.
 
 | Folder | Concept | Published preview |
 |---|---|---|
@@ -17,7 +17,8 @@ The current direction is **11-night-mela**.
 | `08-one-step-form` | One-step quote form, redrawn vehicles, proof slots | same link, version 3 |
 | `09-search-results` | "Your search ends here" as a search results page | same link, version 4 |
 | `10-claw-machine` | Claw machine game for "Your search ends here" | same link, version 5 |
-| `11-night-mela` | **Current:** night street, neon stalls, claw machine, cousin slider | same link, version 6 |
+| `11-night-mela` | Night street, neon stalls, claw machine, cousin slider | same link, version 6 |
+| `12-daytime-compare` | **Current:** daytime street (from version 3), cousin vs us drag slider as section 2, calmer motion | same link, version 7 |
 
 The published previews are private until shared from their Share menu.
 
