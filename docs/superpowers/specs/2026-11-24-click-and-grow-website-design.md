@@ -1,7 +1,7 @@
 # Click & Grow — Agency Website Design
 
 Date: 2026-11-24
-Status: draft, awaiting approval
+Status: approved 2026-11-24
 
 ## 1. Intent and why
 
@@ -93,7 +93,7 @@ highlighted word per headline at most.
 
 ### 6.2 Type (my call)
 
-- **Display:** *Clash Display* (Fontshare, free licence, self-hosted). Big, confident, modern.
+- **Display:** *Bricolage Grotesque* (self-hosted via npm @fontsource). Big, confident, modern. (Builder's call: Clash Display was the first pick, but Fontshare isn't reachable from the build environment or on npm.)
 - **Accent:** *Instrument Serif Italic* (Google Fonts), for one word per headline, for example
   "Websites that *grow*". This adds the premium, editorial touch.
 - **Body and UI:** *Inter Tight* (Google Fonts). 16px base, 1.6 line height.
