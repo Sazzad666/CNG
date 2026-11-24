@@ -1,4 +1,6 @@
 <% if (!(typeof noPanel !== 'undefined' && noPanel)) { %><%- include('enquiry-panel') %><%- include('mobile-bar') %><% } %>
+<% var noExit = ['/contact', '/estimate', '/thank-you'].indexOf(path) > -1 || (typeof noPanel !== 'undefined' && noPanel); %>
+<% if (!noExit) { %><%- include('exit-intent') %><script src="/js/exit-intent.js" defer></script><% } %>
 <script src="/js/logo.js" defer></script>
 <script src="/js/forms.js" defer></script>
 </body>
