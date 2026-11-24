@@ -309,7 +309,7 @@ test/*.test.js
     - `[data-marquee]`, `[data-process-line]`, `[data-drift]` and `#cg-logo`.
   - `forms.js` attaches to every `form[data-lead-form]`. It posts JSON with a fallback to normal
     submit, shows inline errors, disables the button while sending, and fills the hidden UTM and
-    source fields from `sessionStorage`.
+    source fields from `sessionStorage`. On success it fires `gtag("event","generate_lead")` and `fbq("track","Lead")` when those globals exist (IDs from `.env` `GA4_ID` and `META_PIXEL_ID`).
 - **Logo sequence** (spec section 6.3), about 1.1 s in total:
   1. The cursor drops (y −12 → 0, spring).
   2. It presses (scale 0.92, 160 ms).
