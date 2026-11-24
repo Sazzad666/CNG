@@ -19,19 +19,19 @@
       <div data-reveal-item><p class="font-display text-5xl font-bold text-lime">03</p><h3 class="mt-4 text-2xl font-bold">Measured by results</h3><p class="mt-3 text-cream/70">We agree the number that matters up front, and report against it until it moves.</p></div>
     </div>
   </section>
-  <section class="on-cream py-20 sm:py-28" data-reveal>
+  <section class="py-20 sm:py-28" data-reveal>
     <div class="wrap">
       <p class="eyebrow">The team</p>
-      <h2 class="mt-4 text-4xl font-bold sm:text-5xl">The people behind the <em class="accent">work.</em></h2>
+      <h2 class="mt-4 text-4xl font-bold sm:text-5xl">The <em class="s">gardeners.</em></h2>
       <div class="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
         <% content.team().forEach(function (m) { %>
           <figure data-reveal-item>
-            <div class="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-2"><%- img(m.photo, { cls: 'absolute inset-0 h-full w-full object-cover', alt: m.name, sizes: '(min-width: 1024px) 25vw, 50vw' }) %></div>
-            <figcaption class="mt-4"><span class="block font-display text-xl font-bold"><%= m.name %></span><span class="text-sm text-ink/65"><%= m.role %></span></figcaption>
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[40%_40%_24px_24px] bg-ink-2 ring-1 ring-lime/20"><%- img(m.photo, { cls: 'absolute inset-0 h-full w-full object-cover', alt: m.name, sizes: '(min-width: 1024px) 25vw, 50vw' }) %></div>
+            <figcaption class="mt-4"><span class="block font-display text-xl font-bold"><%= m.name %></span><span class="text-sm text-sage"><%= m.role %></span></figcaption>
           </figure>
         <% }) %>
       </div>
-      <p class="mt-8 text-sm text-ink/60">Team profiles are placeholders until the final team photos are ready.</p>
+      <p class="mt-8 text-sm text-sage">Team profiles are placeholders until the final team photos are ready.</p>
     </div>
   </section>
   <section class="wrap grid items-center gap-10 py-20 sm:py-28 lg:grid-cols-2" data-reveal>

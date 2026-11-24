@@ -92,6 +92,7 @@
     nextBtn.hidden = n === TOTAL;
     submit.hidden = n !== TOTAL;
     if (n === TOTAL) summary(sync()); else sync();
+    document.dispatchEvent(new CustomEvent('est:progress', { detail: { step: n, answers: form._answers } }));
     if (from === to) { to.hidden = false; return; }
     var focusTarget = function () {
       var t = n === TOTAL ? to.querySelector('input[name="name"]') : to.querySelector('legend');

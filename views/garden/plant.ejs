@@ -1,0 +1,50 @@
+<%# A service as a plant. Param: key (web-design | branding | video | apps | growth) %>
+<% if (key === 'web-design') { %>
+<svg viewBox="0 0 200 220" aria-hidden="true">
+            <rect x="34" y="66" width="132" height="88" rx="8" fill="#121A14" stroke="#F3F1EA" stroke-width="3"/>
+            <g class="p p-screen"><rect x="46" y="78" width="60" height="8" rx="4" fill="#C6F432"/><rect x="46" y="94" width="108" height="5" rx="2.5" fill="#F3F1EA" opacity=".5"/><rect x="46" y="105" width="90" height="5" rx="2.5" fill="#F3F1EA" opacity=".5"/><rect x="46" y="122" width="40" height="18" rx="9" fill="#C6F432"/></g>
+            <path d="M22 160h156l-12 12H34z" fill="#F3F1EA"/>
+            <path d="M160 172 C 186 150, 168 120, 184 96 C 196 76, 178 54, 184 34" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M178 140 c 14 -10 26 -6 30 2 c -10 8 -22 8 -30 -2z"/><path class="p p-leaf" d="M180 100 c -14 -10 -26 -6 -30 2 c 10 8 22 8 30 -2z"/><path class="p p-leaf" d="M184 58 c 12 -12 24 -8 28 0 c -10 8 -20 8 -28 0z"/></g>
+            <g class="p p-petal"><use href="#flowerShape" transform="translate(184 32) scale(.8)"/></g>
+          </svg>
+<% } else if (key === 'branding') { %>
+<svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 210 C 100 180, 96 160, 100 130" stroke="#7FBF3A" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M100 186 c -20 -14 -38 -6 -42 4 c 14 10 32 8 42 -4z"/><path class="p p-leaf" d="M100 170 c 20 -14 38 -6 42 4 c -14 10 -32 8 -42 -4z"/></g>
+            <g class="p p-petal">
+              <g fill="#FF9EC0"><ellipse cx="100" cy="52" rx="20" ry="34"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(60 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(120 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(180 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(240 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(300 100 90)"/></g>
+            </g>
+            <circle cx="100" cy="90" r="26" fill="#C6F432"/>
+            <text x="100" y="104" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="40" fill="#0B0F0C">&amp;</text>
+          </svg>
+<% } else if (key === 'video') { %>
+<svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 210 V 150" stroke="#7FBF3A" stroke-width="5" stroke-linecap="round"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M100 190 c -20 -12 -36 -4 -40 6 c 14 8 30 6 40 -6z"/><path class="p p-leaf" d="M100 176 c 20 -12 36 -4 40 6 c -14 8 -30 6 -40 -6z"/></g>
+            <g class="p p-spin">
+              <circle cx="100" cy="94" r="58" fill="#121A14" stroke="#F3F1EA" stroke-width="4"/>
+              <g fill="#0A0F0B" stroke="#F3F1EA" stroke-width="3"><circle cx="100" cy="58" r="13"/><circle cx="100" cy="130" r="13"/><circle cx="64" cy="94" r="13"/><circle cx="136" cy="94" r="13"/></g>
+            </g>
+            <path d="M92 82 L 114 94 L 92 106 Z" fill="#C6F432"/>
+            <g class="p p-pop"><circle cx="150" cy="40" r="5" class="glowdot"/><circle cx="166" cy="56" r="3" class="glowdot"/><circle cx="140" cy="24" r="3" class="glowdot"/></g>
+          </svg>
+<% } else if (key === 'apps') { %>
+<svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M58 214h84l-8-22H66z" fill="#B0673A"/>
+            <g class="p p-arm" style="transform-origin:100% 100%"><path d="M72 128 H 50 Q 40 128 40 116 V 92" fill="none" stroke="#3F6B1E" stroke-width="16" stroke-linecap="round"/></g>
+            <g class="p p-arm" style="transform-origin:0% 100%"><path d="M128 112 H 150 Q 160 112 160 100 V 80" fill="none" stroke="#3F6B1E" stroke-width="16" stroke-linecap="round"/></g>
+            <rect x="68" y="46" width="64" height="148" rx="16" fill="#3F6B1E"/>
+            <rect x="76" y="60" width="48" height="96" rx="8" fill="#121A14"/>
+            <g class="p p-screen"><rect x="82" y="68" width="24" height="6" rx="3" fill="#C6F432"/><rect x="82" y="82" width="36" height="18" rx="5" fill="#7FBF3A" opacity=".7"/><rect x="82" y="106" width="36" height="18" rx="5" fill="#7FBF3A" opacity=".5"/><rect x="82" y="132" width="36" height="12" rx="6" fill="#C6F432"/></g>
+            <circle cx="100" cy="178" r="5" fill="#121A14"/>
+            <g class="p p-pop"><use href="#flowerShape" transform="translate(100 40) scale(.9)"/></g>
+          </svg>
+<% } else if (key === 'growth') { %>
+<svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 212 V 120 M100 160 L 70 130 M100 146 L 134 116" stroke="#8A6A45" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <g fill="#C6F432"><rect class="p p-bar" x="40" y="62" width="22" height="66" rx="6"/><rect class="p p-bar" x="68" y="38" width="22" height="90" rx="6"/><rect class="p p-bar" x="96" y="20" width="22" height="108" rx="6"/><rect class="p p-bar" x="124" y="6" width="22" height="122" rx="6"/></g>
+            <path class="p p-pop" d="M150 8 l 22 -6 l -4 22" fill="none" stroke="#F5E27A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <ellipse cx="100" cy="212" rx="50" ry="6" fill="#2B2118"/>
+          </svg>
+<% } %>

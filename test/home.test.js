@@ -9,7 +9,7 @@ after(closeDb);
 
 test('home has every section, in order, with one h1', async () => {
   const r = await request(app).get('/');
-  const ids = ['hero', 'trust', 'services', 'work', 'why', 'process', 'estimate-teaser', 'testimonials', 'faq', 'cta'];
+  const ids = ['hero', 'garden', 'harvest', 'seasons', 'pots', 'estimate-teaser', 'testimonials', 'plant'];
   let last = -1;
   for (const id of ids) {
     const at = r.text.indexOf(`id="${id}"`);
@@ -17,7 +17,7 @@ test('home has every section, in order, with one h1', async () => {
     last = at;
   }
   assert.ok(r.text.indexOf('<header') < r.text.indexOf('id="hero"'));
-  assert.ok(r.text.lastIndexOf('<footer') > r.text.indexOf('id="cta"'));
+  assert.ok(r.text.lastIndexOf('<footer') > r.text.indexOf('id="plant"'));
   assert.equal((r.text.match(/<h1[\s>]/g) || []).length, 1);
 });
 
@@ -26,7 +26,7 @@ test('every enquiry opener still works without JavaScript', async () => {
     const r = await request(app).get(url);
     const openers = r.text.match(/<a [^>]*data-open-enquiry[^>]*>/g) || [];
     assert.ok(openers.length >= 2, url);
-    for (const tag of openers) assert.match(tag, /href="(\/contact[^"]*|#cta)"/, tag);
+    for (const tag of openers) assert.match(tag, /href="(\/contact[^"]*|#cta|#plant)"/, tag);
   }
 });
 

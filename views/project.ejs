@@ -33,7 +33,7 @@
     <p class="text-cream/70">Next project</p>
     <a href="/work/<%= nextProject.slug %>" class="group inline-flex items-center gap-4 font-display text-3xl font-bold sm:text-4xl"><%= nextProject.client %> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lime text-base text-ink transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span></a>
   </section>
-  <%- include('partials/cta', { service: p.services[0], heading: 'Want results like *these?*' }) %>
+  <%- include('partials/plant-cta', { service: p.services[0], heading: 'Want results like *these?*' }) %>
 </main>
 <%- include('layout/footer') %>
 <%- include('layout/foot') %>

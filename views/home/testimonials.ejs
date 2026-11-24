@@ -1,17 +1,11 @@
-<section id="testimonials" class="on-cream py-20 sm:py-28" data-reveal>
+<section id="testimonials" class="pb-20 sm:pb-28">
   <div class="wrap">
-    <div class="flex flex-wrap items-end justify-between gap-4">
-      <div><p class="eyebrow">Clients</p><h2 class="mt-4 text-4xl font-bold sm:text-6xl">In their <em class="accent">words.</em></h2></div>
-      <span class="sample-tag text-ink/60">Sample testimonials</span>
-    </div>
-    <div class="mt-14 grid gap-6 lg:grid-cols-3">
-      <% content.testimonials().forEach(function (t, i) { %>
-        <figure class="flex flex-col justify-between rounded-3xl bg-white p-7 sm:p-8 <%= i === 1 ? 'lg:mt-10 lg:-mb-10' : '' %>" data-reveal-item>
-          <blockquote class="text-xl leading-snug">“<%= t.quote %>”</blockquote>
-          <figcaption class="mt-8 flex items-center gap-4">
-            <span class="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-cream-2"><%- img(t.photo, { cls: 'absolute inset-0 h-full w-full object-cover', sizes: '56px', alt: '' }) %></span>
-            <span><span class="block font-semibold"><%= t.name %></span><span class="text-sm text-ink/60"><%= t.role %></span></span>
-          </figcaption>
+    <div class="g-head"><h2>What <em class="s">grew.</em></h2><p><span class="sample-tag text-sage">Sample testimonials</span></p></div>
+    <div class="quotes">
+      <% content.testimonials().forEach(function (t) { %>
+        <figure class="quote" data-reveal-item>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><%- img(t.photo, { sizes: '44px', alt: '' }) %><span><b class="block"><%= t.name %></b><span class="text-sage"><%= t.role %></span></span></figcaption>
         </figure>
       <% }) %>
     </div>

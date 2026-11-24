@@ -1,8 +1,12 @@
 <%- include('layout/head') %>
 <%- include('layout/header') %>
 <main id="main" class="wrap flex min-h-[70vh] flex-col items-start justify-center py-24">
-  <p class="eyebrow">404</p>
-  <h1 class="mt-4 text-5xl font-bold sm:text-7xl">Page not found</h1>
+  <svg id="wiltPlant" class="wilt-svg mb-6 cursor-pointer" viewBox="0 0 200 240" role="button" tabindex="0" aria-label="Water the wilted plant">
+    <g id="wpStem"><path d="M100 172 C 98 130, 104 100, 100 70" stroke="#8A7A55" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M100 140 c -22 -14 -40 -6 -44 4 c 16 10 34 8 44 -4z M100 112 c 22 -14 40 -6 44 4 c -16 10 -34 8 -44 -4z" fill="#8A7A55"/><g id="wpFlower"><use href="#flowerShape" transform="translate(100 66)"/></g></g>
+    <path d="M52 170h96l-10 62H62z" fill="#B0673A"/><rect x="46" y="162" width="108" height="14" rx="4" fill="#C47A49"/>
+  </svg>
+  <p class="eyebrow" id="wiltHint">404 · tap the plant to water it</p>
+  <h1 class="mt-4 text-5xl font-bold sm:text-7xl"><span class="sr-only">Page not found. </span>This seed didn’t <em class="s">sprout.</em></h1>
   <p class="mt-5 max-w-lg text-lg text-cream/75">This page has moved or never existed. Try the homepage, or get in touch and tell us what you were looking for.</p>
   <div class="mt-8 flex flex-wrap gap-3">
     <a href="/" class="btn btn-lime">Back to home <span class="arrow" aria-hidden="true">→</span></a>

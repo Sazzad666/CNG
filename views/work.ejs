@@ -10,12 +10,8 @@
       <% content.services().forEach(function (s) { %><button type="button" class="rounded-full border border-cream/20 px-4 py-2 text-sm text-cream/80 hover:border-cream/50" data-filter="<%= s.key %>" aria-pressed="false"><%= s.short %></button><% }) %>
     </div>
   </section>
-  <section class="wrap grid gap-x-10 gap-y-16 pb-24 md:grid-cols-2" data-reveal>
-    <% content.projects().forEach(function (p) { %>
-      <div data-services="<%= p.services.join(' ') %>"><%- include('partials/project-card', { p: p }) %></div>
-    <% }) %>
-  </section>
-  <%- include('partials/cta', { heading: 'Your project could be *next.*' }) %>
+  <section class="wrap pb-24 pt-20"><%- include('partials/harvest', { list: content.projects(), three: true }) %></section>
+  <%- include('partials/plant-cta', { heading: 'Your project could be *next.*' }) %>
 </main>
 <%- include('layout/footer') %>
 <%- include('layout/foot') %>

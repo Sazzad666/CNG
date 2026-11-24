@@ -1,0 +1,40 @@
+<svg id="scene" viewBox="0 0 500 600" role="img" aria-label="Our mascot, a little cursor with a sprout on its head, plants a seed that grows into a glowing vine">
+        
+        <ellipse cx="250" cy="560" rx="240" ry="46" fill="url(#soilg)"/>
+        <ellipse cx="250" cy="548" rx="70" ry="40" fill="url(#halo)" id="seedHalo" opacity="0"/>
+        <path id="vine" d="M250 540 C 252 470, 178 450, 196 380 C 214 312, 320 300, 304 226 C 290 160, 196 158, 214 100 C 226 62, 262 52, 270 44" fill="none" stroke="#7FBF3A" stroke-width="6" stroke-linecap="round"/>
+        <path id="vine2" d="M200 372 C 150 360, 120 330, 112 292" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+        <path id="vine3" d="M304 232 C 350 214, 382 222, 404 196" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+        <g fill="#7FBF3A">
+          <g transform="translate(222 452) rotate(-160) scale(1.1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(240 470) rotate(-20) scale(.9)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(198 352) rotate(-170) scale(1.2)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(150 350) rotate(-130)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(300 262) rotate(-15) scale(1.2)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(360 216) rotate(-40)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(276 180) rotate(-150) scale(1.1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(214 110) rotate(-200) scale(1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(226 84) rotate(-20) scale(.9)"><use href="#leafShape" class="vl"/></g>
+        </g>
+        <g transform="translate(270 44) scale(1.5)"><use href="#flowerShape" class="vf"/></g>
+        <g transform="translate(112 290) scale(1.05)"><use href="#flowerShape" class="vf"/></g>
+        <g transform="translate(404 194) scale(1.15)"><use href="#flowerShape" class="vf"/></g>
+        <ellipse id="seed" cx="250" cy="540" rx="11" ry="14" fill="#C6F432"/>
+        <circle id="ring" cx="250" cy="540" r="16" fill="none" stroke="#C6F432" stroke-width="2.5" opacity="0"/>
+
+        <!-- mascot: a cursor with a sprout on its head -->
+        <g id="mascotWrap" transform="translate(360 548)">
+          <g id="mascot" tabindex="0" role="button" aria-label="Poke the gardener">
+            <ellipse cx="22" cy="2" rx="30" ry="6" fill="#000" opacity=".35"/>
+            <g id="mbody">
+              <ellipse cx="10" cy="-1" rx="8" ry="4.5" fill="#0B0F0C"/><ellipse cx="34" cy="-3" rx="8" ry="4.5" fill="#0B0F0C"/>
+              <path d="M2 -110 L2 -18 Q2 -12 7 -16 L22 -32 L34 -8 Q36 -4 40 -6 L48 -10 Q52 -12 50 -16 L38 -40 L64 -42 Q70 -42 66 -47 L8 -112 Q2 -117 2 -110 Z" fill="#F3F1EA" stroke="#0B0F0C" stroke-width="3" stroke-linejoin="round"/>
+              <g id="eyes"><circle cx="14" cy="-70" r="7" fill="#fff" stroke="#0B0F0C" stroke-width="2"/><circle cx="32" cy="-62" r="7" fill="#fff" stroke="#0B0F0C" stroke-width="2"/><circle class="pupil" cx="15" cy="-70" r="3.4" fill="#0B0F0C"/><circle class="pupil" cx="33" cy="-62" r="3.4" fill="#0B0F0C"/></g>
+              <rect id="lids" x="5" y="-80" width="38" height="0" fill="#F3F1EA"/>
+              <ellipse cx="10" cy="-55" rx="4" ry="2.5" fill="#FF9EC0" opacity=".8"/><ellipse cx="40" cy="-48" rx="4" ry="2.5" fill="#FF9EC0" opacity=".8"/>
+              <path d="M19 -54 Q24 -49 28 -54" fill="none" stroke="#0B0F0C" stroke-width="2.2" stroke-linecap="round"/>
+              <g id="msprout"><path d="M5 -112 C 5 -124, 10 -130, 16 -134" fill="none" stroke="#C6F432" stroke-width="3" stroke-linecap="round"/><path d="M16 -134 C 20 -142, 30 -142, 33 -138 C 28 -132, 21 -131, 16 -134 Z" fill="#C6F432"/><path d="M8 -124 C 3 -131, -5 -131, -8 -127 C -3 -122, 4 -121, 8 -124 Z" fill="#C6F432"/></g>
+            </g>
+          </g>
+        </g>
+      </svg>

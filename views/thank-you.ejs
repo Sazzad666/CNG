@@ -2,9 +2,12 @@
 <%- include('layout/header') %>
 <main id="main" class="wrap flex min-h-[70vh] flex-col justify-center py-24" data-lead-type="<%= type %>">
   <div class="max-w-2xl">
-    <div class="mb-8 inline-flex h-16 w-16 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
-      <svg class="h-8 w-8" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
+    <svg id="bigBloom" class="bloom-svg mb-6" viewBox="0 0 200 220" aria-hidden="true">
+      <path id="bbStem" d="M100 214 C 96 180, 104 150, 100 110" stroke="#7FBF3A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M100 176 c -26 -18 -50 -8 -54 6 c 18 12 40 10 54 -6z M100 156 c 26 -18 50 -8 54 6 c -18 12 -40 10 -54 -6z" fill="#7FBF3A"/>
+      <g id="bbPetals" fill="#FF9EC0"><% for (var a = 0; a < 360; a += 45) { %><ellipse cx="100" cy="46" rx="16" ry="34" transform="rotate(<%= a %> 100 80)"/><% } %></g>
+      <circle id="bbCenter" cx="100" cy="80" r="20" fill="#F5E27A"/>
+    </svg>
     <h1 class="text-4xl font-bold sm:text-6xl"><%= thanks.title %></h1>
     <p class="mt-6 text-xl text-cream/80"><%= thanks.lead %></p>
     <div class="mt-10 rounded-2xl border border-cream/10 bg-ink-2 p-6">

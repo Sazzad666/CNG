@@ -48,6 +48,7 @@ function rewrite(html) {
   }
   fs.writeFileSync(path.join(out, 'css', 'app.css'), fs.readFileSync(path.join(ROOT, 'public/css/app.css'), 'utf8').replace(/url\(\/fonts\//g, 'url(../fonts/'));
   fs.copyFileSync(path.join(ROOT, 'node_modules/motion/dist/motion.js'), path.join(out, 'vendor', 'motion.js'));
+  for (const f of ['gsap.min.js', 'ScrollTrigger.min.js']) fs.copyFileSync(path.join(ROOT, 'node_modules/gsap/dist', f), path.join(out, 'vendor', f));
   fs.writeFileSync(path.join(out, 'js', 'preview.js'), `/* Preview only: forms have no server here, so a submit goes to the matching thank-you page. */
 (function () {
   document.addEventListener('submit', function (e) {
@@ -57,9 +58,12 @@ function rewrite(html) {
     if (est && est.hidden) return; // estimator steps 1-4: let it move to the next step
     e.preventDefault(); e.stopImmediatePropagation();
     var type = (f.querySelector('input[name="type"]') || {}).value || 'enquiry';
+    var go = 'thank-you-' + type + '.html';
     var s = f.querySelector('.form-status');
-    if (s) { s.hidden = false; s.style.color = '#C6F432'; s.textContent = 'Preview: on the live site this is saved to your admin inbox. Opening the thank-you page...'; }
-    setTimeout(function () { location.href = 'thank-you-' + type + '.html'; }, 1100);
+    if (s) { s.hidden = false; s.style.color = '#C6F432'; s.textContent = 'Preview: on the live site this lead is saved to your admin inbox.'; }
+    // let the garden play its bloom first, exactly as the live site does after a successful send
+    var ev = new CustomEvent('lead:sent', { cancelable: true, detail: { ok: true, redirect: go } });
+    if (f.dispatchEvent(ev)) setTimeout(function () { location.href = go; }, 900);
   }, true);
 })();
 `);

@@ -21,7 +21,11 @@
   <% if (typeof jsonLd !== 'undefined' && jsonLd) { %><script type="application/ld+json"><%- JSON.stringify(jsonLd).replace(/</g, '\\u003c') %></script><% } %>
   <script src="/vendor/motion.js" defer></script>
   <script src="/js/site.js" defer></script>
+  <script src="/vendor/gsap.min.js" defer></script>
+  <script src="/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="/js/garden.js" defer></script>
   <% if (tracking.ga4) { %><script src="https://www.googletagmanager.com/gtag/js?id=<%= tracking.ga4 %>" async></script><script src="/js/tracking.js" data-ga4="<%= tracking.ga4 %>" data-pixel="<%= tracking.metaPixel %>" defer></script><% } else if (tracking.metaPixel) { %><script src="/js/tracking.js" data-pixel="<%= tracking.metaPixel %>" defer></script><% } %>
 </head>
 <body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>">
+<%- include('../garden/defs') %>
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-lime focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>

@@ -1,13 +1,6 @@
-<section id="work" class="pb-20 sm:pb-28" data-reveal>
+<section id="harvest" class="g-section">
   <div class="wrap">
-    <div class="flex flex-wrap items-end justify-between gap-6">
-      <div><p class="eyebrow">Selected work</p><h2 class="mt-4 text-4xl font-bold sm:text-6xl">Recent work, with the <em class="accent text-lime">numbers.</em></h2></div>
-      <a href="/work" class="ulink text-cream/80">See all work →</a>
-    </div>
-    <div class="mt-14 grid gap-x-10 gap-y-16 md:grid-cols-2">
-      <div class="md:col-span-2"><%- include('../partials/project-card', { p: content.projects()[0], big: true }) %></div>
-      <%- include('../partials/project-card', { p: content.projects()[1] }) %>
-      <%- include('../partials/project-card', { p: content.projects()[2] }) %>
-    </div>
+    <div class="g-head"><h2>This season’s <em class="s">harvest.</em></h2><p>Hover a frame to see what grew. <a class="ulink text-cream" href="/work">All work →</a></p></div>
+    <%- include('../partials/harvest', { list: content.projects().slice(0, 4) }) %>
   </div>
 </section>

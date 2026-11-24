@@ -1,27 +1,14 @@
-<section id="services" class="py-20 sm:py-28" data-reveal>
+<section id="garden" class="g-section">
   <div class="wrap">
-    <div class="flex flex-wrap items-end justify-between gap-6">
-      <div>
-        <p class="eyebrow">What we do</p>
-        <h2 class="mt-4 max-w-2xl text-4xl font-bold sm:text-6xl">One team for your whole <em class="accent text-lime">digital</em> presence.</h2>
-      </div>
-      <a href="/services" class="ulink text-cream/80">All services →</a>
-    </div>
-    <div class="mt-14 grid gap-5 md:grid-cols-6">
-      <% content.services().forEach(function (s, i) { var span = i < 2 ? 'md:col-span-3' : 'md:col-span-2'; %>
-        <a href="/services/<%= s.key %>" class="svc group lift relative isolate flex min-h-[360px] flex-col justify-end overflow-hidden rounded-3xl border border-cream/10 p-6 sm:p-8 <%= span %> <%= i < 2 ? 'md:min-h-[440px]' : '' %>" data-reveal-item>
-          <div class="zoom absolute inset-0 -z-10"><%- img(s.photo, { cls: 'h-full w-full object-cover', sizes: i < 2 ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 33vw, 100vw', alt: '' }) %></div>
-          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/10"></div>
-          <span class="font-display text-sm text-lime tabular-nums">0<%= i + 1 %></span>
-          <h3 class="mt-2 text-3xl font-bold"><%= s.label %></h3>
-          <p class="mt-3 text-cream/75"><%= s.items.slice(0, 4).map(function (x) { return x.title; }).join(' · ') %></p>
-          <span class="svc-arrow absolute right-6 top-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">→</span>
+    <div class="g-head"><h2>Pick a <em class="s">plant.</em></h2><p>Five things we grow. Hover or tap one to watch it bloom.</p></div>
+    <div class="beds">
+      <% var tagline = { 'web-design': 'that sell while you sleep', branding: 'logos people remember', video: 'that stops the scroll', apps: 'people keep on their phones', growth: 'ads, social and SEO' };
+         content.services().forEach(function (s) { %>
+        <a class="bed" href="/services/<%= s.key %>" data-bed>
+          <%- include('../garden/plant', { key: s.key }) %>
+          <b><%= s.short === 'Growth' ? 'Growth' : s.short %></b><small><%= tagline[s.key] %></small>
         </a>
       <% }) %>
-      <a href="/estimate" class="group lift flex min-h-[360px] flex-col justify-between rounded-3xl bg-lime p-6 text-ink sm:p-8 md:col-span-6 md:min-h-0 md:flex-row md:items-center" data-open-estimate data-reveal-item>
-        <p class="font-display text-3xl font-bold sm:text-4xl">Not sure what you need?</p>
-        <span class="mt-6 inline-flex items-center gap-3 text-lg font-semibold md:mt-0">Answer 5 quick questions <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink text-lime transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span></span>
-      </a>
     </div>
   </div>
 </section>

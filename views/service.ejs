@@ -7,12 +7,12 @@
       <h1 class="mt-4 text-5xl font-bold sm:text-7xl" data-enter data-enter-step="1"><%- accent(s.headline) %></h1>
       <p class="mt-6 max-w-xl text-lg text-cream/75" data-enter data-enter-step="2"><%= s.intro %></p>
       <div class="mt-8 flex flex-wrap gap-3" data-enter data-enter-step="3">
-        <a href="#cta" class="btn btn-lime" data-open-enquiry data-service="<%= s.key %>">Enquire about <%= s.short.toLowerCase() %> <span class="arrow" aria-hidden="true">→</span></a>
-        <a href="/estimate" class="btn btn-outline" data-open-estimate>Estimate my project</a>
+        <a href="/contact" class="btn btn-lime" data-open-enquiry data-service="<%= s.key %>">Enquire about <%= s.short.toLowerCase() %> <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/estimate?service=<%= s.key %>" class="btn btn-outline">Grow your quote</a>
       </div>
     </div>
     <div class="lg:col-span-5" data-enter data-enter-step="2">
-      <div class="relative aspect-[4/5] overflow-hidden rounded-3xl"><%- img(s.photo, { cls: 'absolute inset-0 h-full w-full object-cover', eager: true, sizes: '(min-width: 1024px) 40vw, 100vw' }) %></div>
+      <div class="bed big" data-keep><%- include('garden/plant', { key: s.key }) %></div>
     </div>
   </section>
 
@@ -44,14 +44,12 @@
       <div><p class="eyebrow">Selected work</p><h2 class="mt-4 text-4xl font-bold sm:text-5xl">Recent <%= s.short.toLowerCase() %> projects</h2></div>
       <a href="/work" class="ulink text-cream/80">See all work →</a>
     </div>
-    <div class="mt-12 grid gap-10 md:grid-cols-2">
-      <% work.slice(0, 2).forEach(function (p) { %><%- include('partials/project-card', { p: p }) %><% }) %>
-    </div>
+    <div class="mt-20"><%- include('partials/harvest', { list: work.slice(0, 3), three: true }) %></div>
   </section>
   <% } %>
 
   <%- include('partials/faq') %>
-  <%- include('partials/cta', { service: s.key, heading: 'Let’s talk about your *' + s.short.toLowerCase() + '.*' }) %>
+  <%- include('partials/plant-cta', { service: s.key, heading: 'Plant your *' + s.short.toLowerCase() + '* idea.' }) %>
 </main>
 <%- include('layout/footer') %>
 <%- include('layout/foot') %>

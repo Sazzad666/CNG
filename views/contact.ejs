@@ -1,9 +1,9 @@
 <%- include('layout/head') %>
 <%- include('layout/header') %>
-<main id="main" class="wrap grid gap-12 py-16 lg:grid-cols-12 lg:py-24">
+<main id="main" class="wrap grid gap-12 py-16 lg:grid-cols-12 lg:py-24" data-plant>
   <div class="lg:col-span-5">
     <p class="eyebrow">Contact</p>
-    <h1 class="mt-4 text-5xl font-bold sm:text-6xl">Tell us what you’re <em class="accent text-lime">building.</em></h1>
+    <h1 class="mt-4 text-5xl font-bold sm:text-6xl">Plant your <em class="s">idea.</em></h1>
     <p class="mt-6 max-w-md text-lg text-cream/75">A short note is enough. We’ll call you within one business day to talk it through, with no obligation.</p>
     <dl class="mt-10 space-y-5">
       <div><dt class="eyebrow">Call</dt><dd class="mt-1 text-xl"><a class="ulink" href="<%= site.phoneHref %>"><%= site.phone %></a></dd></div>
@@ -11,6 +11,7 @@
       <div><dt class="eyebrow">Email</dt><dd class="mt-1 text-xl break-all"><a class="ulink" href="mailto:<%= site.email %>"><%= site.email %></a></dd></div>
       <div><dt class="eyebrow">Studio</dt><dd class="mt-1 text-xl"><%= site.address %></dd></div>
     </dl>
+    <div class="mt-10 max-w-[260px]"><%- include('garden/pot') %></div>
   </div>
   <div class="lg:col-span-7">
     <div class="rounded-3xl border border-cream/10 bg-ink-2 p-6 sm:p-10">

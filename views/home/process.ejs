@@ -1,31 +1,16 @@
-<% var steps = [
-  ['Discover', 'A short call and a workshop to agree goals, audience and the number we’re aiming for.', '1 week'],
-  ['Design', 'Strategy, structure and visual design, reviewed with you at every step.', '1 to 3 weeks'],
-  ['Build', 'Development, content and testing on real phones, then a careful launch.', '2 to 4 weeks'],
-  ['Grow', 'Campaigns, SEO and monthly improvements, measured against your goal.', 'Ongoing']
-]; %>
-<section id="process" class="py-20 sm:py-28" data-reveal>
-  <div class="wrap grid gap-14 lg:grid-cols-12">
-    <div class="lg:col-span-5">
-      <div class="lg:sticky lg:top-28">
-        <p class="eyebrow">How it works</p>
-        <h2 class="mt-4 text-4xl font-bold sm:text-6xl">From first call to <em class="accent text-lime">growth.</em></h2>
-        <p class="mt-5 max-w-md text-lg text-cream/75">A typical business website goes live in four to eight weeks. You’ll always know what’s happening and what’s next.</p>
-        <a href="/contact" class="btn btn-lime mt-8" data-open-enquiry>Book a discovery call <span class="arrow" aria-hidden="true">→</span></a>
+<section id="seasons" class="g-seasons" aria-label="How a project grows: seed, sprout, bloom, harvest">
+  <div class="track">
+    <div class="stage wrap">
+      <%- include('../garden/seasons-svg') %>
+      <div>
+        <p class="eyebrow">How it grows</p>
+        <div class="steps mt-3">
+          <div class="step on"><b>Seed</b><span>first call · 1 week</span></div>
+          <div class="step"><b>Sprout</b><span>design · 1 to 3 weeks</span></div>
+          <div class="step"><b>Bloom</b><span>build &amp; launch · 2 to 4 weeks</span></div>
+          <div class="step"><b>Harvest</b><span>leads, every month</span></div>
+        </div>
       </div>
     </div>
-    <ol class="relative lg:col-span-7" data-process>
-      <span aria-hidden="true" class="absolute bottom-6 left-[23px] top-6 w-px bg-cream/15"></span>
-      <span aria-hidden="true" class="process-line absolute bottom-6 left-[23px] top-6 w-px origin-top bg-lime" data-process-line></span>
-      <% steps.forEach(function (s, i) { %>
-        <li class="relative flex gap-6 pb-12 last:pb-0" data-reveal-item>
-          <span class="relative z-10 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-lime/60 bg-ink font-display font-bold text-lime"><%= i + 1 %></span>
-          <div class="pt-2">
-            <div class="flex flex-wrap items-baseline gap-x-4"><h3 class="text-3xl font-bold"><%= s[0] %></h3><span class="text-sm text-sage"><%= s[2] %></span></div>
-            <p class="mt-3 max-w-md text-cream/75"><%= s[1] %></p>
-          </div>
-        </li>
-      <% }) %>
-    </ol>
   </div>
 </section>

@@ -1,0 +1,13 @@
+<%# Final call to action: the pot grows as the visitor types. Params: service, heading %>
+<section id="plant" class="g-section">
+  <div class="wrap">
+    <div class="plant-box" data-plant>
+      <%- include('../garden/pot') %>
+      <div>
+        <h2><%- accent(typeof heading !== 'undefined' && heading ? heading : 'Plant your *idea.*', 'text-lime') %></h2>
+        <p class="mt-3 max-w-md text-cream/70">Every letter you type waters the seed. We call you within one business day.</p>
+        <div class="mt-8"><%- include('enquiry-form', { formType: 'enquiry', service: typeof service !== 'undefined' ? service : '', idp: 'cta', submitLabel: 'Plant it' }) %></div>
+      </div>
+    </div>
+  </div>
+</section>
