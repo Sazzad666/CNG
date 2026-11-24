@@ -22,7 +22,7 @@ test('completing the estimator for a website saves an estimate lead with its ans
   await page.waitForTimeout(2100); // the form refuses submissions faster than a person could fill it
   await page.getByRole('checkbox', { name: /Web design/ }).check();
   await page.getByRole('button', { name: 'Next' }).click();
-  await page.getByRole('radio', { name: '6–15 pages' }).check();
+  await page.getByRole('radio', { name: '6 to 15 pages' }).check();
   await page.getByRole('radio', { name: 'Yes, an online store' }).check();
   await page.getByRole('button', { name: 'Next' }).click();
   await page.getByRole('checkbox', { name: /Copywriting/ }).check();

@@ -1,16 +1,16 @@
 <%
   var Q = {
     'web-design': [
-      { name: 'pages', label: 'How many pages, roughly?', type: 'radio', options: [['1-5', '1–5 pages'], ['6-15', '6–15 pages'], ['16-plus', '16+ pages']] },
+      { name: 'pages', label: 'How many pages, roughly?', type: 'radio', options: [['1-5', '1 to 5 pages'], ['6-15', '6 to 15 pages'], ['16-plus', '16+ pages']] },
       { name: 'ecommerce', label: 'Will you sell online?', type: 'radio', options: [['no', 'No, it’s informational'], ['yes', 'Yes, an online store']] },
-      { name: 'products', label: 'How many products?', type: 'radio', showIf: 'ecommerce=yes', options: [['up-to-50', 'Up to 50'], ['51-500', '51–500'], ['500-plus', '500+']] }
+      { name: 'products', label: 'How many products?', type: 'radio', showIf: 'ecommerce=yes', options: [['up-to-50', 'Up to 50'], ['51-500', '51 to 500'], ['500-plus', '500+']] }
     ],
     'branding': [
       { name: 'branding_need', label: 'What do you need?', type: 'radio', options: [['logo', 'Logo only'], ['identity', 'Full brand identity'], ['packaging', 'Packaging'], ['print', 'Print & stationery']] }
     ],
     'video': [
       { name: 'video_type', label: 'What kind of video?', type: 'radio', options: [['ad', 'Ad or commercial'], ['explainer', 'Explainer'], ['corporate', 'Corporate film'], ['social', 'Social media series']] },
-      { name: 'video_length', label: 'How long?', type: 'radio', options: [['short', 'Under 30 seconds'], ['medium', '1–2 minutes'], ['long', '3 minutes or more']] }
+      { name: 'video_length', label: 'How long?', type: 'radio', options: [['short', 'Under 30 seconds'], ['medium', '1 to 2 minutes'], ['long', '3 minutes or more']] }
     ],
     'apps': [
       { name: 'app_platforms', label: 'Which platforms?', type: 'radio', options: [['ios', 'iPhone'], ['android', 'Android'], ['both', 'Both']] },
@@ -21,7 +21,7 @@
     ]
   };
   var EXTRAS = [['cms', 'Content management (CMS)'], ['booking', 'Booking or appointments'], ['payments', 'Online payments (bKash, card)'], ['bilingual', 'English & Bangla'], ['copywriting', 'Copywriting'], ['photography', 'Photography or video shoot'], ['support', 'Monthly support after launch']];
-  var TIMELINE = [['asap', 'As soon as possible'], ['month', 'Within a month'], ['quarter', 'In 1–3 months'], ['exploring', 'Just exploring']];
+  var TIMELINE = [['asap', 'As soon as possible'], ['month', 'Within a month'], ['quarter', 'In 1 to 3 months'], ['exploring', 'Just exploring']];
   function choice(type, name, value, label, extra) {
     return '<label class="est-choice"><input type="' + type + '" name="a_' + name + '" value="' + value + '" class="est-input"' + (extra || '') + '><span class="est-choice-box">' + label.replace(/&(?!amp;)/g, '&amp;') + '<span class="est-tick" aria-hidden="true"></span></span></label>';
   }

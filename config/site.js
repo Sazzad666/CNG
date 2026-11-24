@@ -17,8 +17,8 @@ module.exports = {
   ],
   budgets: [
     { key: 'under-50k', label: 'Under ৳50,000' },
-    { key: '50k-150k', label: '৳50,000 – ৳1.5 lakh' },
-    { key: '150k-500k', label: '৳1.5 – 5 lakh' },
+    { key: '50k-150k', label: '৳50,000 to ৳1.5 lakh' },
+    { key: '150k-500k', label: '৳1.5 to 5 lakh' },
     { key: '500k-plus', label: '৳5 lakh+' },
   ],
   services: [

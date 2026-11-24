@@ -26,9 +26,9 @@ const ipHash = (ip) => crypto.createHash('sha256').update(config.sessionSecret +
 const wantsJson = (req) => req.is('application/json') || (req.get('accept') || '').includes('application/json');
 
 const THANKS = {
-  enquiry: { title: 'Thanks — we’ve got your enquiry.', lead: `We’ll call you within one business day from ${config.site.phone}.` },
-  estimate: { title: 'Thanks — your project is with us.', lead: 'You’ll get your quote by email within 24 hours, and we may call to clarify a detail or two.' },
-  audit: { title: 'Thanks — your free audit is booked.', lead: 'You’ll get your audit within 2 business days, sent to the phone or email you gave us.' },
+  enquiry: { title: 'Thanks, we’ve got your enquiry.', lead: `We’ll call you within one business day from ${config.site.phone}.` },
+  estimate: { title: 'Thanks, your project is with us.', lead: 'You’ll get your quote by email within 24 hours, and we may call to clarify a detail or two.' },
+  audit: { title: 'Thanks, your free audit is booked.', lead: 'You’ll get your audit within 2 business days, sent to the phone or email you gave us.' },
 };
 
 router.post('/api/leads', async (req, res, next) => {
@@ -49,7 +49,7 @@ router.post('/api/leads', async (req, res, next) => {
     const v = validateLead(type, body);
     if (!v.ok) {
       if (wantsJson(req)) return res.status(422).json({ ok: false, errors: v.errors });
-      return res.status(422).render('contact', { formType: type, values: body, errors: v.errors, meta: { title: 'Check your details — Click & Grow' } });
+      return res.status(422).render('contact', { formType: type, values: body, errors: v.errors, meta: { title: 'Check your details | Click & Grow' } });
     }
 
     const key = v.data.phone + '|' + type;
@@ -83,7 +83,7 @@ router.post('/api/estimate-partial', async (req, res, next) => {
 
 router.get('/thank-you', (req, res) => {
   const type = THANKS[req.query.type] ? req.query.type : 'enquiry';
-  res.set('X-Robots-Tag', 'noindex').render('thank-you', { type, thanks: THANKS[type], meta: { title: 'Thank you — Click & Grow' } });
+  res.set('X-Robots-Tag', 'noindex').render('thank-you', { type, thanks: THANKS[type], meta: { title: 'Thank you | Click & Grow' } });
 });
 
 router._resetLimits = () => hits.clear();

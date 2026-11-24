@@ -18,11 +18,11 @@ const localBusiness = () => ({
 
 router.get('/', (req, res) => res.render('home', {
   jsonLd: localBusiness(),
-  meta: { title: 'Click & Grow — Web design, branding & growth agency in Dhaka', description: 'Click & Grow designs websites, brands, apps and campaigns for ambitious businesses in Bangladesh. Talk to a senior team in Dhaka today.' },
+  meta: { title: 'Click & Grow | Web design, branding and growth agency in Dhaka', description: 'Click & Grow designs websites, brands, apps and campaigns for ambitious businesses in Bangladesh. Talk to a senior team in Dhaka today.' },
 }));
 
 router.get('/services', (req, res) => res.render('services', {
-  meta: { title: 'Services — Click & Grow, Dhaka', description: 'Web design, branding, video, apps and digital marketing from one senior team in Dhaka. See what we do and start a project.' },
+  meta: { title: 'Services | Click & Grow, Dhaka', description: 'Web design, branding, video, apps and digital marketing from one senior team in Dhaka. See what we do and start a project.' },
 }));
 
 router.get('/services/:key', (req, res, next) => {
@@ -30,12 +30,12 @@ router.get('/services/:key', (req, res, next) => {
   if (!s) return next();
   res.render('service', {
     s, work: content.projects(s.key),
-    meta: { title: `${s.label} in Dhaka — Click & Grow`, description: s.intro.slice(0, 155) },
+    meta: { title: `${s.label} in Dhaka | Click & Grow`, description: s.intro.slice(0, 155) },
   });
 });
 
 router.get('/work', (req, res) => res.render('work', {
-  meta: { title: 'Our work — Click & Grow', description: 'Websites, brands, apps and campaigns we have built for businesses across Bangladesh. Each project starts with a clear goal and ends with numbers.' },
+  meta: { title: 'Our work | Click & Grow', description: 'Websites, brands, apps and campaigns we have built for businesses across Bangladesh. Each project starts with a clear goal and ends with numbers.' },
 }));
 
 router.get('/work/:slug', (req, res, next) => {
@@ -45,29 +45,29 @@ router.get('/work/:slug', (req, res, next) => {
   const next_ = all[(all.indexOf(p) + 1) % all.length];
   res.render('project', {
     p, nextProject: next_,
-    meta: { title: `${p.client}: ${p.type} — Click & Grow`, description: `${p.summary} ${p.result}. A sample project showing how Click & Grow works.`, ogImage: `/img/${p.photos[0]}-1024.webp` },
+    meta: { title: `${p.client}: ${p.type} | Click & Grow`, description: `${p.summary} ${p.result}. A sample project showing how Click & Grow works.`, ogImage: `/img/${p.photos[0]}-1024.webp` },
   });
 });
 
 router.get('/about', (req, res) => res.render('about', {
-  meta: { title: 'About us — Click & Grow, Dhaka', description: 'Click & Grow is a senior team of designers, developers and marketers in Dhaka. Meet the people who will work on your project.' },
+  meta: { title: 'About us | Click & Grow, Dhaka', description: 'Click & Grow is a senior team of designers, developers and marketers in Dhaka. Meet the people who will work on your project.' },
 }));
 
 router.get('/estimate', (req, res) => res.render('estimate', {
-  meta: { title: 'Estimate your project — Click & Grow', description: 'Answer five quick questions about your website, brand, app or campaign and get a custom quote from Click & Grow within 24 hours.' },
+  meta: { title: 'Estimate your project | Click & Grow', description: 'Answer five quick questions about your website, brand, app or campaign and get a custom quote from Click & Grow within 24 hours.' },
 }));
 
 router.get('/contact', (req, res) => res.render('contact', {
   formType: 'enquiry', values: { service: req.query.service || '' }, errors: {},
-  meta: { title: 'Contact — Click & Grow, Dhaka', description: `Tell us about your project. Call ${site.phone}, message us on WhatsApp, or send the form and we’ll call you within one business day.` },
+  meta: { title: 'Contact | Click & Grow, Dhaka', description: `Tell us about your project. Call ${site.phone}, message us on WhatsApp, or send the form and we’ll call you within one business day.` },
 }));
 
 router.get('/privacy', (req, res) => res.render('privacy', {
-  meta: { title: 'Privacy — Click & Grow', description: 'What Click & Grow collects when you send a form on this website, why we keep it, and how to ask us to delete it.' },
+  meta: { title: 'Privacy | Click & Grow', description: 'What Click & Grow collects when you send a form on this website, why we keep it, and how to ask us to delete it.' },
 }));
 
 router.get('/credits', (req, res) => res.render('credits', {
-  meta: { title: 'Photo credits — Click & Grow', description: 'The photographers whose work appears on this website, courtesy of Unsplash. Thank you to every one of them.' },
+  meta: { title: 'Photo credits | Click & Grow', description: 'The photographers whose work appears on this website, courtesy of Unsplash. Thank you to every one of them.' },
 }));
 
 const PUBLIC = () => ['/', '/services', ...content.services().map((s) => '/services/' + s.key), '/work',
