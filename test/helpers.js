@@ -19,6 +19,11 @@ async function resetDb() {
   await pool.query('SET FOREIGN_KEY_CHECKS = 1');
 }
 
-async function closeDb() { await require('../src/db').pool.end(); }
+async function closeDb() {
+  // The session store runs a cleanup timer; stop it so the test process can exit.
+  const admin = require.cache[require.resolve('../src/admin/routes')];
+  if (admin && admin.exports.sessionStore) admin.exports.sessionStore.clearExpirationInterval();
+  await require('../src/db').pool.end().catch(() => {});
+}
 
 module.exports = { resetDb, closeDb };
