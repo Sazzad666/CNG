@@ -1,0 +1,630 @@
+<title>Click &amp; Grow Garden</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap">
+<style>
+  /* Layout: a night garden. Every section is a scene the visitor grows by scrolling or clicking; words are labels, not paragraphs. */
+  :root {
+    --night: #0A0F0B; --night-2: #121A14; --night-3: #1C261E; --soil: #2B2118; --soil-2: #3A2C1F;
+    --cream: #F3F1EA; --muted: #9AA79C; --lime: #C6F432; --leaf: #7FBF3A; --leaf-dark: #3F6B1E;
+    --petal: #FF9EC0; --glow: #F5E27A; --ink: #0B0F0C; --wilt: #8A7A55;
+    --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+    --body: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --ease: cubic-bezier(.23, 1, .32, 1);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  main { overflow-x: clip; }
+  body { background: var(--night); color: var(--cream); font: 400 16px/1.5 var(--body); overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+  .gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .wrap { max-width: 1200px; margin: 0 auto; }
+  h1, h2 { font-family: var(--display); letter-spacing: -0.03em; line-height: .95; margin: 0; text-wrap: balance; }
+  em.s { font: italic 400 1.08em var(--serif); color: var(--lime); letter-spacing: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 6px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 0; font: 600 16px var(--body); text-decoration: none; cursor: pointer; transition: transform 160ms var(--ease), background-color 200ms; }
+  .btn:active { transform: scale(.96); }
+  .btn-lime { background: var(--lime); color: var(--ink); }
+  .btn-ghost { background: transparent; color: var(--cream); box-shadow: inset 0 0 0 1.5px rgba(243,241,234,.35); }
+  @media (hover: hover) and (pointer: fine) { .btn-lime:hover { background: #d8ff52; } .btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--cream); } }
+  .kicker { font: 600 12px/1 var(--body); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---- custom cursor: a seed that becomes a watering can over anything you can press ---- */
+  #cur { position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; width: 0; height: 0; display: none; }
+  #cur .dot { position: absolute; width: 10px; height: 14px; margin: -7px 0 0 -5px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: var(--lime); box-shadow: 0 0 14px var(--lime); transition: transform 200ms var(--ease), opacity 200ms; }
+  #cur .can { position: absolute; width: 34px; height: 34px; margin: -6px 0 0 -2px; opacity: 0; transform: scale(.6) rotate(-10deg); transition: transform 220ms var(--ease), opacity 160ms; }
+  #cur.water .dot { transform: scale(.3); opacity: 0; }
+  #cur.water .can { opacity: 1; transform: scale(1) rotate(-18deg); }
+  @media (hover: hover) and (pointer: fine) { #cur { display: block; } body, a, button, input { cursor: none; } }
+
+  /* ---- top bar ---- */
+  header.bar { position: fixed; z-index: 50; top: env(safe-area-inset-top, 0px); left: 0; right: 0; }
+  header.bar .in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 72px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; font: 800 21px var(--display); letter-spacing: -.02em; text-decoration: none; }
+  .logo svg { width: 30px; height: 38px; overflow: visible; }
+  .logo em { font: italic 400 24px var(--serif); color: var(--lime); }
+  nav.links { display: flex; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(18,26,20,.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: inset 0 0 0 1px rgba(243,241,234,.08); }
+  nav.links a { padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 15px; color: rgba(243,241,234,.8); }
+  @media (hover: hover) { nav.links a:hover { background: var(--night-3); color: var(--cream); } }
+  @media (max-width: 760px) { nav.links { display: none; } }
+  header.bar .btn { min-height: 44px; padding: 0 18px; font-size: 15px; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--night); }
+
+  /* ---- scroll stem along the left edge ---- */
+  #stem { position: fixed; z-index: 5; left: max(10px, env(safe-area-inset-left, 0px)); top: 0; width: 40px; height: 100vh; pointer-events: none; }
+  @media (max-width: 900px) { #stem { display: none; } }
+
+  /* ---- hero ---- */
+  #hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; padding-block: 96px 40px; }
+  #flies { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #hero .grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 24px; width: 100%; }
+  #hero h1 { font-size: clamp(3.2rem, 9vw, 8.4rem); font-weight: 800; }
+  #hero h1 .ln { display: block; }
+  #hero h1 em.s { font-size: 1.12em; }
+  #hero .sub { margin: 26px 0 0; max-width: 34ch; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: rgba(243,241,234,.75); }
+  #hero .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .hint { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; font-size: 13.5px; color: var(--muted); }
+  .hint i { width: 8px; height: 11px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); animation: pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: .35; transform: scale(.8); } }
+  #scene { width: 100%; max-width: 560px; height: auto; justify-self: center; overflow: visible; }
+  #mascot { cursor: pointer; }
+  @media (max-width: 860px) { #hero .grid { grid-template-columns: minmax(0, 1fr); } #scene { max-width: 380px; margin-top: -10px; } #hero { padding-top: 110px; } }
+
+  /* ---- planted sprouts (click anywhere) ---- */
+  .sprout { position: absolute; z-index: 4; width: 60px; height: 70px; margin: -66px 0 0 -30px; pointer-events: none; overflow: visible; }
+
+  section.scene { position: relative; padding-block: clamp(80px, 12vw, 150px); }
+  .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; margin-bottom: clamp(36px, 6vw, 64px); }
+  .head h2 { font-size: clamp(2.6rem, 6.5vw, 5.6rem); font-weight: 800; }
+  .head p { margin: 0; max-width: 30ch; color: var(--muted); }
+
+  /* ---- services as plants ---- */
+  .beds { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+  @media (max-width: 1000px) { .beds { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 620px) { .beds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .bed { position: relative; display: flex; flex-direction: column; align-items: center; padding: 18px 12px 20px; border-radius: 28px; background: radial-gradient(120% 70% at 50% 100%, var(--night-3), var(--night-2) 70%); box-shadow: inset 0 0 0 1px rgba(243,241,234,.06); text-decoration: none; transition: box-shadow 300ms var(--ease), transform 300ms var(--ease); }
+  .bed svg { width: 100%; max-width: 190px; height: auto; overflow: visible; }
+  .bed b { font: 700 clamp(1.25rem, 2vw, 1.6rem) var(--display); letter-spacing: -.02em; }
+  .bed small { margin-top: 4px; font-size: 13px; color: var(--muted); text-align: center; }
+  .bed .p { transform-origin: 50% 50%; transform-box: fill-box; transition: transform 600ms cubic-bezier(.34, 1.56, .64, 1), opacity 400ms; }
+  .bed:not(.open) .p-petal { transform: scale(.25); }
+  .bed:not(.open) .p-leaf { transform: scale(.55) rotate(-10deg); }
+  .bed:not(.open) .p-bar { transform: scaleY(.3); }
+  .bed:not(.open) .p-spin { transform: rotate(-60deg); }
+  .bed:not(.open) .p-pop { transform: scale(0); }
+  .bed:not(.open) .p-arm { transform: rotate(18deg); }
+  .bed:not(.open) .p-screen { opacity: .25; }
+  .bed.open { box-shadow: inset 0 0 0 1.5px rgba(198,244,50,.55), 0 30px 60px -30px rgba(198,244,50,.35); transform: translateY(-6px); }
+  .glowdot { fill: var(--glow); }
+  .bed .p-bar, .bed .p-leaf { transform-origin: 50% 100%; }
+  
+
+  /* ---- harvest: projects hanging from a branch ---- */
+  .branch { position: relative; }
+  .branch > svg { position: absolute; left: -4%; top: -40px; width: 108%; height: 90px; overflow: visible; }
+  .fruit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 2.5vw, 34px); padding-top: 30px; }
+  @media (max-width: 860px) { .fruit { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 50px; } }
+  .hang { position: relative; transform-origin: 50% -60px; animation: swing var(--d, 5s) ease-in-out infinite alternate; }
+  .hang::before { content: ""; position: absolute; left: 50%; top: -60px; height: 60px; width: 1.5px; background: linear-gradient(var(--leaf), rgba(127,191,58,.4)); }
+  @keyframes swing { from { transform: rotate(var(--a, 2.4deg)); } to { transform: rotate(calc(var(--a, 2.4deg) * -1)); } }
+  .frame { display: block; position: relative; aspect-ratio: 3 / 4; max-width: 100%; border-radius: 22px; overflow: hidden; background: var(--night-3); box-shadow: 0 0 0 6px var(--night-2), 0 0 0 7px rgba(243,241,234,.1), 0 30px 50px -20px #000; text-decoration: none; }
+  .frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease), filter 400ms; filter: saturate(.85); }
+  .frame .who { position: absolute; left: 14px; bottom: 12px; right: 14px; font: 700 18px var(--display); text-shadow: 0 2px 12px #000; }
+  .frame .res { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 4px; padding: 16px; text-align: center; background: rgba(10,15,11,.78); opacity: 0; transition: opacity 300ms var(--ease); }
+  .frame .res strong { font: 800 clamp(2.4rem, 5vw, 3.6rem)/1 var(--display); color: var(--lime); letter-spacing: -.03em; }
+  .frame .res span { font-size: 14px; color: var(--cream); }
+  .tag { position: absolute; top: 12px; left: 12px; padding: 3px 8px; border-radius: 99px; font: 600 10.5px var(--body); letter-spacing: .12em; text-transform: uppercase; background: rgba(10,15,11,.6); color: var(--cream); }
+  @media (hover: hover) { .hang:hover { animation-play-state: paused; } .hang:hover .res { opacity: 1; } .hang:hover img { transform: scale(1.06); filter: saturate(1); } }
+  .hang.show .res { opacity: 1; }
+
+  /* ---- seasons: one plant, grown by scrolling ---- */
+  #seasons { padding: 0; }
+  #seasons .track { height: 320vh; }
+  #seasons .stage { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 30px; }
+  #seasons svg { width: 100%; max-height: 82svh; overflow: visible; }
+  .steps { display: grid; gap: 4px; }
+  .step { display: flex; align-items: baseline; gap: 18px; padding: 10px 0; opacity: .25; transition: opacity 400ms var(--ease), transform 400ms var(--ease); }
+  .step b { font: 800 clamp(2.4rem, 6vw, 5rem)/1 var(--display); letter-spacing: -.03em; }
+  .step span { font-size: 14px; color: var(--muted); }
+  .step.on { opacity: 1; transform: translateX(10px); }
+  .step.on b { color: var(--lime); }
+  @media (max-width: 760px) { #seasons .stage { grid-template-columns: minmax(0, 1fr); align-content: center; gap: 0; } #seasons svg { max-height: 48svh; } .step { padding: 2px 0; } .step b { font-size: 2.1rem; } }
+
+  /* ---- three pots ---- */
+  .pots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 3vw, 40px); align-items: end; }
+  .pot { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .pot svg { width: 100%; max-width: 280px; height: auto; overflow: visible; }
+  .pot b { margin-top: 14px; font: 700 clamp(1rem, 2.2vw, 1.5rem) var(--display); }
+  .pot small { color: var(--muted); font-size: clamp(12px, 1.6vw, 14px); }
+  .pot.us b { color: var(--lime); }
+
+  /* ---- plant your idea ---- */
+  #plant .box { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(20px, 5vw, 70px); align-items: center; padding: clamp(22px, 5vw, 60px); border-radius: 40px; background: radial-gradient(90% 90% at 20% 100%, #1d2a12, var(--night-2) 65%); box-shadow: inset 0 0 0 1px rgba(198,244,50,.15); }
+  #plant svg { width: 100%; max-width: 360px; justify-self: center; overflow: visible; }
+  #plant h2 { font-size: clamp(2.6rem, 6vw, 4.8rem); font-weight: 800; }
+  form.seed { display: grid; gap: 12px; margin-top: 26px; }
+  .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+  @media (max-width: 860px) { #plant .box { grid-template-columns: minmax(0, 1fr); } #plant svg { max-width: 240px; } .row { grid-template-columns: minmax(0, 1fr); } }
+  label.f { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  label.f input, label.f select { width: 100%; min-height: 54px; padding: 0 18px; border-radius: 16px; border: 0; background: var(--night); color: var(--cream); font: 500 16px var(--body); box-shadow: inset 0 0 0 1.5px rgba(243,241,234,.14); transition: box-shadow 160ms; }
+  label.f input:focus, label.f select:focus { outline: none; box-shadow: inset 0 0 0 2px var(--lime); }
+  label.f input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--petal); }
+  .msg { min-height: 22px; margin: 4px 0 0; font-size: 14.5px; }
+  .msg.bad { color: var(--petal); }
+  .msg.good { color: var(--lime); }
+
+  footer { padding-block: 40px 60px; color: var(--muted); font-size: 14px; }
+  footer .in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; border-top: 1px solid rgba(243,241,234,.1); padding-top: 26px; }
+  footer strong { color: var(--cream); font-weight: 600; user-select: all; }
+  .note { font-size: 12.5px; color: rgba(154,167,156,.8); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hang, .hint i { animation: none; }
+    .bed .p, .step, .btn, .frame img { transition: none; }
+  }
+</style>
+
+<div id="cur" aria-hidden="true">
+  <span class="dot"></span>
+  <svg class="can" viewBox="0 0 34 34"><path d="M6 12h15v14a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" fill="#C6F432"/><path d="M21 15l9-6v3l-8 7z" fill="#C6F432"/><path d="M8 12c0-5 11-5 11 0" fill="none" stroke="#C6F432" stroke-width="2"/><circle cx="31" cy="12" r="1.4" fill="#7FD3FF"/><circle cx="32" cy="16" r="1.2" fill="#7FD3FF"/></svg>
+</div>
+
+<header class="bar gut">
+  <div class="wrap in">
+    <a class="logo" href="#hero" aria-label="Click and Grow, back to top">
+      <svg viewBox="0 0 36 44" aria-hidden="true"><path d="M11 17C11.5 11.5 14.5 8 20 6.2" fill="none" stroke="#C6F432" stroke-width="2.4" stroke-linecap="round"/><path d="M20 6.2C22.5 2.6 28.5 2.2 31 4.4 28.2 7.6 23 8.4 20 6.2Z" fill="#C6F432"/><path d="M12.6 11.6C10.2 8.2 5.6 7.6 3.4 9.2 5.4 12.4 9.6 13.2 12.6 11.6Z" fill="#C6F432"/><path d="M11 17v21l5.2-5 3.6 7.6 3.6-1.6-3.5-7.4 7.1-.2Z" fill="#F3F1EA" stroke="#0A0F0B" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <span>Click <em>&amp;</em> Grow</span>
+    </a>
+    <nav class="links" aria-label="Sections"><a href="#garden">Services</a><a href="#harvest">Work</a><a href="#seasons">Process</a><a href="#plant">Contact</a></nav>
+    <a class="btn btn-lime" href="#plant">Plant your idea</a>
+  </div>
+</header>
+
+<svg id="stem" viewBox="0 0 40 1000" preserveAspectRatio="none" aria-hidden="true">
+  <path id="stemPath" d="M20 0 C 34 80, 6 160, 20 240 S 34 400, 20 480 S 6 640, 20 720 S 34 880, 20 1000" fill="none" stroke="#7FBF3A" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+</svg>
+
+<main>
+  <!-- HERO -->
+  <section id="hero" class="gut">
+    <canvas id="flies" aria-hidden="true"></canvas>
+    <div class="wrap grid">
+      <div>
+        <h1><span class="ln hl">Click.</span><span class="ln hl">Watch it</span><span class="ln hl"><em class="s">grow.</em></span></h1>
+        <p class="sub hl">Websites, brands and campaigns for Dhaka’s most ambitious businesses.</p>
+        <div class="cta hl"><a class="btn btn-lime" href="#plant">Plant your idea <span aria-hidden="true">→</span></a><a class="btn btn-ghost" href="#garden">See what grows</a></div>
+        <p class="hint hl"><i></i>Click anywhere on the page to plant something</p>
+      </div>
+
+      <svg id="scene" viewBox="0 0 500 600" role="img" aria-label="Our mascot, a little cursor with a sprout on its head, plants a seed that grows into a glowing vine">
+        <defs>
+          <radialGradient id="soilg" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#4A3826"/><stop offset="1" stop-color="#1B140E"/></radialGradient>
+          <radialGradient id="halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#C6F432" stop-opacity=".55"/><stop offset="1" stop-color="#C6F432" stop-opacity="0"/></radialGradient>
+          <g id="leafShape"><path d="M0 0 C 10 -14, 30 -16, 40 -6 C 28 4, 10 6, 0 0 Z"/><path d="M2 -1 C 14 -6, 26 -8, 36 -6" fill="none" stroke="#0A0F0B" stroke-opacity=".35" stroke-width="1.2"/></g>
+          <g id="flowerShape"><g fill="#FF9EC0"><ellipse cx="0" cy="-14" rx="8" ry="14"/><ellipse cx="0" cy="-14" rx="8" ry="14" transform="rotate(72)"/><ellipse cx="0" cy="-14" rx="8" ry="14" transform="rotate(144)"/><ellipse cx="0" cy="-14" rx="8" ry="14" transform="rotate(216)"/><ellipse cx="0" cy="-14" rx="8" ry="14" transform="rotate(288)"/></g><circle r="7" fill="#F5E27A"/></g>
+        </defs>
+        <ellipse cx="250" cy="560" rx="240" ry="46" fill="url(#soilg)"/>
+        <ellipse cx="250" cy="548" rx="70" ry="40" fill="url(#halo)" id="seedHalo" opacity="0"/>
+        <path id="vine" d="M250 540 C 252 470, 178 450, 196 380 C 214 312, 320 300, 304 226 C 290 160, 196 158, 214 100 C 226 62, 262 52, 270 44" fill="none" stroke="#7FBF3A" stroke-width="6" stroke-linecap="round"/>
+        <path id="vine2" d="M200 372 C 150 360, 120 330, 112 292" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+        <path id="vine3" d="M304 232 C 350 214, 382 222, 404 196" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+        <g fill="#7FBF3A">
+          <g transform="translate(222 452) rotate(-160) scale(1.1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(240 470) rotate(-20) scale(.9)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(198 352) rotate(-170) scale(1.2)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(150 350) rotate(-130)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(300 262) rotate(-15) scale(1.2)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(360 216) rotate(-40)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(276 180) rotate(-150) scale(1.1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(214 110) rotate(-200) scale(1)"><use href="#leafShape" class="vl"/></g>
+          <g transform="translate(226 84) rotate(-20) scale(.9)"><use href="#leafShape" class="vl"/></g>
+        </g>
+        <g transform="translate(270 44) scale(1.5)"><use href="#flowerShape" class="vf"/></g>
+        <g transform="translate(112 290) scale(1.05)"><use href="#flowerShape" class="vf"/></g>
+        <g transform="translate(404 194) scale(1.15)"><use href="#flowerShape" class="vf"/></g>
+        <ellipse id="seed" cx="250" cy="540" rx="11" ry="14" fill="#C6F432"/>
+        <circle id="ring" cx="250" cy="540" r="16" fill="none" stroke="#C6F432" stroke-width="2.5" opacity="0"/>
+
+        <!-- mascot: a cursor with a sprout on its head -->
+        <g id="mascotWrap" transform="translate(360 548)">
+          <g id="mascot" tabindex="0" role="button" aria-label="Poke the gardener">
+            <ellipse cx="22" cy="2" rx="30" ry="6" fill="#000" opacity=".35"/>
+            <g id="mbody">
+              <ellipse cx="10" cy="-1" rx="8" ry="4.5" fill="#0B0F0C"/><ellipse cx="34" cy="-3" rx="8" ry="4.5" fill="#0B0F0C"/>
+              <path d="M2 -110 L2 -18 Q2 -12 7 -16 L22 -32 L34 -8 Q36 -4 40 -6 L48 -10 Q52 -12 50 -16 L38 -40 L64 -42 Q70 -42 66 -47 L8 -112 Q2 -117 2 -110 Z" fill="#F3F1EA" stroke="#0B0F0C" stroke-width="3" stroke-linejoin="round"/>
+              <g id="eyes"><circle cx="14" cy="-70" r="7" fill="#fff" stroke="#0B0F0C" stroke-width="2"/><circle cx="32" cy="-62" r="7" fill="#fff" stroke="#0B0F0C" stroke-width="2"/><circle class="pupil" cx="15" cy="-70" r="3.4" fill="#0B0F0C"/><circle class="pupil" cx="33" cy="-62" r="3.4" fill="#0B0F0C"/></g>
+              <rect id="lids" x="5" y="-80" width="38" height="0" fill="#F3F1EA"/>
+              <ellipse cx="10" cy="-55" rx="4" ry="2.5" fill="#FF9EC0" opacity=".8"/><ellipse cx="40" cy="-48" rx="4" ry="2.5" fill="#FF9EC0" opacity=".8"/>
+              <path d="M19 -54 Q24 -49 28 -54" fill="none" stroke="#0B0F0C" stroke-width="2.2" stroke-linecap="round"/>
+              <g id="msprout"><path d="M5 -112 C 5 -124, 10 -130, 16 -134" fill="none" stroke="#C6F432" stroke-width="3" stroke-linecap="round"/><path d="M16 -134 C 20 -142, 30 -142, 33 -138 C 28 -132, 21 -131, 16 -134 Z" fill="#C6F432"/><path d="M8 -124 C 3 -131, -5 -131, -8 -127 C -3 -122, 4 -121, 8 -124 Z" fill="#C6F432"/></g>
+            </g>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SERVICES AS PLANTS -->
+  <section id="garden" class="scene gut">
+    <div class="wrap">
+      <div class="head"><h2>Pick a <em class="s">plant.</em></h2><p>Five things we grow. Hover or tap one to watch it bloom.</p></div>
+      <div class="beds">
+        <a class="bed" href="#plant" data-svc="web-design">
+          <svg viewBox="0 0 200 220" aria-hidden="true">
+            <rect x="34" y="66" width="132" height="88" rx="8" fill="#121A14" stroke="#F3F1EA" stroke-width="3"/>
+            <g class="p p-screen"><rect x="46" y="78" width="60" height="8" rx="4" fill="#C6F432"/><rect x="46" y="94" width="108" height="5" rx="2.5" fill="#F3F1EA" opacity=".5"/><rect x="46" y="105" width="90" height="5" rx="2.5" fill="#F3F1EA" opacity=".5"/><rect x="46" y="122" width="40" height="18" rx="9" fill="#C6F432"/></g>
+            <path d="M22 160h156l-12 12H34z" fill="#F3F1EA"/>
+            <path d="M160 172 C 186 150, 168 120, 184 96 C 196 76, 178 54, 184 34" fill="none" stroke="#7FBF3A" stroke-width="4" stroke-linecap="round"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M178 140 c 14 -10 26 -6 30 2 c -10 8 -22 8 -30 -2z"/><path class="p p-leaf" d="M180 100 c -14 -10 -26 -6 -30 2 c 10 8 22 8 30 -2z"/><path class="p p-leaf" d="M184 58 c 12 -12 24 -8 28 0 c -10 8 -20 8 -28 0z"/></g>
+            <g class="p p-petal"><use href="#flowerShape" transform="translate(184 32) scale(.8)"/></g>
+          </svg>
+          <b>Websites</b><small>that sell while you sleep</small>
+        </a>
+        <a class="bed" href="#plant" data-svc="branding">
+          <svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 210 C 100 180, 96 160, 100 130" stroke="#7FBF3A" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M100 186 c -20 -14 -38 -6 -42 4 c 14 10 32 8 42 -4z"/><path class="p p-leaf" d="M100 170 c 20 -14 38 -6 42 4 c -14 10 -32 8 -42 -4z"/></g>
+            <g class="p p-petal">
+              <g fill="#FF9EC0"><ellipse cx="100" cy="52" rx="20" ry="34"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(60 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(120 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(180 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(240 100 90)"/><ellipse cx="100" cy="52" rx="20" ry="34" transform="rotate(300 100 90)"/></g>
+            </g>
+            <circle cx="100" cy="90" r="26" fill="#C6F432"/>
+            <text x="100" y="104" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="40" fill="#0B0F0C">&amp;</text>
+          </svg>
+          <b>Branding</b><small>logos people remember</small>
+        </a>
+        <a class="bed" href="#plant" data-svc="video">
+          <svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 210 V 150" stroke="#7FBF3A" stroke-width="5" stroke-linecap="round"/>
+            <g fill="#7FBF3A"><path class="p p-leaf" d="M100 190 c -20 -12 -36 -4 -40 6 c 14 8 30 6 40 -6z"/><path class="p p-leaf" d="M100 176 c 20 -12 36 -4 40 6 c -14 8 -30 6 -40 -6z"/></g>
+            <g class="p p-spin">
+              <circle cx="100" cy="94" r="58" fill="#121A14" stroke="#F3F1EA" stroke-width="4"/>
+              <g fill="#0A0F0B" stroke="#F3F1EA" stroke-width="3"><circle cx="100" cy="58" r="13"/><circle cx="100" cy="130" r="13"/><circle cx="64" cy="94" r="13"/><circle cx="136" cy="94" r="13"/></g>
+            </g>
+            <path d="M92 82 L 114 94 L 92 106 Z" fill="#C6F432"/>
+            <g class="p p-pop"><circle cx="150" cy="40" r="5" class="glowdot"/><circle cx="166" cy="56" r="3" class="glowdot"/><circle cx="140" cy="24" r="3" class="glowdot"/></g>
+          </svg>
+          <b>Video</b><small>that stops the scroll</small>
+        </a>
+        <a class="bed" href="#plant" data-svc="apps">
+          <svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M58 214h84l-8-22H66z" fill="#B0673A"/>
+            <g class="p p-arm" style="transform-origin:100% 100%"><path d="M72 128 H 50 Q 40 128 40 116 V 92" fill="none" stroke="#3F6B1E" stroke-width="16" stroke-linecap="round"/></g>
+            <g class="p p-arm" style="transform-origin:0% 100%"><path d="M128 112 H 150 Q 160 112 160 100 V 80" fill="none" stroke="#3F6B1E" stroke-width="16" stroke-linecap="round"/></g>
+            <rect x="68" y="46" width="64" height="148" rx="16" fill="#3F6B1E"/>
+            <rect x="76" y="60" width="48" height="96" rx="8" fill="#121A14"/>
+            <g class="p p-screen"><rect x="82" y="68" width="24" height="6" rx="3" fill="#C6F432"/><rect x="82" y="82" width="36" height="18" rx="5" fill="#7FBF3A" opacity=".7"/><rect x="82" y="106" width="36" height="18" rx="5" fill="#7FBF3A" opacity=".5"/><rect x="82" y="132" width="36" height="12" rx="6" fill="#C6F432"/></g>
+            <circle cx="100" cy="178" r="5" fill="#121A14"/>
+            <g class="p p-pop"><use href="#flowerShape" transform="translate(100 40) scale(.9)"/></g>
+          </svg>
+          <b>Apps</b><small>people keep on their phones</small>
+        </a>
+        <a class="bed" href="#plant" data-svc="growth">
+          <svg viewBox="0 0 200 220" aria-hidden="true">
+            <path d="M100 212 V 120 M100 160 L 70 130 M100 146 L 134 116" stroke="#8A6A45" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <g fill="#C6F432"><rect class="p p-bar" x="40" y="62" width="22" height="66" rx="6"/><rect class="p p-bar" x="68" y="38" width="22" height="90" rx="6"/><rect class="p p-bar" x="96" y="20" width="22" height="108" rx="6"/><rect class="p p-bar" x="124" y="6" width="22" height="122" rx="6"/></g>
+            <path class="p p-pop" d="M150 8 l 22 -6 l -4 22" fill="none" stroke="#F5E27A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <ellipse cx="100" cy="212" rx="50" ry="6" fill="#2B2118"/>
+          </svg>
+          <b>Growth</b><small>ads, social and SEO</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARVEST -->
+  <section id="harvest" class="scene gut">
+    <div class="wrap">
+      <div class="head"><h2>This season’s <em class="s">harvest.</em></h2><p>Hover a frame to see what grew. Sample projects.</p></div>
+      <div class="branch">
+        <svg viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 C 160 20, 300 70, 500 40 S 840 30, 1000 56" fill="none" stroke="#8A6A45" stroke-width="10" stroke-linecap="round" vector-effect="non-scaling-stroke"/><g fill="#7FBF3A"><path d="M120 34 c 20 -20 40 -16 46 -6 c -16 12 -34 14 -46 6z"/><path d="M420 46 c -20 -20 -40 -16 -46 -6 c 16 12 34 14 46 6z"/><path d="M640 34 c 20 -22 44 -16 50 -4 c -18 12 -38 12 -50 4z"/><path d="M900 40 c -20 -20 -40 -16 -46 -6 c 16 12 34 14 46 6z"/></g></svg>
+        <div class="fruit">
+          <div class="hang" style="--d:4.6s;--a:2.6deg"><a class="frame" href="#plant"><img src="img/p-realestate-1-640.webp" alt="Living room in a Meridian Residences apartment" loading="lazy"><span class="tag">Sample</span><span class="who">Meridian Residences</span><span class="res"><strong>3.1×</strong><span>site-visit bookings</span></span></a></div>
+          <div class="hang" style="--d:5.4s;--a:-2deg"><a class="frame" href="#plant"><img src="img/p-fashion-1-640.webp" alt="Noor Atelier clothes on a rail" loading="lazy"><span class="tag">Sample</span><span class="who">Noor Atelier</span><span class="res"><strong>+64%</strong><span>online revenue</span></span></a></div>
+          <div class="hang" style="--d:4.2s;--a:2.2deg"><a class="frame" href="#plant"><img src="img/p-fintech-1-640.webp" alt="TakaWallet app on a phone" loading="lazy"><span class="tag">Sample</span><span class="who">TakaWallet</span><span class="res"><strong>50k</strong><span>downloads in Q1</span></span></a></div>
+          <div class="hang" style="--d:5s;--a:-2.8deg"><a class="frame" href="#plant"><img src="img/p-restaurant-1-640.webp" alt="A Spice Route dish" loading="lazy"><span class="tag">Sample</span><span class="who">Spice Route</span><span class="res"><strong>100%</strong><span>weekend tables booked</span></span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS -->
+  <section id="seasons" class="scene gut" aria-label="How a project grows: seed, sprout, bloom, harvest">
+    <div class="track">
+      <div class="stage wrap">
+        <svg id="season" viewBox="0 0 400 520" aria-hidden="true">
+          <ellipse cx="200" cy="488" rx="170" ry="30" fill="url(#soilg2)"/>
+          <defs><radialGradient id="soilg2" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#4A3826"/><stop offset="1" stop-color="#1B140E"/></radialGradient></defs>
+          <ellipse id="sSeed" cx="200" cy="476" rx="12" ry="15" fill="#C6F432"/>
+          <path id="sStem" d="M200 474 C 196 420, 214 380, 200 330 C 186 280, 214 240, 200 190 C 192 160, 200 130, 200 110" fill="none" stroke="#7FBF3A" stroke-width="8" stroke-linecap="round"/>
+          <g id="sLeaves" fill="#7FBF3A">
+            <path d="M200 410 c -40 -30 -76 -16 -84 4 c 28 22 62 18 84 -4z"/><path d="M204 360 c 40 -30 76 -16 84 4 c -28 22 -62 18 -84 -4z"/>
+            <path d="M198 290 c -44 -30 -82 -14 -90 6 c 30 22 66 18 90 -6z"/><path d="M204 236 c 40 -28 74 -14 80 6 c -26 20 -58 16 -80 -6z"/>
+          </g>
+          <g id="sFlower"><g fill="#FF9EC0"><ellipse cx="200" cy="66" rx="22" ry="40"/><ellipse cx="200" cy="66" rx="22" ry="40" transform="rotate(60 200 108)"/><ellipse cx="200" cy="66" rx="22" ry="40" transform="rotate(120 200 108)"/><ellipse cx="200" cy="66" rx="22" ry="40" transform="rotate(180 200 108)"/><ellipse cx="200" cy="66" rx="22" ry="40" transform="rotate(240 200 108)"/><ellipse cx="200" cy="66" rx="22" ry="40" transform="rotate(300 200 108)"/></g><circle cx="200" cy="108" r="22" fill="#F5E27A"/></g>
+          <g id="sFruit"><circle cx="120" cy="420" r="13" fill="#C6F432"/><circle cx="292" cy="372" r="13" fill="#C6F432"/><circle cx="112" cy="300" r="12" fill="#C6F432"/><circle cx="284" cy="248" r="12" fill="#C6F432"/><circle cx="150" cy="170" r="9" fill="#F5E27A"/><circle cx="254" cy="150" r="9" fill="#F5E27A"/></g>
+        </svg>
+        <div>
+          <p class="kicker">How it grows</p>
+          <div class="steps">
+            <div class="step on" data-i="0"><b>Seed</b><span>call · 1 week</span></div>
+            <div class="step" data-i="1"><b>Sprout</b><span>design · 1 to 3 weeks</span></div>
+            <div class="step" data-i="2"><b>Bloom</b><span>build &amp; launch · 2 to 4 weeks</span></div>
+            <div class="step" data-i="3"><b>Harvest</b><span>leads, every month</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE POTS -->
+  <section id="pots" class="scene gut">
+    <div class="wrap">
+      <div class="head"><h2>Same seed. <em class="s">Three gardeners.</em></h2></div>
+      <div class="pots">
+        <div class="pot">
+          <svg viewBox="0 0 200 240" aria-hidden="true">
+            <g id="wilt"><path d="M100 172 C 98 130, 104 100, 100 70" stroke="#7FBF3A" stroke-width="5" fill="none" stroke-linecap="round" class="wc"/><g class="wl" fill="#7FBF3A"><path d="M100 140 c -22 -14 -40 -6 -44 4 c 16 10 34 8 44 -4z"/><path d="M100 112 c 22 -14 40 -6 44 4 c -16 10 -34 8 -44 -4z"/></g><g class="wl"><use href="#flowerShape" transform="translate(100 66) scale(.9)"/></g></g>
+            <g class="fall" fill="#8A7A55" opacity="0"><path d="M60 200 c 10 -6 20 -4 22 1 c -8 5 -16 5 -22 -1z"/><path d="M128 206 c 10 -6 20 -4 22 1 c -8 5 -16 5 -22 -1z"/></g>
+            <path d="M52 170h96l-10 62H62z" fill="#B0673A"/><rect x="46" y="162" width="108" height="14" rx="4" fill="#C47A49"/>
+          </svg>
+          <b>Freelancer</b><small>wilts after launch</small>
+        </div>
+        <div class="pot">
+          <svg viewBox="0 0 200 240" aria-hidden="true">
+            <path d="M100 172 V 70" stroke="#5AA0A0" stroke-width="5" stroke-linecap="round"/>
+            <g fill="#5AA0A0"><path d="M100 140 L 56 128 L 100 120z"/><path d="M100 112 L 144 100 L 100 92z"/><path d="M100 84 L 62 70 L 100 64z"/></g>
+            <g id="ptag"><path d="M130 74 L 150 96" stroke="#F3F1EA" stroke-width="1.5"/><rect x="140" y="94" width="44" height="24" rx="4" fill="#F3F1EA" transform="rotate(20 150 96)"/><text x="160" y="112" font-family="Inter Tight, sans-serif" font-size="12" font-weight="700" fill="#0B0F0C" text-anchor="middle" transform="rotate(20 150 96)">+৳৳</text></g>
+            <path d="M52 170h96l-10 62H62z" fill="#6A6F76"/><rect x="46" y="162" width="108" height="14" rx="4" fill="#80868D"/>
+          </svg>
+          <b>Template agency</b><small>plastic leaves, hidden extras</small>
+        </div>
+        <div class="pot us">
+          <svg viewBox="0 0 200 240" aria-hidden="true">
+            <g id="tree">
+              <path d="M100 172 C 96 140, 106 110, 100 80 M100 130 L 70 104 M100 112 L 134 86" stroke="#8A6A45" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <g fill="#7FBF3A"><circle cx="100" cy="62" r="34"/><circle cx="66" cy="90" r="26"/><circle cx="136" cy="74" r="26"/></g>
+              <g fill="#C6F432"><circle cx="88" cy="56" r="6"/><circle cx="116" cy="70" r="6"/><circle cx="62" cy="88" r="5"/><circle cx="140" cy="68" r="5"/><circle cx="104" cy="40" r="5"/></g>
+            </g>
+            <path d="M52 170h96l-10 62H62z" fill="#C6F432"/><rect x="46" y="162" width="108" height="14" rx="4" fill="#D8FF52"/>
+          </svg>
+          <b>Click &amp; Grow</b><small>keeps growing, month after month</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANT YOUR IDEA -->
+  <section id="plant" class="scene gut">
+    <div class="wrap">
+      <div class="box">
+        <svg id="pot" viewBox="0 0 300 360" aria-hidden="true">
+          <ellipse cx="150" cy="330" rx="110" ry="14" fill="#000" opacity=".35"/>
+          <g id="potPlant">
+            <path id="potStem" d="M150 258 C 146 220, 158 190, 150 150 C 144 120, 152 96, 150 70" fill="none" stroke="#7FBF3A" stroke-width="7" stroke-linecap="round"/>
+            <g id="potLeaves" fill="#7FBF3A"><path d="M150 220 c -30 -22 -58 -12 -64 4 c 22 16 48 14 64 -4z"/><path d="M152 180 c 30 -22 58 -12 64 4 c -22 16 -48 14 -64 -4z"/><path d="M148 130 c -28 -20 -54 -10 -60 4 c 20 14 44 12 60 -4z"/></g>
+            <g id="potFlower"><g fill="#FF9EC0"><ellipse cx="150" cy="40" rx="16" ry="30"/><ellipse cx="150" cy="40" rx="16" ry="30" transform="rotate(60 150 70)"/><ellipse cx="150" cy="40" rx="16" ry="30" transform="rotate(120 150 70)"/><ellipse cx="150" cy="40" rx="16" ry="30" transform="rotate(180 150 70)"/><ellipse cx="150" cy="40" rx="16" ry="30" transform="rotate(240 150 70)"/><ellipse cx="150" cy="40" rx="16" ry="30" transform="rotate(300 150 70)"/></g><circle cx="150" cy="70" r="16" fill="#F5E27A"/></g>
+          </g>
+          <ellipse id="potSeed" cx="150" cy="256" rx="10" ry="13" fill="#C6F432"/>
+          <path d="M70 262h160l-18 70H88z" fill="#C6F432"/><rect x="60" y="250" width="180" height="20" rx="6" fill="#D8FF52"/>
+          <g id="drops" fill="#7FD3FF" opacity="0"><ellipse cx="128" cy="200" rx="3" ry="5"/><ellipse cx="150" cy="186" rx="3" ry="5"/><ellipse cx="172" cy="204" rx="3" ry="5"/></g>
+        </svg>
+        <div>
+          <h2>Plant your <em class="s">idea.</em></h2>
+          <p style="margin:14px 0 0;color:var(--muted);max-width:36ch">Every letter you type waters the seed. We call you within one business day.</p>
+          <form class="seed" id="seedForm" novalidate>
+            <div class="row">
+              <label class="f" for="nm">Your name<input id="nm" name="name" autocomplete="name" maxlength="120"></label>
+              <label class="f" for="ph">Mobile number<input id="ph" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01712-345678"></label>
+            </div>
+            <label class="f" for="sv">What should we grow?<select id="sv" name="service"><option value="">Choose one</option><option value="web-design">A website</option><option value="branding">A brand</option><option value="video">A video</option><option value="apps">An app</option><option value="growth">More customers</option></select></label>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:8px"><button class="btn btn-lime" type="submit">Plant it <span aria-hidden="true">→</span></button><span class="note">Concept page: nothing is sent yet.</span></div>
+            <p class="msg" id="msg" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="gut">
+  <div class="wrap in">
+    <span>Click &amp; Grow · Dhaka · <strong>+880 1732-508485</strong></span>
+    <span class="note">Concept for the Digital Garden direction. Project photos via Unsplash.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var G = window.gsap;
+  if (G && window.ScrollTrigger) G.registerPlugin(ScrollTrigger);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function len(p) { try { return p.getTotalLength(); } catch (e) { return 600; } }
+  function prepDraw(p) { var l = len(p); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; return l; }
+
+  /* ---------- cursor ---------- */
+  var cur = $('#cur');
+  if (fine && cur) {
+    var cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
+    addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; cur.classList.toggle('water', !!e.target.closest('a, button, input, select, [role="button"]')); });
+    (function loop() { cx += (tx - cx) * .35; cy += (ty - cy) * .35; cur.style.transform = 'translate(' + cx + 'px,' + cy + 'px)'; requestAnimationFrame(loop); })();
+  }
+
+  /* ---------- fireflies ---------- */
+  var cv = $('#flies'), ctx = cv && cv.getContext('2d'), flies = [], heroOn = true, dpr = Math.min(2, devicePixelRatio || 1);
+  function size() { if (!cv) return; cv.width = cv.offsetWidth * dpr; cv.height = cv.offsetHeight * dpr; }
+  if (ctx) {
+    size(); addEventListener('resize', size);
+    for (var i = 0; i < (innerWidth < 700 ? 22 : 46); i++) flies.push({ x: Math.random(), y: Math.random(), r: 1 + Math.random() * 2.2, s: .2 + Math.random() * .6, p: Math.random() * 6.28, dx: (Math.random() - .5) * .0006, dy: -.0002 - Math.random() * .0005 });
+    var draw = function (t) {
+      if (heroOn) {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        flies.forEach(function (f) {
+          if (!reduce) { f.x += f.dx; f.y += f.dy; if (f.y < -.02) { f.y = 1.02; f.x = Math.random(); } if (f.x < 0 || f.x > 1) f.dx *= -1; }
+          var a = reduce ? .5 : .35 + .65 * Math.abs(Math.sin(t / 1000 * f.s + f.p));
+          var x = f.x * cv.width, y = f.y * cv.height, r = f.r * dpr;
+          var g = ctx.createRadialGradient(x, y, 0, x, y, r * 6); g.addColorStop(0, 'rgba(245,226,122,' + a + ')'); g.addColorStop(1, 'rgba(245,226,122,0)');
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r * 6, 0, 6.28); ctx.fill();
+        });
+      }
+      if (!reduce) requestAnimationFrame(draw);
+    };
+    requestAnimationFrame(draw);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { heroOn = es[0].isIntersecting; }).observe($('#hero'));
+  }
+
+  if (!G || reduce) return finalStates();
+
+  /* ---------- hero: the gardener plants the seed ---------- */
+  var vines = ['#vine', '#vine2', '#vine3'].map(function (s) { return $(s); });
+  vines.forEach(prepDraw);
+  G.set('.vl', { scale: 0, transformOrigin: '0% 72%' });
+  G.set('.vf', { scale: 0, transformOrigin: '50% 50%' });
+  var tl = G.timeline({ delay: .3 });
+  tl.from('.hl', { y: 40, opacity: 0, duration: .8, stagger: .08, ease: 'expo.out' }, 0)
+    .fromTo('#mascotWrap', { attr: { transform: 'translate(900 548)' } }, { attr: { transform: 'translate(360 548)' }, duration: 1.1, ease: 'power3.out' }, .2)
+    .to('#mbody', { y: -14, duration: .14, yoyo: true, repeat: 5, ease: 'sine.inOut' }, .2)
+    .to('#mascotWrap', { attr: { transform: 'translate(282 548)' }, duration: .5, ease: 'power2.inOut' }, 1.3)
+    .to('#mbody', { y: -70, duration: .32, ease: 'power2.out' }, 1.85)
+    .to('#mbody', { y: 0, duration: .26, ease: 'power3.in' }, 2.17)
+    .to('#mbody', { scaleY: .82, scaleX: 1.12, transformOrigin: '50% 100%', duration: .1, yoyo: true, repeat: 1 }, 2.43)
+    .fromTo('#ring', { attr: { r: 14 }, opacity: 1 }, { attr: { r: 90 }, opacity: 0, duration: .8, ease: 'expo.out' }, 2.45)
+    .to('#seedHalo', { opacity: 1, duration: .6 }, 2.45)
+    .to('#mascotWrap', { attr: { transform: 'translate(352 548)' }, duration: .5, ease: 'power2.out' }, 2.6)
+    .to('#vine', { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' }, 2.55)
+    .to(['#vine2', '#vine3'], { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .25 }, 3.1)
+    .to('.vl', { scale: 1, duration: .7, ease: 'back.out(2.2)', stagger: .09 }, 2.8)
+    .to('.vf', { scale: 1, rotate: 30, duration: .9, ease: 'back.out(2)', stagger: .15 }, 3.7)
+    .from('.hl em.s', { color: '#F3F1EA', duration: .6 }, 3.9);
+
+  // idle: breathe, blink, eyes follow the pointer
+  G.to('#mbody', { y: -4, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 4.4 });
+  G.to('#msprout', { rotate: 8, transformOrigin: '0% 100%', duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  (function blink() { G.to('#lids', { attr: { height: 24 }, duration: .08, yoyo: true, repeat: 1, delay: 2.5 + Math.random() * 3, onComplete: blink }); })();
+  var pupils = $$('.pupil'), scene = $('#scene');
+  addEventListener('pointermove', function (e) {
+    var b = scene.getBoundingClientRect(), dx = e.clientX - (b.left + b.width * .62), dy = e.clientY - (b.top + b.height * .8), d = Math.hypot(dx, dy) || 1;
+    pupils.forEach(function (p) { G.to(p, { x: dx / d * 3, y: dy / d * 3, duration: .3 }); });
+  });
+  function poke() {
+    G.timeline().to('#mbody', { y: -40, rotate: -10, transformOrigin: '50% 100%', duration: .22, ease: 'power2.out' }).to('#mbody', { y: 0, rotate: 0, duration: .5, ease: 'bounce.out' });
+    G.fromTo('#msprout', { scale: 1 }, { scale: 1.4, transformOrigin: '0% 100%', duration: .2, yoyo: true, repeat: 1 });
+  }
+  $('#mascot').addEventListener('click', function (e) { e.stopPropagation(); poke(); });
+  $('#mascot').addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); poke(); } });
+
+  /* ---------- click anywhere: plant a sprout ---------- */
+  var planted = [];
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a, button, input, select, label, form, [role="button"], .bed, .frame')) return;
+    var ns = 'http://www.w3.org/2000/svg', s = document.createElementNS(ns, 'svg');
+    s.setAttribute('viewBox', '0 0 60 70'); s.setAttribute('class', 'sprout'); s.setAttribute('aria-hidden', 'true');
+    var hue = Math.random() < .3 ? '#FF9EC0' : '#C6F432';
+    s.innerHTML = '<ellipse cx="30" cy="66" rx="10" ry="3" fill="#000" opacity=".4"/><path class="st" d="M30 66 C 30 50, 26 40, 30 26" fill="none" stroke="#7FBF3A" stroke-width="3" stroke-linecap="round"/><path class="l1" d="M30 40 c -10 -10 -22 -6 -24 0 c 8 6 18 6 24 0z" fill="#7FBF3A"/><path class="l2" d="M30 34 c 10 -10 22 -6 24 0 c -8 6 -18 6 -24 0z" fill="#7FBF3A"/><circle class="bud" cx="30" cy="24" r="6" fill="' + hue + '"/>';
+    s.style.left = e.pageX + 'px'; s.style.top = e.pageY + 'px';
+    document.body.appendChild(s); planted.push(s);
+    if (planted.length > 30) planted.shift().remove();
+    var st = s.querySelector('.st'); prepDraw(st);
+    G.timeline().to(st, { strokeDashoffset: 0, duration: .45, ease: 'power2.out' })
+      .from([s.querySelector('.l1'), s.querySelector('.l2')], { scale: 0, transformOrigin: '30px 38px', duration: .45, ease: 'back.out(2.5)', stagger: .08 }, .2)
+      .from(s.querySelector('.bud'), { scale: 0, transformOrigin: '30px 24px', duration: .5, ease: 'back.out(3)' }, .4)
+      .to(s, { opacity: 0, y: 10, duration: 1.2, delay: 7, onComplete: function () { s.remove(); } });
+  });
+
+  /* ---------- scroll stem along the edge ---------- */
+  var sp = $('#stemPath'); prepDraw(sp);
+  G.to(sp, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: .6 } });
+
+  /* ---------- services: bloom on hover or tap, and once as they arrive ---------- */
+  $$('.bed').forEach(function (bed, i) {
+    if (fine) { bed.addEventListener('pointerenter', function () { bed.classList.add('open'); }); bed.addEventListener('pointerleave', function () { bed.classList.remove('open'); }); }
+    bed.addEventListener('focus', function () { bed.classList.add('open'); });
+    bed.addEventListener('blur', function () { bed.classList.remove('open'); });
+    if (!fine) bed.addEventListener('click', function (e) { if (!bed.classList.contains('open')) { e.preventDefault(); $$('.bed').forEach(function (b) { b.classList.remove('open'); }); bed.classList.add('open'); } });
+    bed.addEventListener('click', function () { var v = bed.getAttribute('data-svc'); if (v) $('#sv').value = v; });
+  });
+  ScrollTrigger.create({ trigger: '#garden .beds', start: 'top 75%', once: true, onEnter: function () {
+    $$('.bed').forEach(function (b, i) { setTimeout(function () { b.classList.add('open'); setTimeout(function () { if (!b.matches(':hover')) b.classList.remove('open'); }, 900); }, i * 140); });
+  } });
+  G.from('.bed', { y: 60, opacity: 0, duration: .9, ease: 'expo.out', stagger: .08, scrollTrigger: { trigger: '#garden .beds', start: 'top 85%' } });
+
+  /* ---------- harvest: frames drop onto the branch ---------- */
+  G.from('.branch > svg path', { strokeDasharray: 1200, strokeDashoffset: 1200, duration: 1.4, ease: 'power2.out', scrollTrigger: { trigger: '.branch', start: 'top 80%' } });
+  G.from('.hang', { y: -120, opacity: 0, duration: 1.1, ease: 'bounce.out', stagger: .12, scrollTrigger: { trigger: '.branch', start: 'top 75%' } });
+  if (!fine) $$('.hang').forEach(function (h) { h.querySelector('.frame').addEventListener('click', function (e) { if (!h.classList.contains('show')) { e.preventDefault(); $$('.hang').forEach(function (x) { x.classList.remove('show'); }); h.classList.add('show'); } }); });
+
+  /* ---------- seasons: scroll grows one plant ---------- */
+  var ss = $('#sStem'); prepDraw(ss);
+  G.set('#sLeaves path', { scale: 0, transformOrigin: '50% 100%' });
+  G.set('#sFlower', { scale: 0, rotate: -40, transformOrigin: '50% 50%' });
+  G.set('#sFruit circle', { scale: 0, transformOrigin: '50% 50%' });
+  var steps = $$('.step');
+  var stl = G.timeline({ scrollTrigger: { trigger: '#seasons .track', start: 'top top', end: 'bottom bottom', scrub: .8,
+    onUpdate: function (s) { var k = Math.min(3, Math.floor(s.progress * 4)); steps.forEach(function (st, i) { st.classList.toggle('on', i === k); }); } } });
+  stl.to('#sSeed', { scale: 1.25, transformOrigin: '50% 50%', duration: .5 })
+     .to('#sSeed', { scaleY: .7, duration: .3 })
+     .to(ss, { strokeDashoffset: 0, duration: 1.4, ease: 'none' })
+     .to('#sLeaves path', { scale: 1, stagger: .2, duration: .5, ease: 'back.out(2)' }, '-=1')
+     .to('#sFlower', { scale: 1, rotate: 0, duration: 1, ease: 'back.out(1.6)' })
+     .to('#sFruit circle', { scale: 1, stagger: .12, duration: .4, ease: 'back.out(3)' });
+
+  /* ---------- three pots ---------- */
+  var pt = G.timeline({ scrollTrigger: { trigger: '.pots', start: 'top 70%' } });
+  pt.from('#tree', { scale: .2, transformOrigin: '50% 100%', duration: 1.4, ease: 'elastic.out(1, .6)' }, .3)
+    .to('#wilt', { rotate: 38, transformOrigin: '50% 100%', duration: 1.6, ease: 'power2.in' }, .5)
+    .to('#wilt .wc', { stroke: '#8A7A55', duration: 1.2 }, .6)
+    .to('#wilt .wl', { fill: '#8A7A55', opacity: .7, duration: 1.2 }, .6)
+    .to('.fall', { opacity: 1, y: 6, duration: .6 }, 1.6)
+    .fromTo('#ptag', { rotate: -12, transformOrigin: '0% 0%' }, { rotate: 12, transformOrigin: '0% 0%', duration: .9, yoyo: true, repeat: 3, ease: 'sine.inOut' }, .3);
+
+  /* ---------- plant your idea: typing waters the seed ---------- */
+  var potStem = $('#potStem'), pl = prepDraw(potStem);
+  G.set('#potLeaves path', { scale: 0, transformOrigin: '50% 100%' });
+  G.set('#potFlower', { scale: 0, transformOrigin: '50% 50%' });
+  var form = $('#seedForm'), msg = $('#msg');
+  G.set(potStem, { strokeDashoffset: pl * .86 });
+  function grow() {
+    var n = ($('#nm').value.length + $('#ph').value.replace(/\D/g, '').length + ($('#sv').value ? 6 : 0));
+    var k = Math.max(.14, Math.min(1, n / 22));
+    G.to(potStem, { strokeDashoffset: pl * (1 - k), duration: .5, ease: 'power2.out' });
+    $$('#potLeaves path').forEach(function (l, i) { G.to(l, { scale: k > (i + 1) * .28 ? 1 : 0, duration: .5, ease: 'back.out(2)' }); });
+    G.fromTo('#drops', { opacity: 1, y: -10 }, { opacity: 0, y: 30, duration: .6, ease: 'power1.in', overwrite: true });
+  }
+  ['input', 'change'].forEach(function (ev) { form.addEventListener(ev, grow); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ph = $('#ph').value.replace(/[০-৯]/g, function (d) { return '০১২৩৪৫৬৭৮৯'.indexOf(d); }).replace(/\D/g, '').replace(/^88(?=01)/, '');
+    var nameOk = $('#nm').value.trim().length > 0, phoneOk = /^01[3-9]\d{8}$/.test(ph);
+    $('#nm').setAttribute('aria-invalid', String(!nameOk)); $('#ph').setAttribute('aria-invalid', String(!phoneOk));
+    if (!nameOk || !phoneOk) {
+      msg.className = 'msg bad';
+      msg.textContent = !nameOk ? 'Tell us your name so we know who to call.' : 'Enter a Bangladeshi mobile number, like 01712-345678.';
+      G.fromTo('#pot', { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+      return;
+    }
+    G.to(potStem, { strokeDashoffset: 0, duration: .5 });
+    G.to('#potLeaves path', { scale: 1, duration: .5, stagger: .08, ease: 'back.out(2)' });
+    G.fromTo('#potFlower', { scale: 0, rotate: -60 }, { scale: 1, rotate: 0, duration: 1.1, ease: 'elastic.out(1, .5)', delay: .3 });
+    msg.className = 'msg good';
+    msg.textContent = 'Seed planted. On the live site this goes to your inbox and we call within a day.';
+  });
+
+})();
+
+function finalStates() {
+  /* reduced motion or no GSAP: everything grown, nothing moving */
+  var s = document.getElementById('seedForm');
+  if (s) s.addEventListener('submit', function (e) { e.preventDefault(); var m = document.getElementById('msg'); m.className = 'msg good'; m.textContent = 'Seed planted. On the live site this goes to your inbox and we call within a day.'; });
+  document.querySelectorAll('.bed').forEach(function (b) { b.classList.add('open'); });
+  document.querySelectorAll('.step').forEach(function (b) { b.classList.add('on'); });
+  var mb = document.getElementById('mascotWrap'); if (mb) mb.setAttribute('transform', 'translate(352 548)');
+}
+</script>
