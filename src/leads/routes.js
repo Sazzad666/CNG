@@ -19,6 +19,9 @@ function limited(ip) {
   if (hits.size > 5000) hits.delete(hits.keys().next().value);
   return list.length > LIMIT;
 }
+// Submissions being saved right now, keyed on phone|type. The app runs as one process, so this
+// closes the gap between "is there a recent duplicate?" and the insert when a double-click sends two at once.
+const inFlight = new Set();
 const ipHash = (ip) => crypto.createHash('sha256').update(config.sessionSecret + '|' + (ip || '')).digest('hex');
 const wantsJson = (req) => req.is('application/json') || (req.get('accept') || '').includes('application/json');
 
@@ -49,9 +52,15 @@ router.post('/api/leads', async (req, res, next) => {
       return res.status(422).render('contact', { formType: type, values: body, errors: v.errors, meta: { title: 'Check your details — Click & Grow' } });
     }
 
-    if (await store.findRecentDuplicate(v.data.phone, type)) return success();
-    const lead = { ...v.data, ip_hash: ipHash(req.ip) };
-    lead.id = await store.insertLead(lead);
+    const key = v.data.phone + '|' + type;
+    if (inFlight.has(key)) return success();
+    inFlight.add(key);
+    let lead;
+    try {
+      if (await store.findRecentDuplicate(v.data.phone, type)) return success();
+      lead = { ...v.data, ip_hash: ipHash(req.ip) };
+      lead.id = await store.insertLead(lead);
+    } finally { inFlight.delete(key); }
     success();
     // After the response: the alert never delays or loses the lead.
     sendLeadAlert(lead).then((r) => store.markAlert(lead.id, r)).catch((e) => console.error('alert bookkeeping failed:', e.message));

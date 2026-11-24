@@ -115,3 +115,13 @@ test('thank-you copy depends on the lead type', async () => {
   assert.match((await request(app).get('/thank-you?type=audit')).text, /audit within 2 business days/);
   assert.match((await request(app).get('/thank-you')).text, /call you within one business day/);
 });
+
+test('two identical submissions at the same moment save one lead', async () => {
+  const [a, b] = await Promise.all([
+    request(app).post('/api/leads').send(valid({ phone: '01755555555' })),
+    request(app).post('/api/leads').send(valid({ phone: '01755555555' })),
+  ]);
+  assert.equal(a.body.ok, true);
+  assert.equal(b.body.ok, true);
+  assert.equal(await count(), 1);
+});
