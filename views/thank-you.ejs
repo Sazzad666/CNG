@@ -1,0 +1,22 @@
+<%- include('layout/head', { bodyClass: 'page-thanks' }) %>
+<%- include('layout/header') %>
+<main id="main" class="wrap flex min-h-[70vh] flex-col justify-center py-24" data-lead-type="<%= type %>">
+  <div class="max-w-2xl">
+    <div class="mb-8 inline-flex h-16 w-16 items-center justify-center rounded-full bg-lime text-ink" aria-hidden="true">
+      <svg class="h-8 w-8" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1 class="text-4xl font-bold sm:text-6xl"><%= thanks.title %></h1>
+    <p class="mt-6 text-xl text-cream/80"><%= thanks.lead %></p>
+    <div class="mt-10 rounded-2xl border border-cream/10 bg-ink-2 p-6">
+      <p class="font-medium">In a hurry?</p>
+      <p class="mt-1 text-cream/70">Message us on WhatsApp and we’ll pick it up right away.</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="<%= site.whatsapp %>?text=<%= encodeURIComponent('Hi Click & Grow, I just sent an enquiry on your website.') %>" class="btn btn-lime" rel="noopener" target="_blank">WhatsApp us <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="<%= site.phoneHref %>" class="btn btn-outline">Call <%= site.phone %></a>
+      </div>
+    </div>
+    <p class="mt-10"><a href="/work" class="ulink text-cream/80">While you wait, see some of our work →</a></p>
+  </div>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>
