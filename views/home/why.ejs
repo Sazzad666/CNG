@@ -1,0 +1,46 @@
+<% var rows = [
+  ['Design', 'Template, lightly edited', 'Template with your logo', 'Designed from scratch for your buyers'],
+  ['Process', 'Whenever they have time', 'Vague until the invoice', 'Dated plan, weekly updates'],
+  ['Price', 'Cheap, then expensive', 'Hidden extras', 'One fixed quote, agreed up front'],
+  ['Results', 'Not their job', 'Vanity metrics', 'Reported against your goal'],
+  ['After launch', 'Hard to reach', 'Paid support only', '30 days free, then on call']
+]; %>
+<section id="why" class="on-cream py-20 sm:py-28" data-reveal>
+  <div class="wrap">
+    <p class="eyebrow">Why Click & Grow</p>
+    <h2 class="mt-4 max-w-3xl text-4xl font-bold sm:text-6xl">Cheap websites cost <em class="accent">more.</em></h2>
+    <p class="mt-5 max-w-2xl text-lg text-ink/70">Here’s what usually happens with the alternatives, and what you get with us instead.</p>
+    <div class="mt-14 hidden overflow-hidden rounded-3xl border border-ink/10 bg-white md:block">
+      <table class="w-full table-fixed text-left">
+        <caption class="sr-only">How Click & Grow compares with a freelancer and a template agency</caption>
+        <thead><tr class="text-sm">
+          <th class="w-[18%] px-6 py-5 font-medium text-ink/50" scope="col"><span class="sr-only">Area</span></th>
+          <th class="px-6 py-5 font-semibold" scope="col">Freelancer</th>
+          <th class="px-6 py-5 font-semibold" scope="col">Template agency</th>
+          <th class="why-us bg-ink px-6 py-5 font-display text-lg font-bold text-cream" scope="col">Click <em class="accent text-lime">&amp;</em> Grow</th>
+        </tr></thead>
+        <tbody>
+          <% rows.forEach(function (r, i) { %>
+            <tr class="[&>*]:border-t [&>*]:border-ink/10 [&>td:last-child]:border-cream/10" data-reveal-item>
+              <th scope="row" class="px-6 py-5 font-semibold"><%= r[0] %></th>
+              <td class="px-6 py-5 text-ink/60"><%= r[1] %></td>
+              <td class="px-6 py-5 text-ink/60"><%= r[2] %></td>
+              <td class="bg-ink px-6 py-5 text-cream"><span class="flex gap-3"><svg class="mt-1 h-4 w-4 shrink-0 text-lime" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><%= r[3] %></span></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-12 grid gap-4 md:hidden">
+      <div class="rounded-3xl bg-ink p-6 text-cream">
+        <p class="font-display text-xl font-bold">With Click <em class="accent text-lime">&amp;</em> Grow</p>
+        <ul class="mt-4 space-y-3"><% rows.forEach(function (r) { %><li class="flex gap-3"><svg class="mt-1 h-4 w-4 shrink-0 text-lime" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong class="font-semibold"><%= r[0] %>:</strong> <%= r[3] %></span></li><% }) %></ul>
+      </div>
+      <div class="rounded-3xl border border-ink/10 bg-white p-6">
+        <p class="font-semibold">With a freelancer or template agency</p>
+        <ul class="mt-4 space-y-3 text-ink/65"><% rows.forEach(function (r) { %><li><strong class="font-semibold text-ink"><%= r[0] %>:</strong> <%= r[1] %>, or <%= r[2].charAt(0).toLowerCase() + r[2].slice(1) %></li><% }) %></ul>
+      </div>
+    </div>
+    <div class="mt-10"><a href="/contact" class="btn btn-ink" data-open-enquiry>Get a fixed quote <span class="arrow" aria-hidden="true">→</span></a></div>
+  </div>
+</section>

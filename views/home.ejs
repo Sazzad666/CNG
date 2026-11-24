@@ -1,7 +1,16 @@
-<%- include('layout/head') %>
+<%- include('layout/head', { bodyClass: 'page-home' }) %>
 <%- include('layout/header') %>
 <main id="main">
-  <section id="hero" class="wrap py-24"><h1 class="text-5xl font-bold">Click & Grow</h1></section>
+  <%- include('home/hero') %>
+  <%- include('home/trust') %>
+  <%- include('home/services') %>
+  <%- include('home/work') %>
+  <%- include('home/why') %>
+  <%- include('home/process') %>
+  <%- include('home/estimate-teaser') %>
+  <%- include('home/testimonials') %>
+  <%- include('partials/faq') %>
+  <%- include('partials/cta') %>
 </main>
 <%- include('layout/footer') %>
 <%- include('layout/foot') %>

@@ -1,5 +1,5 @@
 <%# Click & Grow mark: a cursor that clicks, and a sprout grows from its tip. Animated by public/js/logo.js. %>
-<a href="/" class="cg-logo group inline-flex items-center gap-2.5 text-cream" id="cg-logo" aria-label="Click & Grow — home">
+<a href="/" class="cg-logo group inline-flex items-center gap-2.5 text-cream"<%- typeof animate !== 'undefined' && animate ? ' data-logo-animate' : '' %> aria-label="Click & Grow — home">
   <svg class="cg-mark h-9 w-9 shrink-0 overflow-visible" viewBox="0 0 36 40" aria-hidden="true" focusable="false">
     <circle class="cg-ring" cx="11" cy="15" r="7" fill="none" stroke="#C6F432" stroke-width="1.6" opacity="0"/>
     <path class="cg-stem" d="M11 15 C 11.5 9.5, 14.5 6, 20 4.2" fill="none" stroke="#C6F432" stroke-width="2.2" stroke-linecap="round"/>

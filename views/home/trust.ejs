@@ -1,0 +1,17 @@
+<section id="trust" class="border-y border-cream/10 py-10" aria-label="Clients and promises">
+  <div class="wrap grid items-center gap-8 lg:grid-cols-12">
+    <p class="text-sm text-cream/60 lg:col-span-3">Trusted by growing brands <span class="sample-tag ml-1 align-middle text-sage">Sample</span></p>
+    <div class="marquee relative overflow-hidden lg:col-span-9" data-marquee>
+      <div class="marquee-track flex w-max gap-14">
+        <% for (var r = 0; r < 2; r++) { content.clients().forEach(function (c, i) { %>
+          <span class="whitespace-nowrap font-display text-2xl font-bold text-cream/45 <%= i % 2 ? 'italic font-serif font-normal' : '' %>" <%- r ? 'aria-hidden="true"' : '' %>><%= c %></span>
+        <% }) } %>
+      </div>
+    </div>
+  </div>
+  <div class="wrap mt-10"><dl class="grid gap-6 border-t border-cream/10 pt-10 sm:grid-cols-3">
+    <div><dt class="text-sm text-cream/60">Reply time</dt><dd class="mt-1 font-display text-3xl font-bold">1 business day</dd></div>
+    <div><dt class="text-sm text-cream/60">Every quote</dt><dd class="mt-1 font-display text-3xl font-bold">Fixed, up front</dd></div>
+    <div><dt class="text-sm text-cream/60">What you own</dt><dd class="mt-1 font-display text-3xl font-bold">100% of it</dd></div>
+  </dl></div>
+</section>

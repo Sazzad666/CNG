@@ -1,6 +1,6 @@
 <%# Params: p (project), big (bool) %>
 <a href="/work/<%= p.slug %>" class="group block lift" data-reveal-item>
-  <div class="zoom relative overflow-hidden rounded-3xl bg-ink-2 <%= typeof big !== 'undefined' && big ? 'aspect-[4/3] lg:aspect-[16/10]' : 'aspect-[4/3]' %>">
+  <div class="zoom relative overflow-hidden rounded-3xl bg-ink-2 <%= typeof big !== 'undefined' && big ? 'aspect-[4/3] lg:aspect-[21/9]' : 'aspect-[4/3]' %>">
     <%- img(p.photos[0], { cls: 'absolute inset-0 h-full w-full object-cover', sizes: '(min-width: 1024px) 50vw, 100vw' }) %>
     <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/80 to-transparent"></div>
     <span class="sample-tag absolute left-4 top-4 bg-ink/60 text-cream backdrop-blur">Sample</span>
