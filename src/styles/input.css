@@ -1,0 +1,68 @@
+@font-face { font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 200 800; font-display: swap; src: url('/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-tight-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/inter-tight-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/inter-tight-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Instrument Serif'; font-style: italic; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400-italic.woff2') format('woff2'); }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { --ink:#0B0F0C; --ink-2:#151B16; --ink-3:#222A23; --cream:#F3F1EA; --sage:#8A998C; --lime:#C6F432; --lime-deep:#9BC41A; --error:#FF6B5B; --ease-out:cubic-bezier(0.23,1,0.32,1); color-scheme: dark; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
+  body { @apply bg-ink text-cream font-sans antialiased; font-size: 16px; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
+  h1, h2, h3 { @apply font-display; letter-spacing: -0.02em; line-height: 1.05; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--lime); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+  .on-cream :focus-visible { outline-color: var(--ink); }
+  em.accent { @apply font-serif font-normal; font-style: italic; letter-spacing: 0; }
+  img { max-width: 100%; height: auto; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-site px-5 sm:px-8 lg:px-12; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.18em] text-sage; }
+  .on-cream .eyebrow { @apply text-sage-dark; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 font-semibold select-none; min-height: 48px; transition: transform 160ms var(--ease-out), background-color 200ms, color 200ms, border-color 200ms; }
+  .btn:active { transform: scale(0.97); }
+  .btn-lime { @apply bg-lime text-ink; }
+  .btn-outline { @apply border border-cream/30 text-cream; }
+  .on-cream .btn-outline { @apply border-ink/30 text-ink; }
+  .btn-ink { @apply bg-ink text-cream; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-lime:hover { @apply bg-lime-deep; }
+    .btn-outline:hover { @apply border-cream; }
+    .on-cream .btn-outline:hover { @apply border-ink; }
+    .btn .arrow { transition: transform 200ms var(--ease-out); }
+    .btn:hover .arrow { transform: translateX(3px); }
+    .lift { transition: transform 240ms var(--ease-out); }
+    .lift:hover { transform: translateY(-2px); }
+    .zoom img { transition: transform 600ms var(--ease-out); }
+    .zoom:hover img { transform: scale(1.03); }
+    .ulink { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 250ms var(--ease-out); }
+    .ulink:hover { background-size: 100% 1px; }
+  }
+  .on-cream { @apply bg-cream text-ink; color-scheme: light; }
+  .sample-tag { @apply inline-flex items-center rounded-full border border-current px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider opacity-70; }
+
+  /* Forms */
+  .field { @apply flex flex-col gap-1.5; }
+  .field label { @apply text-sm font-medium; }
+  .field .hint { @apply text-xs text-sage; }
+  .input { @apply w-full rounded-xl border border-cream/15 bg-ink-2 px-4 text-cream placeholder:text-sage/70; min-height: 48px; font-size: 16px; transition: border-color 160ms; }
+  textarea.input { @apply py-3; min-height: 110px; }
+  .input:focus { @apply border-lime outline-none; }
+  .on-cream .input { @apply border-ink/15 bg-white text-ink; }
+  .on-cream .input:focus { @apply border-ink; }
+  .field.has-error .input { border-color: var(--error); }
+  .field .error { @apply text-sm; color: var(--error); }
+  .on-cream .field .error { color: #B3261E; }
+  .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+}
+
+/* Motion: hidden start states only when JS has loaded and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-enter], .js [data-reveal] { opacity: 0; }
+}

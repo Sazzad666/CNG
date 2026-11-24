@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title><%= (meta && meta.title) || 'Click & Grow — Digital agency in Dhaka' %></title>
+  <meta name="description" content="<%= (meta && meta.description) || site.tagline %>">
+  <link rel="canonical" href="<%= baseUrl + ((meta && meta.canonical) || path) %>">
+  <meta name="theme-color" content="#0B0F0C">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Click & Grow">
+  <meta property="og:title" content="<%= (meta && meta.title) || 'Click & Grow' %>">
+  <meta property="og:description" content="<%= (meta && meta.description) || site.tagline %>">
+  <meta property="og:url" content="<%= baseUrl + ((meta && meta.canonical) || path) %>">
+  <meta property="og:image" content="<%= baseUrl + ((meta && meta.ogImage) || '/brand/og.png') %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-tight-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css">
+  <% if (typeof jsonLd !== 'undefined' && jsonLd) { %><script type="application/ld+json"><%- JSON.stringify(jsonLd).replace(/</g, '\\u003c') %></script><% } %>
+  <script src="/vendor/motion.js" defer></script>
+  <script src="/js/site.js" defer></script>
+  <% if (tracking.ga4) { %><script src="https://www.googletagmanager.com/gtag/js?id=<%= tracking.ga4 %>" async></script><script src="/js/tracking.js" data-ga4="<%= tracking.ga4 %>" data-pixel="<%= tracking.metaPixel %>" defer></script><% } else if (tracking.metaPixel) { %><script src="/js/tracking.js" data-pixel="<%= tracking.metaPixel %>" defer></script><% } %>
+</head>
+<body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-lime focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
