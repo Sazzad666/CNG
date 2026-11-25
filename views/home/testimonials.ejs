@@ -1,0 +1,13 @@
+<section id="testimonials" class="pb-20 sm:pb-28">
+  <div class="wrap">
+    <div class="g-head"><h2>What <em class="s">grew.</em></h2><p><span class="sample-tag text-sage">Sample testimonials</span></p></div>
+    <div class="quotes">
+      <% content.testimonials().forEach(function (t) { %>
+        <figure class="quote" data-reveal-item>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><%- img(t.photo, { sizes: '44px', alt: '' }) %><span><b class="block"><%= t.name %></b><span class="text-sage"><%= t.role %></span></span></figcaption>
+        </figure>
+      <% }) %>
+    </div>
+  </div>
+</section>

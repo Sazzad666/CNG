@@ -1,0 +1,42 @@
+<footer class="border-t border-cream/10 bg-ink pt-16 pb-28 sm:pb-12" data-footer>
+  <div class="wrap grid gap-12 sm:grid-cols-2 lg:grid-cols-12">
+    <div class="sm:col-span-2 lg:col-span-4">
+      <%- include('../partials/logo') %>
+      <p class="mt-5 max-w-sm text-cream/70"><%= site.tagline %></p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contact" class="btn btn-lime" data-open-enquiry>Start a project <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="<%= site.whatsapp %>" class="btn btn-outline" rel="noopener" target="_blank">WhatsApp us</a>
+      </div>
+    </div>
+    <div class="lg:col-span-3">
+      <p class="eyebrow">Services</p>
+      <ul class="mt-4 space-y-2.5">
+        <% site.services.forEach(function (s) { %><li><a class="ulink text-cream/80 hover:text-cream" href="/services/<%= s.key %>"><%= s.label %></a></li><% }) %>
+      </ul>
+    </div>
+    <div class="lg:col-span-2">
+      <p class="eyebrow">Studio</p>
+      <ul class="mt-4 space-y-2.5">
+        <li><a class="ulink text-cream/80 hover:text-cream" href="/work">Work</a></li>
+        <li><a class="ulink text-cream/80 hover:text-cream" href="/about">About</a></li>
+        <li><a class="ulink text-cream/80 hover:text-cream" href="/estimate">Estimate a project</a></li>
+        <li><a class="ulink text-cream/80 hover:text-cream" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="lg:col-span-3">
+      <p class="eyebrow">Talk to us</p>
+      <ul class="mt-4 space-y-2.5 text-cream/80">
+        <li><a class="ulink hover:text-cream" href="<%= site.phoneHref %>"><%= site.phone %></a></li>
+        <li><a class="ulink hover:text-cream [overflow-wrap:anywhere]" href="mailto:<%= site.email %>"><%= site.email %></a></li>
+        <li><%= site.address %></li>
+      </ul>
+      <ul class="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <% site.socials.forEach(function (s) { %><li><a class="ulink text-cream/70 hover:text-cream" href="<%= s.href %>"><%= s.label %></a></li><% }) %>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap mt-14 flex flex-col gap-3 border-t border-cream/10 pt-6 text-xs text-cream/55 lg:flex-row lg:items-center lg:justify-between">
+    <p>© <%= year %> Click & Grow, Dhaka. Projects, clients and testimonials marked "Sample" are illustrative.</p>
+    <p><a class="ulink" href="/privacy">Privacy</a> · Photos from <a class="ulink" href="https://unsplash.com/?utm_source=click_and_grow&utm_medium=referral" rel="noopener">Unsplash</a> (<a class="ulink" href="/credits">credits</a>)</p>
+  </div>
+</footer>

@@ -1,0 +1,747 @@
+<title>Click &amp; Grow Open Sign</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Yellowtail&display=swap">
+<style>
+/* Layout: one night street told in seven scenes. Hero (sign switches on) → Dave's bad day (pinned) → build the shop
+   (services, pinned) → the crowd → process as neon wiring → zoom out to the globe → your own sign (contact).
+   Every scene's finished state is the CSS default; GSAP sets the "before" states only when it loaded and motion is allowed. */
+:root{
+  --night:#0B1026; --night-2:#131A3E; --night-3:#1D2552; --street:#181E44;
+  --text:#EEF0FF; --muted:#AEB5DA;
+  --pink:#FF4F9A; --green:#2BE08A; --warm:#FFC861; --cyan:#47E5FF; --red:#FF5C5C;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --neon:"Yellowtail","Brush Script MT",cursive;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --head:66px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:var(--head)}
+body{background:var(--night);color:var(--text);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1;margin:0;text-wrap:balance}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 13px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.neon-pink{color:#FFE3EF;text-shadow:0 0 6px var(--pink),0 0 18px var(--pink),0 0 40px rgba(255,79,154,.6)}
+.neon-green{color:#E6FFF2;text-shadow:0 0 6px var(--green),0 0 18px var(--green),0 0 40px rgba(43,224,138,.55)}
+main{overflow-x:clip}
+
+/* buttons: step on hover, press on click */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:2px solid var(--green);background:var(--green);color:#04180D;font:800 16px/1 var(--display);text-decoration:none;cursor:pointer;transition:transform .16s var(--ease-out),box-shadow .2s var(--ease-out)}
+.btn:active{transform:translateY(1px) scale(.97)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translateY(-2px);box-shadow:0 0 0 6px rgba(43,224,138,.18),0 0 28px rgba(43,224,138,.45)}}
+.btn--ghost{background:transparent;color:var(--text);border-color:#3A4380}
+@media (hover:hover) and (pointer:fine){.btn--ghost:hover{box-shadow:0 0 0 6px rgba(71,229,255,.12)}}
+
+/* header */
+.head{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);background:linear-gradient(rgba(11,16,38,.92),rgba(11,16,38,.7));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.head .wrap{height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font:800 20px/1 var(--display);text-decoration:none;min-height:44px}
+.logo svg{width:34px;height:34px}
+.head nav ul{display:flex;list-style:none;margin:0;padding:0;gap:2px}
+.head nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;text-decoration:none;font-weight:500;font-size:15px;color:var(--muted);transition:color .2s ease}
+.head nav a:hover{color:var(--text)}
+.head .btn{min-height:44px;padding:0 18px;font-size:15px}
+
+/* scene shell */
+.scene{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
+.scene > svg.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.overlay{position:relative;z-index:2}
+.scene-head{max-width:620px}
+.scene-head h2{font-size:clamp(36px,4.6vw,62px)}
+.scene-head p{color:var(--muted);font-size:clamp(16px,1.4vw,19px);margin-top:14px;max-width:30em}
+
+/* ---------- 1 HERO ---------- */
+#hero .overlay{padding-top:calc(var(--head) + clamp(40px,9vh,110px))}
+#hero{background:#0B1026}
+#hero h1{font-size:clamp(40px,4.9vw,72px);max-width:8.2em;margin:18px 0 20px}
+#hero h1 em{font-style:normal;color:var(--green)}
+#hero .lede{font-size:clamp(17px,1.4vw,19px);color:var(--muted);max-width:24em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.star{animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.25}}
+.bubble{font:600 15px/1 var(--body)}
+
+/* ---------- 2 DAVE ---------- */
+#dave{background:radial-gradient(ellipse at 70% 40%,#1A2150 0,#0B1026 65%)}
+.dave-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;min-height:100svh;padding-block:calc(var(--head) + 30px) 40px}
+.lines{display:grid;gap:10px}
+.lines h2{font-size:clamp(38px,5vw,68px)}
+.lines .bad{color:var(--red)}
+.lines .good{color:var(--green)}
+.lines .set{display:grid;gap:10px}
+.lines .set + .set{margin-top:34px}
+.counter{display:inline-flex;align-items:center;gap:12px;margin-top:28px;border:1.5px solid #3A4380;border-radius:14px;padding:10px 16px}
+.counter b{font:800 30px/1 var(--display);font-variant-numeric:tabular-nums;color:var(--red);min-width:2ch}
+.counter span{font-size:14px;color:var(--muted);line-height:1.3}
+.counter small{display:block;font-size:12px;opacity:.75}
+.phones{display:flex;justify-content:center;gap:28px;position:relative}
+.cam{position:absolute;left:-10px;top:-24px;width:120px;height:120px;border-radius:50%;background:#26306B;border:3px solid #3A4380;overflow:hidden;z-index:3;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.cam svg{width:100%;height:100%}
+.phone{width:clamp(200px,calc((100svh - 190px) * .486),280px);aspect-ratio:9/18.5;border-radius:38px;background:#05071A;padding:12px;border:2px solid #2C3470;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);position:relative}
+.screen{position:absolute;inset:12px;border-radius:28px;overflow:hidden;background:#fff;color:#1A1A1A}
+.phone .tag{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);font:600 13px/1 var(--body);color:var(--muted);white-space:nowrap}
+/* bad site */
+.bad-site{background:#F3F0E6;font-family:"Times New Roman",serif}
+.bad-site .nav{display:flex;flex-wrap:wrap;gap:3px;padding:8px;font-size:8.5px;background:#7B2CBF22;border-bottom:1px solid #aaa}
+.bad-site .nav span{text-decoration:underline;color:#2A4CD8}
+.bad-site .banner{margin:10px;padding:10px;background:repeating-linear-gradient(45deg,#FFEB3B,#FFEB3B 8px,#FFCB2B 8px,#FFCB2B 16px);font:700 15px/1.1 "Comic Sans MS",cursive;text-align:center;color:#C2185B}
+.bad-site .prod{margin:8px 10px;display:grid;grid-template-columns:60px 1fr;gap:8px;font-size:10px;align-items:center}
+.bad-site .prod i{display:block;height:60px;background:#ccc}
+.bad-site .tiny{display:inline-block;font-size:8px;border:1px solid #999;padding:1px 4px;margin-top:4px;background:#eee}
+.spin{position:absolute;left:50%;top:58%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:4px solid #ddd;border-top-color:#888;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.popup{position:absolute;inset:auto 14px 26% 14px;background:#fff;border:2px solid #222;border-radius:6px;padding:12px;font:700 13px/1.25 Arial,sans-serif;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.popup small{display:block;font-weight:400;font-size:10px;margin-top:6px;color:#666}
+.popup .x{position:absolute;right:4px;top:2px;font-size:8px;color:#bbb}
+.rage{position:absolute;width:34px;height:34px;border-radius:50%;border:3px solid var(--red);opacity:.9}
+/* good site */
+.good-site{display:flex;flex-direction:column;font-family:var(--body)}
+.good-site .top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font:800 15px/1 var(--display)}
+.good-site .top span{font:600 12px/1 var(--body);color:#555}
+.good-site .pic{margin:0 14px;border-radius:18px;aspect-ratio:1/1;background:linear-gradient(160deg,#FFE6C7,#FFB37A);display:grid;place-items:center}
+.good-site .pic svg{width:44%}
+.good-site .info{padding:14px 16px;display:grid;gap:4px}
+.good-site .info b{font:800 18px/1.1 var(--display)}
+.good-site .info span{font-size:13px;color:#555}
+.good-site .buy{margin:auto 14px 16px;min-height:50px;border-radius:14px;background:#0F1433;color:#fff;font:700 15px/1 var(--body);display:grid;place-items:center;position:relative;overflow:hidden}
+.good-site .buy .done{position:absolute;inset:0;display:grid;place-items:center;background:var(--green);color:#04180D}
+.tap{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.55);border:2px solid #fff;pointer-events:none;opacity:0}
+.confetti{position:absolute;left:50%;bottom:70px;width:8px;height:12px;border-radius:2px;opacity:0}
+/* static layout: both phones side by side. Anim layout: one phone, screens swap. */
+.anim .phones .phone + .phone{display:none}
+.anim .phone .screen.good-site{opacity:1}
+.phone2-wrap{position:relative}
+
+/* ---------- 3 SERVICES ---------- */
+#services{background:linear-gradient(#0B1026,#111845)}
+.svc-grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:28px;align-items:center;min-height:100svh;padding-block:calc(var(--head) + 30px) 30px}
+.parts{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:10px}
+.parts li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;padding:12px 14px;border-radius:16px;border:1.5px solid transparent;transition:background .25s ease,border-color .25s ease,opacity .25s ease;cursor:default}
+.parts li b{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#1D2552;font:800 16px/1 var(--display)}
+.parts li strong{font:800 20px/1.15 var(--display);display:block}
+.parts li span{color:var(--muted);font-size:15px}
+.parts li.on{background:#182052;border-color:#3A4380}
+.parts li.on b{background:var(--green);color:#04180D}
+.anim .parts li:not(.on){opacity:.5}
+.shop-svg{width:100%;height:auto;max-height:76svh}
+.part{transition:filter .25s ease}
+.part.hl{filter:drop-shadow(0 0 10px rgba(71,229,255,.9))}
+
+/* ---------- 4 CROWD ---------- */
+#crowd .overlay{padding-top:calc(var(--head) + 40px);text-align:center}
+#crowd .scene-head{margin:0 auto}
+#crowd .scene-head p{margin-inline:auto}
+.footfall{display:inline-grid;margin-top:22px;border:1.5px solid #3A4380;border-radius:16px;padding:12px 20px;background:rgba(11,16,38,.6)}
+.footfall b{font:800 clamp(34px,4vw,52px)/1 var(--display);font-variant-numeric:tabular-nums;color:var(--warm)}
+.footfall span{font-size:14px;color:var(--muted)}
+
+/* ---------- 5 PROCESS ---------- */
+#process{min-height:auto;padding-block:120px}
+.wire-wrap{position:relative;margin-top:56px}
+.wire-wrap svg{position:absolute;left:0;right:0;top:34px;width:100%;height:40px;overflow:visible}
+.words{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;margin:0;padding:0}
+.words li{display:grid;gap:12px;justify-items:start}
+.words .w{font:400 clamp(44px,5vw,70px)/1 var(--neon);color:#3B2A55;transition:color .3s ease,text-shadow .3s ease;padding:0 6px;background:var(--night)}
+.words li.lit .w{color:#FFE3EF;text-shadow:0 0 6px var(--pink),0 0 18px var(--pink),0 0 40px rgba(255,79,154,.6)}
+.words li:nth-child(4).lit .w{color:#E6FFF2;text-shadow:0 0 6px var(--green),0 0 18px var(--green),0 0 40px rgba(43,224,138,.55)}
+.words p{color:var(--muted);font-size:16px;max-width:15em}
+.words p b{color:var(--text);display:block;font:700 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+
+/* ---------- 6 WORLD ---------- */
+#world{background:#070B1F}
+#world .overlay{position:absolute;inset:auto 0 9vh 0;text-align:center}
+#world .scene-head{margin:0 auto}
+#world .scene-head p{margin-inline:auto}
+
+/* ---------- 7 CONTACT ---------- */
+#contact{min-height:auto;padding-block:120px 80px;background:linear-gradient(#0B1026,#141B44)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center}
+.your-sign{border-radius:28px;background:#0A0E24;border:2px solid #232B5E;aspect-ratio:4/3;display:grid;place-items:center;position:relative;overflow:hidden;padding:24px}
+.your-sign::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,#141A3C 0 46px,#10163A 46px 92px);opacity:.5}
+.sign-board{position:relative;display:grid;justify-items:center;gap:6px;text-align:center}
+.sign-name{font:400 clamp(40px,6vw,84px)/1.05 var(--neon);color:#B48AC2;transition:color .25s ease,text-shadow .25s ease;max-width:100%;overflow-wrap:anywhere;padding:0 10px}
+.sign-name.on{color:#FFE3EF;text-shadow:0 0 6px var(--pink),0 0 18px var(--pink),0 0 44px rgba(255,79,154,.65)}
+.sign-open{font:800 18px/1 var(--display);letter-spacing:.3em;color:#4FA77C;transition:color .3s ease,text-shadow .3s ease}
+.sign-open.on{color:#E6FFF2;text-shadow:0 0 6px var(--green),0 0 18px var(--green)}
+.form{display:grid;gap:16px}
+.field{display:grid;gap:7px}
+.field label,.field legend{font:600 14px/1.2 var(--body)}
+.field input{background:#0F1538;border:1.5px solid #2E3772;border-radius:12px;padding:12px 14px;min-height:50px;width:100%;color:var(--text)}
+.field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(43,224,138,.25)}
+fieldset.field{border:0;padding:0;margin:0;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid #2E3772;font:500 14px/1 var(--body);transition:background .2s ease,border-color .2s ease,color .2s ease}
+.chips input:checked + span{background:var(--green);border-color:var(--green);color:#04180D;font-weight:600}
+.chips input:focus-visible + span{outline:3px solid var(--cyan);outline-offset:2px}
+.err{color:#FF9A9A;font-size:14px}
+.err:empty{display:none}
+.msg{font:400 26px/1.15 var(--neon);color:var(--green);min-height:1.2em}
+
+footer{padding-block:56px 40px;border-top:1px solid #1E2656;text-align:center;color:var(--muted);font-size:14px}
+footer .late{font:400 44px/1 var(--neon);margin-bottom:14px}
+footer nav{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:10px}
+footer a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+footer a:hover{color:var(--text)}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .head nav{display:none}
+  .dave-grid,.svc-grid,.contact-grid{grid-template-columns:minmax(0,1fr)}
+  .dave-grid{gap:30px;padding-bottom:70px}
+  .phones{flex-wrap:wrap}
+  .cam{width:84px;height:84px;left:0}
+  .words{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wire-wrap svg{display:none}
+  #hero .overlay{padding-top:calc(var(--head) + 24px)}
+  #hero{min-height:100svh}
+  #hero svg.bg{top:auto;bottom:0;height:56%}
+  .lines h2{font-size:clamp(28px,7.4vw,40px)}
+  .phone{width:clamp(160px,calc((100svh - 470px) * .486),240px)}
+  .dave-grid{gap:18px;padding-top:calc(var(--head) + 16px)}
+  .counter{margin-top:14px}
+}
+@media (max-width:600px){
+  .head .btn{display:none}
+  .parts li{padding:10px}
+  .parts li strong{font-size:18px}
+  .words{grid-template-columns:minmax(0,1fr)}
+  .anim .dave-grid .lines .set + .set{margin-top:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .star,.spin{animation:none}
+  .btn{transition:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glowSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070B1F"/><stop offset=".7" stop-color="#18205A"/><stop offset="1" stop-color="#2A2466"/></linearGradient>
+    <radialGradient id="spillG"><stop offset="0" stop-color="#FFC861" stop-opacity=".55"/><stop offset="1" stop-color="#FFC861" stop-opacity="0"/></radialGradient>
+    <linearGradient id="coneG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2A0" stop-opacity=".55"/><stop offset="1" stop-color="#FFE2A0" stop-opacity="0"/></linearGradient>
+    <pattern id="winPat" width="36" height="44" patternUnits="userSpaceOnUse"><rect x="8" y="10" width="16" height="20" rx="2" fill="#232B63"/></pattern>
+    <pattern id="winPatLit" width="36" height="44" patternUnits="userSpaceOnUse"><rect x="8" y="10" width="16" height="20" rx="2" fill="#FFC861" opacity=".8"/></pattern>
+    <radialGradient id="globeG" cx=".4" cy=".35"><stop offset="0" stop-color="#2A3478"/><stop offset="1" stop-color="#0E1438"/></radialGradient>
+    <!-- a passer-by; colours come from the <use> element -->
+    <symbol id="person" viewBox="0 0 40 100"><circle cx="20" cy="14" r="11" fill="#E8B68E"/><path d="M9 14c0-9 6-13 11-13s11 4 11 13c-4-5-7-6-11-6s-7 1-11 6z" fill="currentColor" opacity=".55"/><path d="M6 64c0-26 6-36 14-36s14 10 14 36z" fill="currentColor"/><path d="M11 64h8v34h-8zM21 64h8v34h-8z" fill="#20264A"/></symbol>
+    <symbol id="candle" viewBox="0 0 60 90"><path d="M30 6c10 12 10 22 0 26-10-4-10-14 0-26z" fill="#FFC861"/><path d="M30 32v8" stroke="#0F1433" stroke-width="3"/><rect x="10" y="40" width="40" height="48" rx="6" fill="#fff" stroke="#0F1433" stroke-width="3"/><rect x="10" y="56" width="40" height="14" fill="#2BE08A"/></symbol>
+  </defs>
+</svg>
+
+<header class="head">
+  <div class="wrap">
+    <a class="logo" href="#hero" aria-label="Click and Grow home">
+      <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1.5" y="1.5" width="31" height="31" rx="10" fill="none" stroke="#2BE08A" stroke-width="2.5" filter="url(#glowSoft)"/><path d="M10 8l6 18 3-7 7-3z" fill="#EEF0FF"/><path d="M19.5 25.5c0-5 3-8 7.5-9-1 5-3 8-7.5 9z" fill="#2BE08A"/></svg>
+      Click &amp; Grow
+    </a>
+    <nav aria-label="Main"><ul><li><a href="#services">Services</a></li><li><a href="#process">How it works</a></li><li><a href="#world">About</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+    <a class="btn" href="#contact">Turn my sign on</a>
+  </div>
+</header>
+
+<main>
+  <!-- ================= 1 · HERO: the sign switches on ================= -->
+  <section class="scene" id="hero" aria-labelledby="t-hero">
+    <svg class="bg" id="heroSvg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" role="img" aria-label="A quiet street at night. A cursor clicks a shop's neon OPEN sign, the shop lights up, and a customer walks over.">
+      <rect width="1440" height="900" fill="url(#sky)"/>
+      <g fill="#fff">
+        <circle class="star" cx="80" cy="120" r="1.6"/><circle class="star" cx="220" cy="60" r="1.2" style="animation-delay:.6s"/><circle class="star" cx="380" cy="150" r="1.4" style="animation-delay:1.2s"/><circle class="star" cx="520" cy="80" r="1.1"/><circle class="star" cx="690" cy="40" r="1.6" style="animation-delay:.9s"/><circle class="star" cx="840" cy="120" r="1.2" style="animation-delay:1.8s"/><circle class="star" cx="980" cy="70" r="1.5" style="animation-delay:.3s"/><circle class="star" cx="1120" cy="150" r="1.2" style="animation-delay:2.1s"/><circle class="star" cx="1380" cy="70" r="1.4" style="animation-delay:1.5s"/><circle class="star" cx="1300" cy="230" r="1.1"/><circle class="star" cx="620" cy="220" r="1.2" style="animation-delay:2.4s"/>
+      </g>
+      <circle cx="1240" cy="150" r="42" fill="#F3EFD6"/><circle cx="1256" cy="138" r="8" fill="#DCD6B8"/><circle cx="1228" cy="164" r="5" fill="#DCD6B8"/>
+      <!-- back buildings -->
+      <g fill="#141A44">
+        <rect x="0" y="420" width="170" height="300"/><rect x="190" y="360" width="140" height="360"/><rect x="350" y="450" width="200" height="270"/><rect x="560" y="390" width="120" height="330"/>
+        <rect x="1250" y="400" width="190" height="320"/><rect x="1180" y="470" width="80" height="250"/>
+      </g>
+      <g fill="url(#winPat)"><rect x="0" y="420" width="170" height="300"/><rect x="190" y="360" width="140" height="360"/><rect x="350" y="450" width="200" height="270"/><rect x="560" y="390" width="120" height="330"/><rect x="1250" y="400" width="190" height="320"/></g>
+      <!-- street -->
+      <rect y="700" width="1440" height="200" fill="#1A1F48"/>
+      <rect y="700" width="1440" height="8" fill="#262C5E"/>
+      <rect y="820" width="1440" height="80" fill="#10142F"/>
+      <path d="M0 860h1440" stroke="#3A4380" stroke-width="4" stroke-dasharray="40 40"/>
+      <!-- lamps -->
+      <g id="lamps">
+        <g class="lamp"><polygon class="cone" points="134,392 166,392 270,702 30,702" fill="url(#coneG)"/><rect x="146" y="380" width="8" height="320" fill="#2B3266"/><rect x="128" y="372" width="44" height="14" rx="5" fill="#3A4380"/><circle class="bulb" cx="150" cy="390" r="7" fill="#FFE2A0"/></g>
+        <g class="lamp"><polygon class="cone" points="1334,392 1366,392 1470,702 1230,702" fill="url(#coneG)"/><rect x="1346" y="380" width="8" height="320" fill="#2B3266"/><rect x="1328" y="372" width="44" height="14" rx="5" fill="#3A4380"/><circle class="bulb" cx="1350" cy="390" r="7" fill="#FFE2A0"/></g>
+      </g>
+      <!-- light spill on pavement -->
+      <ellipse id="spill" cx="960" cy="740" rx="380" ry="60" fill="url(#spillG)"/>
+      <!-- the shop -->
+      <g id="shop">
+        <rect x="700" y="290" width="520" height="412" fill="#2B3266"/>
+        <rect x="690" y="280" width="540" height="22" rx="4" fill="#3A4380"/>
+        <rect x="750" y="318" width="420" height="66" rx="8" fill="#0F1433"/>
+        <text id="heroName" x="960" y="364" text-anchor="middle" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="36" fill="#EEF0FF" letter-spacing="2">YOUR BUSINESS</text>
+        <!-- awning -->
+        <g><path d="M720 400h480l20 52H700z" fill="#EEF0FF"/><path d="M748 400h40l-6 52h-48zM828 400h40l-2 52h-48zM908 400h40l2 52h-48zM988 400h40l6 52h-48zM1068 400h40l10 52h-48zM1148 400h40l14 52h-48z" fill="#2BE08A"/>
+          <path d="M700 452c13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0 13 14 27 14 40 0" fill="#EEF0FF"/></g>
+        <!-- window, lit interior -->
+        <g id="winLit">
+          <rect x="740" y="482" width="300" height="200" rx="6" fill="#FFD98A"/>
+          <rect x="740" y="620" width="300" height="62" fill="#E7B865"/>
+          <rect x="760" y="510" width="120" height="6" fill="#C9954A"/><rect x="760" y="560" width="120" height="6" fill="#C9954A"/>
+          <use href="#candle" x="770" y="476" width="24" height="36"/><use href="#candle" x="800" y="480" width="20" height="32"/><use href="#candle" x="840" y="526" width="24" height="36"/>
+          <rect x="890" y="580" width="110" height="68" rx="6" fill="#0F1433"/><rect x="896" y="586" width="98" height="56" rx="3" fill="#fff"/><rect x="904" y="596" width="50" height="6" rx="3" fill="#0F1433"/><rect x="904" y="608" width="34" height="5" rx="2.5" fill="#999"/><rect x="904" y="622" width="30" height="10" rx="5" fill="#2BE08A"/><rect x="876" y="648" width="138" height="8" rx="3" fill="#0F1433"/>
+        </g>
+        <rect id="winDark" x="740" y="482" width="300" height="200" rx="6" fill="#0D1131"/>
+        <rect x="740" y="482" width="300" height="200" rx="6" fill="none" stroke="#3A4380" stroke-width="8"/>
+        <!-- door -->
+        <rect x="1070" y="482" width="122" height="220" rx="4" fill="#3A4380"/>
+        <rect id="doorLit" x="1084" y="496" width="94" height="120" rx="4" fill="#FFD98A"/>
+        <rect id="doorDark" x="1084" y="496" width="94" height="120" rx="4" fill="#0D1131"/>
+        <circle cx="1172" cy="620" r="5" fill="#FFC861"/>
+        <!-- the neon OPEN sign -->
+        <g id="sign">
+          <rect x="1092" y="636" width="78" height="40" rx="8" fill="#0D1131" stroke="#4A2440" stroke-width="3"/>
+          <text x="1131" y="665" text-anchor="middle" font-family="Yellowtail, cursive" font-size="28" fill="#4A2440">Open</text>
+          <g id="signOn" filter="url(#glow)">
+            <rect x="1092" y="636" width="78" height="40" rx="8" fill="none" stroke="#FF4F9A" stroke-width="3"/>
+            <text x="1131" y="665" text-anchor="middle" font-family="Yellowtail, cursive" font-size="28" fill="#FFE3EF">Open</text>
+          </g>
+        </g>
+      </g>
+      <!-- Dave walks over -->
+      <g id="heroDave" transform="translate(600 520)">
+        <g id="daveBody">
+          <circle cx="40" cy="22" r="20" fill="#E8B68E"/>
+          <path d="M20 20c0-14 9-20 20-20s20 6 20 20c-6-7-12-9-20-9s-14 2-20 9z" fill="#3B2A1E"/>
+          <circle cx="47" cy="24" r="2.6" fill="#0F1433"/>
+          <path d="M44 33c3 2 6 2 8 0" stroke="#0F1433" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+          <path d="M14 104c0-46 10-62 26-62s26 16 26 62z" fill="#3D7BFF"/>
+          <path d="M40 46v30" stroke="#2E62D8" stroke-width="3"/>
+        </g>
+        <g id="legL" style="transform-origin:34px 104px"><rect x="26" y="102" width="14" height="76" rx="6" fill="#20264A"/><rect x="24" y="172" width="22" height="9" rx="4" fill="#0B0F24"/></g>
+        <g id="legR" style="transform-origin:48px 104px"><rect x="42" y="102" width="14" height="76" rx="6" fill="#283063"/><rect x="40" y="172" width="22" height="9" rx="4" fill="#0B0F24"/></g>
+        <g id="daveThought"><rect x="-6" y="-58" width="150" height="40" rx="20" fill="#EEF0FF"/><path d="M30 -20l8 14 6-14z" fill="#EEF0FF"/><text x="69" y="-32" text-anchor="middle" class="bubble" fill="#0F1433">Ooh, they’re open!</text></g>
+      </g>
+      <!-- cursor + ripple -->
+      <circle id="ripple" cx="1131" cy="656" r="14" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
+      <g id="cursor" opacity="0"><path d="M0 0l16 46 7-18 18-7z" fill="#fff" stroke="#0B1026" stroke-width="3" stroke-linejoin="round"/></g>
+    </svg>
+    <div class="overlay wrap">
+      <p class="eyebrow">Websites · apps · marketing</p>
+      <h1 id="t-hero">Your business is open. Does the <em>internet</em> know?</h1>
+      <p class="lede">We build websites that bring customers in, then make sure people can find them.</p>
+      <div class="hero-cta"><a class="btn" href="#contact">Turn my sign on</a><a class="btn btn--ghost" href="#dave">See how ↓</a></div>
+    </div>
+  </section>
+
+  <!-- ================= 2 · DAVE'S BAD DAY ================= -->
+  <section class="scene" id="dave" aria-labelledby="t-dave">
+    <div class="wrap dave-grid">
+      <div>
+        <div class="lines">
+          <div class="set" id="setA">
+            <h2 id="t-dave" class="l1">Meet Dave.</h2>
+            <h2 class="l2">Dave wants to give you money.</h2>
+            <h2 class="l3 bad">Your website won’t let him.</h2>
+          </div>
+          <div class="set" id="setB">
+            <h2 class="good l4">Same Dave. Our website.</h2>
+            <h2 class="l5">Two taps. Done.</h2>
+          </div>
+        </div>
+        <div class="counter" id="lostBox"><b id="lost">37</b><span>Daves who gave up today<small>sample number</small></span></div>
+      </div>
+      <div class="phones">
+        <div class="cam" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <rect width="120" height="120" fill="#26306B"/>
+            <path d="M20 120c0-30 18-44 40-44s40 14 40 44z" fill="#3D7BFF"/>
+            <circle id="faceSkin" cx="60" cy="56" r="30" fill="#E8B68E"/>
+            <path d="M30 54c0-22 13-30 30-30s30 8 30 30c-8-10-18-13-30-13s-22 3-30 13z" fill="#3B2A1E"/>
+            <g id="faceCalm"><circle cx="49" cy="60" r="3.4" fill="#0F1433"/><circle cx="71" cy="60" r="3.4" fill="#0F1433"/><path d="M52 74c5 2 11 2 16 0" stroke="#0F1433" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+            <g id="faceMad" opacity="0"><path d="M42 52l12 5M78 52l-12 5" stroke="#0F1433" stroke-width="3.4" stroke-linecap="round"/><circle cx="49" cy="62" r="3.4" fill="#0F1433"/><circle cx="71" cy="62" r="3.4" fill="#0F1433"/><path d="M50 78c6-5 14-5 20 0" stroke="#0F1433" stroke-width="3.4" fill="none" stroke-linecap="round"/></g>
+            <g id="faceHappy" opacity="0"><path d="M44 60c3-5 9-5 12 0M64 60c3-5 9-5 12 0" stroke="#0F1433" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M48 70c6 10 18 10 24 0z" fill="#fff" stroke="#0F1433" stroke-width="3" stroke-linejoin="round"/></g>
+          </svg>
+        </div>
+        <div class="phone" aria-label="A slow, cluttered website on Dave's phone" role="img">
+          <div class="screen bad-site" id="badSite">
+            <div class="nav"><span>Home</span><span>About us</span><span>Our story</span><span>Products</span><span>Products 2</span><span>Blog</span><span>Gallery</span><span>FAQ</span><span>Contact</span><span>Login</span></div>
+            <div class="banner">!!! WELCOME TO OUR WEBSITE !!!</div>
+            <div class="prod"><i></i><div>Lavender candle, very good quality, please see details on page 4<br><span class="tiny">buy</span></div></div>
+            <div class="prod"><i></i><div>Gift box (call for price)<br><span class="tiny">enquire</span></div></div>
+            <div class="spin" id="spin"></div>
+            <div class="popup" id="popup"><span class="x">x</span>SIGN UP FOR OUR NEWSLETTER!!!<small>Enter your email, phone, address and date of birth</small></div>
+            <span class="rage" style="left:58%;top:26%"></span><span class="rage" style="left:54%;top:30%"></span><span class="rage" style="left:62%;top:28%"></span><span class="rage" style="left:56%;top:24%"></span>
+          </div>
+          <div class="screen good-site" id="goodSite" style="opacity:0">
+            <div class="top">Mira’s Candles <span>Bag (0)</span></div>
+            <div class="pic"><svg viewBox="0 0 60 90" aria-hidden="true"><use href="#candle"/></svg></div>
+            <div class="info"><b>Lavender candle</b><span>Hand-poured soy wax · $24</span></div>
+            <div class="buy">Buy now<span class="done" id="doneBtn">Order placed ✓</span></div>
+            <span class="tap" id="tap" style="left:50%;bottom:20px;margin-left:-22px"></span>
+            <span class="confetti" style="background:#2BE08A"></span><span class="confetti" style="background:#FF4F9A"></span><span class="confetti" style="background:#FFC861"></span><span class="confetti" style="background:#47E5FF"></span><span class="confetti" style="background:#2BE08A"></span><span class="confetti" style="background:#FF4F9A"></span>
+          </div>
+          <span class="tag">Your website now</span>
+        </div>
+        <div class="phone" aria-label="The same shop on a clean website: one product, one Buy button, order placed" role="img">
+          <div class="screen good-site">
+            <div class="top">Mira’s Candles <span>Bag (1)</span></div>
+            <div class="pic"><svg viewBox="0 0 60 90" aria-hidden="true"><use href="#candle"/></svg></div>
+            <div class="info"><b>Lavender candle</b><span>Hand-poured soy wax · $24</span></div>
+            <div class="buy">Buy now<span class="done">Order placed ✓</span></div>
+          </div>
+          <span class="tag">Built by Click &amp; Grow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3 · BUILD THE SHOP (services) ================= -->
+  <section class="scene" id="services" aria-labelledby="t-svc">
+    <div class="wrap svc-grid">
+      <div>
+        <p class="eyebrow">What we do</p>
+        <h2 id="t-svc" style="font-size:clamp(34px,4vw,54px);margin-top:12px">Everything that brings people to your door.</h2>
+        <ol class="parts" id="parts">
+          <li class="on" data-part="pWeb"><b>1</b><div><strong>Website</strong><span>Your shopfront. Fast, clear, great on phones.</span></div></li>
+          <li class="on" data-part="pBrand"><b>2</b><div><strong>Branding</strong><span>The sign people remember.</span></div></li>
+          <li class="on" data-part="pSearch"><b>3</b><div><strong>Search</strong><span>Signposts on Google, pointing at you.</span></div></li>
+          <li class="on" data-part="pAds"><b>4</b><div><strong>Ads</strong><span>A billboard for people already looking.</span></div></li>
+        </ol>
+      </div>
+      <svg class="shop-svg" id="shopSvg" viewBox="0 0 800 640" role="img" aria-label="A shop gets built piece by piece: shopfront, painted sign and awning, a street signpost, and a lit billboard on the roof">
+        <rect x="0" y="560" width="800" height="80" fill="#1A1F48"/><rect x="0" y="556" width="800" height="6" fill="#262C5E"/>
+        <!-- Ads: billboard -->
+        <g class="part" id="pAds">
+          <rect x="300" y="78" width="10" height="70" fill="#3A4380"/><rect x="560" y="78" width="10" height="70" fill="#3A4380"/>
+          <rect x="250" y="8" width="370" height="96" rx="10" fill="#0F1433" stroke="#47E5FF" stroke-width="3" filter="url(#glowSoft)"/>
+          <text x="435" y="52" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#EEF0FF">NOW OPEN</text>
+          <text x="435" y="84" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="16" fill="#47E5FF">10% off your first order</text>
+        </g>
+        <!-- Website: the shopfront itself -->
+        <g class="part" id="pWeb">
+          <rect x="200" y="150" width="470" height="410" fill="#2B3266"/>
+          <rect x="190" y="140" width="490" height="20" rx="4" fill="#3A4380"/>
+          <rect x="232" y="330" width="270" height="200" rx="6" fill="#FFD98A"/>
+          <rect x="232" y="460" width="270" height="70" fill="#E7B865"/>
+          <rect x="300" y="390" width="130" height="80" rx="6" fill="#0F1433"/><rect x="306" y="396" width="118" height="66" rx="3" fill="#fff"/><rect x="314" y="406" width="64" height="7" rx="3.5" fill="#0F1433"/><rect x="314" y="420" width="44" height="6" rx="3" fill="#999"/><rect x="314" y="436" width="36" height="12" rx="6" fill="#2BE08A"/>
+          <rect x="532" y="330" width="110" height="230" rx="4" fill="#3A4380"/><rect x="546" y="344" width="82" height="120" rx="4" fill="#FFD98A"/>
+          <g filter="url(#glow)"><rect x="548" y="478" width="78" height="38" rx="8" fill="none" stroke="#FF4F9A" stroke-width="3"/><text x="587" y="506" text-anchor="middle" font-family="Yellowtail, cursive" font-size="26" fill="#FFE3EF">Open</text></g>
+        </g>
+        <!-- Branding: awning + name board -->
+        <g class="part" id="pBrand">
+          <rect x="250" y="176" width="370" height="70" rx="10" fill="#0F1433"/>
+          <text x="435" y="224" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="34" fill="#2BE08A" filter="url(#glowSoft)">YOUR BUSINESS</text>
+          <path d="M215 262h440l20 50H195z" fill="#EEF0FF"/><path d="M240 262h38l-6 50h-46zM318 262h38l-2 50h-46zM396 262h38l2 50h-46zM474 262h38l6 50h-46zM552 262h38l10 50h-46zM630 262h22l12 50h-30z" fill="#FF4F9A"/>
+        </g>
+        <!-- Search: signpost -->
+        <g class="part" id="pSearch">
+          <rect x="92" y="330" width="10" height="230" fill="#3A4380"/>
+          <path d="M20 340h150l26 26-26 26H20z" fill="#2BE08A"/>
+          <text x="92" y="374" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="20" fill="#04180D">YOU · 50m</text>
+          <path d="M36 410h120l-20 22 20 22H36z" fill="#47E5FF"/>
+          <text x="90" y="440" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="14" fill="#04180D">#1 on Google</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ================= 4 · THE CROWD ================= -->
+  <section class="scene" id="crowd" aria-labelledby="t-crowd">
+    <svg class="bg" id="crowdSvg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" role="img" aria-label="The street fills up with people queueing outside the lit shop">
+      <rect width="1440" height="900" fill="url(#sky)"/>
+      <g fill="#141A44"><rect x="0" y="430" width="260" height="290"/><rect x="1180" y="420" width="260" height="300"/></g>
+      <g fill="url(#winPatLit)"><rect x="0" y="430" width="260" height="290"/><rect x="1180" y="420" width="260" height="300"/></g>
+      <rect y="700" width="1440" height="200" fill="#1A1F48"/><rect y="700" width="1440" height="8" fill="#262C5E"/>
+      <ellipse cx="720" cy="730" rx="420" ry="60" fill="url(#spillG)"/>
+      <g>
+        <rect x="560" y="380" width="320" height="322" fill="#2B3266"/><rect x="550" y="370" width="340" height="18" rx="4" fill="#3A4380"/>
+        <rect x="590" y="400" width="260" height="50" rx="8" fill="#0F1433"/><text x="720" y="436" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="26" fill="#2BE08A">YOUR BUSINESS</text>
+        <rect x="586" y="480" width="150" height="150" rx="6" fill="#FFD98A"/><rect x="760" y="480" width="96" height="222" rx="4" fill="#3A4380"/><rect x="772" y="494" width="72" height="110" rx="4" fill="#FFD98A"/>
+        <g filter="url(#glow)"><rect x="772" y="616" width="72" height="36" rx="8" fill="none" stroke="#FF4F9A" stroke-width="3"/><text x="808" y="642" text-anchor="middle" font-family="Yellowtail, cursive" font-size="24" fill="#FFE3EF">Open</text></g>
+      </g>
+      <!-- queue: 14 people; JS walks them in from the edges -->
+      <g id="queue">
+        <use class="p" href="#person" x="880" y="612" width="40" height="100" style="color:#FF4F9A"/>
+        <use class="p" href="#person" x="926" y="610" width="40" height="100" style="color:#47E5FF"/>
+        <use class="p" href="#person" x="972" y="614" width="40" height="100" style="color:#FFC861"/>
+        <use class="p" href="#person" x="1018" y="610" width="40" height="100" style="color:#2BE08A"/>
+        <use class="p" href="#person" x="1064" y="612" width="40" height="100" style="color:#B9C1FF"/>
+        <use class="p" href="#person" x="1110" y="610" width="40" height="100" style="color:#FF8A5C"/>
+        <use class="p" href="#person" x="1156" y="614" width="40" height="100" style="color:#47E5FF"/>
+        <use class="p" href="#person" x="500" y="612" width="40" height="100" style="color:#FFC861"/>
+        <use class="p" href="#person" x="454" y="610" width="40" height="100" style="color:#FF4F9A"/>
+        <use class="p" href="#person" x="408" y="614" width="40" height="100" style="color:#2BE08A"/>
+        <use class="p" href="#person" x="362" y="610" width="40" height="100" style="color:#B9C1FF"/>
+        <use class="p" href="#person" x="316" y="612" width="40" height="100" style="color:#FF8A5C"/>
+        <use class="p" href="#person" x="270" y="610" width="40" height="100" style="color:#47E5FF"/>
+        <!-- Dave, waving -->
+        <g class="p" id="crowdDave" transform="translate(1210 598)"><circle cx="20" cy="14" r="12" fill="#E8B68E"/><path d="M8 14c0-9 6-14 12-14s12 5 12 14c-4-5-8-6-12-6s-8 1-12 6z" fill="#3B2A1E"/><path d="M5 66c0-28 6-38 15-38s15 10 15 38z" fill="#3D7BFF"/><path d="M10 66h8v36h-8zM22 66h8v36h-8z" fill="#20264A"/><path id="wave" d="M33 36l14-22" stroke="#E8B68E" stroke-width="7" stroke-linecap="round" style="transform-origin:33px 36px"/></g>
+      </g>
+    </svg>
+    <div class="overlay wrap">
+      <div class="scene-head">
+        <h2 id="t-crowd">Every click is someone walking in.</h2>
+        <div class="footfall"><b id="visits">1,240</b><span>visitors this month · sample</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5 · PROCESS AS NEON WIRING ================= -->
+  <section class="scene" id="process" aria-labelledby="t-proc">
+    <div class="wrap">
+      <div class="scene-head"><p class="eyebrow">How it works</p><h2 id="t-proc" style="margin-top:12px">How we switch you on.</h2></div>
+      <div class="wire-wrap">
+        <svg viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path id="wire" d="M0 20 C150 -10 250 50 400 20 S650 -10 800 20 S1050 50 1200 20" fill="none" stroke="#FF4F9A" stroke-width="3" filter="url(#glowSoft)" pathLength="1"/></svg>
+        <ol class="words" id="words">
+          <li class="lit"><span class="w">Plan</span><p><b>Step 1</b>A short call and a clear, fixed price.</p></li>
+          <li class="lit"><span class="w">Design</span><p><b>Step 2</b>Click through it and ask for changes before we build.</p></li>
+          <li class="lit"><span class="w">Build</span><p><b>Step 3</b>Fast pages, tested on real phones.</p></li>
+          <li class="lit"><span class="w">Grow</span><p><b>Step 4</b>Search, ads and a monthly check-in.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6 · ZOOM OUT: the world ================= -->
+  <section class="scene" id="world" aria-labelledby="t-world">
+    <svg class="bg" id="worldSvg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="The view pulls back from one street to a globe dotted with lit shops, with lines running from Dhaka to cities around the world">
+      <rect width="1440" height="900" fill="#070B1F"/>
+      <g fill="#fff" opacity=".7"><circle cx="120" cy="140" r="1.4"/><circle cx="300" cy="700" r="1.2"/><circle cx="1300" cy="160" r="1.5"/><circle cx="1180" cy="760" r="1.2"/><circle cx="220" cy="420" r="1"/><circle cx="1360" cy="480" r="1.1"/></g>
+      <!-- the city we zoom out of -->
+      <g id="city">
+        <g fill="#141A44"><rect x="380" y="300" width="120" height="420"/><rect x="510" y="220" width="140" height="500"/><rect x="660" y="340" width="110" height="380"/><rect x="780" y="260" width="150" height="460"/><rect x="940" y="330" width="120" height="390"/></g>
+        <g fill="url(#winPatLit)"><rect x="380" y="300" width="120" height="420"/><rect x="510" y="220" width="140" height="500"/><rect x="660" y="340" width="110" height="380"/><rect x="780" y="260" width="150" height="460"/><rect x="940" y="330" width="120" height="390"/></g>
+        <rect x="300" y="720" width="840" height="20" fill="#1A1F48"/>
+      </g>
+      <!-- the globe -->
+      <g id="globe">
+        <circle cx="720" cy="400" r="270" fill="url(#globeG)" stroke="#2E3772" stroke-width="2"/>
+        <g fill="none" stroke="#2E3772" stroke-width="1.5"><ellipse cx="720" cy="400" rx="180" ry="270"/><ellipse cx="720" cy="400" rx="90" ry="270"/><path d="M720 130v540"/><ellipse cx="720" cy="400" rx="270" ry="90"/><ellipse cx="720" cy="310" rx="235" ry="60"/><ellipse cx="720" cy="490" rx="235" ry="60"/></g>
+        <g id="arcs" fill="none" stroke="#2BE08A" stroke-width="2" stroke-linecap="round" opacity=".9">
+          <path pathLength="1" d="M860 400 Q 740 260 610 300"/><path pathLength="1" d="M860 400 Q 700 300 520 350"/><path pathLength="1" d="M860 400 Q 820 350 780 380"/><path pathLength="1" d="M860 400 Q 920 520 900 590"/><path pathLength="1" d="M860 400 Q 900 450 880 480"/><path pathLength="1" d="M860 400 Q 700 280 650 270"/>
+        </g>
+        <g id="dots">
+          <circle cx="610" cy="300" r="7" fill="#FFC861" filter="url(#glowSoft)"/><circle cx="520" cy="350" r="7" fill="#FFC861" filter="url(#glowSoft)"/><circle cx="780" cy="380" r="7" fill="#FFC861" filter="url(#glowSoft)"/><circle cx="900" cy="590" r="7" fill="#FFC861" filter="url(#glowSoft)"/><circle cx="880" cy="480" r="7" fill="#FFC861" filter="url(#glowSoft)"/><circle cx="650" cy="270" r="7" fill="#FFC861" filter="url(#glowSoft)"/>
+        </g>
+        <g id="dhaka"><circle cx="860" cy="400" r="10" fill="#2BE08A" filter="url(#glow)"/><text x="878" y="392" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#EEF0FF">Dhaka</text></g>
+      </g>
+    </svg>
+    <div class="overlay wrap">
+      <div class="scene-head">
+        <h2 id="t-world">Built in Dhaka. Lighting up shops anywhere.</h2>
+        <p>Calls in your time zone. Prices in your currency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7 · YOUR SIGN (contact) ================= -->
+  <section class="scene" id="contact" aria-labelledby="t-contact">
+    <div class="wrap contact-grid">
+      <div class="your-sign" role="img" aria-label="Preview of your neon sign, showing the business name you type">
+        <div class="sign-board"><span class="sign-name" id="signName">Your Business</span><span class="sign-open" id="signOpen">OPEN</span></div>
+      </div>
+      <div>
+        <p class="eyebrow">Start a project</p>
+        <h2 id="t-contact" style="font-size:clamp(34px,4.4vw,58px);margin:12px 0 24px">Your sign is ready. Just add your name.</h2>
+        <form class="form" id="form" novalidate>
+          <div class="field"><label for="f-biz">Business name</label><input id="f-biz" autocomplete="organization" maxlength="28" aria-describedby="e-biz"><p class="err" id="e-biz"></p></div>
+          <div class="field"><label for="f-mail">Email</label><input id="f-mail" type="email" autocomplete="email" aria-describedby="e-mail"><p class="err" id="e-mail"></p></div>
+          <fieldset class="field"><legend>What do you need?</legend>
+            <div class="chips"><label><input type="checkbox" name="need" value="Website"><span>Website</span></label><label><input type="checkbox" name="need" value="Online store"><span>Online store</span></label><label><input type="checkbox" name="need" value="App"><span>App</span></label><label><input type="checkbox" name="need" value="Marketing"><span>Marketing</span></label></div>
+          </fieldset>
+          <div><button class="btn" type="submit">Turn my sign on</button></div>
+          <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="late neon-pink" aria-hidden="true">Open late</p>
+    <p>© 2026 Click &amp; Grow · Dhaka, working worldwide</p>
+    <nav aria-label="Footer"><a href="#services">Services</a><a href="#process">How it works</a><a href="#world">About</a><a href="#contact">Contact</a></nav>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = matchMedia('(max-width: 900px)').matches;
+
+  // keep the shop in frame on narrow screens
+  if (narrow) { ['#heroSvg', '#crowdSvg'].forEach(s => $(s).setAttribute('preserveAspectRatio', 'xMaxYMax slice')); const ws = $('#worldSvg'); ws.setAttribute('viewBox', '400 90 640 740'); ws.setAttribute('preserveAspectRatio', 'xMidYMin meet'); }
+
+  /* ---------------- contact: live neon sign (works with or without GSAP) ---------------- */
+  const biz = $('#f-biz'), name = $('#signName'), open = $('#signOpen'), msg = $('#msg');
+  const shopNames = [$('#heroName')];
+  biz.addEventListener('input', () => {
+    const v = biz.value.trim();
+    name.textContent = v || 'Your Business';
+    name.classList.toggle('on', !!v);
+  });
+  function flicker(el, done) {
+    if (reduce) { el.classList.add('on'); done && done(); return; }
+    const seq = [1, 0, 1, 0, 0, 1, 0, 1]; let i = 0;
+    const t = setInterval(() => { el.classList.toggle('on', !!seq[i]); if (++i >= seq.length) { clearInterval(t); el.classList.add('on'); done && done(); } }, 70);
+  }
+  $('#form').addEventListener('submit', e => {
+    e.preventDefault();
+    const b = biz.value.trim(), m = $('#f-mail').value.trim();
+    const eb = $('#e-biz'), em = $('#e-mail');
+    eb.textContent = b ? '' : 'Add your business name. It goes on the sign.';
+    em.textContent = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m) ? '' : 'Add an email so we can reply.';
+    biz.setAttribute('aria-invalid', !b); $('#f-mail').setAttribute('aria-invalid', !!em.textContent);
+    if (!b) { biz.focus(); return; }
+    if (em.textContent) { $('#f-mail').focus(); return; }
+    flicker(name); flicker(open);
+    msg.textContent = `${b} is on! (This is a preview, so nothing was sent.)`;
+  });
+
+  /* ---------------- motion: only when GSAP loaded and motion is allowed ---------------- */
+  if (reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  document.documentElement.classList.add('anim');
+  const OUT = 'expo.out';
+
+  /* ===== 1 · HERO: lights on (load), then Dave walks over (scroll) ===== */
+  // "before" states
+  gsap.set('#signOn', { opacity: 0 });
+  gsap.set(['#winLit', '#doorLit'], { opacity: 0 });
+  gsap.set(['#winDark', '#doorDark'], { opacity: 1 });
+  gsap.set('#spill', { opacity: 0, scaleX: .6, transformOrigin: '50% 50%' });
+  gsap.set('.lamp .cone', { opacity: 0 });
+  gsap.set('.lamp .bulb', { fill: '#4A4E6E' });
+  gsap.set('#heroDave', { x: -460 });
+  gsap.set('#daveThought', { opacity: 0, scale: .9, transformOrigin: '30px 0px' });
+
+  const intro = gsap.timeline({ delay: .5 });
+  intro
+    // lead: the cursor arrives and clicks
+    .fromTo('#cursor', { opacity: 0, x: 1420, y: 320 }, { opacity: 1, x: 1122, y: 646, duration: 1, ease: OUT })
+    .to('#cursor', { scale: .82, transformOrigin: '0 0', duration: .1, ease: 'power2.out', yoyo: true, repeat: 1 }, '>-.05')
+    // impact: ripple + neon buzz land on the click
+    .fromTo('#ripple', { opacity: 1, scale: .4, transformOrigin: '50% 50%' }, { opacity: 0, scale: 3, duration: .6, ease: OUT }, '<+.05')
+    .to('#signOn', { keyframes: [{ opacity: 1, duration: .04 }, { opacity: .1, duration: .06 }, { opacity: 1, duration: .04 }, { opacity: .2, duration: .1 }, { opacity: 1, duration: .05 }] }, '<')
+    // support: the shop wakes up
+    .to(['#winDark', '#doorDark'], { opacity: 0, duration: .5, ease: 'power2.out' }, '>-.05')
+    .to(['#winLit', '#doorLit'], { opacity: 1, duration: .5, ease: 'power2.out' }, '<')
+    .to('#spill', { opacity: 1, scaleX: 1, duration: .8, ease: OUT }, '<')
+    // the street follows in a quick wave
+    .to('.lamp .cone', { opacity: 1, duration: .5, stagger: .12, ease: 'power2.out' }, '<+.15')
+    .to('.lamp .bulb', { fill: '#FFE2A0', duration: .2, stagger: .12 }, '<')
+    .to('#cursor', { opacity: 0, x: 1200, y: 600, duration: .5, ease: 'power2.in' }, '<+.4');
+
+  // idle hum: the sign dips now and then
+  gsap.to('#signOn', { keyframes: [{ opacity: .35, duration: .05 }, { opacity: 1, duration: .05 }], repeat: -1, repeatDelay: 6, delay: 4 });
+
+  // scroll: Dave walks over to the window, then says so
+  const walk = gsap.timeline({ scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=70%', scrub: .6, pin: true } });
+  walk.to('#heroDave', { x: narrow ? 170 : 0, ease: 'none', duration: 1 })
+      .to('#legL', { rotate: 18, duration: .125, ease: 'sine.inOut', yoyo: true, repeat: 7 }, 0)
+      .to('#legR', { rotate: -18, duration: .125, ease: 'sine.inOut', yoyo: true, repeat: 7 }, 0)
+      .to('#daveBody', { y: -4, duration: .0625, ease: 'sine.inOut', yoyo: true, repeat: 15 }, 0)
+      .to('#daveThought', { opacity: 1, scale: 1, duration: .15, ease: 'back.out(2)' }, '>-.05');
+
+  /* ===== 2 · DAVE'S BAD DAY (pinned, scrubbed) ===== */
+  gsap.set(['#dave .l2', '#dave .l3', '#setB'], { opacity: 0, y: 16 });
+  gsap.set('#dave .lines', { position: 'relative' });
+  gsap.set('#setB', { position: 'absolute', top: 0, left: 0, right: 0, marginTop: 0 });
+  gsap.set('#popup', { opacity: 0, scale: .96 });
+  gsap.set('.rage', { opacity: 0, scale: .4 });
+  gsap.set('#badSite .prod, #badSite .banner', { opacity: 0 });
+  gsap.set('#doneBtn', { yPercent: 100 });
+  gsap.set('.confetti', { opacity: 0 });
+  const lost = { v: 0 }; $('#lost').textContent = '0';
+
+  const d = gsap.timeline({ scrollTrigger: { trigger: '#dave', start: 'top top', end: '+=180%', scrub: .5, pin: true } });
+  d.to('#dave .l2', { opacity: 1, y: 0, duration: .5 })
+   .to('#badSite .banner, #badSite .prod', { opacity: 1, duration: .3, stagger: .1 }, '<+.3')
+   .to('#spin', { opacity: 0, duration: .2 }, '>')
+   .to('#popup', { opacity: 1, scale: 1, duration: .3, ease: 'back.out(1.6)' }, '>+.1')
+   .to('#faceMad', { opacity: 1, duration: .2 }, '<').to('#faceCalm', { opacity: 0, duration: .2 }, '<')
+   .to('.rage', { opacity: 1, scale: 1, duration: .15, stagger: .08, ease: 'back.out(2)' }, '>+.1')
+   .to('#faceSkin', { attr: { fill: '#F07A6A' }, duration: .3 }, '<')
+   .to('#dave .l3', { opacity: 1, y: 0, duration: .4 }, '<')
+   .to(lost, { v: 37, duration: .6, ease: 'none', onUpdate: () => { $('#lost').textContent = Math.round(lost.v); } }, '<')
+   // the cut: same Dave, our website
+   .to('#setA', { opacity: 0, y: -16, duration: .35 }, '>+.4')
+   .to('#lostBox', { opacity: 0, duration: .3 }, '<')
+   .to('#badSite', { opacity: 0, x: -30, duration: .35 }, '<')
+   .fromTo('#goodSite', { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: .35 }, '<+.1')
+   .to('#setB', { opacity: 1, y: 0, duration: .4 }, '<')
+   .to('#faceMad', { opacity: 0, duration: .2 }, '<').to('#faceHappy', { opacity: 1, duration: .2 }, '<')
+   .to('#faceSkin', { attr: { fill: '#E8B68E' }, duration: .3 }, '<')
+   .fromTo('#tap', { opacity: 0, scale: .6 }, { opacity: 1, scale: 1, duration: .15, yoyo: true, repeat: 1 }, '>+.2')
+   .to('#doneBtn', { yPercent: 0, duration: .25, ease: OUT }, '>-.05')
+   .to('.confetti', { opacity: 1, duration: .05 }, '<')
+   .to('.confetti', { x: i => [-90, -50, -10, 30, 70, 100][i], y: i => [-140, -190, -160, -200, -150, -120][i], rotate: i => i * 70, duration: .5, ease: 'power2.out' }, '<')
+   .to('.confetti', { opacity: 0, duration: .2 }, '>-.1')
+   .to('#setB .l5', { color: '#2BE08A', duration: .2 }, '<');
+
+  /* ===== 3 · BUILD THE SHOP (services) ===== */
+  const parts = $$('#parts li');
+  const order = [['#pWeb', { y: 80, opacity: 0 }], ['#pBrand', { y: -60, opacity: 0 }], ['#pSearch', { x: -80, opacity: 0 }], ['#pAds', { y: -40, opacity: 0, scale: .96 }]];
+  order.forEach(([s, from]) => gsap.set(s, Object.assign({ transformOrigin: '50% 100%' }, from)));
+  parts.forEach(li => li.classList.remove('on'));
+  const mm = gsap.matchMedia();
+  const buildTl = st => {
+    const tl = gsap.timeline({ scrollTrigger: st });
+    order.forEach(([s], i) => {
+      tl.to(s, { x: 0, y: 0, opacity: 1, scale: 1, duration: .6, ease: OUT }, i * .7)
+        .call(() => parts.forEach((li, j) => li.classList.toggle('on', j <= i)), null, i * .7 + .1);
+    });
+    tl.call(() => parts.forEach((li, j) => li.classList.toggle('on', j === 0)), null, 0.05);
+    return tl;
+  };
+  mm.add('(min-width: 901px)', () => { buildTl({ trigger: '#services', start: 'top top', end: '+=160%', scrub: .5, pin: true }); });
+  mm.add('(max-width: 900px)', () => { buildTl({ trigger: '#shopSvg', start: 'top 75%', end: 'bottom 55%', scrub: .5 }); });
+  // hover a label → glow its part
+  parts.forEach(li => {
+    const p = document.getElementById(li.dataset.part);
+    li.addEventListener('pointerenter', () => p.classList.add('hl'));
+    li.addEventListener('pointerleave', () => p.classList.remove('hl'));
+  });
+
+  /* ===== 4 · THE CROWD ===== */
+  const people = $$('#queue .p');
+  people.forEach(p => { const left = parseFloat(p.getAttribute('x') || 1200) < 720; gsap.set(p, { x: left ? -700 : 700, opacity: 0 }); });
+  gsap.set('#crowdDave', { x: 1210 + 500, y: 598 });
+  const visits = { v: 3 }; $('#visits').textContent = '3';
+  const c = gsap.timeline({ scrollTrigger: { trigger: '#crowd', start: 'top 70%', end: 'bottom 70%', scrub: .6 } });
+  c.to('#queue use.p', { x: 0, opacity: 1, duration: .7, ease: 'power2.out', stagger: { each: .08, from: 'start' } })
+   .to('#crowdDave', { x: 1210, duration: .7, ease: 'power2.out' }, '>-.4')
+   .to(visits, { v: 1240, duration: 1.4, ease: 'power1.in', onUpdate: () => { $('#visits').textContent = Math.round(visits.v).toLocaleString('en-US'); } }, 0);
+  gsap.to('#wave', { rotate: -30, duration: .35, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+
+  /* ===== 5 · PROCESS: the wire lights each word ===== */
+  const words = $$('#words li');
+  words.forEach(w => w.classList.remove('lit'));
+  gsap.set('#wire', { strokeDasharray: 1, strokeDashoffset: 1 });
+  gsap.timeline({ scrollTrigger: { trigger: '#process', start: 'top 60%', end: 'bottom 75%', scrub: .5,
+      onUpdate: self => words.forEach((w, i) => w.classList.toggle('lit', self.progress >= i * .25 + .04)) } })
+    .to('#wire', { strokeDashoffset: 0, ease: 'none', duration: 1 });
+
+  /* ===== 6 · ZOOM OUT ===== */
+  gsap.set('#globe', { opacity: 0, scale: .55, transformOrigin: '720px 400px' });
+  gsap.set('#arcs path', { strokeDasharray: 1, strokeDashoffset: 1 });
+  gsap.set('#dots circle', { opacity: 0, scale: .4, transformOrigin: '50% 50%' });
+  gsap.set('#world .scene-head', { opacity: 0, y: 20 });
+  const w = gsap.timeline({ scrollTrigger: { trigger: '#world', start: 'top top', end: '+=140%', scrub: .6, pin: true } });
+  w.to('#city', { scale: .18, opacity: 0, transformOrigin: '860px 480px', duration: 1, ease: 'power2.in' })
+   .to('#globe', { opacity: 1, scale: 1, duration: 1, ease: OUT }, '-=.5')
+   .to('#arcs path', { strokeDashoffset: 0, duration: .8, stagger: .1, ease: 'power2.out' }, '>-.2')
+   .to('#dots circle', { opacity: 1, scale: 1, duration: .3, stagger: .1, ease: 'back.out(2)' }, '<+.3')
+   .to('#world .scene-head', { opacity: 1, y: 0, duration: .5, ease: OUT }, '<');
+  gsap.to('#dhaka circle', { scale: 1.35, transformOrigin: '50% 50%', duration: 1, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>

@@ -1,0 +1,781 @@
+<title>Click &amp; Grow Comic</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Comic+Neue:wght@700&family=Archivo:wght@400;500;700&display=swap">
+<style>
+/* Layout: the homepage is a comic book. Cover (hero) → three-panel strip (the problem) → crew trading cards (services)
+   → a page you flip (process) → splash page (the result) → last page you fill in (contact). Behind-the-panels notes close it. */
+:root{
+  --paper:#FCFAF5;       /* newsprint, a little cool */
+  --panel:#FFFFFF;
+  --ink:#121212;
+  --ink-soft:#4B4A47;
+  --cyan:#25BFEF;
+  --magenta:#FF3D8B;
+  --yellow:#FFE14D;
+  --grow:#1FB774;        /* brand green */
+  --skin1:#C98B5E; --skin2:#F1C6A0; --skin3:#8C5A3C;
+  --display:"Bowlby One","Arial Black",Impact,sans-serif;
+  --letter:"Comic Neue","Comic Sans MS","Chalkboard SE",cursive;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gutter:14px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);
+  background-image:radial-gradient(rgba(18,18,18,.07) 1px,transparent 1.2px);background-size:7px 7px}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;line-height:.95;letter-spacing:.005em;text-transform:uppercase;text-wrap:balance}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- comic primitives ---------- */
+.panel{background:var(--panel);border:4px solid var(--ink);position:relative;overflow:hidden}
+.caption{display:inline-block;background:var(--yellow);border:3px solid var(--ink);padding:6px 12px 7px;font:700 15px/1.25 var(--letter);text-transform:uppercase;letter-spacing:.02em}
+.bubble{position:absolute;background:#fff;border:3px solid var(--ink);border-radius:50% / 46%;padding:12px 18px;font:700 16px/1.2 var(--letter);text-transform:uppercase;text-align:center;max-width:62%}
+.bubble::after{content:"";position:absolute;width:18px;height:18px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);bottom:-11px;left:calc(var(--tx,30%) - 9px);transform:skewX(var(--sk,25deg)) rotate(45deg)}
+.sfx{position:absolute;font:400 clamp(34px,5vw,58px)/1 var(--display);color:var(--yellow);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill;text-shadow:4px 4px 0 var(--ink);transform:rotate(-8deg);pointer-events:none;letter-spacing:.02em}
+.pg{font:700 13px/1 var(--letter);text-transform:uppercase;letter-spacing:.08em}
+
+/* buttons: printed, offset shadow, they press */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 24px;background:var(--yellow);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font:400 18px/1 var(--display);text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn--ink{background:var(--ink);color:#fff;box-shadow:5px 5px 0 var(--magenta)}
+.btn--ink:hover{box-shadow:7px 7px 0 var(--magenta)}
+.btn--ink:active{box-shadow:1px 1px 0 var(--magenta)}
+
+/* ---------- masthead ---------- */
+.mast{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:4px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:41;background:var(--paper)}
+.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:48px}
+.logo svg{width:52px;height:52px}
+.logo b{font:400 22px/1 var(--display);text-transform:uppercase}
+.mast nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.mast nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;font:700 15px/1 var(--letter);text-transform:uppercase;text-decoration:none;border:3px solid transparent}
+.mast nav a:hover{border-color:var(--ink);background:var(--yellow)}
+.mast .btn{min-height:46px;padding:8px 16px;font-size:15px;box-shadow:4px 4px 0 var(--ink)}
+.counter{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:#fff;border:3px solid var(--ink);padding:8px 12px;box-shadow:4px 4px 0 var(--magenta)}
+.counter b{font:400 18px/1 var(--display);margin-left:6px}
+
+/* ---------- cover ---------- */
+.cover{padding-block:28px 40px}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:28px;align-items:stretch}
+.cover-copy{display:flex;flex-direction:column;justify-content:center;gap:22px}
+.issue{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.issue .stamp{background:var(--magenta);color:#fff;border:3px solid var(--ink);padding:6px 10px;font:400 14px/1 var(--display)}
+.cover h1{font-size:clamp(50px,7.6vw,104px)}
+.cover h1 .hl{background:var(--yellow);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone;border:3px solid var(--ink);display:inline-block;transform:rotate(-1.5deg);margin-top:.06em}
+.cover .lede{font-size:clamp(17px,1.5vw,20px);max-width:30em;color:var(--ink-soft)}
+.cover .lede b{color:var(--ink)}
+.cover-actions{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:center}
+.cover-actions a.more{font:700 17px/1 var(--letter);text-transform:uppercase;min-height:44px;display:inline-flex;align-items:center;text-underline-offset:5px;text-decoration-thickness:3px}
+.cover-art{width:100%;aspect-ratio:1/1;min-height:0;align-self:center}
+.cover-art svg{width:100%;height:100%;display:block}
+
+/* cover choreography: rest state is the finished drawing. JS adds .play to run it. */
+.c-hand{transform-box:fill-box;transform-origin:50% 100%}
+.c-btn-top{transform-box:fill-box;transform-origin:50% 100%}
+.c-bar{transform-box:fill-box;transform-origin:50% 100%}
+.c-pop{transform-box:fill-box;transform-origin:center}
+.c-burst{transform-box:fill-box;transform-origin:center}
+.play .c-hand{animation:press .42s cubic-bezier(.3,0,.2,1) both}
+.play .c-btn-top{animation:squash .42s cubic-bezier(.3,0,.2,1) both}
+.play .c-burst{animation:burst .5s cubic-bezier(.2,1.6,.4,1) .22s both}
+.play .c-bar{animation:rise .7s cubic-bezier(.2,1.25,.4,1) var(--d,.3s) both}
+.play .c-pop{animation:popin .45s cubic-bezier(.2,1.7,.4,1) var(--d,.6s) both}
+@keyframes press{0%,100%{transform:none}45%{transform:translateY(16px)}}
+@keyframes squash{0%,100%{transform:none}45%{transform:scaleY(.55)}}
+@keyframes burst{from{transform:scale(.2) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes rise{from{transform:scaleY(.05)}to{transform:none}}
+@keyframes popin{from{transform:scale(0)}to{transform:none}}
+
+/* ---------- section heads ---------- */
+.chapter{padding-block:56px}
+.chap-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.chap-head h2{font-size:clamp(36px,5vw,66px)}
+.chap-head .pg{background:var(--ink);color:#fff;padding:7px 10px}
+.chap-head p.sub{max-width:28em;color:var(--ink-soft);font-size:17px}
+
+/* ---------- strip (the problem) ---------- */
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gutter)}
+.strip .panel{aspect-ratio:4/4.4;min-height:0}
+.strip .panel svg.art{position:absolute;inset:0;width:100%;height:100%}
+.strip .caption{position:absolute;left:-3px;top:-3px;max-width:78%}
+.strip .bubble{font-size:15px}
+/* panel action: content visible at rest, .play adds the beat */
+.beat{transform-box:fill-box;transform-origin:center}
+.play .beat-shake{animation:shake .5s ease-in-out var(--d,0s) both}
+.play .beat-pop{animation:popin .45s cubic-bezier(.2,1.7,.4,1) var(--d,0s) both}
+.play .beat-roll{animation:roll 1.6s cubic-bezier(.3,.1,.3,1) var(--d,0s) both}
+.play .bubble{animation:bubin .42s cubic-bezier(.2,1.5,.4,1) var(--bd,.25s) both}
+.play .sfx{animation:sfxin .5s cubic-bezier(.2,1.8,.4,1) var(--bd,.2s) both}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-4px) rotate(-2deg)}40%{transform:translateX(4px) rotate(2deg)}60%{transform:translateX(-3px)}80%{transform:translateX(2px)}}
+@keyframes roll{from{transform:translateX(-160px) rotate(-360deg)}to{transform:none}}
+@keyframes bubin{from{transform:scale(.4) translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes sfxin{from{transform:rotate(-8deg) scale(.2);opacity:0}to{transform:rotate(-8deg);opacity:1}}
+
+/* ---------- crew cards ---------- */
+.crew{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.card{display:block;width:100%;perspective:1100px;background:none;border:0;padding:0;cursor:pointer;text-align:left;min-height:400px}
+.card-in{display:block;position:relative;width:100%;height:100%;min-height:400px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,1.25,.45,1)}
+.card[aria-pressed="true"] .card-in{transform:rotateY(180deg)}
+@media (hover:hover){.card:hover .card-in{transform:rotateY(180deg)}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column;overflow:hidden}
+.front{background:var(--bg,var(--cyan))}
+.front .portrait{flex:1;position:relative;background-image:radial-gradient(rgba(18,18,18,.18) 1.4px,transparent 1.6px);background-size:8px 8px;min-height:0}
+.front .portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.front .name{display:block;background:#fff;border-top:4px solid var(--ink);padding:12px 14px}
+.front .name h3{font-size:26px}
+.front .name span,.front .name p{display:block;font:700 14px/1.2 var(--letter);text-transform:uppercase;margin-top:4px}
+.front .flip{position:absolute;right:10px;top:10px;background:#fff;border:3px solid var(--ink);font:700 12px/1 var(--letter);text-transform:uppercase;padding:6px 8px}
+.back{background:#fff;transform:rotateY(180deg);padding:18px;gap:12px}
+.back h3{font-size:22px}
+.back ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.back li{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:15.5px;line-height:1.35}
+.back li::before{content:"";flex:none;width:12px;height:12px;margin-top:4px;background:var(--bg,var(--cyan));border:2.5px solid var(--ink)}
+.back .quote{margin-top:auto;background:var(--yellow);border:3px solid var(--ink);padding:10px 12px;font:700 15px/1.25 var(--letter);text-transform:uppercase}
+.back .stat{display:grid;gap:6px;font:700 12px/1 var(--letter);text-transform:uppercase}
+.back .stat span{display:flex;align-items:center;gap:8px}
+.back .stat i{flex:1;height:10px;border:2.5px solid var(--ink);background:linear-gradient(90deg,var(--bg,var(--cyan)) var(--v),#fff var(--v))}
+
+/* ---------- process: a page you flip ---------- */
+.flipper{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:stretch}
+.stage{position:relative;aspect-ratio:16/10;min-height:0}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:#fff}
+.slide[hidden]{display:none!important}
+.slide .art{position:relative;border-right:4px solid var(--ink);background:var(--bg);background-image:radial-gradient(rgba(18,18,18,.16) 1.4px,transparent 1.6px);background-size:8px 8px}
+.slide .art svg{position:absolute;inset:0;width:100%;height:100%}
+.slide .txt{padding:26px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.slide .txt .no{font:400 64px/1 var(--display);color:var(--bg);-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
+.slide .txt h3{font-size:clamp(26px,2.8vw,38px)}
+.slide .txt p{font-size:17px;color:var(--ink-soft)}
+.slide .txt .when{font:700 15px/1 var(--letter);text-transform:uppercase}
+.slide.in-next{animation:inR .42s cubic-bezier(.2,.9,.25,1) both}
+.slide.in-prev{animation:inL .42s cubic-bezier(.2,.9,.25,1) both}
+@keyframes inR{from{transform:translateX(9%);opacity:0}to{transform:none;opacity:1}}
+@keyframes inL{from{transform:translateX(-9%);opacity:0}to{transform:none;opacity:1}}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}
+.steps button{width:100%;display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:12px;text-align:left;background:#fff;border:3px solid var(--ink);padding:8px 12px;min-height:60px;cursor:pointer;font:700 16px/1.15 var(--letter);text-transform:uppercase;transition:transform .12s,box-shadow .12s,background .15s}
+.steps button b{font:400 24px/1 var(--display);width:44px;height:44px;display:grid;place-items:center;border:3px solid var(--ink);background:var(--paper)}
+.steps button:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.steps button[aria-selected="true"]{background:var(--yellow);box-shadow:4px 4px 0 var(--ink)}
+.steps button[aria-selected="true"] b{background:var(--ink);color:#fff}
+.flip-nav{display:flex;gap:10px;margin-top:6px}
+.flip-nav .btn{flex:1;min-height:48px;font-size:15px;padding:8px 12px}
+
+/* ---------- splash ---------- */
+.splash{aspect-ratio:21/9;min-height:0;background:var(--magenta)}
+.splash svg{position:absolute;inset:0;width:100%;height:100%}
+.splash .caption{position:absolute;left:-3px;top:-3px}
+.backissues{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}
+.issue-cover{display:block;text-decoration:none;border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);background:var(--bg);position:relative;aspect-ratio:3/3.6;overflow:hidden;transition:transform .18s cubic-bezier(.3,1.4,.5,1),box-shadow .18s}
+.issue-cover:hover{transform:translate(-3px,-3px) rotate(-1deg);box-shadow:9px 9px 0 var(--ink)}
+.issue-cover .top{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:4px solid var(--ink);background:#fff}
+.issue-cover .top b{font:400 18px/1 var(--display);text-transform:uppercase}
+.issue-cover .top span{font:700 12px/1 var(--letter);text-transform:uppercase}
+.issue-cover h3{position:absolute;left:12px;right:12px;bottom:14px;font-size:clamp(22px,2.4vw,30px);color:#fff;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:3px 3px 0 var(--ink)}
+.issue-cover svg{position:absolute;inset:52px 0 0;width:100%;height:calc(100% - 52px)}
+.slot-note{margin-top:14px;font:700 15px/1.3 var(--letter);color:var(--ink-soft);text-transform:uppercase}
+
+/* ---------- last page (contact) ---------- */
+.lastpage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:var(--gutter)}
+.lastpage .panel{padding:28px}
+.lp-art{background:var(--cyan);min-height:380px}
+.lp-art svg{position:absolute;inset:0;width:100%;height:100%}
+.madlib{font:700 clamp(22px,2.4vw,30px)/1.9 var(--letter);text-transform:uppercase}
+.madlib label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.madlib input,.madlib select{font:inherit;text-transform:none;border:0;border-bottom:4px solid var(--ink);background:var(--yellow);padding:0 10px;min-height:44px;color:var(--ink);max-width:100%;border-radius:0}
+.madlib input{width:9ch}
+.madlib input.wide{width:12ch}
+.madlib input[type=email]{width:16ch}
+.madlib input:focus,.madlib select:focus{outline:3px solid var(--magenta);outline-offset:2px}
+.madlib .row-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:22px;line-height:1.2}
+.madlib .err{font:700 15px/1.3 var(--letter);color:#B4123F}
+.madlib .err:empty{display:none}
+.sent{position:absolute;inset:0;display:grid;place-items:center;background:var(--yellow);text-align:center;padding:24px}
+.sent[hidden]{display:none!important}
+.sent h3{font-size:clamp(32px,4vw,52px)}
+.sent p{font:700 18px/1.3 var(--letter);text-transform:uppercase;margin-top:12px}
+
+/* ---------- behind the panels (concept notes) ---------- */
+.notes{background:var(--ink);color:#F3F1EA;margin-top:56px;padding-block:56px}
+.notes h2{color:#fff;font-size:clamp(32px,4vw,52px)}
+.notes .pg{background:var(--yellow);color:var(--ink);padding:7px 10px;display:inline-block;margin-bottom:14px}
+.ngrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:26px}
+.ncard{border:3px solid #F3F1EA;padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ncard h3{font-size:22px;color:var(--yellow)}
+.ncard p,.ncard li{color:#D9D6CC;font-size:15.5px}
+.ncard ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.ncard .bad{text-decoration:line-through;text-decoration-color:var(--magenta);color:#9C998F}
+.tl{margin-top:20px;overflow-x:auto;border:3px solid #F3F1EA}
+.tl table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+.tl th,.tl td{padding:10px 12px;text-align:left;border-bottom:1.5px solid #3A3935;vertical-align:top}
+.tl th{font:700 13px/1 var(--letter);text-transform:uppercase;color:var(--yellow);letter-spacing:.05em}
+.tl td{color:#D9D6CC;font-variant-numeric:tabular-nums}
+
+footer.end{padding-block:40px 90px;text-align:center}
+footer.end h2{font-size:clamp(44px,8vw,110px)}
+footer.end p{font:700 18px/1.3 var(--letter);text-transform:uppercase;margin-top:10px}
+footer.end .links{display:flex;justify-content:center;gap:8px 20px;flex-wrap:wrap;margin-top:18px}
+footer.end .links a{font-weight:700;min-height:44px;display:inline-flex;align-items:center}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .crew{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flipper{grid-template-columns:minmax(0,1fr)}
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .steps button{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center;font-size:12px;padding:8px 4px}
+  .flip-nav{grid-column:1/-1}
+}
+@media (max-width:820px){
+  .mast nav{display:none}
+  .cover-grid,.lastpage{grid-template-columns:minmax(0,1fr)}
+  .cover-art{order:-1;max-height:420px;aspect-ratio:auto;height:min(92vw,420px)}
+  .strip{grid-template-columns:minmax(0,1fr)}
+  .strip .panel{aspect-ratio:5/4}
+  .stage{aspect-ratio:auto;height:auto;min-height:0}
+  .slide{position:relative;grid-template-columns:minmax(0,1fr)}
+  .slide .art{border-right:0;border-bottom:4px solid var(--ink);aspect-ratio:16/10}
+  .splash{aspect-ratio:4/3}
+  .backissues{grid-template-columns:minmax(0,1fr)}
+  .issue-cover{aspect-ratio:4/3}
+  .ngrid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .crew{grid-template-columns:minmax(0,1fr)}
+  .card,.card-in{min-height:380px}
+  .mast .btn{display:none}
+  .counter{display:none}
+  .steps button{font-size:0}
+  .steps button b{font-size:22px}
+  .madlib{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<!-- ===== shared art: halftone + the characters ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#121212" opacity=".28"/></pattern>
+    <pattern id="dotsW" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.6" fill="#fff" opacity=".45"/></pattern>
+    <!-- Mira: candle maker, our hero client -->
+    <symbol id="mira-body" viewBox="0 0 160 200">
+      <path d="M22 200c2-46 22-74 58-74s56 28 58 74z" fill="#FFE14D" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M50 200l6-58h48l6 58z" fill="#25BFEF" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M50 200l6-58h48l6 58z" fill="url(#dots)"/>
+      <path d="M68 128v-14h24v14" fill="#C98B5E" stroke="#121212" stroke-width="4"/>
+      <circle cx="80" cy="76" r="40" fill="#C98B5E" stroke="#121212" stroke-width="4"/>
+      <path d="M40 74c0-30 18-44 40-44s40 14 40 44c-10-14-24-20-40-20s-30 6-40 20z" fill="#2A1A12" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="80" cy="24" r="16" fill="#2A1A12" stroke="#121212" stroke-width="4"/>
+      <circle cx="62" cy="96" r="6" fill="#FF3D8B" opacity=".45"/><circle cx="98" cy="96" r="6" fill="#FF3D8B" opacity=".45"/>
+    </symbol>
+    <symbol id="mira-worried" viewBox="0 0 160 200">
+      <use href="#mira-body"/>
+      <path d="M60 74l14-5M100 74l-14-5" stroke="#121212" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="66" cy="84" r="4.5" fill="#121212"/><circle cx="94" cy="84" r="4.5" fill="#121212"/>
+      <path d="M70 104c6-4 14-4 20 0" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="mira-happy" viewBox="0 0 160 200">
+      <use href="#mira-body"/>
+      <path d="M58 80c4-6 12-6 16 0M86 80c4-6 12-6 16 0" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/>
+      <path d="M64 96c8 14 24 14 32 0z" fill="#fff" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="mira-determined" viewBox="0 0 160 200">
+      <use href="#mira-body"/>
+      <path d="M58 70l16 6M102 70l-16 6" stroke="#121212" stroke-width="4.5" stroke-linecap="round"/>
+      <circle cx="66" cy="84" r="4.5" fill="#121212"/><circle cx="94" cy="84" r="4.5" fill="#121212"/>
+      <path d="M68 100c8 6 16 6 24 0" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/>
+    </symbol>
+    <!-- a candle -->
+    <symbol id="candle" viewBox="0 0 40 70">
+      <path d="M20 4c8 10 8 18 0 22-8-4-8-12 0-22z" fill="#FFE14D" stroke="#121212" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M20 26v6" stroke="#121212" stroke-width="3"/>
+      <rect x="6" y="32" width="28" height="36" rx="3" fill="#FF3D8B" stroke="#121212" stroke-width="3"/>
+      <rect x="6" y="32" width="28" height="36" rx="3" fill="url(#dots)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="mast">
+  <div class="wrap">
+    <a class="logo" href="#cover" aria-label="Click and Grow, back to the cover">
+      <svg viewBox="0 0 52 52" aria-hidden="true">
+        <path d="M26 2l6 9 10-4 0 11 10 3-7 9 7 9-10 3 0 11-10-4-6 9-6-9-10 4 0-11-10-3 7-9-7-9 10-3 0-11 10 4z" fill="#FFE14D" stroke="#121212" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M18 14l8 24 4-9 9-4z" fill="#fff" stroke="#121212" stroke-width="2.8" stroke-linejoin="round"/>
+        <path d="M30 38c0-7 4-11 10-12-1 6-4 10-10 12z" fill="#1FB774" stroke="#121212" stroke-width="2.4" stroke-linejoin="round"/>
+      </svg>
+      <b>Click &amp; Grow</b>
+    </a>
+    <nav aria-label="Pages">
+      <ul>
+        <li><a href="#crew">The crew</a></li>
+        <li><a href="#how">How it goes</a></li>
+        <li><a href="#work">Back issues</a></li>
+      </ul>
+    </nav>
+    <a class="btn" href="#last">Skip to the last page</a>
+  </div>
+</header>
+
+<p class="counter pg" aria-live="off">Page<b id="pgNo">01</b> / 06</p>
+
+<main>
+  <!-- ================= COVER ================= -->
+  <section class="cover wrap" id="cover" data-page="01" aria-labelledby="t-cover">
+    <div class="cover-grid">
+      <div class="cover-copy">
+        <div class="issue"><span class="stamp">Issue #01</span><span class="pg">Websites · Apps · Growth marketing</span></div>
+        <h1 id="t-cover">Make the internet <span class="hl">click</span> for you.</h1>
+        <p class="lede">We’re <b>Click &amp; Grow</b>, a small crew of designers, developers and marketers. We build websites and apps people actually use, then help them find you.</p>
+        <div class="cover-actions">
+          <a class="btn btn--ink" href="#last">Start your story
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></a>
+          <a class="more" href="#problem">Read the comic ↓</a>
+        </div>
+      </div>
+
+      <div class="panel cover-art" id="coverArt" role="img" aria-label="Comic drawing: a hand presses a big green CLICK button and a website's sales bars shoot up out of the screen">
+        <svg viewBox="0 0 520 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <!-- burst rays -->
+          <rect width="520" height="520" fill="#25BFEF"/>
+          <g fill="#7ED8F6">
+            <path d="M300 230L520 0h-90z"/><path d="M300 230L520 160v-90z"/><path d="M300 230L520 330v-80z"/><path d="M300 230L470 520h80z"/><path d="M300 230L300 520h-80z"/><path d="M300 230L80 520H0z"/><path d="M300 230L0 300v-90z"/><path d="M300 230L0 80V0z"/><path d="M300 230L180 0h90z"/>
+          </g>
+          <rect width="520" height="520" fill="url(#dotsW)" opacity=".5"/>
+          <!-- laptop -->
+          <path d="M150 300h300l30 50H120z" fill="#fff" stroke="#121212" stroke-width="5" stroke-linejoin="round"/>
+          <rect x="170" y="140" width="260" height="164" rx="8" fill="#fff" stroke="#121212" stroke-width="5"/>
+          <rect x="184" y="154" width="232" height="136" fill="#FCFAF5" stroke="#121212" stroke-width="3"/>
+          <path d="M184 172h232" stroke="#121212" stroke-width="3"/>
+          <circle cx="194" cy="163" r="3.5" fill="#FF3D8B"/><circle cx="206" cy="163" r="3.5" fill="#121212"/><circle cx="218" cy="163" r="3.5" fill="#121212"/>
+          <!-- bars grow out of the screen -->
+          <g stroke="#121212" stroke-width="4" stroke-linejoin="round">
+            <rect class="c-bar" style="--d:.34s" x="206" y="230" width="34" height="60" fill="#FFE14D"/>
+            <rect class="c-bar" style="--d:.40s" x="252" y="186" width="34" height="104" fill="#FF3D8B"/>
+            <rect class="c-bar" style="--d:.45s" x="298" y="130" width="34" height="160" fill="#1FB774"/>
+            <rect class="c-bar" style="--d:.49s" x="344" y="60" width="34" height="230" fill="#FFE14D"/>
+          </g>
+          <path class="c-pop" style="--d:.7s" d="M330 34l40-22 6 44" fill="none" stroke="#121212" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- little cursors & hearts that pop as people arrive -->
+          <g class="c-pop" style="--d:.62s"><path d="M120 120l10 30 5-12 12-5z" fill="#fff" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g>
+          <g class="c-pop" style="--d:.7s"><path d="M450 200l10 30 5-12 12-5z" fill="#fff" stroke="#121212" stroke-width="3" stroke-linejoin="round"/></g>
+          <g class="c-pop" style="--d:.76s"><path d="M460 110c0-8 12-10 14-2 2-8 14-6 14 2 0 10-14 18-14 18s-14-8-14-18z" fill="#FF3D8B" stroke="#121212" stroke-width="3"/></g>
+          <g class="c-pop" style="--d:.8s"><path d="M96 220c0-8 12-10 14-2 2-8 14-6 14 2 0 10-14 18-14 18s-14-8-14-18z" fill="#FF3D8B" stroke="#121212" stroke-width="3"/></g>
+          <!-- the big button -->
+          <ellipse cx="120" cy="456" rx="92" ry="30" fill="#121212"/>
+          <path d="M28 430v26c0 16 41 30 92 30s92-14 92-30v-26z" fill="#127A4E" stroke="#121212" stroke-width="5"/>
+          <g class="c-btn-top"><ellipse cx="120" cy="428" rx="92" ry="30" fill="#1FB774" stroke="#121212" stroke-width="5"/>
+            <text x="120" y="438" text-anchor="middle" font-family="Bowlby One, Arial Black, sans-serif" font-size="30" fill="#fff" stroke="#121212" stroke-width="2" paint-order="stroke">CLICK</text></g>
+          <!-- hand -->
+          <g class="c-hand">
+            <path d="M100 262c0-12 18-12 18 0v62c4-10 18-8 18 2 4-8 18-6 18 4 4-6 16-4 16 6v44c0 30-20 44-46 44s-42-16-44-42l-6-36c-2-12 14-16 20-4l6 12z" fill="#F1C6A0" stroke="#121212" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M118 326v20M136 330v18M154 334v16" stroke="#121212" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M78 400h92l-4 40H84z" fill="#FF3D8B" stroke="#121212" stroke-width="5" stroke-linejoin="round" transform="translate(0 -6)"/>
+          </g>
+          <!-- SFX -->
+          <g class="c-burst">
+            <path d="M232 380l22-20 4 22 28-10-10 24 30 6-26 14 18 20-30-2 2 28-22-18-14 26-6-28-28 12 12-26-28-6 26-14-16-22 28 4z" fill="#FFE14D" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+            <text x="262" y="426" text-anchor="middle" font-family="Bowlby One, Arial Black, sans-serif" font-size="24" fill="#121212" transform="rotate(-10 262 420)">CLICK!</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 2 · THE PROBLEM ================= -->
+  <section class="chapter wrap" id="problem" data-page="02" aria-labelledby="t-problem">
+    <div class="chap-head">
+      <div><p class="pg" style="margin-bottom:10px">Page 02 · The problem</p><h2 id="t-problem">Nice website. Nobody home.</h2></div>
+      <p class="sub">Most of our stories start the same way. Meet Mira.</p>
+    </div>
+    <div class="strip" data-play>
+      <div class="panel" role="img" aria-label="Panel 1: Mira, a candle maker, stares at her laptop. She asks why her website is so quiet.">
+        <svg class="art" viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="300" height="330" fill="#FFF3D1"/>
+          <path d="M0 250h300v80H0z" fill="#C98B5E"/><path d="M0 250h300" stroke="#121212" stroke-width="4"/>
+          <path d="M0 250h300v80H0z" fill="url(#dots)"/>
+          <use href="#candle" x="216" y="182" width="40" height="70"/><use href="#candle" x="246" y="196" width="30" height="54"/>
+          <use href="#mira-worried" x="24" y="100" width="150" height="190"/>
+          <path d="M150 250l20-70h96l-20 70z" fill="#fff" stroke="#121212" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M140 250h120v10H140z" fill="#121212"/>
+        </svg>
+        <span class="caption">Mira makes very good candles.</span>
+        <p class="bubble" style="right:12px;top:68px;--tx:30%;--bd:.35s">So why is my website so quiet?</p>
+      </div>
+      <div class="panel" role="img" aria-label="Panel 2: Mira's screen shows zero orders today while a tumbleweed rolls across it.">
+        <svg class="art" viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="300" height="330" fill="#E6F6FD"/>
+          <rect x="20" y="40" width="260" height="240" rx="6" fill="#fff" stroke="#121212" stroke-width="5"/>
+          <path d="M20 70h260" stroke="#121212" stroke-width="4"/>
+          <text x="44" y="122" font-family="Archivo, sans-serif" font-weight="700" font-size="16" fill="#4B4A47">ORDERS TODAY</text>
+          <text x="40" y="196" font-family="Bowlby One, Arial Black, sans-serif" font-size="72" fill="#121212">0</text>
+          <path d="M120 180h140" stroke="#121212" stroke-width="4" stroke-dasharray="8 8"/>
+          <g class="beat beat-roll" style="--d:.15s">
+            <circle cx="200" cy="244" r="24" fill="none" stroke="#8A6A3A" stroke-width="4"/>
+            <path d="M182 232c12 6 24 2 36 8M180 250c14-4 26 2 40-4M192 224c-2 14 6 26 2 40M208 222c4 14-4 28 0 42" fill="none" stroke="#8A6A3A" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <path d="M40 268h220" stroke="#121212" stroke-width="3"/>
+        </svg>
+        <span class="caption">The analytics said it all.</span>
+        <p class="sfx" style="right:16px;top:92px;--bd:.9s;font-size:30px;color:#fff">*cricket*</p>
+      </div>
+      <div class="panel" role="img" aria-label="Panel 3: Mira, determined, clicks a button. Sound effect: CLICK. She says: okay, let's call the nerds.">
+        <svg class="art" viewBox="0 0 300 330" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="300" height="330" fill="#FF3D8B"/>
+          <g fill="#FF77AC"><path d="M150 200L300 60v60z"/><path d="M150 200L300 230v60z"/><path d="M150 200L230 330h-60z"/><path d="M150 200L0 300v-60z"/><path d="M150 200L0 100V40z"/><path d="M150 200L120 0h60z"/></g>
+          <use href="#mira-determined" x="8" y="120" width="170" height="215"/>
+          <g class="beat beat-shake" style="--d:.1s">
+            <ellipse cx="226" cy="282" rx="54" ry="18" fill="#121212"/>
+            <path d="M172 266v14c0 10 24 18 54 18s54-8 54-18v-14z" fill="#127A4E" stroke="#121212" stroke-width="4"/>
+            <ellipse cx="226" cy="264" rx="54" ry="18" fill="#1FB774" stroke="#121212" stroke-width="4"/>
+          </g>
+        </svg>
+        <p class="sfx" style="right:22px;top:150px;--bd:.12s">CLICK!</p>
+        <p class="bubble" style="left:12px;top:16px;--tx:40%;--sk:-25deg;--bd:.45s">Okay. Let’s call the nerds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 3 · THE CREW ================= -->
+  <section class="chapter wrap" id="crew" data-page="03" aria-labelledby="t-crew">
+    <div class="chap-head">
+      <div><p class="pg" style="margin-bottom:10px">Page 03 · The crew</p><h2 id="t-crew">Four nerds. One group chat.</h2></div>
+      <p class="sub">Flip a card to see who does what.</p>
+    </div>
+    <div class="crew">
+      <button class="card" type="button" aria-pressed="false" style="--bg:var(--magenta)">
+        <span class="card-in">
+          <span class="face front">
+            <span class="flip">Flip ↻</span>
+            <span class="portrait"><svg viewBox="0 0 200 220" aria-hidden="true"><path d="M30 220c4-50 30-76 70-76s66 26 70 76z" fill="#FFE14D" stroke="#121212" stroke-width="4"/><circle cx="100" cy="96" r="44" fill="#F1C6A0" stroke="#121212" stroke-width="4"/><path d="M54 92c-6-40 22-62 52-58 28 4 46 26 40 58-8-20-28-28-50-26-18 2-34 10-42 26z" fill="#FF3D8B" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M70 40c10-16 50-20 66 0-20-6-46-6-66 0z" fill="#121212"/><circle cx="84" cy="104" r="5" fill="#121212"/><circle cx="116" cy="104" r="5" fill="#121212"/><path d="M86 122c8 8 20 8 28 0" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/><path d="M150 150l26-40 10 6-24 40z" fill="#fff" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M176 110l6-12 6 4-2 14" fill="#121212"/></svg></span>
+            <span class="name"><h3>Pixel</h3><p>Design &amp; branding</p></span>
+          </span>
+          <span class="face back">
+            <h3>Pixel makes you look good</h3>
+            <ul><li>Logos and brand kits</li><li>Website and app design</li><li>Clickable prototypes before any code</li></ul>
+            <span class="stat"><span>Taste <i style="--v:95%"></i></span><span>Patience for Comic Sans <i style="--v:12%"></i></span></span>
+            <span class="quote">“If it looks like a template, I’m not done.”</span>
+          </span>
+        </span>
+      </button>
+
+      <button class="card" type="button" aria-pressed="false" style="--bg:var(--cyan)">
+        <span class="card-in">
+          <span class="face front">
+            <span class="flip">Flip ↻</span>
+            <span class="portrait"><svg viewBox="0 0 200 220" aria-hidden="true"><path d="M30 220c4-50 30-76 70-76s66 26 70 76z" fill="#121212" stroke="#121212" stroke-width="4"/><path d="M70 160c10 14 50 14 60 0" fill="none" stroke="#fff" stroke-width="4"/><circle cx="100" cy="96" r="44" fill="#8C5A3C" stroke="#121212" stroke-width="4"/><path d="M58 86c0-30 18-44 42-44s42 14 42 44c-8-12-22-18-42-18s-34 6-42 18z" fill="#121212"/><circle cx="82" cy="104" r="13" fill="#fff" stroke="#121212" stroke-width="4"/><circle cx="118" cy="104" r="13" fill="#fff" stroke="#121212" stroke-width="4"/><path d="M95 104h10" stroke="#121212" stroke-width="4"/><circle cx="82" cy="104" r="4" fill="#121212"/><circle cx="118" cy="104" r="4" fill="#121212"/><path d="M90 126c6 4 14 4 20 0" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/><text x="160" y="70" font-family="ui-monospace,monospace" font-weight="700" font-size="22" fill="#121212">&lt;/&gt;</text></svg></span>
+            <span class="name"><h3>Stack</h3><p>Websites &amp; web apps</p></span>
+          </span>
+          <span class="face back">
+            <h3>Stack makes it work</h3>
+            <ul><li>Fast websites on WordPress, Shopify or custom code</li><li>Online stores and booking systems</li><li>Fixes and updates every month after launch</li></ul>
+            <span class="stat"><span>Page speed <i style="--v:92%"></i></span><span>Coffee per bug <i style="--v:70%"></i></span></span>
+            <span class="quote">“Slow sites lose sales. So I don’t build slow sites.”</span>
+          </span>
+        </span>
+      </button>
+
+      <button class="card" type="button" aria-pressed="false" style="--bg:var(--yellow)">
+        <span class="card-in">
+          <span class="face front">
+            <span class="flip">Flip ↻</span>
+            <span class="portrait"><svg viewBox="0 0 200 220" aria-hidden="true"><path d="M30 220c4-50 30-76 70-76s66 26 70 76z" fill="#1FB774" stroke="#121212" stroke-width="4"/><circle cx="100" cy="96" r="44" fill="#C98B5E" stroke="#121212" stroke-width="4"/><path d="M56 90c-4-34 20-54 46-52 26 2 44 22 40 52-4-10-14-16-26-18 4 8 2 12 2 12-14-10-34-12-50-4-6 2-10 6-12 10z" fill="#5A3A22" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><circle cx="84" cy="104" r="5" fill="#121212"/><circle cx="116" cy="104" r="5" fill="#121212"/><path d="M84 120c10 12 22 12 32 0z" fill="#fff" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><rect x="146" y="120" width="30" height="52" rx="6" fill="#fff" stroke="#121212" stroke-width="4"/><circle cx="161" cy="160" r="4" fill="#121212"/><path d="M152 132h18" stroke="#FF3D8B" stroke-width="4"/></svg></span>
+            <span class="name"><h3>Swipe</h3><p>Mobile apps</p></span>
+          </span>
+          <span class="face back">
+            <h3>Swipe puts you in pockets</h3>
+            <ul><li>iOS and Android apps from one codebase</li><li>Logins, payments and push notifications</li><li>App Store and Play Store launch</li></ul>
+            <span class="stat"><span>Thumb-friendliness <i style="--v:96%"></i></span><span>Notifications sent at 3am <i style="--v:0%"></i></span></span>
+            <span class="quote">“If your thumb has to stretch, I redo it.”</span>
+          </span>
+        </span>
+      </button>
+
+      <button class="card" type="button" aria-pressed="false" style="--bg:var(--grow)">
+        <span class="card-in">
+          <span class="face front">
+            <span class="flip">Flip ↻</span>
+            <span class="portrait"><svg viewBox="0 0 200 220" aria-hidden="true"><path d="M30 220c4-50 30-76 70-76s66 26 70 76z" fill="#FF3D8B" stroke="#121212" stroke-width="4"/><circle cx="96" cy="96" r="44" fill="#F1C6A0" stroke="#121212" stroke-width="4"/><path d="M52 92c-4-36 18-56 46-56s48 22 42 52c-14-18-34-24-52-20-14 4-26 12-36 24z" fill="#E0A82E" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><circle cx="80" cy="104" r="5" fill="#121212"/><circle cx="112" cy="104" r="5" fill="#121212"/><path d="M78 124c10 4 22 4 32-4" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/><path d="M136 132l40-24v58l-40-24z" fill="#fff" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M126 132h10v10h-10z" fill="#121212"/><path d="M184 118l12-8M186 138h14M184 158l12 8" stroke="#121212" stroke-width="4" stroke-linecap="round"/></svg></span>
+            <span class="name"><h3>Boost</h3><p>Growth marketing</p></span>
+          </span>
+          <span class="face back">
+            <h3>Boost brings the crowd</h3>
+            <ul><li>Google search and local SEO</li><li>Meta and Google ads that pay for themselves</li><li>A monthly report you can read in two minutes</li></ul>
+            <span class="stat"><span>Clicks <i style="--v:88%"></i></span><span>Buzzwords used <i style="--v:5%"></i></span></span>
+            <span class="quote">“Traffic is nice. Orders are nicer.”</span>
+          </span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 4 · HOW IT GOES ================= -->
+  <section class="chapter wrap" id="how" data-page="04" aria-labelledby="t-how">
+    <div class="chap-head">
+      <div><p class="pg" style="margin-bottom:10px">Page 04 · How it goes</p><h2 id="t-how">Four steps. Zero mystery.</h2></div>
+      <p class="sub">You see something real at the end of every step. Use the arrows or your keyboard to flip.</p>
+    </div>
+    <div class="flipper">
+      <div class="panel stage" id="stage" aria-live="polite">
+        <article class="slide" id="s1" style="--bg:var(--yellow)" role="tabpanel" aria-labelledby="b1">
+          <div class="art"><svg viewBox="0 0 300 250" aria-hidden="true"><path d="M70 150h60l-6 60H76z" fill="#fff" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><path d="M130 166c22 0 22 30 0 30" fill="none" stroke="#121212" stroke-width="5"/><path d="M86 136c-6-10 6-14 0-26M104 136c-6-10 6-14 0-26" fill="none" stroke="#121212" stroke-width="4" stroke-linecap="round"/><path d="M170 150h60l-6 60h-48z" fill="#FF3D8B" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><path d="M230 166c22 0 22 30 0 30" fill="none" stroke="#121212" stroke-width="5"/><g class="beat beat-pop" style="--d:.25s"><path d="M60 40h100c10 0 16 6 16 16v28c0 10-6 16-16 16H96l-20 16 4-16H60c-10 0-16-6-16-16V56c0-10 6-16 16-16z" fill="#fff" stroke="#121212" stroke-width="4"/><text x="110" y="80" text-anchor="middle" font-family="Bowlby One, Arial Black, sans-serif" font-size="26" fill="#121212">???</text></g><g class="beat beat-pop" style="--d:.4s"><path d="M196 30h72c10 0 14 6 14 14v24c0 8-4 14-14 14h-30l4 14-18-14h-28c-10 0-14-6-14-14V44c0-8 4-14 14-14z" fill="#25BFEF" stroke="#121212" stroke-width="4"/><text x="232" y="64" text-anchor="middle" font-family="Bowlby One, Arial Black, sans-serif" font-size="22" fill="#121212">!!</text></g></svg></div>
+          <div class="txt"><span class="no">1</span><h3>Coffee &amp; questions</h3><p>A 30-minute call. We ask what’s selling, what isn’t, and who you want to reach.</p><span class="when">You get: a plan and a fixed price</span></div>
+        </article>
+        <article class="slide" id="s2" style="--bg:var(--cyan)" role="tabpanel" aria-labelledby="b2" hidden>
+          <div class="art"><svg viewBox="0 0 300 250" aria-hidden="true"><rect x="50" y="34" width="200" height="180" fill="#fff" stroke="#121212" stroke-width="5"/><path d="M50 60h200" stroke="#121212" stroke-width="4"/><g fill="none" stroke="#121212" stroke-width="3.5" stroke-linecap="round"><path d="M70 84h90M70 100h60"/><rect x="70" y="118" width="70" height="70"/><path d="M70 118l70 70M140 118l-70 70"/><path d="M156 124h74M156 140h56M156 156h66"/><rect x="156" y="170" width="60" height="18" rx="9"/></g><g class="beat beat-pop" style="--d:.3s"><path d="M226 22l40 40-80 80-46 6 6-46z" fill="#FFE14D" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><path d="M146 148l6-46 40 40z" fill="#F1C6A0" stroke="#121212" stroke-width="4" stroke-linejoin="round"/></g></svg></div>
+          <div class="txt"><span class="no">2</span><h3>Sketch it</h3><p>Rough layouts first, then the real design. You click through it before we write a line of code.</p><span class="when">You get: a clickable prototype</span></div>
+        </article>
+        <article class="slide" id="s3" style="--bg:var(--grow)" role="tabpanel" aria-labelledby="b3" hidden>
+          <div class="art"><svg viewBox="0 0 300 250" aria-hidden="true"><rect x="40" y="40" width="220" height="150" rx="8" fill="#121212" stroke="#121212" stroke-width="5"/><g font-family="ui-monospace,monospace" font-size="14" font-weight="700"><text x="58" y="74" fill="#FF3D8B">&lt;header&gt;</text><text x="74" y="98" fill="#FFE14D">Mira’s Candles</text><text x="58" y="122" fill="#FF3D8B">&lt;/header&gt;</text><text x="58" y="150" fill="#25BFEF">checkout.fast()</text></g><path d="M20 190h260l-20 30H40z" fill="#fff" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><g class="beat beat-shake" style="--d:.2s"><circle cx="238" cy="60" r="26" fill="#FFE14D" stroke="#121212" stroke-width="5"/><circle cx="238" cy="60" r="9" fill="#fff" stroke="#121212" stroke-width="4"/><path d="M238 26v-8M238 102v-8M204 60h-8M280 60h-8M214 36l-6-6M268 90l-6-6M262 36l6-6M208 90l6-6" stroke="#121212" stroke-width="5" stroke-linecap="round"/></g></svg></div>
+          <div class="txt"><span class="no">3</span><h3>Build it</h3><p>We build, test on real phones and send you a link every Friday so you can poke at it.</p><span class="when">You get: a working site to try</span></div>
+        </article>
+        <article class="slide" id="s4" style="--bg:var(--magenta)" role="tabpanel" aria-labelledby="b4" hidden>
+          <div class="art"><svg viewBox="0 0 300 250" aria-hidden="true"><path d="M30 220c40-10 70-40 100-70s70-60 140-90" fill="none" stroke="#121212" stroke-width="5" stroke-dasharray="10 10"/><g class="beat beat-pop" style="--d:.15s"><path d="M210 70c30-30 60-36 70-30 6 10 0 40-30 70l-20 6-26-26z" fill="#fff" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><circle cx="250" cy="70" r="9" fill="#25BFEF" stroke="#121212" stroke-width="4"/><path d="M204 90l-22 4 14-22M230 116l-4 22 22-14" fill="#FFE14D" stroke="#121212" stroke-width="4" stroke-linejoin="round"/><path d="M200 120l-18 18M210 130l-10 18" stroke="#FFE14D" stroke-width="7" stroke-linecap="round"/></g><g fill="#FFE14D" stroke="#121212" stroke-width="3"><path d="M70 60l5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/><path d="M140 30l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/></g></svg></div>
+          <div class="txt"><span class="no">4</span><h3>Launch &amp; grow</h3><p>We go live, then keep tuning ads, search and pages every month based on what sells.</p><span class="when">You get: more orders, and a report</span></div>
+        </article>
+      </div>
+      <div>
+        <ul class="steps" role="tablist" aria-label="Process steps">
+          <li><button role="tab" id="b1" aria-controls="s1" aria-selected="true"><b>1</b>Coffee &amp; questions</button></li>
+          <li><button role="tab" id="b2" aria-controls="s2" aria-selected="false" tabindex="-1"><b>2</b>Sketch it</button></li>
+          <li><button role="tab" id="b3" aria-controls="s3" aria-selected="false" tabindex="-1"><b>3</b>Build it</button></li>
+          <li><button role="tab" id="b4" aria-controls="s4" aria-selected="false" tabindex="-1"><b>4</b>Launch &amp; grow</button></li>
+        </ul>
+        <div class="flip-nav"><button class="btn" type="button" id="prev">← Back</button><button class="btn btn--ink" type="button" id="next">Next →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 5 · SPLASH (THE RESULT) ================= -->
+  <section class="chapter wrap" id="work" data-page="05" aria-labelledby="t-work">
+    <div class="chap-head">
+      <div><p class="pg" style="margin-bottom:10px">Page 05 · Three months later</p><h2 id="t-work">Mira needs more candles.</h2></div>
+      <p class="sub">That’s the ending we’re after. Here are a few back issues.</p>
+    </div>
+    <div class="panel splash" data-play role="img" aria-label="Splash page: Mira, delighted, surrounded by delivery boxes and phone notifications saying new order">
+      <svg viewBox="0 0 840 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="840" height="360" fill="#FF3D8B"/>
+        <g fill="#FF77AC"><path d="M420 200L840 0v90z"/><path d="M420 200L840 200v90z"/><path d="M420 200L700 360H580z"/><path d="M420 200L260 360H140z"/><path d="M420 200L0 300v-90z"/><path d="M420 200L0 60V0h60z"/><path d="M420 200L380 0h90z"/></g>
+        <rect width="840" height="360" fill="url(#dotsW)" opacity=".35"/>
+        <g stroke="#121212" stroke-width="4" stroke-linejoin="round">
+          <rect x="120" y="270" width="110" height="80" fill="#E0A86A"/><path d="M120 290h110M175 270v20" fill="none"/>
+          <rect x="140" y="200" width="80" height="70" fill="#E0A86A"/><path d="M140 218h80M180 200v18" fill="none"/>
+          <rect x="610" y="260" width="120" height="90" fill="#E0A86A"/><path d="M610 282h120M670 260v22" fill="none"/>
+        </g>
+        <use href="#mira-happy" x="320" y="120" width="200" height="250"/>
+        <use href="#candle" x="252" y="256" width="40" height="70"/><use href="#candle" x="560" y="270" width="34" height="60"/>
+        <g class="beat beat-pop" style="--d:.2s"><rect x="40" y="40" width="200" height="58" rx="12" fill="#fff" stroke="#121212" stroke-width="4"/><circle cx="68" cy="69" r="13" fill="#1FB774" stroke="#121212" stroke-width="3"/><text x="90" y="64" font-family="Archivo, sans-serif" font-weight="700" font-size="15" fill="#121212">New order!</text><text x="90" y="84" font-family="Archivo, sans-serif" font-size="13" fill="#4B4A47">Lavender candle × 3</text></g>
+        <g class="beat beat-pop" style="--d:.32s"><rect x="600" y="40" width="200" height="58" rx="12" fill="#fff" stroke="#121212" stroke-width="4"/><circle cx="628" cy="69" r="13" fill="#1FB774" stroke="#121212" stroke-width="3"/><text x="650" y="64" font-family="Archivo, sans-serif" font-weight="700" font-size="15" fill="#121212">New order!</text><text x="650" y="84" font-family="Archivo, sans-serif" font-size="13" fill="#4B4A47">Gift box × 1</text></g>
+        <g class="beat beat-pop" style="--d:.42s"><rect x="620" y="140" width="190" height="58" rx="12" fill="#fff" stroke="#121212" stroke-width="4"/><circle cx="648" cy="169" r="13" fill="#FFE14D" stroke="#121212" stroke-width="3"/><text x="670" y="164" font-family="Archivo, sans-serif" font-weight="700" font-size="15" fill="#121212">New review</text><text x="670" y="184" font-family="Archivo, sans-serif" font-size="13" fill="#4B4A47">★★★★★</text></g>
+      </svg>
+      <span class="caption">Three months later…</span>
+      <p class="sfx" style="left:4%;bottom:12%;--bd:.5s;font-size:clamp(28px,4vw,48px)">DING! DING!</p>
+      <p class="bubble" style="left:56%;top:26%;max-width:30%;--tx:20%;--sk:-25deg;--bd:.3s">I’m gonna need a bigger shelf.</p>
+    </div>
+
+    <div class="backissues">
+      <!-- Client slots: each cover becomes a real case study (project name, one image, one true result). -->
+      <a class="issue-cover" href="#last" style="--bg:var(--cyan)"><span class="top"><b>Issue #02</b><span>Online store</span></span>
+        <svg viewBox="0 0 300 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="260" fill="url(#dotsW)"/><path d="M90 70h120l-12 120H102z" fill="#FFE14D" stroke="#121212" stroke-width="5" stroke-linejoin="round"/><path d="M118 70c0-30 64-30 64 0" fill="none" stroke="#121212" stroke-width="5"/><circle cx="130" cy="120" r="5" fill="#121212"/><circle cx="170" cy="120" r="5" fill="#121212"/><path d="M134 140c10 10 22 10 32 0" fill="none" stroke="#121212" stroke-width="5" stroke-linecap="round"/></svg>
+        <h3>The shop that sold out</h3></a>
+      <a class="issue-cover" href="#last" style="--bg:var(--yellow)"><span class="top"><b>Issue #03</b><span>Mobile app</span></span>
+        <svg viewBox="0 0 300 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="260" fill="url(#dots)" opacity=".5"/><rect x="110" y="30" width="80" height="150" rx="14" fill="#fff" stroke="#121212" stroke-width="5"/><rect x="122" y="56" width="56" height="26" rx="6" fill="#FF3D8B" stroke="#121212" stroke-width="3"/><rect x="122" y="92" width="56" height="26" rx="6" fill="#25BFEF" stroke="#121212" stroke-width="3"/><path d="M140 164h20" stroke="#121212" stroke-width="5" stroke-linecap="round"/></svg>
+        <h3>The app people open daily</h3></a>
+      <a class="issue-cover" href="#last" style="--bg:var(--grow)"><span class="top"><b>Issue #04</b><span>Rebrand + ads</span></span>
+        <svg viewBox="0 0 300 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="300" height="260" fill="url(#dotsW)"/><path d="M60 170l50-50 40 30 80-90" fill="none" stroke="#121212" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 170l50-50 40 30 80-90" fill="none" stroke="#FFE14D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M200 60h30v30" fill="none" stroke="#121212" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>The clinic with a waitlist</h3></a>
+    </div>
+    <p class="slot-note">✎ Concept slots: these covers become your real case studies, each with one true result.</p>
+  </section>
+
+  <!-- ================= PAGE 6 · YOUR TURN ================= -->
+  <section class="chapter wrap" id="last" data-page="06" aria-labelledby="t-last">
+    <div class="chap-head">
+      <div><p class="pg" style="margin-bottom:10px">Page 06 · The last page</p><h2 id="t-last">Your turn. Fill in the bubble.</h2></div>
+      <p class="sub">No long forms. Finish the sentence and we’ll write back.</p>
+    </div>
+    <div class="lastpage">
+      <div class="panel lp-art" role="img" aria-label="The four crew members peek in from the edge of the panel, waiting for your message">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="400" height="400" fill="#25BFEF"/><rect width="400" height="400" fill="url(#dotsW)" opacity=".5"/>
+          <g stroke="#121212" stroke-width="4">
+            <circle cx="70" cy="330" r="56" fill="#F1C6A0"/><path d="M14 322c0-40 24-62 56-62s58 20 56 54c-12-20-32-28-56-26s-40 14-56 34z" fill="#FF3D8B"/>
+            <circle cx="170" cy="350" r="56" fill="#8C5A3C"/><path d="M116 340c0-34 24-52 54-52s54 18 54 52c-12-14-30-22-54-22s-42 8-54 22z" fill="#121212"/><circle cx="152" cy="352" r="14" fill="#fff"/><circle cx="188" cy="352" r="14" fill="#fff"/>
+            <circle cx="270" cy="340" r="56" fill="#C98B5E"/><path d="M214 334c-2-40 26-62 56-60 30 2 52 24 54 58-14-16-32-22-50-22-24 0-42 10-60 24z" fill="#5A3A22"/>
+            <circle cx="360" cy="320" r="56" fill="#F1C6A0"/><path d="M304 314c-2-40 22-62 56-62s58 26 54 58c-14-20-36-26-58-22-20 4-34 14-52 26z" fill="#E0A82E"/>
+          </g>
+          <g fill="#121212"><circle cx="56" cy="334" r="5"/><circle cx="84" cy="334" r="5"/><circle cx="152" cy="352" r="5"/><circle cx="188" cy="352" r="5"/><circle cx="256" cy="344" r="5"/><circle cx="284" cy="344" r="5"/><circle cx="346" cy="324" r="5"/><circle cx="374" cy="324" r="5"/></g>
+        </svg>
+        <p class="bubble" style="left:8%;top:10%;max-width:84%;--tx:22%;--sk:25deg;font-size:20px">We’re listening. Probably eating snacks.</p>
+      </div>
+
+      <div class="panel" style="position:relative">
+        <form class="madlib" id="madlib" novalidate>
+          <p>Hi, I’m
+            <label for="m-name">Your name</label><input id="m-name" name="name" autocomplete="given-name" placeholder="Mira" required>.
+            I need a
+            <label for="m-what">What you need</label>
+            <select id="m-what" name="what"><option>new website</option><option>online store</option><option>mobile app</option><option>brand refresh</option><option>flood of customers</option></select>
+            for my
+            <label for="m-biz">What your business is</label><input id="m-biz" name="biz" class="wide" placeholder="candle shop" required>.
+            Write back to
+            <label for="m-mail">Your email</label><input id="m-mail" name="email" type="email" class="wide" autocomplete="email" placeholder="you@email.com" required>.
+          </p>
+          <div class="row-actions">
+            <button class="btn btn--ink" type="submit">Send it</button>
+            <p class="err" id="m-err" role="alert"></p>
+          </div>
+        </form>
+        <div class="sent" id="sent" hidden>
+          <div><h3>Whoosh!</h3><p id="sentMsg">Got it. This is a preview, so nothing was sent yet.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= BEHIND THE PANELS ================= -->
+<section class="notes" aria-labelledby="t-notes">
+  <div class="wrap">
+    <p class="pg">Behind the panels · concept notes</p>
+    <h2 id="t-notes">Why a comic?</h2>
+    <div class="ngrid">
+      <div class="ncard">
+        <h3>The idea</h3>
+        <p>Artattackk decorates its pages with doodles. We use art to tell one story: a client with a quiet website meets the crew, and three months later she can’t keep up with orders. Visitors see themselves in Mira, so the pitch makes itself.</p>
+      </div>
+      <div class="ncard">
+        <h3>Copy rules</h3>
+        <ul>
+          <li>Words live in bubbles and captions. Max 12 per bubble.</li>
+          <li>Characters talk like people. No one says “solutions”.</li>
+          <li>Every section has one headline, one sub, one thing to do.</li>
+          <li class="bad">We deliver innovative digital solutions.</li>
+          <li>Slow sites lose sales. So I don’t build slow sites.</li>
+        </ul>
+      </div>
+      <div class="ncard">
+        <h3>UX choices</h3>
+        <ul>
+          <li>“Skip to the last page” in the header: the quote form is one click away from anywhere.</li>
+          <li>A page counter shows how far through the story you are.</li>
+          <li>Process is a page you flip, with arrow keys, not a wall of text.</li>
+          <li>The contact form is one sentence with four blanks.</li>
+          <li>Everything still reads with motion turned off.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl">
+      <table>
+        <caption class="sr">Animation timeline for the cover and panels</caption>
+        <thead><tr><th>Moment</th><th>Element</th><th>Role</th><th>Starts</th><th>Duration</th><th>Motion</th></tr></thead>
+        <tbody>
+          <tr><td>Cover load</td><td>Hand + big button</td><td>Lead</td><td>0 ms</td><td>420 ms</td><td>Press down, button squashes, both spring back</td></tr>
+          <tr><td></td><td>“CLICK!” burst</td><td>Support</td><td>220 ms</td><td>500 ms</td><td>Lands on the press impact, overshoots</td></tr>
+          <tr><td></td><td>Sales bars</td><td>Support</td><td>340 / 400 / 450 / 490 ms</td><td>700 ms</td><td>Rise from the screen, gaps shrink so it reads as one wave</td></tr>
+          <tr><td></td><td>Cursors, hearts, arrow</td><td>Decoration</td><td>620–800 ms</td><td>450 ms</td><td>Pop in place, no travel</td></tr>
+          <tr><td>Idle</td><td>Hand taps again</td><td>Attention loop</td><td>after 2.5 s, every 7 s</td><td>420 ms</td><td>Stops while you hover the cover</td></tr>
+          <tr><td>Panel enters view</td><td>Panel action (roll, shake, pop)</td><td>Lead</td><td>0–150 ms</td><td>450–1600 ms</td><td>Art is already drawn; only the beat plays</td></tr>
+          <tr><td></td><td>Speech bubble</td><td>Support</td><td>250–450 ms</td><td>420 ms</td><td>Pops after the action, like reading order</td></tr>
+          <tr><td>Flip a page</td><td>Next slide</td><td>Lead</td><td>0 ms</td><td>420 ms</td><td>Enters from the side you’re heading to</td></tr>
+          <tr><td>Send form</td><td>“Whoosh!” panel</td><td>Lead</td><td>0 ms</td><td>420 ms</td><td>Covers the form, nothing else moves</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="end wrap">
+  <h2>The end.</h2>
+  <p>Or the start of yours.</p>
+  <div class="links"><a href="#last">Start your story</a><a href="#crew">Meet the crew</a><a href="#cover">Back to the cover</a></div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- cover: plays once on load, then an occasional tap (attention loop) ---- */
+  const cover = document.getElementById('coverArt');
+  let idle;
+  const playCover = () => { cover.classList.remove('play'); void cover.offsetWidth; cover.classList.add('play'); };
+  if (!reduce) {
+    playCover();
+    const loop = () => { idle = setTimeout(() => { if (!cover.matches(':hover')) playCover(); loop(); }, 7000); };
+    setTimeout(loop, 2500);
+  }
+
+  /* ---- panels: the drawing is visible at rest; entering view plays its beat once ---- */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('play'); io.unobserve(e.target);
+    }), { threshold: .45 });
+    document.querySelectorAll('[data-play]').forEach(el => io.observe(el));
+  }
+
+  /* ---- page counter ---- */
+  const pgNo = document.getElementById('pgNo');
+  const pio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) pgNo.textContent = e.target.dataset.page; }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('[data-page]').forEach(s => pio.observe(s));
+
+  /* ---- crew cards: tap/Enter flips (hover flips on mouse) ---- */
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true')));
+
+  /* ---- process: tabs + prev/next, direction-aware ---- */
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const slides = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  let cur = 0;
+  function go(i, focus) {
+    i = (i + tabs.length) % tabs.length; if (i === cur) return;
+    const dir = i > cur ? 'in-next' : 'in-prev';
+    slides[cur].hidden = true; slides[cur].classList.remove('play', 'in-next', 'in-prev');
+    tabs[cur].setAttribute('aria-selected', 'false'); tabs[cur].tabIndex = -1;
+    cur = i;
+    const s = slides[cur]; s.hidden = false;
+    if (!reduce) { s.classList.add(dir); void s.offsetWidth; s.classList.add('play'); }
+    tabs[cur].setAttribute('aria-selected', 'true'); tabs[cur].tabIndex = 0;
+    if (focus) tabs[cur].focus();
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => go(i));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); go(cur + 1, true); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(cur - 1, true); }
+    });
+  });
+  document.getElementById('next').addEventListener('click', () => go(cur + 1));
+  document.getElementById('prev').addEventListener('click', () => go(cur - 1));
+
+  /* ---- mad-lib form ---- */
+  const f = document.getElementById('madlib'), err = document.getElementById('m-err');
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = f.name.value.trim(), biz = f.biz.value.trim(), mail = f.email.value.trim();
+    const miss = [];
+    if (!name) miss.push(['m-name', 'your name']);
+    if (!biz) miss.push(['m-biz', 'what your business is']);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) miss.push(['m-mail', 'an email we can reply to']);
+    f.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid'));
+    if (miss.length) {
+      miss.forEach(([id]) => document.getElementById(id).setAttribute('aria-invalid', 'true'));
+      err.textContent = 'Almost! Fill in ' + miss.map(m => m[1]).join(' and ') + '.';
+      document.getElementById(miss[0][0]).focus(); return;
+    }
+    err.textContent = '';
+    document.getElementById('sentMsg').textContent = `Thanks, ${name}! A ${f.what.value} for your ${biz}. This is a preview, so nothing was sent yet.`;
+    document.getElementById('sent').hidden = false;
+  });
+})();
+</script>

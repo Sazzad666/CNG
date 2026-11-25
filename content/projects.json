@@ -1,0 +1,56 @@
+[
+  {
+    "slug": "meridian-residences", "demo": true, "client": "Meridian Residences", "type": "Luxury real-estate developer",
+    "services": ["web-design", "growth"], "photos": ["p-realestate-1", "p-realestate-2", "p-realestate-3"],
+    "summary": "A website that sells apartments before the foundation is poured.",
+    "result": "3.1× more site-visit bookings",
+    "challenge": "Buyers in Gulshan and Baridhara compare five or six developers before booking a site visit. Meridian’s old site was a brochure PDF with a phone number.",
+    "approach": "We built project pages around floor plans, walkthrough video and a visit-booking flow, then ran Google and Meta campaigns straight to them.",
+    "metrics": [["3.1×", "site-visit bookings"], ["−38%", "cost per lead"], ["1.4s", "load time on 4G"]]
+  },
+  {
+    "slug": "noor-atelier", "demo": true, "client": "Noor Atelier", "type": "Fashion label",
+    "services": ["web-design", "branding"], "photos": ["p-fashion-1", "p-fashion-2"],
+    "summary": "A Shopify store that feels like walking into the boutique.",
+    "result": "+64% online revenue in six months",
+    "challenge": "Noor sold mostly through Instagram DMs, which meant lost orders and no way to see what sold.",
+    "approach": "A custom Shopify store with bKash and card checkout, lookbook pages and a refreshed visual identity for the launch.",
+    "metrics": [["+64%", "online revenue"], ["2.8%", "conversion rate"], ["70%", "orders on mobile"]]
+  },
+  {
+    "slug": "careplus-hospital", "demo": true, "client": "CarePlus Hospital", "type": "Private hospital",
+    "services": ["web-design", "growth"], "photos": ["p-hospital-1", "p-hospital-2"],
+    "summary": "Finding a doctor and booking an appointment in under a minute.",
+    "result": "+42% online appointments",
+    "challenge": "Patients called the switchboard for everything. The website had no doctor search and ranked poorly for specialist searches.",
+    "approach": "We rebuilt the site around a doctor finder and booking form, and ran a local SEO programme for each department.",
+    "metrics": [["+42%", "online appointments"], ["Top 3", "for 18 specialist searches"], ["−30%", "switchboard calls"]]
+  },
+  {
+    "slug": "spice-route", "demo": true, "client": "Spice Route Group", "type": "Restaurant group",
+    "services": ["branding", "growth", "video"], "photos": ["p-restaurant-1", "p-restaurant-2", "p-restaurant-3"],
+    "summary": "One brand family for three restaurants, and a social calendar to match.",
+    "result": "Weekend tables fully booked within 10 weeks",
+    "challenge": "Three restaurants, three logos, three tones of voice, and no consistent social presence.",
+    "approach": "A brand family with a shared system, monthly photo and reel shoots, and Meta campaigns for weekend reservations.",
+    "metrics": [["100%", "weekend occupancy"], ["4×", "Instagram reach"], ["12", "reels a month"]]
+  },
+  {
+    "slug": "taka-wallet", "demo": true, "client": "TakaWallet", "type": "Fintech startup",
+    "services": ["apps", "branding"], "photos": ["p-fintech-1", "p-fintech-2"],
+    "summary": "A savings app simple enough for a first-time smartphone user.",
+    "result": "50,000 downloads in the first quarter",
+    "challenge": "TakaWallet needed to launch on iOS and Android at once, with a brand that felt safe and modern.",
+    "approach": "Flutter app with a design system tested with 40 users in Dhaka and Chattogram, plus the launch brand and store assets.",
+    "metrics": [["50k", "downloads in Q1"], ["4.7★", "store rating"], ["1", "codebase, two platforms"]]
+  },
+  {
+    "slug": "studio-kaath", "demo": true, "client": "Studio Kaath", "type": "Interior design studio",
+    "services": ["branding", "video"], "photos": ["p-interior-1", "p-interior-2", "p-interior-3"],
+    "summary": "A quieter, more premium brand, and films that show the craft.",
+    "result": "Average project size up 2×",
+    "challenge": "Studio Kaath was winning small jobs because its brand looked smaller than its work.",
+    "approach": "A refined identity, a portfolio site and a series of short films walking through finished homes.",
+    "metrics": [["2×", "average project size"], ["6", "short films"], ["+55%", "enquiries from referrals"]]
+  }
+]

@@ -1,0 +1,695 @@
+<title>Click &amp; Grow Concept</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;700&family=Caveat:wght@600;700&display=swap">
+<style>
+/* Layout: a concept board — the proposed hero first, then one storyboard row per scroll chapter (seed → harvest), then the motion, look and voice rules. */
+:root{
+  /* single deliberate light look: a sunny garden sheet */
+  --ground:#F2F6EE;      /* pale leaf white */
+  --sheet:#FFFFFF;
+  --ink:#17271E;         /* forest ink, all lines and text */
+  --ink-soft:#4C5E53;
+  --leaf:#2E9E58;        /* primary green */
+  --leaf-lite:#BFE8C9;
+  --sun:#FFC53D;         /* highlight + CTA */
+  --bloom:#FF6F91;       /* flowers, "done" moments */
+  --sky:#8FD0FF;
+  --soil:#8A5A3B;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
+  --r:18px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:400 16px/1.55 var(--body)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0;text-wrap:balance}
+p{margin:0}
+.page{max-width:1180px;margin:0 auto;padding-block:28px 0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+
+/* misregistered riso fill: the house twist on the doodle look */
+.riso{filter:url(#wob)}
+.ln{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+.hand{font:700 22px/1.1 var(--hand);color:var(--ink)}
+.tag{display:inline-flex;align-items:center;gap:8px;font:700 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.tag i{width:10px;height:10px;border-radius:50%;background:var(--leaf);display:inline-block}
+
+/* top bar */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.logo{display:flex;align-items:center;gap:10px;font:800 22px/1 var(--display)}
+.logo svg{width:40px;height:40px}
+.top .hand{font-size:20px;color:var(--ink-soft)}
+
+/* intro */
+.intro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:28px}
+.intro h1{font-size:clamp(44px,7vw,96px)}
+.intro h1 em{font-style:normal;position:relative;white-space:nowrap}
+.intro h1 em::after{content:"";position:absolute;left:-4px;right:-4px;bottom:.06em;height:.32em;background:var(--sun);z-index:-1;border-radius:30% 10% 40% 12%}
+.intro h1 span{position:relative;z-index:0}
+.intro .lede{font-size:19px;color:var(--ink-soft);max-width:30em}
+.intro .lede b{color:var(--ink)}
+
+/* browser frame */
+.frame{background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);box-shadow:6px 6px 0 var(--ink);overflow:hidden;position:relative}
+.frame .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:3px solid var(--ink);background:var(--leaf-lite)}
+.frame .bar i{width:12px;height:12px;border-radius:50%;border:2.5px solid var(--ink);background:var(--sheet)}
+.frame .bar i:first-child{background:var(--bloom)}
+.frame .bar span{margin-left:10px;font:500 13px/1 var(--body);color:var(--ink-soft)}
+.ctrl{position:absolute;right:12px;top:7px;display:flex;gap:6px}
+.ctrl button{font:700 13px/1 var(--body);background:var(--sheet);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer;min-height:32px}
+.ctrl button:hover{background:var(--sun)}
+
+/* HERO DEMO */
+.hero-demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:430px}
+.hd-copy{padding:40px 36px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.hd-copy h2{font-size:clamp(38px,5vw,64px)}
+.hd-copy p{font-size:18px;color:var(--ink-soft)}
+.hd-btn{align-self:flex-start;font:800 18px/1 var(--display);background:var(--sun);border:3px solid var(--ink);border-radius:999px;padding:16px 26px;box-shadow:4px 4px 0 var(--ink);position:relative;color:var(--ink)}
+.hd-btn.is-press{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.hd-stage{position:relative;background:linear-gradient(var(--sky) 0 72%,var(--soil) 72% 100%);border-left:3px solid var(--ink);overflow:hidden}
+.hd-stage svg{position:absolute;inset:0;width:100%;height:100%}
+.soilline{stroke:var(--ink);stroke-width:3}
+.cursor{position:absolute;width:34px;height:34px;left:0;top:0;z-index:3;pointer-events:none;transition:transform 1s cubic-bezier(.5,0,.2,1)}
+.ripple{position:absolute;width:20px;height:20px;border-radius:50%;border:3px solid var(--ink);opacity:0;pointer-events:none;z-index:2}
+.ripple.go{animation:ripple .6s ease-out}
+@keyframes ripple{from{opacity:1;transform:scale(.4)}to{opacity:0;transform:scale(3)}}
+.grow{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.4s cubic-bezier(.3,.6,.2,1)}
+.grow.on{stroke-dashoffset:0}
+.pop{transform:scale(0);transform-box:fill-box;transform-origin:center bottom;transition:transform .55s cubic-bezier(.3,1.6,.5,1)}
+.pop.on{transform:scale(1)}
+.seed{transition:transform .7s cubic-bezier(.6,0,.9,.6),opacity .2s}
+.sway{transform-box:view-box;transform-origin:50% 72%;animation:sway 4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.paused .sway,.paused .bob,.paused .blink{animation-play-state:paused}
+
+/* section heads */
+.chapter{margin-top:88px}
+.ch-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:26px}
+.ch-head h2{font-size:clamp(32px,4.4vw,54px)}
+.ch-head p{color:var(--ink-soft);font-size:17px;max-width:34em}
+
+/* big idea */
+.idea{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.idea .card{background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px}
+.idea svg{width:100%;height:130px}
+.idea h3{font-size:26px}
+.idea p{color:var(--ink-soft)}
+.arrow-row{display:flex;justify-content:center;margin-top:10px}
+
+/* storyboard rows */
+.story{display:grid;gap:22px}
+.row{display:grid;grid-template-columns:88px minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:stretch;background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:20px}
+.stage-no{display:flex;flex-direction:column;align-items:center;gap:6px;border-right:2.5px dashed #B9C8BD;padding-right:14px}
+.stage-no b{font:800 15px/1 var(--display);text-transform:uppercase;letter-spacing:.06em}
+.stage-no svg{width:56px;height:56px}
+.preview{border:2.5px solid var(--ink);border-radius:14px;background:var(--ground);position:relative;overflow:hidden;min-height:230px}
+.notes{display:flex;flex-direction:column;gap:12px;min-width:0}
+.notes .say{font:800 26px/1.05 var(--display)}
+.notes .sub{color:var(--ink-soft)}
+.notes dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;margin:4px 0 0;font-size:15px}
+.notes dt{font-weight:700;white-space:nowrap}
+.notes dd{margin:0;color:var(--ink-soft)}
+.try{font:700 20px/1 var(--hand);color:var(--leaf)}
+
+/* services pots */
+.pots{position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;padding:10px 10px 0}
+.pot{background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ink);font:700 14px/1.1 var(--body);min-height:44px}
+.pot svg{width:100%;max-width:120px;height:170px;overflow:visible}
+.pot .stem{transform-origin:50% 100%;transform-box:fill-box;transform:scaleY(.15);transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
+.pot .lf{transform:scale(0);transform-box:fill-box;transform-origin:center bottom;transition:transform .5s cubic-bezier(.3,1.6,.5,1) .25s}
+.pot:hover .stem,.pot:focus-visible .stem,.pot.on .stem{transform:scaleY(1)}
+.pot:hover .lf,.pot:focus-visible .lf,.pot.on .lf{transform:scale(1)}
+.pot span{padding-bottom:10px}
+
+/* roots scrub */
+.roots svg{position:absolute;inset:0;width:100%;height:calc(100% - 52px)}
+.roots .scrub{position:absolute;left:14px;right:14px;bottom:12px;display:flex;align-items:center;gap:10px;font:700 13px/1 var(--body)}
+.roots input{flex:1;accent-color:var(--leaf);min-height:32px}
+.node{transition:transform .4s cubic-bezier(.3,1.6,.5,1),opacity .3s;transform-box:fill-box;transform-origin:center}
+
+/* garden / work */
+.panes{position:absolute;inset:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pane{border:2.5px solid var(--ink);border-radius:10px;background:var(--sheet);position:relative;overflow:hidden;cursor:pointer;padding:0;display:flex;flex-direction:column;font:700 13px/1.2 var(--body);color:var(--ink);text-align:left}
+.pane .shot{flex:1;position:relative;background:linear-gradient(var(--leaf-lite),var(--sheet));min-height:120px}
+.pane .shot svg{position:absolute;inset:0;width:100%;height:100%}
+.pane .lbl{padding:8px 10px;border-top:2.5px solid var(--ink)}
+.pane .wilt{transition:opacity .4s}
+.pane .bloomed{opacity:0;transition:opacity .4s}
+.pane:hover .wilt,.pane:focus-visible .wilt,.pane.on .wilt{opacity:0}
+.pane:hover .bloomed,.pane:focus-visible .bloomed,.pane.on .bloomed{opacity:1}
+
+/* harvest / contact */
+.preview:has(.harvest){min-height:350px}
+.harvest{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:12px;padding:14px}
+.harvest form{display:flex;flex-direction:column;gap:8px}
+.harvest label{font:700 13px/1 var(--body)}
+.harvest input{font:400 15px var(--body);border:2.5px solid var(--ink);border-radius:10px;padding:8px 10px;min-height:40px;background:var(--sheet);color:var(--ink);width:100%}
+.harvest button{font:800 15px/1 var(--display);background:var(--sun);border:2.5px solid var(--ink);border-radius:999px;padding:10px 14px;box-shadow:3px 3px 0 var(--ink);cursor:pointer;min-height:44px;color:var(--ink)}
+.harvest button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.harvest svg{width:100%;height:100%}
+.hv-msg{font:700 18px/1.1 var(--hand);color:var(--leaf);min-height:20px}
+
+/* mascot */
+.mascot-wrap{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;align-items:center;background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:24px}
+.mascot-wrap svg{width:100%;height:auto;max-width:260px}
+.bob{animation:bob 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.blink{animation:blink 4s infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.moods{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.moods span{border:2.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;background:var(--ground)}
+
+/* motion system */
+.motion{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.mo{background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px}
+.mo .demo{height:110px;border-radius:12px;background:var(--ground);border:2.5px solid var(--ink);position:relative;overflow:hidden;display:grid;place-items:center}
+.mo h3{font-size:24px}
+.mo p{color:var(--ink-soft);font-size:15px}
+.mo code{font:600 12.5px/1.4 ui-monospace,Menlo,monospace;background:var(--ground);border-radius:6px;padding:3px 6px;align-self:flex-start;color:var(--ink)}
+.d-grow{width:14px;height:70px;background:var(--leaf);border:2.5px solid var(--ink);border-radius:8px 8px 2px 2px;transform-origin:bottom;animation:dgrow 2.8s cubic-bezier(.3,1.5,.5,1) infinite}
+@keyframes dgrow{0%,10%{transform:scaleY(.1)}45%,85%{transform:scaleY(1)}100%{transform:scaleY(.1)}}
+.d-sway{width:12px;height:76px;background:var(--leaf);border:2.5px solid var(--ink);border-radius:8px;transform-origin:bottom;animation:sway2 3.4s ease-in-out infinite}
+@keyframes sway2{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+.d-draw path{stroke-dasharray:240;stroke-dashoffset:240;animation:ddraw 3s ease-in-out infinite}
+@keyframes ddraw{0%{stroke-dashoffset:240}55%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:-240}}
+.d-pop{width:54px;height:54px;border-radius:50%;background:var(--bloom);border:2.5px solid var(--ink);animation:dpop 2.4s cubic-bezier(.3,1.7,.5,1) infinite}
+@keyframes dpop{0%,15%{transform:scale(0)}40%,80%{transform:scale(1)}100%{transform:scale(0)}}
+
+/* look */
+.look{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px}
+.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:18px}
+.sw{border:2.5px solid var(--ink);border-radius:12px;overflow:hidden}
+.sw div{height:64px}
+.sw p{padding:8px 10px;font-size:13px;line-height:1.3}
+.sw b{display:block;font-size:14px}
+.typebox{background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:12px}
+.typebox .big{font:800 52px/1 var(--display);letter-spacing:-.03em}
+.typebox .mid{font:500 17px/1.5 var(--body);color:var(--ink-soft)}
+.typebox .hand{font-size:28px;color:var(--leaf)}
+.rule-list{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:8px;font-size:15px}
+.rule-list li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px}
+.rule-list svg{width:20px;height:20px;margin-top:2px}
+
+/* voice */
+.voice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.vcol{background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:22px}
+.vcol h3{font-size:24px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.vcol ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.vcol li{padding:10px 14px;border-radius:12px;font-size:16px}
+.vcol.no li{background:#FCE9EE;color:#5A2533;text-decoration:line-through;text-decoration-color:rgba(90,37,51,.45)}
+.vcol.yes li{background:#E4F5E9;font-weight:500}
+.budget{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.budget span{background:var(--sun);border:2.5px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:700;font-size:14px}
+
+/* build plan */
+.plan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:wk}
+.plan li{list-style:none;background:var(--sheet);border:3px solid var(--ink);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:6px}
+.plan ol{display:contents}
+.plan .wk{font:700 22px/1 var(--hand);color:var(--leaf)}
+.plan h3{font-size:22px}
+.plan p{color:var(--ink-soft);font-size:15px}
+.stack{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.stack span{border:2.5px solid var(--ink);border-radius:999px;padding:6px 12px;font-size:14px;font-weight:500;background:var(--sheet)}
+
+/* grass footer */
+.grass{margin-top:88px;position:relative;height:200px;border-top:3px solid var(--ink);background:var(--leaf-lite)}
+.grass canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.grass p{position:absolute;left:16px;right:16px;top:26px;text-align:center;font:700 26px/1.1 var(--hand);pointer-events:none}
+
+/* responsive */
+@media (max-width:900px){
+  .intro,.ch-head,.hero-demo,.look,.voice,.mascot-wrap{grid-template-columns:minmax(0,1fr)}
+  .hd-stage{border-left:0;border-top:3px solid var(--ink);min-height:300px}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .stage-no{flex-direction:row;border-right:0;border-bottom:2.5px dashed #B9C8BD;padding:0 0 12px;justify-content:flex-start}
+  .stage-no svg{width:40px;height:40px}
+  .idea,.motion,.plan{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .idea,.motion,.plan{grid-template-columns:minmax(0,1fr)}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hd-copy{padding:26px 20px}
+  .pots span{font-size:12px}
+  .panes{grid-template-columns:minmax(0,1fr)}
+  .panes .pane:nth-child(n+2){display:none}
+  .harvest{grid-template-columns:minmax(0,1fr) 96px}
+  .ctrl{position:static;margin-left:auto}
+  .frame .bar span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .grow{stroke-dashoffset:0}.pop{transform:scale(1)}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wob"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter>
+</svg>
+
+<div class="page">
+  <header class="top">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" aria-hidden="true" class="riso"><path d="M8 6l9 24 4-9 9-4z" fill="#FFC53D" stroke="#17271E" stroke-width="2.6" stroke-linejoin="round"/><path d="M25 32c0-8 4-12 10-13-1 6-4 10-10 13z" fill="#2E9E58" stroke="#17271E" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      Click &amp; Grow
+    </div>
+    <span class="hand">website concept · v1 for review</span>
+  </header>
+
+  <section class="intro" aria-labelledby="t-intro">
+    <div>
+      <p class="tag"><i></i>The big idea</p>
+      <h1 id="t-intro">Every click <em><span>plants</span></em> something.</h1>
+    </div>
+    <p class="lede">An IT company site that <b>shows</b> growth instead of talking about it. The cursor is a seed, every section is a stage of growth, and every hover makes something sprout. Few words, lots to watch.</p>
+  </section>
+
+  <!-- HERO DEMO -->
+  <div class="frame" id="heroFrame">
+    <div class="bar"><i></i><i></i><i></i><span>clickandgrow — home</span>
+      <div class="ctrl"><button type="button" id="replay">Replay</button><button type="button" id="pause" aria-pressed="false">Pause</button></div>
+    </div>
+    <div class="hero-demo">
+      <div class="hd-copy">
+        <p class="tag"><i></i>Proposed hero</p>
+        <h2>You click.<br>We grow it.</h2>
+        <p>Websites, apps and marketing that keep growing after launch day.</p>
+        <span class="hd-btn" id="heroBtn">Plant your idea →</span>
+      </div>
+      <div class="hd-stage" id="stage">
+        <svg viewBox="0 0 400 430" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+          <circle cx="330" cy="70" r="34" fill="#FFC53D" stroke="#17271E" stroke-width="3" class="riso"/>
+          <path d="M40 90c10-14 34-14 42 0 14-6 30 4 26 18H34c-8-6-4-18 6-18z" fill="#fff" stroke="#17271E" stroke-width="3" class="riso"/>
+          <line x1="0" y1="310" x2="400" y2="310" class="soilline"/>
+          <g class="sway">
+            <path class="ln grow" id="stem" pathLength="1" d="M200 312c-6-40 10-70 0-110s8-70 0-110" style="stroke:#2E9E58;stroke-width:6"/>
+            <path class="ln grow" pathLength="1" d="M200 312c-6-40 10-70 0-110s8-70 0-110" style="transition-delay:.05s"/>
+            <!-- leaves carry the three services -->
+            <g class="pop" data-d="900"><path d="M202 250c30-26 66-20 80-6-22 22-56 26-80 6z" fill="#BFE8C9" stroke="#17271E" stroke-width="3" class="riso"/><text x="246" y="252" font-family="ui-monospace,monospace" font-weight="700" font-size="16" fill="#17271E">&lt;/&gt;</text></g>
+            <g class="pop" data-d="1150"><path d="M198 200c-30-26-66-20-80-6 22 22 56 26 80 6z" fill="#BFE8C9" stroke="#17271E" stroke-width="3" class="riso"/><rect x="146" y="186" width="14" height="22" rx="3" fill="#fff" stroke="#17271E" stroke-width="2.4"/></g>
+            <g class="pop" data-d="1400"><path d="M202 150c30-26 66-20 80-6-22 22-56 26-80 6z" fill="#BFE8C9" stroke="#17271E" stroke-width="3" class="riso"/><path d="M238 154l10-8 8 4 12-12" fill="none" stroke="#17271E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <g class="pop" data-d="1750">
+              <circle cx="200" cy="80" r="16" fill="#FFC53D" stroke="#17271E" stroke-width="3"/>
+              <g fill="#FF6F91" stroke="#17271E" stroke-width="3" class="riso">
+                <ellipse cx="200" cy="50" rx="13" ry="17"/><ellipse cx="200" cy="110" rx="13" ry="17"/><ellipse cx="170" cy="80" rx="17" ry="13"/><ellipse cx="230" cy="80" rx="17" ry="13"/>
+              </g>
+              <circle cx="200" cy="80" r="16" fill="#FFC53D" stroke="#17271E" stroke-width="3"/>
+            </g>
+          </g>
+          <g class="seed" id="seed" style="opacity:0"><ellipse cx="200" cy="40" rx="9" ry="12" fill="#8A5A3B" stroke="#17271E" stroke-width="3"/></g>
+          <path d="M60 360c20-6 40 4 60-2M260 380c24-6 48 4 70-2M140 400c14-4 28 2 42-2" fill="none" stroke="#5E3B25" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="hand" style="position:absolute;left:16px;bottom:14px;color:#FFF4DA">web · apps · growth</span>
+      </div>
+    </div>
+    <svg class="cursor" id="cursor" viewBox="0 0 34 34" aria-hidden="true"><path d="M5 3l8 26 4-10 10-4z" fill="#fff" stroke="#17271E" stroke-width="2.6" stroke-linejoin="round"/></svg>
+    <span class="ripple" id="ripple"></span>
+  </div>
+  <p class="hand" style="margin-top:14px;color:var(--ink-soft)">↑ Loop: the cursor clicks the button, a seed drops, the stem grows, leaves pop (web, app, growth), it blooms. On the live site this runs once, then the plant leans toward your cursor.</p>
+
+  <!-- THE IDEA IN THREE -->
+  <section class="chapter" aria-labelledby="t-idea">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>The story</p><h2 id="t-idea">One metaphor, the whole way down.</h2></div>
+      <p>Artattackk wins with personality. We keep that energy but swap random doodles for one story the visitor plays through: plant, grow, bloom.</p>
+    </div>
+    <div class="idea">
+      <div class="card">
+        <svg viewBox="0 0 200 130" aria-hidden="true" class="riso"><path d="M70 20l22 70 10-26 26-10z" fill="#FFC53D" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/><circle cx="130" cy="96" r="16" fill="none" stroke="#17271E" stroke-width="3" stroke-dasharray="5 7"/></svg>
+        <h3>Click</h3><p>You bring the idea. One click on “Plant your idea” starts everything.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 200 130" aria-hidden="true" class="riso"><path d="M20 110h160" stroke="#17271E" stroke-width="3"/><path d="M100 110c0-30 0-50 0-70" stroke="#2E9E58" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M100 70c18-18 42-14 50-4-14 14-36 16-50 4zM100 56c-18-18-42-14-50-4 14 14 36 16 50 4z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/></svg>
+        <h3>Grow</h3><p>We design, build and market. Each service is a leaf on the same stem.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 200 130" aria-hidden="true" class="riso"><path d="M30 110c30-10 50-40 70-60s40-30 70-36" fill="none" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/><g fill="#FF6F91" stroke="#17271E" stroke-width="3"><circle cx="170" cy="16" r="10"/><circle cx="100" cy="50" r="8"/></g><path d="M156 30l14-14M150 18h20v20" fill="none" stroke="#17271E" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>Bloom</h3><p>Launch is the start. Traffic, sales and sign-ups keep climbing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORYBOARD -->
+  <section class="chapter" aria-labelledby="t-story">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>Homepage storyboard</p><h2 id="t-story">Five scroll chapters, five growth stages.</h2></div>
+      <p>Each chapter has one headline, one line of copy and one thing to play with. Try the previews: hover, tap and drag.</p>
+    </div>
+
+    <div class="story">
+      <!-- 1 SPROUT / services -->
+      <article class="row">
+        <div class="stage-no"><svg viewBox="0 0 56 56" aria-hidden="true" class="riso"><path d="M28 50V28" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/><path d="M28 32c10-12 22-10 26-4-8 8-18 10-26 4z" fill="#BFE8C9" stroke="#17271E" stroke-width="2.6"/></svg><b>Sprout</b></div>
+        <div class="preview" aria-label="Preview: services as plant pots">
+          <div class="pots">
+            <button class="pot on" type="button"><svg viewBox="0 0 120 170" aria-hidden="true"><g class="stem"><path d="M60 128V40" stroke="#2E9E58" stroke-width="6" stroke-linecap="round"/></g><g class="lf"><rect x="30" y="20" width="60" height="42" rx="6" fill="#fff" stroke="#17271E" stroke-width="3"/><path d="M30 30h60" stroke="#17271E" stroke-width="3"/><path d="M38 42h26M38 50h16" stroke="#17271E" stroke-width="2.6" stroke-linecap="round"/></g><path d="M34 128h52l-6 36H40z" fill="#E08A5B" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/></svg><span>Websites</span></button>
+            <button class="pot" type="button"><svg viewBox="0 0 120 170" aria-hidden="true"><g class="stem"><path d="M60 128V44" stroke="#2E9E58" stroke-width="6" stroke-linecap="round"/></g><g class="lf"><rect x="44" y="10" width="32" height="54" rx="7" fill="#fff" stroke="#17271E" stroke-width="3"/><path d="M54 56h12" stroke="#17271E" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="32" r="8" fill="#FF6F91" stroke="#17271E" stroke-width="2.6"/></g><path d="M34 128h52l-6 36H40z" fill="#8FD0FF" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/></svg><span>Apps</span></button>
+            <button class="pot" type="button"><svg viewBox="0 0 120 170" aria-hidden="true"><g class="stem"><path d="M60 128V44" stroke="#2E9E58" stroke-width="6" stroke-linecap="round"/></g><g class="lf"><circle cx="60" cy="34" r="26" fill="#FFC53D" stroke="#17271E" stroke-width="3"/><path d="M48 34c4-8 20-8 24 0-4 8-20 8-24 0z" fill="#fff" stroke="#17271E" stroke-width="2.6"/><circle cx="60" cy="34" r="3" fill="#17271E"/></g><path d="M34 128h52l-6 36H40z" fill="#FF6F91" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/></svg><span>Branding</span></button>
+            <button class="pot" type="button"><svg viewBox="0 0 120 170" aria-hidden="true"><g class="stem"><path d="M60 128V48" stroke="#2E9E58" stroke-width="6" stroke-linecap="round"/></g><g class="lf"><path d="M28 64V40M50 64V28M72 64V18M94 64V8" stroke="#17271E" stroke-width="10" stroke-linecap="round"/><path d="M28 64V40M50 64V28M72 64V18M94 64V8" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/></g><path d="M34 128h52l-6 36H40z" fill="#FFC53D" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/></svg><span>Marketing</span></button>
+          </div>
+        </div>
+        <div class="notes">
+          <p class="tag"><i></i>Chapter 1 · Services</p>
+          <p class="say">Pick a pot. Watch it grow.</p>
+          <p class="sub">Four pots, one word each. Hover and the plant grows into a tiny version of the service.</p>
+          <dl><dt>Moves</dt><dd>Stem stretches, then the leaf pops. Spring ease, 600 ms.</dd><dt>Trigger</dt><dd>Hover or tap. Pots idle-sway when the section enters.</dd></dl>
+          <p class="try">↖ hover or tap a pot</p>
+        </div>
+      </article>
+
+      <!-- 2 ROOTS / process -->
+      <article class="row">
+        <div class="stage-no"><svg viewBox="0 0 56 56" aria-hidden="true" class="riso"><path d="M8 18h40" stroke="#17271E" stroke-width="3"/><path d="M28 18c0 10-8 14-12 24M28 18c0 12 6 16 12 26M28 18v30" stroke="#8A5A3B" stroke-width="3.4" stroke-linecap="round" fill="none"/></svg><b>Roots</b></div>
+        <div class="preview roots" aria-label="Preview: process drawn as roots">
+          <svg viewBox="0 0 420 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="0" y="0" width="420" height="30" fill="#BFE8C9"/>
+            <line x1="0" y1="30" x2="420" y2="30" stroke="#17271E" stroke-width="3"/>
+            <path id="rootPath" pathLength="1" d="M30 30c30 40 60 10 80 60s60 20 90 40 40-60 90-50 50 70 100 80" fill="none" stroke="#8A5A3B" stroke-width="6" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <g class="node" data-at=".12"><circle cx="70" cy="66" r="16" fill="#FFC53D" stroke="#17271E" stroke-width="3"/><text x="70" y="106" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="14" fill="#17271E">Dig in</text></g>
+            <g class="node" data-at=".38"><circle cx="160" cy="118" r="16" fill="#8FD0FF" stroke="#17271E" stroke-width="3"/><text x="160" y="158" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="14" fill="#17271E">Plant</text></g>
+            <g class="node" data-at=".66"><circle cx="270" cy="94" r="16" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/><text x="270" y="134" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="14" fill="#17271E">Water</text></g>
+            <g class="node" data-at=".95"><circle cx="388" cy="166" r="16" fill="#FF6F91" stroke="#17271E" stroke-width="3"/><text x="372" y="196" text-anchor="end" font-family="Figtree,sans-serif" font-weight="700" font-size="14" fill="#17271E">Bloom</text></g>
+          </svg>
+          <div class="scrub"><label for="rootRange">Scroll</label><input id="rootRange" type="range" min="0" max="100" value="0" aria-label="Scroll position preview"></div>
+        </div>
+        <div class="notes">
+          <p class="tag"><i></i>Chapter 2 · Process</p>
+          <p class="say">Good things start underground.</p>
+          <p class="sub">Dig in, plant, water, bloom. A root draws itself as you scroll and lights up each step.</p>
+          <dl><dt>Moves</dt><dd>Root draws with the scroll. Each step pops when the root reaches it.</dd><dt>Trigger</dt><dd>Scroll-scrubbed, pinned for one screen.</dd></dl>
+          <p class="try">↖ drag the slider to “scroll”</p>
+        </div>
+      </article>
+
+      <!-- 3 BLOOM / work -->
+      <article class="row">
+        <div class="stage-no"><svg viewBox="0 0 56 56" aria-hidden="true" class="riso"><g fill="#FF6F91" stroke="#17271E" stroke-width="2.6"><circle cx="28" cy="14" r="8"/><circle cx="28" cy="38" r="8"/><circle cx="16" cy="26" r="8"/><circle cx="40" cy="26" r="8"/></g><circle cx="28" cy="26" r="7" fill="#FFC53D" stroke="#17271E" stroke-width="2.6"/></svg><b>Bloom</b></div>
+        <div class="preview" aria-label="Preview: work as greenhouse panes">
+          <div class="panes">
+            <button class="pane" type="button"><div class="shot"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="wilt"><path d="M60 110c0-20 4-34-6-46" stroke="#9AA88F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M54 64c-14 4-24 14-26 24 12-2 22-10 26-24z" fill="#D9DCC8" stroke="#17271E" stroke-width="2.4"/></g><g class="bloomed"><path d="M60 110V40" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/><path d="M60 80c14-14 32-10 36-2-10 10-26 12-36 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="2.4"/><circle cx="60" cy="34" r="16" fill="#FF6F91" stroke="#17271E" stroke-width="2.6"/><circle cx="60" cy="34" r="6" fill="#FFC53D" stroke="#17271E" stroke-width="2.4"/></g></svg></div><span class="lbl">Online store</span></button>
+            <button class="pane" type="button"><div class="shot"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="wilt"><path d="M60 110c0-20 4-34-6-46" stroke="#9AA88F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M54 64c-14 4-24 14-26 24 12-2 22-10 26-24z" fill="#D9DCC8" stroke="#17271E" stroke-width="2.4"/></g><g class="bloomed"><path d="M60 110V40" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/><path d="M60 72c-14-14-32-10-36-2 10 10 26 12 36 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="2.4"/><circle cx="60" cy="34" r="16" fill="#8FD0FF" stroke="#17271E" stroke-width="2.6"/><circle cx="60" cy="34" r="6" fill="#FFC53D" stroke="#17271E" stroke-width="2.4"/></g></svg></div><span class="lbl">Booking app</span></button>
+            <button class="pane" type="button"><div class="shot"><svg viewBox="0 0 120 120" aria-hidden="true"><g class="wilt"><path d="M60 110c0-20 4-34-6-46" stroke="#9AA88F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M54 64c-14 4-24 14-26 24 12-2 22-10 26-24z" fill="#D9DCC8" stroke="#17271E" stroke-width="2.4"/></g><g class="bloomed"><path d="M60 110V40" stroke="#2E9E58" stroke-width="5" stroke-linecap="round"/><path d="M60 84c14-14 32-10 36-2-10 10-26 12-36 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="2.4"/><circle cx="60" cy="34" r="16" fill="#FFC53D" stroke="#17271E" stroke-width="2.6"/><circle cx="60" cy="34" r="6" fill="#FF6F91" stroke="#17271E" stroke-width="2.4"/></g></svg></div><span class="lbl">Rebrand</span></button>
+          </div>
+        </div>
+        <div class="notes">
+          <p class="tag"><i></i>Chapter 3 · Work</p>
+          <p class="say">Before we met. After we grew.</p>
+          <p class="sub">Each project is a greenhouse pane. It starts wilted (the old site) and blooms on hover into the new one, with one real result underneath.</p>
+          <dl><dt>Moves</dt><dd>Crossfade wilted → bloom, petals pop, the result number counts up.</dd><dt>Needs</dt><dd>Real before/after screenshots and one true metric per project.</dd></dl>
+          <p class="try">↖ hover a pane</p>
+        </div>
+      </article>
+
+      <!-- 4 SUN / why us -->
+      <article class="row">
+        <div class="stage-no"><svg viewBox="0 0 56 56" aria-hidden="true" class="riso"><circle cx="28" cy="28" r="12" fill="#FFC53D" stroke="#17271E" stroke-width="2.6"/><path d="M28 4v8M28 44v8M4 28h8M44 28h8M11 11l6 6M39 39l6 6M45 11l-6 6M17 39l-6 6" stroke="#17271E" stroke-width="2.6" stroke-linecap="round"/></svg><b>Sunlight</b></div>
+        <div class="preview" aria-label="Preview: the Sprig mascot">
+          <svg viewBox="0 0 420 230" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+            <rect x="0" y="180" width="420" height="50" fill="#BFE8C9"/><line x1="0" y1="180" x2="420" y2="180" stroke="#17271E" stroke-width="3"/>
+            <g class="bob">
+              <path d="M210 180c0-26 0-40 0-60" stroke="#2E9E58" stroke-width="7" stroke-linecap="round"/>
+              <path d="M210 128c-16-30-46-34-62-22 12 22 40 32 62 22z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/>
+              <path d="M212 120c4-34 30-52 52-46-2 26-26 44-52 46z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/>
+              <circle cx="210" cy="150" r="22" fill="#FFC53D" stroke="#17271E" stroke-width="3"/>
+              <g class="blink"><circle cx="202" cy="146" r="3.4" fill="#17271E"/><circle cx="218" cy="146" r="3.4" fill="#17271E"/></g>
+              <path d="M202 158c5 5 11 5 16 0" fill="none" stroke="#17271E" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M236 152l18-10 4 6-16 10z" fill="#fff" stroke="#17271E" stroke-width="2.6" stroke-linejoin="round"/>
+            </g>
+            <g font-family="Caveat,cursive" font-weight="700" font-size="22" fill="#17271E">
+              <text x="40" y="60">One team.</text><text x="300" y="52">Real humans.</text><text x="292" y="128">Replies today.</text><text x="34" y="132">Fair prices.</text>
+            </g>
+          </svg>
+        </div>
+        <div class="notes">
+          <p class="tag"><i></i>Chapter 4 · Why us</p>
+          <p class="say">Meet Sprig. Sprig hates boring websites.</p>
+          <p class="sub">Our mascot replaces paragraphs of “why us”. Four short promises float around Sprig and grow toward your cursor.</p>
+          <dl><dt>Moves</dt><dd>Idle bob, blinks, turns to face the cursor. Promises drift in like seeds.</dd><dt>Built in</dt><dd>Rive or Lottie so Sprig can react to hover, scroll and form input.</dd></dl>
+        </div>
+      </article>
+
+      <!-- 5 HARVEST / contact -->
+      <article class="row">
+        <div class="stage-no"><svg viewBox="0 0 56 56" aria-hidden="true" class="riso"><path d="M10 26h36l-5 22H15z" fill="#E08A5B" stroke="#17271E" stroke-width="2.6" stroke-linejoin="round"/><path d="M18 26c0-12 20-12 20 0" fill="none" stroke="#17271E" stroke-width="2.6"/><circle cx="22" cy="22" r="6" fill="#FF6F91" stroke="#17271E" stroke-width="2.4"/><circle cx="34" cy="21" r="6" fill="#FFC53D" stroke="#17271E" stroke-width="2.4"/></svg><b>Harvest</b></div>
+        <div class="preview" aria-label="Preview: contact form that grows a plant">
+          <div class="harvest">
+            <form id="hvForm" novalidate>
+              <label for="hv1">Your name</label><input id="hv1" autocomplete="off">
+              <label for="hv2">What should we grow?</label><input id="hv2" autocomplete="off">
+              <label for="hv3">Email</label><input id="hv3" autocomplete="off">
+              <button type="submit">Plant it</button>
+              <p class="hv-msg" id="hvMsg" role="status" aria-live="polite"></p>
+            </form>
+            <svg viewBox="0 0 150 220" aria-hidden="true">
+              <path d="M40 180h70l-8 36H48z" fill="#E08A5B" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/>
+              <path id="hvStem" d="M75 180V60" stroke="#2E9E58" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset=".85" style="transition:stroke-dashoffset .6s cubic-bezier(.3,1.3,.5,1)"/>
+              <path class="pop hvl" d="M76 150c16-16 36-12 42-2-12 12-30 14-42 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/>
+              <path class="pop hvl" d="M74 120c-16-16-36-12-42-2 12 12 30 14 42 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/>
+              <path class="pop hvl" d="M76 92c16-16 36-12 42-2-12 12-30 14-42 2z" fill="#BFE8C9" stroke="#17271E" stroke-width="3"/>
+              <g class="pop" id="hvBloom"><g fill="#FF6F91" stroke="#17271E" stroke-width="3"><ellipse cx="75" cy="34" rx="11" ry="14"/><ellipse cx="75" cy="78" rx="11" ry="14"/><ellipse cx="53" cy="56" rx="14" ry="11"/><ellipse cx="97" cy="56" rx="14" ry="11"/></g><circle cx="75" cy="56" r="13" fill="#FFC53D" stroke="#17271E" stroke-width="3"/></g>
+            </svg>
+          </div>
+        </div>
+        <div class="notes">
+          <p class="tag"><i></i>Chapter 5 · Contact</p>
+          <p class="say">Three fields. One plant.</p>
+          <p class="sub">Every field you fill grows a leaf. Hit “Plant it” and it blooms. The shortest form we can get away with.</p>
+          <dl><dt>Moves</dt><dd>Leaf per field, stem grows with progress, bloom + confetti petals on send.</dd><dt>Why</dt><dd>Turns the boring part into the fun part, so fewer people quit halfway.</dd></dl>
+          <p class="try">↖ type in the fields</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- MOTION RULES -->
+  <section class="chapter" aria-labelledby="t-motion">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>Motion system</p><h2 id="t-motion">Four moves. Nothing else.</h2></div>
+      <p>Everything on the site uses one of these. That keeps it playful without turning into a circus.</p>
+    </div>
+    <div class="motion">
+      <div class="mo"><div class="demo"><div class="d-grow"></div></div><h3>Grow</h3><p>Things enter by growing up from a baseline, never by fading in.</p><code>spring · 600ms</code></div>
+      <div class="mo"><div class="demo"><div class="d-sway"></div></div><h3>Sway</h3><p>Idle life. Slow, small, and it stops when you look away.</p><code>ease-in-out · 3–4s</code></div>
+      <div class="mo"><div class="demo d-draw"><svg viewBox="0 0 160 90" width="160" height="90" aria-hidden="true"><path d="M10 70c30-40 50 10 80-20s40-30 60-20" fill="none" stroke="#17271E" stroke-width="4" stroke-linecap="round"/></svg></div><h3>Draw</h3><p>Lines, roots and arrows sketch themselves, tied to scroll.</p><code>scroll-scrub</code></div>
+      <div class="mo"><div class="demo"><div class="d-pop"></div></div><h3>Bloom</h3><p>Only for “done” moments: a sent form, a finished step, a launch.</p><code>overshoot · 450ms</code></div>
+    </div>
+  </section>
+
+  <!-- MASCOT -->
+  <section class="chapter" aria-labelledby="t-sprig">
+    <div class="mascot-wrap">
+      <svg viewBox="0 0 260 240" aria-hidden="true">
+        <ellipse cx="130" cy="226" rx="70" ry="10" fill="#BFE8C9"/>
+        <g class="bob">
+          <path d="M130 226c0-30 0-50 0-80" stroke="#2E9E58" stroke-width="9" stroke-linecap="round"/>
+          <path d="M130 140c-22-40-62-46-84-30 16 30 54 42 84 30z" fill="#BFE8C9" stroke="#17271E" stroke-width="3.4"/>
+          <path d="M132 130c6-46 40-70 70-62-2 34-34 58-70 62z" fill="#BFE8C9" stroke="#17271E" stroke-width="3.4"/>
+          <circle cx="130" cy="176" r="34" fill="#FFC53D" stroke="#17271E" stroke-width="3.4"/>
+          <g class="blink"><circle cx="118" cy="170" r="5" fill="#17271E"/><circle cx="142" cy="170" r="5" fill="#17271E"/></g>
+          <path d="M116 188c8 8 20 8 28 0" fill="none" stroke="#17271E" stroke-width="3.2" stroke-linecap="round"/>
+          <circle cx="106" cy="184" r="6" fill="#FF6F91" opacity=".6"/><circle cx="154" cy="184" r="6" fill="#FF6F91" opacity=".6"/>
+          <path d="M168 178l30-16 6 10-26 16z" fill="#fff" stroke="#17271E" stroke-width="3" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      <div>
+        <p class="tag"><i></i>Mascot</p>
+        <h2 style="font-size:clamp(32px,4vw,48px);margin:8px 0 12px">Sprig, the seedling with a cursor.</h2>
+        <p style="color:var(--ink-soft);max-width:34em">Our answer to Artattackk’s doodle crowd: one character people remember. Sprig shows up in the loader, the 404 page, empty states and the form. Same face everywhere.</p>
+        <div class="moods"><span>Loading: digs a hole</span><span>404: lost in the weeds</span><span>Form sent: blooms</span><span>Idle: naps in the pot</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOK -->
+  <section class="chapter" aria-labelledby="t-look">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>The look</p><h2 id="t-look">Riso garden, not grey sketchbook.</h2></div>
+      <p>Artattackk draws in grey pencil. We draw in thick ink with bright flat fills printed slightly off the line, like a risograph poster. Same hand-made warmth, our own colour.</p>
+    </div>
+    <div class="look">
+      <div class="swatches">
+        <div class="sw"><div style="background:#17271E"></div><p><b>Forest ink</b>lines + text</p></div>
+        <div class="sw"><div style="background:#2E9E58"></div><p><b>Leaf</b>growth, links</p></div>
+        <div class="sw"><div style="background:#FFC53D"></div><p><b>Sun</b>buttons, highlights</p></div>
+        <div class="sw"><div style="background:#FF6F91"></div><p><b>Bloom</b>success moments</p></div>
+        <div class="sw"><div style="background:#8FD0FF"></div><p><b>Sky</b>backgrounds</p></div>
+        <div class="sw"><div style="background:#F2F6EE"></div><p><b>Leaf white</b>page ground</p></div>
+      </div>
+      <div class="typebox">
+        <p class="big">Grow loud.</p>
+        <p class="mid">Bricolage Grotesque for headlines, chunky and a bit wonky. Figtree for the few sentences we keep. Caveat for handwritten notes in the margins.</p>
+        <p class="hand">notes like this, sparingly ✿</p>
+        <ul class="rule-list">
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11l4 4 10-11" fill="none" stroke="#2E9E58" stroke-width="3" stroke-linecap="round"/></svg>3px ink lines, round caps, everywhere</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11l4 4 10-11" fill="none" stroke="#2E9E58" stroke-width="3" stroke-linecap="round"/></svg>Fills sit a hair off the line (the riso wobble)</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11l4 4 10-11" fill="none" stroke="#2E9E58" stroke-width="3" stroke-linecap="round"/></svg>Hard offset shadows, no soft blur</li>
+          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" fill="none" stroke="#E5484D" stroke-width="3" stroke-linecap="round"/></svg>No stock photos, no gradients, no 3D blobs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section class="chapter" aria-labelledby="t-voice">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>Voice</p><h2 id="t-voice">Talk like a friend who codes.</h2></div>
+      <p>Short, warm, a little cheeky. If a line needs a second sentence, the animation should be doing that job instead.</p>
+    </div>
+    <div class="voice">
+      <div class="vcol no"><h3>Not this</h3><ul>
+        <li>We deliver innovative, scalable digital solutions.</li>
+        <li>Leveraging cutting-edge technology to empower your brand.</li>
+        <li>Our comprehensive suite of services includes…</li>
+      </ul></div>
+      <div class="vcol yes"><h3>This</h3><ul>
+        <li>You click. We grow it.</li>
+        <li>Websites that don’t just sit there.</li>
+        <li>Tell us the idea. We’ll bring the shovel.</li>
+      </ul></div>
+    </div>
+    <div class="budget"><span>Headlines: 6 words max</span><span>Body: 1 line per chapter</span><span>Buttons: verb + thing</span><span>Whole homepage: under 150 words</span></div>
+  </section>
+
+  <!-- BUILD PLAN -->
+  <section class="chapter" aria-labelledby="t-plan">
+    <div class="ch-head">
+      <div><p class="tag"><i></i>Next steps</p><h2 id="t-plan">From seed to launch in six weeks.</h2></div>
+      <p>A rough plan to turn this board into the real site.</p>
+    </div>
+    <div class="plan"><ol>
+      <li><span class="wk">week 1</span><h3>Draw Sprig</h3><p>Final mascot, plant kit and icon set in the riso style.</p></li>
+      <li><span class="wk">week 2</span><h3>Animate</h3><p>Sprig in Rive. Hero grow loop and the four moves as reusable pieces.</p></li>
+      <li><span class="wk">weeks 3–5</span><h3>Build</h3><p>Next.js site, scroll chapters with GSAP, CMS for work and blog.</p></li>
+      <li><span class="wk">week 6</span><h3>Bloom</h3><p>Speed pass, reduced-motion version, phone polish, launch.</p></li>
+    </ol></div>
+    <div class="stack"><span>Next.js</span><span>GSAP + ScrollTrigger</span><span>Rive (Sprig)</span><span>SVG plant kit</span><span>Sanity CMS</span><span>Vercel</span></div>
+  </section>
+</div>
+
+<footer class="grass" aria-label="Footer preview: grass that moves with your cursor">
+  <canvas id="grass" aria-hidden="true"></canvas>
+  <p>footer idea: move your cursor through the grass</p>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- hero loop ---------- */
+  const frame = document.getElementById('heroFrame'), stage = document.getElementById('stage');
+  const cur = document.getElementById('cursor'), rip = document.getElementById('ripple'), btn = document.getElementById('heroBtn');
+  const seed = document.getElementById('seed');
+  const grows = stage.querySelectorAll('.grow'), pops = stage.querySelectorAll('.pop');
+  let timers = [], paused = false;
+  const T = (fn, ms) => timers.push(setTimeout(fn, ms));
+  const rel = el => { const a = el.getBoundingClientRect(), f = frame.getBoundingClientRect(); return { x: a.left - f.left, y: a.top - f.top, w: a.width, h: a.height }; };
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    grows.forEach(g => g.classList.remove('on')); pops.forEach(p => p.classList.remove('on'));
+    seed.style.transition = 'none'; seed.style.opacity = 0; seed.style.transform = 'translateY(0)';
+  }
+  function grownState() { grows.forEach(g => g.classList.add('on')); pops.forEach(p => p.classList.add('on')); cur.style.opacity = 0; }
+  function run() {
+    reset();
+    if (reduce) { grownState(); return; }
+    const b = rel(btn), s = rel(stage);
+    cur.style.opacity = 1;
+    cur.style.transition = 'none'; cur.style.transform = `translate(${s.x + s.w * .7}px, ${s.y + s.h * .2}px)`;
+    T(() => { cur.style.transition = 'transform 1s cubic-bezier(.5,0,.2,1)'; cur.style.transform = `translate(${b.x + b.w * .6}px, ${b.y + b.h * .55}px)`; }, 300);
+    T(() => {
+      btn.classList.add('is-press');
+      rip.style.left = (b.x + b.w * .6 - 10) + 'px'; rip.style.top = (b.y + b.h * .55 - 10) + 'px';
+      rip.classList.remove('go'); void rip.offsetWidth; rip.classList.add('go');
+    }, 1400);
+    T(() => btn.classList.remove('is-press'), 1620);
+    T(() => { seed.style.transition = ''; seed.style.opacity = 1; }, 1650);
+    T(() => { seed.style.transform = 'translateY(270px)'; }, 1700);
+    T(() => { seed.style.opacity = 0; grows.forEach(g => g.classList.add('on')); }, 2400);
+    pops.forEach(p => T(() => p.classList.add('on'), 2400 + (+p.dataset.d || 0)));
+    T(() => { cur.style.transform = `translate(${s.x + s.w * .78}px, ${s.y + s.h * .3}px)`; }, 2600);
+    T(() => { if (!paused) run(); }, 9000);
+  }
+  document.getElementById('replay').addEventListener('click', () => { paused = false; frame.classList.remove('paused'); pb.textContent = 'Pause'; pb.setAttribute('aria-pressed', 'false'); run(); });
+  const pb = document.getElementById('pause');
+  pb.addEventListener('click', () => {
+    paused = !paused; pb.setAttribute('aria-pressed', paused); pb.textContent = paused ? 'Play' : 'Pause';
+    frame.classList.toggle('paused', paused);
+    if (paused) { timers.forEach(clearTimeout); timers = []; grownState(); } else run();
+  });
+  addEventListener('resize', () => { if (!paused) run(); });
+  run();
+
+  /* ---------- pots: tap support ---------- */
+  document.querySelectorAll('.pot, .pane').forEach(b => b.addEventListener('click', () => b.classList.toggle('on')));
+
+  /* ---------- roots scrub ---------- */
+  const rp = document.getElementById('rootPath'), rr = document.getElementById('rootRange'), nodes = document.querySelectorAll('.node');
+  const drawRoots = () => {
+    const v = rr.value / 100; rp.style.strokeDashoffset = 1 - v;
+    nodes.forEach(n => { const on = v >= +n.dataset.at; n.style.opacity = on ? 1 : .25; n.style.transform = on ? 'scale(1)' : 'scale(.7)'; });
+  };
+  rr.addEventListener('input', drawRoots);
+  // auto-demo once when visible, then hand it to the visitor
+  let rootsDemoed = false;
+  new IntersectionObserver((es, o) => es.forEach(e => {
+    if (!e.isIntersecting || rootsDemoed) return; rootsDemoed = true; o.disconnect();
+    if (reduce) { rr.value = 100; drawRoots(); return; }
+    let v = 0; const step = () => { v += 1.2; rr.value = Math.min(v, 100); drawRoots(); if (v < 100) requestAnimationFrame(step); }; step();
+  }), { threshold: .5 }).observe(rr);
+  rr.value = 35; drawRoots();
+
+  /* ---------- harvest form ---------- */
+  const f = document.getElementById('hvForm'), ins = [...f.querySelectorAll('input')], lvs = document.querySelectorAll('.hvl');
+  const stem = document.getElementById('hvStem'), bloom = document.getElementById('hvBloom'), msg = document.getElementById('hvMsg');
+  const upd = () => {
+    const n = ins.filter(i => i.value.trim()).length;
+    stem.style.strokeDashoffset = .85 - n * .27;
+    lvs.forEach((l, i) => l.classList.toggle('on', i < n));
+    if (n < 3) { bloom.classList.remove('on'); msg.textContent = ''; }
+  };
+  ins.forEach(i => i.addEventListener('input', upd));
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const n = ins.filter(i => i.value.trim()).length;
+    if (n < 3) { msg.textContent = `${3 - n} more to go…`; ins.find(i => !i.value.trim()).focus(); return; }
+    bloom.classList.add('on'); msg.textContent = 'Planted! (just a preview)';
+  });
+  upd();
+
+  /* ---------- grass footer ---------- */
+  const cv = document.getElementById('grass'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, blades = [], mx = -999, my = -999, t = 0, raf = 0;
+  const cols = ['#2E9E58', '#3BB56A', '#25844A', '#55C27C'];
+  function size() {
+    const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    blades = []; const n = Math.round(W / 6);
+    for (let i = 0; i < n; i++) blades.push({ x: i * 6 + Math.random() * 6, h: 50 + Math.random() * 80, w: 3 + Math.random() * 3, p: Math.random() * 6.28, c: cols[i % 4], bend: 0 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (const b of blades) {
+      const dx = b.x - mx, near = Math.abs(dx) < 70 && my > H - b.h - 30 ? (1 - Math.abs(dx) / 70) * Math.sign(dx || 1) : 0;
+      b.bend += ((near * 40) - b.bend) * .12;
+      const sway = reduce ? 0 : Math.sin(t * .02 + b.p) * 6;
+      const tipx = b.x + sway + b.bend, tipy = H - b.h;
+      ctx.beginPath(); ctx.moveTo(b.x - b.w, H);
+      ctx.quadraticCurveTo(b.x + (sway + b.bend) * .4, H - b.h * .5, tipx, tipy);
+      ctx.quadraticCurveTo(b.x + (sway + b.bend) * .4 + b.w, H - b.h * .5, b.x + b.w, H);
+      ctx.closePath(); ctx.fillStyle = b.c; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = '#17271E'; ctx.stroke();
+    }
+    t++; raf = requestAnimationFrame(draw);
+  }
+  cv.parentElement.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+  cv.parentElement.addEventListener('pointerleave', () => { mx = my = -999; });
+  addEventListener('resize', size);
+  size();
+  // run only while visible
+  new IntersectionObserver(es => es.forEach(e => { cancelAnimationFrame(raf); if (e.isIntersecting) draw(); })).observe(cv);
+  if (reduce) { draw(); cancelAnimationFrame(raf); }
+})();
+</script>

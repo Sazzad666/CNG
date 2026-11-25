@@ -1,0 +1,1591 @@
+<title>Click &amp; Grow Shutter Up</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=Bungee&display=swap">
+<style>
+/* Layout: a daytime high street that becomes the visitor's own city (Dhaka, London, Dubai, New York).
+   Hero (shutter goes up) → your search ends here (a ride in the rain, local to the city) → your cousin tried (comparison)
+   → the menu (services, local currency) → last seats on the bus (honest scarcity) → packs → the route → open everywhere (map)
+   → FAQ → order like cha (your shop name on a painted sign) → final call.
+   Finished states are the CSS default. Motion only sets "before" states when it loaded and motion is allowed. */
+:root{
+  --paper:#FFFBF2; --paper-2:#FFF1D6; --card:#FFFFFF;
+  --ink:#1C1A17; --ink-2:#55504A; --line:#EADFC8;
+  --green:#006A4E; --green-2:#0E8A62; --green-lite:#D7F2E4;
+  --red:#E8283F; --red-d:#C8102E; --red-lite:#FFE1E5;
+  --yellow:#FFC72C; --pink:#FF4F8B; --teal:#13A8A0; --slate:#22313B;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sign:"Bungee","Arial Black",Impact,sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --head:64px; --r:20px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:calc(var(--head) + 30px)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1;letter-spacing:-.01em;margin:0;text-wrap:balance}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:8px}
+.dark :focus-visible,.order :focus-visible,.strip :focus-visible{outline-color:#fff}
+main{overflow-x:clip}
+.wrap{max-width:1220px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:700 13px/1.2 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.eyebrow::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--red)}
+.sec{padding-block:96px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:40px}
+.sec-head h2{font-size:clamp(36px,4.6vw,58px);margin-top:12px}
+.sec-head p{color:var(--ink-2);font-size:clamp(16px,1.4vw,19px);max-width:32em}
+.sec-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:32px}
+.sec-cta p{font-weight:600;color:var(--ink-2)}
+.dark{background:var(--slate);color:#F3F0E8}
+.dark .eyebrow{color:var(--yellow)}
+.dark .sec-head p,.dark .sec-cta p{color:#C9D3DA}
+
+/* bunting */
+.bunting{display:flex;overflow:hidden;gap:6px;padding:0 4px;border-top:2px solid var(--ink);height:26px}
+.bunting i{flex:none;width:24px;height:22px;clip-path:polygon(0 0,100% 0,50% 100%);background:var(--c);transform-origin:50% 0}
+
+/* buttons: step on hover, press on click */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:14px;border:2.5px solid var(--ink);background:#fff;color:var(--ink);font:800 17px/1 var(--display);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .16s var(--ease-out),box-shadow .16s var(--ease-out)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}}
+.btn--green{background:var(--green);color:#fff}
+.btn--white{background:#fff}
+.btn svg{width:20px;height:20px;flex:none}
+.wa{background:#fff;color:var(--ink)}
+.wa svg{color:#1A9E4B}
+.textlink{font:700 15px/1 var(--body);min-height:44px;display:inline-flex;align-items:center;padding:0 6px;color:var(--green);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+
+/* ---------- header ---------- */
+.strip{background:var(--green);color:#fff;font:600 14px/1.3 var(--body);text-align:center;padding:9px 16px}
+.strip a{color:#fff;font-weight:700;text-decoration-thickness:2px;text-underline-offset:3px}
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:rgba(255,251,242,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:61;background:var(--paper)}
+.head .wrap{height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px/1 var(--display);min-height:44px;white-space:nowrap}
+.logo svg{width:40px;height:40px;flex:none}
+.amp{color:var(--red);margin:0 .06em;font-weight:800}
+.head nav ul{display:flex;list-style:none;margin:0;padding:0;gap:2px}
+.head nav a{display:flex;align-items:center;min-height:44px;padding:0 11px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px}
+.head nav a:hover{background:var(--paper-2)}
+.acts{display:flex;align-items:center;gap:10px}
+.head .btn{min-height:44px;padding:0 16px;font-size:15px;box-shadow:3px 3px 0 var(--ink)}
+.seats-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 4px;font:700 13px/1 var(--body);color:var(--red-d);text-decoration:none;white-space:nowrap}
+.seats-chip:hover{text-decoration:underline}
+.seats-chip i{width:9px;height:9px;border-radius:50%;background:var(--red);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3}}
+
+/* ---------- HERO ---------- */
+.hero{background:linear-gradient(#FFE8B5,#FFF6E3 62%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:24px;align-items:center;padding-block:44px 8px}
+.hero h1{font-size:clamp(46px,6vw,84px);margin:14px 0 18px}
+.hero h1 .u{background:linear-gradient(transparent 62%,var(--yellow) 62% 92%,transparent 92%)}
+.hero .lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:28em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.city{margin-top:22px;display:grid;gap:8px}
+.city > span{font:700 14px/1 var(--body)}
+.city-btns{display:flex;flex-wrap:wrap;gap:8px}
+.city-btns button{min-height:44px;padding:0 14px;border-radius:999px;border:2px solid var(--ink);background:#fff;font:700 15px/1 var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .15s ease,transform .15s var(--ease-out)}
+.city-btns button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.city-btns button:active{transform:scale(.96)}
+.city-btns svg{width:18px;height:18px}
+.hero-art{position:relative;aspect-ratio:1100/780;min-height:0}
+.hero-art > svg{width:100%;height:100%;display:block}
+html:not(.anim) .tap,html:not(.anim) #rides{display:none}
+.tap{position:absolute;border:0;background:transparent;cursor:pointer;border-radius:10px;left:52%;top:42%;width:24%;height:35%}
+.hint{position:absolute;left:52%;top:33%;font:700 14px/1 var(--body);background:var(--ink);color:#fff;padding:8px 12px;border-radius:999px;pointer-events:none;opacity:0;white-space:nowrap}
+.steam{animation:steam 2.6s ease-in-out infinite}
+.steam:nth-of-type(2){animation-delay:.8s}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-16px)}}
+.landmark{transition:opacity .35s ease}
+.anim .bunting i{animation:sway 1.6s ease-in-out infinite alternate}
+.bunting i:nth-child(2n){animation-delay:-.8s}
+@keyframes sway{from{transform:rotate(-6deg)}to{transform:rotate(6deg)}}
+.anim .win.empty rect{animation:seat 1.6s ease-in-out infinite}
+@keyframes seat{50%{opacity:.5}}
+.anim #dhakaPin circle{transform-box:fill-box;transform-origin:center;animation:pin 1.6s ease-in-out infinite}
+@keyframes pin{50%{transform:scale(1.25)}}
+svg .anim-box{transform-box:fill-box}
+
+/* ---------- SEARCH (a results page) ---------- */
+.searchsec{background:linear-gradient(#FFF6E3,#FFFBF2)}
+.serp{max-width:900px;margin:0 auto;background:#fff;border:2.5px solid var(--ink);border-radius:24px;padding:22px 26px 26px;box-shadow:8px 8px 0 var(--ink)}
+.sbar{display:flex;align-items:center;gap:12px;border:2.5px solid var(--ink);border-radius:999px;padding:8px 8px 8px 18px;min-height:58px;background:#fff}
+.sbar .mag{width:22px;height:22px;color:var(--ink-2);flex:none}
+.sbar .q{flex:1;min-width:0;font:600 clamp(16px,1.6vw,19px)/1.2 var(--body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--ink);vertical-align:-3px;margin-left:2px;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.again{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--ink);background:var(--paper-2);font:700 14px/1 var(--body);cursor:pointer}
+.again{display:inline-flex;align-items:center;gap:6px}.again svg{width:16px;height:16px}
+.again:hover{background:var(--yellow)}
+.meta{font-size:13px;color:var(--ink-2);margin:12px 4px 6px}
+.results{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.res{position:relative;padding:14px 16px;border-radius:16px}
+.res .body{display:grid;gap:3px;transition:opacity .4s ease}
+.res .url{font-size:13px;color:#1D6B3F}
+.res .url b{color:var(--ink);font-weight:700}
+.res .t{font:700 clamp(17px,1.7vw,21px)/1.25 var(--display);color:#1A4FC4}
+.res p{font-size:15px;color:var(--ink-2);max-width:54ch}
+.res.bad.struck .body{opacity:.5}
+.strike{position:absolute;left:8px;right:24%;top:30px;height:34px;width:auto;pointer-events:none;overflow:visible}
+.strike path{fill:none;stroke:var(--red);stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset .45s var(--ease-out)}
+.scrib{position:absolute;right:12px;top:16px;background:var(--yellow);border:2px solid var(--ink);border-radius:6px;padding:7px 12px;font:800 15px/1.1 var(--display);transform:rotate(-4deg);box-shadow:2px 2px 0 var(--ink);transition:opacity .25s ease,transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+.anim .res.bad:not(.struck) .strike path{stroke-dashoffset:1}
+.anim .res.bad:not(.struck) .scrib{opacity:0;transform:rotate(-12deg) scale(.6)}
+.res.ours{border:2.5px solid var(--green);background:#F2FBF6;margin-bottom:8px;padding:18px 18px 18px 64px;box-shadow:0 0 0 5px rgba(0,106,78,.12)}
+.pending{display:none}
+.anim .res.ours.wait{border-style:dashed;background:#FBFAF6;box-shadow:none}
+.anim .res.ours.wait > :not(.pending){visibility:hidden}
+.anim .res.ours.wait .pending{display:flex;position:absolute;inset:0;align-items:center;justify-content:center;gap:8px;font:700 15px/1 var(--body);color:var(--ink-2)}
+.pending i{width:8px;height:8px;border-radius:50%;background:var(--green);animation:dot 1s ease-in-out infinite}
+.pending i:nth-child(2){animation-delay:.15s}.pending i:nth-child(3){animation-delay:.3s;margin-right:6px}
+@keyframes dot{50%{transform:translateY(-5px);opacity:.4}}
+.res.ours .rank{position:absolute;left:16px;top:18px;width:36px;height:36px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font:800 14px/1 var(--display)}
+.ours-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:10px}
+.ours-row .btn{min-height:46px;padding:0 18px;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font:600 12.5px/1 var(--body);background:#fff;border:1.5px solid #9FD3B9;color:#0A4D39;border-radius:999px;padding:6px 10px}
+.stamp-end{position:absolute;right:16px;top:-14px;font:400 15px/1.05 var(--sign);color:var(--red-d);border:3px solid var(--red-d);border-radius:10px;padding:6px 10px;background:#fff;transform:rotate(6deg);text-align:center}
+.searchsec .tiles .tile{background:#fff;border:2.5px solid var(--ink);color:var(--ink)}
+.searchsec .tiles .tile span{color:var(--ink-2)}
+.searchsec .tiles .tile .tico{color:var(--green)}
+@media (max-width:700px){
+  .serp{padding:16px;box-shadow:5px 5px 0 var(--ink)}
+  .scrib{position:static;display:inline-block;margin-top:8px}
+  .strike{left:8px;right:auto;width:calc(100% - 16px)}
+  .res{overflow:hidden}
+  .res.ours{overflow:visible;margin-top:22px}
+  .res.ours{padding:16px}
+  .sbar .q{white-space:normal;font-size:15px}
+  .again{padding:0;width:44px;justify-content:center}.again span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .res.ours .rank{position:static;margin-bottom:8px}
+  .stamp-end{top:-12px;right:8px;font-size:12px}
+}
+/* ---------- old search (unused) ---------- */
+.search-track{height:200vh;position:relative}
+.search-stick{position:sticky;top:calc(var(--head) + 8px);padding-top:28px}
+.search .sec-head{margin-bottom:22px}
+.search .sec-head h2{font-size:clamp(30px,4vw,52px)}
+.rainbox{position:relative;border-radius:var(--r);overflow:hidden;border:2.5px solid #0E151A;aspect-ratio:1440/560;background:#2B3B46;max-height:52vh;width:100%}
+.rainbox svg{position:absolute;inset:0;width:100%;height:100%}
+.rain{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(transparent 0 70%,rgba(200,225,240,.45) 70% 100%);background-size:3px 26px;mask-image:repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 23px);-webkit-mask-image:repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 23px);animation:rain .6s linear infinite;transform:skewX(-12deg) scale(1.2);opacity:.7}
+.rainbox[data-weather="dry"] .rain{display:none}
+@keyframes rain{to{background-position:0 26px}}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+.tile{background:#2B3B46;border:2px solid #3E5260;border-radius:16px;padding:14px 16px;display:grid;gap:6px}
+.tile .tico{width:28px;height:28px;color:var(--yellow)}
+.tile b{font:800 18px/1.15 var(--display)}
+.tile span{color:#C9D3DA;font-size:14px}
+
+/* ---------- COUSIN ---------- */
+.cousin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.switch{display:inline-flex;gap:4px;background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:4px;margin-bottom:16px;box-shadow:3px 3px 0 var(--ink)}
+.switch button{border:0;background:none;border-radius:999px;min-height:44px;padding:0 16px;font:800 15px/1 var(--display);cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.mock{border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--ink);position:relative}
+.mock .chrome{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:2.5px solid var(--ink);background:var(--paper-2)}
+.mock .chrome i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink)}
+.mock .chrome span{margin-left:8px;font:500 12px/1 var(--body);color:var(--ink-2)}
+.mock-body{position:relative;aspect-ratio:4/3.1}
+.v-cousin,.v-pro{position:absolute;inset:0;transition:opacity .45s var(--ease-out),transform .45s var(--ease-out)}
+.mock[data-v="pro"] .v-cousin{opacity:0;transform:scale(.97) rotate(-1deg);pointer-events:none}
+.mock[data-v="cousin"] .v-pro{opacity:0;transform:scale(1.02);pointer-events:none}
+.v-cousin{background:#000080 radial-gradient(#fff 1px,transparent 1.4px) 0 0/22px 22px;color:#FFFF00;font-family:"Comic Sans MS","Comic Neue",cursive;padding:14px;display:flex;flex-direction:column;gap:10px;text-align:center}
+.v-cousin .t{font-size:clamp(18px,2.2vw,26px);color:#FF00FF;text-shadow:2px 2px #00FFFF;font-weight:700}
+.v-cousin .uc{background:repeating-linear-gradient(45deg,#FFD400 0 12px,#111 12px 24px);color:#fff;font:700 13px/1 Arial,sans-serif;padding:8px;text-shadow:1px 1px #000}
+.v-cousin .row{display:flex;gap:8px;justify-content:center}
+.v-cousin .row i{width:28%;aspect-ratio:1/1;background:#C0C0C0;border:3px outset #fff}
+.v-cousin .ctr{font:700 12px/1 "Courier New",monospace;color:#0F0;background:#000;align-self:center;padding:4px 8px;border:2px inset #888}
+.v-cousin .blink{animation:blink 1s steps(1) infinite;color:#FF7070;font-weight:700}
+@keyframes blink{50%{opacity:0}}
+.v-cousin small{font-size:11px;color:#ddd}
+.v-pro{background:#fff;padding:16px 18px;display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.v-pro .nav{display:flex;justify-content:space-between;align-items:center;font:800 16px/1 var(--display)}
+.v-pro .nav span{font:600 12px/1 var(--body);color:var(--ink-2);display:flex;gap:12px}
+.v-pro .hero2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:12px;align-items:center}
+.v-pro .hero2 b{font:800 clamp(18px,2.2vw,26px)/1.05 var(--display);display:block}
+.v-pro .hero2 p{font-size:12px;color:var(--ink-2);margin:6px 0 10px}
+.v-pro .hero2 .go{display:inline-flex;min-height:30px;align-items:center;padding:0 12px;border-radius:8px;background:var(--green);color:#fff;font:700 12px/1 var(--body)}
+.v-pro .pic{aspect-ratio:1/1;border-radius:12px;background:conic-gradient(from 30deg,var(--pink),var(--yellow),var(--teal),var(--pink));opacity:.85}
+.v-pro .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.v-pro .cards div{border-radius:10px;background:var(--paper-2);padding:8px;font:600 11px/1.2 var(--body)}
+.v-pro .cards small{display:block;color:var(--green);font-weight:700;margin-top:2px}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;font-size:15px}
+.cmp th,.cmp td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1.5px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{font:800 16px/1.1 var(--display);background:var(--paper-2);border-bottom:2.5px solid var(--ink)}
+.cmp thead th:last-child{background:var(--green);color:#fff}
+.cmp td:first-child{font-weight:700;width:24%}
+.cmp td:nth-child(2){color:#8A2F3A;background:#FFF6F7}
+.cmp td:nth-child(3){color:#0A4D39;background:#F3FBF7;font-weight:600}
+.footnote{margin-top:12px;font-size:14px;color:var(--ink-2)}
+
+/* ---------- MENU (services) ---------- */
+.svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.svc a{display:flex;flex-direction:column;gap:10px;text-decoration:none;background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);padding:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.svc a:hover{transform:translate(-2px,-3px);box-shadow:6px 7px 0 var(--ink)}.svc a:hover .ico{transform:rotate(-6deg) scale(1.06)}}
+.svc .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--bg);border:2.5px solid var(--ink);transition:transform .25s var(--ease-out)}
+.svc .ico svg{width:32px;height:32px}
+.svc h3{font-size:22px}
+.svc p{color:var(--ink-2);font-size:15px;line-height:1.45;flex:1}
+.svc .price{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed var(--line);padding-top:10px;font-size:13px;color:var(--ink-2)}
+.svc .price b{font:800 21px/1 var(--display);color:var(--ink);display:inline-block}
+.svc .price em{font-style:normal;font-weight:700;color:var(--green)}
+.note{margin-top:14px;font-size:13px;color:var(--ink-2)}
+
+/* ---------- SEATS ---------- */
+.seats{background:var(--paper-2)}
+.seats-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:center}
+.seats-grid h2{font-size:clamp(36px,4.6vw,58px);margin:12px 0 16px}
+.seats-grid .lede{color:var(--ink-2);font-size:18px;max-width:30em}
+.meter{display:flex;gap:10px;margin:24px 0 12px;flex-wrap:wrap}
+.meter span{width:46px;height:46px;border-radius:12px;border:2.5px solid var(--ink);display:grid;place-items:center;font:800 15px/1 var(--display);background:#fff}
+.meter span.taken{background:#E9E1CF;color:#5C564C;text-decoration:line-through}
+.meter span.free{background:var(--green);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.closing{font:600 15px/1.4 var(--body);color:var(--red-d)}
+.closing b{color:var(--ink);font-variant-numeric:tabular-nums}
+.why{margin-top:10px;font-size:15px;color:var(--ink-2)}
+.bus svg{width:100%;height:auto;display:block;overflow:visible}
+
+/* ---------- PROOF ---------- */
+.logos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.slot{min-height:72px;border:2.5px dashed #C9BEA6;border-radius:14px;display:grid;place-items:center;font:700 13px/1.2 var(--body);color:var(--ink-2);background:#fff;text-align:center;padding:8px}
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.quote{margin:0;background:#fff;border:2.5px solid var(--ink);border-radius:20px;padding:22px;display:grid;gap:14px;box-shadow:4px 4px 0 var(--ink)}
+.quote .qmark{width:34px;height:28px;color:var(--yellow)}
+.quote blockquote{margin:0;font:700 19px/1.35 var(--display)}
+.quote figcaption{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;align-items:center;font-size:14px;color:var(--ink-2)}
+.quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.quote .avatar{width:44px;height:44px;border-radius:50%;border:2.5px dashed #C9BEA6;grid-row:span 2}
+.quote .result{grid-column:2;justify-self:start;background:var(--green-lite);color:#0A4D39;font-weight:700;border-radius:999px;padding:4px 10px;font-size:13px}
+/* ---------- PACKS ---------- */
+.pack-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.pack{position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:12px;box-shadow:5px 5px 0 var(--ink)}
+.pack.hot{background:var(--green);color:#fff;transform:translateY(-12px);box-shadow:5px 5px 0 var(--ink),0 0 0 6px var(--yellow)}
+.pack .badge{position:absolute;top:-16px;left:50%;transform:translateX(-50%) rotate(-3deg);background:var(--red-d);color:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:6px 14px;font:800 14px/1 var(--display);white-space:nowrap}
+.pack .food{height:110px;display:grid;place-items:center}
+.pack .food svg{height:110px;width:auto;max-width:100%;overflow:visible}
+.pack h3{font-size:30px}
+.pack h3 small{font:600 15px/1 var(--body);color:var(--ink-2);margin-left:6px}
+.pack.hot h3 small{color:#E3F5EC}
+.pack .tag{font-weight:600;opacity:.85}
+.pack .amt{font:800 40px/1 var(--display)}
+.pack ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;flex:1}
+.pack li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px}
+.pack li svg{width:18px;height:18px;margin-top:3px}
+.pack .btn{background:#fff}
+.custom{text-align:center;margin-top:34px;font-weight:600}
+.custom a{color:var(--green);font-weight:800}
+
+/* ---------- ROUTE ---------- */
+.route-box svg{width:100%;height:auto;display:block}
+.stops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;margin:18px 0 0;padding:0}
+.stops li{border:2.5px solid var(--ink);border-radius:18px;padding:16px;background:#fff;transition:background .3s ease}
+.stops li b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper-2);border:2.5px solid var(--ink);font:800 16px/1 var(--display);margin-bottom:8px}
+.stop-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.stop-top b{margin:0!important}
+.stops .tico{width:30px;height:30px;color:var(--green)}
+.stops li.on .tico{color:var(--ink)}
+.stops li strong{display:block;font:800 20px/1.15 var(--display)}
+.stops li > span:not(.stop-top){color:var(--ink-2);font-size:15px;display:block}
+.stops li.on{background:var(--yellow)}
+.stops li.on > span:not(.stop-top){color:var(--ink)}
+.stops li.on b{background:var(--ink);color:#fff}
+
+/* ---------- MAP ---------- */
+.map{position:relative;border:2.5px solid var(--ink);border-radius:24px;background:#DDF0F4;overflow:hidden;box-shadow:6px 6px 0 var(--ink)}
+.map svg{width:100%;height:auto;display:block}
+.map-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-weight:600;color:var(--ink-2)}
+.map-legend span{display:inline-flex;align-items:center;gap:8px}
+.map-legend i{width:12px;height:12px;border-radius:50%;background:var(--c);border:2px solid var(--ink)}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{border:2.5px solid var(--ink);border-radius:16px;background:#fff;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:16px 56px 16px 18px;font:800 19px/1.25 var(--display);position:relative;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;width:30px;height:30px;margin-top:-15px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:800 20px/1 var(--body);transition:transform .25s var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--yellow)}
+.faq details p{padding:0 18px 18px;color:var(--ink-2)}
+
+/* ---------- ORDER ---------- */
+.order{background:var(--green);color:#fff}
+.order .eyebrow{color:var(--yellow)}
+.order .eyebrow::before{background:var(--yellow)}
+.order .sec-head p{color:#D7F2E4}
+.order-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:28px;align-items:start}
+.slip{background:var(--paper);color:var(--ink);border:2.5px solid var(--ink);border-radius:24px;padding:28px;box-shadow:8px 8px 0 #013a2b;position:relative;overflow:hidden}
+#formBody{display:grid;gap:20px}
+.group{border:0;padding:0;margin:0;min-width:0;display:grid;gap:10px}
+.group legend{font:800 17px/1.2 var(--display);padding:0;margin-bottom:10px}
+.opt{font:500 13px/1 var(--body);color:var(--ink-2);margin-left:6px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills label{position:relative;cursor:pointer}
+.pills input{position:absolute;opacity:0;pointer-events:none}
+.pills span{display:inline-flex;flex-direction:column;justify-content:center;min-height:46px;padding:6px 16px;border:2.5px solid var(--ink);border-radius:14px;background:#fff;font:700 15px/1.15 var(--body);transition:background .15s ease,transform .15s var(--ease-out),box-shadow .15s ease}
+.pills span small{font:500 12.5px/1.2 var(--body);color:var(--ink-2);margin-top:2px}
+.pills.budget{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.pills.budget span{width:100%;height:100%;min-height:62px}
+@media (max-width:640px){.pills.budget{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pills input:checked + span{background:var(--yellow);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.pills input:focus-visible + span{outline:3px solid var(--ink);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.pills label:hover span{transform:translateY(-2px)}}
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.submit-row .small{font-size:13.5px;color:var(--ink-2)}
+.promises{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px;font-size:14.5px;color:#E3F5EC}
+.promises li{display:flex;gap:8px;align-items:center}
+.promises li::before{content:"";width:16px;height:16px;flex:none;border-radius:50%;background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5' fill='none' stroke='%231C1A17' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/100% no-repeat}
+.done-card h3{font-size:30px}
+.done-card p{color:var(--ink-2)}
+.btn[disabled]{opacity:.7;cursor:progress}
+.progress{display:flex;align-items:center;gap:8px;margin:0 0 20px}
+.progress span{flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden;position:relative}
+.progress span i{position:absolute;inset:0;background:var(--green-2);transform-origin:left;transform:scaleX(0);transition:transform .4s var(--ease-out)}
+.progress span.done i{transform:scaleX(1)}
+.progress b{font:700 13px/1 var(--body);color:var(--ink-2);white-space:nowrap}
+.step{display:grid;gap:14px;border:0;padding:0;margin:0;min-width:0}
+.step legend{padding:0;margin-bottom:6px}
+.step h3{font-size:clamp(24px,2.6vw,32px)}
+.help{color:var(--ink-2);font-size:15px}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.choices label{position:relative;cursor:pointer}
+.choices input{position:absolute;opacity:0;pointer-events:none}
+.choices .c{display:flex;flex-direction:column;gap:4px;align-items:flex-start;min-height:80px;padding:12px;border:2.5px solid var(--ink);border-radius:14px;background:#fff;font:800 16px/1.15 var(--display);transition:background .15s ease,transform .15s var(--ease-out),box-shadow .15s ease}
+.choices .c small{font:500 13px/1.3 var(--body);color:var(--ink-2)}
+.choices input:checked + .c{background:var(--yellow);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.choices input:focus-visible + .c{outline:3px solid var(--teal);outline-offset:2px}
+.budget{display:grid;grid-template-columns:110px minmax(0,1fr);gap:18px;align-items:center;margin-top:6px}
+.budget svg{width:110px;height:130px}
+.range-wrap{display:grid;gap:8px}
+.range-wrap input{width:100%;accent-color:var(--green);min-height:44px}
+.range-wrap output{font:800 30px/1 var(--display)}
+.range-wrap .lvl{font-weight:700;color:var(--green)}
+.field{display:grid;gap:6px}
+.field label{font:700 14px/1.2 var(--body)}
+.field input{border:2.5px solid var(--ink);border-radius:12px;padding:12px 14px;min-height:50px;background:#fff;width:100%}
+.field input:focus{outline:3px solid var(--teal);outline-offset:1px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.err{color:var(--red-d);font-size:14px;font-weight:600}
+.err:empty{display:none}
+.nav-steps{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+.nav-steps .back{background:#fff}
+.nav-steps .back[hidden]{display:inline-flex!important;visibility:hidden}
+.done-card{text-align:center;display:grid;gap:12px;justify-items:center;padding:18px 0}
+.stamp{font:400 26px/1 var(--sign);color:var(--red-d);border:4px solid var(--red-d);border-radius:12px;padding:10px 16px;transform:rotate(-6deg)}
+.side{display:grid;gap:18px}
+.signpreview{border:2.5px dashed rgba(255,255,255,.55);border-radius:22px;padding:22px;display:grid;place-items:center;min-height:200px}
+.board{position:relative;background:var(--red-d);border:3px solid var(--ink);border-radius:14px;padding:18px 26px 16px;text-align:center;box-shadow:5px 5px 0 #013a2b;max-width:100%}
+.board::before,.board::after{content:"";position:absolute;width:12px;height:12px;border-radius:50%;background:var(--yellow);border:2px solid var(--ink);top:8px}
+.board::before{left:8px}.board::after{right:8px}
+.board b{display:block;font:400 clamp(22px,3vw,36px)/1.05 var(--sign);color:var(--yellow);-webkit-text-stroke:1px var(--ink);overflow-wrap:anywhere}
+.board small{display:block;margin-top:6px;font:700 12px/1 var(--body);letter-spacing:.2em;color:#fff}
+.ticket{border:2.5px dashed rgba(255,255,255,.55);border-radius:22px;padding:20px;display:grid;gap:10px}
+.ticket h3{font-size:22px;color:var(--yellow)}
+.ticket dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 14px;margin:0;font-size:15px}
+.ticket dt{color:#DDF2E8}
+.ticket dd{margin:0;font-weight:700}
+.ticket .pay{font-size:13.5px;color:#E3F5EC}
+
+/* ---------- FINAL + FOOTER ---------- */
+.final{background:var(--yellow);border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);text-align:center}
+.final h2{font-size:clamp(36px,4.6vw,58px)}
+.final p{font-size:19px;margin:12px auto 26px;max-width:34em;color:#3D3520}
+.final .hero-cta{justify-content:center}
+footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
+.brandfoot{background:var(--ink);color:#E9E3D6}
+.brandfoot .logo{color:#fff}
+.brandfoot .logo.big{font-size:clamp(30px,4vw,44px);gap:14px}
+.brandfoot .logo.big svg{width:clamp(48px,5vw,64px);height:auto}
+.bf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding-bottom:26px;border-bottom:1px solid #3A3630}
+.tagline{font:800 clamp(20px,2.2vw,28px)/1.1 var(--display);color:var(--yellow)}
+.bf-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:22px}
+.bf-row p{max-width:40ch;color:#CFC8BA}
+.bf-row nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+.bf-row a{color:#fff;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.bf-row a:hover{text-decoration:underline}
+.fine{color:#A49D90;font-size:13px}
+.brandfoot :focus-visible{outline-color:#fff}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+.foot a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.foot a:hover{color:var(--ink);text-decoration:underline}
+.mbar{display:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){.head nav{display:none}.svc,.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .quotes{grid-template-columns:minmax(0,1fr)}.logos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-grid,.sec-head,.cousin-grid,.seats-grid,.order-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{padding-top:24px}
+  .pack-grid{grid-template-columns:minmax(0,1fr);gap:30px}.pack.hot{transform:none}
+  .stops{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sec{padding-block:72px}
+  .search-track{height:180vh}
+  .rainbox{aspect-ratio:4/3;max-height:44vh}
+  .head .acts .btn:not(.wa){display:none}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:var(--paper);border-top:2.5px solid var(--ink)}
+  .mbar .btn{flex:1;min-height:48px;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
+}
+@media (max-width:560px){
+  .head .acts{display:none}
+  .svc{grid-template-columns:minmax(0,1fr)}
+  .choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .budget{grid-template-columns:80px minmax(0,1fr)}.budget svg{width:80px;height:96px}
+  .cmp{font-size:13.5px}.cmp th,.cmp td{padding:10px}
+  .stops{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .steam,.rain,.v-cousin .blink,.seats-chip i,.bunting i,.win.empty rect,#dhakaPin circle{animation:none!important}
+  .btn,.svc a,.v-cousin,.v-pro,.faq summary::after,.progress span i,.landmark{transition:none}
+  .search-track{height:auto}.search-stick{position:static}
+}
+
+/* ---------- SEARCH SLOT + SPEED RACE ---------- */
+.stage{min-height:420px}
+/* shared phone */
+.ph{border:2.5px solid var(--ink);border-radius:28px;background:#fff;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;width:100%;max-width:400px;justify-self:center}
+.ph-top{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#075E54;color:#fff}
+.ph-av{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;font:800 13px/1 var(--display);color:#fff;border:2px solid #fff}
+.ph-name{display:block;font:700 15px/1.2 var(--body)}
+.ph-st{display:block;font-size:12.5px;opacity:.85;min-height:1.3em}
+/* 4 speed race */
+.v4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.urlb{padding:9px 14px;border-bottom:2.5px solid var(--ink);background:var(--paper-2);font-size:12.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scr{position:relative;aspect-ratio:9/11;background:#fff;overflow:hidden}
+.v4-load{position:absolute;inset:0;z-index:2;background:#fff;display:grid;place-items:center;align-content:center;gap:14px;font-weight:600;color:var(--ink-2);transition:opacity .2s ease,visibility .2s}
+.v4-load.done{opacity:0;visibility:hidden}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--ink-2);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pbar{width:150px;max-width:70%;height:8px;border-radius:9px;background:var(--line);overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--green-2);transform-origin:left}
+.toast{position:absolute;left:10px;right:10px;top:10px;z-index:3;background:var(--ink);color:#fff;border-radius:12px;padding:10px 12px;font:700 14px/1.25 var(--body);display:flex;gap:8px;align-items:center;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.toast svg{width:18px;height:18px;flex:none;color:var(--yellow)}
+.clock{font:800 40px/1 var(--display);font-variant-numeric:tabular-nums;text-align:center;margin-top:18px;color:var(--red-d)}
+.clock.good{color:var(--green)}
+.ppl{display:flex;justify-content:center;gap:8px;margin-top:10px}
+.ppl svg{width:20px;height:28px;fill:var(--green);transition:opacity .3s ease,transform .3s var(--ease-out),fill .2s ease}
+.ppl svg.gone{opacity:.15;transform:translateX(14px)}
+.ppl svg.buy{fill:var(--yellow);stroke:var(--ink);stroke-width:1.5}
+.v4-cap{text-align:center;color:var(--ink-2);font-weight:700;margin-top:8px;min-height:1.6em}
+.v4-ctl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:center;margin-top:24px}
+.v4-ctl p{color:var(--ink-2);font-weight:600}
+.v4 .v-cousin{padding:10px;gap:8px}
+.v4 .v-cousin .t{font-size:16px}
+.v4 .v-pro .hero2 b{font-size:17px}
+@media (max-width:760px){
+  .v4{gap:12px}
+  .ph{border-radius:20px;box-shadow:4px 4px 0 var(--ink)}
+  .clock{font-size:26px}
+  .ppl{gap:3px}.ppl svg{width:14px;height:20px}
+  .v4 .v-cousin .t{font-size:12px}.v4 .v-cousin small,.v4 .v-cousin .row{display:none}
+  .v4 .v-pro{padding:10px;gap:8px}.v4 .v-pro .cards{display:none}.v4 .v-pro .nav span{display:none}
+  .toast{font-size:12px;padding:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .spin{animation:none}
+  .ppl svg,.v4-load{transition:none}
+}
+
+/* ---------- HERO: a day in 10 seconds ---------- */
+.hero-art.hp{aspect-ratio:auto;display:flex;flex-direction:column;cursor:pointer}
+.hp-scene{position:relative}
+.hp-svg{width:100%;height:auto;display:block;border:2.5px solid var(--ink);border-radius:22px;background:#BFE6FF;box-shadow:6px 6px 0 var(--ink)}
+.hp-cap{margin:16px 0 0;min-height:46px;display:flex;justify-content:center;align-items:flex-start;pointer-events:none}
+.hp-cap span{background:var(--ink);color:#fff;font:700 clamp(15px,1.5vw,18px)/1.3 var(--body);padding:10px 18px;border-radius:999px;text-align:center;max-width:100%;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.hp-cap span:empty{display:none}
+.hp-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:4% 5% 0;pointer-events:none;opacity:0}
+.lock-time{font:800 clamp(30px,5.2vw,62px)/1 var(--display);color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.3)}
+.lock-sub{color:#DCE4F2;font:600 clamp(13px,1.3vw,16px)/1.2 var(--body);margin:4px 0 10px}
+.lock-list{list-style:none;margin:0;padding:0;width:min(100%,460px);display:grid;gap:8px}
+.nt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:1px 12px;align-items:center;background:rgba(255,255,255,.96);border:2.5px solid var(--ink);border-radius:16px;padding:9px 14px 10px 10px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.nt i{grid-row:span 3;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:2px solid var(--ink)}
+.nt i svg{width:22px;height:22px}
+.nt .app{display:flex;justify-content:space-between;gap:8px;font:600 13px/1.2 var(--body);color:var(--ink-2)}
+.nt b{font:800 17px/1.2 var(--display);color:var(--ink)}
+.nt .body{font:500 15px/1.3 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lock-count{margin-top:12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:7px 16px;font:800 clamp(14px,1.4vw,18px)/1 var(--display)}
+.lock-count:empty{display:none}
+@media (max-width:560px){
+  .hp-lock{padding-top:3%}
+  .lock-sub{display:none}
+  .lock-time{margin-bottom:6px}
+  .lock-list{gap:5px}
+  .nt{grid-template-columns:28px minmax(0,1fr);gap:0 8px;padding:5px 9px 6px 6px;border-radius:12px;border-width:2px}
+  .nt i{width:28px;height:28px;border-radius:8px}.nt i svg{width:16px;height:16px}
+  .nt .app{font-size:10.5px}.nt b{font-size:13px}.nt .body{font-size:11.5px}
+  .lock-count{margin-top:6px;padding:5px 12px;font-size:12px;border-width:2px}
+}
+
+/* ---------- COUSIN: a four-panel comic ---------- */
+.saga{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.panel{position:relative;margin:0;background:var(--bg);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column}
+.panel > svg{display:block;width:100%;height:auto;border-radius:13px 13px 0 0}
+.when{position:absolute;top:10px;left:10px;z-index:2;background:var(--ink);color:#fff;font:800 15px/1 var(--display);padding:7px 11px;border-radius:9px;transform:rotate(-3deg)}
+.bub{position:relative;margin:4px 12px 14px;background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:11px 14px;font:700 17px/1.35 var(--body);transform-origin:30% 0}
+.bub::before{content:"";position:absolute;top:-11px;left:30%;width:18px;height:18px;background:#fff;border-left:2.5px solid var(--ink);border-top:2.5px solid var(--ink);transform:rotate(45deg)}
+.meanwhile{position:relative;margin-top:24px;background:var(--green);color:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:26px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.meanwhile h3{font-size:clamp(26px,2.8vw,36px);color:var(--yellow);margin-bottom:14px}
+.steps-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps-list li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;font-size:clamp(16px,1.5vw,18px);line-height:1.4}
+.steps-list i{width:28px;height:28px;border-radius:50%;background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5' fill='none' stroke='%231C1A17' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/70% no-repeat;border:2px solid var(--ink)}
+.steps-list b{color:var(--yellow)}
+.harmed{font:400 clamp(16px,1.6vw,20px)/1.1 var(--sign);color:#fff;border:3px solid #fff;border-radius:12px;padding:10px 14px;text-align:center;transform:rotate(6deg)}
+@media (prefers-reduced-motion:no-preference){
+  .crawl{transform-box:fill-box;transform-origin:left;animation:crawl 4s var(--ease-out) infinite}
+  .buzz{transform-box:fill-box;transform-origin:center;animation:buzz 2.4s linear infinite}
+  .buzzlines{animation:buzzl 2.4s linear infinite}
+  .dance{transform-box:fill-box;transform-origin:50% 100%;animation:dance .9s ease-in-out infinite alternate}
+  .lights circle{animation:twinkle 1.2s ease-in-out infinite alternate}
+  .lights circle:nth-child(2n){animation-delay:-.6s}
+  .plane{animation:fly 4.5s linear infinite}
+  .wave{transform-box:fill-box;transform-origin:100% 100%;animation:wave .7s ease-in-out infinite alternate}
+  .spark path{transform-box:fill-box;transform-origin:center;animation:spark 1.6s ease-in-out infinite alternate}
+  .spark path:nth-child(2){animation-delay:-.8s}
+}
+@keyframes crawl{0%{transform:scaleX(0)}45%,100%{transform:scaleX(.12)}}
+@keyframes buzz{0%,66%,100%{transform:rotate(0)}70%{transform:rotate(-9deg)}74%{transform:rotate(9deg)}78%{transform:rotate(-7deg)}82%{transform:rotate(7deg)}86%{transform:rotate(0)}}
+@keyframes buzzl{0%,66%,90%,100%{opacity:0}70%,86%{opacity:1}}
+@keyframes dance{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-6px) rotate(3deg)}}
+@keyframes twinkle{from{opacity:1}to{opacity:.35}}
+@keyframes fly{from{transform:translate(-120px,60px)}to{transform:translate(360px,-40px)}}
+@keyframes wave{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+@keyframes spark{from{transform:scale(.8) rotate(0)}to{transform:scale(1.1) rotate(20deg)}}
+@media (max-width:1000px){.saga{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.saga{grid-template-columns:minmax(0,1fr)}.meanwhile{grid-template-columns:minmax(0,1fr);padding:22px 18px}.harmed{justify-self:start}}
+
+/* ---------- page-wide motion ---------- */
+:root{interpolate-size:allow-keywords}
+.faq details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size .3s var(--ease-out),opacity .25s ease,content-visibility .3s allow-discrete}
+.faq details[open]::details-content{block-size:auto;opacity:1}
+.final{position:relative;overflow:hidden}
+.final::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(#A7B0B5 0 15px,#7D868B 15px 18px);transform-origin:50% 0;transform:scaleY(0)}
+.final.shut::after{transform:scaleY(1)}
+.final.rolling::after{transition:transform .9s cubic-bezier(0.77, 0, 0.175, 1)}
+@media (prefers-reduced-motion:reduce){.faq details::details-content{transition:none}.final::after{display:none}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="tick" viewBox="0 0 20 20"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="wa-ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+    <symbol id="pin" viewBox="0 0 20 20"><path d="M10 1c-4 0-7 3-7 7 0 5 7 11 7 11s7-6 7-11c0-4-3-7-7-7z" fill="currentColor"/><circle cx="10" cy="8" r="2.6" fill="#fff"/></symbol>
+
+    <!-- VEHICLES: every one faces right, so they always drive forward (left to right) -->
+    <!-- rickshaw: puller in front on the right -->
+    <symbol id="veh-dhaka" viewBox="0 0 260 200">
+      <g transform="translate(260 0) scale(-1 1)">
+        <path d="M120 40c0-22 30-34 70-34s58 16 58 40v34H120z" fill="#E8283F" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M134 44c10-14 70-18 98 0" fill="none" stroke="#FFC72C" stroke-width="6"/>
+        <circle cx="160" cy="28" r="5" fill="#FF4F8B"/><circle cx="190" cy="22" r="5" fill="#13A8A0"/><circle cx="220" cy="28" r="5" fill="#FFC72C"/>
+        <rect x="126" y="80" width="118" height="26" rx="6" fill="#13A8A0" stroke="#1C1A17" stroke-width="5"/>
+        <path d="M244 106v40M130 106l-60 40" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/><path d="M70 146h174" stroke="#1C1A17" stroke-width="6"/>
+        <circle cx="208" cy="160" r="34" fill="none" stroke="#1C1A17" stroke-width="6"/><path d="M208 126v68M174 160h68M184 136l48 48M232 136l-48 48" stroke="#1C1A17" stroke-width="2.5"/>
+        <circle cx="46" cy="168" r="26" fill="none" stroke="#1C1A17" stroke-width="6"/><path d="M46 142v52M20 168h52" stroke="#1C1A17" stroke-width="2.5"/>
+        <circle cx="60" cy="96" r="14" fill="#8C5A3C"/><path d="M50 108c0 0 4 26 14 36" stroke="#2F5DFF" stroke-width="16" stroke-linecap="round"/><path d="M48 90c2-10 22-10 24 0z" fill="#fff"/>
+      </g>
+    </symbol>
+    <!-- London black cab: tall cabin, long bonnet on the RIGHT, headlight front-right -->
+    <symbol id="veh-london" viewBox="0 0 260 170">
+      <ellipse cx="130" cy="162" rx="118" ry="6" fill="#000" opacity=".18"/>
+      <path d="M14 140V98q0-10 10-10h34l14-44q3-8 12-8h80q9 0 13 8l20 44h40q19 0 19 18v34z" fill="currentColor" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M80 86l10-38h40v38zM138 86V48h38l16 38z" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="168" cy="68" r="8" fill="#C98B5E"/>
+      <rect x="110" y="20" width="40" height="13" rx="3" fill="#FFC72C" stroke="#1C1A17" stroke-width="3"/><text x="130" y="30.5" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="9.5" fill="#1C1A17">TAXI</text>
+      <path d="M134 92v42" stroke="#1C1A17" stroke-width="3"/>
+      <circle cx="238" cy="104" r="8" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="14" y="100" width="7" height="14" rx="2" fill="#E8283F"/>
+      <circle cx="64" cy="142" r="22" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="64" cy="142" r="7" fill="#bbb"/>
+      <circle cx="204" cy="142" r="22" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="204" cy="142" r="7" fill="#bbb"/>
+    </symbol>
+    <!-- sedan taxi: trunk on the left, windscreen and bonnet on the RIGHT -->
+    <symbol id="veh-car" viewBox="0 0 260 170">
+      <ellipse cx="130" cy="162" rx="118" ry="6" fill="#000" opacity=".18"/>
+      <path d="M14 140v-36q0-12 12-12h44l30-40h58l40 40h34q18 2 20 18v30z" fill="currentColor" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M78 90l26-34h28v34zM140 90V56h20l32 34z" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="166" cy="76" r="8" fill="#C98B5E"/>
+      <rect x="110" y="36" width="40" height="13" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="3"/><text x="130" y="46.5" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="9.5" fill="#1C1A17">TAXI</text>
+      <path d="M136 94v40" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="236" y="102" width="12" height="10" rx="3" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="14" y="102" width="7" height="12" rx="2" fill="#E8283F"/>
+      <circle cx="64" cy="142" r="22" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="64" cy="142" r="7" fill="#bbb"/>
+      <circle cx="204" cy="142" r="22" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="204" cy="142" r="7" fill="#bbb"/>
+    </symbol>
+    <!-- New York cab: the sedan plus a checker band -->
+    <symbol id="veh-ny" viewBox="0 0 260 170">
+      <use href="#veh-car"/>
+      <g fill="#1C1A17"><rect x="24" y="112" width="10" height="8"/><rect x="44" y="112" width="10" height="8"/><rect x="34" y="120" width="10" height="8"/><rect x="214" y="112" width="10" height="8"/><rect x="224" y="120" width="10" height="8"/></g>
+    </symbol>
+    <!-- Dubai taxi: the sedan with the red roof -->
+    <symbol id="veh-dubai" viewBox="0 0 260 170">
+      <use href="#veh-car"/>
+      <path d="M100 52h58l8 8h-74z" fill="#E8283F" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Dhaka CNG: rear passenger bench on the left, driver and nose on the RIGHT -->
+    <symbol id="veh-cng" viewBox="0 0 260 170">
+      <ellipse cx="130" cy="162" rx="112" ry="6" fill="#000" opacity=".18"/>
+      <path d="M22 140V82q0-48 70-52h70q52 4 62 50l12 30v30z" fill="currentColor" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M50 108V82q2-34 50-36h52v62z" fill="#1C1A17" opacity=".75"/>
+      <path d="M160 46h8q34 4 44 40h-52z" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="186" cy="70" r="9" fill="#C98B5E"/><path d="M177 66c2-8 16-8 18 0z" fill="#2A1A12"/>
+      <circle cx="92" cy="80" r="9" fill="#F1C6A0"/><path d="M80 108c0-16 5-22 12-22s12 6 12 22z" fill="#FF4F8B"/>
+      <circle cx="238" cy="104" r="8" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="22" y="104" width="7" height="12" rx="2" fill="#E8283F"/>
+      <circle cx="70" cy="142" r="21" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="70" cy="142" r="7" fill="#bbb"/>
+      <circle cx="210" cy="142" r="21" fill="#333" stroke="#1C1A17" stroke-width="5"/><circle cx="210" cy="142" r="7" fill="#bbb"/>
+    </symbol>
+  </defs>
+</svg>
+
+<p class="strip">Free website check-up this month. <a href="#order">Claim yours</a></p>
+<header class="head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><path d="M7 9h26v5c0 2-1.6 3.4-3.3 3.4S26.4 16 26.4 14c0 2-1.6 3.4-3.3 3.4S19.8 16 19.8 14c0 2-1.6 3.4-3.3 3.4S13.2 16 13.2 14c0 2-1.6 3.4-3.1 3.4S7 16 7 14z" fill="#E8283F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 20l5.5 14 2.4-5.6 5.6-2.4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 33c0-4 2.4-6.4 6.2-7-.6 4-3 6.4-6.2 7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Click<b class="amp">&amp;</b>Grow</span></a>
+    <nav aria-label="Main"><ul><li><a href="#menu">Services</a></li><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <div class="acts">
+      <a class="seats-chip" href="#seats"><i aria-hidden="true"></i><span data-seats-chip>2 seats left this month</span></a>
+      <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a>
+      <a class="btn btn--green" href="#order">Free quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="t-hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
+        <h1 id="t-hero">Pull up the shutter. Let the <span class="u">customers</span> in.</h1>
+        <p class="lede">Your shop opens at 10. Your website should never close. We build websites and online shops that actually sell, wherever you trade.</p>
+        <div class="hero-cta">
+          <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
+        </div>
+        <div class="city" role="group" aria-labelledby="cityLbl">
+          <span id="cityLbl">Where’s your shop?</span>
+          <div class="city-btns">
+            <button type="button" data-city="dhaka" aria-pressed="true"><svg aria-hidden="true" style="color:#006A4E"><use href="#pin"/></svg>Dhaka</button>
+            <button type="button" data-city="london" aria-pressed="false"><svg aria-hidden="true" style="color:#E8283F"><use href="#pin"/></svg>London</button>
+            <button type="button" data-city="dubai" aria-pressed="false"><svg aria-hidden="true" style="color:#13A8A0"><use href="#pin"/></svg>Dubai</button>
+            <button type="button" data-city="ny" aria-pressed="false"><svg aria-hidden="true" style="color:#C79100"><use href="#pin"/></svg>New York</button>
+          </div>
+        </div>
+      </div>
+      <div class="hero-art hp" id="heroStage" title="Click to replay the day"></div>
+    </div>
+    <div class="bunting" aria-hidden="true"></div>
+  </section>
+
+  <!-- ================= YOUR SEARCH ENDS HERE: a search everyone has typed ================= -->
+  <section class="sec searchsec" id="search" aria-labelledby="t-search">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-search">Your search ends here.</h2></div><p>Your customer taps your link. Same shop, same phone, two websites. Watch who waits.</p></div>
+      <div id="searchStage" class="stage"></div>
+      <div class="tiles">
+          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M8 14h12M8 18h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Price fixed before we start</b><span>The meter is on. No surprise extras.</span></div>
+          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 6h20v13H12l-5 4v-4H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg><b>Real people on WhatsApp</b><span>Not a bot. Not “sir is in a meeting”.</span></div>
+          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="8" y="3" width="12" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M12 21h4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Built for phones first</b><span>Because your customers live on them.</span></div>
+          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V7z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M10 14l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>30 days of free fixes</b><span>Something looks off after launch? We fix it.</span></div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ================= YOUR COUSIN TRIED: a four-panel comic, then what happens with us ================= -->
+  <section class="sec" id="cousin" aria-labelledby="t-cousin">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <symbol id="cz" viewBox="0 0 90 150">
+        <path d="M33 106v38M57 106v38" stroke="#1C1A17" stroke-width="8" stroke-linecap="round"/>
+        <path d="M17 110c0-42 10-60 28-60s28 18 28 60z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3.5"/>
+        <path d="M37 76l8 8 8-8" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="45" cy="30" r="20" fill="#C98B5E" stroke="#1C1A17" stroke-width="3.5"/>
+        <path d="M24 27c0-17 10-24 21-24s23 7 21 24l-6-9-5 8-5-10-5 9-5-9-5 10z" fill="#1C1A17"/>
+        <circle cx="37" cy="32" r="6.5" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="54" cy="32" r="6.5" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
+        <circle cx="38" cy="33" r="2" fill="#1C1A17"/><circle cx="55" cy="33" r="2" fill="#1C1A17"/><path d="M43.5 32h4" stroke="#1C1A17" stroke-width="3"/>
+        <path d="M37 42q8 7 16 0" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+    </defs></svg>
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-cousin">Your cousin tried his best.</h2></div><p>We love him too. Here’s how “I’ll make your website for free” usually goes.</p></div>
+      <div class="saga">
+        <figure class="panel" style="--bg:#FFF1C2">
+          <span class="when">Day 1</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <g class="spark" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"><path d="M60 40l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/><path d="M262 60l4 8 8 4-8 4-4 8-4-8-8-4 8-4z"/></g>
+            <use href="#cz" x="112" y="40" width="96" height="160"/>
+            <path d="M200 132l26-26" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/><circle cx="230" cy="100" r="9" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M230 91v-10" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/>
+            <rect x="40" y="150" width="240" height="20" rx="4" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3.5"/>
+            <path d="M84 150l8-44h76l8 44z" fill="#C0C8CC" stroke="#1C1A17" stroke-width="3.5" stroke-linejoin="round"/><rect x="98" y="114" width="64" height="28" rx="3" fill="#13A8A0"/>
+            <path d="M104 122h30M104 130h44M104 136h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M60 170v52M260 170v52" stroke="#1C1A17" stroke-width="5"/>
+          </svg>
+          <figcaption class="bub" data-cz="0">Website? Easy, bhai. I’ll do it this weekend. Free!</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#DDF0F4">
+          <span class="when">Week 3</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <use href="#cz" x="182" y="40" width="96" height="160"/>
+            <path d="M206 128l-20-6" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <path d="M168 110h22l-3 24h-16z" fill="#fff" stroke="#1C1A17" stroke-width="3"/><path d="M190 116c8 0 8 10 0 10" fill="none" stroke="#1C1A17" stroke-width="3"/>
+            <path class="steam" d="M174 102c-5-8 5-12 0-20" fill="none" stroke="#9FB4C0" stroke-width="3.5" stroke-linecap="round"/><path class="steam" d="M184 102c-5-8 5-12 0-20" fill="none" stroke="#9FB4C0" stroke-width="3.5" stroke-linecap="round"/>
+            <rect x="20" y="150" width="280" height="20" rx="4" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3.5"/>
+            <path d="M30 150l8-90h120l8 90z" fill="#C0C8CC" stroke="#1C1A17" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="44" y="68" width="108" height="74" rx="4" fill="#fff"/>
+            <text x="52" y="86" font-family="Archivo, sans-serif" font-size="12" font-weight="700" fill="#55504A">Pick a font:</text>
+            <text x="52" y="104" font-family="Georgia, serif" font-size="13" fill="#1C1A17">Georgia</text>
+            <rect x="48" y="109" width="98" height="18" rx="3" fill="#FFC72C"/>
+            <text x="52" y="122" font-family="'Comic Sans MS','Comic Neue',cursive" font-size="13" font-weight="700" fill="#1C1A17">Comic Sans ✓</text>
+            <rect x="52" y="132" width="92" height="6" rx="3" fill="#EADFC8"/><rect class="crawl" x="52" y="132" width="92" height="6" rx="3" fill="#E8283F"/>
+            <path d="M40 170v52M280 170v52" stroke="#1C1A17" stroke-width="5"/>
+          </svg>
+          <figcaption class="bub">Almost done. Just choosing a font. 12% there.</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#FFE0EC">
+          <span class="when">Month 4</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <path d="M0 26Q80 58 160 26T320 26" fill="none" stroke="#1C1A17" stroke-width="2.5"/>
+            <g class="lights" stroke="#1C1A17" stroke-width="2"><circle cx="30" cy="36" r="6" fill="#FFC72C"/><circle cx="76" cy="44" r="6" fill="#FF4F8B"/><circle cx="122" cy="38" r="6" fill="#13A8A0"/><circle cx="198" cy="38" r="6" fill="#FFC72C"/><circle cx="244" cy="44" r="6" fill="#FF4F8B"/><circle cx="290" cy="36" r="6" fill="#13A8A0"/></g>
+            <g class="dance">
+              <path d="M144 112l-22-40M196 112l22-40" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+              <use href="#cz" x="122" y="56" width="96" height="160"/>
+              <g fill="#FF8A1F" stroke="#1C1A17" stroke-width="1.5"><circle cx="150" cy="110" r="6"/><circle cx="158" cy="120" r="6"/><circle cx="170" cy="124" r="6"/><circle cx="182" cy="120" r="6"/><circle cx="190" cy="110" r="6"/></g>
+            </g>
+            <rect x="12" y="176" width="92" height="12" rx="3" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3"/><path d="M24 188v34M92 188v34" stroke="#1C1A17" stroke-width="4"/>
+            <g class="buzz"><rect x="38" y="128" width="40" height="48" rx="7" fill="#1C1A17"/><rect x="43" y="134" width="30" height="34" rx="3" fill="#E8283F"/><text x="58" y="157" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="15" fill="#fff">14</text></g>
+            <path class="buzzlines" d="M28 140l-8-4M28 152h-9M88 140l8-4M88 152h9" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+            <text x="58" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="12" fill="#C8102E">missed calls</text>
+          </svg>
+          <figcaption class="bub">Can’t talk, I’m at a wedding till Sunday!</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#E4E9FF">
+          <span class="when">Month 9</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <g class="plane"><path d="M10 40l60-6 18-16h10l-8 18 28-2 8-8h8l-4 12 4 12h-8l-8-8-28-2 8 18H88L70 46z" fill="#fff" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></g>
+            <rect x="190" y="70" width="112" height="30" rx="5" fill="#22313B" stroke="#1C1A17" stroke-width="3"/><text x="246" y="90" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="13" fill="#FFC72C" letter-spacing="1">DEPARTURES</text>
+            <use href="#cz" x="96" y="56" width="96" height="160"/>
+            <path class="wave" d="M118 116l-26-34" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <path d="M172 118l18 26" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <rect x="182" y="144" width="56" height="70" rx="8" fill="#E8283F" stroke="#1C1A17" stroke-width="3.5"/><path d="M196 144v-12h28v12" fill="none" stroke="#1C1A17" stroke-width="3.5"/><path d="M182 168h56" stroke="#1C1A17" stroke-width="3"/>
+            <circle cx="196" cy="216" r="5" fill="#1C1A17"/><circle cx="226" cy="216" r="5" fill="#1C1A17"/>
+          </svg>
+          <figcaption class="bub">Moved to Toronto! Your password? No idea, sorry.</figcaption>
+        </figure>
+      </div>
+      <div class="meanwhile">
+        <div>
+          <h3>Meanwhile, at Click &amp; Grow</h3>
+          <ol class="steps-list">
+            <li><i aria-hidden="true"></i><span><b>Day 1.</b> A free call. The tea’s on us.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Day 3.</b> You click through your design and change whatever you like.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Day 14.</b> Your site goes live on your own domain, and you get the password.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Every day after.</b> We pick up the phone. Even during wedding season.</span></li>
+          </ol>
+        </div>
+        <span class="harmed" aria-hidden="true">NO COUSINS<br>WERE HARMED</span>
+      </div>
+      <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us the site he started. We’ll tell you what to keep, free.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= MENU (services) ================= -->
+  <section class="sec" id="menu" aria-labelledby="t-menu" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-menu">Everything you need to sell online.</h2></div><p>Prices shown in <b data-city-text="curName">Bangladeshi taka</b>. Pick a city above to switch.</p></div>
+      <div class="svc" id="svc">
+        <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M3 12h26" stroke="#1C1A17" stroke-width="2.5"/><rect x="7" y="16" width="10" height="3" fill="#006A4E"/></svg></span><h3>Business website</h3><p>Look as good online as you do in person.</p><span class="price">from <b data-price="web">৳25,000</b></span></a>
+        <a href="#order" data-need="Online shop"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 11c0-6 10-6 10 0" fill="none" stroke="#1C1A17" stroke-width="2.5"/></svg></span><h3>Online shop</h3><p data-city-text="shopLine">bKash, Nagad, card. Customers pay, you sleep.</p><span class="price">from <b data-price="shop">৳45,000</b></span></a>
+        <a href="#order" data-need="Social page to website"><span class="ico" style="--bg:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22v14H14l-6 5v-5H5z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Social page → website</h3><p data-city-text="inbox">Stop answering “price koto?” 200 times a day.</p><span class="price">from <b data-price="social">৳18,000</b></span></a>
+        <a href="#order" data-need="Mobile app"><span class="ico" style="--bg:var(--red-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="16" cy="14" r="4" fill="#E8283F"/></svg></span><h3>Mobile app</h3><p>Your shop, on their home screen.</p><span class="price">from <b data-price="app">৳1,20,000</b></span></a>
+        <a href="#order" data-need="Ads & Google"><span class="ico" style="--bg:#D6F4F1"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M20 20l7 7" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg></span><h3>Google &amp; SEO</h3><p>Get found when people search, not only when you post.</p><span class="price">from <b data-price="seo">৳12,000</b><em>/mo</em></span></a>
+        <a href="#order" data-need="Ads & Google"><span class="ico" style="--bg:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Facebook &amp; Google ads</h3><p>Ads that bring orders, not just likes from your aunts.</p><span class="price">from <b data-price="ads">৳10,000</b><em>/mo</em></span></a>
+        <a href="#order" data-need="Website"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.5 8 8.5.7-6.5 5.6 2 8.4L16 22.3 8.5 26.7l2-8.4L4 12.7l8.5-.7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Logo &amp; branding</h3><p>A logo people remember. Not one made in Paint at 2am.</p><span class="price">from <b data-price="logo">৳8,000</b></span></a>
+        <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12-6-2-10-6-10-12V8z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l4 4 6-7" fill="none" stroke="#006A4E" stroke-width="2.8" stroke-linecap="round"/></svg></span><h3>Website care</h3><p>Updates, backups and fixes. We worry so you don’t.</p><span class="price">from <b data-price="care">৳3,000</b><em>/mo</em></span></a>
+      </div>
+      <p class="note">Sample prices for this concept. Every quote is fixed before we start.</p>
+    </div>
+  </section>
+
+  <!-- ================= PROOF (slots for real clients) ================= -->
+  <!-- Replace every slot with a real client logo and their own words before launch. Never invent reviews. -->
+  <section class="sec proof" id="proof" aria-labelledby="t-proof">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-proof">Shops that already switched on.</h2></div><p>Two or three real clients go here: their logo, one sentence, one result.</p></div>
+      <div class="logos" aria-label="Client logos">
+        <span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span>
+      </div>
+      <div class="quotes">
+        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>Add one sentence from a real client about what changed.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
+        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>A short quote works best. Twenty words or fewer.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
+        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>Mix one Dhaka client with one from abroad.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LAST SEATS (honest scarcity) ================= -->
+  <!-- Set the real numbers in SEATS (script). The countdown uses the real calendar. -->
+  <section class="sec seats" id="seats" aria-labelledby="t-seats">
+    <div class="wrap seats-grid">
+      <div>
+        <p class="eyebrow">Limited seats, honestly</p>
+        <h2 id="t-seats"><span data-city-text="busShout">“Ar ekjon! Ar ekjon!”</span></h2>
+        <p class="lede"><span data-city-text="busLede">Like the bus conductor says: one more, one more.</span> We take <b data-seats-total>6</b> new projects a month, so every shop gets the real team, not the intern’s intern.</p>
+        <div class="meter" id="meter" aria-label="Seats this month"></div>
+        <p class="closing"><span data-seats-line>2 of 6 seats left this month.</span> Booking closes in <b id="countdown">a few days</b>.</p>
+        <p class="why">Seats fill in the order quotes are accepted. Missed this bus? The next one leaves on the 1st.</p>
+        <div class="sec-cta"><a class="btn btn--green" href="#order">Book my seat</a></div>
+      </div>
+      <div class="bus" role="img" aria-label="A bus pulls in. Most seats are taken, the last ones glow green, and the conductor leans out shouting for one more passenger.">
+        <svg viewBox="0 0 720 440" aria-hidden="true">
+          <rect x="0" y="380" width="720" height="60" fill="#454545"/><path d="M0 410h720" stroke="#F3F0E8" stroke-width="4" stroke-dasharray="40 30"/>
+          <g id="busAll">
+            <g id="upper" hidden><rect x="40" y="20" width="620" height="112" rx="22" style="fill:var(--busColor,#E8283F)" stroke="#1C1A17" stroke-width="5"/><g fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"><rect x="70" y="44" width="78" height="62" rx="8"/><rect x="162" y="44" width="78" height="62" rx="8"/><rect x="254" y="44" width="78" height="62" rx="8"/><rect x="346" y="44" width="78" height="62" rx="8"/><rect x="438" y="44" width="78" height="62" rx="8"/><rect x="530" y="44" width="78" height="62" rx="8"/></g><text x="350" y="124" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="13" fill="#fff">UPSTAIRS: FULL</text></g>
+            <rect x="40" y="130" width="620" height="230" rx="26" style="fill:var(--busColor,#E8283F)" stroke="#1C1A17" stroke-width="5"/>
+            <rect x="40" y="280" width="620" height="34" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/>
+            <path d="M60 300c40-14 80 14 120 0s80 14 120 0 80 14 120 0 80 14 120 0 80 14 120 0" fill="none" stroke="#006A4E" stroke-width="5"/>
+            <text x="350" y="346" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="22" fill="#FFFBF2" data-city-text="busName">CLICK &amp; GROW PARIBAHAN</text>
+            <g id="windows">
+              <g class="win" data-i="0"><rect x="70" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="109" cy="202" r="16" fill="#C98B5E"/><path d="M89 256c0-24 9-36 20-36s20 12 20 36z" fill="#FF4F8B"/></g></g>
+              <g class="win" data-i="1"><rect x="162" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="201" cy="202" r="16" fill="#F1C6A0"/><path d="M181 256c0-24 9-36 20-36s20 12 20 36z" fill="#13A8A0"/></g></g>
+              <g class="win" data-i="2"><rect x="254" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="293" cy="202" r="16" fill="#8C5A3C"/><path d="M273 256c0-24 9-36 20-36s20 12 20 36z" fill="#FFC72C"/></g></g>
+              <g class="win" data-i="3"><rect x="346" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="385" cy="202" r="16" fill="#C98B5E"/><path d="M365 256c0-24 9-36 20-36s20 12 20 36z" fill="#2F5DFF"/></g></g>
+              <g class="win" data-i="4"><rect x="438" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="477" cy="202" r="16" fill="#F1C6A0"/><path d="M457 256c0-24 9-36 20-36s20 12 20 36z" fill="#9B6BFF"/></g></g>
+              <g class="win" data-i="5"><rect x="530" y="160" width="78" height="96" rx="10" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/><g class="pax anim-box" style="transform-origin:50% 100%"><circle cx="569" cy="202" r="16" fill="#8C5A3C"/><path d="M549 256c0-24 9-36 20-36s20 12 20 36z" fill="#0E8A62"/></g></g>
+            </g>
+            <rect x="618" y="160" width="34" height="200" rx="6" fill="#BFD9E6" stroke="#1C1A17" stroke-width="4"/>
+            <circle cx="140" cy="370" r="34" fill="#333" stroke="#1C1A17" stroke-width="6"/><circle cx="140" cy="370" r="12" fill="#aaa"/><circle cx="560" cy="370" r="34" fill="#333" stroke="#1C1A17" stroke-width="6"/><circle cx="560" cy="370" r="12" fill="#aaa"/>
+            <circle cx="660" cy="320" r="9" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/>
+            <g id="conductor"><circle cx="676" cy="196" r="17" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3"/><path d="M660 280c0-40 6-58 16-58s16 18 16 58z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/><path id="cArm" class="anim-box" d="M690 234l26-26" stroke="#8C5A3C" stroke-width="9" stroke-linecap="round" style="transform-origin:0% 100%"/></g>
+          </g>
+          <g id="shout" class="anim-box" style="transform-origin:90% 100%"><rect x="420" y="0" width="290" height="74" rx="20" fill="#fff" stroke="#1C1A17" stroke-width="4"/><text x="565" y="34" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="27" fill="#111" data-city-text="busShoutShort">“Ar ekjon!”</text><text x="565" y="58" text-anchor="middle" font-family="Archivo, sans-serif" font-size="15" fill="#555" data-city-text="busShoutSub">One more seat!</text></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PACKS ================= -->
+  <section class="sec" id="packs" aria-labelledby="t-packs">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-packs">Three packs, priced like a menu.</h2></div><p>Named after our favourite food. Every pack comes with mobile design, hosting set-up and a WhatsApp button that works.</p></div>
+      <div class="pack-grid">
+        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="96" rx="70" ry="10" fill="#E9DCC0"/><path d="M40 92L80 20l40 72z" fill="#E7A94A" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M60 70l20-34 20 34" fill="none" stroke="#B9782A" stroke-width="3"/></svg></div>
+          <h3>Singara <small>the starter</small></h3><p class="tag">Small, quick and satisfying.</p><p class="amt" data-price="singara">৳18,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>One-page website</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>WhatsApp and call buttons</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Google Maps listing</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 7 days</li></ul>
+          <a class="btn" href="#order" data-pack="singara">Order Singara</a></article>
+        <article class="pack hot"><span class="badge">Most ordered</span><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="84" rx="72" ry="20" fill="#fff" stroke="#1C1A17" stroke-width="4"/><path d="M24 80c4-28 26-44 56-44s52 16 56 44z" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><g fill="#fff"><circle cx="60" cy="56" r="3"/><circle cx="80" cy="50" r="3"/><circle cx="100" cy="58" r="3"/></g><ellipse cx="96" cy="60" rx="14" ry="11" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="96" cy="60" r="6" fill="#FFC72C"/><circle cx="62" cy="66" r="10" fill="#D9A25A" stroke="#1C1A17" stroke-width="3"/><path class="steam" d="M60 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path class="steam" d="M96 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <h3>Biryani <small>the main</small></h3><p class="tag">The crowd favourite. Feeds a growing business.</p><p class="amt" data-price="biryani">৳35,000</p>
+          <ul><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Up to 6 pages</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Google set-up and basic SEO</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Analytics and ad pixels</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>30 days of free fixes</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Live in about 14 days</li></ul>
+          <a class="btn" href="#order" data-pack="biryani">Order Biryani</a></article>
+        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><path d="M30 46h100l-8 52H38z" fill="#9A9FA6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M24 46h112" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/><path d="M40 46c4-18 20-28 40-28s36 10 40 28" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><rect x="72" y="60" width="16" height="12" rx="3" fill="#E8283F"/></svg></div>
+          <h3>Kacchi <small>the feast</small></h3><p class="tag">For serious online sellers.</p><p class="amt" data-price="kacchi">৳65,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>Online shop, up to 50 products</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Local and card payments</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Order dashboard and alerts</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>SEO and first ad campaign</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 21 days</li></ul>
+          <a class="btn" href="#order" data-pack="kacchi">Order Kacchi</a></article>
+      </div>
+      <p class="custom">Every pack takes one of this month’s <span data-seats-total>6</span> seats. Not hungry for a pack? <a href="#order">Get a custom quote</a>.</p>
+    </div>
+  </section>
+
+  <!-- ================= ROUTE ================= -->
+  <section class="sec" id="route" aria-labelledby="t-route" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-route">From “we need a website” to launch day.</h2></div><p>Four stops, no traffic. You always know where we are.</p></div>
+      <div class="route-box">
+        <svg viewBox="0 0 1200 170" aria-hidden="true">
+          <rect y="120" width="1200" height="40" rx="20" fill="#454545"/><path d="M20 140h1160" stroke="#F3F0E8" stroke-width="4" stroke-dasharray="30 26"/>
+          <g fill="#E8283F" stroke="#1C1A17" stroke-width="3"><circle cx="150" cy="140" r="11"/><circle cx="450" cy="140" r="11"/><circle cx="750" cy="140" r="11"/><circle cx="1050" cy="140" r="11"/></g>
+          <use id="routeVeh" href="#veh-dhaka" x="0" y="34" width="150" height="116"/>
+        </svg>
+        <ol class="stops" id="stops">
+          <li class="on"><span class="stop-top"><b>1</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 10h15v8a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M20 12h2a3 3 0 0 1 0 6h-2M10 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><strong>Tea &amp; chat</strong><span>A free call. Tell us what you sell and who buys it.</span></li>
+          <li class="on"><span class="stop-top"><b>2</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 14s4-8 11-8 11 8 11 8-4 8-11 8S3 14 3 14z" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="14" cy="14" r="3.5" fill="currentColor"/></svg></span><strong>See it first</strong><span>A clickable design you can change before we build.</span></li>
+          <li class="on"><span class="stop-top"><b>3</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 8l-6 6 6 6M19 8l6 6-6 6M16 5l-4 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Build &amp; test</strong><span>Tested on real phones, slow internet included.</span></li>
+          <li class="on"><span class="stop-top"><b>4</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M17 4c4 0 7 3 7 7l-9 9-7-7z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 13l-4 1 2 4M15 20l-1 4-4-2M5 23l4-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="10" r="2" fill="currentColor"/></svg></span><strong>Launch &amp; grow</strong><span>Go live, then ads and Google bring the crowd.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OPEN EVERYWHERE ================= -->
+  <section class="sec" id="map" aria-labelledby="t-map" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-map">Built in Dhaka for shops everywhere.</h2></div><p>Calls in your time zone, prices in your currency, and one team that answers.</p></div>
+      <div class="map" role="img" aria-label="A simple world map with routes from Dhaka to London, Dubai, New York, Toronto, Sydney and Singapore">
+        <svg viewBox="0 0 1200 520" aria-hidden="true">
+          <g fill="#BFE0C9" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round">
+            <path d="M120 120c60-40 180-50 240-20 40 20 30 60 0 80-20 14-10 40-40 60-30 20-60 20-90 60-20 26-50 20-60-10-10-30-40-40-60-80-10-30-10-70 10-90z"/>
+            <path d="M300 300c30-10 70 0 80 30 10 40-10 80-30 120-14 28-40 36-50 10-12-30-20-70-24-110-2-26 4-44 24-50z"/>
+            <path d="M520 110c40-20 110-20 140 0 20 14 0 40-20 50-30 14-60 10-90 20-30 10-50-10-50-30 0-20 2-30 20-40z"/>
+            <path d="M540 210c40-10 90 0 110 30 20 30 10 80-10 120-16 30-40 50-60 40-20-10-24-50-34-80-10-30-34-50-30-80 2-18 8-26 24-30z"/>
+            <path d="M680 100c80-30 220-30 300 10 40 20 50 60 20 90-24 24-70 20-100 50-20 20-60 30-90 10-24-16-40-10-70-30-30-20-50-40-40-80 4-20 40-40 80-50z"/>
+            <path d="M940 360c30-14 80-10 100 10 16 16 10 46-14 60-30 18-80 14-96-10-14-20-14-46 10-60z"/>
+          </g>
+          <g id="arcs" fill="none" stroke="#E8283F" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="0">
+            <path pathLength="1" d="M860 200 Q 720 80 585 130"/><path pathLength="1" d="M860 200 Q 790 170 720 205"/><path pathLength="1" d="M860 200 Q 560 0 250 160"/><path pathLength="1" d="M860 200 Q 560 30 240 120"/><path pathLength="1" d="M860 200 Q 960 260 1000 390"/><path pathLength="1" d="M860 200 Q 900 240 900 270"/>
+          </g>
+          <g id="cities" stroke="#1C1A17" stroke-width="3">
+            <circle data-c="london" cx="585" cy="130" r="9" fill="#FFC72C"/><circle data-c="dubai" cx="720" cy="205" r="9" fill="#FFC72C"/><circle data-c="ny" cx="250" cy="160" r="9" fill="#FFC72C"/><circle cx="240" cy="120" r="8" fill="#FFC72C"/><circle cx="1000" cy="390" r="8" fill="#FFC72C"/><circle cx="900" cy="270" r="8" fill="#FFC72C"/>
+          </g>
+          <g font-family="Archivo, sans-serif" font-weight="700" font-size="16" fill="#1C1A17"><text x="560" y="114">London</text><text x="700" y="232">Dubai</text><text x="214" y="190">New York</text><text x="200" y="104">Toronto</text><text x="1014" y="396">Sydney</text><text x="918" y="276">Singapore</text></g>
+          <g id="dhakaPin"><circle cx="860" cy="200" r="14" fill="#006A4E" stroke="#1C1A17" stroke-width="3"/><text x="880" y="192" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22" fill="#1C1A17">Dhaka</text></g>
+        </svg>
+      </div>
+      <div class="map-legend"><span><i style="--c:#006A4E"></i>Our studio</span><span><i style="--c:#FFC72C"></i>Cities we work with</span></div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="sec" id="faq" aria-labelledby="t-faq" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-faq">Questions people ask (and some they’re too shy to).</h2></div></div>
+      <div class="faq">
+        <details><summary>Can you make it like Amazon, for the price of lunch, by tomorrow?</summary><p>We love the energy. Not the timeline. Let’s start with what you actually need, then pick the pack that fits.</p></details>
+        <details><summary>Why only a few projects a month?</summary><p>A small batch gets the full team. When the seats are gone, the next batch starts on the 1st. No fake timers: the countdown is the real calendar.</p></details>
+        <details><summary>You’re in Dhaka and I’m in London. How does that work?</summary><p>Calls in your working hours, updates on WhatsApp or email, and invoices in your currency. Most clients never notice the distance, only the price.</p></details>
+        <details><summary>How do I pay?</summary><p>bKash, Nagad or bank transfer in Bangladesh. Card or bank transfer everywhere else.</p></details>
+        <details><summary>What if I don’t like the design?</summary><p>You click through it before we build anything, and we change it until you’re happy to show it to your family.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ORDER: one step ================= -->
+  <section class="sec order" id="order" aria-labelledby="t-order">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">Free quote</p><h2 id="t-order">Your free quote takes one minute.</h2></div><p>One short form. A fixed price and a plan within a day, on WhatsApp or email. No payment now.</p></div>
+      <div class="order-grid">
+        <form class="slip" id="quote" novalidate>
+          <div id="formBody">
+            <div class="two">
+              <div class="field"><label for="f-biz">Shop or business name</label><input id="f-biz" autocomplete="organization" maxlength="26" aria-describedby="e-biz"><p class="err" id="e-biz"></p></div>
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+            </div>
+            <fieldset class="group"><legend>What do you need? <span class="opt">Pick any</span></legend>
+              <div class="pills" id="needs">
+                <label><input type="checkbox" name="need" value="Website"><span>Website</span></label>
+                <label><input type="checkbox" name="need" value="Online shop"><span>Online shop</span></label>
+                <label><input type="checkbox" name="need" value="Social page to website"><span>Page → website</span></label>
+                <label><input type="checkbox" name="need" value="Mobile app"><span>Mobile app</span></label>
+                <label><input type="checkbox" name="need" value="Ads & Google"><span>Ads &amp; Google</span></label>
+                <label><input type="checkbox" name="need" value="Not sure"><span>Not sure yet</span></label>
+              </div><p class="err" id="e-need"></p></fieldset>
+            <fieldset class="group"><legend>Rough budget</legend>
+              <div class="pills budget" id="budget">
+                <label><input type="radio" name="budget" value="0"><span><b>Singara</b><small data-budget="0">Under ৳25k</small></span></label>
+                <label><input type="radio" name="budget" value="1" checked><span><b>Biryani</b><small data-budget="1">৳25k to ৳60k</small></span></label>
+                <label><input type="radio" name="budget" value="2"><span><b>Kacchi</b><small data-budget="2">৳60k to ৳1.5 lakh</small></span></label>
+                <label><input type="radio" name="budget" value="3"><span><b>Wedding feast</b><small data-budget="3">৳1.5 lakh+</small></span></label>
+              </div></fieldset>
+            <fieldset class="group"><legend>How soon?</legend>
+              <div class="pills">
+                <label><input type="radio" name="when" value="Flexible" checked><span>Flexible</span></label>
+                <label><input type="radio" name="when" value="This month"><span>This month</span></label>
+                <label><input type="radio" name="when" value="Urgent"><span>Exam-night urgent</span></label>
+              </div></fieldset>
+            <div class="two">
+              <div class="field"><label for="f-contact">WhatsApp number or email</label><input id="f-contact" autocomplete="email" placeholder="01XXXXXXXXX or you@shop.com" aria-describedby="e-contact"><p class="err" id="e-contact"></p></div>
+              <div class="field"><label for="f-note">Anything else? <span class="opt">Optional</span></label><input id="f-note" placeholder="Your current site, a deadline, a dream"></div>
+            </div>
+            <div class="submit-row"><button class="btn btn--green" type="submit" id="send">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="small">Takes one seat only when you accept the quote.</span></div>
+          </div>
+          <div class="done-card" id="doneCard" hidden><span class="stamp">SEAT RESERVED</span><h3 id="doneTitle">Your plan is brewing.</h3><p>This is a preview, so nothing was sent yet.</p></div>
+          <p class="sr" role="status" aria-live="polite" id="live"></p>
+        </form>
+        <div class="side">
+          <div class="signpreview" aria-label="Preview of your painted shop sign"><div class="board" id="board"><b id="boardName">YOUR SHOP</b><small data-city-text="signSub">NOW OPEN · DHAKA</small></div></div>
+          <aside class="ticket" aria-label="Your quote so far"><h3>Your quote so far</h3>
+            <dl><dt>Shop</dt><dd id="tBiz">Not named yet</dd><dt>Needs</dt><dd id="tNeed">Pick something</dd><dt>Budget</dt><dd id="tBudget">Biryani</dd><dt>When</dt><dd id="tWhen">Flexible</dd><dt>Seat</dt><dd data-seats-ticket>1 of 2 left this month</dd></dl>
+            <ul class="promises"><li>Fixed price before any work</li><li>Reply within one working day</li><li>No payment until you say yes</li></ul></aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec final" aria-labelledby="t-final"><div class="wrap"><h2 id="t-final">Shutter’s up. Let’s sell.</h2><p><span data-seats-line>2 of 6 seats left this month.</span> Tell us about your business before the bus leaves.</p>
+    <div class="hero-cta"><a class="btn btn--green" href="#order">Get my free quote</a><a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a></div></div></section>
+</main>
+
+<footer class="brandfoot"><div class="wrap">
+  <div class="bf-top">
+    <a class="logo big" href="#top" aria-label="Click and Grow, back to top"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><path d="M7 9h26v5c0 2-1.6 3.4-3.3 3.4S26.4 16 26.4 14c0 2-1.6 3.4-3.3 3.4S19.8 16 19.8 14c0 2-1.6 3.4-3.3 3.4S13.2 16 13.2 14c0 2-1.6 3.4-3.1 3.4S7 16 7 14z" fill="#E8283F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 20l5.5 14 2.4-5.6 5.6-2.4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 33c0-4 2.4-6.4 6.2-7-.6 4-3 6.4-6.2 7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Click<b class="amp">&amp;</b>Grow</span></a>
+    <p class="tagline">Get found. Get clicked. Grow.</p>
+  </div>
+  <div class="bf-row">
+    <p>Websites, online shops and ads for businesses in Dhaka, London, Dubai, New York and anywhere with Wi-Fi.</p>
+    <nav aria-label="Footer"><a href="#menu">Services</a><a href="#packs">Prices</a><a href="#route">How it works</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav>
+  </div>
+  <p class="fine">© 2026 Click &amp; Grow · Made in Dhaka with too much tea.</p>
+</div></footer>
+<div class="mbar" aria-label="Quick actions"><a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a><a class="btn btn--green" href="#order">Free quote</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<script>
+(() => {
+  document.documentElement.lang = 'en';
+  /* ===== Honest scarcity: set real numbers each month ===== */
+  const SEATS = { total: 6, taken: 4 };
+
+  /* ===== One page, four cities ===== */
+  const CITY = {
+    dhaka:  { name: 'Dhaka', veh: '#veh-dhaka', vehColor: '', ride: '#veh-cng', rideColors: ['#2E8B57', '#4FA36F', '#2E8B57'], weather: 'rain', lm: 'dhaka',
+      eyebrow: 'Websites, online shops and ads for Dhaka businesses', serpCity: 'for Dhaka businesses', cheap: '৳4,999', stall: 'CHA · ৳10', rideText: 'CNG in the rain', curName: 'Bangladeshi taka',
+      says: [['“Jabo na.”', 'I won’t go.'], ['“500 taka extra.”', 'Hidden charges, from the start.'], ['“Ashbo. 3 mash por.”', 'I’ll come. In three months.'], ['“Template diye dei?”', 'Shall I just use a free template?']],
+      ours: ['“Uthen! Meter on.”', 'Get in. Fixed price. Leaving now.'],
+      bus: { name: 'CLICK & GROW PARIBAHAN', color: '#E8283F', double: false, shout: '“Ar ekjon! Ar ekjon!”', short: '“Ar ekjon!”', sub: 'One more seat!', lede: 'Like the bus conductor says: one more, one more.' },
+      shopLine: 'bKash, Nagad, card. Customers pay, you sleep.', inbox: 'Stop answering “price koto?” 200 times a day.', signSub: 'NOW OPEN · DHAKA', cur: 'bdt' },
+    london: { name: 'London', veh: '#veh-london', vehColor: '#23272B', ride: '#veh-london', rideColors: ['#23272B', '#5A2A3A', '#23272B'], weather: 'rain', lm: 'london',
+      eyebrow: 'Websites, online shops and ads for London businesses', serpCity: 'for London businesses', cheap: '£49', stall: 'TEA · £2', rideText: 'black cab in the rain', curName: 'British pounds',
+      says: [['“Not going that way, mate.”', 'Translation: we don’t do small shops.'], ['“That’s £50 extra.”', 'Surprise fees, from the start.'], ['“Back in three months.”', 'Ish. Don’t call us.'], ['“Fancy a template?”', 'Same as everyone else’s.']],
+      ours: ['“Hop in. Meter’s on.”', 'Fixed price. Leaving now.'],
+      bus: { name: 'CLICK & GROW  ROUTE 24', color: '#D7261E', double: true, shout: '“Room for one more!”', short: '“One more!”', sub: 'Upstairs is full.', lede: 'Like the bus driver says: room for one more.' },
+      shopLine: 'Card, Apple Pay, PayPal. Customers pay, you sleep.', inbox: 'Stop answering “how much?” 200 times a day.', signSub: 'NOW OPEN · LONDON', cur: 'gbp' },
+    dubai:  { name: 'Dubai', veh: '#veh-dubai', vehColor: '#F4E7C9', ride: '#veh-dubai', rideColors: ['#F4E7C9', '#EADBB8', '#F4E7C9'], weather: 'dry', lm: 'dubai',
+      eyebrow: 'Websites, online shops and ads for Dubai businesses', serpCity: 'for Dubai businesses', cheap: 'AED 199', stall: 'KARAK · AED 1', rideText: 'taxi at 5pm on Sheikh Zayed Road', curName: 'UAE dirhams',
+      says: [['“Not my area, sorry.”', 'Small shops? Not for us.'], ['“AED 200 extra.”', 'Surprise fees, from the start.'], ['“Next quarter, maybe.”', 'Or the one after.'], ['“Template is fine, no?”', 'Same as everyone else’s.']],
+      ours: ['“Yalla! Meter’s on.”', 'Fixed price. Leaving now.'],
+      bus: { name: 'CLICK & GROW EXPRESS', color: '#13A8A0', double: false, shout: '“One more seat!”', short: '“One more!”', sub: 'Air-conditioned, obviously.', lede: 'Like the bus driver says: one more seat.' },
+      shopLine: 'Card, Apple Pay, Tabby. Customers pay, you sleep.', inbox: 'Stop answering “how much?” 200 times a day.', signSub: 'NOW OPEN · DUBAI', cur: 'aed' },
+    ny:     { name: 'New York', veh: '#veh-ny', vehColor: '#FFC72C', ride: '#veh-ny', rideColors: ['#FFC72C', '#F2B705', '#FFC72C'], weather: 'rain', lm: 'ny',
+      eyebrow: 'Websites, online shops and ads for New York businesses', serpCity: 'for New York businesses', cheap: '$49', stall: 'COFFEE · $3', rideText: 'cab at rush hour', curName: 'US dollars',
+      says: [['“Off duty.”', 'Small shops? Not today.'], ['“That’s 50 bucks extra.”', 'Surprise fees, from the start.'], ['“Call back in Q3.”', 'Of next year.'], ['“Ever heard of templates?”', 'Same as everyone else’s.']],
+      ours: ['“Get in. Meter’s running.”', 'Fixed price. Leaving now.'],
+      bus: { name: 'CLICK & GROW  M1', color: '#2F5DFF', double: false, shout: '“Step in, one more!”', short: '“One more!”', sub: 'Last seat, no standing.', lede: 'Like the bus driver says: step in, one more.' },
+      shopLine: 'Card, Apple Pay, PayPal. Customers pay, you sleep.', inbox: 'Stop answering “how much?” 200 times a day.', signSub: 'NOW OPEN · NEW YORK', cur: 'usd' }
+  };
+  const PRICES = {
+    web: ['৳25,000', '£199', 'AED 899', '$249'], shop: ['৳45,000', '£359', 'AED 1,649', '$449'], social: ['৳18,000', '£149', 'AED 659', '$179'],
+    app: ['৳1,20,000', '£949', 'AED 4,399', '$1,190'], seo: ['৳12,000', '£95', 'AED 439', '$119'], ads: ['৳10,000', '£79', 'AED 369', '$99'],
+    logo: ['৳8,000', '£65', 'AED 289', '$79'], care: ['৳3,000', '£25', 'AED 109', '$29'],
+    singara: ['৳18,000', '£149', 'AED 659', '$179'], biryani: ['৳35,000', '£279', 'AED 1,279', '$349'], kacchi: ['৳65,000', '£519', 'AED 2,379', '$649'],
+    lawn: ['৳450 / yd', '£4 / yd', 'AED 17 / yd', '$5 / yd'], silk: ['৳1,200 / yd', '£10 / yd', 'AED 45 / yd', '$12 / yd'], muslin: ['৳900 / yd', '£8 / yd', 'AED 33 / yd', '$9 / yd']
+  };
+  const CUR = { bdt: { i: 0, sym: '৳', min: 10000, max: 200000, fmt: n => '৳' + n.toLocaleString('en-IN') }, gbp: { i: 1, sym: '£', min: 100, max: 2000, fmt: n => '£' + n.toLocaleString('en-GB') }, aed: { i: 2, sym: 'AED', min: 400, max: 8000, fmt: n => 'AED ' + n.toLocaleString('en-US') }, usd: { i: 3, sym: '$', min: 100, max: 2500, fmt: n => '$' + n.toLocaleString('en-US') } };
+
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const M = window.Motion; const canAnim = !reduce && M && M.animateMini && M.animate;
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+
+  /* bunting */
+  const cols = ['#E8283F', '#FFC72C', '#006A4E', '#FF4F8B', '#13A8A0'];
+  $$('.bunting').forEach(b => { for (let i = 0; i < 70; i++) { const f = document.createElement('i'); f.style.setProperty('--c', cols[i % 5]); b.appendChild(f); } });
+
+  /* ---------- seats ---------- */
+  const now = new Date(), month = now.toLocaleString('en-GB', { month: 'long' });
+  const left = Math.max(0, SEATS.total - SEATS.taken);
+  const days = Math.ceil((new Date(now.getFullYear(), now.getMonth() + 1, 1) - now) / 864e5);
+  $$('[data-seats-total]').forEach(e => e.textContent = SEATS.total);
+  $$('[data-seats-line]').forEach(e => e.textContent = left ? `${left} of ${SEATS.total} seats left for ${month}.` : `${month} is full. Next bus leaves on the 1st.`);
+  $$('[data-seats-chip]').forEach(e => e.textContent = left ? `${left} seat${left > 1 ? 's' : ''} left in ${month}` : 'Booking next month');
+  $$('[data-seats-ticket]').forEach(e => e.textContent = left ? `1 of ${left} left in ${month}` : 'Next month’s bus');
+  $('#countdown').textContent = days <= 1 ? 'less than a day' : `${days} days`;
+  for (let i = 0; i < SEATS.total; i++) { const s = document.createElement('span'); const t = i < SEATS.taken; s.className = t ? 'taken' : 'free'; s.textContent = i + 1; s.setAttribute('role', 'img'); s.setAttribute('aria-label', `Seat ${i + 1}: ${t ? 'taken' : 'free'}`); $('#meter').appendChild(s); }
+  $$('#windows .win').forEach(w => { const i = +w.dataset.i; if (i >= SEATS.total) w.style.display = 'none'; else if (i >= SEATS.taken) { w.classList.add('empty'); w.querySelector('.pax').style.display = 'none'; const r = w.querySelector('rect'); r.setAttribute('fill', '#D7F2E4'); r.setAttribute('stroke', '#006A4E'); r.setAttribute('stroke-width', '6'); } });
+
+  /* ---------- city ---------- */
+  let city = 'dhaka', cur = 'bdt';
+  function guessCity() {
+    const saved = store.get('cg-city'); if (saved && CITY[saved]) return saved;
+    let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    if (/Dhaka/.test(tz)) return 'dhaka';
+    if (/^Europe\//.test(tz)) return 'london';
+    if (/Dubai|Muscat|Qatar|Riyadh|Kuwait|Bahrain/.test(tz)) return 'dubai';
+    if (/^America\//.test(tz)) return 'ny';
+    return 'dhaka';
+  }
+  function setCity(c, animate) {
+    city = c; const C = CITY[c]; cur = C.cur; store.set('cg-city', c);
+    $$('.city-btns button').forEach(b => b.setAttribute('aria-pressed', b.dataset.city === c));
+    $$('[data-city-text]').forEach(el => { const k = el.dataset.cityText; const v = k.startsWith('bus') ? { busName: C.bus.name, busShout: C.bus.shout, busShoutShort: C.bus.short, busShoutSub: C.bus.sub, busLede: C.bus.lede }[k] : { ride: C.rideText }[k] || C[k]; if (v != null) el.textContent = v; });
+    // prices
+    $$('[data-price]').forEach(el => { el.textContent = PRICES[el.dataset.price][CUR[cur].i]; });
+    if (animate && canAnim) M.animate('[data-price]', { opacity: [0, 1], y: [8, 0] }, { duration: .35, delay: M.stagger(.02) });
+    // landmark
+    $$('.landmark').forEach(g => { const on = g.dataset.lm === C.lm; g.style.opacity = on ? 1 : 0; });
+    if (animate && canAnim && $('.landmark')) M.animateMini(`.landmark[data-lm="${C.lm}"]`, { transform: ['translateY(30px)', 'translateY(0px)'] }, { type: 'spring', bounce: .35, duration: .7 });
+    // vehicles
+    ['#heroVeh', '#routeVeh'].forEach(id => { const u = $(id); if (!u) return; u.setAttribute('href', C.veh); u.style.color = C.vehColor; });
+    if (animate && canAnim && $('#heroVehWrap')) M.animateMini('#heroVehWrap', { transform: ['translateX(-420px)', 'translateX(0px)'] }, { duration: .9, ease: [.23, 1, .32, 1] });
+    window.__cg = { c, C, cur, fmt: CUR[cur].fmt }; document.dispatchEvent(new Event('cg:city'));
+    // bus
+    $('.bus svg').style.setProperty('--busColor', C.bus.color); $('#upper').toggleAttribute('hidden', !C.bus.double);
+    // map focus
+    $$('#cities circle').forEach(d => d.setAttribute('r', d.dataset.c === c ? 13 : (d.dataset.c ? 9 : 8)));
+    // budget slider follows currency
+    updBudget();
+  }
+  $$('.city-btns button').forEach(b => b.addEventListener('click', () => setCity(b.dataset.city, true)));
+
+  /* ---------- one-step quote form ---------- */
+  const BUDGET = { bdt: ['Under ৳25k', '৳25k to ৳60k', '৳60k to ৳1.5 lakh', '৳1.5 lakh+'], gbp: ['Under £200', '£200 to £500', '£500 to £1,200', '£1,200+'], aed: ['Under AED 900', 'AED 900 to 2,200', 'AED 2,200 to 5,500', 'AED 5,500+'], usd: ['Under $250', '$250 to $600', '$600 to $1,500', '$1,500+'] };
+  const BNAME = ['Singara', 'Biryani', 'Kacchi', 'Wedding feast'];
+  function updBudget() { $$('[data-budget]').forEach(el => el.textContent = BUDGET[cur][+el.dataset.budget]); sync(); }
+  function sync() {
+    const b = $('#f-biz').value.trim(); $('#boardName').textContent = (b || 'Your shop').toUpperCase(); $('#tBiz').textContent = b || 'Not named yet';
+    const needs = $$('#needs input:checked').map(i => i.value); $('#tNeed').textContent = needs.length ? needs.join(', ') : 'Pick something';
+    const bi = +($('input[name="budget"]:checked') || { value: 1 }).value; $('#tBudget').textContent = `${BNAME[bi]} · ${BUDGET[cur][bi]}`;
+    const w = $('input[name="when"]:checked'); $('#tWhen').textContent = w ? w.value : '';
+  }
+  const form = $('#quote'), live = $('#live');
+  form.addEventListener('input', sync); form.addEventListener('change', sync);
+  // clear each error as soon as its field is fixed
+  const okRules = { 'f-biz': ['#e-biz', v => !!v.trim()], 'f-name': ['#e-name', v => !!v.trim()], 'f-contact': ['#e-contact', v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || /^\+?\d{8,15}$/.test(v.trim().replace(/[\s-]/g, ''))] };
+  form.addEventListener('input', e => { const r = okRules[e.target.id]; if (r && $(r[0]).textContent && r[1](e.target.value)) { $(r[0]).textContent = ''; e.target.setAttribute('aria-invalid', 'false'); } });
+  $('#needs').addEventListener('change', () => { if ($$('#needs input:checked').length) $('#e-need').textContent = ''; });
+  let lastLen = 0;
+  $('#f-biz').addEventListener('input', e => { const l = e.target.value.length; if (canAnim && l > lastLen) M.animate('#board', { scale: [1.05, 1], rotate: [-1.2, 0] }, { type: 'spring', bounce: .5, duration: .4 }); lastLen = l; });
+  $$('#svc a').forEach(a => a.addEventListener('click', () => { $$('#needs input').forEach(i => { if (i.value === a.dataset.need) i.checked = true; }); sync(); }));
+  const packI = { singara: 0, biryani: 1, kacchi: 2 };
+  $$('[data-pack]').forEach(a => a.addEventListener('click', () => { const i = packI[a.dataset.pack]; $$('input[name="budget"]')[i].checked = true; $$('#needs input').forEach(x => { if (x.value === (i === 2 ? 'Online shop' : 'Website')) x.checked = true; }); sync(); }));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const biz = $('#f-biz'), name = $('#f-name'), ct = $('#f-contact'), v = ct.value.trim().replace(/[\s-]/g, '');
+    const errs = [
+      [biz, '#e-biz', biz.value.trim() ? '' : 'What’s the shop called? Even “Bhai’s shop” works.'],
+      [name, '#e-name', name.value.trim() ? '' : 'What should we call you?'],
+      [$('#needs input'), '#e-need', $$('#needs input:checked').length ? '' : 'Pick at least one. “Not sure yet” counts.'],
+      [ct, '#e-contact', (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(ct.value.trim()) || /^\+?\d{8,15}$/.test(v)) ? '' : 'Add a WhatsApp number or an email we can reply to.']
+    ];
+    let first = null;
+    errs.forEach(([el, eid, msg]) => { $(eid).textContent = msg; if (el.tagName === 'INPUT' && el.type !== 'checkbox') el.setAttribute('aria-invalid', !!msg); if (msg && !first) first = el; });
+    if (first) { first.focus(); live.textContent = 'Please check the highlighted fields.'; if (canAnim) M.animate(form, { x: [0, -8, 8, -5, 0] }, { duration: .35 }); return; }
+    const btn = $('#send'); btn.disabled = true; btn.firstChild.textContent = 'Sending… ';
+    setTimeout(() => {
+      $('#formBody').hidden = true; $('#doneCard').hidden = false;
+      $('#doneTitle').textContent = `Thanks, ${name.value.trim().split(' ')[0]}! ${biz.value.trim()} has a seat on hold.`;
+      live.textContent = 'Seat reserved. This is a preview, so nothing was sent yet.';
+      if (canAnim) { M.animate('.stamp', { scale: [1.7, 1], opacity: [0, 1], rotate: [-22, -6] }, { type: 'spring', bounce: .45, duration: .6 }); M.animate('#doneCard h3, #doneCard p', { opacity: [0, 1], y: [10, 0] }, { duration: .4, delay: M.stagger(.08, { startDelay: .25 }) }); M.animate('#board', { scale: [1, 1.1, 1] }, { type: 'spring', bounce: .5, duration: .6 }); }
+    }, 700);
+  });
+
+  setCity(guessCity(), false);
+
+  /* ================= MOTION =================
+     SVG scenes use Motion's animateMini (WAAPI under the hood; Motion's animate() does not move SVG groups in this build).
+     HTML pieces use animate() with springs. Every "before" state is set here, so without Motion the page shows finished scenes. */
+  if (!canAnim) return;
+  document.documentElement.classList.add('anim');
+  const { animate, animateMini: A, inView, stagger } = M;
+  const OUT = [.23, 1, .32, 1], INOUT = [.65, 0, .35, 1];
+  const css = (el, t, o) => { el.style.transform = t; if (o != null) el.style.opacity = o; };
+  const clamp = v => Math.max(0, Math.min(1, v)), eOut = t => 1 - Math.pow(1 - t, 3), eIn = t => t * t * t;
+  /* one rAF-throttled scroll listener drives every scroll-linked scene (Motion's scroll() stuck on native ScrollTimeline here) */
+  const scenes = [];
+  const onScrollScene = (el, progressOf, paint) => scenes.push({ el, progressOf, paint });
+  let ticking = false;
+  const run = () => { const vh = innerHeight; scenes.forEach(sc => { const r = sc.el.getBoundingClientRect(); sc.paint(clamp(sc.progressOf(r, vh))); }); ticking = false; };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
+  addEventListener('resize', run);
+
+  /* ---- 2 SEARCH: the speed race is mounted by the script below ---- */
+  $$('.tile').forEach(t => t.style.opacity = 0);
+  inView('.tiles', () => { animate('.tile', { opacity: [0, 1], y: [16, 0] }, { duration: .4, delay: stagger(.07), ease: OUT }); }, { amount: .4 });
+
+  /* ---- 4 MENU: one springy wave ---- */
+  $$('#svc a').forEach(a => a.style.opacity = 0);
+  inView('#svc', () => { animate('#svc a', { opacity: [0, 1], y: [30, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.06) }); }, { amount: .2 });
+
+  /* ---- 5 SEATS: the bus drives in forward, passengers sit, the conductor shouts ---- */
+  const bus = $('#busAll'), pax = $$('.win:not(.empty) .pax');
+  css(bus, 'translateX(-760px)'); css($('#shout'), 'scale(.8)', 0); pax.forEach(x => css(x, 'scale(0)')); $$('#meter span').forEach(sp => sp.style.opacity = 0);
+  inView('#seats', () => {
+    A(bus, { transform: ['translateX(-760px)', 'translateX(0px)'] }, { duration: 1.1, ease: [.16, 1, .3, 1] });
+    pax.forEach((x, i) => A(x, { transform: ['scale(0)', 'scale(1)'] }, { type: 'spring', bounce: .45, duration: .5, delay: .8 + i * .12 }));
+    animate('#meter span', { opacity: [0, 1], y: [10, 0] }, { duration: .3, delay: stagger(.06, { startDelay: .8 }) });
+    A('#shout', { opacity: [0, 1], transform: ['scale(.8)', 'scale(1)'] }, { type: 'spring', bounce: .5, duration: .5, delay: 1.4 });
+    A('#cArm', { transform: ['rotate(0deg)', 'rotate(-30deg)', 'rotate(0deg)', 'rotate(-30deg)', 'rotate(0deg)'] }, { duration: 1.2, delay: 1.4 });
+  }, { amount: .35 });
+
+  /* ---- PROOF ---- */
+  $$('.quote, .logos .slot').forEach(q => q.style.opacity = 0);
+  inView('#proof', () => { animate('.logos .slot', { opacity: [0, 1], y: [12, 0] }, { duration: .35, delay: stagger(.05) }); animate('.quote', { opacity: [0, 1], y: [30, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.1, { startDelay: .2 }) }); }, { amount: .25 });
+
+  /* ---- 6 PACKS ---- */
+  $$('.pack').forEach(p => p.style.opacity = 0);
+  inView('.pack-grid', () => { animate('.pack', { opacity: [0, 1], y: [40, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.1) }); animate('.pack .badge', { scale: [.5, 1], rotate: [-15, -3] }, { type: 'spring', bounce: .55, duration: .6, delay: .45 }); }, { amount: .2 });
+
+  /* ---- 7 ROUTE: forward, stops light as it passes ---- */
+  const stops = $$('#stops li'); stops.forEach(s => s.classList.remove('on'));
+  const routeVeh = $('#routeVeh');
+  onScrollScene($('.route-box'), (r, vh) => (.8 * vh - r.top) / (r.height + .35 * vh), p => { css(routeVeh, `translateX(${1050 * p}px)`); stops.forEach((li, i) => li.classList.toggle('on', p >= [.1, .37, .63, .9][i])); });
+
+  /* ---- 8 MAP: routes draw out from Dhaka ---- */
+  $$('#arcs path').forEach(pth => pth.style.strokeDashoffset = 1);
+  const arcs = $$('#arcs path');
+  onScrollScene($('.map'), (r, vh) => (.85 * vh - r.top) / (.3 * vh + r.height / 2), p => arcs.forEach((a, i) => { a.style.strokeDashoffset = 1 - clamp(p * 1.3 - i * .06); }));
+  run();
+})();
+</script>
+<script>
+(() => {
+  const M = window.Motion, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const can = !reduce && !!(M && M.animate);
+  const OUT = [.23, 1, .32, 1];
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const tokens = new WeakMap(), observers = new WeakMap();
+  const G = () => window.__cg;
+  const wait = (ms, ok) => new Promise((res, rej) => setTimeout(() => ok() ? res() : rej(0), ms));
+  const an = (el, kf, o) => { if (can && el) M.animate(el, kf, o); };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function tween(el, to, ms, fmt, ok) {
+    const from = el._v ?? to; el._v = to; const id = el._tid = (el._tid || 0) + 1;
+    if (!can || from === to) { el.textContent = fmt(to); return; }
+    const s = performance.now();
+    const step = n => { if (!ok() || el._tid !== id) return; const p = Math.min(1, (n - s) / ms), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(Math.round(from + (to - from) * e)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  const isBD = () => G().c === 'dhaka';
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
+  const money = n => G().fmt(n);
+  const WEB = () => ({ bdt: 25000, gbp: 199, aed: 899, usd: 249 })[G().cur];
+  const CHEAP = () => ({ bdt: 4999, gbp: 49, aed: 199, usd: 49 })[G().cur];
+  const person = '<svg viewBox="0 0 22 30" aria-hidden="true"><circle cx="11" cy="7" r="6"/><path d="M1 30c0-10 4-15 10-15s10 5 10 15z"/></svg>';
+  const mag = '<svg class="mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+  const again = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const bag = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.5 13h-11z" fill="currentColor"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+
+  /* ---------- 4 SPEED RACE: two phones open the same link; one loads before the customer gets bored ---------- */
+  const v4 = {
+    name: 'Speed race', sub: () => 'Your customer taps your link. Watch who waits.',
+    html: () => {
+      const load = '<div class="v4-load done"><div class="spin"></div><div class="pbar"><i></i></div><span>Loading…</span></div>';
+      const col = (url, screen, extra, clk, cls, ppl, cap) => `<div class="v4-col"><div class="ph"><div class="urlb">${url}</div><div class="scr">${screen}${load}${extra}</div></div><p class="clock ${cls}" data-clock>${clk}</p><div class="ppl">${ppl}</div><p class="v4-cap" data-cap aria-live="polite">${cap}</p></div>`;
+      const cousin = '<div class="v-cousin" aria-hidden="true"><div class="t">★ WELCOME TO RAHMAN TRADERS ★</div><div class="uc">⚠ UNDER CONSTRUCTION ⚠</div><div class="row"><i></i><i></i><i></i></div><div><span class="blink">BEST PRICE!!!</span> For price please inbox</div><div class="ctr">VISITORS: 000047</div></div>';
+      const pro = `<div class="v-pro" aria-hidden="true"><div class="nav">Rahman Traders <span><span>Fabrics</span><span>Cart (2)</span></span></div><div class="hero2"><div><b>Quality fabric, delivered anywhere.</b><p>Order before 6pm, ships today.</p><span class="go">Shop fabrics</span></div><div class="pic"></div></div><div class="cards"><div>Cotton lawn<small>${money(conv(450))} / yd</small></div><div>Katan silk<small>${money(conv(1200))} / yd</small></div><div>Muslin<small>${money(conv(900))} / yd</small></div></div></div>`;
+      const p = (gone, buy) => Array.from({ length: 5 }, (_, i) => person.replace('<svg', `<svg class="${i < gone ? 'gone' : ''}${buy && i === 0 ? 'buy' : ''}"`)).join('');
+      return `<div class="v4">
+        ${col('rahmantraders.blogspot.com', cousin, '', '8.4s', '', p(4), '4 of 5 visitors left before it loaded.')}
+        ${col('rahmantraders.com', pro, `<div class="toast">${bag}New order · ${money(conv(2400))}</div>`, '1.2s', 'good', p(0, true), 'Loaded in 1.2s. Nobody left. One ordered.')}
+      </div>
+      <div class="v4-ctl"><button class="btn" type="button" data-race>Run the race again</button><p>Most phone visitors give up on a site that takes more than a few seconds.</p></div>`;
+    },
+    setup(r, ok) {
+      $('[data-race]', r).addEventListener('click', () => mount(r, v4));
+      const [L, R] = $$('.v4-col', r).map(c => ({ load: $('.v4-load', c), bar: $('.pbar i', c), clock: $('[data-clock]', c), ppl: $$('.ppl svg', c), cap: $('[data-cap]', c) }));
+      const toast = $('.toast', r);
+      return {
+        final() {},
+        prep() { [L, R].forEach(s => { s.load.classList.remove('done'); s.bar.style.transform = 'scaleX(0)'; s.clock.textContent = '0.0s'; s.cap.textContent = ''; s.ppl.forEach(p => p.classList.remove('gone', 'buy')); }); toast.style.opacity = 0; },
+        play() {
+          return new Promise(res => {
+            const t0 = performance.now(), LEAVE = [3, 4.2, 5.4, 6.6]; let rDone = false, toasted = false, left = 0;
+            const frame = n => {
+              if (!ok()) return res();
+              const e = (n - t0) / 1000;
+              R.clock.textContent = Math.min(e, 1.2).toFixed(1) + 's';
+              R.bar.style.transform = `scaleX(${1 - Math.pow(1 - Math.min(e / 1.2, 1), 3)})`;
+              if (e >= 1.2 && !rDone) { rDone = true; R.load.classList.add('done'); }
+              if (e >= 1.8 && !toasted) { toasted = true; an(toast, { opacity: [0, 1], y: [-16, 0] }, { type: 'spring', bounce: .35, duration: .5 }); R.ppl[0].classList.add('buy'); R.cap.textContent = 'Loaded in 1.2s. Nobody left. One ordered.'; }
+              L.clock.textContent = Math.min(e, 8.4).toFixed(1) + 's';
+              L.bar.style.transform = `scaleX(${e < 1.5 ? e / 1.5 * .35 : .35 + (Math.min(e, 8.4) - 1.5) / 6.9 * .6})`;
+              while (left < LEAVE.length && e >= LEAVE[left]) { L.ppl[left].classList.add('gone'); left++; L.cap.textContent = `${left} of 5 visitor${left > 1 ? 's' : ''} left. Still loading…`; }
+              if (e >= 8.4) { L.load.classList.add('done'); L.cap.textContent = '4 of 5 visitors left before it loaded.'; return res(); }
+              requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+          });
+        }
+      };
+    }
+  };
+
+
+  function mount(stage, v) {
+    const t = (tokens.get(stage) || 0) + 1; tokens.set(stage, t);
+    const old = observers.get(stage); if (old) old.disconnect();
+    stage.innerHTML = v.html();
+    const ok = () => tokens.get(stage) === t;
+    const ctl = v.setup(stage, ok);
+    if (!can) { ctl.final(); return; }
+    ctl.prep();
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); Promise.resolve(ctl.play()).catch(() => {}); } }, { threshold: .3 });
+    observers.set(stage, io); io.observe(stage);
+  }
+  const searchStage = $('#searchStage');
+  const all = () => mount(searchStage, v4);
+  document.addEventListener('cg:city', all);
+  all();
+})();
+</script>
+<script>
+(() => {
+  /* ===== HERO: a shop's day on fast-forward. At night the shutter is down, the street becomes a lock screen, and orders keep arriving. ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const stage = $('#heroStage');
+  let token = 0, timers = [];
+  const G = () => window.__cg || { c: 'dhaka', cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
+  const money = b => G().fmt(conv(b));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function mk(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  // Easing on a multi-step effect goes on each step; on the effect it would warp the whole timeline.
+  const A = (el, kf, o = {}) => {
+    if (!el) return null;
+    const opts = Object.assign({ fill: 'both', easing: OUT }, o);
+    if (kf.length > 2 && opts.easing !== 'linear') { kf = kf.map(k => Object.assign({ easing: opts.easing }, k)); opts.easing = 'linear'; }
+    return el.animate(kf, opts);
+  };
+  const stop = el => el && el.getAnimations().forEach(a => a.cancel());
+
+  const SKIN = ['#C98B5E', '#8C5A3C', '#F1C6A0', '#A86F4C'];
+  const SHIRT = ['#FF4F8B', '#13A8A0', '#2F5DFF', '#FFC72C', '#9B6BFF', '#E8283F', '#0E8A62'];
+  const wins = (x0, y0, cols, rows, dx, dy) => { let s = ''; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) s += `<rect x="${x0 + c * dx}" y="${y0 + r * dy}" width="44" height="54"/>`; return s; };
+  const slats = () => { let s = ''; for (let y = 396; y < 612; y += 16) s += `M430 ${y}h240`; return s; };
+
+  const html = () => `<div class="hp-scene"><svg class="hp-svg" viewBox="0 0 1100 780" role="img" aria-label="A shop’s whole day on fast-forward. Customers queue with their phones during the day. At night the shutter closes, and the street turns into a phone lock screen where new orders keep arriving.">
+    <defs><symbol id="hp-p" viewBox="0 0 40 100">
+      <path d="M14 62v34M26 62v34" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/>
+      <path d="M8 64c0-26 5-38 12-38s12 12 12 38z" fill="currentColor" stroke="#1C1A17" stroke-width="2.5"/>
+      <circle cx="20" cy="13" r="10" fill="var(--skin,#C98B5E)" stroke="#1C1A17" stroke-width="2.5"/>
+      <path d="M28 36l2 14-6 4" fill="none" stroke="var(--skin,#C98B5E)" stroke-width="5" stroke-linecap="round"/>
+      <rect x="21" y="43" width="9" height="15" rx="2" fill="#1C1A17"/><rect x="22.5" y="45" width="6" height="11" rx="1" fill="#9FB4C0"/>
+    </symbol></defs>
+    <rect width="1100" height="780" fill="#BFE6FF"/><rect class="dusk" width="1100" height="780" fill="#FFB38A" opacity="0"/><rect class="night" width="1100" height="780" fill="#1B2440" opacity="0"/>
+    <g class="stars" fill="#FFF7C2" opacity="0"><circle cx="90" cy="90" r="3"/><circle cx="260" cy="60" r="2.5"/><circle cx="360" cy="110" r="3"/><circle cx="760" cy="70" r="2.5"/><circle cx="880" cy="130" r="3"/><circle cx="1010" cy="80" r="2.5"/><circle cx="180" cy="160" r="2"/><circle cx="980" cy="190" r="2"/></g>
+    <g class="sun" style="transform:translate(200px,100px)"><circle r="50" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/></g>
+    <g class="moon" style="transform:translate(60px,200px)" opacity="0"><circle r="36" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/><circle cx="15" cy="-11" r="30" fill="#1B2440"/></g>
+    <g stroke="#1C1A17" stroke-width="4"><rect x="-10" y="210" width="210" height="430" fill="#F4C9A0"/><rect x="200" y="140" width="200" height="500" fill="#C9E6D8"/><rect x="700" y="170" width="200" height="470" fill="#F6D9E2"/><rect x="900" y="250" width="210" height="390" fill="#D7E3F6"/></g>
+    <g fill="#FFFBF2" stroke="#1C1A17" stroke-width="3">${wins(30, 250, 2, 4, 90, 90)}${wins(240, 180, 2, 5, 90, 86)}${wins(730, 210, 2, 4, 90, 90)}${wins(940, 290, 2, 3, 90, 90)}</g>
+    <rect x="410" y="250" width="280" height="390" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
+    <rect x="392" y="262" width="316" height="96" rx="12" fill="#E8283F" stroke="#1C1A17" stroke-width="4"/>
+    <text x="550" y="308" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="32" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.5" paint-order="stroke">YOUR BUSINESS</text>
+    <text class="signsub" x="550" y="343" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="24" fill="#fff" letter-spacing=".5">OPEN · 10:00 AM</text>
+    <g class="bulbs" fill="#FFC72C"><circle cx="408" cy="278" r="7"/><circle cx="692" cy="278" r="7"/><circle cx="408" cy="342" r="7"/><circle cx="692" cy="342" r="7"/></g>
+    <g class="inside">
+      <rect x="430" y="380" width="240" height="250" fill="#FFE7A3"/>
+      <path d="M440 432h220M440 486h110" stroke="#1C1A17" stroke-width="3"/>
+      <g stroke="#1C1A17" stroke-width="2.5"><rect x="448" y="400" width="24" height="32" fill="#FF4F8B"/><rect x="478" y="408" width="22" height="24" fill="#13A8A0"/><rect x="560" y="402" width="30" height="30" fill="#FFC72C"/><rect x="620" y="406" width="26" height="26" fill="#2F5DFF"/><rect x="450" y="456" width="30" height="30" fill="#0E8A62"/></g>
+      <circle cx="610" cy="500" r="22" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M588 496c0-18 10-26 22-26s22 8 22 26c-6-6-12-9-22-9s-16 3-22 9z" fill="#1C1A17"/>
+      <path d="M582 572c0-34 12-48 28-48s28 14 28 48z" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="430" y="572" width="240" height="58" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
+    </g>
+    <rect x="420" y="364" width="260" height="20" rx="6" fill="#6E777C" stroke="#1C1A17" stroke-width="4"/>
+    <g class="shutter" style="transform-origin:550px 382px">
+      <rect x="430" y="380" width="240" height="250" fill="#A7B0B5" stroke="#1C1A17" stroke-width="4"/>
+      <path d="${slats()}" stroke="#7D868B" stroke-width="3"/>
+      <text x="550" y="520" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="28" fill="#5A6368">CLOSED</text>
+    </g>
+    <g class="nwin" fill="#FFD36B" opacity="0"><rect x="30" y="250" width="44" height="54"/><rect x="330" y="266" width="44" height="54"/><rect x="820" y="300" width="44" height="54"/><rect x="940" y="380" width="44" height="54"/></g>
+    <rect x="-10" y="630" width="1120" height="42" fill="#DCCBAA" stroke="#1C1A17" stroke-width="4"/>
+    <rect x="-10" y="672" width="1120" height="120" fill="#454545"/>
+    <path d="M0 728h1100" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="60 50"/>
+    <g class="peds"></g>
+    <rect class="dim" width="1100" height="780" fill="#0B1226" opacity="0" pointer-events="none"/>
+  </svg>
+  <div class="hp-lock"><p class="lock-time">11:42 PM</p><p class="lock-sub">Shutter’s down. The shop isn’t.</p><ol class="lock-list"></ol><p class="lock-count"></p></div></div>
+  <p class="hp-cap" aria-live="polite"><span></span></p>`;
+
+  function person(parent, x, i, flip) {
+    const o = mk('g', { transform: `translate(${x} 516) scale(1.15)` }, parent);
+    const mv = mk('g', {}, o), bob = mk('g', {}, mv);
+    const inner = mk('g', flip ? { transform: 'translate(44 0) scale(-1 1)' } : {}, bob);
+    mk('use', { href: '#hp-p', width: 44, height: 110 }, inner);
+    inner.style.color = SHIRT[i % SHIRT.length]; inner.style.setProperty('--skin', SKIN[i % SKIN.length]);
+    const glow = mk('rect', { x: 24, y: 49, width: 7, height: 12, rx: 1.5, fill: '#5BF09A', opacity: 0 }, inner);
+    return { mv, bob, glow, inner };
+  }
+  const bobbing = p => A(p.bob, [{ transform: 'translateY(0px)' }, { transform: 'translateY(-3px)' }], { duration: 320, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+  function bubble(parent, x, y, text) {
+    const size = 22, h = 44, w = text.length * size * .58 + 30, g = mk('g', {}, parent);
+    mk('rect', { x: x - w / 2, y: y - h, width: w, height: h, rx: h / 2, fill: '#D7F2E4', stroke: '#1C1A17', 'stroke-width': 3 }, g);
+    mk('text', { x, y: y - 14, 'text-anchor': 'middle', 'font-family': 'Archivo, sans-serif', 'font-weight': 800, 'font-size': size, fill: '#0A4D39' }, g, text);
+    g.style.transformBox = 'fill-box'; g.style.transformOrigin = '50% 100%';
+    A(g, [{ opacity: 0, transform: 'translateY(8px) scale(0.92)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 260 });
+    A(g, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 900, easing: 'ease', fill: 'forwards' }).onfinish = () => g.remove();
+  }
+  function shutter(r, open, instant) {
+    const sh = $('.shutter', r), ins = $('.inside', r), bulbs = $$('.bulbs circle', r);
+    if (instant) { sh.style.transform = open ? 'scaleY(0.04)' : 'none'; ins.style.opacity = open ? 1 : 0; bulbs.forEach(b => b.style.opacity = open ? 1 : .25); return; }
+    stop(sh); stop(ins);
+    A(sh, open ? [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.04)' }] : [{ transform: 'scaleY(0.04)' }, { transform: 'scaleY(1)' }], { duration: open ? 900 : 700, easing: INOUT });
+    A(ins, open ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: 0 }], { duration: 500, delay: open ? 100 : 300, easing: 'ease' });
+    bulbs.forEach((b, i) => { stop(b); A(b, open ? [{ opacity: .25 }, { opacity: 1 }, { opacity: .4 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: .25 }], { duration: 500, delay: open ? 550 + i * 80 : 400, easing: 'linear' }); });
+  }
+  function caption(r, text, instant) {
+    const s = $('.hp-cap span', r); if (!s) return;
+    if (instant) { s.textContent = text; return; }
+    const show = () => { s.textContent = text; A(s, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 260 }); };
+    if (s.textContent) A(s, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease' }).onfinish = show; else show();
+  }
+
+  const BUYER = { dhaka: 'Rahima', london: 'Sarah', dubai: 'Fatima', ny: 'Mike' };
+  const ICON = {
+    bag: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.5 13h-11z" fill="#fff"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="#fff" stroke-width="2"/></svg>',
+    pay: '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M3 10h18" stroke="#fff" stroke-width="2.2"/></svg>',
+    star: '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z" fill="#fff"/></svg>'
+  };
+  const NOTES = () => {
+    const bd = G().c === 'dhaka';
+    return [
+      { t: '11:42 PM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1043', body: `2 × Katan silk · ${money(2400)}` },
+      { t: '1:15 AM', app: bd ? 'bKash' : 'Card payments', icon: 'pay', bg: bd ? '#E2136E' : '#2F5DFF', title: 'Payment received', body: `${money(2400)} from ${BUYER[G().c] || 'Rahima'}` },
+      { t: '3:08 AM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1044', body: `Cotton lawn, 5 yards · ${money(2250)}` },
+      { t: '6:30 AM', app: 'Google', icon: 'star', bg: '#F2A600', title: 'New 5★ review', body: '“Ordered at 3am. It arrived by lunch!”' }
+    ];
+  };
+  const noteHTML = n => `<li class="nt"><i style="background:${n.bg}" aria-hidden="true">${ICON[n.icon]}</i><span class="app">${esc(n.app)}<time>${n.t}</time></span><b>${esc(n.title)}</b><span class="body">${esc(n.body)}</span></li>`;
+
+  function run(r, T, instant) {
+    const C = 13000;
+    const tt = h => (h - 10) / 24 * C;
+    const at = (h, fn) => T.at(tt(h), fn);
+    const sub = $('.signsub', r), peds = $('.peds', r), lock = $('.hp-lock', r), list = $('.lock-list', r), ltime = $('.lock-time', r), lcount = $('.lock-count', r);
+    const maxCards = matchMedia('(max-width:560px)').matches ? 3 : 4;
+    const clock = h => { h = ((h % 24) + 24) % 24; const hh = Math.floor(h), mm = Math.floor((h - hh) * 6) * 10; return `${((hh + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${hh < 12 ? 'AM' : 'PM'}`; };
+
+    if (instant) {
+      shutter(r, false, true);
+      ['.night', '.stars', '.nwin'].forEach(s => $(s, r).setAttribute('opacity', 1));
+      $('.dim', r).setAttribute('opacity', .55); $('.sun', r).setAttribute('opacity', 0);
+      const moon = $('.moon', r); moon.setAttribute('opacity', 1); moon.style.transform = 'translate(820px,84px)';
+      sub.textContent = 'CLOSED · 6:30 AM';
+      list.innerHTML = NOTES().slice(4 - maxCards).reverse().map(noteHTML).join('');
+      ltime.textContent = '6:30 AM'; lcount.textContent = '3 orders while you slept'; lock.style.opacity = 1;
+      caption(r, 'Your shop opens at 10. Your website never closes.', true);
+      return;
+    }
+
+    shutter(r, false, true);
+    const t0 = performance.now();
+    T.every(130, () => { const h = 10 + ((performance.now() - t0) % C) / C * 24, hm = h % 24; sub.textContent = (hm >= 21 || hm < 10 ? 'CLOSED · ' : 'OPEN · ') + clock(h); });
+    A($('.sun', r), [{ transform: 'translate(200px,100px)' }, { transform: 'translate(550px,62px)', offset: .35 }, { transform: 'translate(900px,100px)', offset: .75 }, { transform: 'translate(1070px,340px)' }], { duration: tt(19.5), easing: 'linear' });
+    A($('.dusk', r), [{ opacity: 0 }, { opacity: .85 }, { opacity: 0 }], { duration: tt(20.5) - tt(17), delay: tt(17), easing: 'ease-in-out' });
+    const nightKf = v => [{ opacity: 0 }, { opacity: v, offset: .14 }, { opacity: v, offset: .86 }, { opacity: 0 }];
+    [$('.night', r), $('.stars', r), $('.nwin', r)].forEach(el => A(el, nightKf(1), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' }));
+    A($('.dim', r), nightKf(.55), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' });
+    A($('.moon', r), [{ opacity: 0, transform: 'translate(80px,190px)' }, { opacity: 1, transform: 'translate(260px,100px)', offset: .15 }, { opacity: 1, transform: 'translate(820px,84px)', offset: .85 }, { opacity: 0, transform: 'translate(1040px,190px)' }], { duration: tt(30.5) - tt(20), delay: tt(20), easing: 'linear' });
+
+    caption(r, '10 AM. You pull up the shutter.');
+    T.at(150, () => shutter(r, true));
+    const walk = (i, from, to, dur, delay, after) => {
+      const p = person(peds, 0, i, to < from); bobbing(p);
+      A(p.mv, [{ transform: `translateX(${from}px)`, opacity: 0 }, { opacity: 1, offset: .1 }, { transform: `translateX(${to}px)`, opacity: 1 }], { duration: dur, delay, easing: 'linear' });
+      T.at(delay + dur, () => { stop(p.bob); after && after(p); });
+      return p;
+    };
+    const vanish = p => A(p.mv, [{ opacity: 1 }, { opacity: 0 }], { duration: 250, easing: 'ease' });
+    walk(0, -60, 470, 2000, 300, vanish);
+    walk(1, 1160, 600, 1800, 700, vanish);
+    at(13, () => caption(r, 'Afternoon. A queue, and everyone’s on their phone.'));
+    const spots = [330, 385, 680, 735, 275, 790];
+    const crowd = spots.map((x, i) => walk(i + 2, x < 550 ? -80 - i * 40 : 1180 + i * 40, x, 1500, tt(12.5) + i * 140, p => A(p.glow, [{ opacity: 0 }, { opacity: .95 }], { duration: 200, easing: 'ease' })));
+    [13.6, 14.6, 15.6, 16.6].forEach((h, k) => at(h, () => bubble(crowd[[0, 3, 1, 2][k]].mv, 22, -6, k % 2 ? 'Paid!' : 'Ordered!')));
+    at(18.4, () => crowd.forEach((p, i) => {
+      const x = spots[i], away = x < 550 ? -120 : 1220;
+      stop(p.mv); p.inner.setAttribute('transform', x < 550 ? 'translate(44 0) scale(-1 1)' : ''); bobbing(p);
+      A(p.mv, [{ transform: `translateX(${x}px)` }, { transform: `translateX(${away}px)` }], { duration: 1400, delay: i * 60, easing: 'linear' });
+    }));
+    at(21, () => { shutter(r, false); caption(r, '9 PM. You lock up and go home.'); });
+
+    // Night: the dimmed street becomes a lock screen; each order lands on top and pushes the rest down together.
+    let n = 0;
+    at(22.4, () => {
+      caption(r, 'Your website is still open.');
+      ltime.textContent = '11:30 PM'; lcount.textContent = '';
+      A(lock, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease' });
+      A(ltime, [{ opacity: 0, transform: 'scale(0.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 400 });
+    });
+    NOTES().forEach((note, k) => at([23.7, 25.2, 27.1, 29.5][k], () => {
+      const before = new Map($$('.nt', list).map(el => [el, el.getBoundingClientRect().top]));
+      list.insertAdjacentHTML('afterbegin', noteHTML(note));
+      const fresh = list.firstElementChild;
+      const extra = $$('.nt', list)[maxCards];
+      if (extra) { extra.remove(); before.delete(extra); }
+      before.forEach((top, el) => { const dy = top - el.getBoundingClientRect().top; if (dy) A(el, [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0px)' }], { duration: 320 }); });
+      A(fresh, [{ opacity: 0, transform: 'translateY(-14px) scale(0.97)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 360 });
+      ltime.textContent = note.t;
+      if (k < 3) { n++; lcount.textContent = `${n} order${n > 1 ? 's' : ''} while you slept`; if (n === 1) A(lcount, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 300 }); }
+      if (k === 1) caption(r, 'After midnight. The orders keep coming.');
+      if (k === 3) caption(r, 'And a 5★ review before breakfast.');
+    }));
+    at(31.2, () => { caption(r, 'Your shop opens at 10. Your website never closes.'); A(lock, [{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'ease' }); });
+    T.at(C + 1200, () => mount(true));
+  }
+
+  function mount(sync) {
+    const t = ++token; timers.forEach(clearTimeout); timers = [];
+    const T = {
+      at(ms, fn) { timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); },
+      every(ms, fn) { const id = setInterval(() => { if (t === token) fn(); else clearInterval(id); }, ms); timers.push(id); }
+    };
+    const go = () => { if (t !== token) return; stage.innerHTML = html(); run(stage, T, reduce); };
+    if (sync) go(); else { stage.innerHTML = ''; requestAnimationFrame(go); }
+  }
+  stage.addEventListener('click', () => mount());
+  document.addEventListener('cg:city', () => mount());
+  mount();
+})();
+</script>
+<script>
+(() => {
+  /* ===== Page-wide entrances: headings, the cousin comic and the closing shutter. Each plays once, the first time it scrolls into view. ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
+
+  const NICK = { dhaka: 'bhai', london: 'mate', dubai: 'habibi', ny: 'buddy' };
+  const nick = () => { const b = $('[data-cz="0"]'); if (b) b.textContent = `Website? Easy, ${NICK[(window.__cg || {}).c] || 'bhai'}. I’ll do it this weekend. Free!`; };
+  nick(); document.addEventListener('cg:city', nick);
+
+  if (reduce || !('IntersectionObserver' in window)) return;
+  const once = (el, fn, threshold = .3) => { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, { threshold }); io.observe(el); };
+  const hide = els => els.forEach(e => { e.style.opacity = 0; });
+
+  // Section headings: the title leads, the line beside it follows 80ms later.
+  $$('.sec .sec-head').forEach(head => {
+    if (head.closest('#cousin')) return;
+    const h = $('h2, h3', head), p = $(':scope > p', head);
+    if (!h || head.getBoundingClientRect().top < innerHeight) return;
+    hide([h, p].filter(Boolean));
+    once(head, () => {
+      A(h, [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 600 });
+      if (p) A(p, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 500, delay: 80 });
+    }, .5);
+  });
+
+  // The comic reads left to right, so panels land in reading order; each speech bubble pops just after its panel.
+  const saga = $('.saga');
+  if (saga) {
+    const head = $('#cousin .sec-head'), h = $('h2', head), p = $(':scope > p', head);
+    const panels = $$('.panel', saga), bubs = $$('.bub', saga), mw = $('.meanwhile'), steps = $$('.steps-list li'), harmed = $('.harmed');
+    hide([h, p, ...panels, ...bubs, mw, ...steps, harmed]);
+    once(saga, () => {
+      A(h, [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 600 });
+      A(p, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 500, delay: 80 });
+      const gaps = [200, 520, 820, 1100];
+      panels.forEach((el, i) => {
+        A(el, [{ opacity: 0, transform: 'translateY(22px) rotate(-2deg)' }, { opacity: 1, transform: 'translateY(0px) rotate(0deg)' }], { duration: 500, delay: gaps[i] });
+        A(bubs[i], [{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, delay: gaps[i] + 280 });
+      });
+    }, .2);
+    once(mw, () => {
+      A(mw, [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 550 });
+      steps.forEach((li, i) => A(li, [{ opacity: 0, transform: 'translateX(-10px)' }, { opacity: 1, transform: 'translateX(0px)' }], { duration: 400, delay: 250 + [0, 110, 200, 270][i] }));
+      A(harmed, [{ opacity: 0, transform: 'rotate(-10deg) scale(1.5)' }, { opacity: 1, transform: 'rotate(6deg) scale(1)' }], { duration: 500, delay: 700, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+    }, .4);
+  }
+
+  // The closing section sits behind a shutter that rolls up as you reach it: "Shutter's up. Let's sell."
+  const fin = $('.final');
+  if (fin && fin.getBoundingClientRect().top > innerHeight) {
+    fin.classList.add('shut');
+    once(fin, () => { fin.classList.add('rolling'); requestAnimationFrame(() => fin.classList.remove('shut')); }, .45);
+  }
+})();
+</script>

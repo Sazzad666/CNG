@@ -1,0 +1,77 @@
+<%
+  // Params: formType ('enquiry' | 'audit'), service, values, errors, idp (id prefix), submitLabel, tone ('dark' | 'cream')
+  var ft = (typeof formType !== 'undefined' && formType) || 'enquiry';
+  var v = (typeof values !== 'undefined' && values) || {};
+  var er = (typeof errors !== 'undefined' && errors) || {};
+  var p = (typeof idp !== 'undefined' && idp) || 'f';
+  var pre = v.service || ((typeof service !== 'undefined' && service) || '');
+  var label = (typeof submitLabel !== 'undefined' && submitLabel) || (ft === 'audit' ? 'Get my free audit' : 'Send my enquiry');
+  function f(name) { return er[name] ? ' has-error' : ''; }
+  function err(name) { return er[name] ? '<p class="error" id="' + p + '-' + name + '-err">' + er[name].replace(/</g, '&lt;') + '</p>' : '<p class="error" id="' + p + '-' + name + '-err" hidden></p>'; }
+  function aria(name) { return 'aria-describedby="' + p + '-' + name + '-err"' + (er[name] ? ' aria-invalid="true"' : ''); }
+%>
+<form action="/api/leads" method="post" class="grid gap-5" data-lead-form novalidate>
+  <input type="hidden" name="type" value="<%= ft %>">
+  <input type="hidden" name="_t" value="<%= Date.now() %>">
+  <input type="hidden" name="source_page" value="<%= v.source_page || path %>">
+  <input type="hidden" name="utm_source" value="<%= v.utm_source || '' %>">
+  <input type="hidden" name="utm_medium" value="<%= v.utm_medium || '' %>">
+  <input type="hidden" name="utm_campaign" value="<%= v.utm_campaign || '' %>">
+  <input type="hidden" name="referrer" value="<%= v.referrer || '' %>">
+  <div class="hp" aria-hidden="true"><label>Company website <input type="text" name="company_site" tabindex="-1" autocomplete="off"></label></div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div class="field<%= f('name') %>">
+      <label for="<%= p %>-name">Your name</label>
+      <input class="input" id="<%= p %>-name" name="name" autocomplete="name" required maxlength="120" value="<%= v.name || '' %>" <%- aria('name') %>>
+      <%- err('name') %>
+    </div>
+    <div class="field<%= f('phone') %>">
+      <label for="<%= p %>-phone">Mobile number</label>
+      <input class="input" id="<%= p %>-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="01712-345678" value="<%= v.phone || '' %>" <%- aria('phone') %>>
+      <%- err('phone') %>
+    </div>
+  </div>
+
+  <% if (ft === 'audit') { %>
+    <div class="field<%= f('website') %>">
+      <label for="<%= p %>-website">Your current website</label>
+      <input class="input" id="<%= p %>-website" name="website" inputmode="url" autocomplete="url" required placeholder="yourbrand.com" value="<%= v.website || '' %>" <%- aria('website') %>>
+      <%- err('website') %>
+    </div>
+  <% } else { %>
+    <div class="field<%= f('email') %>">
+      <label for="<%= p %>-email">Email <span class="font-normal opacity-60">(optional)</span></label>
+      <input class="input" id="<%= p %>-email" name="email" type="email" autocomplete="email" maxlength="190" value="<%= v.email || '' %>" <%- aria('email') %>>
+      <%- err('email') %>
+    </div>
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div class="field<%= f('service') %>">
+        <label for="<%= p %>-service">What do you need?</label>
+        <select class="input" id="<%= p %>-service" name="service" <%- aria('service') %>>
+          <option value="">Choose a service</option>
+          <% site.services.forEach(function (s) { %><option value="<%= s.key %>"<%= pre === s.key ? ' selected' : '' %>><%= s.label %></option><% }) %>
+        </select>
+        <%- err('service') %>
+      </div>
+      <div class="field<%= f('budget') %>">
+        <label for="<%= p %>-budget">Budget <span class="font-normal opacity-60">(optional)</span></label>
+        <select class="input" id="<%= p %>-budget" name="budget" <%- aria('budget') %>>
+          <option value="">Prefer to discuss</option>
+          <% site.budgets.forEach(function (b) { %><option value="<%= b.key %>"<%= v.budget === b.key ? ' selected' : '' %>><%= b.label %></option><% }) %>
+        </select>
+        <%- err('budget') %>
+      </div>
+    </div>
+    <div class="field">
+      <label for="<%= p %>-message">Tell us a little about it <span class="font-normal opacity-60">(optional)</span></label>
+      <textarea class="input" id="<%= p %>-message" name="message" maxlength="2000" rows="3" placeholder="What you sell, who it’s for, and when you’d like to launch."><%= v.message || '' %></textarea>
+    </div>
+  <% } %>
+
+  <p class="form-status text-sm" role="status" aria-live="polite" hidden></p>
+  <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+    <button type="submit" class="btn btn-lime" data-submit><span data-label><%= label %></span> <span class="arrow" aria-hidden="true">→</span></button>
+    <p class="text-sm opacity-70">We reply within one business day and never add you to a mailing list.</p>
+  </div>
+</form>

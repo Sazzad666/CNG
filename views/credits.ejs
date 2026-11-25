@@ -1,0 +1,14 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main" class="wrap max-w-3xl py-16 sm:py-24">
+  <p class="eyebrow">Credits</p>
+  <h1 class="mt-4 text-5xl font-bold">Photo credits</h1>
+  <p class="mt-6 text-lg text-cream/75">Photographs on this site are by these photographers, via <a class="ulink text-cream" href="https://unsplash.com/?utm_source=click_and_grow&utm_medium=referral" rel="noopener">Unsplash</a>. Thank you.</p>
+  <ul class="mt-10 divide-y divide-cream/10 border-y border-cream/10">
+    <% var seen = {}; content.credits().forEach(function (c) { if (seen[c.author]) return; seen[c.author] = 1; %>
+      <li class="flex justify-between gap-6 py-3"><a class="ulink" href="<%= c.profile %>?utm_source=click_and_grow&utm_medium=referral" rel="noopener"><%= c.author %></a><span class="text-sm text-sage"><%= c.alt %></span></li>
+    <% }) %>
+  </ul>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>
