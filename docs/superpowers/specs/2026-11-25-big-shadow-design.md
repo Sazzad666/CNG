@@ -50,7 +50,9 @@ One homepage that any small or mid-size business owner, in any country, reads an
 ## Claims
 
 Confirmed: free website check-up, free logo with every website, free Google and SEO setup, free support after launch, pay in parts, quote agreed upfront, limited project slots each month.
-Placeholders until confirmed: slot numbers, prices, support length, reply time, the country list for the map.
+Placeholders until confirmed: slot numbers, prices, support length, reply time.
+
+Decided by the owner (2026-11-25): design approved. Map countries: USA and Canada, UK and Europe, UAE and the Gulf, Australia. Bangladesh payment apps (bKash, Nagad) appear only in the FAQ; everywhere else says card, bank transfer and PayPal.
 
 ## Left to the builder
 
