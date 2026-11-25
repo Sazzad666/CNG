@@ -730,6 +730,155 @@ body{caret-color:var(--red)}
 .demo-list li::before{content:"";position:absolute;left:0;top:3px;width:22px;height:22px;border-radius:50%;background:var(--teal,#3BCEAC) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5' fill='none' stroke='%232B1D0E' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/70% no-repeat;border:2px solid var(--ink)}
 .demo-list b{color:var(--ink);font-weight:800}
 .demo-note{margin-top:22px;font-size:14px;color:var(--ink-2)}
+
+/* =====================================================================
+   LOUD: hero collage, who we are, what we do, versus, fill-in-the-blanks
+   Motion rules: enter with a strong ease-out or a small overshoot, press = scale(.97),
+   hover only on fine pointers, constant motion (ticker) is linear and pauses on hover.
+   ===================================================================== */
+:root{--ease-spring:cubic-bezier(.34,1.56,.64,1);--ease-io:cubic-bezier(.77,0,.175,1)}
+.btn{transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out)}
+.btn:active{transform:translate(3px,3px) scale(.97)}
+
+/* hero */
+.hz{background:var(--yellow);position:relative;overflow:hidden}
+.hz-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px;align-items:center;padding-block:40px 36px}
+.hz h1{font-size:clamp(50px,7.4vw,112px);line-height:.9;letter-spacing:-.025em;margin:0 0 18px;text-wrap:initial}
+.slam .sl{display:inline-block;transform-origin:50% 80%}
+.sl-cut{position:relative;color:var(--paper);-webkit-text-stroke:2.5px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--pink)}
+.hz-swap{font:800 clamp(22px,2.6vw,34px)/1.15 var(--display);margin-bottom:14px}
+.hz-swap .hx-swap{color:var(--red-d)}
+.hz .lede{font-size:clamp(16px,1.35vw,19px);color:var(--ink);max-width:31em}
+.hz .hero-cta{margin-top:22px}
+.hz .city{margin-top:22px}
+
+.collage{position:relative;aspect-ratio:1/1;width:min(560px,100%);justify-self:center}
+.stk{position:absolute;margin:0;transform:rotate(var(--r));will-change:transform}
+.stk img{display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;border:3px solid var(--ink);background:#fff}
+figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 var(--ink)}
+.st-face{left:16%;top:12%;width:56%;aspect-ratio:1;z-index:2}
+.st-phone{right:0;top:0;width:32%;aspect-ratio:3/4;z-index:3}
+.st-parcel{left:0;bottom:4%;width:34%;aspect-ratio:1;z-index:3}
+.st-chai{right:6%;bottom:2%;width:28%;aspect-ratio:1;border-radius:50%!important;z-index:3}
+.st-chai img{border-radius:50%}
+.tape{position:absolute;width:38%;height:22px;left:31%;top:-11px;background:rgba(255,244,204,.82);border:1.5px dashed rgba(43,29,14,.35);transform:rotate(-4deg)}
+.st-bubble{left:2%;top:2%;z-index:4;background:#fff;border:3px solid var(--ink);border-radius:22px;padding:12px 16px;box-shadow:5px 5px 0 var(--ink);display:grid;line-height:1.05}
+.st-bubble::after{content:"";position:absolute;right:26px;bottom:-16px;width:24px;height:24px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg) skew(10deg,10deg)}
+.st-bubble b{font:800 clamp(20px,2.4vw,30px)/1 var(--display)}
+.st-bubble span{font:700 14px/1.2 var(--body);color:var(--ink-2)}
+.st-tag{right:30%;bottom:20%;z-index:5;background:var(--teal);border:3px solid var(--ink);border-radius:14px;padding:8px 14px;box-shadow:4px 4px 0 var(--ink);display:grid;line-height:1}
+.st-tag small{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.08em}
+.st-tag b{font:800 clamp(22px,2.4vw,30px)/1.05 var(--display);font-variant-numeric:tabular-nums}
+.st-burst{right:2%;top:36%;width:22%;aspect-ratio:1;z-index:4;display:grid;place-items:center}
+.st-burst svg{position:absolute;inset:0;width:100%;height:100%}
+.st-burst span{position:relative;font:400 clamp(12px,1.3vw,17px)/1 var(--sign);color:#fff;text-align:center}
+.st-mega{left:4%;top:44%;width:20%;z-index:4}
+.st-mega svg{width:100%;display:block;overflow:visible}
+@media (hover:hover) and (pointer:fine){
+  figure.stk{transition:box-shadow 200ms var(--ease-out)}
+  figure.stk:hover{box-shadow:10px 12px 0 var(--ink)}
+}
+.ticker{background:var(--ink);color:var(--yellow);border-top:3px solid var(--ink);overflow:hidden;padding:12px 0}
+.tk-track{display:flex;width:max-content;animation:tk 26s linear infinite}
+.tk-track span{font:400 clamp(16px,1.6vw,22px)/1 var(--sign);padding:0 22px;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.tk-track span::after{content:"";width:12px;height:12px;background:var(--pink);transform:rotate(45deg);margin-left:22px}
+.ticker:hover .tk-track{animation-play-state:paused}
+@keyframes tk{to{transform:translateX(-50%)}}
+@media (max-width:860px){
+  .hz-grid{grid-template-columns:minmax(0,1fr);padding-block:22px 26px;gap:8px}
+  .hz h1{font-size:clamp(46px,14vw,74px)}
+  .collage{width:min(380px,92%);order:2;margin:4px auto 0}
+  .hz-copy{display:contents}
+  .hz-copy > h1{order:0}.hz-copy > .hz-swap{order:1}.collage{order:2}.hz-copy > .hero-cta{order:3}.hz-copy > .checkup{order:4}.hz-copy > .lede{order:5;margin-top:10px}.hz-copy > .city{order:6}
+}
+
+/* who we are */
+.who{background:var(--paper)}
+.who-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:center;margin-bottom:34px}
+.who h2{font-size:clamp(40px,5.4vw,74px);line-height:.95}
+.mark{display:inline-block;background:var(--pink);color:#fff;padding:0 .16em .04em;border-radius:.12em;transform:rotate(-2deg);box-shadow:4px 4px 0 var(--ink)}
+.mom > p{font-size:clamp(16px,1.4vw,19px);color:var(--ink-2)}
+.mom-quote{margin:18px 0 0;background:#fff;border:3px solid var(--ink);border-radius:18px;padding:16px 18px;box-shadow:5px 5px 0 var(--ink);transform:rotate(-1.2deg)}
+.mom-quote p{font:800 clamp(20px,2vw,26px)/1.15 var(--display)}
+.mom-quote footer{padding:0;margin-top:8px;font:600 14px/1.35 var(--body);color:var(--ink-2)}
+.mom-quote small{display:block;font-weight:500}
+.who-hint{font:700 14px/1 var(--body);color:var(--ink-2);margin-bottom:14px}
+.kids{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.kid{transform:rotate(var(--r));perspective:1100px}
+.kid-in{position:relative;display:block;width:100%;aspect-ratio:3/4;padding:0;border:0;background:none;cursor:pointer;transform-style:preserve-3d;transition:transform 560ms var(--ease-io);text-align:left;font:inherit}
+.kid-in[aria-pressed="true"]{transform:rotateY(180deg)}
+.kid-in:active .kid-face{scale:.97}
+.kid-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;transition:scale 160ms var(--ease-out)}
+.kid-front{background:#fff;padding:8px 8px 14px}
+.kid-front img{width:100%;flex:1;min-height:0;object-fit:cover;border-radius:13px;border:2px solid var(--ink)}
+.kid-front b{font:800 clamp(19px,1.8vw,24px)/1.05 var(--display);margin:12px 6px 2px}
+.kid-front small{font:700 13px/1.2 var(--body);color:var(--green);margin:0 6px;text-transform:uppercase;letter-spacing:.06em}
+.kid-back{transform:rotateY(180deg);background:var(--ink);color:var(--paper);padding:22px 18px;gap:12px;justify-content:center}
+.kid-back b{font:800 24px/1.05 var(--display);color:var(--yellow)}
+.kid-back span{font-size:16px;line-height:1.45}
+.kid-back em{font-style:normal;font-weight:700;color:var(--teal);font-size:15px}
+.kids li:nth-child(2) .kid-back{background:var(--green)}
+.kids li:nth-child(3) .kid-back{background:var(--red-d)}
+@media (hover:hover) and (pointer:fine){.kid-in:not([aria-pressed="true"]):hover{transform:rotateY(-14deg) rotateX(4deg)}}
+@media (max-width:980px){.kids{grid-template-columns:repeat(2,minmax(0,1fr))}.who-head{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:420px){.kid-back span{font-size:14px}.kid-back{padding:16px 13px}.kid-back b{font-size:20px}}
+
+/* what we do */
+.svcs{background:var(--paper-2);border-block:3px solid var(--ink)}
+.svc-list{display:grid;gap:30px}
+.svc-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;background:#fff;border:3px solid var(--ink);border-radius:28px;padding:clamp(20px,3vw,40px);box-shadow:8px 8px 0 var(--ink)}
+.svc-row.flip .svc-copy{order:2}
+.svc-n{display:block;font:400 clamp(40px,5vw,64px)/1 var(--sign);color:transparent;-webkit-text-stroke:2px var(--ink);margin-bottom:6px}
+.svc-copy h3{font-size:clamp(32px,4vw,54px);line-height:.95;margin-bottom:14px}
+.svc-copy p{font-size:clamp(16px,1.35vw,19px);color:var(--ink-2);max-width:30em}
+.svc-copy ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.svc-copy li{display:flex;gap:10px;align-items:center;font-weight:600}
+.svc-copy li svg{width:22px;height:22px;flex:none;color:var(--green)}
+.scene{display:block;width:100%;padding:0;border:3px solid var(--ink);border-radius:22px;background:var(--yellow);cursor:pointer;overflow:hidden;transition:transform 160ms var(--ease-out)}
+.scene:active{transform:scale(.97)}
+.scene svg{display:block;width:100%;height:auto;overflow:hidden}
+.rings circle,.mega{transform-box:fill-box;transform-origin:center}
+.sc-loud{background:#FFE0E7}.sc-dev{background:#D3F5EA}.sc-shop{background:var(--paper)}.sc-seo{background:#E4E9FF}
+@media (max-width:860px){.svc-row{grid-template-columns:minmax(0,1fr);gap:20px;box-shadow:5px 5px 0 var(--ink)}.svc-row.flip .svc-copy{order:0}}
+
+/* versus */
+.vs{margin-top:40px}
+.vs-title{font-size:clamp(30px,3.6vw,46px);margin-bottom:18px}
+.vs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.vs-col{display:grid;gap:10px;align-content:start;background:#fff;border:3px solid var(--ink);border-radius:22px;padding:14px;box-shadow:5px 5px 0 var(--ink)}
+.vs-h{font:800 22px/1.1 var(--display);padding:4px 4px 8px;border-bottom:2.5px dashed var(--line);position:relative}
+.vs-h small{display:block;font:600 13px/1.2 var(--body);color:var(--ink-2)}
+.vs-c{position:relative;padding:10px 12px 10px 42px;border-radius:12px;background:var(--paper);font-size:15px;line-height:1.4}
+.vs-c b{display:block;font:700 12px/1.2 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.vs-c::before{content:"";position:absolute;left:10px;top:12px;width:22px;height:22px;border-radius:50%;border:2.5px solid var(--ink);background-position:center;background-repeat:no-repeat;background-size:14px}
+.vs-c.no::before{background-color:#FFE0E7;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 3l8 8M11 3l-8 8' stroke='%23C0183F' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E")}
+.vs-c.yes::before{background-color:var(--teal);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2.5 7.5l3 3 6-7' fill='none' stroke='%232B1D0E' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.vs-col.us{background:var(--ink);color:var(--paper);transform:rotate(-1deg) scale(1.02);box-shadow:8px 8px 0 var(--pink)}
+.vs-col.us .vs-h{color:var(--yellow);border-color:rgba(255,244,204,.3)}
+.vs-col.us .vs-c{background:rgba(255,244,204,.1)}
+.vs-col.us .vs-c b{color:#F3E3B8}
+.obv{position:absolute;right:0;top:-4px;font:400 13px/1 var(--sign);background:var(--pink);color:#fff;padding:6px 9px;border-radius:8px;transform:rotate(6deg);border:2px solid var(--paper)}
+@media (max-width:860px){.vs-grid{grid-template-columns:minmax(0,1fr)}.vs-col.us{order:-1;transform:none}}
+
+/* fill-in-the-blanks form */
+.ml-hello{font:800 clamp(28px,3.2vw,40px)/1 var(--display);margin-bottom:14px}
+.ml-line{font:700 clamp(18px,1.7vw,22px)/2 var(--display);margin:4px 0}
+.ml-line label{font:inherit}
+.ml-in{display:inline-block;vertical-align:baseline;width:min(15em,100%)}
+.ml-in.wide{width:min(20em,100%)}
+.ml-in input{width:100%;border:0;border-bottom:3px dashed var(--ink);background:transparent;padding:2px 4px;font:800 clamp(18px,1.7vw,22px)/1.3 var(--display);color:var(--green);border-radius:0}
+.ml-in input::placeholder{color:#86704C;font-weight:600}
+.ml-in input:focus{outline:none;border-bottom-style:solid;border-bottom-color:var(--pink);background:#FFF4CC}
+.ml-leg{font:700 clamp(18px,1.7vw,22px)/1.3 var(--display)!important;margin-bottom:8px}
+.ml-sign{font:700 18px/1.2 var(--display);margin:6px 0 4px;color:var(--ink-2)}
+.slip .err:empty{display:none}
+.done-card .small{font-size:14px;color:var(--ink-2);margin-top:6px}
+.confetti{position:fixed;left:0;top:0;width:10px;height:14px;border-radius:2px;pointer-events:none;z-index:200}
+
+@media (prefers-reduced-motion:reduce){
+  .tk-track{animation:none}
+  .kid-in{transition:none}
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -807,7 +956,7 @@ body{caret-color:var(--red)}
 <header class="head">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="#FFC72C" stroke="#1C1A17" stroke-width="1.6"><ellipse cx="39.50" cy="24.00" rx="4.6" ry="8" transform="rotate(90.0 39.50 24.00)"/><ellipse cx="37.42" cy="31.75" rx="4.6" ry="8" transform="rotate(120.0 37.42 31.75)"/><ellipse cx="31.75" cy="37.42" rx="4.6" ry="8" transform="rotate(150.0 31.75 37.42)"/><ellipse cx="24.00" cy="39.50" rx="4.6" ry="8" transform="rotate(180.0 24.00 39.50)"/><ellipse cx="16.25" cy="37.42" rx="4.6" ry="8" transform="rotate(210.0 16.25 37.42)"/><ellipse cx="10.58" cy="31.75" rx="4.6" ry="8" transform="rotate(240.0 10.58 31.75)"/><ellipse cx="8.50" cy="24.00" rx="4.6" ry="8" transform="rotate(270.0 8.50 24.00)"/><ellipse cx="10.58" cy="16.25" rx="4.6" ry="8" transform="rotate(300.0 10.58 16.25)"/><ellipse cx="16.25" cy="10.58" rx="4.6" ry="8" transform="rotate(330.0 16.25 10.58)"/><ellipse cx="24.00" cy="8.50" rx="4.6" ry="8" transform="rotate(360.0 24.00 8.50)"/><ellipse cx="31.75" cy="10.58" rx="4.6" ry="8" transform="rotate(390.0 31.75 10.58)"/><ellipse cx="37.42" cy="16.25" rx="4.6" ry="8" transform="rotate(420.0 37.42 16.25)"/></g><circle cx="24" cy="24" r="13.5" fill="#6B4423" stroke="#1C1A17" stroke-width="2"/><path d="M19.5 14.5v18l4.6-4.6 3.8 7 3.1-1.6-3.8-6.9h6.4z" fill="#fff" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><circle cx="22.3" cy="22.4" r="1.25" fill="#1C1A17"/><circle cx="25.2" cy="24.4" r="1.25" fill="#1C1A17"/><path d="M21.3 26.8q2.1 1.7 4.2.3" fill="none" stroke="#1C1A17" stroke-width="1.3" stroke-linecap="round"/></svg><span>Click<b class="amp">&amp;</b><span class="grow">Grow</span></span></a>
-    <nav aria-label="Main"><ul><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#proof">Demo</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <nav aria-label="Main"><ul><li><a href="#services">What we do</a></li><li><a href="#who">Who we are</a></li><li><a href="#packs">Prices</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
     <div class="acts">
       <a class="btn btn--green" href="#order">Get my free quote</a>
     </div>
@@ -815,12 +964,13 @@ body{caret-color:var(--red)}
 </header>
 
 <main id="top">
-  <!-- ================= HERO ================= -->
-  <section class="hero" aria-labelledby="t-hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-                <h1 id="t-hero">Your website sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep, eat, watch cricket or sit in traffic</span>.</h1>
-        <p class="lede">We build websites and online shops that take orders day and night, so you can sleep, eat and watch the match in peace.</p>
+  <!-- ================= HERO: loud headline, photo stickers slap onto the page ================= -->
+  <section class="hero hz" aria-labelledby="t-hero">
+    <div class="wrap hz-grid">
+      <div class="hz-copy">
+        <h1 id="t-hero" class="slam"><span class="sl">Loud</span> <span class="sl">marketing.</span> <span class="sl sl-cut">Razor-sharp</span> <span class="sl">design.</span></h1>
+        <p class="hz-swap">So your shop sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep, eat, watch cricket or sit in traffic</span>.</p>
+        <p class="lede">We’re a Dhaka gang of designers, developers and ad nerds. We build websites, online shops and Facebook and Google ads that make small shops impossible to ignore.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
@@ -836,24 +986,106 @@ body{caret-color:var(--red)}
           </div>
         </div>
       </div>
-      <div class="hv" id="heroStage">
-        <button class="hv-frame" type="button" aria-label="Show the next scene">
-          <svg class="hv-svg" viewBox="0 0 400 400" role="img" aria-label="The shop owner gets on with life, sleeping, eating, watching cricket, stuck in traffic, drinking tea or dancing at a wedding, while the phone keeps taking orders.">
-            <rect class="hv-base" width="400" height="400" fill="#1E2A52"/>
-            <circle class="hv-reveal" cx="200" cy="200" r="290" fill="#1E2A52" style="transform:scale(0)"/>
-            <g class="hv-scenes"></g>
-          </svg>
-        </button>
-        <div class="hv-toast" aria-hidden="true"><i><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="#FFC72C" stroke="#1C1A17" stroke-width="1.6"><ellipse cx="39.50" cy="24.00" rx="4.6" ry="8" transform="rotate(90.0 39.50 24.00)"/><ellipse cx="37.42" cy="31.75" rx="4.6" ry="8" transform="rotate(120.0 37.42 31.75)"/><ellipse cx="31.75" cy="37.42" rx="4.6" ry="8" transform="rotate(150.0 31.75 37.42)"/><ellipse cx="24.00" cy="39.50" rx="4.6" ry="8" transform="rotate(180.0 24.00 39.50)"/><ellipse cx="16.25" cy="37.42" rx="4.6" ry="8" transform="rotate(210.0 16.25 37.42)"/><ellipse cx="10.58" cy="31.75" rx="4.6" ry="8" transform="rotate(240.0 10.58 31.75)"/><ellipse cx="8.50" cy="24.00" rx="4.6" ry="8" transform="rotate(270.0 8.50 24.00)"/><ellipse cx="10.58" cy="16.25" rx="4.6" ry="8" transform="rotate(300.0 10.58 16.25)"/><ellipse cx="16.25" cy="10.58" rx="4.6" ry="8" transform="rotate(330.0 16.25 10.58)"/><ellipse cx="24.00" cy="8.50" rx="4.6" ry="8" transform="rotate(360.0 24.00 8.50)"/><ellipse cx="31.75" cy="10.58" rx="4.6" ry="8" transform="rotate(390.0 31.75 10.58)"/><ellipse cx="37.42" cy="16.25" rx="4.6" ry="8" transform="rotate(420.0 37.42 16.25)"/></g><circle cx="24" cy="24" r="13.5" fill="#6B4423" stroke="#1C1A17" stroke-width="2"/><path d="M19.5 14.5v18l4.6-4.6 3.8 7 3.1-1.6-3.8-6.9h6.4z" fill="#fff" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><circle cx="22.3" cy="22.4" r="1.25" fill="#1C1A17"/><circle cx="25.2" cy="24.4" r="1.25" fill="#1C1A17"/><path d="M21.3 26.8q2.1 1.7 4.2.3" fill="none" stroke="#1C1A17" stroke-width="1.3" stroke-linecap="round"/></svg></i><span><b>New order</b><em id="hvItem">2 × Katan silk</em></span><strong id="hvAmt">৳2,400</strong></div>
-        <div class="hv-meta">
-          <p class="hv-count" aria-live="polite">Orders while you <span id="hvWord">sleep</span>: <b id="hvNum">0</b></p>
-          <button class="hv-pause" type="button" aria-pressed="false">Pause</button>
-          <p class="hv-seen" id="hvSeen">1 of 6 seen. Tap the picture for the next one.</p>
-        </div>
+      <div class="collage" id="collage" role="img" aria-label="A collage of stickers: a customer shocked by how many orders came in, a phone with an online shop, a parcel going out, a cup of cha and a megaphone.">
+        <figure class="stk st-face" style="--r:-4deg"><img src="img/happy.webp" alt="" width="640" height="640" fetchpriority="high"><i class="tape"></i></figure>
+        <figure class="stk st-phone" style="--r:7deg"><img src="img/phone.webp" alt="" width="640" height="640"><i class="tape"></i></figure>
+        <figure class="stk st-parcel" style="--r:-9deg"><img src="img/parcel.webp" alt="" width="640" height="640"></figure>
+        <figure class="stk st-chai" style="--r:10deg"><img src="img/chai.webp" alt="" width="640" height="640"></figure>
+        <div class="stk st-bubble" style="--r:3deg"><b>31 orders?!</b><span>Since breakfast?!</span></div>
+        <div class="stk st-tag" style="--r:-8deg"><small>New order</small><b>৳<span id="tagAmt">2,400</span></b></div>
+        <div class="stk st-burst" style="--r:12deg"><svg viewBox="0 0 120 120" aria-hidden="true"><path d="M60 4l11 22 24-8-5 24 24 9-20 15 14 21-25 1-3 25-20-14-20 14-3-25-25-1 14-21L6 51l24-9-5-24 24 8z" fill="#EE4266" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round"/></svg><span>SOLD<br>OUT!</span></div>
+        <div class="stk st-mega" style="--r:-14deg"><svg viewBox="0 0 120 90" aria-hidden="true"><path d="M14 34h18l52-26v74L32 56H14z" fill="#FFD23F" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M30 56l8 26h14l-6-24" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><g class="waves" fill="none" stroke="#2B1D0E" stroke-width="5" stroke-linecap="round"><path d="M96 30q8 15 0 30"/><path d="M106 20q14 25 0 50"/></g></svg></div>
       </div>
     </div>
-    <div class="bunting" aria-hidden="true"></div>
+    <div class="ticker" aria-hidden="true"><div class="tk-track"><span>Websites</span><span>Online shops</span><span>Facebook ads</span><span>Google &amp; SEO</span><span>Branding</span><span>Mobile apps</span><span>Websites</span><span>Online shops</span><span>Facebook ads</span><span>Google &amp; SEO</span><span>Branding</span><span>Mobile apps</span></div></div>
   </section>
+  <!-- ================= WHO WE ARE ================= -->
+  <section class="sec who" id="who" aria-labelledby="t-who">
+    <div class="wrap">
+      <div class="who-head">
+        <h2 id="t-who">We’re good kids. <span class="mark">Ask our mom.</span></h2>
+        <div class="mom">
+          <p>She says we’re polite, we eat on time and we always pick up the phone. She also says we make small shops look ridiculously good online. Mothers don’t lie.</p>
+          <blockquote class="mom-quote"><p>“Very talented boys. Still not married.”</p><footer>Our mom, Mirpur. <small>Not a client. She wouldn’t sign the release form.</small></footer></blockquote>
+        </div>
+      </div>
+      <p class="who-hint">Tap a card to meet the gang.</p>
+      <ul class="kids">
+        <li class="kid" style="--r:-3deg"><button type="button" class="kid-in" aria-pressed="false">
+            <span class="kid-face kid-front"><img src="img/stressed.webp" alt="" width="640" height="640" loading="lazy"><b>Pixel Pushers</b><small>Web design</small></span>
+            <span class="kid-face kid-back"><b>Pixel Pushers</b><span>They move a button 2px left. Then back. Then left again. That’s how your website gets razor sharp.</span><em>They design your website and shop.</em></span>
+          </button></li>
+        <li class="kid" style="--r:2.5deg"><button type="button" class="kid-in" aria-pressed="false">
+            <span class="kid-face kid-front"><img src="img/phone.webp" alt="" width="640" height="640" loading="lazy"><b>Ad Nerds</b><small>Digital marketing</small></span>
+            <span class="kid-face kid-back"><b>Ad Nerds</b><span>They wake up checking your Facebook ads and know your customer’s scroll speed by heart.</span><em>They run your Facebook and Google ads.</em></span>
+          </button></li>
+        <li class="kid" style="--r:-2deg"><button type="button" class="kid-in" aria-pressed="false">
+            <span class="kid-face kid-front"><img src="img/happy.webp" alt="" width="640" height="640" loading="lazy"><b>Blabbermouths</b><small>Words and branding</small></span>
+            <span class="kid-face kid-back"><b>Blabbermouths</b><span>They write the lines that make people tap “Order”. They also talk a lot. A lot.</span><em>They write your copy and shape your brand.</em></span>
+          </button></li>
+        <li class="kid" style="--r:3deg"><button type="button" class="kid-in" aria-pressed="false">
+            <span class="kid-face kid-front"><img src="img/chai.webp" alt="" width="640" height="640" loading="lazy"><b>Chief Cha Officer</b><small>Support</small></span>
+            <span class="kid-face kid-back"><b>Chief Cha Officer</b><span>Keeps everyone awake, and still answers your call at 9 PM in wedding season.</span><em>They keep your site running after launch.</em></span>
+          </button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE DO ================= -->
+  <section class="sec svcs" id="services" aria-labelledby="t-svcs">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-svcs">What we do (besides drinking cha).</h2></div><p>Five things, done loudly. Tap any picture to play it again.</p></div>
+      <div class="svc-list">
+        <article class="svc-row" data-scene="design">
+          <div class="svc-copy"><span class="svc-n" aria-hidden="true">01</span><h3>Razor-sharp web design</h3><p>Bespoke, never off the shelf. We cut the clutter until your shop looks like the expensive one on the street.</p><ul><li><svg aria-hidden="true"><use href="#tick"/></svg>Designed for phones first</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Your colours, your logo, your vibe</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Click through it before we build</li></ul></div>
+          <button type="button" class="scene sc-design" aria-label="Play the razor-sharp web design animation again"><svg viewBox="0 0 400 300" aria-hidden="true">
+            <rect x="40" y="40" width="320" height="220" rx="16" fill="#FFFDF6" stroke="#2B1D0E" stroke-width="4"/>
+            <g class="messy"><rect x="62" y="64" width="150" height="26" rx="4" fill="#E9D8A6" transform="rotate(-5 137 77)"/><rect x="230" y="58" width="100" height="70" rx="6" fill="#F7B6C4" transform="rotate(8 280 93)"/><rect x="70" y="110" width="120" height="12" rx="6" fill="#D9CBA8" transform="rotate(4 130 116)"/><rect x="80" y="134" width="90" height="12" rx="6" fill="#D9CBA8" transform="rotate(-6 125 140)"/><circle cx="120" cy="208" r="26" fill="#B8E6DA" transform="rotate(10 120 208)"/><rect x="200" y="170" width="130" height="60" rx="6" fill="#FFE899" transform="rotate(-7 265 200)"/><text x="215" y="208" font-family="Comic Sans MS,cursive" font-size="18" fill="#C0183F" transform="rotate(-7 265 200)">SALE!!!</text></g>
+            <g class="clean" opacity="0"><rect x="62" y="62" width="168" height="22" rx="4" fill="#2B1D0E"/><rect x="62" y="96" width="120" height="10" rx="5" fill="#5C4632"/><rect x="62" y="114" width="140" height="10" rx="5" fill="#5C4632"/><rect x="62" y="140" width="96" height="34" rx="10" fill="#2B1D0E"/><rect x="250" y="62" width="88" height="112" rx="10" fill="#3BCEAC" stroke="#2B1D0E" stroke-width="3"/><g fill="#FFD23F" stroke="#2B1D0E" stroke-width="3"><rect x="62" y="192" width="84" height="48" rx="8"/><rect x="158" y="192" width="84" height="48" rx="8"/><rect x="254" y="192" width="84" height="48" rx="8"/></g></g>
+            <path class="slash" d="M20 280L380 20" stroke="#EE4266" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <g class="razor"><rect x="-38" y="-14" width="76" height="28" rx="4" fill="#E4E8EC" stroke="#2B1D0E" stroke-width="4"/><path d="M-38 8h76" stroke="#2B1D0E" stroke-width="3"/><rect x="-16" y="-6" width="32" height="8" rx="4" fill="#2B1D0E"/></g>
+          </svg></button>
+        </article>
+        <article class="svc-row flip" data-scene="loud">
+          <div class="svc-copy"><span class="svc-n" aria-hidden="true">02</span><h3>Loud marketing</h3><p>Facebook and Google ads that people actually stop scrolling for. We find your buyers and shout at them, politely.</p><ul><li><svg aria-hidden="true"><use href="#tick"/></svg>Ad design and copy that sells</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Targeting your real customers</li><li><svg aria-hidden="true"><use href="#tick"/></svg>A simple report every month</li></ul></div>
+          <button type="button" class="scene sc-loud" aria-label="Play the loud marketing animation again"><svg viewBox="0 0 400 300" aria-hidden="true">
+            <g class="rings" fill="none" stroke="#EE4266" stroke-width="5"><circle cx="150" cy="160" r="40"/><circle cx="150" cy="160" r="40"/><circle cx="150" cy="160" r="40"/></g>
+            <g class="mega"><path d="M50 130h30l90-46v152l-90-46H50z" fill="#FFD23F" stroke="#2B1D0E" stroke-width="6" stroke-linejoin="round"/><path d="M76 190l12 44h24l-10-40" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="6" stroke-linejoin="round"/></g>
+            <g class="likes"><g transform="translate(250 70)"><circle r="24" fill="#EE4266" stroke="#2B1D0E" stroke-width="4"/><path d="M0 10l-11-11a7 7 0 0 1 11-9 7 7 0 0 1 11 9z" fill="#fff"/></g><g transform="translate(320 140)"><rect x="-44" y="-22" width="88" height="44" rx="22" fill="#3BCEAC" stroke="#2B1D0E" stroke-width="4"/><text y="7" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="20" fill="#2B1D0E">+1 sale</text></g><g transform="translate(262 222)"><rect x="-62" y="-22" width="124" height="44" rx="10" fill="#fff" stroke="#2B1D0E" stroke-width="4"/><text y="7" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="19" fill="#2B1D0E">Order now</text></g><g transform="translate(350 60)"><path d="M0-20l6 13 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2z" fill="#FFD23F" stroke="#2B1D0E" stroke-width="3"/></g></g>
+          </svg></button>
+        </article>
+        <article class="svc-row" data-scene="dev">
+          <div class="svc-copy"><span class="svc-n" aria-hidden="true">03</span><h3>Websites that work</h3><p>From a sketch on a napkin to a fast, secure website. Tested on real phones with slow internet.</p><ul><li><svg aria-hidden="true"><use href="#tick"/></svg>Loads in about a second</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Easy for you to update</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Hosting and domain set up</li></ul></div>
+          <button type="button" class="scene sc-dev" aria-label="Play the websites that work animation again"><svg viewBox="0 0 400 300" aria-hidden="true">
+            <rect x="60" y="50" width="220" height="200" rx="14" fill="#FFFDF6" stroke="#2B1D0E" stroke-width="4"/>
+            <path class="sketch" d="M84 82h150M84 104h110M84 140h70v40H84zM176 140h80v90h-80zM84 200h70M84 222h60" fill="none" stroke="#2B1D0E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+            <g class="pencil"><g transform="rotate(35)"><rect x="-8" y="-70" width="16" height="60" fill="#FFD23F" stroke="#2B1D0E" stroke-width="4"/><path d="M-8-10L0 8 8-10z" fill="#F3D9B0" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round"/><rect x="-8" y="-82" width="16" height="12" rx="3" fill="#EE4266" stroke="#2B1D0E" stroke-width="4"/></g></g>
+            <g class="rocket" opacity="0"><path d="M0-56c18 14 24 40 16 72h-32c-8-32-2-58 16-72z" fill="#fff" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><circle cy="-14" r="9" fill="#3BCEAC" stroke="#2B1D0E" stroke-width="4"/><path d="M-16 4l-16 22 14-4M16 4l16 22-14-4" fill="#EE4266" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round"/><path class="flame" d="M-10 18q10 34 20 0" fill="#FFD23F" stroke="#2B1D0E" stroke-width="4"/></g>
+          </svg></button>
+        </article>
+        <article class="svc-row flip" data-scene="shop">
+          <div class="svc-copy"><span class="svc-n" aria-hidden="true">04</span><h3>Online shops</h3><p>Products, prices, cart and payment. Customers order at 2 AM and you wake up to money.</p><ul><li><svg aria-hidden="true"><use href="#tick"/></svg>bKash, Nagad and cards</li><li><svg aria-hidden="true"><use href="#tick"/></svg>WhatsApp order alerts</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Order dashboard</li></ul></div>
+          <button type="button" class="scene sc-shop" aria-label="Play the online shops animation again"><svg viewBox="0 0 400 300" aria-hidden="true">
+            <g class="items"><g class="it"><rect x="-26" y="-26" width="52" height="52" rx="8" fill="#EE4266" stroke="#2B1D0E" stroke-width="4"/></g><g class="it"><rect x="-26" y="-26" width="52" height="52" rx="8" fill="#3BCEAC" stroke="#2B1D0E" stroke-width="4"/></g><g class="it"><rect x="-26" y="-26" width="52" height="52" rx="8" fill="#FFD23F" stroke="#2B1D0E" stroke-width="4"/></g></g>
+            <g class="cart"><path d="M70 120h40l30 110h150l30-90H128" fill="none" stroke="#2B1D0E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M136 140h182l-24 76H156z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><circle cx="170" cy="258" r="16" fill="#2B1D0E"/><circle cx="276" cy="258" r="16" fill="#2B1D0E"/></g>
+            <g class="badge" transform="translate(330 120)"><circle r="26" fill="#EE4266" stroke="#2B1D0E" stroke-width="4"/><text class="badge-n" y="9" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="26" fill="#fff">0</text></g>
+          </svg></button>
+        </article>
+        <article class="svc-row" data-scene="seo">
+          <div class="svc-copy"><span class="svc-n" aria-hidden="true">05</span><h3>Google and SEO</h3><p>When someone nearby searches for what you sell, your shop shows up first. Not your neighbour’s.</p><ul><li><svg aria-hidden="true"><use href="#tick"/></svg>Google Business profile</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Search-friendly pages</li><li><svg aria-hidden="true"><use href="#tick"/></svg>Reviews that build trust</li></ul></div>
+          <button type="button" class="scene sc-seo" aria-label="Play the google and seo animation again"><svg viewBox="0 0 400 300" aria-hidden="true">
+            <rect x="40" y="30" width="320" height="46" rx="23" fill="#fff" stroke="#2B1D0E" stroke-width="4"/>
+            <circle cx="70" cy="53" r="9" fill="none" stroke="#2B1D0E" stroke-width="4"/><path d="M77 60l8 8" stroke="#2B1D0E" stroke-width="4" stroke-linecap="round"/>
+            <text class="q" x="96" y="60" font-family="Archivo,sans-serif" font-size="19" fill="#2B1D0E"></text>
+            <g class="res r1"><rect x="40" y="96" width="320" height="52" rx="10" fill="#fff" stroke="#2B1D0E" stroke-width="3"/><rect x="58" y="110" width="150" height="10" rx="5" fill="#9FB4C0"/><rect x="58" y="128" width="210" height="8" rx="4" fill="#D9E2E7"/></g>
+            <g class="res r2"><rect x="40" y="158" width="320" height="52" rx="10" fill="#fff" stroke="#2B1D0E" stroke-width="3"/><rect x="58" y="172" width="130" height="10" rx="5" fill="#9FB4C0"/><rect x="58" y="190" width="190" height="8" rx="4" fill="#D9E2E7"/></g>
+            <g class="res ours"><rect x="40" y="220" width="320" height="52" rx="10" fill="#FFD23F" stroke="#2B1D0E" stroke-width="4"/><text x="58" y="245" font-family="Baloo 2,sans-serif" font-weight="800" font-size="19" fill="#2B1D0E">Your shop</text><text x="58" y="264" font-family="Archivo,sans-serif" font-size="13" fill="#5C4632">Open now · 4.9 ★ · 600 m away</text><g class="crown" transform="translate(330 232)" opacity="0"><path d="M-18 8l-4-22 12 10 10-16 10 16 12-10-4 22z" fill="#EE4266" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/></g></g>
+          </svg></button>
+        </article>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ================= YOUR SEARCH ENDS HERE: a search everyone has typed ================= -->
   <section class="sec searchsec" id="search" aria-labelledby="t-search">
@@ -943,19 +1175,15 @@ body{caret-color:var(--red)}
           <figcaption class="bub">Moved to Toronto! Your password? No idea, sorry.</figcaption>
         </figure>
       </div>
-      <div class="meanwhile">
-        <div>
-          <h3>Meanwhile, at Click &amp; Grow</h3>
-          <ol class="steps-list">
-            <li><i aria-hidden="true"></i><span><b>Day 1.</b> A free call. The tea’s on us.</span></li>
-            <li><i aria-hidden="true"></i><span><b>Day 3.</b> You click through your design and change whatever you like.</span></li>
-            <li><i aria-hidden="true"></i><span><b>Day 14.</b> Your site goes live on your own domain, and you get the password.</span></li>
-            <li><i aria-hidden="true"></i><span><b>Every day after.</b> We pick up the phone. Even during wedding season.</span></li>
-          </ol>
+      <div class="vs" id="vs">
+        <h3 class="vs-title">Pick your fighter.</h3>
+        <div class="vs-grid" role="table" aria-label="Your cousin, a random agency and Click and Grow compared">
+          <div class="vs-col" role="rowgroup"><div class="vs-h" role="columnheader">Your cousin</div><div class="vs-c no" role="cell"><b>Price</b>Free. Plus nine months.</div><div class="vs-c no" role="cell"><b>Speed</b>“This weekend.” Which weekend? Unclear.</div><div class="vs-c no" role="cell"><b>Phone</b>At a wedding.</div><div class="vs-c no" role="cell"><b>Password</b>Moved to Toronto with it.</div></div>
+          <div class="vs-col" role="rowgroup"><div class="vs-h" role="columnheader">Random agency<small>from the ad behind a rickshaw</small></div><div class="vs-c no" role="cell"><b>Price</b>Cheap, then “extra charge” for everything.</div><div class="vs-c no" role="cell"><b>Speed</b>“Next week”, every week.</div><div class="vs-c no" role="cell"><b>Phone</b>Number not reachable.</div><div class="vs-c no" role="cell"><b>Password</b>“Company policy.”</div></div>
+          <div class="vs-col us" role="rowgroup"><div class="vs-h" role="columnheader">Click &amp; Grow<span class="obv">obviously</span></div><div class="vs-c yes" role="cell"><b>Price</b>Fixed, written down before we start.</div><div class="vs-c yes" role="cell"><b>Speed</b>Live in 7 to 21 days.</div><div class="vs-c yes" role="cell"><b>Phone</b>We pick up. Even in wedding season.</div><div class="vs-c yes" role="cell"><b>Password</b>Yours, from day one.</div></div>
         </div>
-        <span class="harmed" aria-hidden="true">NO COUSINS<br>WERE HARMED</span>
       </div>
-      <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us the site he started. We’ll tell you what to keep, free.</p></div>
+      <div class="sec-cta"><a class="btn btn--green" href="#order">Get my free quote</a><p>Send us the site he started. We’ll tell you what to keep, free.</p></div>
     </div>
   </section>
 
@@ -1070,6 +1298,8 @@ body{caret-color:var(--red)}
     <div class="wrap">
       <div class="sec-head"><div><h2 id="t-faq">Questions people ask (and some they’re too shy to).</h2></div></div>
       <div class="faq">
+        <details><summary>Are you really good kids?</summary><p>Yes. Ask our mom. She’s biased, but she’s not wrong.</p></details>
+        <details><summary>Do you only make websites?</summary><p>No. We also run Facebook and Google ads, set up Google and SEO, build online shops and apps, and shape your brand. The website is where all that noise lands.</p></details>
         <details><summary>Can you make it like Amazon, for the price of lunch, by tomorrow?</summary><p>We love the energy. Not the timeline. Let’s start with what you actually need, then pick the pack that fits.</p></details>
         <details><summary>Why only a few projects a month?</summary><p>A small batch gets the full team. When the seats are gone, the next batch starts on the 1st. No fake timers: the countdown is the real calendar.</p></details>
         <details><summary>You’re in Dhaka and I’m in London. How does that work?</summary><p>Calls in your working hours, updates on WhatsApp or email, and invoices in your currency. Most clients never notice the distance, only the price.</p></details>
@@ -1082,15 +1312,14 @@ body{caret-color:var(--red)}
   <!-- ================= ORDER: one step ================= -->
   <section class="sec order" id="order" aria-labelledby="t-order">
     <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-order">Your free quote takes one minute.</h2></div><p>One short form. A fixed price and a plan within a day, on WhatsApp or email. No payment now.</p></div>
+      <div class="sec-head"><div><h2 id="t-order">Fill in the blanks. We’ll do the shouting.</h2></div><p>One minute. A fixed price and a plan within a day, on WhatsApp or email. No payment now.</p></div>
       <div class="order-grid">
         <form class="slip" id="quote" novalidate>
           <div id="formBody">
-            <div class="two">
-              <div class="field"><label for="f-biz">Shop or business name</label><input id="f-biz" autocomplete="organization" maxlength="26" aria-describedby="e-biz"><p class="err" id="e-biz"></p></div>
-              <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
-            </div>
-            <fieldset class="group"><legend>What do you need? <span class="opt">Pick any</span></legend>
+            <p class="ml-hello">Hello Click &amp; Grow!</p>
+            <p class="ml-line"><label for="f-name">My name is</label> <span class="ml-in"><input id="f-name" autocomplete="name" placeholder="your name" aria-describedby="e-name"></span> <label for="f-biz">and I run</label> <span class="ml-in"><input id="f-biz" autocomplete="organization" maxlength="26" placeholder="shop name" aria-describedby="e-biz"></span>.</p>
+            <p class="err" id="e-name"></p><p class="err" id="e-biz"></p>
+            <fieldset class="group"><legend class="ml-leg">I want my shop to be loud, so I need <span class="opt">(pick any)</span></legend>
               <div class="pills" id="needs">
                 <label><input type="checkbox" name="need" value="Website"><span>Website</span></label>
                 <label><input type="checkbox" name="need" value="Online shop"><span>Online shop</span></label>
@@ -1100,26 +1329,26 @@ body{caret-color:var(--red)}
                 <label><input type="checkbox" name="need" value="Free website check-up" id="needCheck"><span>Free check-up</span></label>
                 <label><input type="checkbox" name="need" value="Not sure"><span>Not sure yet</span></label>
               </div><p class="err" id="e-need"></p></fieldset>
-            <fieldset class="group"><legend>Rough budget</legend>
+            <fieldset class="group"><legend class="ml-leg">My budget is roughly</legend>
               <div class="pills budget" id="budget">
                 <label><input type="radio" name="budget" value="0"><span><b>Singara</b><small data-budget="0">Under ৳25k</small></span></label>
                 <label><input type="radio" name="budget" value="1" checked><span><b>Biryani</b><small data-budget="1">৳25k to ৳60k</small></span></label>
                 <label><input type="radio" name="budget" value="2"><span><b>Kacchi</b><small data-budget="2">৳60k to ৳1.5 lakh</small></span></label>
                 <label><input type="radio" name="budget" value="3"><span><b>Wedding feast</b><small data-budget="3">৳1.5 lakh+</small></span></label>
               </div></fieldset>
-            <fieldset class="group"><legend>How soon?</legend>
+            <fieldset class="group"><legend class="ml-leg">and I need it</legend>
               <div class="pills">
                 <label><input type="radio" name="when" value="Flexible" checked><span>Flexible</span></label>
                 <label><input type="radio" name="when" value="This month"><span>This month</span></label>
                 <label><input type="radio" name="when" value="Urgent"><span>Exam-night urgent</span></label>
               </div></fieldset>
-            <div class="two">
-              <div class="field"><label for="f-contact">WhatsApp number or email</label><input id="f-contact" autocomplete="email" placeholder="01XXXXXXXXX or you@shop.com" aria-describedby="e-contact"><p class="err" id="e-contact"></p></div>
-              <div class="field"><label for="f-note">Anything else? <span class="opt">Optional</span></label><input id="f-note" placeholder="Your current site, a deadline, a dream"></div>
-            </div>
-            <div class="submit-row"><button class="btn btn--green" type="submit" id="send">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="small">Takes one seat only when you accept the quote.</span></div>
+            <p class="ml-line"><label for="f-contact">Call me back at</label> <span class="ml-in wide"><input id="f-contact" autocomplete="email" placeholder="WhatsApp number or email" aria-describedby="e-contact"></span>.</p>
+            <p class="err" id="e-contact"></p>
+            <p class="ml-line"><label for="f-note">PS:</label> <span class="ml-in wide"><input id="f-note" placeholder="my cousin started a site, please save it"></span></p>
+            <p class="ml-sign">Thanks, bye. <span aria-hidden="true">✌</span></p>
+            <div class="submit-row"><button class="btn btn--green" type="submit" id="send">Make some noise <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="small">No payment until you say yes. Mom’s promise.</span></div>
           </div>
-          <div class="done-card" id="doneCard" hidden><span class="stamp">QUOTE ON ITS WAY</span><h3 id="doneTitle">Your plan is brewing.</h3><p>This is a preview, so nothing was sent yet.</p></div>
+          <div class="done-card" id="doneCard" hidden><span class="stamp">NOISE INCOMING</span><h3 id="doneTitle">Your plan is brewing.</h3><p>Now go drink your cha. We’ll call you within one working day.</p><p class="small">This is a preview, so nothing was sent yet.</p></div>
           <p class="sr" role="status" aria-live="polite" id="live"></p>
         </form>
         <div class="side">
@@ -1140,9 +1369,9 @@ body{caret-color:var(--red)}
     <p class="tagline">Get found. Get clicked. Grow.</p>
   </div>
   <div class="bf-row">
-    <p>Websites, online shops and ads for businesses in Dhaka, London, Dubai, New York and anywhere with Wi-Fi.</p>
+    <p>Digital marketing, web design and development for shops in Dhaka, London, Dubai, New York and anywhere with Wi-Fi.</p>
     <div class="contact"><a href="https://wa.me/8801732508485" target="_blank" rel="noopener">WhatsApp: +880 1732-508485</a><span>Based in Dhaka, working with shops everywhere.</span></div>
-    <nav aria-label="Footer"><a href="#packs">Prices</a><a href="#route">How it works</a><a href="#proof">Demo</a><a href="#faq">FAQ</a></nav>
+    <nav aria-label="Footer"><a href="#services">What we do</a><a href="#who">Who we are</a><a href="#packs">Prices</a><a href="#faq">FAQ</a></nav>
   </div>
   <p class="fine">© 2026 Click &amp; Grow · Made in Dhaka with too much tea.</p>
 </div></footer>
@@ -1454,7 +1683,7 @@ body{caret-color:var(--red)}
   if (saga) {
     const head = $('#cousin .sec-head'), h = $('h2', head), p = $(':scope > p', head);
     const panels = $$('.panel', saga), bubs = $$('.bub', saga), mw = $('.meanwhile'), steps = $$('.steps-list li'), harmed = $('.harmed');
-    hide([h, p, ...panels, ...bubs, mw, ...steps, harmed]);
+    hide([h, p, ...panels, ...bubs]);
     once(saga, () => {
       A(h, [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 600 });
       A(p, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 500, delay: 80 });
@@ -1464,7 +1693,7 @@ body{caret-color:var(--red)}
         A(bubs[i], [{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, delay: gaps[i] + 280 });
       });
     }, .2);
-    once(mw, () => {
+    if (mw) once(mw, () => {
       A(mw, [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 550 });
       steps.forEach((li, i) => A(li, [{ opacity: 0, transform: 'translateX(-10px)' }, { opacity: 1, transform: 'translateX(0px)' }], { duration: 400, delay: 250 + [0, 110, 200, 270][i] }));
       A(harmed, [{ opacity: 0, transform: 'rotate(-10deg) scale(1.5)' }, { opacity: 1, transform: 'rotate(6deg) scale(1)' }], { duration: 500, delay: 700, easing: 'cubic-bezier(.34,1.56,.64,1)' });
@@ -1710,5 +1939,166 @@ body{caret-color:var(--red)}
     }, { threshold: .35 });
     io.observe(demo);
   }
+})();
+</script>
+<script>
+(() => {
+  /* ===== LOUD page motion: hero slam + sticker slap, word swap, flip cards, service scenes, versus, confetti ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', SPRING = 'cubic-bezier(.34,1.56,.64,1)', IO = 'cubic-bezier(.77,0,.175,1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const A = (el, kf, o = {}) => el && el.animate ? el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o)) : null;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const onView = (el, fn, th = .35) => { if (!el) return; const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.disconnect(); fn(); } }), { threshold: th }); io.observe(el); };
+
+  /* --- hero: headline words slam in, then stickers slap onto the page one by one --- */
+  const words = $$('.slam .sl'), stks = $$('#collage .stk');
+  if (!reduce) {
+    words.forEach((w, i) => A(w, [{ opacity: 0, transform: `scale(1.9) rotate(${rnd(-10, 10)}deg)` }, { opacity: 1, transform: 'scale(1) rotate(0deg)' }], { duration: 520, delay: 80 + i * 110, easing: SPRING }));
+    const cut = $('.sl-cut'); A(cut, [{ textShadow: '0 0 0 #EE4266' }, { textShadow: '5px 5px 0 #EE4266' }], { duration: 260, delay: 80 + 2 * 110 + 380 });
+    const order = ['st-face', 'st-phone', 'st-parcel', 'st-chai', 'st-bubble', 'st-tag', 'st-burst', 'st-mega'];
+    stks.sort((a, b) => order.findIndex(c => a.classList.contains(c)) - order.findIndex(c => b.classList.contains(c)));
+    const gaps = [520, 700, 820, 930, 1180, 1300, 1420, 1520];
+    stks.forEach((s, i) => {
+      const r = getComputedStyle(s).getPropertyValue('--r').trim() || '0deg';
+      A(s, [
+        { opacity: 0, transform: `translateY(-40px) scale(1.35) rotate(calc(${r} + 14deg))` },
+        { opacity: 1, transform: `translateY(0) scale(.94) rotate(${r})`, offset: .62 },
+        { opacity: 1, transform: `translateY(0) scale(1) rotate(${r})` }
+      ], { duration: 480, delay: gaps[i] || 1500 });
+    });
+    // the price tag counts up once it lands
+    const amt = $('#tagAmt');
+    if (amt) { amt.textContent = '0'; setTimeout(() => { const t0 = performance.now(); const step = now => { const k = Math.min(1, (now - t0) / 700); amt.textContent = Math.round(2400 * (1 - Math.pow(1 - k, 3))).toLocaleString('en-US'); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }, 1350); }
+    // megaphone waves pulse three times, then rest
+    $$('.st-mega .waves path').forEach((w, i) => A(w, [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 700, delay: 1800 + i * 160, iterations: 3, easing: 'ease-out', fill: 'none' }));
+    // stickers lean towards the pointer (desktop only), eased so it has a little weight
+    const col = $('#collage');
+    if (col && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+      const depth = stks.map((_, i) => 6 + (i % 4) * 5);
+      const tick = () => { x += (tx - x) * .12; y += (ty - y) * .12; stks.forEach((s, i) => s.style.translate = `${(x * depth[i]).toFixed(2)}px ${(y * depth[i]).toFixed(2)}px`); raf = Math.abs(tx - x) + Math.abs(ty - y) > .002 ? requestAnimationFrame(tick) : 0; };
+      document.querySelector('.hz').addEventListener('pointermove', e => { const r = col.getBoundingClientRect(); tx = (e.clientX - r.left - r.width / 2) / r.width; ty = (e.clientY - r.top - r.height / 2) / r.height; if (!raf) raf = requestAnimationFrame(tick); });
+      document.querySelector('.hz').addEventListener('pointerleave', () => { tx = ty = 0; if (!raf) raf = requestAnimationFrame(tick); });
+    }
+  }
+
+  /* --- the changing word: a new entrance each time, paused off screen and on hover --- */
+  const sw = $('.hz .hx-swap');
+  if (sw) {
+    const LIST = ['sleep', 'eat biryani', 'watch cricket', 'sit in traffic', 'drink cha', 'go to a wedding'];
+    let i = 0, last = '', timer = 0, fxTimer = 0, visible = true, hover = false;
+    const plain = w => { clearInterval(fxTimer); sw.classList.remove('hx-hand'); sw.getAnimations({ subtree: true }).forEach(a => a.cancel()); sw.textContent = w; };
+    const FX = {
+      scramble(w) { plain(w); const pool = 'abcdefghkmnpqrstuvwxyz৳#%&*'; let f = 0; fxTimer = setInterval(() => { f++; const keep = Math.floor(w.length * f / 12); sw.textContent = [...w].map((c, k) => c === ' ' || k < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join(''); if (f >= 12) { clearInterval(fxTimer); sw.textContent = w; } }, 34); },
+      slide(w) { plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }); },
+      drop(w) { plain(''); [...w].forEach((c, k) => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: k * 28, easing: SPRING }); }); },
+      hand(w) { plain(w); sw.classList.add('hx-hand'); A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 320 }); },
+      type(w) { plain(''); const txt = document.createTextNode(''), caret = document.createElement('span'); caret.className = 'hx-caret'; sw.append(txt, caret); let n = 0; fxTimer = setInterval(() => { txt.data = w.slice(0, ++n); if (n >= w.length) { clearInterval(fxTimer); A(caret, [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 900, easing: 'steps(1,end)' }); } }, 55); },
+      marker(w) { plain(w); const m = document.createElement('span'); m.className = 'hx-mark'; sw.appendChild(m); A(m, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 420, easing: IO }); A(sw, [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 420, delay: 120, easing: IO }); },
+      stickers(w) { plain(''); [...w].forEach((c, k) => { const s = document.createElement('span'); s.className = 'hx-st'; s.textContent = c; sw.appendChild(s); const r = rnd(-14, 14); A(s, [{ opacity: 0, transform: `scale(.4) rotate(${r * 3}deg)` }, { opacity: 1, transform: `scale(1.2) rotate(${r}deg)`, offset: .6 }, { opacity: 1, transform: 'scale(1) rotate(0deg)' }], { duration: 480, delay: k * 40, easing: SPRING }); }); }
+    };
+    const next = () => { i = (i + 1) % LIST.length; const names = Object.keys(FX).filter(n => n !== last); const fx = names[Math.floor(Math.random() * names.length)]; last = fx; FX[fx](LIST[i]); };
+    const run = () => { clearInterval(timer); if (!reduce && visible && !hover && !document.hidden) timer = setInterval(next, 2600); };
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; run(); }).observe(sw);
+    const h1 = $('.hz-swap'); h1.addEventListener('pointerenter', () => { hover = true; run(); }); h1.addEventListener('pointerleave', () => { hover = false; run(); });
+    document.addEventListener('visibilitychange', run);
+    setTimeout(run, reduce ? 0 : 1600);
+  }
+
+  /* --- who we are: flip cards --- */
+  $$('.kid-in').forEach((b, k) => {
+    b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'));
+    if (!reduce) { b.parentElement.style.opacity = 0; }
+  });
+  if (!reduce) onView($('.kids'), () => $$('.kid').forEach((li, k) => {
+    const r = li.style.getPropertyValue('--r');
+    li.style.opacity = '';
+    A(li, [{ opacity: 0, transform: `translateY(60px) rotate(calc(${r} - 10deg)) scale(.9)` }, { opacity: 1, transform: `translateY(0) rotate(${r}) scale(1)` }], { duration: 560, delay: [0, 90, 170, 240][k], easing: SPRING, fill: 'none' });
+  }), .25);
+  if (!reduce) onView($('.mark'), () => A($('.mark'), [{ transform: 'rotate(-12deg) scale(1.6)', opacity: 0 }, { transform: 'rotate(-2deg) scale(1)', opacity: 1 }], { duration: 520, delay: 200, easing: SPRING, fill: 'none' }), .6);
+
+  /* --- what we do: each picture plays once when it arrives, and again on tap --- */
+  const SC = {
+    design(s) {
+      const razor = $('.razor', s), slash = $('.slash', s), messy = $('.messy', s), clean = $('.clean', s);
+      A(razor, [{ transform: 'translate(-40px,320px) rotate(-36deg)' }, { transform: 'translate(440px,-20px) rotate(-36deg)' }], { duration: 700, easing: IO });
+      A(slash, [{ strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, opacity: 1, offset: .8 }, { strokeDashoffset: 0, opacity: 0 }], { duration: 900, easing: IO });
+      A(messy, [{ opacity: 1, transform: 'translate(0,0) rotate(0)' }, { opacity: 0, transform: 'translate(-30px,60px) rotate(-8deg)' }], { duration: 500, delay: 560, easing: 'cubic-bezier(.55,0,1,.45)' });
+      A(clean, [{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 500, delay: 760 });
+    },
+    loud(s) {
+      A($('.mega', s), [{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(.9) rotate(-6deg)', offset: .3 }, { transform: 'scale(1.08) rotate(3deg)', offset: .55 }, { transform: 'scale(1) rotate(0)' }], { duration: 600, easing: 'ease-out' });
+      $$('.rings circle', s).forEach((c, k) => A(c, [{ transform: 'scale(1)', opacity: .9 }, { transform: 'scale(4.2)', opacity: 0 }], { duration: 1100, delay: 200 + k * 220, easing: 'ease-out' }));
+      $$('.likes > g', s).forEach((g, k) => { const tr = g.getAttribute('transform').replace(/translate\(([-\d.]+) ([-\d.]+)\)/, 'translate($1px,$2px)'); A(g, [{ opacity: 0, transform: `${tr} translate(-120px,${40 - k * 20}px) scale(.5)` }, { opacity: 1, transform: `${tr} translate(0px,0px) scale(1)` }], { duration: 520, delay: 380 + k * 140, easing: SPRING }); });
+    },
+    dev(s) {
+      const pencil = $('.pencil', s), sketch = $('.sketch', s), rocket = $('.rocket', s);
+      A(sketch, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 1300, easing: 'cubic-bezier(.45,.05,.55,.95)' });
+      A(pencil, [{ transform: 'translate(84px,82px)' }, { transform: 'translate(234px,82px)', offset: .2 }, { transform: 'translate(84px,140px)', offset: .4 }, { transform: 'translate(256px,230px)', offset: .7 }, { transform: 'translate(330px,220px)', opacity: 1, offset: .9 }, { transform: 'translate(330px,220px)', opacity: 0 }], { duration: 1500, easing: 'linear' });
+      A(rocket, [{ opacity: 0, transform: 'translate(330px,230px) scale(.6)' }, { opacity: 1, transform: 'translate(330px,210px) scale(1)', offset: .25 }, { opacity: 1, transform: 'translate(330px,206px) scale(1)', offset: .45 }, { opacity: 1, transform: 'translate(330px,-120px) scale(1)' }], { duration: 1400, delay: 1350, easing: 'cubic-bezier(.6,0,.9,.4)' });
+    },
+    shop(s) {
+      const n = $('.badge-n', s); n.textContent = '0';
+      $$('.it', s).forEach((it, k) => {
+        A(it, [{ opacity: 1, transform: `translate(${150 + k * 70}px,-60px) rotate(${(k - 1) * 30}deg)` }, { opacity: 1, transform: `translate(${190 + k * 46}px,186px) rotate(${(k - 1) * 8}deg)` }], { duration: 560, delay: 150 + k * 300, easing: 'cubic-bezier(.5,0,.75,0)' });
+        setTimeout(() => { n.textContent = k + 1; A($('.badge', s), [{ transform: 'translate(330px,120px) scale(1)' }, { transform: 'translate(330px,120px) scale(1.35)' }, { transform: 'translate(330px,120px) scale(1)' }], { duration: 300, easing: 'ease-out', fill: 'none' }); A($('.cart', s), [{ transform: 'translateY(0)' }, { transform: 'translateY(6px)' }, { transform: 'translateY(0)' }], { duration: 260, easing: 'ease-out', fill: 'none' }); }, 150 + k * 300 + 560);
+      });
+    },
+    seo(s) {
+      const q = $('.q', s), text = 'fabric shop near me'; let k = 0; q.textContent = '';
+      const id = setInterval(() => { q.textContent = text.slice(0, ++k) + (k < text.length ? '|' : ''); if (k >= text.length) clearInterval(id); }, 45);
+      const d = text.length * 45 + 200;
+      A($('.ours', s), [{ transform: 'translateY(0)' }, { transform: 'translateY(-124px)' }], { duration: 650, delay: d, easing: IO });
+      A($('.r1', s), [{ transform: 'translateY(0)' }, { transform: 'translateY(62px)' }], { duration: 650, delay: d + 40, easing: IO });
+      A($('.r2', s), [{ transform: 'translateY(0)' }, { transform: 'translateY(62px)' }], { duration: 650, delay: d + 80, easing: IO });
+      A($('.crown', s), [{ opacity: 0, transform: 'translate(330px,232px) scale(.5) rotate(-30deg)' }, { opacity: 1, transform: 'translate(330px,232px) scale(1) rotate(8deg)' }], { duration: 480, delay: d + 650, easing: SPRING });
+    }
+  };
+  $$('.svc-row').forEach(row => {
+    const id = row.dataset.scene, btn = $('.scene', row), copy = $('.svc-copy', row);
+    const play = () => { if (reduce) return; btn.getAnimations({ subtree: true }).forEach(a => a.cancel()); SC[id] && SC[id](btn); };
+    btn.addEventListener('click', play);
+    if (reduce) { // show each finished state
+      $$('.clean', btn).forEach(e => e.setAttribute('opacity', 1)); $$('.messy,.razor,.pencil', btn).forEach(e => e.setAttribute('opacity', 0));
+      $$('.sketch,.slash', btn).forEach(e => e.style.strokeDashoffset = 0); $$('.slash', btn).forEach(e => e.style.opacity = 0);
+      const q = $('.q', btn); if (q) q.textContent = 'fabric shop near me'; $$('.it', btn).forEach(e => e.style.opacity = 0); $$('.crown', btn).forEach(e => e.setAttribute('opacity', 1));
+      return;
+    }
+    // finished-looking defaults until it plays
+    if (id === 'shop') $$('.it', btn).forEach(it => it.style.opacity = 0);
+    if (id === 'dev') { $('.pencil', btn).setAttribute('transform', 'translate(84 82)'); }
+    copy.style.opacity = 0;
+    onView(row, () => {
+      copy.style.opacity = '';
+      A(copy, [{ opacity: 0, transform: `translateX(${row.classList.contains('flip') ? 40 : -40}px)` }, { opacity: 1, transform: 'translateX(0)' }], { duration: 600, fill: 'none' });
+      A(btn, [{ transform: 'rotate(-6deg) scale(.9)', opacity: 0 }, { transform: 'rotate(0) scale(1)', opacity: 1 }], { duration: 560, easing: SPRING, fill: 'none' });
+      setTimeout(play, 250);
+    }, .35);
+  });
+
+  /* --- versus: the other two get crossed out, ours gets stamped --- */
+  const vs = $('#vs');
+  if (vs && !reduce) {
+    $$('.vs-col', vs).forEach(c => c.style.opacity = 0);
+    onView(vs, () => {
+      $$('.vs-col', vs).forEach((c, k) => { c.style.opacity = ''; A(c, [{ opacity: 0, transform: `translateY(40px) rotate(${k === 2 ? -6 : 3}deg)` }, { opacity: 1, transform: k === 2 ? 'translateY(0) rotate(-1deg) scale(1.02)' : 'translateY(0) rotate(0deg)' }], { duration: 520, delay: k * 140, easing: k === 2 ? SPRING : OUT, fill: 'none' }); });
+      $$('.vs-c', vs).forEach((c, k) => A(c, [{ opacity: 0, transform: 'translateX(-8px)' }, { opacity: 1, transform: 'translateX(0)' }], { duration: 300, delay: 300 + (k % 4) * 90 + Math.floor(k / 4) * 140, fill: 'none' }));
+      A($('.obv', vs), [{ opacity: 0, transform: 'rotate(-20deg) scale(1.8)' }, { opacity: 1, transform: 'rotate(6deg) scale(1)' }], { duration: 480, delay: 1000, easing: SPRING, fill: 'none' });
+    }, .3);
+  }
+
+  /* --- form: confetti when the quote is sent --- */
+  const done = $('#doneCard');
+  if (done) new MutationObserver(() => {
+    if (done.hidden || reduce) return;
+    const r = done.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 40, cols = ['#FFD23F', '#EE4266', '#3BCEAC', '#2B1D0E', '#FFF4CC'];
+    for (let k = 0; k < 46; k++) {
+      const c = document.createElement('i'); c.className = 'confetti'; c.style.background = cols[k % cols.length]; document.body.appendChild(c);
+      const a = rnd(0, Math.PI * 2), v = rnd(120, 320), dx = Math.cos(a) * v, dy = Math.sin(a) * v - 140;
+      const an = c.animate([{ transform: `translate(${cx}px,${cy}px) rotate(0)`, opacity: 1 }, { transform: `translate(${cx + dx}px,${cy + dy}px) rotate(${rnd(-400, 400)}deg)`, opacity: 1, offset: .55 }, { transform: `translate(${cx + dx * 1.2}px,${cy + dy + 380}px) rotate(${rnd(-700, 700)}deg)`, opacity: 0 }], { duration: rnd(1100, 1700), easing: 'cubic-bezier(.2,.7,.4,1)' });
+      an.onfinish = () => c.remove();
+    }
+  }).observe(done, { attributes: true, attributeFilter: ['hidden'] });
 })();
 </script>
