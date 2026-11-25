@@ -2,9 +2,9 @@
 
 Homepage prototypes for Click & Grow, a web design, development and marketing agency in Dhaka.
 
-`index.html` at the root is the default page: the "Your search ends here" search results design (a copy of `concepts/09-search-results/`). Open it in a browser to view it.
+`index.html` at the root is the default page, a copy of `concepts/09-search-results/index.html`. Its "Your search ends here" section is the speed race: the cousin's slow site against ours on a phone. Open it in a browser to view it.
 
-Preview: https://claude.ai/artifact/8jLBGYLQbVKDMm3N84PabU
+Preview: https://claude.ai/artifact/BgGHA7pToRpDT36LVZ6BZF
 
 Every other concept is in `concepts/`. See `concepts/README.md` for the full list.
 
