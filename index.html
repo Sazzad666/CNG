@@ -684,6 +684,47 @@ body{caret-color:var(--red)}
 .order .eyebrow{color:var(--yellow)}
 .v-pro .cards small{color:#0B5A49}
 .pack.hot h3 small,.pack.hot .tag{color:#fff;opacity:1}
+
+/* ---------- redesign pass: one call to action per screen, motion that plays once, an honest demo ---------- */
+.checkup{margin-top:12px;font-weight:600;color:#3D3520}
+.checkup a{color:var(--ink);font-weight:800;text-decoration-thickness:2px;text-underline-offset:3px}
+@media (max-width:860px){.hero-copy > .checkup{order:5}.hero-copy > .lede{order:6}.hero-copy > .city{order:7}}
+.brandfoot .contact{display:grid;gap:4px}
+.brandfoot .contact a{font-weight:800;color:var(--yellow)}
+.brandfoot .contact span{color:#CFC0A0;font-size:14px}
+/* the phone bar waits until the hero's own buttons have scrolled away, and steps aside over the form and footer */
+@media (max-width:860px){
+  .mbar{transform:translateY(calc(100% + 16px));transition:transform .4s cubic-bezier(0.32,0.72,0,1)}
+  .mbar.show{transform:translateY(0)}
+}
+@media (prefers-reduced-motion:reduce){.mbar{transition:opacity .2s ease;opacity:0}.mbar.show{opacity:1}}
+/* few, but big: section moments play a few times and rest; decorative loops stop */
+.anim .bunting i{animation:none}
+.saga *,.pack .steam,.v-cousin .blink,.anim .win.empty rect{animation-iteration-count:3!important}
+/* the demo shop */
+.demo-grid{display:grid;gap:28px;align-items:center}
+@media (min-width:900px){.demo-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px}}
+.demo-win{border:2.5px solid var(--ink);border-radius:18px;overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--ink)}
+.demo-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:2.5px solid var(--ink);background:var(--paper-2)}
+.demo-bar i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink)}
+.demo-bar span{margin-left:8px;font-size:12.5px;color:var(--ink-2)}
+.demo-body{padding:18px;display:grid;gap:16px}
+.demo-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;font:800 16px/1 var(--display)}
+.demo-nav span{font:600 12px/1 var(--body);color:var(--ink-2)}
+.demo-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:14px;align-items:center}
+.demo-hero b{display:block;font:800 clamp(20px,2.4vw,28px)/1.05 var(--display)}
+.demo-hero span{display:block;margin:8px 0 12px;font-size:13px;color:var(--ink-2)}
+.demo-hero em{display:inline-flex;min-height:34px;align-items:center;padding:0 14px;border-radius:9px;background:var(--choc,#2B1D0E);color:var(--yellow);font:700 13px/1 var(--body);font-style:normal}
+.demo-pic{aspect-ratio:1;border-radius:14px;border:2.5px solid var(--ink);background:repeating-linear-gradient(135deg,#FFD23F 0 14px,#EE4266 14px 28px,#3BCEAC 28px 42px)}
+.demo-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.demo-items div{display:grid;gap:4px;padding:10px;border-radius:12px;background:var(--paper);font:700 13px/1.2 var(--body)}
+.demo-items i{height:34px;border-radius:8px;border:2px solid var(--ink)}
+.demo-items small{color:#0B5A49;font-weight:800}
+.demo-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.demo-list li{padding-left:34px;position:relative;font-size:17px;color:var(--ink-2)}
+.demo-list li::before{content:"";position:absolute;left:0;top:3px;width:22px;height:22px;border-radius:50%;background:var(--teal,#3BCEAC) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5' fill='none' stroke='%232B1D0E' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/70% no-repeat;border:2px solid var(--ink)}
+.demo-list b{color:var(--ink);font-weight:800}
+.demo-note{margin-top:22px;font-size:14px;color:var(--ink-2)}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -758,15 +799,12 @@ body{caret-color:var(--red)}
   </defs>
 </svg>
 
-<p class="strip">Free website check-up this month. <a href="#order">Claim yours</a></p>
 <header class="head">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="#FFC72C" stroke="#1C1A17" stroke-width="1.6"><ellipse cx="39.50" cy="24.00" rx="4.6" ry="8" transform="rotate(90.0 39.50 24.00)"/><ellipse cx="37.42" cy="31.75" rx="4.6" ry="8" transform="rotate(120.0 37.42 31.75)"/><ellipse cx="31.75" cy="37.42" rx="4.6" ry="8" transform="rotate(150.0 31.75 37.42)"/><ellipse cx="24.00" cy="39.50" rx="4.6" ry="8" transform="rotate(180.0 24.00 39.50)"/><ellipse cx="16.25" cy="37.42" rx="4.6" ry="8" transform="rotate(210.0 16.25 37.42)"/><ellipse cx="10.58" cy="31.75" rx="4.6" ry="8" transform="rotate(240.0 10.58 31.75)"/><ellipse cx="8.50" cy="24.00" rx="4.6" ry="8" transform="rotate(270.0 8.50 24.00)"/><ellipse cx="10.58" cy="16.25" rx="4.6" ry="8" transform="rotate(300.0 10.58 16.25)"/><ellipse cx="16.25" cy="10.58" rx="4.6" ry="8" transform="rotate(330.0 16.25 10.58)"/><ellipse cx="24.00" cy="8.50" rx="4.6" ry="8" transform="rotate(360.0 24.00 8.50)"/><ellipse cx="31.75" cy="10.58" rx="4.6" ry="8" transform="rotate(390.0 31.75 10.58)"/><ellipse cx="37.42" cy="16.25" rx="4.6" ry="8" transform="rotate(420.0 37.42 16.25)"/></g><circle cx="24" cy="24" r="13.5" fill="#6B4423" stroke="#1C1A17" stroke-width="2"/><path d="M19.5 14.5v18l4.6-4.6 3.8 7 3.1-1.6-3.8-6.9h6.4z" fill="#fff" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><circle cx="22.3" cy="22.4" r="1.25" fill="#1C1A17"/><circle cx="25.2" cy="24.4" r="1.25" fill="#1C1A17"/><path d="M21.3 26.8q2.1 1.7 4.2.3" fill="none" stroke="#1C1A17" stroke-width="1.3" stroke-linecap="round"/></svg><span>Click<b class="amp">&amp;</b><span class="grow">Grow</span></span></a>
-    <nav aria-label="Main"><ul><li><a href="#menu">Services</a></li><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <nav aria-label="Main"><ul><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#proof">Demo</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
     <div class="acts">
-      <a class="seats-chip" href="#seats"><i aria-hidden="true"></i><span data-seats-chip>2 seats left this month</span></a>
-      <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a>
-      <a class="btn btn--green" href="#order">Free quote</a>
+      <a class="btn btn--green" href="#order">Get my free quote</a>
     </div>
   </div>
 </header>
@@ -776,13 +814,13 @@ body{caret-color:var(--red)}
   <section class="hero" aria-labelledby="t-hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
-        <h1 id="t-hero">Your website sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep</span>.</h1>
+                <h1 id="t-hero">Your website sells while you get on with life.</h1>
         <p class="lede">We build websites and online shops that take orders day and night, so you can sleep, eat and watch the match in peace.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
         </div>
+        <p class="checkup">Already have a website? <a href="#order" data-checkup>Get a free check-up</a> first.</p>
         <div class="city" role="group" aria-labelledby="cityLbl">
           <span id="cityLbl">Where’s your shop?</span>
           <div class="city-btns">
@@ -817,12 +855,6 @@ body{caret-color:var(--red)}
     <div class="wrap">
       <div class="sec-head"><div><h2 id="t-search">Your search ends here.</h2></div><p>Your customer taps your link. Same shop, same phone, two websites. Watch who waits.</p></div>
       <div id="searchStage" class="stage"></div>
-      <div class="tiles">
-          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M8 14h12M8 18h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Price fixed before we start</b><span>The meter is on. No surprise extras.</span></div>
-          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 6h20v13H12l-5 4v-4H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg><b>Real people on WhatsApp</b><span>Not a bot. Not “sir is in a meeting”.</span></div>
-          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="8" y="3" width="12" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M12 21h4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Built for phones first</b><span>Because your customers live on them.</span></div>
-          <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3l9 4v7c0 5-4 9-9 11-5-2-9-6-9-11V7z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M10 14l3 3 5-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>30 days of free fixes</b><span>Something looks off after launch? We fix it.</span></div>
-        </div>
     </div>
   </section>
 
@@ -922,45 +954,69 @@ body{caret-color:var(--red)}
     </div>
   </section>
 
-  <!-- ================= STATEMENT: the words fill in as you scroll ================= -->
-  <section class="sec sx" aria-label="What you get with Click and Grow">
+  <!-- ================= PACKS ================= -->
+  <section class="sec" id="packs" aria-labelledby="t-packs">
     <div class="wrap">
-      <p>Fixed price before we start. Real people on WhatsApp. Built for your customers’ phones. Zero cousins involved.</p>
-      <small>No surprise extras, no “sir is in a meeting”, and nobody learning to code on your shop.</small>
+      <div class="sec-head"><div><h2 id="t-packs">Three packs, priced like a menu.</h2></div><p>Named after our favourite food. Every pack comes with mobile design, hosting set-up and a WhatsApp button that works.</p></div>
+      <div class="pack-grid">
+        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="96" rx="70" ry="10" fill="#E9DCC0"/><path d="M40 92L80 20l40 72z" fill="#E7A94A" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M60 70l20-34 20 34" fill="none" stroke="#B9782A" stroke-width="3"/></svg></div>
+          <h3>Singara <small>the starter</small></h3><p class="tag">Small, quick and satisfying.</p><p class="amt" data-price="singara">৳18,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>One-page website</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>WhatsApp and call buttons</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Google Maps listing</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 7 days</li></ul>
+          <a class="btn" href="#order" data-pack="singara">Order Singara</a></article>
+        <article class="pack hot"><span class="badge">Most ordered</span><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="84" rx="72" ry="20" fill="#fff" stroke="#1C1A17" stroke-width="4"/><path d="M24 80c4-28 26-44 56-44s52 16 56 44z" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><g fill="#fff"><circle cx="60" cy="56" r="3"/><circle cx="80" cy="50" r="3"/><circle cx="100" cy="58" r="3"/></g><ellipse cx="96" cy="60" rx="14" ry="11" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="96" cy="60" r="6" fill="#FFC72C"/><circle cx="62" cy="66" r="10" fill="#D9A25A" stroke="#1C1A17" stroke-width="3"/><path class="steam" d="M60 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path class="steam" d="M96 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <h3>Biryani <small>the main</small></h3><p class="tag">The crowd favourite. Feeds a growing business.</p><p class="amt" data-price="biryani">৳35,000</p>
+          <ul><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Up to 6 pages</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Google set-up and basic SEO</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Analytics and ad pixels</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>30 days of free fixes</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Live in about 14 days</li></ul>
+          <a class="btn" href="#order" data-pack="biryani">Order Biryani</a></article>
+        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><path d="M30 46h100l-8 52H38z" fill="#9A9FA6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M24 46h112" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/><path d="M40 46c4-18 20-28 40-28s36 10 40 28" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><rect x="72" y="60" width="16" height="12" rx="3" fill="#E8283F"/></svg></div>
+          <h3>Kacchi <small>the feast</small></h3><p class="tag">For serious online sellers.</p><p class="amt" data-price="kacchi">৳65,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>Online shop, up to 50 products</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Local and card payments</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Order dashboard and alerts</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>SEO and first ad campaign</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 21 days</li></ul>
+          <a class="btn" href="#order" data-pack="kacchi">Order Kacchi</a></article>
+      </div>
+      <p class="custom">Also on the menu: mobile apps, Google and SEO, Facebook ads, logos and website care. <a href="#order">Ask for a custom quote</a>. Every pack takes one of this month’s <span data-seats-total>6</span> seats.</p>
     </div>
   </section>
 
-  <!-- ================= MENU (services) ================= -->
-  <section class="sec" id="menu" aria-labelledby="t-menu" style="padding-top:20px">
+  <!-- ================= ROUTE ================= -->
+  <section class="sec" id="route" aria-labelledby="t-route" style="padding-top:20px">
     <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-menu">Everything you need to sell online.</h2></div><p>Prices shown in <b data-city-text="curName">Bangladeshi taka</b>. Pick a city above to switch.</p></div>
-      <div class="svc" id="svc">
-        <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M3 12h26" stroke="#1C1A17" stroke-width="2.5"/><rect x="7" y="16" width="10" height="3" fill="#006A4E"/></svg></span><h3>Business website</h3><p>Look as good online as you do in person.</p><span class="price">from <b data-price="web">৳25,000</b></span></a>
-        <a href="#order" data-need="Online shop"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 11c0-6 10-6 10 0" fill="none" stroke="#1C1A17" stroke-width="2.5"/></svg></span><h3>Online shop</h3><p data-city-text="shopLine">bKash, Nagad, card. Customers pay, you sleep.</p><span class="price">from <b data-price="shop">৳45,000</b></span></a>
-        <a href="#order" data-need="Social page to website"><span class="ico" style="--bg:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22v14H14l-6 5v-5H5z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Social page → website</h3><p data-city-text="inbox">Stop answering “price koto?” 200 times a day.</p><span class="price">from <b data-price="social">৳18,000</b></span></a>
-        <a href="#order" data-need="Mobile app"><span class="ico" style="--bg:var(--red-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="16" cy="14" r="4" fill="#E8283F"/></svg></span><h3>Mobile app</h3><p>Your shop, on their home screen.</p><span class="price">from <b data-price="app">৳1,20,000</b></span></a>
-        <a href="#order" data-need="Ads & Google"><span class="ico" style="--bg:#D6F4F1"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M20 20l7 7" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg></span><h3>Google &amp; SEO</h3><p>Get found when people search, not only when you post.</p><span class="price">from <b data-price="seo">৳12,000</b><em>/mo</em></span></a>
-        <a href="#order" data-need="Ads & Google"><span class="ico" style="--bg:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Facebook &amp; Google ads</h3><p>Ads that bring orders, not just likes from your aunts.</p><span class="price">from <b data-price="ads">৳10,000</b><em>/mo</em></span></a>
-        <a href="#order" data-need="Website"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.5 8 8.5.7-6.5 5.6 2 8.4L16 22.3 8.5 26.7l2-8.4L4 12.7l8.5-.7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Logo &amp; branding</h3><p>A logo people remember. Not one made in Paint at 2am.</p><span class="price">from <b data-price="logo">৳8,000</b></span></a>
-        <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12-6-2-10-6-10-12V8z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l4 4 6-7" fill="none" stroke="#006A4E" stroke-width="2.8" stroke-linecap="round"/></svg></span><h3>Website care</h3><p>Updates, backups and fixes. We worry so you don’t.</p><span class="price">from <b data-price="care">৳3,000</b><em>/mo</em></span></a>
+      <div class="sec-head"><div><h2 id="t-route">From “we need a website” to launch day.</h2></div><p>Four stops, no traffic. You always know where we are.</p></div>
+      <div class="route-box">
+        <svg viewBox="0 0 1200 170" aria-hidden="true">
+          <rect y="120" width="1200" height="40" rx="20" fill="#454545"/><path d="M20 140h1160" stroke="#F3F0E8" stroke-width="4" stroke-dasharray="30 26"/>
+          <g fill="#E8283F" stroke="#1C1A17" stroke-width="3"><circle cx="150" cy="140" r="11"/><circle cx="450" cy="140" r="11"/><circle cx="750" cy="140" r="11"/><circle cx="1050" cy="140" r="11"/></g>
+          <use id="routeVeh" href="#veh-dhaka" x="0" y="34" width="150" height="116"/>
+        </svg>
+        <ol class="stops" id="stops">
+          <li class="on"><span class="stop-top"><b>1</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 10h15v8a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M20 12h2a3 3 0 0 1 0 6h-2M10 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><strong>Tea &amp; chat</strong><span>A free call. Tell us what you sell and who buys it.</span></li>
+          <li class="on"><span class="stop-top"><b>2</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 14s4-8 11-8 11 8 11 8-4 8-11 8S3 14 3 14z" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="14" cy="14" r="3.5" fill="currentColor"/></svg></span><strong>See it first</strong><span>A clickable design you can change before we build.</span></li>
+          <li class="on"><span class="stop-top"><b>3</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 8l-6 6 6 6M19 8l6 6-6 6M16 5l-4 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Build &amp; test</strong><span>Tested on real phones, slow internet included.</span></li>
+          <li class="on"><span class="stop-top"><b>4</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M17 4c4 0 7 3 7 7l-9 9-7-7z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 13l-4 1 2 4M15 20l-1 4-4-2M5 23l4-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="10" r="2" fill="currentColor"/></svg></span><strong>Launch &amp; grow</strong><span>Go live, then ads and Google bring the crowd.</span></li>
+        </ol>
       </div>
-      <p class="note">Sample prices for this concept. Every quote is fixed before we start.</p>
     </div>
   </section>
 
-  <!-- ================= PROOF (slots for real clients) ================= -->
-  <!-- Replace every slot with a real client logo and their own words before launch. Never invent reviews. -->
-  <section class="sec proof" id="proof" aria-labelledby="t-proof">
+  <!-- ================= DEMO: what we would build, clearly labelled as a demo ================= -->
+  <section class="sec demo" id="proof" aria-labelledby="t-proof">
     <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-proof">Shops that already switched on.</h2></div><p>Two or three real clients go here: their logo, one sentence, one result.</p></div>
-      <div class="logos" aria-label="Client logos">
-        <span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span><span class="slot">Client logo</span>
+      <div class="sec-head"><div><h2 id="t-proof">Rahman Traders, our demo shop.</h2></div><p>An imaginary fabric shop we built to show what you get. Real client stories go here once they’re happy for us to share them.</p></div>
+      <div class="demo-grid">
+        <div class="demo-win" aria-hidden="true">
+          <div class="demo-bar"><i></i><i></i><i></i><span>rahmantraders.example</span></div>
+          <div class="demo-body">
+            <div class="demo-nav"><b>Rahman Traders</b><span>Fabrics · Wholesale · Cart (2)</span></div>
+            <div class="demo-hero"><div><b>Quality fabric, delivered anywhere.</b><span>Order before 6 PM, ships today.</span><em>Shop fabrics</em></div><div class="demo-pic"></div></div>
+            <div class="demo-items"><div><i style="background:#FF8A1F"></i>Cotton lawn<small data-price="lawn">৳450 / yd</small></div><div><i style="background:#EE4266"></i>Katan silk<small data-price="silk">৳1,200 / yd</small></div><div><i style="background:#3BCEAC"></i>Muslin<small data-price="muslin">৳900 / yd</small></div></div>
+          </div>
+        </div>
+        <ul class="demo-list">
+          <li><b>Prices on every product.</b> Nobody has to message “price koto?” first.</li>
+          <li><b>Order on WhatsApp in one tap.</b> The order arrives with the product and size filled in.</li>
+          <li><b>Found on Google Maps.</b> For “fabric shop near me” in your area.</li>
+          <li><b>Open at 2 AM.</b> It takes orders while the shutter is down.</li>
+        </ul>
       </div>
-      <div class="quotes">
-        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>Add one sentence from a real client about what changed.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
-        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>A short quote works best. Twenty words or fewer.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
-        <figure class="quote"><svg class="qmark" viewBox="0 0 40 32" aria-hidden="true"><path d="M4 30V18C4 8 10 3 18 2l2 5c-5 2-8 5-8 10h7v13zM22 30V18c0-10 6-15 14-16l2 5c-5 2-8 5-8 10h7v13z" fill="currentColor"/></svg><blockquote>Mix one Dhaka client with one from abroad.</blockquote><figcaption><span class="avatar slot-dot" aria-hidden="true"></span><span><b>Client name</b>Business · City</span><span class="result">Their result</span></figcaption></figure>
-      </div>
+      <p class="demo-note">Demo project. Rahman Traders isn’t a real client.</p>
     </div>
   </section>
 
@@ -969,13 +1025,12 @@ body{caret-color:var(--red)}
   <section class="sec seats" id="seats" aria-labelledby="t-seats">
     <div class="wrap seats-grid">
       <div>
-        <p class="eyebrow">Limited seats, honestly</p>
         <h2 id="t-seats"><span data-city-text="busShout">“Ar ekjon! Ar ekjon!”</span></h2>
         <p class="lede"><span data-city-text="busLede">Like the bus conductor says: one more, one more.</span> We take <b data-seats-total>6</b> new projects a month, so every shop gets the real team, not the intern’s intern.</p>
         <div class="meter" id="meter" aria-label="Seats this month"></div>
         <p class="closing"><span data-seats-line>2 of 6 seats left this month.</span> Booking closes in <b id="countdown">a few days</b>.</p>
         <p class="why">Seats fill in the order quotes are accepted. Missed this bus? The next one leaves on the 1st.</p>
-        <div class="sec-cta"><a class="btn btn--green" href="#order">Book my seat</a></div>
+        <div class="sec-cta"><a class="btn btn--green" href="#order">Get my free quote</a></div>
       </div>
       <div class="bus" role="img" aria-label="A bus pulls in. Most seats are taken, the last ones glow green, and the conductor leans out shouting for one more passenger.">
         <svg viewBox="0 0 720 440" aria-hidden="true">
@@ -1005,76 +1060,6 @@ body{caret-color:var(--red)}
     </div>
   </section>
 
-  <!-- ================= PACKS ================= -->
-  <section class="sec" id="packs" aria-labelledby="t-packs">
-    <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-packs">Three packs, priced like a menu.</h2></div><p>Named after our favourite food. Every pack comes with mobile design, hosting set-up and a WhatsApp button that works.</p></div>
-      <div class="pack-grid">
-        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="96" rx="70" ry="10" fill="#E9DCC0"/><path d="M40 92L80 20l40 72z" fill="#E7A94A" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M60 70l20-34 20 34" fill="none" stroke="#B9782A" stroke-width="3"/></svg></div>
-          <h3>Singara <small>the starter</small></h3><p class="tag">Small, quick and satisfying.</p><p class="amt" data-price="singara">৳18,000</p>
-          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>One-page website</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>WhatsApp and call buttons</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Google Maps listing</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 7 days</li></ul>
-          <a class="btn" href="#order" data-pack="singara">Order Singara</a></article>
-        <article class="pack hot"><span class="badge">Most ordered</span><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="84" rx="72" ry="20" fill="#fff" stroke="#1C1A17" stroke-width="4"/><path d="M24 80c4-28 26-44 56-44s52 16 56 44z" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><g fill="#fff"><circle cx="60" cy="56" r="3"/><circle cx="80" cy="50" r="3"/><circle cx="100" cy="58" r="3"/></g><ellipse cx="96" cy="60" rx="14" ry="11" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="96" cy="60" r="6" fill="#FFC72C"/><circle cx="62" cy="66" r="10" fill="#D9A25A" stroke="#1C1A17" stroke-width="3"/><path class="steam" d="M60 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path class="steam" d="M96 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
-          <h3>Biryani <small>the main</small></h3><p class="tag">The crowd favourite. Feeds a growing business.</p><p class="amt" data-price="biryani">৳35,000</p>
-          <ul><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Up to 6 pages</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Google set-up and basic SEO</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Analytics and ad pixels</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>30 days of free fixes</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Live in about 14 days</li></ul>
-          <a class="btn" href="#order" data-pack="biryani">Order Biryani</a></article>
-        <article class="pack"><div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><path d="M30 46h100l-8 52H38z" fill="#9A9FA6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M24 46h112" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/><path d="M40 46c4-18 20-28 40-28s36 10 40 28" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><rect x="72" y="60" width="16" height="12" rx="3" fill="#E8283F"/></svg></div>
-          <h3>Kacchi <small>the feast</small></h3><p class="tag">For serious online sellers.</p><p class="amt" data-price="kacchi">৳65,000</p>
-          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>Online shop, up to 50 products</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Local and card payments</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Order dashboard and alerts</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>SEO and first ad campaign</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 21 days</li></ul>
-          <a class="btn" href="#order" data-pack="kacchi">Order Kacchi</a></article>
-      </div>
-      <p class="custom">Every pack takes one of this month’s <span data-seats-total>6</span> seats. Not hungry for a pack? <a href="#order">Get a custom quote</a>.</p>
-    </div>
-  </section>
-
-  <!-- ================= ROUTE ================= -->
-  <section class="sec" id="route" aria-labelledby="t-route" style="padding-top:20px">
-    <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-route">From “we need a website” to launch day.</h2></div><p>Four stops, no traffic. You always know where we are.</p></div>
-      <div class="route-box">
-        <svg viewBox="0 0 1200 170" aria-hidden="true">
-          <rect y="120" width="1200" height="40" rx="20" fill="#454545"/><path d="M20 140h1160" stroke="#F3F0E8" stroke-width="4" stroke-dasharray="30 26"/>
-          <g fill="#E8283F" stroke="#1C1A17" stroke-width="3"><circle cx="150" cy="140" r="11"/><circle cx="450" cy="140" r="11"/><circle cx="750" cy="140" r="11"/><circle cx="1050" cy="140" r="11"/></g>
-          <use id="routeVeh" href="#veh-dhaka" x="0" y="34" width="150" height="116"/>
-        </svg>
-        <ol class="stops" id="stops">
-          <li class="on"><span class="stop-top"><b>1</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 10h15v8a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M20 12h2a3 3 0 0 1 0 6h-2M10 3v4M15 3v4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span><strong>Tea &amp; chat</strong><span>A free call. Tell us what you sell and who buys it.</span></li>
-          <li class="on"><span class="stop-top"><b>2</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 14s4-8 11-8 11 8 11 8-4 8-11 8S3 14 3 14z" fill="none" stroke="currentColor" stroke-width="2.6"/><circle cx="14" cy="14" r="3.5" fill="currentColor"/></svg></span><strong>See it first</strong><span>A clickable design you can change before we build.</span></li>
-          <li class="on"><span class="stop-top"><b>3</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M9 8l-6 6 6 6M19 8l6 6-6 6M16 5l-4 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Build &amp; test</strong><span>Tested on real phones, slow internet included.</span></li>
-          <li class="on"><span class="stop-top"><b>4</b><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M17 4c4 0 7 3 7 7l-9 9-7-7z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M8 13l-4 1 2 4M15 20l-1 4-4-2M5 23l4-4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="10" r="2" fill="currentColor"/></svg></span><strong>Launch &amp; grow</strong><span>Go live, then ads and Google bring the crowd.</span></li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= OPEN EVERYWHERE ================= -->
-  <section class="sec" id="map" aria-labelledby="t-map" style="padding-top:20px">
-    <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-map">Built in Dhaka for shops everywhere.</h2></div><p>Calls in your time zone, prices in your currency, and one team that answers.</p></div>
-      <div class="map" role="img" aria-label="A simple world map with routes from Dhaka to London, Dubai, New York, Toronto, Sydney and Singapore">
-        <svg viewBox="0 0 1200 520" aria-hidden="true">
-          <g fill="#BFE0C9" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round">
-            <path d="M120 120c60-40 180-50 240-20 40 20 30 60 0 80-20 14-10 40-40 60-30 20-60 20-90 60-20 26-50 20-60-10-10-30-40-40-60-80-10-30-10-70 10-90z"/>
-            <path d="M300 300c30-10 70 0 80 30 10 40-10 80-30 120-14 28-40 36-50 10-12-30-20-70-24-110-2-26 4-44 24-50z"/>
-            <path d="M520 110c40-20 110-20 140 0 20 14 0 40-20 50-30 14-60 10-90 20-30 10-50-10-50-30 0-20 2-30 20-40z"/>
-            <path d="M540 210c40-10 90 0 110 30 20 30 10 80-10 120-16 30-40 50-60 40-20-10-24-50-34-80-10-30-34-50-30-80 2-18 8-26 24-30z"/>
-            <path d="M680 100c80-30 220-30 300 10 40 20 50 60 20 90-24 24-70 20-100 50-20 20-60 30-90 10-24-16-40-10-70-30-30-20-50-40-40-80 4-20 40-40 80-50z"/>
-            <path d="M940 360c30-14 80-10 100 10 16 16 10 46-14 60-30 18-80 14-96-10-14-20-14-46 10-60z"/>
-          </g>
-          <g id="arcs" fill="none" stroke="#E8283F" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="0">
-            <path pathLength="1" d="M860 200 Q 720 80 585 130"/><path pathLength="1" d="M860 200 Q 790 170 720 205"/><path pathLength="1" d="M860 200 Q 560 0 250 160"/><path pathLength="1" d="M860 200 Q 560 30 240 120"/><path pathLength="1" d="M860 200 Q 960 260 1000 390"/><path pathLength="1" d="M860 200 Q 900 240 900 270"/>
-          </g>
-          <g id="cities" stroke="#1C1A17" stroke-width="3">
-            <circle data-c="london" cx="585" cy="130" r="9" fill="#FFC72C"/><circle data-c="dubai" cx="720" cy="205" r="9" fill="#FFC72C"/><circle data-c="ny" cx="250" cy="160" r="9" fill="#FFC72C"/><circle cx="240" cy="120" r="8" fill="#FFC72C"/><circle cx="1000" cy="390" r="8" fill="#FFC72C"/><circle cx="900" cy="270" r="8" fill="#FFC72C"/>
-          </g>
-          <g font-family="Archivo, sans-serif" font-weight="700" font-size="16" fill="#1C1A17"><text x="560" y="114">London</text><text x="700" y="232">Dubai</text><text x="214" y="190">New York</text><text x="200" y="104">Toronto</text><text x="1014" y="396">Sydney</text><text x="918" y="276">Singapore</text></g>
-          <g id="dhakaPin"><circle cx="860" cy="200" r="14" fill="#006A4E" stroke="#1C1A17" stroke-width="3"/><text x="880" y="192" font-family="Baloo 2, sans-serif" font-weight="800" font-size="22" fill="#1C1A17">Dhaka</text></g>
-        </svg>
-      </div>
-      <div class="map-legend"><span><i style="--c:#006A4E"></i>Our studio</span><span><i style="--c:#FFC72C"></i>Cities we work with</span></div>
-    </div>
-  </section>
-
   <!-- ================= FAQ ================= -->
   <section class="sec" id="faq" aria-labelledby="t-faq" style="padding-top:20px">
     <div class="wrap">
@@ -1092,7 +1077,7 @@ body{caret-color:var(--red)}
   <!-- ================= ORDER: one step ================= -->
   <section class="sec order" id="order" aria-labelledby="t-order">
     <div class="wrap">
-      <div class="sec-head"><div><p class="eyebrow">Free quote</p><h2 id="t-order">Your free quote takes one minute.</h2></div><p>One short form. A fixed price and a plan within a day, on WhatsApp or email. No payment now.</p></div>
+      <div class="sec-head"><div><h2 id="t-order">Your free quote takes one minute.</h2></div><p>One short form. A fixed price and a plan within a day, on WhatsApp or email. No payment now.</p></div>
       <div class="order-grid">
         <form class="slip" id="quote" novalidate>
           <div id="formBody">
@@ -1107,6 +1092,7 @@ body{caret-color:var(--red)}
                 <label><input type="checkbox" name="need" value="Social page to website"><span>Page → website</span></label>
                 <label><input type="checkbox" name="need" value="Mobile app"><span>Mobile app</span></label>
                 <label><input type="checkbox" name="need" value="Ads & Google"><span>Ads &amp; Google</span></label>
+                <label><input type="checkbox" name="need" value="Free website check-up" id="needCheck"><span>Free check-up</span></label>
                 <label><input type="checkbox" name="need" value="Not sure"><span>Not sure yet</span></label>
               </div><p class="err" id="e-need"></p></fieldset>
             <fieldset class="group"><legend>Rough budget</legend>
@@ -1128,7 +1114,7 @@ body{caret-color:var(--red)}
             </div>
             <div class="submit-row"><button class="btn btn--green" type="submit" id="send">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="small">Takes one seat only when you accept the quote.</span></div>
           </div>
-          <div class="done-card" id="doneCard" hidden><span class="stamp">SEAT RESERVED</span><h3 id="doneTitle">Your plan is brewing.</h3><p>This is a preview, so nothing was sent yet.</p></div>
+          <div class="done-card" id="doneCard" hidden><span class="stamp">QUOTE ON ITS WAY</span><h3 id="doneTitle">Your plan is brewing.</h3><p>This is a preview, so nothing was sent yet.</p></div>
           <p class="sr" role="status" aria-live="polite" id="live"></p>
         </form>
         <div class="side">
@@ -1141,8 +1127,6 @@ body{caret-color:var(--red)}
     </div>
   </section>
 
-  <section class="sec final" aria-labelledby="t-final"><div class="wrap"><h2 id="t-final">Shutter’s up. Let’s sell.</h2><p><span data-seats-line>2 of 6 seats left this month.</span> Tell us about your business before the bus leaves.</p>
-    <div class="hero-cta"><a class="btn btn--green" href="#order">Get my free quote</a><a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a></div></div></section>
 </main>
 
 <footer class="brandfoot"><div class="wrap">
@@ -1152,11 +1136,12 @@ body{caret-color:var(--red)}
   </div>
   <div class="bf-row">
     <p>Websites, online shops and ads for businesses in Dhaka, London, Dubai, New York and anywhere with Wi-Fi.</p>
-    <nav aria-label="Footer"><a href="#menu">Services</a><a href="#packs">Prices</a><a href="#route">How it works</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav>
+    <div class="contact"><a href="https://wa.me/8801732508485" target="_blank" rel="noopener">WhatsApp: +880 1732-508485</a><span>Based in Dhaka, working with shops everywhere.</span></div>
+    <nav aria-label="Footer"><a href="#packs">Prices</a><a href="#route">How it works</a><a href="#proof">Demo</a><a href="#faq">FAQ</a></nav>
   </div>
   <p class="fine">© 2026 Click &amp; Grow · Made in Dhaka with too much tea.</p>
 </div></footer>
-<div class="mbar" aria-label="Quick actions"><a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a><a class="btn btn--green" href="#order">Free quote</a></div>
+<div class="mbar" role="region" aria-label="Quick actions"><a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a><a class="btn btn--green" href="#order">Free quote</a></div>
 
 <script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
 <script>
@@ -1217,7 +1202,7 @@ body{caret-color:var(--red)}
   $$('[data-seats-total]').forEach(e => e.textContent = SEATS.total);
   $$('[data-seats-line]').forEach(e => e.textContent = left ? `${left} of ${SEATS.total} seats left for ${month}.` : `${month} is full. Next bus leaves on the 1st.`);
   $$('[data-seats-chip]').forEach(e => e.textContent = left ? `${left} seat${left > 1 ? 's' : ''} left in ${month}` : 'Booking next month');
-  $$('[data-seats-ticket]').forEach(e => e.textContent = left ? `1 of ${left} left in ${month}` : 'Next month’s bus');
+  $$('[data-seats-ticket]').forEach(e => e.textContent = left ? `${left} of ${SEATS.total} left in ${month}` : 'Next month’s bus');
   $('#countdown').textContent = days <= 1 ? 'less than a day' : `${days} days`;
   for (let i = 0; i < SEATS.total; i++) { const s = document.createElement('span'); const t = i < SEATS.taken; s.className = t ? 'taken' : 'free'; s.textContent = i + 1; s.setAttribute('role', 'img'); s.setAttribute('aria-label', `Seat ${i + 1}: ${t ? 'taken' : 'free'}`); $('#meter').appendChild(s); }
   $$('#windows .win').forEach(w => { const i = +w.dataset.i; if (i >= SEATS.total) w.style.display = 'none'; else if (i >= SEATS.taken) { w.classList.add('empty'); w.querySelector('.pax').style.display = 'none'; const r = w.querySelector('rect'); r.setAttribute('fill', '#D7F2E4'); r.setAttribute('stroke', '#006A4E'); r.setAttribute('stroke-width', '6'); } });
@@ -1292,8 +1277,8 @@ body{caret-color:var(--red)}
     const btn = $('#send'); btn.disabled = true; btn.firstChild.textContent = 'Sending… ';
     setTimeout(() => {
       $('#formBody').hidden = true; $('#doneCard').hidden = false;
-      $('#doneTitle').textContent = `Thanks, ${name.value.trim().split(' ')[0]}! ${biz.value.trim()} has a seat on hold.`;
-      live.textContent = 'Seat reserved. This is a preview, so nothing was sent yet.';
+      $('#doneTitle').textContent = `Thanks, ${name.value.trim().split(' ')[0]}! ${biz.value.trim()} is first in our queue.`;
+      live.textContent = 'Quote requested. This is a preview, so nothing was sent yet.';
       if (canAnim) { M.animate('.stamp', { scale: [1.7, 1], opacity: [0, 1], rotate: [-22, -6] }, { type: 'spring', bounce: .45, duration: .6 }); M.animate('#doneCard h3, #doneCard p', { opacity: [0, 1], y: [10, 0] }, { duration: .4, delay: M.stagger(.08, { startDelay: .25 }) }); M.animate('#board', { scale: [1, 1.1, 1] }, { type: 'spring', bounce: .5, duration: .6 }); }
     }, 700);
   });
@@ -1318,13 +1303,6 @@ body{caret-color:var(--red)}
   addEventListener('resize', run);
 
   /* ---- 2 SEARCH: the speed race is mounted by the script below ---- */
-  $$('.tile').forEach(t => t.style.opacity = 0);
-  inView('.tiles', () => { animate('.tile', { opacity: [0, 1], y: [16, 0] }, { duration: .4, delay: stagger(.07), ease: OUT }); }, { amount: .4 });
-
-  /* ---- 4 MENU: one springy wave ---- */
-  $$('#svc a').forEach(a => a.style.opacity = 0);
-  inView('#svc', () => { animate('#svc a', { opacity: [0, 1], y: [30, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.06) }); }, { amount: .2 });
-
   /* ---- 5 SEATS: the bus drives in forward, passengers sit, the conductor shouts ---- */
   const bus = $('#busAll'), pax = $$('.win:not(.empty) .pax');
   css(bus, 'translateX(-760px)'); css($('#shout'), 'scale(.8)', 0); pax.forEach(x => css(x, 'scale(0)')); $$('#meter span').forEach(sp => sp.style.opacity = 0);
@@ -1336,10 +1314,6 @@ body{caret-color:var(--red)}
     A('#cArm', { transform: ['rotate(0deg)', 'rotate(-30deg)', 'rotate(0deg)', 'rotate(-30deg)', 'rotate(0deg)'] }, { duration: 1.2, delay: 1.4 });
   }, { amount: .35 });
 
-  /* ---- PROOF ---- */
-  $$('.quote, .logos .slot').forEach(q => q.style.opacity = 0);
-  inView('#proof', () => { animate('.logos .slot', { opacity: [0, 1], y: [12, 0] }, { duration: .35, delay: stagger(.05) }); animate('.quote', { opacity: [0, 1], y: [30, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.1, { startDelay: .2 }) }); }, { amount: .25 });
-
   /* ---- 6 PACKS: set menus land like plates, driven by the script below ---- */
 
   /* ---- 7 ROUTE: forward, stops light as it passes ---- */
@@ -1347,10 +1321,6 @@ body{caret-color:var(--red)}
   const routeVeh = $('#routeVeh');
   onScrollScene($('.route-box'), (r, vh) => (.8 * vh - r.top) / (r.height + .35 * vh), p => { css(routeVeh, `translateX(${1050 * p}px)`); stops.forEach((li, i) => li.classList.toggle('on', p >= [.1, .37, .63, .9][i])); });
 
-  /* ---- 8 MAP: routes draw out from Dhaka ---- */
-  $$('#arcs path').forEach(pth => pth.style.strokeDashoffset = 1);
-  const arcs = $$('#arcs path');
-  onScrollScene($('.map'), (r, vh) => (.85 * vh - r.top) / (.3 * vh + r.height / 2), p => arcs.forEach((a, i) => { a.style.strokeDashoffset = 1 - clamp(p * 1.3 - i * .06); }));
   run();
 })();
 </script>
@@ -1553,50 +1523,13 @@ body{caret-color:var(--red)}
     addEventListener('resize', paint); paint();
   }
 
-  /* ---------- 4. doodles: a few brand scribbles placed at random each visit, drifting at their own speed ---------- */
-  const DOODLES = [
-    '<svg viewBox="0 0 40 48"><path d="M4 3l13 37 5-14 14-5z" fill="#fff" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></svg>',
-    '<svg viewBox="0 0 48 60"><path d="M24 58V24M24 32c-10-1-16-8-16-18 10 1 16 8 16 18zM24 38c9-1 15-7 15-16-9 1-15 7-15 16z" fill="#93DDB2" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>',
-    '<svg viewBox="0 0 44 56"><path d="M4 4h36v48l-6-4-6 4-6-4-6 4-6-4-6 4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/><path d="M11 16h22M11 25h16M11 34h20" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg>',
-    '<svg viewBox="0 0 48 48"><path d="M24 3l6 14 15 1-12 10 4 15-13-8-13 8 4-15L3 18l15-1z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></svg>',
-    '<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="#FF4F8B" stroke="#1C1A17" stroke-width="3"/><text x="26" y="35" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26" fill="#fff">৳</text></svg>'
-  ];
-  const homes = ['#menu', '#seats', '#packs', '#route', '#faq', '#proof'].map(s => $(s)).filter(Boolean);
-  const drifters = [];
-  homes.forEach(sec => {
-    const n = Math.random() < .5 ? 1 : 2;
-    for (let k = 0; k < n; k++) {
-      const d = document.createElement('div'); d.className = 'dz'; d.setAttribute('aria-hidden', 'true');
-      d.innerHTML = DOODLES[Math.floor(Math.random() * DOODLES.length)];
-      const size = Math.round(rnd(38, 64)), wrap = sec.querySelector('.wrap'), gutter = wrap ? wrap.getBoundingClientRect().left : 0;
-      if (gutter < size + 24) continue;
-      const side = Math.random() < .5, x = `${Math.round(rnd(8, Math.max(9, gutter - size - 12)))}px`;
-      d.style.left = side ? x : 'auto'; d.style.right = side ? 'auto' : x;
-      d.style.top = `${rnd(6, 80)}%`; d.style.setProperty('--s', `${size}px`);
-      sec.appendChild(d);
-      drifters.push({ el: d, sec, speed: rnd(-90, 90), spin: rnd(-30, 30) });
-    }
-  });
-  if (!reduce && drifters.length) {
-    const paint = () => {
-      const vh = innerHeight;
-      drifters.forEach(({ el, sec, speed, spin }) => {
-        const r = sec.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
-        const p = (vh - r.top) / (vh + r.height) - .5;
-        el.style.transform = `translateY(${(p * speed * 2).toFixed(1)}px) rotate(${(p * spin * 2).toFixed(1)}deg)`;
-      });
-    };
-    let ticking = false;
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
-    paint();
-  }
 })();
 </script>
 <script>
 (() => {
   /* ===== HERO: one little scene per headline word. The word and the scene change together; the phone keeps taking orders in every scene. ===== */
   const root = document.getElementById('heroStage'), sw = document.querySelector('.hx-swap');
-  if (!root || !sw) return;
+  if (!root) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
   const $ = s => root.querySelector(s), $$ = s => [...root.querySelectorAll(s)];
@@ -1682,7 +1615,7 @@ body{caret-color:var(--red)}
   const at = (ms, fn) => { const t = token; timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); };
 
   /* the headline word's entrance: a different effect each time */
-  const plain = w => { sw.classList.remove('hx-hand'); sw.textContent = w; };
+  const plain = w => { if (!sw) return; sw.classList.remove('hx-hand'); sw.textContent = w; };
   const FX = {
     scramble(w) { plain(w); const pool = 'abcdefghkmnpqrstuvwxyz৳#%&*'; let f = 0; const id = setInterval(() => { f++; const keep = Math.floor(w.length * f / 12); sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join(''); if (f >= 12) { clearInterval(id); sw.textContent = w; } }, 34); },
     slide(w) { plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }); },
@@ -1709,7 +1642,7 @@ body{caret-color:var(--red)}
     groups.forEach((g, k) => { g.classList.toggle('on', k === i); });
     root.style.setProperty('--hv-bg', s.bg);
     if (!animate) { groups.forEach((g, k) => g.setAttribute('opacity', k === i ? 1 : 0)); base.setAttribute('fill', s.bg); plain(s.word); return; }
-    const names = Object.keys(FX).filter(n => n !== lastFx); const fx = names[Math.floor(Math.random() * names.length)]; lastFx = fx; FX[fx](s.word);
+    if (sw) { const names = Object.keys(FX).filter(n => n !== lastFx); const fx = names[Math.floor(Math.random() * names.length)]; lastFx = fx; FX[fx](s.word); }
     reveal.setAttribute('fill', s.bg);
     A(reveal, [{ transform: 'scale(0.04)' }, { transform: 'scale(1)' }], { duration: 460 }).onfinish = () => { base.setAttribute('fill', s.bg); reveal.getAnimations().forEach(a => a.cancel()); };
     if (prev >= 0) A(groups[prev], [{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease' }).onfinish = () => groups[prev].setAttribute('opacity', 0);
@@ -1744,5 +1677,29 @@ body{caret-color:var(--red)}
   show(0, false);
   at(600, ding);
   at(3000, () => cycle(nextIndex()));
+})();
+</script>
+<script>
+(() => {
+  /* ===== Phone bar: hidden while the hero's own buttons are on screen; tucked away over the quote form and footer ===== */
+  const bar = document.querySelector('.mbar'), cta = document.querySelector('.hero .hero-cta');
+  if (bar && cta && 'IntersectionObserver' in window) {
+    const seen = { cta: true, order: false, foot: false };
+    const sync = () => { const on = !seen.cta && cta.getBoundingClientRect().bottom < 0 && !seen.order && !seen.foot; bar.classList.toggle('show', on); bar.toggleAttribute('inert', !on); };
+    const watch = (el, k, th = 0) => el && new IntersectionObserver(es => { seen[k] = es[es.length - 1].isIntersecting; sync(); }, { threshold: th }).observe(el);
+    watch(cta, 'cta'); watch(document.getElementById('order'), 'order', .2); watch(document.querySelector('footer'), 'foot'); sync();
+  } else if (bar) bar.classList.add('show');
+  /* the check-up link pre-ticks the check-up box on the form */
+  document.querySelectorAll('[data-checkup]').forEach(a => a.addEventListener('click', () => { const c = document.getElementById('needCheck'); if (c) c.checked = true; }));
+  /* the demo shop builds itself once, when it scrolls into view */
+  const demo = document.querySelector('.demo-win');
+  if (demo && !matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    const parts = [...demo.querySelectorAll('.demo-nav, .demo-hero > div, .demo-pic, .demo-items > div')];
+    parts.forEach(el => el.style.opacity = 0);
+    const io = new IntersectionObserver(es => { if (!es.some(e => e.isIntersecting)) return; io.disconnect();
+      parts.forEach((el, i) => el.animate([{ opacity: 0, transform: 'translateY(14px) scale(.97)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 420, delay: 120 + [0, 90, 160, 220, 270, 310][Math.min(i, 5)], easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'both' }));
+    }, { threshold: .35 });
+    io.observe(demo);
+  }
 })();
 </script>
