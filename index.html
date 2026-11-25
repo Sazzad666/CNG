@@ -918,6 +918,12 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
 .jam-svg .wheel{transform-origin:center}.jam-svg .parm{transform-origin:0% 100%}.jam-svg .laundry{transform-origin:50% 0}
 @media (max-width:860px){.notes{width:52%}}
 @media (max-width:420px){.notes{width:56%}.jnote{grid-template-columns:20px minmax(0,1fr) auto;gap:5px;padding:4px 6px}.jnote i{width:20px;height:20px;font-size:10px}.jnote b{font-size:10.5px}.jnote em{font-size:9px}.jnote strong{font-size:10.5px}.till small{font-size:8px}}
+
+/* ---------- the changing word sits on its own line ---------- */
+.hz-slot{display:inline-block;white-space:nowrap;min-height:1.15em}
+.hz-swap .hx-swap.hz-hl{color:var(--ink);vertical-align:bottom}
+.hz .sr{user-select:none}
+.jam-svg .prop{transform-box:fill-box;transform-origin:50% 100%}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1008,7 +1014,7 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
     <div class="wrap hz-grid">
       <div class="hz-copy">
         <h1 id="t-hero" class="slam"><span class="sl">Loud</span> <span class="sl">marketing.</span> <span class="sl sl-cut">Razor-sharp</span> <span class="sl">design.</span></h1>
-        <p class="hz-swap">So your shop sells while you <span class="hz-hl">sit in traffic</span>.</p>
+        <p class="hz-swap">So your shop sells while you<br><span class="hz-slot"><span class="hx-swap hz-hl" aria-hidden="true">sit in traffic</span>.</span><span class="sr">sit in traffic, nap, sip cha, eat jhalmuri, watch the cricket or chat with the driver</span></p>
         <p class="lede">Websites, online shops and ads from a Dhaka gang of designers, developers and ad nerds.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -1062,7 +1068,13 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
             <circle cx="160" cy="490" r="18" fill="none" stroke="#2B1D0E" stroke-width="5"/></g>
           <!-- the CNG, cage doors, our shop owner inside on the phone -->
           <g class="veh v-cng"><path d="M180 510v-90q0-56 66-60h50q70 4 70 60v90z" fill="#0F7A63" stroke="#2B1D0E" stroke-width="6" stroke-linejoin="round"/><path d="M202 510v-86q0-36 46-40h44q42 4 44 40v86" fill="#2B1D0E"/><path d="M180 380h190" stroke="#FFD23F" stroke-width="6"/>
-            <g class="owner"><path d="M228 510c0-46 18-66 44-66s44 20 44 66z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="4"/><circle cx="270" cy="424" r="24" fill="#C98B5E" stroke="#2B1D0E" stroke-width="4"/><path d="M246 418c2-20 15-28 26-28s24 8 24 24q-8-11-24-11t-26 15z" fill="#2B1D0E"/><path d="M258 426q4 3 8 0M276 426q4 3 8 0" fill="none" stroke="#2B1D0E" stroke-width="3" stroke-linecap="round"/><path class="mouth" d="M262 436q8 6 16 0" fill="none" stroke="#2B1D0E" stroke-width="3.5" stroke-linecap="round"/><path d="M298 488l12-30" stroke="#C98B5E" stroke-width="11" stroke-linecap="round"/><rect class="jph" x="300" y="432" width="20" height="32" rx="5" fill="#5C4632" stroke="#2B1D0E" stroke-width="3"/></g>
+            <g class="owner"><path d="M228 510c0-46 18-66 44-66s44 20 44 66z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="4"/><circle cx="270" cy="424" r="24" fill="#C98B5E" stroke="#2B1D0E" stroke-width="4"/><path d="M246 418c2-20 15-28 26-28s24 8 24 24q-8-11-24-11t-26 15z" fill="#2B1D0E"/><path d="M258 426q4 3 8 0M276 426q4 3 8 0" fill="none" stroke="#2B1D0E" stroke-width="3" stroke-linecap="round"/><path class="mouth" d="M262 436q8 6 16 0" fill="none" stroke="#2B1D0E" stroke-width="3.5" stroke-linecap="round"/><path d="M298 488l12-30" stroke="#C98B5E" stroke-width="11" stroke-linecap="round"/><rect class="jph" x="300" y="432" width="20" height="32" rx="5" fill="#5C4632" stroke="#2B1D0E" stroke-width="3"/>
+              <g class="prop p-zzz" opacity="0"><text x="300" y="404" font-family="Baloo 2,sans-serif" font-weight="800" font-size="22" fill="#fff" stroke="#2B1D0E" stroke-width="1.2">z</text><text x="314" y="388" font-family="Baloo 2,sans-serif" font-weight="800" font-size="17" fill="#fff" stroke="#2B1D0E" stroke-width="1.2">z</text><text x="325" y="374" font-family="Baloo 2,sans-serif" font-weight="800" font-size="13" fill="#fff" stroke="#2B1D0E" stroke-width="1">z</text></g>
+              <g class="prop p-cup" opacity="0"><path d="M240 496l18-46" stroke="#C98B5E" stroke-width="11" stroke-linecap="round"/><path d="M248 432h22l-3 18h-16z" fill="#C1683C" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/><path class="steam" d="M254 426c-4-6 4-9 0-15M263 426c-4-6 4-9 0-15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></g>
+              <g class="prop p-muri" opacity="0"><path d="M240 496l18-46" stroke="#C98B5E" stroke-width="11" stroke-linecap="round"/><path d="M244 428l28 2-16 26z" fill="#F3EBD3" stroke="#2B1D0E" stroke-width="3" stroke-linejoin="round"/><path d="M250 432h2M258 434h2M264 432h2" stroke="#5C4632" stroke-width="2.5" stroke-linecap="round"/><g fill="#E7A94A"><circle cx="250" cy="427" r="3"/><circle cx="258" cy="425" r="3"/><circle cx="266" cy="427" r="3"/></g><circle cx="255" cy="424" r="2" fill="#3BCEAC"/></g>
+              <g class="prop p-six" opacity="0"><rect x="303" y="435" width="14" height="24" rx="2" fill="#3BCEAC"/><path d="M306 452h8M310 440v12" stroke="#fff" stroke-width="2"/><g transform="translate(330 402) rotate(10)"><rect x="-22" y="-14" width="44" height="26" rx="6" fill="#FFD23F" stroke="#2B1D0E" stroke-width="3"/><text y="6" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="16" fill="#2B1D0E">SIX!</text></g></g>
+              <g class="prop p-chat" opacity="0"><path d="M214 340h104q10 0 10 10v24q0 10-10 10h-66l-14 12 2-12h-26q-10 0-10-10v-24q0-10 10-10z" fill="#fff" stroke="#2B1D0E" stroke-width="3"/><text x="266" y="368" text-anchor="middle" font-family="Baloo Da 2,Baloo 2,sans-serif" font-weight="800" font-size="15" fill="#2B1D0E">মামা, আর কতক্ষণ?</text></g>
+              </g>
             <g stroke="#2B1D0E" stroke-width="3" opacity=".85"><path d="M206 430v80M336 430v80"/><path d="M216 450v60M326 450v60"/></g>
             <circle cx="214" cy="512" r="20" fill="#2B1D0E"/><circle cx="340" cy="512" r="20" fill="#2B1D0E"/><circle cx="214" cy="512" r="7" fill="#C9BEA6"/><circle cx="340" cy="512" r="7" fill="#C9BEA6"/></g>
           <!-- traffic police on his box, whistle ready -->
@@ -2074,7 +2086,7 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
   /* --- the changing word: a new entrance each time, paused off screen and on hover --- */
   const sw = $('.hz .hx-swap');
   if (sw) {
-    const LIST = ['sleep', 'eat biryani', 'watch cricket', 'sit in traffic', 'drink cha', 'go to a wedding'];
+    const LIST = ['sit in traffic', 'take a nap', 'sip your cha', 'eat jhalmuri', 'watch the cricket', 'chat with the driver'];
     let i = 0, last = '', timer = 0, fxTimer = 0, visible = true, hover = false;
     const plain = w => { clearInterval(fxTimer); sw.classList.remove('hx-hand'); sw.getAnimations({ subtree: true }).forEach(a => a.cancel()); sw.textContent = w; };
     const FX = {
@@ -2086,8 +2098,8 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
       marker(w) { plain(w); const m = document.createElement('span'); m.className = 'hx-mark'; sw.appendChild(m); A(m, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 420, easing: IO }); A(sw, [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 420, delay: 120, easing: IO }); },
       stickers(w) { plain(''); [...w].forEach((c, k) => { const s = document.createElement('span'); s.className = 'hx-st'; s.textContent = c; sw.appendChild(s); const r = rnd(-14, 14); A(s, [{ opacity: 0, transform: `scale(.4) rotate(${r * 3}deg)` }, { opacity: 1, transform: `scale(1.2) rotate(${r}deg)`, offset: .6 }, { opacity: 1, transform: 'scale(1) rotate(0deg)' }], { duration: 480, delay: k * 40, easing: SPRING }); }); }
     };
-    const next = () => { i = (i + 1) % LIST.length; const names = Object.keys(FX).filter(n => n !== last); const fx = names[Math.floor(Math.random() * names.length)]; last = fx; FX[fx](LIST[i]); };
-    const run = () => { clearInterval(timer); if (!reduce && visible && !hover && !document.hidden) timer = setInterval(next, 2600); };
+    const next = () => { i = (i + 1) % LIST.length; const names = Object.keys(FX).filter(n => n !== last); const fx = names[Math.floor(Math.random() * names.length)]; last = fx; FX[fx](LIST[i]); document.dispatchEvent(new CustomEvent('hzword', { detail: i })); };
+    const run = () => { clearInterval(timer); if (!reduce && visible && !hover && !document.hidden) timer = setInterval(next, 3400); };
     new IntersectionObserver(es => { visible = es[0].isIntersecting; run(); }).observe(sw);
     const h1 = $('.hz-swap'); h1.addEventListener('pointerenter', () => { hover = true; run(); }); h1.addEventListener('pointerleave', () => { hover = false; run(); });
     document.addEventListener('visibilitychange', run);
@@ -2283,5 +2295,20 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
   new IntersectionObserver(es => { visible = es[0].isIntersecting; plan(); }, { threshold: .2 }).observe(jam);
   document.addEventListener('visibilitychange', plan);
   jam.addEventListener('click', () => order(true));
+
+  // what he's doing in the CNG follows the headline word
+  const PROPS = [null, '.p-zzz', '.p-cup', '.p-muri', '.p-six', '.p-chat'];
+  let cur = null, loop = null;
+  document.addEventListener('hzword', e => {
+    const sel = PROPS[e.detail], el = sel && $(sel);
+    if (loop) { loop.cancel(); loop = null; }
+    if (cur && cur !== el) { const old = cur; A(old, [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(.9)' }], { duration: 180 }); }
+    cur = el;
+    if (!el) return;
+    A(el, [{ opacity: 0, transform: 'translateY(8px) scale(.85)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 380, easing: SPRING });
+    if (sel === '.p-zzz') loop = A(el, [{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 1400, delay: 380, iterations: 2, easing: 'ease-in-out', fill: 'none' });
+    if (sel === '.p-cup') loop = A(el.querySelector('.steam'), [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }, { opacity: 0, transform: 'translateY(-6px)' }], { duration: 1100, iterations: 3, easing: 'ease-out', fill: 'none' });
+    if (sel === '.p-six') loop = A(el.lastElementChild, [{ transform: 'translate(330px,402px) rotate(10deg) scale(.6)' }, { transform: 'translate(330px,402px) rotate(10deg) scale(1.15)' }, { transform: 'translate(330px,402px) rotate(10deg) scale(1)' }], { duration: 420, easing: SPRING, fill: 'none' });
+  });
 })();
 </script>
