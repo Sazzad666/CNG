@@ -556,28 +556,21 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .night .city-btns button{color:var(--ink)}
 .night .city-btns button[aria-pressed="true"]{color:#fff}
 .night .eyebrow,.night .lede,.night .city > span{transition:color .6s ease}
-.night.is-dawn .eyebrow{color:var(--green)}.night.is-dawn .lede{color:#3D3520;text-shadow:none}
+@media (min-width:900px){.night.is-dawn .eyebrow{color:var(--green)}.night.is-dawn .lede{color:#3D3520}}
 .night-hint{margin-top:14px;font-size:13px;color:#9FB4D8}
 @media (prefers-reduced-motion:no-preference){.neon{animation:flick 1.2s linear .3s both}}
 @keyframes flick{0%{opacity:0}8%{opacity:.9}12%{opacity:.15}20%{opacity:1}28%{opacity:.4}36%,100%{opacity:1}}
 @media (max-width:899px){
-  .night{display:block;min-height:clamp(720px,calc(100svh - 96px),900px)}
-  .night-svg{position:absolute;inset:0;width:100%;height:100%}
-  .night-copy{position:static;width:auto;margin:0;padding:20px max(16px,env(safe-area-inset-left,0px)) 0}
-  .night-copy > *{position:relative;z-index:2}
-  .neon{margin:0 0 12px;padding:11px 15px 13px;font-size:clamp(32px,9.4vw,46px)}
-  .neon::before,.neon::after{height:40px}
-  .night .eyebrow{display:none}
-  .night .lede{font-size:16px;line-height:1.5;text-shadow:0 1px 10px rgba(20,28,54,.9)}
-  .night .hero-cta{flex-wrap:nowrap;gap:10px;margin-top:14px}
-  .night .hero-cta .btn--green{flex:1;padding:0 16px}
-  .night .hero-cta .wa{flex:none;width:52px;padding:0;font-size:0;gap:0}
-  .night .hero-cta .wa svg{width:24px;height:24px}
-  .night .city{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:16px;bottom:12px;margin:0;gap:6px}
-  .night .city > span{font-size:13px}
-  .night .city-btns{flex-wrap:nowrap;gap:6px}
-  .night .city-btns button{padding:0 12px;font-size:14px}
-  .night .city-btns svg{display:none}
+  .night{display:flex;flex-direction:column;min-height:0}
+  .night-copy{display:contents}
+  .night-copy > *{margin-left:max(16px,env(safe-area-inset-left,0px));margin-right:max(16px,env(safe-area-inset-right,0px))}
+  .neon{order:1;align-self:flex-start;margin-top:26px;margin-bottom:16px;padding:12px 16px 14px}
+  .night-svg{order:2;position:relative;inset:auto;height:auto;aspect-ratio:640/570}
+  .night .eyebrow{order:3;margin-top:20px}
+  .night .lede{order:4}
+  .night .hero-cta{order:5;margin-top:18px}
+  .night .city{order:6;margin-bottom:30px}
+  .neon::before,.neon::after{height:60px}
 }
 
 /* ---------- phone action bar: appears once the hero buttons are gone, steps aside for the form and footer ---------- */
@@ -683,10 +676,10 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     <div class="night-copy">
       <h1 id="t-hero" class="neon">Your shop is closed. <span>Your website isn’t.</span></h1>
       <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
-      <p class="lede">It’s 2 AM and people are still shopping on their phones. We build the website that catches every click, so your shop keeps growing while you sleep.</p>
+      <p class="lede">It’s 2 AM and people across the city are still shopping on their phones. We build the website that takes their orders while you sleep.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
+          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
         </div>
         <div class="city" role="group" aria-labelledby="cityLbl">
           <span id="cityLbl">Where’s your shop?</span>
@@ -1370,11 +1363,11 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 
   const scene = () => `
     <defs>
-      <linearGradient id="nsSky" x1="0" y1="0" x2="0" gradientUnits="userSpaceOnUse" y2="900"><stop offset="0" stop-color="#141C36"/><stop offset="1" stop-color="#2C3A6B"/></linearGradient>
-      <linearGradient id="nsDawn" x1="0" y1="-200" x2="0" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F7A27E"/><stop offset=".6" stop-color="#FFD9A8"/><stop offset="1" stop-color="#FFEFD0"/></linearGradient>
+      <linearGradient id="nsSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#141C36"/><stop offset="1" stop-color="#2C3A6B"/></linearGradient>
+      <linearGradient id="nsDawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7A27E"/><stop offset=".6" stop-color="#FFD9A8"/><stop offset="1" stop-color="#FFEFD0"/></linearGradient>
     </defs>
-    <rect x="-400" y="-400" width="2400" height="1500" fill="url(#nsSky)"/>
-    <rect class="dawn" x="-400" y="-400" width="2400" height="1500" fill="url(#nsDawn)" opacity="0"/>
+    <rect width="1600" height="900" fill="url(#nsSky)"/>
+    <rect class="dawn" width="1600" height="900" fill="url(#nsDawn)" opacity="0"/>
     <g class="stars" fill="#FFF7C2">${stars.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i % 3 ? 2.2 : 3.2}"/>`).join('')}</g>
     <g class="moon"><circle cx="1460" cy="120" r="46" fill="#FFF3B0"/><circle cx="1480" cy="106" r="40" fill="#1A2342"/></g>
     <path d="M0 640V580h60v-30h50v40h70v-50h40v60h90v-36h60v30h80v-44h50v56h90v-30h70v40h90v-60h40v50h100v-26h70v36h60v-46h50v60h80v-30h70v40h80v-50h40v70H0z" fill="#1E2748"/>
@@ -1382,14 +1375,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     <g stroke="#0E1430" stroke-width="4">${BLOCKS.map(([x, top, w, f]) => `<rect x="${x}" y="${top}" width="${w}" height="${880 - top}" fill="${f}"/>`).join('')}${HOUSES.map(([x, top, w, f]) => `<rect x="${x}" y="${top}" width="${w}" height="${880 - top}" fill="${f}"/><rect x="${x - 8}" y="${top - 12}" width="${w + 16}" height="16" fill="#252141"/>`).join('')}</g>
     <g fill="#1A2140" stroke="#0E1430" stroke-width="3">${WINDOWS.map(w => `<rect x="${w.x}" y="${w.y}" width="${w.w}" height="${w.h}"/>`).join('')}</g>
     <g class="lit"></g>
-    <g class="newfloor" style="transform:translateY(130px)">
-      <rect x="772" y="262" width="336" height="112" fill="#2F6B55" stroke="#0E1430" stroke-width="4"/>
-      <rect x="760" y="250" width="360" height="18" fill="#1F4A3A" stroke="#0E1430" stroke-width="4"/>
-      <g fill="#FFE2A0" stroke="#0E1430" stroke-width="3"><rect x="792" y="284" width="56" height="46"/><rect x="1032" y="284" width="56" height="46"/></g>
-      <rect x="862" y="286" width="156" height="42" rx="6" fill="#FFC72C" stroke="#0E1430" stroke-width="3"/>
-      <text x="940" y="314" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="17" fill="#0E1430">GROWN</text>
-      <text x="940" y="346" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="15" fill="#D7F2E4" letter-spacing="1">OVERNIGHT</text>
-    </g>
     <g class="shop">
       <rect x="760" y="380" width="360" height="470" fill="#3A3550" stroke="#0E1430" stroke-width="4"/>
       <rect x="748" y="368" width="384" height="22" fill="#2A2540" stroke="#0E1430" stroke-width="4"/>
@@ -1420,11 +1405,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       </g>
     </g>
     <rect x="-10" y="820" width="1620" height="38" fill="#4A4560" stroke="#0E1430" stroke-width="4"/>
-    <path class="vine" d="M752 826C722 772 784 742 754 690S722 604 752 560S786 470 754 404" pathLength="1" fill="none" stroke="#3FB27F" stroke-width="7" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
-    <g class="leaves"></g>
-    <g class="bloom" opacity="0" style="transform-box:fill-box;transform-origin:center"><g fill="#FF4F8B" stroke="#0E1430" stroke-width="2"><circle cx="754" cy="384" r="10"/><circle cx="772" cy="398" r="10"/><circle cx="736" cy="398" r="10"/><circle cx="764" cy="416" r="10"/><circle cx="744" cy="416" r="10"/></g><circle cx="754" cy="402" r="8" fill="#FFC72C" stroke="#0E1430" stroke-width="2"/></g>
-    <g class="pot"><path d="M730 818h46l-6 34h-34z" fill="#C86B3C" stroke="#0E1430" stroke-width="3"/><rect x="726" y="810" width="54" height="12" rx="3" fill="#A8552C" stroke="#0E1430" stroke-width="3"/><text x="753" y="842" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="12" fill="#FFF1D6">C&amp;G</text></g>
-    <rect x="-10" y="858" width="1620" height="260" fill="#23233A"/><path d="M0 882h1600" stroke="#6C6A86" stroke-width="5" stroke-dasharray="50 40"/>
+    <rect x="-10" y="858" width="1620" height="50" fill="#23233A"/><path d="M0 882h1600" stroke="#6C6A86" stroke-width="5" stroke-dasharray="50 40"/>
     <g class="cat" transform="translate(1160 790)">
       <path class="tail" d="M-22 22c-22 0-26-24-14-34" fill="none" stroke="#0B0B12" stroke-width="7" stroke-linecap="round" style="transform-box:fill-box;transform-origin:100% 100%"/>
       <ellipse cx="0" cy="18" rx="26" ry="15" fill="#0B0B12"/>
@@ -1470,29 +1451,17 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       stack++;
       if (animate) A(n, [{ opacity: 0, transform: 'translateY(-18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 240 });
     };
-    const vine = $('.vine', r), leaves = $('.leaves', r);
-    const grow = (n, animate) => {
-      const f = n / BASE.length;
-      if (animate) A(vine, [{ strokeDashoffset: 1 - (n - 1) / BASE.length }, { strokeDashoffset: 1 - f }], { duration: 500 });
-      else vine.setAttribute('stroke-dashoffset', 1 - f);
-      const L = vine.getTotalLength(), p = vine.getPointAtLength(L * Math.min(.98, f)), side = n % 2 ? 1 : -1;
-      const holder = mk('g', { transform: `translate(${p.x} ${p.y}) rotate(${side * -30})` }, leaves);
-      const leaf = mk('ellipse', { cx: side * 13, cy: 0, rx: 14, ry: 7, fill: '#5BD08F', stroke: '#0E1430', 'stroke-width': 2 }, holder);
-      if (animate) { leaf.style.transformBox = 'fill-box'; leaf.style.transformOrigin = side > 0 ? '0% 50%' : '100% 50%'; A(leaf, [{ opacity: 0, scale: '0.3' }, { opacity: 1, scale: '1' }], { duration: 400, delay: 250 }); }
-    };
     const fromPt = o => o === 'plane' ? null : { x: o.x + o.w / 2, y: o.y + 10 };
     const dawnState = () => {
       $('.dawn', r).setAttribute('opacity', 1); ['.stars', '.moon', '.lit', '.zzz', '.sleeper', '.plane-wrap'].forEach(s => $(s, r).setAttribute('opacity', 0));
       $('.waker', r).setAttribute('opacity', 1); $('.upwin', r).setAttribute('fill', '#FFE2A0');
       $('.shutter', r).style.transform = 'scaleY(0.07)';
       ctop.textContent = `WHILE YOU SLEPT · ${BASE.length} ORDERS`; camt.textContent = G().fmt(amounts.reduce((a, b) => a + b, 0));
-      $('.newfloor', r).style.transform = 'translateY(0px)'; $('.bloom', r).setAttribute('opacity', 1);
     };
 
     if (instant) {
       O.forEach((o, k) => { if (o !== 'plane') { const f = fromPt(o); const c = { x: (f.x + SLOT.x) / 2, y: Math.min(f.y, SLOT.y) - 220 }; const p = trail(r, f, c); p.setAttribute('stroke-dashoffset', 0); p.setAttribute('opacity', .35); } });
       for (let i = 0; i < 12; i++) addNote(false);
-      for (let i = 1; i <= BASE.length; i++) grow(i, false);
       dawnState();
       svg.closest('.night').classList.add('is-dawn');
       return;
@@ -1509,23 +1478,8 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       const o = O[k];
       let from;
       if (o === 'plane') { const p = (t - PLANE.t0) / PLANE.dur; from = { x: PLANE.from + (PLANE.to - PLANE.from) * p + 40, y: PLANE.y - 40 * p + 6 }; }
-      else { light(r, o, k === 1); from = fromPt(o); click(from); }
+      else { light(r, o, k === 1); from = fromPt(o); }
       const c = { x: (from.x + SLOT.x) / 2 + (k % 2 ? 60 : -60), y: Math.min(from.y, SLOT.y) - (o === 'plane' ? 40 : 230) };
-      T.at(o === 'plane' ? 0 : 260, () => fly(k, o, from, c));
-    }));
-
-    function click(at) {
-      const g = mk('g', {}, pops);
-      const ring = mk('circle', { cx: at.x, cy: at.y + 6, r: 12, fill: 'none', stroke: '#FFE27A', 'stroke-width': 4 }, g);
-      const cur = mk('path', { d: `M${at.x + 4} ${at.y + 8}l11 28 4-11 11-4z`, fill: '#fff', stroke: '#0E1430', 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
-      ring.style.transformBox = 'fill-box'; ring.style.transformOrigin = 'center';
-      A(cur, [{ opacity: 0, transform: 'translate(18px,18px)' }, { opacity: 1, transform: 'translate(0px,0px)' }], { duration: 200 });
-      A(cur, [{ transform: 'scale(1)' }, { transform: 'scale(0.85)' }, { transform: 'scale(1)' }], { duration: 160, delay: 200, easing: 'ease-out', composite: 'add' });
-      A(ring, [{ opacity: 1, transform: 'scale(0.6)' }, { opacity: 0, transform: 'scale(2.4)' }], { duration: 500, delay: 210 });
-      A(cur, [{ opacity: 1 }, { opacity: 0 }], { duration: 250, delay: 520, easing: 'ease', fill: 'forwards' }).onfinish = () => g.remove();
-    }
-
-    function fly(k, o, from, c) {
       const path = trail(r, from, c), dur = o === 'plane' ? 1700 : 1400;
       const slip = mk('g', {}, flights);
       mk('circle', { r: 26, fill: '#FFE27A', opacity: .28 }, slip);
@@ -1546,7 +1500,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
         arrive(k, slip, path);
       };
       raf.add(requestAnimationFrame(step));
-    }
+    }));
 
     function arrive(k, slip, path) {
       slip.animate([{ opacity: 1, transform: `translate(${SLOT.x}px,${SLOT.y}px) scale(1)` }, { opacity: 0, transform: `translate(${SLOT.x}px,${SLOT.y + 4}px) scale(0.3)` }], { duration: 160, easing: 'ease-in-out', fill: 'forwards' }).onfinish = () => slip.remove();
@@ -1561,7 +1515,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
         const tick = now => { if (id !== token) return; const p = Math.min(1, (now - s0) / 420); camt.textContent = G().fmt(Math.round(from + amt * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf.add(requestAnimationFrame(tick)); };
         raf.add(requestAnimationFrame(tick));
         ctop.textContent = `EARNED TONIGHT · ${clock(k)}`;
-        grow(shown, true);
         A($('.glow', r), [{ opacity: .3 }, { opacity: .9 }, { opacity: .3 }], { duration: 360, easing: 'ease-out' });
         if (k === 7) {
           const zs = $$('.zzz text', r); zs.forEach(z => { z.textContent = '৳'; z.setAttribute('fill', '#FFE27A'); });
@@ -1589,11 +1542,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       A(camt, [{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 400, easing: 'ease-out' });
       camt.style.transformBox = 'fill-box'; camt.style.transformOrigin = 'center';
     });
-    T.at(D + 2900, () => {
-      A($('.newfloor', r), [{ transform: 'translateY(130px)' }, { transform: 'translateY(0px)' }], { duration: 1000, easing: INOUT });
-      A($('.bloom', r), [{ opacity: 0, transform: 'scale(0.5)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 450, delay: 700, easing: 'cubic-bezier(.34,1.56,.64,1)' });
-    });
-    T.at(D + 7600, () => {
+    T.at(D + 7000, () => {
       const f = svg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350, easing: 'ease', fill: 'forwards' });
       f.onfinish = () => { mount(); svg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350, easing: 'ease' }); f.cancel(); };
     });
@@ -1608,7 +1557,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     run(svg, T, reduce);
   }
   const mq = matchMedia('(max-width:899px)');
-  const frame = () => { svg.setAttribute('viewBox', mq.matches ? '620 -150 640 1130' : '0 0 1600 900'); svg.setAttribute('preserveAspectRatio', 'xMidYMax slice'); };
+  const frame = () => { svg.setAttribute('viewBox', mq.matches ? '660 330 640 570' : '0 0 1600 900'); svg.setAttribute('preserveAspectRatio', mq.matches ? 'xMidYMid meet' : 'xMidYMax slice'); };
   frame(); mq.addEventListener('change', frame);
   svg.addEventListener('click', mount);
   document.addEventListener('cg:city', mount);
