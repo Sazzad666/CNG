@@ -446,6 +446,59 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   .btn,.svc a,.v-cousin,.v-pro,.faq summary::after,.progress span i,.landmark{transition:none}
   .search-track{height:auto}.search-stick{position:static}
 }
+
+/* ---------- SEARCH SLOT + SPEED RACE ---------- */
+.stage{min-height:420px}
+.race .stage{min-height:0}
+/* 1 search */
+.v1slot{display:grid;grid-template-rows:1fr;transition:grid-template-rows .5s var(--ease-out)}
+.v1slot.closed{grid-template-rows:0fr}
+.v1slot-in{min-height:0;overflow:hidden}
+.v1slot.open .v1slot-in{overflow:visible}
+.v1slot-in > .res.ours{margin:18px 6px 10px}
+/* shared phone */
+.ph{border:2.5px solid var(--ink);border-radius:28px;background:#fff;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;width:100%;max-width:400px;justify-self:center}
+.ph-top{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#075E54;color:#fff}
+.ph-av{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;font:800 13px/1 var(--display);color:#fff;border:2px solid #fff}
+.ph-name{display:block;font:700 15px/1.2 var(--body)}
+.ph-st{display:block;font-size:12.5px;opacity:.85;min-height:1.3em}
+/* 4 speed race */
+.v4{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.urlb{padding:9px 14px;border-bottom:2.5px solid var(--ink);background:var(--paper-2);font-size:12.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scr{position:relative;aspect-ratio:9/11;background:#fff;overflow:hidden}
+.v4-load{position:absolute;inset:0;z-index:2;background:#fff;display:grid;place-items:center;align-content:center;gap:14px;font-weight:600;color:var(--ink-2);transition:opacity .2s ease,visibility .2s}
+.v4-load.done{opacity:0;visibility:hidden}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--ink-2);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pbar{width:150px;max-width:70%;height:8px;border-radius:9px;background:var(--line);overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--green-2);transform-origin:left}
+.toast{position:absolute;left:10px;right:10px;top:10px;z-index:3;background:var(--ink);color:#fff;border-radius:12px;padding:10px 12px;font:700 14px/1.25 var(--body);display:flex;gap:8px;align-items:center;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.toast svg{width:18px;height:18px;flex:none;color:var(--yellow)}
+.clock{font:800 40px/1 var(--display);font-variant-numeric:tabular-nums;text-align:center;margin-top:18px;color:var(--red-d)}
+.clock.good{color:var(--green)}
+.ppl{display:flex;justify-content:center;gap:8px;margin-top:10px}
+.ppl svg{width:20px;height:28px;fill:var(--green);transition:opacity .3s ease,transform .3s var(--ease-out),fill .2s ease}
+.ppl svg.gone{opacity:.15;transform:translateX(14px)}
+.ppl svg.buy{fill:var(--yellow);stroke:var(--ink);stroke-width:1.5}
+.v4-cap{text-align:center;color:var(--ink-2);font-weight:700;margin-top:8px;min-height:1.6em}
+.v4-ctl{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:center;margin-top:24px}
+.v4-ctl p{color:var(--ink-2);font-weight:600}
+.v4 .v-cousin{padding:10px;gap:8px}
+.v4 .v-cousin .t{font-size:16px}
+.v4 .v-pro .hero2 b{font-size:17px}
+@media (max-width:760px){
+  .v4{gap:12px}
+  .ph{border-radius:20px;box-shadow:4px 4px 0 var(--ink)}
+  .clock{font-size:26px}
+  .ppl{gap:3px}.ppl svg{width:14px;height:20px}
+  .v4 .v-cousin .t{font-size:12px}.v4 .v-cousin small,.v4 .v-cousin .row{display:none}
+  .v4 .v-pro{padding:10px;gap:8px}.v4 .v-pro .cards{display:none}.v4 .v-pro .nav span{display:none}
+  .toast{font-size:12px;padding:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .spin{animation:none}
+  .v1slot,.ppl svg,.v4-load{transition:none}
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -635,30 +688,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   <section class="sec searchsec" id="search" aria-labelledby="t-search">
     <div class="wrap">
       <div class="sec-head"><div><h2 id="t-search">Your search ends here.</h2></div><p>We’ve all typed this one. Here’s what usually comes back.</p></div>
-      <div class="serp" id="serp">
-        <div class="sbar">
-          <svg class="mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
-          <span class="q"><span id="q">best web agency in Dhaka</span><i class="caret" aria-hidden="true"></i></span>
-          <button class="again" id="again" type="button" aria-label="Search again"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Search again</span></button>
-        </div>
-        <p class="meta" id="smeta">About 2,340,000 results (0.42 seconds)</p>
-        <ol class="results">
-          <li class="res ours" id="oursRes"><span class="pending" aria-hidden="true"><i></i><i></i><i></i>Looking for one that says yes…</span>
-            <span class="rank" aria-hidden="true">#1</span>
-            <div class="body">
-              <span class="url">clickandgrow.example</span>
-              <span class="t">Click &amp; Grow · Websites, online shops and ads that sell</span>
-              <p>Fixed price before we start. Real people on WhatsApp. A free quote within a day, <span data-city-text="serpCity">for Dhaka businesses</span>.</p>
-              <div class="ours-row"><a class="btn btn--green" href="#order">Get my free quote</a><span class="chips"><span>Fixed price</span><span>Replies same day</span><span>30 days of free fixes</span></span></div>
-            </div>
-            <span class="stamp-end" aria-hidden="true">YOUR SEARCH<br>ENDS HERE</span>
-          </li>
-          <li class="res bad struck"><div class="body"><span class="url"><b>Sponsored</b> · cheapsite.example</span><span class="t">Website in 1 day, only <span data-city-text="cheap">৳4,999</span>!!!</span><p>Pick one of 3 templates. Hosting extra. Domain extra. Changes extra.</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 26C120 12 240 34 360 20S600 30 696 14"/></svg><span class="scrib">Extra, extra, extra.</span></li>
-          <li class="res bad struck"><div class="body"><span class="url">pixelpro-solutions.example</span><span class="t">PixelPro Solutions | No.1 Best Top Agency</span><p>★★★★★ 3 reviews, all from the owner’s family.</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 18C140 30 260 10 380 24S580 12 696 26"/></svg><span class="scrib">Thanks, Ammu.</span></li>
-          <li class="res bad struck"><div class="body"><span class="url">digitaldreams.example</span><span class="t">Digital Dreams Agency · Contact us</span><p>Thanks for your message. We reply within 3 to 5 business months.</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 24C130 14 250 30 370 18S590 28 696 16"/></svg><span class="scrib">Still waiting.</span></li>
-          <li class="res bad struck"><div class="body"><span class="url">mycousin.blogspot.example</span><span class="t">My cousin’s portfolio (under construction)</span><p>Coming soon. Since 2017.</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 20C120 30 260 12 380 26S600 14 696 22"/></svg><span class="scrib">Love you, cousin.</span></li>
-        </ol>
-      </div>
+      <div id="searchStage" class="stage"></div>
       <div class="tiles">
           <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M8 14h12M8 18h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Price fixed before we start</b><span>The meter is on. No surprise extras.</span></div>
           <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 6h20v13H12l-5 4v-4H4z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/></svg><b>Real people on WhatsApp</b><span>Not a bot. Not “sir is in a meeting”.</span></div>
@@ -700,6 +730,14 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
         </table>
       </div>
       <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us your old site. We’ll tell you what to fix, free.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= SPEED RACE: the cousin's site against ours, on a phone ================= -->
+  <section class="sec race" id="race" aria-labelledby="t-race" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><div><h2 id="t-race">Your customer taps your link.</h2></div><p>Same shop, same phone, two websites. Watch who waits.</p></div>
+      <div id="raceStage" class="stage"></div>
     </div>
   </section>
 
@@ -1019,7 +1057,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     // vehicles
     ['#heroVeh', '#routeVeh'].forEach(id => { const u = $(id); u.setAttribute('href', C.veh); u.style.color = C.vehColor; });
     if (animate && canAnim) M.animateMini('#heroVehWrap', { transform: ['translateX(-420px)', 'translateX(0px)'] }, { duration: .9, ease: [.23, 1, .32, 1] });
-    window.__query = 'best web agency in ' + C.name; if (!window.__typing) $('#q').textContent = window.__query;
+    window.__cg = { c, C, cur, fmt: CUR[cur].fmt }; document.dispatchEvent(new Event('cg:city'));
     // bus
     $('.bus svg').style.setProperty('--busColor', C.bus.color); $('#upper').toggleAttribute('hidden', !C.bus.double);
     // map focus
@@ -1128,33 +1166,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const heroVeh = $('#heroVeh');
   onScrollScene($('.hero'), r => -r.top / r.height, p => css(heroVeh, `translateX(${900 * p}px)`));
 
-  /* ---- 2 SEARCH: types the query, crosses out the usual results, then ours takes #1. Plays once in view, replays on demand. ---- */
-  const bad = $$('.res.bad'), oursRes = $('#oursRes'), qEl = $('#q'), meta = $('#smeta');
-  let playing = 0;
-  function resetSearch() { bad.forEach(r => { r.classList.remove('struck'); r.style.opacity = 0; }); oursRes.classList.add('wait'); oursRes.style.opacity = 0; meta.style.opacity = 0; qEl.textContent = ''; }
-  function playSearch() {
-    const id = ++playing; resetSearch(); window.__typing = true;
-    const query = window.__query || qEl.textContent; let i = 0;
-    const type = () => { if (id !== playing) return; qEl.textContent = query.slice(0, ++i); if (i < query.length) setTimeout(type, 38 + Math.random() * 40); else { window.__typing = false; results(); } };
-    const results = () => {
-      animate('.sbar', { scale: [1, .98, 1] }, { duration: .25 });
-      animate(meta, { opacity: [0, 1] }, { duration: .3, delay: .2 });
-      animate(oursRes, { opacity: [0, 1] }, { duration: .3, delay: .2 });
-      animate(bad, { opacity: [0, 1], y: [12, 0] }, { duration: .4, delay: stagger(.08, { startDelay: .3 }), ease: OUT });
-      bad.forEach((r, k) => setTimeout(() => { if (id === playing) r.classList.add('struck'); }, 1000 + k * 650));
-      setTimeout(() => {
-        if (id !== playing) return;
-        oursRes.classList.remove('wait');
-        animate(oursRes, { y: [-24, 0], scale: [.97, 1] }, { type: 'spring', bounce: .35, duration: .8 });
-        animate('#oursRes .body > *', { opacity: [0, 1], y: [8, 0] }, { duration: .35, delay: stagger(.06) });
-        animate('.stamp-end', { scale: [1.8, 1], opacity: [0, 1], rotate: [-10, 6] }, { type: 'spring', bounce: .5, duration: .6, delay: .35 });
-      }, 1000 + bad.length * 650 + 200);
-    };
-    setTimeout(type, 300);
-  }
-  resetSearch(); qEl.textContent = window.__query || 'best web agency in Dhaka';
-  inView('.sbar', () => { playSearch(); }, { amount: .9 });
-  $('#again').addEventListener('click', playSearch);
+  /* ---- 2 SEARCH and the SPEED RACE are mounted by the script below ---- */
   $$('.tile').forEach(t => t.style.opacity = 0);
   inView('.tiles', () => { animate('.tile', { opacity: [0, 1], y: [16, 0] }, { duration: .4, delay: stagger(.07), ease: OUT }); }, { amount: .4 });
 
@@ -1196,5 +1208,141 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const arcs = $$('#arcs path');
   onScrollScene($('.map'), (r, vh) => (.85 * vh - r.top) / (.3 * vh + r.height / 2), p => arcs.forEach((a, i) => { a.style.strokeDashoffset = 1 - clamp(p * 1.3 - i * .06); }));
   run();
+})();
+</script>
+<script>
+(() => {
+  const M = window.Motion, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const can = !reduce && !!(M && M.animate);
+  const OUT = [.23, 1, .32, 1];
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const tokens = new WeakMap(), observers = new WeakMap();
+  const G = () => window.__cg;
+  const wait = (ms, ok) => new Promise((res, rej) => setTimeout(() => ok() ? res() : rej(0), ms));
+  const an = (el, kf, o) => { if (can && el) M.animate(el, kf, o); };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function tween(el, to, ms, fmt, ok) {
+    const from = el._v ?? to; el._v = to; const id = el._tid = (el._tid || 0) + 1;
+    if (!can || from === to) { el.textContent = fmt(to); return; }
+    const s = performance.now();
+    const step = n => { if (!ok() || el._tid !== id) return; const p = Math.min(1, (n - s) / ms), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(Math.round(from + (to - from) * e)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  const isBD = () => G().c === 'dhaka';
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
+  const money = n => G().fmt(n);
+  const WEB = () => ({ bdt: 25000, gbp: 199, aed: 899, usd: 249 })[G().cur];
+  const CHEAP = () => ({ bdt: 4999, gbp: 49, aed: 199, usd: 49 })[G().cur];
+  const person = '<svg viewBox="0 0 22 30" aria-hidden="true"><circle cx="11" cy="7" r="6"/><path d="M1 30c0-10 4-15 10-15s10 5 10 15z"/></svg>';
+  const mag = '<svg class="mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5l5 5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
+  const again = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const bag = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.5 13h-11z" fill="currentColor"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+
+  /* ---------- 1 SEARCH: results land as one wave, strikes speed up, ours opens the slot at #1 and pushes them down ---------- */
+  const v1 = {
+    name: 'Search', sub: () => 'We’ve all typed this one. Here’s what usually comes back.',
+    html: () => {
+      const bad = [
+        ['<b>Sponsored</b> · cheapsite.example', `Website in 1 day, only ${G().C.cheap}!!!`, 'Pick one of 3 templates. Hosting extra. Domain extra. Changes extra.', 'Extra, extra, extra.', 'M4 26C120 12 240 34 360 20S600 30 696 14'],
+        ['pixelpro-solutions.example', 'PixelPro Solutions | No.1 Best Top Agency', '★★★★★ 3 reviews, all from the owner’s family.', isBD() ? 'Thanks, Ammu.' : 'Thanks, Mum.', 'M4 18C140 30 260 10 380 24S580 12 696 26'],
+        ['digitaldreams.example', 'Digital Dreams Agency · Contact us', 'Thanks for your message. We reply within 3 to 5 business months.', 'Still waiting.', 'M4 24C130 14 250 30 370 18S590 28 696 16'],
+        ['mycousin.blogspot.example', 'My cousin’s portfolio (under construction)', 'Coming soon. Since 2017.', 'Love you, cousin.', 'M4 20C120 30 260 12 380 26S600 14 696 22']
+      ];
+      return `<div class="serp v1">
+        <div class="sbar">${mag}<span class="q"><span class="v1q">best web agency in ${G().C.name}</span><i class="caret" aria-hidden="true"></i></span><button class="again" data-again type="button" aria-label="Search again">${again}<span>Search again</span></button></div>
+        <p class="meta v1meta">About 2,340,000 results (0.42 seconds)</p>
+        <ol class="results">
+          <li class="v1slot open"><div class="v1slot-in"><div class="res ours"><span class="rank" aria-hidden="true">#1</span><div class="body"><span class="url">clickandgrow.example</span><span class="t">Click &amp; Grow · Websites, online shops and ads that sell</span><p>Fixed price before we start. Real people on WhatsApp. A free quote within a day, ${G().C.serpCity}.</p><div class="ours-row"><a class="btn btn--green" href="#order">Get my free quote</a><span class="chips"><span>Fixed price</span><span>Replies same day</span><span>30 days of free fixes</span></span></div></div><span class="stamp-end" aria-hidden="true">YOUR SEARCH<br>ENDS HERE</span></div></div></li>
+          ${bad.map(b => `<li class="res bad struck"><div class="body"><span class="url">${b[0]}</span><span class="t">${b[1]}</span><p>${b[2]}</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="${b[4]}"/></svg><span class="scrib">${b[3]}</span></li>`).join('')}
+        </ol></div>`;
+    },
+    setup(r, ok) {
+      $('[data-again]', r).addEventListener('click', () => mount(r, v1));
+      const q = $('.v1q', r), slot = $('.v1slot', r), bad = $$('.res.bad', r), meta = $('.v1meta', r), ours = $('.res.ours', r), stamp = $('.stamp-end', r);
+      return {
+        final() {},
+        prep() { bad.forEach(b => { b.classList.remove('struck'); b.style.opacity = 0; }); meta.style.opacity = 0; slot.classList.remove('open'); slot.classList.add('closed'); ours.style.opacity = 0; stamp.style.opacity = 0; q.textContent = ''; },
+        async play() {
+          const query = 'best web agency in ' + G().C.name;
+          await wait(250, ok);
+          for (let i = 1; i <= query.length; i++) { q.textContent = query.slice(0, i); await wait(30 + Math.random() * 45, ok); }
+          an($('.sbar', r), { scale: [1, .985, 1] }, { duration: .2 });
+          an(meta, { opacity: [0, 1] }, { duration: .25, delay: .1 });
+          [0, .07, .12, .15].forEach((d, i) => an(bad[i], { opacity: [0, 1], y: [10, 0] }, { duration: .4, delay: .12 + d, ease: OUT }));
+          await wait(850, ok);
+          const gaps = [0, 620, 500, 420];
+          for (let i = 0; i < bad.length; i++) { await wait(gaps[i], ok); bad[i].classList.add('struck'); }
+          await wait(500, ok);
+          slot.classList.remove('closed');
+          an(ours, { opacity: [0, 1], y: [-14, 0] }, { duration: .5, ease: OUT });
+          an(stamp, { scale: [1.8, 1], opacity: [0, 1], rotate: [-10, 6] }, { type: 'spring', bounce: .5, duration: .6, delay: .38 });
+          await wait(520, ok); slot.classList.add('open');
+        }
+      };
+    }
+  };
+
+  /* ---------- 4 SPEED RACE: two phones open the same link; one loads before the customer gets bored ---------- */
+  const v4 = {
+    name: 'Speed race', sub: () => 'Your customer taps your link. Watch who waits.',
+    html: () => {
+      const load = '<div class="v4-load done"><div class="spin"></div><div class="pbar"><i></i></div><span>Loading…</span></div>';
+      const col = (url, screen, extra, clk, cls, ppl, cap) => `<div class="v4-col"><div class="ph"><div class="urlb">${url}</div><div class="scr">${screen}${load}${extra}</div></div><p class="clock ${cls}" data-clock>${clk}</p><div class="ppl">${ppl}</div><p class="v4-cap" data-cap aria-live="polite">${cap}</p></div>`;
+      const cousin = '<div class="v-cousin" aria-hidden="true"><div class="t">★ WELCOME TO RAHMAN TRADERS ★</div><div class="uc">⚠ UNDER CONSTRUCTION ⚠</div><div class="row"><i></i><i></i><i></i></div><div><span class="blink">BEST PRICE!!!</span> For price please inbox</div><div class="ctr">VISITORS: 000047</div></div>';
+      const pro = `<div class="v-pro" aria-hidden="true"><div class="nav">Rahman Traders <span><span>Fabrics</span><span>Cart (2)</span></span></div><div class="hero2"><div><b>Quality fabric, delivered anywhere.</b><p>Order before 6pm, ships today.</p><span class="go">Shop fabrics</span></div><div class="pic"></div></div><div class="cards"><div>Cotton lawn<small>${money(conv(450))} / yd</small></div><div>Katan silk<small>${money(conv(1200))} / yd</small></div><div>Muslin<small>${money(conv(900))} / yd</small></div></div></div>`;
+      const p = (gone, buy) => Array.from({ length: 5 }, (_, i) => person.replace('<svg', `<svg class="${i < gone ? 'gone' : ''}${buy && i === 0 ? 'buy' : ''}"`)).join('');
+      return `<div class="v4">
+        ${col('rahmantraders.blogspot.com', cousin, '', '8.4s', '', p(4), '4 of 5 visitors left before it loaded.')}
+        ${col('rahmantraders.com', pro, `<div class="toast">${bag}New order · ${money(conv(2400))}</div>`, '1.2s', 'good', p(0, true), 'Loaded in 1.2s. Nobody left. One ordered.')}
+      </div>
+      <div class="v4-ctl"><button class="btn" type="button" data-race>Run the race again</button><p>Most phone visitors give up on a site that takes more than a few seconds.</p></div>`;
+    },
+    setup(r, ok) {
+      $('[data-race]', r).addEventListener('click', () => mount(r, v4));
+      const [L, R] = $$('.v4-col', r).map(c => ({ load: $('.v4-load', c), bar: $('.pbar i', c), clock: $('[data-clock]', c), ppl: $$('.ppl svg', c), cap: $('[data-cap]', c) }));
+      const toast = $('.toast', r);
+      return {
+        final() {},
+        prep() { [L, R].forEach(s => { s.load.classList.remove('done'); s.bar.style.transform = 'scaleX(0)'; s.clock.textContent = '0.0s'; s.cap.textContent = ''; s.ppl.forEach(p => p.classList.remove('gone', 'buy')); }); toast.style.opacity = 0; },
+        play() {
+          return new Promise(res => {
+            const t0 = performance.now(), LEAVE = [3, 4.2, 5.4, 6.6]; let rDone = false, toasted = false, left = 0;
+            const frame = n => {
+              if (!ok()) return res();
+              const e = (n - t0) / 1000;
+              R.clock.textContent = Math.min(e, 1.2).toFixed(1) + 's';
+              R.bar.style.transform = `scaleX(${1 - Math.pow(1 - Math.min(e / 1.2, 1), 3)})`;
+              if (e >= 1.2 && !rDone) { rDone = true; R.load.classList.add('done'); }
+              if (e >= 1.8 && !toasted) { toasted = true; an(toast, { opacity: [0, 1], y: [-16, 0] }, { type: 'spring', bounce: .35, duration: .5 }); R.ppl[0].classList.add('buy'); R.cap.textContent = 'Loaded in 1.2s. Nobody left. One ordered.'; }
+              L.clock.textContent = Math.min(e, 8.4).toFixed(1) + 's';
+              L.bar.style.transform = `scaleX(${e < 1.5 ? e / 1.5 * .35 : .35 + (Math.min(e, 8.4) - 1.5) / 6.9 * .6})`;
+              while (left < LEAVE.length && e >= LEAVE[left]) { L.ppl[left].classList.add('gone'); left++; L.cap.textContent = `${left} of 5 visitor${left > 1 ? 's' : ''} left. Still loading…`; }
+              if (e >= 8.4) { L.load.classList.add('done'); L.cap.textContent = '4 of 5 visitors left before it loaded.'; return res(); }
+              requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+          });
+        }
+      };
+    }
+  };
+
+
+  function mount(stage, v) {
+    const t = (tokens.get(stage) || 0) + 1; tokens.set(stage, t);
+    const old = observers.get(stage); if (old) old.disconnect();
+    stage.innerHTML = v.html();
+    const ok = () => tokens.get(stage) === t;
+    const ctl = v.setup(stage, ok);
+    if (!can) { ctl.final(); return; }
+    ctl.prep();
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); Promise.resolve(ctl.play()).catch(() => {}); } }, { threshold: .3 });
+    observers.set(stage, io); io.observe(stage);
+  }
+  const searchStage = $('#searchStage'), raceStage = $('#raceStage');
+  const all = () => { mount(searchStage, v1); mount(raceStage, v4); };
+  document.addEventListener('cg:city', all);
+  all();
 })();
 </script>
