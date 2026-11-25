@@ -83,8 +83,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* ---------- HERO ---------- */
 .hero{background:linear-gradient(#FFE8B5,#FFF6E3 62%)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:24px;align-items:center;padding-block:44px 8px}
-.hero h1{font-size:clamp(46px,6vw,84px);margin:14px 0 18px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);grid-template-areas:"top art" "bot art";grid-template-rows:auto 1fr;column-gap:44px;align-items:start;padding-block:36px 8px}
+.hero-top{grid-area:top;align-self:end}.hero-bot{grid-area:bot}.hero .hero-art{grid-area:art;align-self:center}
+.hero h1{font-size:clamp(40px,4.3vw,62px);line-height:1.02;margin:14px 0 16px}
+.hero-fact{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:16px;font:600 15px/1.3 var(--body);color:var(--ink-2)}
+.hero-fact b{color:var(--ink);font-weight:800}
+.hero-seats{color:#A30D25;font-weight:700;min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"top" "art" "bot";grid-template-rows:auto;padding-top:20px}
+  .hero .hero-art{margin:6px 0 18px}
+  .hero h1{font-size:clamp(34px,9.4vw,52px);margin-bottom:12px}
+}
 .hero h1 .u{background:linear-gradient(transparent 62%,var(--yellow) 62% 92%,transparent 92%)}
 .hero .lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:28em}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
@@ -494,10 +503,18 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 }
 
 /* ---------- HERO: a day in 10 seconds ---------- */
-.hero-art.hp{aspect-ratio:auto;display:flex;flex-direction:column;cursor:pointer}
+.hero-art.hp{aspect-ratio:auto;display:flex;flex-direction:column}
 .hp-scene{position:relative}
 .hp-svg{width:100%;height:auto;display:block;border:2.5px solid var(--ink);border-radius:22px;background:#BFE6FF;box-shadow:6px 6px 0 var(--ink)}
-.hp-cap{margin:16px 0 0;min-height:46px;display:flex;justify-content:center;align-items:flex-start;pointer-events:none}
+.hp-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hp-earn{display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 0 12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:18px;padding:8px 18px 9px;box-shadow:0 6px 16px rgba(0,0,0,.3);opacity:0}
+.hp-earn small{font:700 12px/1.1 var(--body);letter-spacing:.06em;text-transform:uppercase}
+.hp-earn b{font:800 clamp(26px,3.4vw,42px)/1 var(--display);font-variant-numeric:tabular-nums}
+.hp-replay{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:2.5px solid var(--ink);background:#fff;color:var(--ink);font:800 15px/1 var(--display);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .14s var(--ease-out)}
+.hp-replay.on{opacity:1;pointer-events:auto}
+.hp-replay:active{transform:scale(.96)}
+.hp-replay svg{width:18px;height:18px}
+@media (hover:hover) and (pointer:fine){.hp-replay:hover{background:var(--paper-2)}}
 .hp-cap span{background:var(--ink);color:#fff;font:700 clamp(15px,1.5vw,18px)/1.3 var(--body);padding:10px 18px;border-radius:999px;text-align:center;max-width:100%;box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .hp-cap span:empty{display:none}
 .hp-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:4% 5% 0;pointer-events:none;opacity:0}
@@ -510,7 +527,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .nt .app{display:flex;justify-content:space-between;gap:8px;font:600 13px/1.2 var(--body);color:var(--ink-2)}
 .nt b{font:800 17px/1.2 var(--display);color:var(--ink)}
 .nt .body{font:500 15px/1.3 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lock-count{margin-top:12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:7px 16px;font:800 clamp(14px,1.4vw,18px)/1 var(--display)}
+.lock-count{display:none;margin-top:12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:7px 16px;font:800 clamp(14px,1.4vw,18px)/1 var(--display)}
 .lock-count:empty{display:none}
 @media (max-width:560px){
   .hp-lock{padding-top:3%}
@@ -520,7 +537,9 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   .nt{grid-template-columns:28px minmax(0,1fr);gap:0 8px;padding:5px 9px 6px 6px;border-radius:12px;border-width:2px}
   .nt i{width:28px;height:28px;border-radius:8px}.nt i svg{width:16px;height:16px}
   .nt .app{font-size:10.5px}.nt b{font-size:13px}.nt .body{font-size:11.5px}
-  .lock-count{margin-top:6px;padding:5px 12px;font-size:12px;border-width:2px}
+  .hp-earn{margin:0 0 6px;padding:5px 12px 6px;border-radius:14px;border-width:2px}
+  .hp-earn small{font-size:9.5px}
+  .hp-replay{right:auto;bottom:auto;left:8px;top:8px;width:44px;min-height:44px;padding:0;justify-content:center;font-size:0;gap:0}
 }
 
 /* ---------- COUSIN: a four-panel comic ---------- */
@@ -660,14 +679,17 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   <!-- ================= HERO ================= -->
   <section class="hero" aria-labelledby="t-hero">
     <div class="wrap hero-grid">
-      <div>
+      <div class="hero-top">
         <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
-        <h1 id="t-hero">Pull up the shutter. Let the <span class="u">customers</span> in.</h1>
-        <p class="lede">Your shop opens at 10. Your website should never close. We build websites and online shops that actually sell, wherever you trade.</p>
+        <h1 id="t-hero">Websites that <span class="u">take orders</span> after you pull the shutter down.</h1>
+      </div>
+      <div class="hero-bot">
+        <p class="lede">You close at 9. Your online shop keeps selling till morning, with bKash, card and WhatsApp built in, wherever you trade.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
         </div>
+        <p class="hero-fact">Websites from <b data-price="web">৳25,000</b><span aria-hidden="true">·</span>most live in about 14 days<span aria-hidden="true">·</span><a href="#seats" class="hero-seats" data-seats-chip>2 seats left this month</a></p>
         <div class="city" role="group" aria-labelledby="cityLbl">
           <span id="cityLbl">Where’s your shop?</span>
           <div class="city-btns">
@@ -678,7 +700,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
           </div>
         </div>
       </div>
-      <div class="hero-art hp" id="heroStage" title="Click to replay the day"></div>
+      <div class="hero-art hp" id="heroStage"></div>
     </div>
     <div class="bunting" aria-hidden="true"></div>
   </section>
@@ -1387,7 +1409,8 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     <g class="peds"></g>
     <rect class="dim" width="1100" height="780" fill="#0B1226" opacity="0" pointer-events="none"/>
   </svg>
-  <div class="hp-lock"><p class="lock-time">11:42 PM</p><p class="lock-sub">Shutter’s down. The shop isn’t.</p><ol class="lock-list"></ol><p class="lock-count"></p></div></div>
+  <div class="hp-lock"><p class="lock-time">11:42 PM</p><p class="lock-sub">Shutter’s down. The shop isn’t.</p><p class="hp-earn"><small>Earned after closing</small><b class="earn-n">0</b></p><ol class="lock-list"></ol><p class="lock-count"></p></div>
+  <button type="button" class="hp-replay" aria-label="Replay the shop’s day"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Replay the day</button></div>
   <p class="hp-cap" aria-live="polite"><span></span></p>`;
 
   function person(parent, x, i, flip) {
@@ -1441,11 +1464,22 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const noteHTML = n => `<li class="nt"><i style="background:${n.bg}" aria-hidden="true">${ICON[n.icon]}</i><span class="app">${esc(n.app)}<time>${n.t}</time></span><b>${esc(n.title)}</b><span class="body">${esc(n.body)}</span></li>`;
 
   function run(r, T, instant) {
-    const C = 13000;
-    const tt = h => (h - 10) / 24 * C;
+    // Two speeds: the day runs fast, the night (where the money is) gets more time.
+    const DAY = 4800, NIGHT = 5400, C = DAY + NIGHT;
+    const tt = h => h <= 21 ? (h - 10) / 11 * DAY : DAY + (h - 21) / 9.5 * NIGHT;
+    const hAt = ms => ms <= DAY ? 10 + ms / DAY * 11 : 21 + (ms - DAY) / NIGHT * 9.5;
     const at = (h, fn) => T.at(tt(h), fn);
     const sub = $('.signsub', r), peds = $('.peds', r), lock = $('.hp-lock', r), list = $('.lock-list', r), ltime = $('.lock-time', r), lcount = $('.lock-count', r);
-    const maxCards = matchMedia('(max-width:560px)').matches ? 3 : 4;
+    const earn = $('.hp-earn', r), earnN = $('.earn-n', r), replay = $('.hp-replay', r);
+    const ORDERS = [2400, 0, 2250, 0];
+    let total = 0;
+    // The total rolls up to each new figure instead of jumping (about 600ms, easing out).
+    const rollTo = v => { const from = total, t1 = performance.now(); total = v;
+      const step = now => { const k = Math.min(1, (now - t1) / 600), e = 1 - Math.pow(1 - k, 3); earnN.textContent = money(Math.round(from + (v - from) * e)); if (k < 1 && t === token) requestAnimationFrame(step); };
+      const t = token; requestAnimationFrame(step); };
+    const finish = () => { replay.classList.add('on'); const cta = document.querySelector('.hero .btn--green');
+      if (cta && !reduce) cta.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 520, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }); };
+    const maxCards = 2;
     const clock = h => { h = ((h % 24) + 24) % 24; const hh = Math.floor(h), mm = Math.floor((h - hh) * 6) * 10; return `${((hh + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${hh < 12 ? 'AM' : 'PM'}`; };
 
     if (instant) {
@@ -1455,20 +1489,21 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       const moon = $('.moon', r); moon.setAttribute('opacity', 1); moon.style.transform = 'translate(820px,84px)';
       sub.textContent = 'CLOSED · 6:30 AM';
       list.innerHTML = NOTES().slice(4 - maxCards).reverse().map(noteHTML).join('');
-      ltime.textContent = '6:30 AM'; lcount.textContent = '3 orders while you slept'; lock.style.opacity = 1;
-      caption(r, 'Your shop opens at 10. Your website never closes.', true);
+      ltime.textContent = '6:30 AM'; lock.style.opacity = 1;
+      total = 4650; earnN.textContent = money(total); earn.style.opacity = 1; replay.classList.add('on');
+      caption(r, 'Overnight, while the shutter was down, the website took 2 orders worth ' + money(total) + ' and a 5-star review.', true);
       return;
     }
 
     shutter(r, false, true);
     const t0 = performance.now();
-    T.every(130, () => { const h = 10 + ((performance.now() - t0) % C) / C * 24, hm = h % 24; sub.textContent = (hm >= 21 || hm < 10 ? 'CLOSED · ' : 'OPEN · ') + clock(h); });
+    T.every(130, () => { const h = hAt(Math.min(performance.now() - t0, C)), hm = h % 24; sub.textContent = (hm >= 21 || hm < 10 ? 'CLOSED · ' : 'OPEN · ') + clock(h); });
     A($('.sun', r), [{ transform: 'translate(200px,100px)' }, { transform: 'translate(550px,62px)', offset: .35 }, { transform: 'translate(900px,100px)', offset: .75 }, { transform: 'translate(1070px,340px)' }], { duration: tt(19.5), easing: 'linear' });
     A($('.dusk', r), [{ opacity: 0 }, { opacity: .85 }, { opacity: 0 }], { duration: tt(20.5) - tt(17), delay: tt(17), easing: 'ease-in-out' });
-    const nightKf = v => [{ opacity: 0 }, { opacity: v, offset: .14 }, { opacity: v, offset: .86 }, { opacity: 0 }];
+    const nightKf = v => [{ opacity: 0 }, { opacity: v, offset: .14 }, { opacity: v }];  // night holds: the day ends on the money
     [$('.night', r), $('.stars', r), $('.nwin', r)].forEach(el => A(el, nightKf(1), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' }));
     A($('.dim', r), nightKf(.55), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' });
-    A($('.moon', r), [{ opacity: 0, transform: 'translate(80px,190px)' }, { opacity: 1, transform: 'translate(260px,100px)', offset: .15 }, { opacity: 1, transform: 'translate(820px,84px)', offset: .85 }, { opacity: 0, transform: 'translate(1040px,190px)' }], { duration: tt(30.5) - tt(20), delay: tt(20), easing: 'linear' });
+    A($('.moon', r), [{ opacity: 0, transform: 'translate(80px,190px)' }, { opacity: 1, transform: 'translate(260px,100px)', offset: .15 }, { opacity: 1, transform: 'translate(820px,84px)' }], { duration: tt(30.5) - tt(20), delay: tt(20), easing: 'linear' });
 
     caption(r, '10 AM. You pull up the shutter.');
     T.at(150, () => shutter(r, true));
@@ -1496,8 +1531,9 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     let n = 0;
     at(22.4, () => {
       caption(r, 'Your website is still open.');
-      ltime.textContent = '11:30 PM'; lcount.textContent = '';
+      ltime.textContent = '11:30 PM'; lcount.textContent = ''; earnN.textContent = money(0); total = 0;
       A(lock, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease' });
+      A(earn, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 320, delay: 200 });
       A(ltime, [{ opacity: 0, transform: 'scale(0.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 400 });
     });
     NOTES().forEach((note, k) => at([23.7, 25.2, 27.1, 29.5][k], () => {
@@ -1508,13 +1544,14 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
       if (extra) { extra.remove(); before.delete(extra); }
       before.forEach((top, el) => { const dy = top - el.getBoundingClientRect().top; if (dy) A(el, [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0px)' }], { duration: 320 }); });
       A(fresh, [{ opacity: 0, transform: 'translateY(-14px) scale(0.97)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 360 });
+      // the phone on the counter gives a small buzz with each one
+      A(list, [{ transform: 'translateX(0px)' }, { transform: 'translateX(-3px)' }, { transform: 'translateX(3px)' }, { transform: 'translateX(-2px)' }, { transform: 'translateX(0px)' }], { duration: 260, easing: 'ease-in-out' });
+      if (ORDERS[k]) { rollTo(total + ORDERS[k]); A(earn, [{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 360 }); }
       ltime.textContent = note.t;
       if (k < 3) { n++; lcount.textContent = `${n} order${n > 1 ? 's' : ''} while you slept`; if (n === 1) A(lcount, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 300 }); }
       if (k === 1) caption(r, 'After midnight. The orders keep coming.');
-      if (k === 3) caption(r, 'And a 5★ review before breakfast.');
+      if (k === 3) { caption(r, 'And a 5-star review before breakfast. ' + money(total) + ' earned after closing.'); T.at(500, finish); }
     }));
-    at(31.2, () => { caption(r, 'Your shop opens at 10. Your website never closes.'); A(lock, [{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'ease' }); });
-    T.at(C + 1200, () => mount(true));
   }
 
   function mount(sync) {
@@ -1526,7 +1563,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     const go = () => { if (t !== token) return; stage.innerHTML = html(); run(stage, T, reduce); };
     if (sync) go(); else { stage.innerHTML = ''; requestAnimationFrame(go); }
   }
-  stage.addEventListener('click', () => mount());
+  stage.addEventListener('click', e => { if (e.target.closest('.hp-replay')) mount(); });
   document.addEventListener('cg:city', () => mount());
   mount();
 })();
