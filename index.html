@@ -645,6 +645,45 @@ body::before{background:var(--paper)}
 @keyframes hvDance{from{transform:rotate(-4deg) translateY(0)}to{transform:rotate(4deg) translateY(-6px)}}
 @keyframes hvBreathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
 @media (prefers-reduced-motion:reduce){.hv-frame{transition:none}}
+
+/* ---------- Sunshine Candy theme: sunshine owns the big regions, chocolate carries text and the main action, pink marks badges, mint marks success ---------- */
+:root{
+  --ink:#2B1D0E; --ink-2:#5C4632; --choc:#2B1D0E;
+  --paper:#FFF4CC; --paper-2:#FFE899; --card:#FFFDF6; --line:#EED9A0;
+  --yellow:#FFD23F;
+  --green:#0F7A63; --green-2:#14936F; --green-lite:#D3F5EA;
+  --pink:#EE4266; --red:#D62A55; --red-d:#C0183F; --red-lite:#FFE0E7;
+  --teal:#3BCEAC; --orange:#FF8A1F; --slate:#2B1D0E;
+  scrollbar-color:var(--choc) var(--paper);
+}
+::selection{background:var(--pink);color:#fff}
+body{caret-color:var(--red)}
+.head{background:rgba(255,244,204,.96)}
+.strip{background:var(--choc);color:var(--paper)}
+.strip a{color:var(--yellow)}
+.btn--green{background:var(--choc);color:var(--yellow)}
+.hero .eyebrow::before,.eyebrow::before{background:var(--pink)}
+.hv-count b{color:var(--choc);box-shadow:inset 0 -.35em 0 var(--teal)}
+.pack .badge{background:var(--red);color:#fff}
+.pack.hot{box-shadow:5px 5px 0 var(--ink),0 0 0 6px var(--pink)}
+.seats-chip i{background:var(--pink)}
+.meanwhile{background:var(--choc)}
+.order{background:var(--choc)}
+.order .sec-head p{color:#F3E3B8}
+.order .eyebrow{color:var(--yellow)}
+.slip{box-shadow:8px 8px 0 #120B04}
+.board{box-shadow:5px 5px 0 #120B04}
+.promises{color:#F3E3B8}
+.ticket dt{color:#F3E3B8}
+.ticket{border-color:rgba(255,210,63,.55)}
+.signpreview{border-color:rgba(255,210,63,.55)}
+.brandfoot{background:var(--choc)}
+.chips span{border-color:#8FD9C2;color:#0B5A49}
+.eyebrow{color:#0B5A49}
+.hero .eyebrow{color:var(--ink)}
+.order .eyebrow{color:var(--yellow)}
+.v-pro .cards small{color:#0B5A49}
+.pack.hot h3 small,.pack.hot .tag{color:#fff;opacity:1}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
