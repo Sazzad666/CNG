@@ -1,0 +1,47 @@
+<%- include('_top', { title: 'Overview', nav: 'dash' }) %>
+<% function n(list, k) { var r = list.find(function (x) { return String(x.k) === String(k); }); return r ? r.n : 0; } %>
+<div class="flex flex-wrap items-end justify-between gap-4">
+  <h1 class="text-3xl font-bold">Overview</h1>
+  <a href="/admin/leads?status=new" class="btn btn-lime !min-h-[40px] text-sm">Open new leads (<%= n(c.byStatus, 'new') %>)</a>
+</div>
+<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-total="<%= c.total %>">
+  <div class="rounded-2xl border border-cream/10 bg-ink-2 p-5"><p class="text-sm text-sage">All leads</p><p class="mt-2 font-display text-4xl font-bold tabular-nums"><%= c.total %></p></div>
+  <% [['enquiry','Enquiries'],['estimate','Estimates'],['audit','Audit requests']].forEach(function (t) { %>
+    <a href="/admin/leads?type=<%= t[0] %>" class="rounded-2xl border border-cream/10 bg-ink-2 p-5 hover:border-cream/30"><p class="text-sm text-sage"><%= t[1] %></p><p class="mt-2 font-display text-4xl font-bold tabular-nums"><%= n(c.byType, t[0]) %></p></a>
+  <% }) %>
+</div>
+<div class="mt-6 grid gap-4 lg:grid-cols-3">
+  <section class="rounded-2xl border border-cream/10 bg-ink-2 p-5">
+    <h2 class="font-sans text-sm font-semibold text-sage">By status</h2>
+    <ul class="mt-4 space-y-2">
+      <% STATUSES.forEach(function (s) { %><li class="flex items-center justify-between"><a href="/admin/leads?status=<%= s %>"><%- include('_pill', { s: s }) %></a><span class="tabular-nums"><%= n(c.byStatus, s) %></span></li><% }) %>
+    </ul>
+  </section>
+  <section class="rounded-2xl border border-cream/10 bg-ink-2 p-5">
+    <h2 class="font-sans text-sm font-semibold text-sage">By source</h2>
+    <% if (!c.bySource.length) { %><p class="mt-4 text-sage">No leads yet.</p><% } %>
+    <ul class="mt-4 space-y-2"><% c.bySource.forEach(function (r) { %><li class="flex justify-between gap-4"><span class="truncate"><%= r.k %></span><span class="tabular-nums"><%= r.n %></span></li><% }) %></ul>
+  </section>
+  <section class="rounded-2xl border border-cream/10 bg-ink-2 p-5">
+    <h2 class="font-sans text-sm font-semibold text-sage">Estimator drop-off (last 30 days)</h2>
+    <p class="mt-1 text-xs text-sage">Visitors who left the estimator, by the last step they reached.</p>
+    <% if (!c.partialsByStep.length) { %><p class="mt-4 text-sage">No drop-offs recorded.</p><% } %>
+    <ul class="mt-4 space-y-2"><% c.partialsByStep.forEach(function (r) { %><li class="flex justify-between"><span>Step <%= r.k %> of 5</span><span class="tabular-nums"><%= r.n %></span></li><% }) %></ul>
+  </section>
+</div>
+<section class="mt-6 rounded-2xl border border-cream/10 bg-ink-2 p-5">
+  <h2 class="font-sans text-sm font-semibold text-sage">Leads per week (last 12 weeks)</h2>
+  <% var max = Math.max.apply(null, c.byWeek.map(function (r) { return r.n; }).concat([1])); %>
+  <% if (!c.byWeek.length) { %><p class="mt-4 text-sage">No leads yet.</p><% } else { %>
+  <div class="mt-5 flex h-40 items-end gap-2" role="img" aria-label="Leads per week">
+    <% c.byWeek.forEach(function (r) { %>
+      <div class="flex flex-1 flex-col items-center gap-1">
+        <span class="text-xs tabular-nums"><%= r.n %></span>
+        <div class="w-full max-w-[40px] rounded-t bg-lime" style="height: <%= Math.max(4, Math.round(r.n / max * 120)) %>px"></div>
+        <span class="text-[10px] text-sage"><%= r.k.slice(5) %></span>
+      </div>
+    <% }) %>
+  </div>
+  <% } %>
+</section>
+<%- include('_bottom') %>

@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en" data-region="US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Click &amp; Grow</title>
+<meta name="description" content="Business slow? It's buffering. Click &amp; Grow builds websites, online shops and Google setups for small businesses worldwide.">
+<meta name="theme-color" content="#141311">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFBF2;--paper-2:#FFF1D6;--card:#FFFFFF;--ink:#1C1A17;--ink-2:#55504A;--line:#EADFC8;
+  --green:#006A4E;--green-2:#0E8A62;--green-lite:#D7F2E4;--red:#E8283F;--red-lite:#FFE1E5;
+  --yellow:#FFC72C;--pink:#FF4F8B;--teal:#13A8A0;--stuck:#141311;--stuck-2:#1E1C19;--stuck-txt:#F3EEE6;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1);--ease-io:cubic-bezier(.77,0,.175,1);
+  --head:64px;--r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.01em}
+p{margin:0}
+[hidden]{display:none!important}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1200px,100% - 32px);margin-inline:auto}
+@media (min-width:700px){.wrap{width:min(1200px,100% - 64px)}}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:6px}
+.mono{font-family:var(--mono)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 22px;border:2.5px solid var(--ink);border-radius:14px;background:var(--yellow);color:var(--ink);font:700 17px/1 var(--display);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out),background-color 160ms ease;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.btn svg{width:20px;height:20px}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}}
+.btn--green{background:var(--green);color:#fff}
+.btn--white{background:#fff}
+.btn--wa{background:#25D366}
+.btn--sm{min-height:40px;padding:8px 14px;font-size:15px;border-width:2px;box-shadow:3px 3px 0 var(--ink)}
+.eyebrow{font:700 13px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+.link{font-weight:700;color:var(--green);text-underline-offset:3px}
+
+/* strip + header */
+.strip{background:var(--green);color:#fff;text-align:center;font-size:14px;padding:8px 16px;margin:0}
+.strip a{color:var(--yellow);font-weight:700}
+.head{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2.5px solid var(--ink)}
+.head .wrap{display:flex;align-items:center;gap:20px;height:var(--head)}
+.logo{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--display);text-decoration:none;white-space:nowrap}
+.logo svg{width:36px;height:36px}
+.logo .lg-ring{transform-origin:20px 20px}
+.head nav{margin-left:auto}
+.head nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.head nav a{text-decoration:none;font-weight:600;font-size:15px;background:linear-gradient(var(--ink),var(--ink)) 0 100%/0 2px no-repeat;transition:background-size 200ms var(--ease-out)}
+@media (hover:hover){.head nav a:hover{background-size:100% 2px}}
+.acts{display:flex;align-items:center;gap:10px}
+.region{position:relative}
+.region select{appearance:none;-webkit-appearance:none;font:600 14px/1 var(--body);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:9px 30px 9px 14px;cursor:pointer;min-height:40px}
+.region::after{content:"";position:absolute;right:13px;top:50%;width:7px;height:7px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+@media (max-width:1060px){.head nav{display:none}.acts{margin-left:auto}}
+@media (max-width:640px){.acts .btn--wa,.acts .btn:not(.btn--wa){display:none}.region select{font-size:13px;padding:8px 26px 8px 12px}}
+
+/* ================= HERO ================= */
+.hero{position:relative;background:var(--stuck);color:var(--stuck-txt);overflow:hidden;transition:color 400ms ease}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.5px) 0 0/22px 22px}
+.wipe{position:absolute;inset:0;background:var(--paper);clip-path:circle(0% at 50% 50%);z-index:0}
+.hero>.wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:56px;align-items:center;min-height:calc(100svh - var(--head) - 36px);padding:40px 0 56px}
+.hero.fast{color:var(--ink)}
+.hero .eyebrow{color:var(--yellow)}
+.hero.fast .eyebrow{color:var(--green)}
+.hero h1{font-weight:800;font-size:clamp(44px,5.6vw,84px);line-height:.94;margin:16px 0 20px}
+.hero h1 .l2{display:inline-block;position:relative}
+.buf{position:relative;display:inline-block;white-space:nowrap}
+.dots{position:absolute;left:100%;bottom:0}
+.strike{position:absolute;left:-2%;right:-2%;top:54%;height:.09em;background:var(--red);border-radius:9px;transform:scaleX(0);transform-origin:left}
+.dots i{font-style:normal;animation:blink 1.4s infinite}
+.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.15}40%{opacity:1}}
+.fixed-tag{position:absolute;right:-.5em;top:-.95em;font:800 .42em/1 var(--display);background:var(--yellow);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:.18em .38em .1em;box-shadow:4px 4px 0 var(--ink);transform:rotate(-6deg) scale(.95);opacity:0;white-space:nowrap}
+.hero .sub{font-size:clamp(18px,1.6vw,21px);max-width:28em;opacity:.82}
+.hero.fast .sub,.hero.fast .slots{opacity:1;color:var(--ink-2)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .ghost{background:transparent;color:inherit;border-color:currentColor;box-shadow:4px 4px 0 currentColor}
+.hero.fast .ghost{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.slots{margin-top:22px;font:500 13.5px/1.5 var(--mono);display:flex;gap:10px;align-items:flex-start;opacity:.85}
+.slots .pulse{flex:none;width:9px;height:9px;margin-top:5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(232,40,63,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(232,40,63,0)}100%{box-shadow:0 0 0 0 rgba(232,40,63,0)}}
+.bd-line{display:none;margin-top:10px;font:700 15px/1.3 var(--display);color:var(--yellow)}
+.hero.fast .bd-line{color:var(--green)}
+html[data-region="BD"] .bd-line{display:block}
+
+/* the browser window */
+.win{position:relative;background:#fff;color:var(--ink);border:2.5px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 #000}
+.hero.fast .win{box-shadow:10px 10px 0 var(--ink)}
+.win-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:2.5px solid var(--ink);background:#F1ECE2;border-radius:16px 16px 0 0}
+.win-bar .d{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink)}
+.win-bar .d:nth-child(1){background:var(--red)}.win-bar .d:nth-child(2){background:var(--yellow)}.win-bar .d:nth-child(3){background:var(--green-2)}
+.refresh{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;margin-left:4px;position:relative}
+.refresh svg{width:18px;height:18px}
+.ripple{position:absolute;inset:0;border-radius:50%;border:2px solid var(--red);opacity:0}
+.addr{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:6px 12px;font:500 13px/1 var(--mono);white-space:nowrap;overflow:hidden}
+.addr svg{width:13px;height:13px;flex:none}
+.win-body{position:relative;height:clamp(320px,33vw,430px);background:var(--stuck-2);border-radius:0 0 16px 16px;overflow:hidden}
+.view-load{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:16px;padding:20px;color:#E8E2D6}
+.spin{width:84px;height:84px;position:relative}
+.spin svg{position:absolute;inset:0;width:100%;height:100%}
+.spin .arc{transform-origin:42px 42px;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin .chk{stroke-dasharray:60;stroke-dashoffset:60}
+.lbl{font:500 15px/1 var(--mono)}
+.track{width:min(380px,74vw);height:16px;border:2px solid #5B564F;border-radius:999px;background:#2A2723;overflow:hidden}
+.fill{height:100%;width:100%;background:linear-gradient(90deg,var(--red),var(--yellow));transform:scaleX(.12);transform-origin:left;border-radius:999px}
+.meta{display:flex;align-items:baseline;gap:16px;font-family:var(--mono)}
+.pct{font-weight:700;font-size:30px;color:var(--yellow)}
+.eta{font-size:13px;color:#9C978E}
+.status{height:1.5em;overflow:hidden;font:500 14px/1.5 var(--mono);color:#B5AFA5;text-align:center;max-width:90%}
+.status span{display:block}
+.cursor{position:absolute;left:58px;top:16px;width:26px;height:26px;z-index:5;pointer-events:none;transform:translate(170px,150px)}
+.view-site{position:absolute;inset:0;background:var(--paper);padding:16px;display:grid;grid-template-rows:auto 1fr auto;gap:12px;visibility:hidden;opacity:0}
+.ms-nav{display:flex;align-items:center;gap:10px}
+.ms-logo{width:28px;height:28px;border-radius:8px;background:var(--green);border:2px solid var(--ink)}
+.ms-nav i{height:8px;width:44px;border-radius:9px;background:var(--line)}
+.ms-nav b{margin-left:auto;font:700 12px/1 var(--display);background:var(--yellow);border:2px solid var(--ink);border-radius:8px;padding:6px 10px}
+.ms-hero{border:2px solid var(--ink);border-radius:14px;background:var(--green);color:#fff;padding:16px;display:grid;align-content:center;gap:8px;position:relative;overflow:hidden}
+.ms-hero strong{font:800 clamp(18px,2vw,26px)/1.05 var(--display);max-width:12em}
+.ms-hero small{opacity:.85;font-size:13px}
+.ms-hero::after{content:"";position:absolute;right:-30px;bottom:-40px;width:150px;height:150px;border-radius:50%;background:var(--yellow);border:2px solid var(--ink)}
+.ms-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ms-card{border:2px solid var(--ink);border-radius:12px;background:#fff;padding:8px;display:grid;gap:6px}
+.ms-card .ph{height:44px;border-radius:8px;border:2px solid var(--ink)}
+.ms-card .row{display:flex;justify-content:space-between;align-items:center;font:700 13px/1 var(--display)}
+.ms-card .row em{font-style:normal;font:700 11px/1 var(--display);background:var(--yellow);border:1.5px solid var(--ink);border-radius:6px;padding:4px 6px}
+.orders{position:absolute;right:14px;top:14px;z-index:2;background:#fff;border:2px solid var(--ink);border-radius:12px;padding:6px 10px;font:700 12px/1.2 var(--mono);box-shadow:3px 3px 0 var(--ink);opacity:0}
+.orders b{display:block;font:800 22px/1 var(--display);color:var(--green)}
+.toasts{position:absolute;inset:0;pointer-events:none;z-index:6}
+.toast{position:absolute;display:flex;align-items:center;gap:10px;background:#fff;color:var(--ink);border:2.5px solid var(--ink);border-radius:14px;padding:9px 13px;box-shadow:4px 4px 0 var(--ink);font-size:14px;line-height:1.2;opacity:0;white-space:nowrap}
+.toast b{font-family:var(--display);font-size:15px}
+.toast small{display:block;color:var(--ink-2);font-size:12px}
+.cc{font:700 11px/1 var(--mono);border:2px solid var(--ink);border-radius:7px;padding:5px 5px;background:var(--c,#fff)}
+.t1{left:-44px;top:30%}.t2{right:-34px;top:16%}.t3{right:-46px;bottom:22%}.t4{left:12%;bottom:-26px}
+@media (max-width:900px){
+  .hero>.wrap{grid-template-columns:minmax(0,1fr);gap:36px;padding:28px 0 64px;min-height:0}
+  .hero-copy{order:2}.hero-win{order:1}
+  .t1{left:8px;top:auto;bottom:62%}.t2{right:8px;top:8px}.t3{right:8px;bottom:12px}.t4{left:8px;bottom:12px;display:none}
+  .toast{font-size:12px;padding:7px 10px}.toast b{font-size:13px}
+  .win-body{height:230px}.view-load{gap:10px}.spin{width:60px;height:60px}.pct{font-size:24px}
+  .hero h1{margin:10px 0 14px}
+}
+.hero.paused .arc,.hero.paused .dots i,.hero.paused .pulse{animation-play-state:paused}
+
+/* ================= SECTIONS ================= */
+.sec{padding:clamp(80px,10vw,128px) 0;position:relative}
+.sec-head{display:grid;gap:14px;max-width:760px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(36px,4.8vw,64px);font-weight:800}
+.sec-head p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:36em}
+.card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:6px 6px 0 var(--ink)}
+
+/* speed test */
+.st{background:var(--paper-2)}
+.st-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:stretch}
+.gauge{background:var(--stuck);color:var(--stuck-txt);border:2.5px solid var(--ink);border-radius:24px;box-shadow:6px 6px 0 var(--ink);padding:28px;display:grid;align-content:center;justify-items:center;gap:6px}
+.gauge svg{width:min(380px,100%)}
+.needle{transform-origin:150px 160px;transform:rotate(-90deg)}
+.g-read{font:700 clamp(44px,5vw,64px)/1 var(--mono);color:var(--yellow)}
+.g-lbl{font:500 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.quiz{padding:28px;display:grid;align-content:start;gap:18px;min-height:420px}
+.q-prog{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.q-prog span{height:8px;border-radius:9px;background:var(--line);overflow:hidden}
+.q-prog span i{display:block;height:100%;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform 300ms var(--ease-out)}
+.q-prog span.on i{transform:scaleX(1)}
+.q-no{font:700 13px/1 var(--mono);color:var(--ink-2)}
+.q-stage{position:relative;min-height:210px}
+.q{position:absolute;inset:0;display:grid;align-content:start;gap:20px}
+.q[hidden]{display:none}
+.q h3{font-size:clamp(24px,2.4vw,32px)}
+.q-ans{display:flex;flex-wrap:wrap;gap:10px}
+.q-res{display:grid;gap:14px}
+.q-res h3{font-size:clamp(26px,2.6vw,36px)}
+.q-res h3 b{color:var(--red)}
+.leaks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.leaks li{display:flex;gap:10px;align-items:flex-start;font-size:16px}
+.leaks li::before{content:"!";flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--red);color:#fff;font:700 13px/1 var(--mono);margin-top:1px}
+.leaks li.ok::before{content:"✓";background:var(--green-2)}
+.rep{display:grid;gap:8px;border-top:2px dashed var(--line);padding-top:16px}
+.rep label{font-weight:700}
+.rep-row{display:flex;gap:10px;flex-wrap:wrap}
+.rep-row input{flex:1 1 220px}
+.rep .err{margin:0}
+.again{background:none;border:0;padding:0;font:600 15px var(--body);color:var(--ink-2);text-decoration:underline;cursor:pointer;justify-self:start}
+@media (max-width:900px){.st-grid{grid-template-columns:minmax(0,1fr)}.quiz{min-height:0}}
+
+/* inputs */
+input[type=text],input[type=email],input[type=tel],input:not([type]){font:500 16px/1.2 var(--body);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:12px;padding:13px 14px;min-height:50px;width:100%}
+input[aria-invalid=true]{border-color:var(--red);box-shadow:0 0 0 3px var(--red-lite)}
+.err{color:var(--red);font-size:14px;font-weight:600;min-height:0;margin:6px 0 0}
+.err:empty{display:none}
+
+/* errors */
+.errs{background:var(--paper)}
+.err-track{position:relative;height:380vh}
+.err-stage{position:sticky;top:var(--head);height:calc(100vh - var(--head));display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px;align-items:center}
+.err-copy .sec-head{margin:0}
+.err-count{margin-top:20px;font:700 14px/1 var(--mono);display:inline-flex;gap:8px;align-items:center;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:9px 14px}
+.err-count b{color:var(--red)}
+.err-done{margin-top:18px;display:none;gap:12px;align-items:center;flex-wrap:wrap}
+.err-done.on{display:flex}
+.pile{position:relative;height:min(560px,78vh)}
+.dlg{position:absolute;width:min(400px,86%);height:236px;perspective:1200px}
+.dlg:nth-child(1){left:0;top:0;--rot:-3deg}
+.dlg:nth-child(2){left:22%;top:16%;--rot:2deg}
+.dlg:nth-child(3){left:6%;top:36%;--rot:-1.5deg}
+.dlg:nth-child(4){left:26%;top:54%;--rot:3deg}
+.dlg .in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 520ms var(--ease-io);transform:rotate(var(--rot))}
+.dlg.fixed .in{transform:rotate(var(--rot)) rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:2.5px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.face.back{transform:rotateY(180deg);background:var(--green-lite)}
+.fbar{display:flex;align-items:center;justify-content:space-between;background:var(--red);color:#fff;border-bottom:2.5px solid var(--ink);padding:8px 12px;font:700 13px/1 var(--mono)}
+.back .fbar{background:var(--green)}
+.fbar i{width:20px;height:20px;border:2px solid #fff;border-radius:5px;display:grid;place-items:center;font-style:normal;font-size:12px}
+.fbody{display:flex;gap:14px;padding:14px 16px;align-items:flex-start}
+.fbody svg{width:38px;height:38px;flex:none}
+.fbody h3{font-size:22px;margin-bottom:4px}
+.fbody p{font-size:15px;color:var(--ink-2);line-height:1.4}
+.facts{display:flex;justify-content:flex-end;gap:8px;padding:0 14px 14px}
+.facts .ign{background:#fff}
+.back .facts{justify-content:flex-start}
+@media (max-width:900px){
+  .err-track{height:auto}
+  .err-stage{position:static;height:auto;grid-template-columns:minmax(0,1fr);gap:32px}
+  .pile{height:auto;display:grid;gap:20px}
+  .dlg{position:relative;left:auto!important;top:auto!important;width:100%;height:250px;--rot:0deg!important}
+}
+
+/* lanes */
+.lanes-sec{background:var(--stuck);color:var(--stuck-txt)}
+.lanes-sec .sec-head p{color:#C9C3B8}
+.lanes-sec .eyebrow{color:var(--yellow)}
+.lanes{display:grid;gap:18px}
+.lane{display:grid;grid-template-columns:240px minmax(0,1fr) 220px;gap:24px;align-items:center;background:var(--stuck-2);border:2px solid #3A3631;border-radius:18px;padding:18px 20px}
+.lane.us{background:#fff;color:var(--ink);border:2.5px solid var(--ink);box-shadow:6px 6px 0 var(--yellow)}
+.who{display:flex;gap:12px;align-items:center}
+.ava{flex:none;width:46px;height:46px;border-radius:50%;border:2.5px solid var(--ink);display:grid;place-items:center}
+.ava svg{width:30px;height:30px}
+.who b{display:block;font:800 19px/1.1 var(--display)}
+.who small{display:block;font-size:13.5px;opacity:.75;line-height:1.3;margin-top:3px}
+.ltrack{position:relative;height:22px;border-radius:999px;background:#2E2A26;border:2px solid #4A453F}
+.us .ltrack{background:#F1ECE2;border-color:var(--ink)}
+.lbar{position:absolute;inset:0;border-radius:999px;transform:scaleX(0);transform-origin:left}
+.c1 .lbar{background:#8C939B}.c2 .lbar{background:var(--pink)}.us .lbar{background:var(--green-2)}
+.pk{position:absolute;top:50%;left:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#fff;border:2.5px solid var(--ink);display:grid;place-items:center;font:700 11px/1 var(--mono);color:var(--ink)}
+.lmeta{font:700 15px/1.3 var(--mono)}
+.lmeta small{display:block;font:500 12.5px/1.35 var(--body);opacity:.75;margin-top:4px}
+.meter{color:var(--pink)}
+.lock{display:flex;gap:10px;align-items:center;color:var(--green)}
+.lock svg{width:30px;height:30px;flex:none}
+.shackle{transform:translateY(-6px)}
+@media (max-width:900px){.lane{grid-template-columns:minmax(0,1fr);gap:14px}}
+
+/* updates */
+.upd-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.upd{overflow:hidden}
+.upd .win-bar{border-radius:0}
+.upd ul{list-style:none;margin:0;padding:10px 20px}
+.upd li{display:grid;grid-template-columns:28px minmax(0,1fr) 110px 46px;gap:12px;align-items:center;padding:13px 0;border-bottom:1.5px dashed var(--line);font-weight:600}
+.upd li:last-child{border-bottom:0}
+.ok{width:24px;height:24px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;background:#fff}
+.ok svg{width:14px;height:14px;color:#fff;opacity:0}
+.done .ok{background:var(--green-2)}
+.done .ok svg{opacity:1}
+.ubar{height:10px;border-radius:9px;background:var(--line);overflow:hidden}
+.ubar i{display:block;height:100%;background:var(--green-2);transform:scaleX(0);transform-origin:left}
+.upct{font:700 13px/1 var(--mono);text-align:right;color:var(--ink-2)}
+.upd-foot{border-top:2.5px solid var(--ink);padding:14px 20px;font:700 14px/1.3 var(--mono);background:var(--green-lite);color:var(--green);opacity:0}
+@media (max-width:900px){.upd-grid{grid-template-columns:minmax(0,1fr);gap:36px}.upd li{grid-template-columns:26px minmax(0,1fr) 64px 40px;font-size:15px}}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.svc a{display:grid;align-content:start;gap:8px;padding:20px;text-decoration:none;background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:4px 4px 0 var(--ink);transition:transform 200ms var(--ease-out),box-shadow 200ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.svc a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}}
+.svc .ico{width:52px;height:52px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center;background:var(--bg)}
+.svc .ico svg{width:30px;height:30px}
+.svc h3{font-size:21px;margin-top:6px}
+.svc p{font-size:15px;color:var(--ink-2);line-height:1.4}
+.price{margin-top:6px;font-size:14px;color:var(--ink-2)}
+.price b{font:800 20px/1 var(--display);color:var(--ink)}
+.price .free{font:800 16px/1 var(--display);color:var(--green)}
+.note{margin-top:20px;font-size:14px;color:var(--ink-2)}
+@media (max-width:1000px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.svc{grid-template-columns:minmax(0,1fr)}}
+
+/* before / after */
+.work{background:var(--paper-2)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.chip{font:700 15px/1 var(--display);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:10px 16px;cursor:pointer;min-height:42px;transition:background-color 160ms ease,transform 160ms var(--ease-out)}
+.chip[aria-pressed=true]{background:var(--ink);color:#fff}
+.chip:active{transform:scale(.97)}
+.ba{position:relative;aspect-ratio:16/9;border:2.5px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);background:#fff;--pos:50%;user-select:none;-webkit-user-select:none}
+.ba-layer{position:absolute;inset:0}
+.ba-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:4px;margin-left:-2px;background:var(--ink);z-index:3;pointer-events:none}
+.ba-handle span{position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:var(--yellow);border:2.5px solid var(--ink);display:grid;place-items:center;font:800 18px/1 var(--display);box-shadow:3px 3px 0 var(--ink)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4;touch-action:pan-y}
+.ba input:focus-visible+.ba-handle span{outline:3px solid var(--pink);outline-offset:3px}
+.ba-tag{position:absolute;top:14px;z-index:2;font:700 12px/1 var(--mono);background:var(--ink);color:#fff;border-radius:8px;padding:7px 10px}
+.ba-tag.l{left:14px;background:var(--red)}.ba-tag.r{right:14px;background:var(--green)}
+.demo-tag{display:inline-block;margin-top:14px;font:600 13px/1 var(--mono);color:var(--ink-2)}
+/* the old site */
+.old{background:#FFFF66 repeating-linear-gradient(45deg,transparent 0 18px,rgba(0,0,0,.05) 18px 36px);font-family:"Times New Roman",Times,serif;color:#00F;padding:3% 4%;display:grid;align-content:start;gap:2.4%}
+.old .mq{background:#F0F;color:#FF0;font:700 clamp(12px,1.8vw,22px)/1.4 "Comic Sans MS","Comic Sans",cursive;white-space:nowrap;overflow:hidden;border:3px ridge #888}
+.old .mq span{display:inline-block;padding-left:100%;animation:mq 9s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+.old h4{margin:0;font:700 clamp(18px,3vw,40px)/1 "Times New Roman",serif;color:#F00;text-decoration:underline;text-align:center}
+.old .uc{justify-self:center;background:#000;color:#FF0;font:700 clamp(11px,1.4vw,16px)/1 "Courier New",monospace;padding:.6em 1em;border:4px dashed #FF0}
+.old .row{display:flex;justify-content:space-between;align-items:flex-end;font-size:clamp(10px,1.2vw,14px)}
+.old .ctr{font:700 clamp(11px,1.4vw,16px)/1 "Courier New",monospace;background:#000;color:#0F0;padding:.3em .5em;letter-spacing:.2em}
+.old .blur{height:clamp(50px,9vw,120px);width:60%;justify-self:center;background:linear-gradient(135deg,#999,#ccc);filter:blur(3px);border:3px outset #ccc}
+/* the new site */
+.new{background:var(--sbg,#FFFBF2);color:var(--ink);padding:3% 4%;display:grid;grid-template-rows:auto 1fr auto;gap:4%;font-family:var(--body)}
+.new .nav{display:flex;align-items:center;gap:3%;font:700 clamp(11px,1.3vw,15px)/1 var(--display)}
+.new .nav .lg{width:clamp(18px,2.4vw,30px);height:clamp(18px,2.4vw,30px);border-radius:8px;background:var(--sa);border:2px solid var(--ink)}
+.new .nav i{font-style:normal;font-weight:600;opacity:.7}
+.new .nav b{margin-left:auto;background:var(--sa);color:#fff;border:2px solid var(--ink);border-radius:9px;padding:.5em .8em}
+.new .hz{display:grid;grid-template-columns:1.1fr .9fr;gap:4%;align-items:center}
+.new .hz strong{display:block;font:800 clamp(18px,3.4vw,46px)/1 var(--display)}
+.new .hz p{font-size:clamp(10px,1.2vw,15px);color:var(--ink-2);margin-top:.6em}
+.new .hz .go{display:inline-block;margin-top:.9em;font:700 clamp(10px,1.2vw,15px)/1 var(--display);background:var(--yellow);border:2px solid var(--ink);border-radius:10px;padding:.6em 1em;box-shadow:3px 3px 0 var(--ink)}
+.new .art{aspect-ratio:1/.8;border:2px solid var(--ink);border-radius:16px;background:var(--sa);position:relative;overflow:hidden}
+.new .art::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:var(--sb);border:2px solid var(--ink);right:-12%;bottom:-20%}
+.new .art::after{content:"";position:absolute;width:34%;aspect-ratio:1;border-radius:24%;background:#fff;border:2px solid var(--ink);left:12%;top:16%;transform:rotate(-8deg)}
+.new .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3%}
+.new .cards div{background:#fff;border:2px solid var(--ink);border-radius:12px;padding:.6em .8em;font:700 clamp(10px,1.2vw,15px)/1.2 var(--display);display:flex;justify-content:space-between;gap:6px}
+.new .cards em{font-style:normal;color:var(--sa)}
+
+/* wizard */
+.wz-track{position:relative;height:320vh}
+.wz-stage{position:sticky;top:var(--head);height:calc(100vh - var(--head));display:grid;align-content:center;gap:28px}
+.wz-stage .sec-head{margin:0}
+.wz{overflow:hidden}
+.wz .win-bar{border-radius:0}
+.wz-body{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:300px}
+.wz-steps{list-style:none;margin:0;padding:18px;border-right:2.5px solid var(--ink);background:#F7F2E8;display:grid;align-content:start;gap:6px}
+.wz-steps li{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:10px;font-weight:600;color:var(--ink-2);transition:background-color 200ms ease,color 200ms ease}
+.wz-steps li .n{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font:700 12px/1 var(--mono)}
+.wz-steps li.on{background:var(--yellow);color:var(--ink)}
+.wz-steps li.past{color:var(--green)}
+.wz-steps li.past .n{background:var(--green);border-color:var(--green);color:#fff}
+.wz-panes{position:relative;padding:28px}
+.pane{position:absolute;inset:28px;display:grid;align-content:center;gap:12px;opacity:0;visibility:hidden;transition:opacity 260ms ease,visibility 0s linear 260ms,transform 260ms var(--ease-out);transform:translateY(8px)}
+.pane.on{opacity:1;visibility:visible;transform:none;transition:opacity 260ms ease,transform 260ms var(--ease-out)}
+.pane .k{font:700 13px/1 var(--mono);color:var(--green)}
+.pane h3{font-size:clamp(28px,3vw,42px)}
+.pane p{color:var(--ink-2);max-width:32em}
+.wz-foot{display:flex;align-items:center;gap:16px;border-top:2.5px solid var(--ink);padding:14px 18px;background:#F7F2E8}
+.wz-prog{flex:1;height:12px;border-radius:9px;background:var(--line);overflow:hidden}
+.wz-prog i{display:block;height:100%;background:var(--green-2);transform:scaleX(0);transform-origin:left}
+.wz-foot .fake{font:700 14px/1 var(--display);border:2px solid var(--ink);border-radius:10px;padding:9px 14px;background:#fff;opacity:.55}
+.wz-foot .fake.nx{background:var(--yellow);opacity:1}
+@media (max-width:760px){
+  .wz-body{grid-template-columns:minmax(0,1fr)}
+  .wz-steps{grid-template-columns:repeat(4,1fr);border-right:0;border-bottom:2.5px solid var(--ink);padding:10px;gap:6px}
+  .wz-steps li{flex-direction:column;gap:4px;padding:6px 2px;font-size:11.5px;text-align:center;line-height:1.15}
+  .wz-panes{min-height:230px;padding:18px}.pane{inset:18px}
+  .wz-foot .fake:not(.nx){display:none}
+}
+
+/* faq */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{background:#fff;border:2.5px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink)}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:18px 20px;font:700 clamp(18px,1.6vw,21px)/1.25 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .code{flex:none;font:700 12px/1 var(--mono);background:var(--red-lite);color:var(--red);border-radius:7px;padding:6px 7px}
+.faq summary::after{content:"+";margin-left:auto;font:700 24px/1 var(--mono);transition:transform 200ms var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 20px 20px;color:var(--ink-2)}
+
+/* restart form */
+.restart{background:var(--stuck);color:var(--stuck-txt)}
+.restart .sec-head p{color:#C9C3B8}.restart .eyebrow{color:var(--yellow)}
+.rs-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:32px;align-items:start}
+.rs{color:var(--ink);overflow:hidden}
+.rs .win-bar{border-radius:0}
+.rs-in{padding:24px}
+.rs-prog{height:10px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:6px}
+.rs-prog i{display:block;height:100%;background:var(--green-2);transform:scaleX(.25);transform-origin:left;transition:transform 400ms var(--ease-out)}
+.rs-no{font:700 13px/1 var(--mono);color:var(--ink-2);margin-bottom:18px}
+.err-sum{background:var(--red-lite);border:2px solid var(--red);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-weight:600;color:#8E1022}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+fieldset[hidden]{display:none}
+legend{padding:0;margin-bottom:6px}
+legend h3{font-size:clamp(24px,2.4vw,30px)}
+.help{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.opts label{position:relative;cursor:pointer}
+.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opts .o{display:grid;gap:3px;height:100%;padding:12px 14px;border:2px solid var(--ink);border-radius:12px;background:#fff;font:700 16px/1.2 var(--display);transition:background-color 160ms ease,transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out)}
+.opts .o small{font:500 13px/1.3 var(--body);color:var(--ink-2)}
+.opts input:checked+.o{background:var(--green-lite);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.opts input:checked+.o::after{content:"";position:absolute;right:10px;top:10px;width:18px;height:18px;border-radius:50%;background:var(--green-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.5 3.5L15 7' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;border:2px solid var(--ink)}
+.opts input:focus-visible+.o{outline:3px solid var(--pink);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+.field label{display:block;font-weight:700;font-size:15px;margin-bottom:6px}
+.phone{display:flex;border:2px solid var(--ink);border-radius:12px;background:#fff;overflow:hidden}
+.phone .ccx{display:grid;place-items:center;padding:0 12px;font:700 15px/1 var(--mono);background:#F1ECE2;border-right:2px solid var(--ink)}
+.phone input{border:0;border-radius:0}
+.phone:focus-within{outline:3px solid var(--pink);outline-offset:2px}
+.phone input:focus-visible{outline:0}
+.rs-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.rs-nav .back{background:#fff}
+.rs-nav .next{margin-left:auto}
+.done-card{text-align:center;display:grid;justify-items:center;gap:10px;padding:20px 0}
+.done-card[hidden]{display:none}
+.done-card .big{width:84px;height:84px;border-radius:50%;background:var(--green-2);border:2.5px solid var(--ink);display:grid;place-items:center}
+.done-card .big svg{width:44px;height:44px;color:#fff}
+.done-card h3{font-size:32px}
+.log{background:var(--stuck-2);border:2px solid #3A3631;border-radius:18px;padding:20px;font:500 14px/1.7 var(--mono);color:#C9C3B8}
+.log h3{font:700 13px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px}
+.log p{display:flex;gap:8px}
+.log p span{color:#7E786F;flex:none}
+.log b{color:#fff;font-weight:700}
+.log .pay{margin-top:14px;padding-top:14px;border-top:1.5px dashed #3A3631;font-family:var(--body);font-size:14px;line-height:1.5;display:block}
+@media (max-width:900px){.rs-grid{grid-template-columns:minmax(0,1fr)}.two{grid-template-columns:minmax(0,1fr)}}
+
+/* final + footer */
+.final{text-align:center;background:var(--yellow);border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink)}
+.final h2{font-size:clamp(44px,7vw,100px);font-weight:800}
+.final p{font-size:clamp(17px,1.5vw,20px);max-width:32em;margin:16px auto 0}
+.final .hero-cta{justify-content:center}
+footer{padding:36px 0 110px;font-size:14px;color:var(--ink-2)}
+.foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:18px}
+.foot a{text-decoration:none;font-weight:600}
+.smile{display:inline-flex;align-items:center;gap:10px}
+.smile svg{width:28px;height:28px}
+.smile .sp{transform-origin:14px 14px;animation:spin 1.2s linear infinite}
+.smile .face2{opacity:0;transition:opacity 200ms ease}
+@media (hover:hover){.smile:hover .sp{opacity:0}.smile:hover .face2{opacity:1}}
+@media (min-width:901px){footer{padding-bottom:36px}}
+
+/* phone bar */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:2.5px solid var(--ink)}
+.mbar .btn{flex:1;min-height:48px}
+@media (max-width:900px){.mbar{display:flex}}
+
+/* reveal: hidden only when motion runs */
+html.motion [data-rise]{opacity:0;transform:translateY(24px)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .spin .arc,.dots i,.pulse,.old .mq span,.smile .sp{animation:none!important}
+  .dlg .in,.pane{transition:none!important}
+}
+html.no-motion .err-track,html.no-motion .wz-track{height:auto}
+html.no-motion .err-stage,html.no-motion .wz-stage{position:static;height:auto}
+html.no-motion .pile{height:auto;display:grid;gap:20px}
+html.no-motion .dlg{position:relative;left:auto!important;top:auto!important;width:100%;height:250px}
+@media (max-width:600px){.ba{aspect-ratio:4/5}.new .hz{grid-template-columns:1fr}.new .art{display:none}.new .hz strong{font-size:30px}.new .hz p,.new .hz .go,.new .cards div,.new .nav{font-size:13px}.new .cards{grid-template-columns:1fr}.old h4{font-size:26px}.old .mq{font-size:15px}.old .uc,.old .ctr{font-size:13px}.old .row{font-size:12px}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="tick" viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+    <symbol id="warn" viewBox="0 0 40 40"><path d="M20 4L37 34H3z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/><path d="M20 15v9" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round"/><circle cx="20" cy="29" r="2.2" fill="#1C1A17"/></symbol>
+    <symbol id="okc" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="#0E8A62" stroke="#1C1A17" stroke-width="3"/><path d="M12 20.5l5.5 5.5L28 15" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<p class="strip"><span id="stripText">Free website check-up for every business.</span> <a href="#order" data-need="Free website check-up">Claim yours</a></p>
+
+<header class="head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Click and Grow home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><circle class="lg-ring" cx="20" cy="20" r="11" fill="none" stroke="#FFC72C" stroke-width="3" stroke-dasharray="44 30" stroke-linecap="round"/><path d="M14 11l6 17 3-7 7-3z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></svg>
+      Click &amp; Grow
+    </a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#speedtest">Speed test</a></li><li><a href="#errors">What's wrong</a></li><li><a href="#lanes">Why us</a></li><li><a href="#services">Services</a></li><li><a href="#work">Work</a></li><li><a href="#how">How it works</a></li><li><a href="#faq">FAQ</a></li>
+    </ul></nav>
+    <div class="acts">
+      <div class="region"><label class="sr" for="region">Your region (sets prices and phone code)</label>
+        <select id="region">
+          <option value="US">US · $</option><option value="UK">UK · £</option><option value="EU">Europe · €</option><option value="AE">UAE · AED</option><option value="BD">Bangladesh · ৳</option><option value="XX">Elsewhere · $</option>
+        </select></div>
+      <a class="btn btn--sm btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+      <a class="btn btn--sm" href="#order">Free quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO: stuck, then fast ================= -->
+<section class="hero" id="hero" aria-labelledby="t-hero">
+  <div class="wipe" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy" data-enter>
+      <p class="eyebrow">Websites, online shops and Google for small businesses</p>
+      <h1 id="t-hero"><span class="l1">Business slow?</span><br><span class="l2"><span class="buf">It’s buffering<span class="dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span><span class="strike" aria-hidden="true"></span></span><span class="fixed-tag" aria-hidden="true">Fixed.</span></span></h1>
+      <p class="sub">Your website is the slow connection. We fix it, so the customers already looking for you can find you, trust you and buy.</p>
+      <div class="hero-cta">
+        <button class="btn btn--green" type="button" id="fixBtn">Fix my connection</button>
+        <a class="btn ghost" href="#speedtest">Free speed test</a>
+      </div>
+      <p class="slots"><span class="pulse" aria-hidden="true"></span><span id="slotsLine">Free website check-up for every business. We only take a few projects a month.</span></p>
+      <p class="bd-line">Bebsha kharap jacche? We know the feeling.</p>
+    </div>
+
+    <div class="hero-win" data-enter>
+      <div class="win" id="win" role="img" aria-label="A browser window loading a business website, stuck at 12 percent. After the fix it loads fully and orders arrive from London, Dubai, New York and Dhaka.">
+        <div class="win-bar">
+          <span class="d"></span><span class="d"></span><span class="d"></span>
+          <span class="refresh" id="refresh"><span class="ripple"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="#1C1A17" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="addr"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="2" fill="#1C1A17"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="#1C1A17" stroke-width="2"/></svg>yourbusiness.com</span>
+        </div>
+        <div class="win-body">
+          <div class="view-load" id="viewLoad">
+            <div class="spin">
+              <svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="30" fill="none" stroke="#3A3631" stroke-width="8"/><circle class="arc" id="arc" cx="42" cy="42" r="30" fill="none" stroke="#FFC72C" stroke-width="8" stroke-linecap="round" stroke-dasharray="48 140"/></svg>
+              <svg viewBox="0 0 84 84" aria-hidden="true"><path class="chk" id="chk" d="M27 43l10 10 21-22" fill="none" stroke="#0E8A62" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="lbl" id="loadLbl">Loading customers…</p>
+            <div class="track"><div class="fill" id="fill"></div></div>
+            <div class="meta"><span class="pct" id="pct">12%</span><span class="eta">Time left: <span id="eta">forever</span></span></div>
+            <p class="status" aria-hidden="true"><span id="status">› Waiting for customers…</span></p>
+          </div>
+          <div class="view-site" id="viewSite" aria-hidden="true">
+            <div class="ms-nav"><span class="ms-logo"></span><i></i><i></i><i></i><b>Order now</b></div>
+            <div class="ms-hero"><strong>Your best sellers, one tap away.</strong><small>Open now · Ships today</small></div>
+            <div class="ms-cards">
+              <div class="ms-card"><span class="ph" style="background:var(--pink)"></span><span class="row">Bestseller <em data-usd="24">$24</em></span></div>
+              <div class="ms-card"><span class="ph" style="background:var(--teal)"></span><span class="row">New in <em data-usd="18">$18</em></span></div>
+              <div class="ms-card"><span class="ph" style="background:var(--yellow)"></span><span class="row">Gift box <em data-usd="40">$40</em></span></div>
+            </div>
+          </div>
+          <div class="orders" id="orders">Orders today<b id="ordN">0</b></div>
+        </div>
+        <svg class="cursor" id="cursor" viewBox="0 0 26 26" aria-hidden="true"><path d="M3 2l18 9-8 2-3 8z" fill="#fff" stroke="#1C1A17" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        <div class="toasts" aria-hidden="true">
+          <div class="toast t1"><span class="cc" style="--c:#DCE6FF">UK</span><span><b>New order</b><small>London · just now</small></span></div>
+          <div class="toast t2"><span class="cc" style="--c:#D7F2E4">AE</span><span><b>New booking</b><small>Dubai · just now</small></span></div>
+          <div class="toast t3"><span class="cc" style="--c:#FFE1E5">US</span><span><b>New order</b><small>New York · 1 min ago</small></span></div>
+          <div class="toast t4"><span class="cc" style="--c:#FFF1C2">BD</span><span><b>New enquiry</b><small>Dhaka · 2 min ago</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPEED TEST ================= -->
+<section class="sec st" id="speedtest" aria-labelledby="t-st">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">Free speed test · 30 seconds</p>
+      <h2 id="t-st">How fast is your business, really?</h2>
+      <p>Five questions. No email needed to see your score. It's quicker than replying "price?" to one customer.</p>
+    </div>
+    <div class="st-grid">
+      <div class="gauge" data-rise>
+        <svg viewBox="0 0 300 180" aria-hidden="true">
+          <path d="M30 160a120 120 0 0 1 60-104" fill="none" stroke="#E8283F" stroke-width="22"/>
+          <path d="M96 52.5a120 120 0 0 1 108 0" fill="none" stroke="#FFC72C" stroke-width="22"/>
+          <path d="M210 56a120 120 0 0 1 60 104" fill="none" stroke="#0E8A62" stroke-width="22"/>
+          <g stroke="#F3EEE6" stroke-width="3" opacity=".5"><path d="M150 26v12M54 70l9 8M246 70l-9 8M30 160h12M258 160h12"/></g>
+          <g class="needle" id="needle"><path d="M150 160V52" stroke="#F3EEE6" stroke-width="6" stroke-linecap="round"/><circle cx="150" cy="160" r="13" fill="#F3EEE6" stroke="#1C1A17" stroke-width="3"/></g>
+          <text x="30" y="178" fill="#F3EEE6" opacity=".6" font-family="JetBrains Mono,monospace" font-size="12">0</text>
+          <text x="258" y="178" fill="#F3EEE6" opacity=".6" font-family="JetBrains Mono,monospace" font-size="12">100</text>
+        </svg>
+        <p class="g-read" id="gRead" aria-live="polite">0%</p>
+        <p class="g-lbl">Business speed</p>
+      </div>
+
+      <div class="card quiz" data-rise>
+        <div class="q-prog" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+        <p class="q-no" id="qNo">Question 1 of 5</p>
+        <div class="q-stage" id="qStage">
+          <div class="q" data-q="0"><h3>Do you show up when people search Google for what you sell?</h3><div class="q-ans"><button class="btn btn--white" data-a="1">Yes</button><button class="btn btn--white" data-a="0">No</button><button class="btn btn--white" data-a=".5">Not sure</button></div></div>
+          <div class="q" data-q="1" hidden><h3>Does your website open in under 3 seconds on a phone?</h3><div class="q-ans"><button class="btn btn--white" data-a="1">Yes</button><button class="btn btn--white" data-a="0">No</button><button class="btn btn--white" data-a="0">What website?</button></div></div>
+          <div class="q" data-q="2" hidden><h3>Can a customer buy or book without messaging you first?</h3><div class="q-ans"><button class="btn btn--white" data-a="1">Yes</button><button class="btn btn--white" data-a="0">No, they DM me</button><button class="btn btn--white" data-a=".5">Sometimes</button></div></div>
+          <div class="q" data-q="3" hidden><h3>Do you have a website of your own, outside Facebook or Instagram?</h3><div class="q-ans"><button class="btn btn--white" data-a="1">Yes</button><button class="btn btn--white" data-a="0">No</button><button class="btn btn--white" data-a=".5">My nephew made one</button></div></div>
+          <div class="q" data-q="4" hidden><h3>Has it been updated in the last year?</h3><div class="q-ans"><button class="btn btn--white" data-a="1">Yes</button><button class="btn btn--white" data-a="0">No</button><button class="btn btn--white" data-a="0">It still says 2019</button></div></div>
+          <div class="q q-res" data-q="5" hidden>
+            <h3>Your business is running at <b id="score">0%</b>.</h3>
+            <ul class="leaks" id="leaks"></ul>
+            <form class="rep" id="repForm" novalidate>
+              <label for="rep">Where should we send your full report?</label>
+              <div class="rep-row"><input id="rep" type="text" inputmode="email" autocomplete="email" placeholder="WhatsApp number or email" aria-describedby="repErr"><button class="btn btn--green" type="submit">Send me the report</button></div>
+              <p class="err" id="repErr"></p>
+            </form>
+            <button class="again" type="button" id="again">Take it again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ERRORS (pinned pile) ================= -->
+<section class="sec errs" id="errors" aria-labelledby="t-err" style="padding-bottom:0">
+  <div class="err-track" id="errTrack">
+    <div class="wrap err-stage">
+      <div class="err-copy">
+        <div class="sec-head">
+          <p class="eyebrow">Error log</p>
+          <h2 id="t-err">The errors your customers see, right before they leave.</h2>
+          <p>You never see these. Your customers see them every day. Press "Fix it" on each one.</p>
+        </div>
+        <p class="err-count" aria-live="polite">Fixed <b id="fixedN">0</b> of 4</p>
+        <div class="err-done" id="errDone"><span style="font-weight:700">All clear. Want it for real?</span><a class="btn btn--green btn--sm" href="#order">Fix my business</a></div>
+      </div>
+      <div class="pile" id="pile">
+        <div class="dlg" data-need="Google & SEO"><div class="in">
+          <div class="face front"><div class="fbar">Error 404<i aria-hidden="true">×</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#warn"/></svg><div><h3>Business not found.</h3><p>Someone just searched for what you sell. Google showed them the shop down the road.</p></div></div>
+            <div class="facts"><button class="btn btn--sm ign" type="button">Ignore</button><button class="btn btn--sm btn--green fix" type="button">Fix it</button></div></div>
+          <div class="face back"><div class="fbar">Fixed<i aria-hidden="true">✓</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#okc"/></svg><div><h3>Google and SEO setup</h3><p>Your Google profile and search basics, done properly. Free with every website.</p></div></div>
+            <div class="facts"><a class="link" href="#order" data-need="Google & SEO">Add to my quote →</a></div></div>
+        </div></div>
+        <div class="dlg" data-need="Website"><div class="in">
+          <div class="face front"><div class="fbar">Connection timed out<i aria-hidden="true">×</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#warn"/></svg><div><h3>This page took 9 seconds.</h3><p>Your customer gave up at three and bought from someone faster.</p></div></div>
+            <div class="facts"><button class="btn btn--sm ign" type="button">Ignore</button><button class="btn btn--sm btn--green fix" type="button">Fix it</button></div></div>
+          <div class="face back"><div class="fbar">Fixed<i aria-hidden="true">✓</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#okc"/></svg><div><h3>A fast website</h3><p>Built for phones first, and quick on a bad connection.</p></div></div>
+            <div class="facts"><a class="link" href="#order" data-need="Website">Add to my quote →</a></div></div>
+        </div></div>
+        <div class="dlg" data-need="Online shop"><div class="in">
+          <div class="face front"><div class="fbar">Payment failed<i aria-hidden="true">×</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#warn"/></svg><div><h3>"DM for price."</h3><p>They had their card out. Your page asked them to send a message and wait.</p></div></div>
+            <div class="facts"><button class="btn btn--sm ign" type="button">Ignore</button><button class="btn btn--sm btn--green fix" type="button">Fix it</button></div></div>
+          <div class="face back"><div class="fbar">Fixed<i aria-hidden="true">✓</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#okc"/></svg><div><h3>An online shop</h3><p>Prices, a cart and checkout, so people can pay the moment they decide.</p></div></div>
+            <div class="facts"><a class="link" href="#order" data-need="Online shop">Add to my quote →</a></div></div>
+        </div></div>
+        <div class="dlg" data-need="Website"><div class="in">
+          <div class="face front"><div class="fbar">Certificate expired<i aria-hidden="true">×</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#warn"/></svg><div><h3>"© 2019" at the bottom.</h3><p>Customers see an old website and quietly assume you've closed.</p></div></div>
+            <div class="facts"><button class="btn btn--sm ign" type="button">Ignore</button><button class="btn btn--sm btn--green fix" type="button">Fix it</button></div></div>
+          <div class="face back"><div class="fbar">Fixed<i aria-hidden="true">✓</i></div>
+            <div class="fbody"><svg aria-hidden="true"><use href="#okc"/></svg><div><h3>A redesign</h3><p>A fresh site that looks like the business you run today.</p></div></div>
+            <div class="facts"><a class="link" href="#order" data-need="Website">Add to my quote →</a></div></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THREE LANES ================= -->
+<section class="sec lanes-sec" id="lanes" aria-labelledby="t-lanes">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">Three ways to fix the connection</p>
+      <h2 id="t-lanes">You've got options. Two of them are bad.</h2>
+      <p>Scroll and watch them race.</p>
+    </div>
+    <div class="lanes" id="laneList">
+      <div class="lane c1">
+        <div class="who"><span class="ava" style="background:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="12" r="6" fill="#F1C6A0" stroke="#1C1A17" stroke-width="2"/><path d="M6 29c1-7 5-10 10-10s9 3 10 10z" fill="#2F5DFF" stroke="#1C1A17" stroke-width="2"/></svg></span><div><b>Your cousin</b><small>On dial-up. Busy during exams.</small></div></div>
+        <div class="ltrack"><div class="lbar"></div><span class="pk">56k</span></div>
+        <p class="lmeta" id="cousinTxt">Connecting…<small>Cheap. Fits nobody.</small></p>
+      </div>
+      <div class="lane c2">
+        <div class="who"><span class="ava" style="background:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="5" width="18" height="24" fill="#fff" stroke="#1C1A17" stroke-width="2"/><path d="M11 10h3M18 10h3M11 15h3M18 15h3M11 20h3M18 20h3" stroke="#1C1A17" stroke-width="2"/></svg></span><div><b>Big agency</b><small>Fibre speed. Priced like a satellite.</small></div></div>
+        <div class="ltrack"><div class="lbar"></div><span class="pk">$$</span></div>
+        <p class="lmeta meter"><span id="meter">$0</span><small style="color:#F3EEE6">Fast. Then the invoice arrives.</small></p>
+      </div>
+      <div class="lane us">
+        <div class="who"><span class="ava" style="background:var(--green)"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M14 11l6 17 3-7 7-3z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></svg></span><div><b>Click &amp; Grow</b><small>Fast, built for phones, and we answer.</small></div></div>
+        <div class="ltrack"><div class="lbar"></div><span class="pk">C&amp;G</span></div>
+        <div class="lmeta lock"><svg viewBox="0 0 32 32" aria-hidden="true"><path class="shackle" id="shackle" d="M10 15v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#1C1A17" stroke-width="3"/><rect x="6" y="14" width="20" height="15" rx="4" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/></svg><span>Quote locked<small style="color:var(--ink-2)">The quote you agree is the quote you pay.</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= UPDATES (offers) ================= -->
+<section class="sec" id="updates" aria-labelledby="t-upd">
+  <div class="wrap upd-grid">
+    <div data-rise>
+      <div class="sec-head" style="margin-bottom:28px">
+        <p class="eyebrow">Upgrades included</p>
+        <h2 id="t-upd">Every website ships with these. Free.</h2>
+        <p>Other agencies sell these as extras later. We install them before launch.</p>
+      </div>
+      <div class="hero-cta" style="margin-top:0"><a class="btn btn--green" href="#order">Get my free quote</a><a class="btn btn--white" href="#order" data-need="Free website check-up">Free website check-up</a></div>
+    </div>
+    <div class="card upd" id="upd" data-rise>
+      <div class="win-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="addr" style="border:0;background:none;padding-left:4px">Installing updates (5)</span></div>
+      <ul>
+        <li><span class="ok"><svg><use href="#tick"/></svg></span><span>Free logo with every website</span><span class="ubar"><i></i></span><span class="upct">0%</span></li>
+        <li><span class="ok"><svg><use href="#tick"/></svg></span><span>Free Google and SEO setup</span><span class="ubar"><i></i></span><span class="upct">0%</span></li>
+        <li><span class="ok"><svg><use href="#tick"/></svg></span><span>Free support after launch</span><span class="ubar"><i></i></span><span class="upct">0%</span></li>
+        <li><span class="ok"><svg><use href="#tick"/></svg></span><span>Pay in parts</span><span class="ubar"><i></i></span><span class="upct">0%</span></li>
+        <li><span class="ok"><svg><use href="#tick"/></svg></span><span>Quote agreed upfront</span><span class="ubar"><i></i></span><span class="upct">0%</span></li>
+      </ul>
+      <p class="upd-foot">All updates installed. No restart needed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec" id="services" aria-labelledby="t-svc" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">What we install</p>
+      <h2 id="t-svc">Pick a fix. Or let us diagnose it.</h2>
+    </div>
+    <div class="svc" data-rise>
+      <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M3 12h26" stroke="#1C1A17" stroke-width="2.5"/><rect x="7" y="16" width="10" height="3" fill="#006A4E"/></svg></span><h3>Business website</h3><p>Fast, built for phones, easy to update.</p><span class="price">from <b data-usd="249">$249</b></span></a>
+      <a href="#order" data-need="Online shop"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 11c0-6 10-6 10 0" fill="none" stroke="#1C1A17" stroke-width="2.5"/></svg></span><h3>Online shop</h3><p>Cart, checkout, payments. People buy without asking.</p><span class="price">from <b data-usd="449">$449</b></span></a>
+      <a href="#order" data-need="Google & SEO"><span class="ico" style="--bg:#D6F4F1"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M20 20l7 7" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg></span><h3>Google &amp; SEO</h3><p>Get found when people search, not only when you post.</p><span class="price">from <b data-usd="119">$119</b>/mo</span></a>
+      <a href="#order" data-need="Ads"><span class="ico" style="--bg:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M23 12c2 2 2 6 0 8" fill="none" stroke="#1C1A17" stroke-width="2.5" stroke-linecap="round"/></svg></span><h3>Facebook &amp; Google ads</h3><p>Ads that bring orders. Likes from your aunt don't count.</p><span class="price">from <b data-usd="99">$99</b>/mo</span></a>
+      <a href="#order" data-need="Mobile app"><span class="ico" style="--bg:var(--red-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="16" cy="14" r="4" fill="#E8283F"/><path d="M13 24h6" stroke="#1C1A17" stroke-width="2.5" stroke-linecap="round"/></svg></span><h3>Mobile app</h3><p>Your business on their home screen.</p><span class="price">from <b data-usd="1190">$1,190</b></span></a>
+      <a href="#order" data-need="Logo & branding"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.5 8 8.5.7-6.5 5.6 2 8.4L16 22.3 8.5 26.7l2-8.4L4 12.7l8.5-.7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Logo &amp; branding</h3><p>A logo people remember. Not one made in Paint at 2 am.</p><span class="price"><span class="free">Free with any website</span></span></a>
+      <a href="#order" data-need="Website care"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12-6-2-10-6-10-12V8z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l4 4 6-7" fill="none" stroke="#006A4E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Website care</h3><p>Updates, backups and fixes, so you can stop worrying.</p><span class="price">from <b data-usd="29">$29</b>/mo</span></a>
+      <a href="#order" data-need="Free website check-up"><span class="ico" style="--bg:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 18h5l3-8 5 14 3-6h8" fill="none" stroke="#1C1A17" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Free check-up</h3><p>We look at what you have and tell you what's costing you customers.</p><span class="price"><span class="free">Free, no strings</span></span></a>
+    </div>
+    <p class="note">Sample prices. You agree the quote before we start, and you can pay in parts.</p>
+  </div>
+</section>
+
+<!-- ================= BEFORE / AFTER ================= -->
+<section class="sec work" id="work" aria-labelledby="t-work">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">Before 12%, after 100%</p>
+      <h2 id="t-work">Drag the line. Watch a business wake up.</h2>
+    </div>
+    <div class="chips" role="group" aria-label="Pick a demo project">
+      <button class="chip" type="button" aria-pressed="true" data-demo="0">Restaurant</button>
+      <button class="chip" type="button" aria-pressed="false" data-demo="1">Dental clinic</button>
+      <button class="chip" type="button" aria-pressed="false" data-demo="2">Clothing brand</button>
+    </div>
+    <div class="ba" id="ba" data-rise>
+      <div class="ba-layer new" id="newSite">
+        <div class="nav"><span class="lg"></span><span id="nName">Saffron &amp; Smoke</span><i>Menu</i><i>About</i><b id="nBtn">Order online</b></div>
+        <div class="hz"><div><strong id="nHead">Dinner, delivered before you get hungry again.</strong><p id="nSub">Order in three taps. Track it to your door.</p><span class="go" id="nGo">See the menu</span></div><div class="art"></div></div>
+        <div class="cards" id="nCards"><div>Lamb biryani <em>$14</em></div><div>Butter chicken <em>$12</em></div><div>Family box <em>$39</em></div></div>
+      </div>
+      <div class="ba-layer old ba-before" aria-hidden="true">
+        <div class="mq"><span id="oMq">*** WELCOME TO OUR WEBSITE!!! *** BEST FOOD IN TOWN *** CALL FOR PRICE ***</span></div>
+        <h4 id="oHead">Saffron &amp; Smoke Restaurent</h4>
+        <div class="blur"></div>
+        <div class="uc">UNDER CONSTRUCTION</div>
+        <div class="row"><span>Best viewed in Internet Explorer 6</span><span class="ctr">000127</span></div>
+      </div>
+      <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+      <label class="sr" for="baRange">Compare before and after</label>
+      <input type="range" id="baRange" min="0" max="100" value="50" step="1">
+      <div class="ba-handle" aria-hidden="true"><span>⇆</span></div>
+    </div>
+    <span class="demo-tag">Demo projects. Your real projects go here.</span>
+  </div>
+</section>
+
+<!-- ================= WIZARD (process) ================= -->
+<section class="sec" id="how" aria-labelledby="t-how" style="padding-bottom:0">
+  <div class="wz-track" id="wzTrack">
+    <div class="wrap wz-stage">
+      <div class="sec-head">
+        <p class="eyebrow">How it works</p>
+        <h2 id="t-how">Installing a faster business takes four steps.</h2>
+      </div>
+      <div class="card wz">
+        <div class="win-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="addr" style="border:0;background:none;padding-left:4px">Click &amp; Grow Setup</span></div>
+        <div class="wz-body">
+          <ol class="wz-steps" id="wzSteps">
+            <li class="on"><span class="n">1</span>Free check-up</li>
+            <li><span class="n">2</span>Agree the quote</li>
+            <li><span class="n">3</span>We build it</li>
+            <li><span class="n">4</span>Launch</li>
+          </ol>
+          <div class="wz-panes" id="wzPanes">
+            <div class="pane on"><p class="k">Step 1 of 4</p><h3>Free check-up</h3><p>Send us your website or page. We send back what's costing you customers. You don't have to hire us afterwards.</p></div>
+            <div class="pane"><p class="k">Step 2 of 4</p><h3>Agree the quote</h3><p>One clear price before we start, and it doesn't grow later. You can pay in parts.</p></div>
+            <div class="pane"><p class="k">Step 3 of 4</p><h3>We build it</h3><p>Most websites take 7 to 21 days. You can click through it while it's being built.</p></div>
+            <div class="pane"><p class="k">Step 4 of 4</p><h3>Launch</h3><p>We go live, set up Google, and stay on with free support after launch.</p></div>
+            <div class="pane"><p class="k">Setup complete</p><h3>Your business is ready.</h3><p>All that's left is the first step, and it's free.</p><div><a class="btn btn--green" href="#order" data-need="Free website check-up">Start my free check-up</a></div></div>
+          </div>
+        </div>
+        <div class="wz-foot"><span class="fake">Back</span><div class="wz-prog"><i id="wzProg"></i></div><span class="fake nx" id="wzNext">Next</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq" aria-labelledby="t-faq">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">Troubleshooting</p>
+      <h2 id="t-faq">Questions, including the awkward ones.</h2>
+    </div>
+    <div class="faq">
+      <details><summary><span class="code">ERR_01</span>Will a website really fix slow business?</summary><p>A website can't sell something nobody wants. What it does is make sure the people already looking for you can find you, trust you and buy without waiting on you. That's usually where the orders go missing.</p></details>
+      <details><summary><span class="code">ERR_02</span>You're in Bangladesh. Can you work with me in London, Dubai or New York?</summary><p>Yes. Most of our work is remote. We schedule calls in your time zone and invoice in USD, GBP, EUR or AED.</p></details>
+      <details><summary><span class="code">ERR_03</span>What's in the free website check-up?</summary><p>We look at your website or social page and send you a short list of what's costing you customers. It's free, and you don't have to hire us afterwards.</p></details>
+      <details><summary><span class="code">ERR_04</span>Can I pay in parts?</summary><p>Yes. We split the payment into parts and agree the split with you before we start.</p></details>
+      <details><summary><span class="code">ERR_05</span>Will the price go up halfway through?</summary><p>No. The quote you agree is the quote you pay. If you ask for something new later, we quote that separately and you decide.</p></details>
+      <details><summary><span class="code">ERR_06</span>I'm not a tech person. Is that a problem?</summary><p>Not at all. If you can use WhatsApp, you can run your website. We show you how.</p></details>
+      <details><summary><span class="code">ERR_07</span>How long does it take?</summary><p>Most websites take 7 to 21 days. Online shops and apps take longer. You get the timeline with your quote.</p></details>
+      <details><summary><span class="code">ERR_08</span>Do you take bKash?</summary><p>Yes, along with cards and bank transfer. Clients abroad usually pay by card or wire.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESTART FORM ================= -->
+<section class="sec restart" id="order" aria-labelledby="t-order">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">Free quote</p>
+      <h2 id="t-order">Restart your business.</h2>
+      <p>Four quick steps. You'll get a plan and a quote. No payment now.</p>
+    </div>
+    <div class="rs-grid">
+      <form class="card rs" id="rs" novalidate>
+        <div class="win-bar"><span class="d"></span><span class="d"></span><span class="d"></span><span class="addr" style="border:0;background:none;padding-left:4px">restart.exe</span></div>
+        <div class="rs-in">
+          <div class="rs-prog" aria-hidden="true"><i id="rsProg"></i></div>
+          <p class="rs-no" id="rsNo">Step 1 of 4</p>
+          <div class="err-sum" id="errSum" role="alert" tabindex="-1" hidden></div>
+
+          <fieldset class="rstep" data-step="1">
+            <legend><h3>What needs fixing?</h3></legend>
+            <p class="help">Pick as many as you like.</p>
+            <div class="opts" id="needs">
+              <label><input type="checkbox" name="need" value="Website"><span class="o">Website<small>New or redesign</small></span></label>
+              <label><input type="checkbox" name="need" value="Online shop"><span class="o">Online shop<small>Sell without DMs</small></span></label>
+              <label><input type="checkbox" name="need" value="Google & SEO"><span class="o">Google &amp; SEO<small>Get found</small></span></label>
+              <label><input type="checkbox" name="need" value="Ads"><span class="o">Ads<small>Facebook and Google</small></span></label>
+              <label><input type="checkbox" name="need" value="Logo & branding"><span class="o">Logo &amp; branding<small>Free with a website</small></span></label>
+              <label><input type="checkbox" name="need" value="Mobile app"><span class="o">Mobile app<small>iOS and Android</small></span></label>
+              <label><input type="checkbox" name="need" value="Website care"><span class="o">Website care<small>Updates and fixes</small></span></label>
+              <label><input type="checkbox" name="need" value="Free website check-up"><span class="o">Free check-up<small>Start here, it's free</small></span></label>
+              <label><input type="checkbox" name="need" value="Not sure"><span class="o">Not sure yet<small>We'll suggest</small></span></label>
+            </div>
+            <p class="err" id="e1"></p>
+          </fieldset>
+
+          <fieldset class="rstep" data-step="2" hidden>
+            <legend><h3>How soon?</h3></legend>
+            <div class="opts">
+              <label><input type="radio" name="when" value="No rush" checked><span class="o">No rush<small>In 1 to 2 months</small></span></label>
+              <label><input type="radio" name="when" value="This month"><span class="o">This month<small>Let's get going</small></span></label>
+              <label><input type="radio" name="when" value="Urgent"><span class="o">Urgent<small>Yesterday, ideally</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rstep" data-step="3" hidden>
+            <legend><h3>Rough budget?</h3></legend>
+            <p class="help">In your currency. Every budget gets an honest answer.</p>
+            <div class="opts" id="budgets">
+              <label><input type="radio" name="budget" value="b1"><span class="o" data-b="0,250">Under $250</span></label>
+              <label><input type="radio" name="budget" value="b2"><span class="o" data-b="250,1000">$250 to $1,000</span></label>
+              <label><input type="radio" name="budget" value="b3"><span class="o" data-b="1000,3000">$1,000 to $3,000</span></label>
+              <label><input type="radio" name="budget" value="b4"><span class="o" data-b="3000,">$3,000 and up</span></label>
+              <label><input type="radio" name="budget" value="Not sure" checked><span class="o">Not sure yet</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rstep" data-step="4" hidden>
+            <legend><h3>Where do we send the plan?</h3></legend>
+            <div class="two">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+              <div class="field"><label for="f-biz">Business name</label><input id="f-biz" autocomplete="organization"></div>
+            </div>
+            <div class="two">
+              <div class="field"><label for="f-wa">WhatsApp number</label><div class="phone"><span class="ccx" id="cc">+1</span><input id="f-wa" type="tel" inputmode="tel" autocomplete="tel-national" aria-describedby="e-wa"></div><p class="err" id="e-wa"></p></div>
+              <div class="field"><label for="f-mail">Email (optional)</label><input id="f-mail" type="email" autocomplete="email" aria-describedby="e-mail"><p class="err" id="e-mail"></p></div>
+            </div>
+            <input type="hidden" id="f-score" name="speed">
+          </fieldset>
+
+          <div class="done-card" id="doneCard" hidden>
+            <span class="big"><svg><use href="#tick"/></svg></span>
+            <h3 tabindex="-1" id="doneTitle">Business restarted.</h3>
+            <p style="color:var(--ink-2);max-width:28em">We'll message you on WhatsApp with a plan and a quote. This is a preview, so nothing was sent yet.</p>
+          </div>
+
+          <div class="rs-nav" id="rsNav">
+            <button class="btn back" type="button" id="backBtn" hidden>Back</button>
+            <button class="btn btn--green next" type="button" id="nextBtn">Next</button>
+          </div>
+          <p class="sr" role="status" aria-live="polite" id="live"></p>
+        </div>
+      </form>
+
+      <aside class="log" aria-label="Your request so far">
+        <h3>Restart log</h3>
+        <p><span>›</span>fix: <b id="lNeed">waiting…</b></p>
+        <p><span>›</span>speed test: <b id="lScore">not taken</b></p>
+        <p><span>›</span>timeline: <b id="lWhen">No rush</b></p>
+        <p><span>›</span>budget: <b id="lBudget">Not sure yet</b></p>
+        <p><span>›</span>reply via: <b>WhatsApp</b></p>
+        <span class="pay">Free quote. No payment now. When you say yes, you can pay in parts.</span>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec final" aria-labelledby="t-final">
+  <div class="wrap">
+    <h2 id="t-final">Still buffering?</h2>
+    <p>Call <a href="tel:+8801732508485">01732-508485</a> or send a WhatsApp. We pick up faster than your website loads.</p>
+    <div class="hero-cta">
+      <a class="btn btn--green" href="#order">Get my free quote</a>
+      <a class="btn btn--white" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="smile"><svg viewBox="0 0 28 28" aria-hidden="true"><circle class="sp" cx="14" cy="14" r="10" fill="none" stroke="#006A4E" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="24 40"/><g class="face2"><circle cx="14" cy="14" r="11" fill="#FFC72C" stroke="#1C1A17" stroke-width="2"/><circle cx="10.5" cy="12" r="1.5"/><circle cx="17.5" cy="12" r="1.5"/><path d="M9.5 16.5c2.5 3 6.5 3 9 0" fill="none" stroke="#1C1A17" stroke-width="2" stroke-linecap="round"/></g></svg>© 2026 Click &amp; Grow. A remote team in Dhaka, working with businesses everywhere.</span>
+    <nav aria-label="Footer"><a href="#speedtest">Speed test</a><a href="#services">Services</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav>
+  </div>
+</footer>
+
+<div class="mbar" aria-label="Quick actions">
+  <a class="btn btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+  <a class="btn" href="#order">Free quote</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = window.gsap;
+  const motion = !!(G && window.ScrollTrigger) && !reduce;
+  root.classList.add(motion ? 'motion' : 'no-motion');
+  if (motion) G.registerPlugin(ScrollTrigger);
+
+  /* ================= SLOTS: edit these each month ================= */
+  const SLOTS = { total: 6, taken: 4 };
+  const month = new Date().toLocaleString('en', { month: 'long' });
+  const left = Math.max(0, SLOTS.total - SLOTS.taken);
+  $('#slotsLine').textContent = left
+    ? `Free website check-up for every business. ${left} of ${SLOTS.total} project slots left for ${month}.`
+    : `Free website check-up for every business. ${month} is full, so we're booking for next month.`;
+  $('#stripText').textContent = left
+    ? `Free website check-up for every business. ${left} of ${SLOTS.total} project slots left for ${month}.`
+    : `Free website check-up for every business. ${month} is fully booked.`;
+
+  /* ================= REGION: currency and phone code ================= */
+  const REG = {
+    US: { sym: '$', rate: 1, cc: '+1' }, UK: { sym: '£', rate: .8, cc: '+44' }, EU: { sym: '€', rate: .92, cc: '+' },
+    AE: { sym: 'AED ', rate: 3.67, cc: '+971' }, BD: { sym: '৳', rate: 100, cc: '+880' }, XX: { sym: '$', rate: 1, cc: '+' }
+  };
+  let region = 'US';
+  const money = usd => {
+    const r = REG[region]; let v = usd * r.rate;
+    if (region === 'BD') v = Math.max(1000, Math.round(v / 1000) * 1000);
+    else if (v >= 50) v = Math.round(v / 10) * 10 - 1;
+    else v = Math.round(v);
+    return r.sym + v.toLocaleString(region === 'BD' ? 'en-IN' : 'en-US');
+  };
+  function applyRegion(r) {
+    region = REG[r] ? r : 'US';
+    root.dataset.region = region; $('#region').value = region;
+    $$('[data-usd]').forEach(el => el.textContent = money(+el.dataset.usd));
+    $$('[data-b]').forEach(el => {
+      const [a, b] = el.dataset.b.split(',').map(Number);
+      el.textContent = !a ? `Under ${money(b)}` : !b ? `${money(a)} and up` : `${money(a)} to ${money(b)}`;
+    });
+    $('#cc').textContent = REG[region].cc;
+    syncLog();
+    try { localStorage.setItem('cg-region', region); } catch (e) {}
+  }
+  function guessRegion() {
+    try { const s = localStorage.getItem('cg-region'); if (s) return s; } catch (e) {}
+    const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+    if (tz === 'Asia/Dhaka') return 'BD';
+    if (tz === 'Europe/London') return 'UK';
+    if (tz === 'Asia/Dubai') return 'AE';
+    if (tz.startsWith('Europe/')) return 'EU';
+    if (tz.startsWith('America/')) return 'US';
+    return 'XX';
+  }
+  $('#region').addEventListener('change', e => applyRegion(e.target.value));
+
+  /* ================= HERO ================= */
+  const hero = $('#hero'), fill = $('#fill'), pct = $('#pct'), statusEl = $('#status'), eta = $('#eta');
+  const lines = ['Waiting for customers…', 'Posting on Facebook again…', 'Boosting post… $40 gone…', 'Asking your nephew to fix the website…', 'Refreshing…', 'Still 12%.'];
+  const etas = ['2 min', '3 hours', 'forever'];
+  let li = 0, fixed = false, statusTimer = null, slipTl = null, cursorTl = null;
+
+  function setStatus(t) {
+    if (!motion) { statusEl.textContent = '› ' + t; return; }
+    G.to(statusEl, { y: -14, opacity: 0, duration: .18, ease: 'power2.in', onComplete: () => {
+      statusEl.textContent = '› ' + t; G.fromTo(statusEl, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .3, ease: 'power3.out' });
+    } });
+  }
+  function startStuck() {
+    if (!motion) return;
+    G.fromTo(fill, { scaleX: 0 }, { scaleX: .12, duration: 2.4, ease: 'power4.out' });
+    const p = { v: 0 };
+    G.to(p, { v: 12, duration: 2.4, ease: 'power4.out', onUpdate: () => pct.textContent = Math.round(p.v) + '%' });
+    slipTl = G.timeline({ repeat: -1, delay: 2.6, repeatDelay: 2.6 })
+      .to(fill, { scaleX: .11, duration: .35, ease: 'power2.out', onStart: () => pct.textContent = '11%' })
+      .to(fill, { scaleX: .12, duration: 1.4, ease: 'power1.inOut', onComplete: () => pct.textContent = '12%' });
+    statusTimer = setInterval(() => { li = (li + 1) % lines.length; setStatus(lines[li]); eta.textContent = etas[li % etas.length]; }, 2200);
+    const cur = $('#cursor'), rip = $('.ripple'), ref = $('#refresh svg');
+    cursorTl = G.timeline({ repeat: -1, repeatDelay: 3.2, delay: 1.4 })
+      .fromTo(cur, { x: 170, y: 150, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .9, ease: 'power3.inOut' })
+      .to(cur, { scale: .82, duration: .08, yoyo: true, repeat: 3, ease: 'none' })
+      .fromTo(rip, { scale: .4, opacity: .9 }, { scale: 1.6, opacity: 0, duration: .45, ease: 'power2.out' }, '<')
+      .to(ref, { rotation: 360, duration: .5, ease: 'power2.out', transformOrigin: '50% 50%' }, '<')
+      .set(ref, { rotation: 0 })
+      .to(cur, { x: 120, y: 110, opacity: 0, duration: .7, ease: 'power2.in', delay: .5 });
+  }
+  function stopStuck() {
+    clearInterval(statusTimer);
+    if (slipTl) slipTl.kill(); if (cursorTl) cursorTl.kill();
+    if (motion) G.to('#cursor', { opacity: 0, duration: .2 });
+  }
+  function fixInstant() {
+    fixed = true; stopStuck();
+    hero.classList.add('fast');
+    $('.wipe').style.clipPath = 'circle(150% at 50% 50%)';
+    fill.style.transform = 'scaleX(1)'; fill.style.background = 'var(--green-2)';
+    pct.textContent = '100%';
+    $('#viewLoad').style.visibility = 'hidden';
+    const vs = $('#viewSite'); vs.style.visibility = 'visible'; vs.style.opacity = 1;
+    $('#orders').style.opacity = 1; $('#ordN').textContent = '37';
+    $$('.toast').forEach(t => t.style.opacity = 1);
+    $('.strike').style.transform = 'scaleX(1)';
+    const ft = $('.fixed-tag'); ft.style.opacity = 1; ft.style.transform = 'rotate(-6deg) scale(1)';
+    $('.dots').style.display = 'none';
+    $('#fixBtn').textContent = 'See how we did it';
+    root.querySelector('meta[name=theme-color]').content = '#FFFBF2';
+  }
+  function fix(origin) {
+    if (fixed) return;
+    if (!motion) return fixInstant();
+    fixed = true; stopStuck();
+    const hr = hero.getBoundingClientRect();
+    let ox = hr.width * .7, oy = hr.height * .5;
+    if (origin) { const b = origin.getBoundingClientRect(); ox = b.left + b.width / 2 - hr.left; oy = b.top + b.height / 2 - hr.top; }
+    const pc = { v: parseInt(pct.textContent) || 12 }, oc = { v: 0 };
+    const tl = G.timeline({ defaults: { ease: 'power3.out' } });
+    tl.to(fill, { scaleX: 1, duration: .9, ease: 'expo.out', background: '#0E8A62' })
+      .to(pc, { v: 100, duration: .9, ease: 'expo.out', onUpdate: () => pct.textContent = Math.round(pc.v) + '%' }, '<')
+      .call(() => { $('#loadLbl').textContent = 'Customers loaded.'; statusEl.textContent = '› Connected. Customers loading fast.'; eta.textContent = '0 sec'; }, null, '<.3')
+      .to('#arc', { opacity: 0, duration: .2 }, '-=.35')
+      .to('#chk', { strokeDashoffset: 0, duration: .35, ease: 'power2.out' }, '<.1')
+      .call(() => hero.classList.add('fast'), null, '<')
+      .fromTo('.wipe', { clipPath: `circle(0% at ${ox}px ${oy}px)` }, { clipPath: `circle(150% at ${ox}px ${oy}px)`, duration: .7, ease: 'power3.inOut' }, '<')
+      .to('.strike', { scaleX: 1, duration: .35, ease: 'power2.out' }, '<.25')
+      .to('.dots', { opacity: 0, duration: .15 }, '<')
+      .fromTo('.fixed-tag', { opacity: 0, scale: .7, rotation: -14 }, { opacity: 1, scale: 1, rotation: -6, duration: .45, ease: 'back.out(2.2)' }, '>-.05')
+      .to('#viewLoad', { opacity: 0, scale: .96, duration: .3, ease: 'power2.in' }, '-=.2')
+      .set('#viewSite', { visibility: 'visible' })
+      .fromTo('#viewSite', { opacity: 0 }, { opacity: 1, duration: .25 })
+      .from('#viewSite > *', { y: 18, opacity: 0, duration: .45, stagger: .07 }, '<')
+      .from('.ms-card', { y: 14, opacity: 0, duration: .4, stagger: i => [0, .05, .12][i] }, '<.15')
+      .to('#orders', { opacity: 1, duration: .25 }, '<.1')
+      .to(oc, { v: 37, duration: 1.2, ease: 'power2.out', onUpdate: () => $('#ordN').textContent = Math.round(oc.v) }, '<')
+      .fromTo('.toast', { opacity: 0, scale: .95, y: 10 }, { opacity: 1, scale: 1, y: 0, duration: .28, ease: 'back.out(1.6)', stagger: i => [0, .11, .2, .34][i] }, '<.1')
+      .call(() => { $('#fixBtn').textContent = 'See how we did it'; root.querySelector('meta[name=theme-color]').content = '#FFFBF2'; });
+  }
+  $('#fixBtn').addEventListener('click', e => {
+    if (fixed) { $('#speedtest').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); return; }
+    fix(e.currentTarget);
+  });
+
+  /* pause hero loops off screen */
+  new IntersectionObserver(([en]) => {
+    hero.classList.toggle('paused', !en.isIntersecting);
+    if (slipTl) en.isIntersecting ? slipTl.resume() : slipTl.pause();
+    if (cursorTl) en.isIntersecting ? cursorTl.resume() : cursorTl.pause();
+  }).observe(hero);
+
+  /* ================= SPEED TEST ================= */
+  const leakText = [
+    ['People searching for what you sell are finding someone else.', 'You show up on Google.'],
+    ['A slow site loses most phone visitors before it opens.', 'Your site loads fast.'],
+    ['Every "DM for price" is a sale waiting on you to reply.', 'People can buy without waiting on you.'],
+    ['Your business lives on a social page you don\'t own.', 'You own your website.'],
+    ['An old site makes people wonder if you\'re still open.', 'Your site is up to date.']
+  ];
+  const answers = [];
+  let qi = 0, speed = null;
+  const needle = $('#needle'), gRead = $('#gRead');
+  function setGauge(v, big) {
+    const rot = -90 + v * 1.8;
+    if (motion) {
+      G.to(needle, { rotation: rot, svgOrigin: '150 160', duration: big ? 1.1 : .6, ease: big ? 'elastic.out(1,.55)' : 'back.out(1.7)' });
+      const o = { v: parseInt(gRead.textContent) || 0 };
+      G.to(o, { v, duration: big ? 1.1 : .6, ease: 'power2.out', onUpdate: () => gRead.textContent = Math.round(o.v) + '%' });
+    } else { needle.setAttribute('transform', `rotate(${rot} 150 160)`); gRead.textContent = v + '%'; }
+  }
+  function showQ(n) {
+    const qs = $$('.q'), cur = qs.find(q => !q.hidden), nxt = qs[n];
+    $$('.q-prog span').forEach((s, i) => s.classList.toggle('on', i < n));
+    $('#qNo').textContent = n < 5 ? `Question ${n + 1} of 5` : 'Your result';
+    if (motion && cur) {
+      G.to(cur, { x: -40, opacity: 0, duration: .2, ease: 'power2.in', onComplete: () => {
+        cur.hidden = true; G.set(cur, { x: 0, opacity: 1 }); nxt.hidden = false;
+        G.fromTo(nxt, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: .3, ease: 'power3.out' });
+        if (n === 5) G.from('#leaks li', { x: 16, opacity: 0, duration: .3, stagger: .07, delay: .15 });
+      } });
+    } else { if (cur) cur.hidden = true; nxt.hidden = false; }
+  }
+  $('#qStage').addEventListener('click', e => {
+    const b = e.target.closest('[data-a]'); if (!b) return;
+    answers[qi] = +b.dataset.a;
+    const run = Math.round(answers.reduce((s, a) => s + a, 0) / 5 * 100);
+    qi++;
+    if (qi < 5) { setGauge(run); showQ(qi); return; }
+    speed = run;
+    $('#score').textContent = speed + '%';
+    $('#score').style.color = speed >= 70 ? 'var(--green-2)' : speed >= 40 ? '#B7791F' : 'var(--red)';
+    const bad = answers.map((a, i) => [a, i]).filter(([a]) => a < 1).sort((x, y) => x[0] - y[0]).slice(0, 3);
+    $('#leaks').innerHTML = (bad.length ? bad.map(([, i]) => `<li>${leakText[i][0]}</li>`) : [`<li class="ok">${leakText[0][1]} ${leakText[2][1]} Nice. A check-up can still find quick wins.</li>`]).join('');
+    setGauge(speed, true); showQ(5);
+    $('#f-score').value = speed + '%'; syncLog();
+  });
+  $('#again').addEventListener('click', () => { answers.length = 0; qi = 0; setGauge(0); showQ(0); });
+  $('#repForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const inp = $('#rep'), v = inp.value.trim(), err = $('#repErr');
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || v.replace(/\D/g, '').length >= 7;
+    if (!ok) { err.textContent = 'Add a WhatsApp number or an email address so we know where to send it.'; inp.setAttribute('aria-invalid', 'true'); inp.focus(); return; }
+    inp.removeAttribute('aria-invalid'); err.textContent = '';
+    const box = $('#repForm');
+    box.innerHTML = `<p style="font-weight:700;color:var(--green)">Report on its way to ${v.replace(/[<>&"]/g, '')}. This is a preview, so nothing was sent yet.</p><a class="btn btn--green" href="#order" data-need="Free website check-up">Book the free check-up too</a>`;
+    if (/@/.test(v)) $('#f-mail').value = v; else $('#f-wa').value = v;
+  });
+
+  /* ================= ERRORS ================= */
+  let fixedN = 0;
+  $$('.dlg').forEach(d => {
+    $('.fix', d).addEventListener('click', () => {
+      if (d.classList.contains('fixed')) return;
+      d.classList.add('fixed'); fixedN++;
+      $('#fixedN').textContent = fixedN;
+      $('#fixedN').style.color = fixedN === 4 ? 'var(--green-2)' : '';
+      if (fixedN === 4) $('#errDone').classList.add('on');
+      const need = d.dataset.need; tick(need, false);
+      setTimeout(() => { const l = $('.back a', d); if (l) l.focus({ preventScroll: true }); }, 540);
+    });
+    $('.ign', d).addEventListener('click', e => {
+      const b = e.currentTarget; b.textContent = 'Nice try';
+      if (motion) G.fromTo(d, { x: 0 }, { keyframes: { x: [-7, 7, -5, 5, -2, 0] }, duration: .4, ease: 'none' });
+    });
+  });
+
+  /* ================= BEFORE / AFTER ================= */
+  const DEMOS = [
+    { name: 'Saffron & Smoke', btn: 'Order online', head: 'Dinner, delivered before you get hungry again.', sub: 'Order in three taps. Track it to your door.', go: 'See the menu', cards: [['Lamb biryani', 14], ['Butter chicken', 12], ['Family box', 39]], a: '#E8283F', b: '#FFC72C', bg: '#FFFBF2', old: 'Saffron & Smoke Restaurent', mq: '*** WELCOME TO OUR WEBSITE!!! *** BEST FOOD IN TOWN *** CALL FOR PRICE ***' },
+    { name: 'Northside Dental', btn: 'Book a visit', head: 'A dentist you can book at midnight.', sub: 'Pick a time online. Get a reminder the day before.', go: 'Book in 30 seconds', cards: [['Check-up', 59], ['Whitening', 199], ['Emergency', 89]], a: '#13A8A0', b: '#DCE6FF', bg: '#F4FBFA', old: 'NORTHSIDE DENTAL CLINIC (est. 1998)', mq: '*** NOW ACCEPTING NEW PATIENTS *** PLEASE PHONE DURING OFFICE HOURS ONLY ***' },
+    { name: 'Thread & Co.', btn: 'Shop now', head: 'New drop. Sizes S to XXL. In stock now.', sub: 'Free returns. Delivered in 2 days.', go: 'Shop the drop', cards: [['Linen shirt', 45], ['Wide trousers', 59], ['Tote bag', 24]], a: '#FF4F8B', b: '#FFC72C', bg: '#FFF6F9', old: 'Thread and Co Fashion House', mq: '*** INBOX FOR PRICE *** SIZE CHART IN COMMENTS *** COD AVAILABLE ***' }
+  ];
+  let demo = 0;
+  function renderDemo() {
+    const d = DEMOS[demo], ns = $('#newSite');
+    ns.style.setProperty('--sa', d.a); ns.style.setProperty('--sb', d.b); ns.style.setProperty('--sbg', d.bg);
+    $('#nName').textContent = d.name; $('#nBtn').textContent = d.btn; $('#nHead').textContent = d.head; $('#nSub').textContent = d.sub; $('#nGo').textContent = d.go;
+    $('#nCards').innerHTML = d.cards.map(([n, p]) => `<div>${n} <em>${money(p)}</em></div>`).join('');
+    $('#oHead').textContent = d.old; $('#oMq').textContent = d.mq;
+  }
+  $$('.chip').forEach(c => c.addEventListener('click', () => {
+    demo = +c.dataset.demo; $$('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+    renderDemo();
+    if (motion) G.fromTo('#newSite > *', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .35, stagger: .06, ease: 'power3.out' });
+  }));
+  const ba = $('#ba'), baR = $('#baRange');
+  baR.addEventListener('input', () => ba.style.setProperty('--pos', baR.value + '%'));
+  $('#region').addEventListener('change', renderDemo);
+
+  /* ================= FORM ================= */
+  const form = $('#rs'), steps = $$('.rstep'), nextBtn = $('#nextBtn'), backBtn = $('#backBtn');
+  let step = 1;
+  function tick(need, go) {
+    const i = $(`#needs input[value="${need}"]`) || (need && $('#needs input[value="Website"]'));
+    if (i) i.checked = true; syncLog();
+  }
+  function syncLog() {
+    const needs = $$('#needs input:checked').map(i => i.value);
+    $('#lNeed').textContent = needs.length ? needs.join(', ') : 'waiting…';
+    $('#lScore').textContent = speed == null ? 'not taken' : speed + '%';
+    $('#lWhen').textContent = (form.querySelector('[name=when]:checked') || {}).value || 'No rush';
+    const b = form.querySelector('[name=budget]:checked');
+    $('#lBudget').textContent = b ? b.nextElementSibling.textContent : 'Not sure yet';
+  }
+  form.addEventListener('change', syncLog);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[data-need]'); if (!a) return;
+    tick(a.dataset.need, true);
+  });
+  function showStep(n) {
+    steps.forEach(s => s.hidden = +s.dataset.step !== n);
+    step = n; backBtn.hidden = n === 1;
+    nextBtn.textContent = n === 4 ? 'Restart my business' : 'Next';
+    $('#rsNo').textContent = `Step ${n} of 4`;
+    $('#rsProg').style.transform = `scaleX(${n / 4})`;
+    $('#live').textContent = `Step ${n} of 4`;
+    const cur = steps[n - 1];
+    if (motion) G.fromTo(cur, { x: 24, opacity: 0 }, { x: 0, opacity: 1, duration: .3, ease: 'power3.out' });
+    const h = $('legend h3', cur); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+  }
+  function setErr(id, inputId, msg) { $('#' + id).textContent = msg; if (inputId) { const i = $('#' + inputId); msg ? i.setAttribute('aria-invalid', 'true') : i.removeAttribute('aria-invalid'); } }
+  function validate() {
+    const sum = $('#errSum'); const errs = [];
+    if (step === 1) {
+      const ok = $$('#needs input:checked').length > 0;
+      setErr('e1', null, ok ? '' : 'Pick at least one thing, or choose "Not sure yet".');
+      if (!ok) errs.push(['e1', 'Pick at least one thing to fix']);
+    }
+    if (step === 4) {
+      const n = $('#f-name').value.trim(), w = $('#f-wa').value.replace(/\D/g, ''), m = $('#f-mail').value.trim();
+      setErr('e-name', 'f-name', n ? '' : 'Tell us your name so we know who to ask for.');
+      if (!n) errs.push(['f-name', 'Your name is missing']);
+      const wOk = w.length >= 6 && w.length <= 15;
+      setErr('e-wa', 'f-wa', wOk ? '' : 'Add a WhatsApp number we can reach you on.');
+      if (!wOk) errs.push(['f-wa', 'WhatsApp number is missing or too short']);
+      const mOk = !m || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m);
+      setErr('e-mail', 'f-mail', mOk ? '' : 'That email doesn\'t look right. Leave it empty if you like.');
+      if (!mOk) errs.push(['f-mail', 'Email looks wrong']);
+    }
+    if (errs.length) {
+      sum.hidden = false;
+      sum.innerHTML = `Fix ${errs.length > 1 ? 'these' : 'this'} to continue: ` + errs.map(([id, t]) => `<a href="#${id}" style="color:inherit">${t}</a>`).join(', ');
+      sum.focus();
+      return false;
+    }
+    sum.hidden = true; return true;
+  }
+  nextBtn.addEventListener('click', () => {
+    if (!validate()) return;
+    if (step < 4) return showStep(step + 1);
+    nextBtn.disabled = true; backBtn.hidden = true;
+    nextBtn.innerHTML = 'Restarting…';
+    $('#rsProg').style.transform = 'scaleX(1)';
+    setTimeout(() => {
+      steps.forEach(s => s.hidden = true); $('#rsNav').hidden = true; $('#rsNo').textContent = 'Done';
+      const dc = $('#doneCard'); dc.hidden = false; $('#doneTitle').focus({ preventScroll: true });
+      $('#live').textContent = 'Business restarted. We will message you on WhatsApp.';
+      if (motion) G.from(dc.children, { y: 16, opacity: 0, duration: .4, stagger: .08, ease: 'back.out(1.6)' });
+    }, 650);
+  });
+  backBtn.addEventListener('click', () => step > 1 && showStep(step - 1));
+  form.addEventListener('submit', e => { e.preventDefault(); nextBtn.click(); });
+
+  /* ================= WIZARD ================= */
+  const wzLis = $$('#wzSteps li'), panes = $$('#wzPanes .pane');
+  function setWz(p) {
+    const i = Math.min(4, Math.floor(p * 5));
+    wzLis.forEach((l, k) => { l.classList.toggle('on', k === i); l.classList.toggle('past', k < i); });
+    panes.forEach((pa, k) => pa.classList.toggle('on', k === i));
+    $('#wzProg').style.transform = `scaleX(${Math.min(1, p * 1.25)})`;
+    $('#wzNext').textContent = i >= 3 ? 'Finish' : 'Next';
+  }
+
+  /* ================= MOTION (scroll) ================= */
+  applyRegion(guessRegion());
+  renderDemo();
+
+  if (!motion) {
+    fixInstant();
+    setWz(1);
+    panes.forEach(p => { p.style.position = 'static'; p.classList.add('on'); });
+    $$('.lbar').forEach(b => b.style.transform = 'scaleX(1)');
+    $$('.lane.c1 .lbar').forEach(b => b.style.transform = 'scaleX(.18)');
+    $('#meter').textContent = '$18,400 + "urgent fee"';
+    $('#cousinTxt').firstChild.textContent = 'Still connecting. ';
+    $('#shackle').style.transform = 'none';
+    $$('#upd li').forEach(l => { l.classList.add('done'); $('.ubar i', l).style.transform = 'scaleX(1)'; $('.upct', l).textContent = '100%'; });
+    $('.upd-foot').style.opacity = 1;
+    $$('.pk').forEach(p => p.style.display = 'none');
+    return;
+  }
+
+  /* hero entrance + logo ring */
+  G.from('.hero-copy > *', { y: 22, opacity: 0, duration: .6, ease: 'power3.out', stagger: i => [0, .06, .16, .22, .3, .34][i] || .34 });
+  G.from('.hero-win', { y: 28, opacity: 0, rotation: 1.5, duration: .7, ease: 'power3.out', delay: .12, onComplete: startStuck });
+  G.to('.logo .lg-ring', { rotation: 360, duration: 1.2, ease: 'none', repeat: -1, svgOrigin: '20 20' });
+  ScrollTrigger.create({ trigger: hero, start: 'top+=28% top', onEnter: () => fix(null) });
+
+  /* section heads rise */
+  $$('[data-rise]').forEach(el => G.to(el, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 86%', once: true } }));
+  G.from('.svc a', { y: 22, opacity: 0, duration: .5, ease: 'power3.out', stagger: i => [0, .04, .09, .12, .18, .2, .25, .28][i], scrollTrigger: { trigger: '.svc', start: 'top 82%', once: true } });
+
+  /* errors: pinned pile on desktop, simple rises on phone */
+  const mm = G.matchMedia();
+  mm.add('(min-width: 901px)', () => {
+    const dl = $$('.dlg');
+    const tl = G.timeline({ scrollTrigger: { trigger: '#errTrack', start: 'top top', end: 'bottom bottom', scrub: .6 } });
+    dl.forEach((d, i) => {
+      tl.fromTo(d, { y: 120, opacity: 0, scale: .9 }, { y: 0, opacity: 1, scale: 1, duration: 1, ease: 'power3.out' }, i * 1.2)
+        .to(d, { keyframes: { x: [-8, 8, -5, 5, 0] }, duration: .4, ease: 'none' }, i * 1.2 + .9);
+    });
+    tl.to({}, { duration: 1 });
+  });
+  mm.add('(max-width: 900px)', () => {
+    $$('.dlg').forEach(d => G.from(d, { y: 40, opacity: 0, duration: .5, ease: 'power3.out', scrollTrigger: { trigger: d, start: 'top 88%', once: true }, onComplete: () => G.fromTo(d, { x: 0 }, { keyframes: { x: [-6, 6, -4, 4, 0] }, duration: .4, ease: 'none' }) }));
+  });
+
+  /* lanes race */
+  const lanes = $$('.lane'), tracks = lanes.map(l => $('.ltrack', l));
+  const pkX = (i, p) => () => tracks[i].clientWidth * p;
+  const meter = $('#meter'), cousin = $('#cousinTxt').firstChild;
+  const race = G.timeline({ scrollTrigger: { trigger: '#laneList', start: 'top 78%', end: 'bottom 40%', scrub: .7, invalidateOnRefresh: true },
+    onUpdate() {
+      const p = race.progress();
+      cousin.textContent = p < .35 ? 'Connecting…' : p < .7 ? 'Still connecting…' : 'He has exams. ';
+      const m = Math.round(Math.min(1, p / .8) * 18400 / 100) * 100;
+      meter.textContent = p > .82 ? '$18,400 + "urgent fee"' : '$' + m.toLocaleString('en-US');
+    } });
+  const c1 = lanes[0], c2 = lanes[1], us = lanes[2];
+  race.to($('.lbar', c1), { scaleX: .07, duration: 1, ease: 'power1.out' }, 0).to($('.pk', c1), { x: pkX(0, .07), duration: 1, ease: 'power1.out' }, 0)
+      .to($('.lbar', c1), { scaleX: .12, duration: 1, ease: 'power1.out' }, 1.8).to($('.pk', c1), { x: pkX(0, .12), duration: 1, ease: 'power1.out' }, 1.8)
+      .to($('.lbar', c1), { scaleX: .18, duration: 1, ease: 'power1.out' }, 3.4).to($('.pk', c1), { x: pkX(0, .18), duration: 1, ease: 'power1.out' }, 3.4)
+      .to($('.lbar', c2), { scaleX: 1, duration: 2.4, ease: 'power2.inOut' }, .2).to($('.pk', c2), { x: pkX(1, 1), duration: 2.4, ease: 'power2.inOut' }, .2)
+      .to($('.lbar', us), { scaleX: 1, duration: 2.2, ease: 'power2.inOut' }, .1).to($('.pk', us), { x: pkX(2, 1), duration: 2.2, ease: 'power2.inOut' }, .1)
+      .to('#shackle', { y: 0, duration: .4, ease: 'back.out(3)' }, 2.4)
+      .to({}, { duration: .8 });
+
+  /* updates install */
+  const rows = $$('#upd li');
+  const ut = G.timeline({ paused: true });
+  const durs = [.7, .9, .6, .45, .8], starts = [0, .25, .7, .95, 1.15];
+  rows.forEach((r, i) => {
+    const o = { v: 0 }, pc = $('.upct', r);
+    ut.to($('.ubar i', r), { scaleX: 1, duration: durs[i], ease: 'power2.inOut' }, starts[i])
+      .to(o, { v: 100, duration: durs[i], ease: 'power2.inOut', onUpdate: () => pc.textContent = Math.round(o.v) + '%', onComplete: () => r.classList.add('done') }, starts[i])
+      .fromTo($('.ok', r), { scale: 1 }, { scale: 1.25, duration: .12, yoyo: true, repeat: 1, ease: 'power2.out' }, starts[i] + durs[i]);
+  });
+  ut.to('.upd-foot', { opacity: 1, duration: .3 }, '+=.1');
+  ScrollTrigger.create({ trigger: '#upd', start: 'top 72%', once: true, onEnter: () => ut.play() });
+
+  /* before/after: a nudge on first view so people know it moves */
+  ScrollTrigger.create({ trigger: '#ba', start: 'top 70%', once: true, onEnter: () => {
+    const o = { v: 50 };
+    G.timeline().to(o, { v: 22, duration: .7, ease: 'power3.inOut', onUpdate: () => { ba.style.setProperty('--pos', o.v + '%'); baR.value = o.v; } })
+      .to(o, { v: 50, duration: .8, ease: 'power3.inOut', onUpdate: () => { ba.style.setProperty('--pos', o.v + '%'); baR.value = o.v; } });
+  } });
+
+  /* wizard */
+  ScrollTrigger.create({ trigger: '#wzTrack', start: 'top top', end: 'bottom bottom', onUpdate: s => setWz(s.progress) });
+  setWz(0);
+})();
+</script>
+</body>
+</html>

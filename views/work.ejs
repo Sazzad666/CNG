@@ -1,0 +1,17 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main">
+  <section class="wrap pb-12 pt-16 sm:pt-24">
+    <p class="eyebrow" data-enter data-enter-step="0">Work</p>
+    <h1 class="mt-4 max-w-4xl text-5xl font-bold sm:text-7xl" data-enter data-enter-step="1">Work that moved the <em class="accent text-lime">numbers.</em></h1>
+    <p class="mt-6 max-w-2xl text-lg text-cream/75" data-enter data-enter-step="2">A selection of projects showing how we work. The projects on this page are illustrative samples while our case studies are prepared.</p>
+    <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter by service" data-enter data-enter-step="3" data-work-filter>
+      <button type="button" class="rounded-full border border-lime bg-lime px-4 py-2 text-sm font-semibold text-ink" data-filter="" aria-pressed="true">All</button>
+      <% content.services().forEach(function (s) { %><button type="button" class="rounded-full border border-cream/20 px-4 py-2 text-sm text-cream/80 hover:border-cream/50" data-filter="<%= s.key %>" aria-pressed="false"><%= s.short %></button><% }) %>
+    </div>
+  </section>
+  <section class="wrap pb-24 pt-20"><%- include('partials/harvest', { list: content.projects(), three: true }) %></section>
+  <%- include('partials/plant-cta', { heading: 'Your project could be *next.*' }) %>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>

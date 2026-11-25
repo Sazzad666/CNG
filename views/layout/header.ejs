@@ -1,0 +1,46 @@
+<header class="site-header sticky top-0 z-50 border-b border-transparent transition-colors duration-300" data-header>
+  <div class="wrap flex h-[72px] items-center justify-between gap-6">
+    <%- include('../partials/logo', { animate: true }) %>
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
+      <div class="relative" data-mega>
+        <a href="/services" class="nav-link inline-flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-medium text-cream/85 hover:text-cream" aria-haspopup="true" aria-expanded="false" data-mega-trigger>
+          Services
+          <svg class="h-3.5 w-3.5 transition-transform duration-200" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="mega invisible absolute left-1/2 top-full w-[640px] -translate-x-1/2 pt-3 opacity-0" data-mega-panel>
+          <div class="grid grid-cols-2 gap-1 rounded-2xl border border-cream/10 bg-ink-2 p-3 shadow-2xl shadow-black/40">
+            <% site.services.forEach(function (s) { %>
+              <a href="/services/<%= s.key %>" class="rounded-xl p-3 hover:bg-ink-3">
+                <span class="block font-medium text-cream"><%= s.label %></span>
+              </a>
+            <% }) %>
+            <a href="/estimate" class="flex items-center justify-between rounded-xl bg-lime/10 p-3 text-lime hover:bg-lime/15">
+              <span class="font-medium">Not sure? Estimate your project</span><span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="/work" class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-cream/85 hover:text-cream">Work</a>
+      <a href="/about" class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-cream/85 hover:text-cream">About</a>
+      <a href="/contact" class="nav-link rounded-full px-4 py-2 text-[15px] font-medium text-cream/85 hover:text-cream">Contact</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="<%= site.phoneHref %>" class="ulink hidden text-sm font-medium text-cream/85 xl:inline"><%= site.phone %></a>
+      <a href="/contact" class="btn btn-lime hidden !min-h-[44px] text-[15px] sm:inline-flex" data-open-enquiry>Start a project <span class="arrow" aria-hidden="true">→</span></a>
+      <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+        <svg class="h-5 w-5" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 14h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden border-t border-cream/10 bg-ink lg:hidden" data-menu>
+    <nav class="wrap flex flex-col py-4" aria-label="Mobile">
+      <a href="/services" class="py-3 text-lg font-medium">Services</a>
+      <% site.services.forEach(function (s) { %><a href="/services/<%= s.key %>" class="py-2 pl-4 text-cream/75"><%= s.label %></a><% }) %>
+      <a href="/work" class="py-3 text-lg font-medium">Work</a>
+      <a href="/about" class="py-3 text-lg font-medium">About</a>
+      <a href="/contact" class="py-3 text-lg font-medium">Contact</a>
+      <a href="/estimate" class="py-3 text-lg font-medium text-lime">Estimate your project</a>
+      <a href="<%= site.phoneHref %>" class="mt-2 py-3 text-cream/75"><%= site.phone %></a>
+    </nav>
+  </div>
+</header>

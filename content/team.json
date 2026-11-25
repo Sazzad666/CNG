@@ -1,0 +1,6 @@
+[
+  { "demo": true, "name": "Arif Rahman", "role": "Founder & Creative Director", "photo": "person-1" },
+  { "demo": true, "name": "Sadia Karim", "role": "Head of Strategy", "photo": "person-2" },
+  { "demo": true, "name": "Imran Hossain", "role": "Lead Developer", "photo": "person-3" },
+  { "demo": true, "name": "Maliha Ahmed", "role": "Growth Lead", "photo": "person-4" }
+]

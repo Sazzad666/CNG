@@ -1,0 +1,12 @@
+<dialog id="exit-offer" class="exit-offer m-auto w-[calc(100%-2rem)] max-w-[620px] overflow-hidden rounded-3xl border border-cream/10 bg-ink-2 p-0 text-cream backdrop:bg-ink/75 backdrop:backdrop-blur-sm" aria-labelledby="exit-offer-title">
+  <div class="relative p-6 sm:p-10">
+    <div aria-hidden="true" class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-lime/15 blur-3xl"></div>
+    <button type="button" class="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-cream/20 hover:border-cream/60" data-close-exit aria-label="No thanks, close">
+      <svg class="h-4 w-4" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <p class="eyebrow relative">Before you go</p>
+    <h2 id="exit-offer-title" class="relative mt-3 pr-10 text-3xl font-bold sm:text-4xl">Get a free website &amp; brand <em class="accent text-lime">audit.</em></h2>
+    <p class="relative mt-3 text-cream/75">We’ll review your site’s speed, design, SEO and how well it turns visitors into enquiries, and send you a short, honest report within 2 business days.</p>
+    <div class="relative mt-6"><%- include('../partials/enquiry-form', { formType: 'audit', idp: 'exit' }) %></div>
+  </div>
+</dialog>

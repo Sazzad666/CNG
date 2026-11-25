@@ -1,0 +1,52 @@
+<%- include('_top', { title: lead.name, nav: 'leads' }) %>
+<p><a class="ulink text-sm text-sage" href="/admin/leads">← All leads</a></p>
+<div class="mt-4 flex flex-wrap items-start justify-between gap-4">
+  <div class="min-w-0">
+    <h1 class="break-words text-3xl font-bold"><%= lead.name %></h1>
+    <p class="mt-2 text-sage"><span class="capitalize"><%= lead.type %></span> · received <%= lead.created_at.slice(0, 16) %> · #<%= lead.id %></p>
+  </div>
+  <%- include('_pill', { s: lead.status }) %>
+</div>
+<div class="mt-8 grid gap-6 lg:grid-cols-3">
+  <section class="rounded-2xl border border-cream/10 bg-ink-2 p-5 lg:col-span-2">
+    <dl class="grid gap-x-6 gap-y-4 sm:grid-cols-2">
+      <div><dt class="text-xs uppercase tracking-wider text-sage">Phone</dt><dd class="mt-1 text-lg tabular-nums"><a class="ulink" href="tel:<%= lead.phone %>"><%= lead.phone %></a> · <a class="ulink text-sm text-lime" href="https://wa.me/88<%= lead.phone %>" target="_blank" rel="noopener">WhatsApp</a></dd></div>
+      <div class="min-w-0"><dt class="text-xs uppercase tracking-wider text-sage">Email</dt><dd class="mt-1 break-all"><%- lead.email ? '<a class="ulink" href="mailto:' + lead.email.replace(/"/g, '') + '">' + lead.email.replace(/</g, '&lt;') + '</a>' : '—' %></dd></div>
+      <div><dt class="text-xs uppercase tracking-wider text-sage">Service</dt><dd class="mt-1"><%= serviceLabel(lead.service) %></dd></div>
+      <div><dt class="text-xs uppercase tracking-wider text-sage">Budget</dt><dd class="mt-1"><%= (site.budgets.find(function (b) { return b.key === lead.budget; }) || {}).label || '—' %></dd></div>
+      <% if (lead.website) { %><div class="min-w-0 sm:col-span-2"><dt class="text-xs uppercase tracking-wider text-sage">Website</dt><dd class="mt-1 break-all"><a class="ulink" href="<%= lead.website %>" target="_blank" rel="noopener nofollow"><%= lead.website %></a></dd></div><% } %>
+      <% if (lead.message) { %><div class="sm:col-span-2"><dt class="text-xs uppercase tracking-wider text-sage">Message</dt><dd class="mt-1 whitespace-pre-wrap break-words"><%= lead.message %></dd></div><% } %>
+      <% if (lead.answers) { %>
+      <div class="sm:col-span-2"><dt class="text-xs uppercase tracking-wider text-sage">Estimator answers</dt>
+        <dd class="mt-2 grid gap-2">
+          <% Object.entries(lead.answers).forEach(function (e) { %>
+            <div class="flex flex-wrap gap-x-3 rounded-lg bg-ink-3 px-3 py-2"><span class="text-sage"><%= e[0].replace(/_/g, ' ') %></span><span class="break-words"><%= Array.isArray(e[1]) ? e[1].join(', ') : (typeof e[1] === 'object' ? JSON.stringify(e[1]) : e[1]) %></span></div>
+          <% }) %>
+        </dd>
+      </div>
+      <% } %>
+      <div class="min-w-0 sm:col-span-2 text-sm text-sage">
+        Page: <span class="break-all"><%= lead.source_page || '—' %></span>
+        <% if (lead.utm_source || lead.utm_medium || lead.utm_campaign) { %> · Campaign: <%= [lead.utm_source, lead.utm_medium, lead.utm_campaign].filter(Boolean).join(' / ') %><% } %>
+        <% if (lead.referrer) { %> · From: <span class="break-all"><%= lead.referrer %></span><% } %>
+      </div>
+    </dl>
+  </section>
+  <section class="rounded-2xl border border-cream/10 bg-ink-2 p-5">
+    <form method="post" class="grid gap-4">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <div class="field"><label for="status">Status</label>
+        <select class="input" id="status" name="status"><% STATUSES.forEach(function (s) { %><option value="<%= s %>"<%= lead.status === s ? ' selected' : '' %>><%= s %></option><% }) %></select></div>
+      <div class="field"><label for="note">Add a note</label><textarea class="input" id="note" name="note" rows="3" maxlength="2000" placeholder="Called, sent proposal…"></textarea></div>
+      <button class="btn btn-lime">Save</button>
+    </form>
+    <h2 class="mt-8 font-sans text-sm font-semibold text-sage">History</h2>
+    <ol class="mt-3 space-y-3 text-sm">
+      <% lead.events.forEach(function (e) { %>
+        <li class="border-l-2 border-cream/10 pl-3"><p class="whitespace-pre-wrap break-words"><%= e.detail %></p><p class="mt-0.5 text-xs text-sage"><%= e.admin_name || 'System' %> · <%= e.created_at.slice(0, 16) %></p></li>
+      <% }) %>
+      <li class="border-l-2 border-cream/10 pl-3 text-xs text-sage">Lead received · <%= lead.created_at.slice(0, 16) %></li>
+    </ol>
+  </section>
+</div>
+<%- include('_bottom') %>

@@ -1,0 +1,20 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main" class="wrap grid gap-12 py-16 sm:py-24 lg:grid-cols-12">
+  <div class="lg:col-span-4">
+    <p class="eyebrow" data-enter data-enter-step="0">Project estimator</p>
+    <h1 class="mt-4 text-5xl font-bold sm:text-6xl" data-enter data-enter-step="1">Grow your <em class="s">quote.</em></h1>
+    <p class="mt-6 text-lg text-cream/75" data-enter data-enter-step="2">Five quick questions. One of our team reads your answers and emails you a custom quote within 24 hours.</p>
+    <div class="mt-6 max-w-[300px]" data-est-pot><%- include('garden/pot') %></div>
+  </div>
+  <div class="lg:col-span-8">
+    <div class="rounded-3xl border border-cream/10 bg-ink-2 p-6 sm:p-10" data-estimator-host>
+      <% if (typeof estimator !== 'undefined') { %><%- estimator %><% } else { %>
+        <%- include('partials/estimator') %>
+      <% } %>
+    </div>
+  </div>
+</main>
+<script src="/js/estimator.js" defer></script>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>
