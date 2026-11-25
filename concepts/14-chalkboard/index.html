@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Click &amp; Grow Chalkboard</title>
+<meta name="description" content="Click &amp; Grow builds websites, online shops and ads for small businesses. Your shop shuts at night. Your website keeps taking orders.">
+<meta name="theme-color" content="#1F2A24">
+<style>
+@font-face{font-family:"Cabin Sketch";font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/cabin-sketch-700-latin.woff2) format("woff2")}
+@font-face{font-family:"Cabin Sketch";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/cabin-sketch-400-latin.woff2) format("woff2")}
+@font-face{font-family:"Caveat Brush";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/caveat-brush-400-latin.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/atkinson-hyperlegible-400-latin.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/atkinson-hyperlegible-700-latin.woff2) format("woff2")}
+
+:root{
+  --slate:#1F2A24; --slate-2:#26332C; --slate-3:#2E3D35;
+  --chalk:#F4F1E8; --chalk-2:#D9D5C8; --chalk-dim:#BDB9AB;
+  --chalk-yellow:#FFD54A; --chalk-green:#93DDB2; --chalk-pink:#F7A8B8;
+  --brand-green:#006A4E; --brand-yellow:#FFC72C; --ink:#1C1A17; --paper:#FFFBF2; --paper-2:#F3EAD5;
+  --wood-1:#7A4A27; --wood-2:#9A6436; --wood-3:#5E3820;
+  --hand:"Cabin Sketch","Caveat Brush",cursive;
+  --script:"Caveat Brush","Cabin Sketch",cursive;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease-out:cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer:cubic-bezier(0.32, 0.72, 0, 1);
+  --rail:clamp(8px,1.6vw,20px);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.7 1.6'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --dust:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 -.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E");
+  --wood:repeating-linear-gradient(90deg,rgba(0,0,0,.09) 0 2px,transparent 2px 11px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 23px),linear-gradient(180deg,var(--wood-2),var(--wood-1) 55%,var(--wood-3));
+  color-scheme:dark;
+  scrollbar-color:var(--wood-2) var(--slate);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background-color:var(--slate);background-image:radial-gradient(ellipse 60% 30% at 20% 12%,rgba(255,255,255,.045),transparent 70%),radial-gradient(ellipse 50% 40% at 85% 55%,rgba(255,255,255,.035),transparent 70%),var(--dust);color:var(--chalk);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;caret-color:var(--chalk-yellow)}
+body::before,body::after{content:"";position:fixed;top:0;bottom:0;width:var(--rail);background:var(--wood);z-index:40;pointer-events:none;box-shadow:0 0 18px rgba(0,0,0,.45)}
+body::before{left:0}body::after{right:0}
+::selection{background:var(--chalk-yellow);color:var(--ink)}
+a{color:inherit;text-underline-offset:.22em;text-decoration-thickness:2px}
+:focus-visible{outline:3px dashed var(--chalk-yellow);outline-offset:4px;border-radius:6px}
+p{margin:0}
+h1,h2,h3{margin:0;font-family:var(--hand);font-weight:700;line-height:1;letter-spacing:0;text-wrap:balance}
+.chalk{-webkit-mask-image:var(--grain);mask-image:var(--grain)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1180px,100% - 2*var(--rail) - 32px);margin-inline:auto}
+
+/* ---------- top rail ---------- */
+.rail{position:sticky;top:0;z-index:50;background:var(--wood);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.rail .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 22px/1 var(--hand);color:var(--chalk);min-height:44px}
+.logo svg{width:38px;height:38px;flex:none}
+.logo b{color:var(--chalk-yellow);font-weight:700}
+.rail nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.rail nav a{display:flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;font-weight:700;color:var(--chalk);border-radius:8px;transition:background-color .15s ease}
+@media (hover:hover) and (pointer:fine){.rail nav a:hover{background:rgba(0,0,0,.18)}}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:12px;border:0;font:700 17px/1 var(--body);text-decoration:none;cursor:pointer;transition:transform .16s var(--ease-out),box-shadow .16s var(--ease-out),background-color .15s ease}
+.btn svg{width:20px;height:20px;flex:none}
+.btn:active{transform:scale(.97)}
+.btn-chalk{background:var(--chalk-yellow);color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.35)}
+@media (hover:hover) and (pointer:fine){.btn-chalk:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.4)}}
+.btn-line{background:transparent;color:var(--chalk);border:2.5px solid var(--chalk-2)}
+@media (hover:hover) and (pointer:fine){.btn-line:hover{background:rgba(255,255,255,.06)}}
+.btn-green{background:var(--brand-green);color:#fff;box-shadow:0 6px 14px rgba(28,26,23,.22)}
+@media (hover:hover) and (pointer:fine){.btn-green:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(28,26,23,.28)}}
+.btn[disabled]{opacity:.7;cursor:progress}
+.rail .btn{min-height:44px;padding:0 16px;font-size:15px}
+
+/* ---------- hero: the board itself ---------- */
+.hero{position:relative;padding:clamp(28px,5vw,64px) 0 clamp(40px,6vw,80px)}
+.hero::before{content:"";position:absolute;inset:4% 30% 40% 2%;pointer-events:none;background:radial-gradient(ellipse 46% 22% at 30% 40%,rgba(244,241,232,.07),transparent 72%),radial-gradient(ellipse 30% 14% at 62% 62%,rgba(244,241,232,.05),transparent 70%);transform:rotate(-6deg)}
+.sec:nth-of-type(odd)::after{content:"";position:absolute;right:6%;top:18%;width:min(420px,60vw);height:180px;pointer-events:none;background:radial-gradient(ellipse 50% 30% at 50% 50%,rgba(244,241,232,.045),transparent 72%);transform:rotate(8deg)}
+.order-line label{display:flex;align-items:center;gap:8px}
+.order-line label svg{width:38px;height:30px;flex:none;color:var(--chalk-yellow)}
+.ico,.tally,.plant,.underline,.order-line label svg,.circle,.pick-note svg,.frame{filter:url(#rough)}
+.hero .wrap{display:grid;gap:clamp(24px,4vw,56px)}
+.hero h1{font-size:clamp(44px,11.2vw,92px);line-height:.95}
+.hero h1 span{display:block;color:var(--chalk-yellow)}
+.underline{display:block;width:min(420px,80%);height:18px;margin:10px 0 0;overflow:visible}
+.underline path,.draw{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.lede{margin-top:18px;font-size:clamp(17px,1.6vw,20px);color:var(--chalk-2);max-width:34em}
+.lede b{color:var(--chalk);font-weight:700}
+[hidden]{display:none!important}
+.hero .wrap{grid-template-areas:"copy" "night" "form"}
+.hero-copy{grid-area:copy}.night{grid-area:night}#heroForm{grid-area:form;margin-top:0}
+.night-board{display:grid;grid-template-columns:clamp(76px,22vw,110px) minmax(0,1fr);gap:16px;align-items:end}
+.plant{width:100%;height:auto;overflow:visible}
+.night-board .frame{display:none;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tally-wrap{display:grid;gap:4px}
+.tally-wrap .label{font:400 clamp(22px,5.6vw,30px)/1 var(--script);color:var(--chalk-green)}
+.tally-wrap .label small{display:block;margin-top:4px;font-size:.62em;color:var(--chalk-2)}
+.tally{width:100%;max-width:320px;height:auto;overflow:visible}
+.tally path{fill:none;stroke:var(--chalk);stroke-width:5;stroke-linecap:round}
+.sum{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font:400 clamp(20px,5vw,26px)/1.1 var(--script);color:var(--chalk-2)}
+.sum b{font:400 clamp(34px,9vw,50px)/1 var(--script);color:var(--chalk-yellow);font-variant-numeric:tabular-nums}
+.order-line{display:grid;gap:10px;max-width:520px}
+.order-line label{font:400 24px/1 var(--script);color:var(--chalk)}
+.order-line .row{display:flex;gap:10px;flex-wrap:wrap}
+.chalk-input{flex:1 1 200px;min-height:52px;padding:0 4px;background:transparent;border:0;border-bottom:3px solid var(--chalk-2);color:var(--chalk);font:400 26px/1.2 var(--script);outline-offset:6px}
+.chalk-input::placeholder{color:var(--chalk-dim);opacity:1}
+.chalk-input:focus{border-bottom-color:var(--chalk-yellow)}
+.order-line .row .btn{flex:1 0 auto}
+.alt{font-size:16px;color:var(--chalk-2)}
+.alt a{color:var(--chalk-green);font-weight:700}
+@media (min-width:900px){
+  .hero .wrap{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);grid-template-areas:"copy night" "form night";align-items:start;row-gap:28px}
+  .night{align-self:center}
+  .night-board{position:relative;grid-template-columns:140px minmax(0,1fr);gap:28px;padding:32px}
+  .night-board .frame{display:block}
+}
+
+/* ---------- sections share one rhythm ---------- */
+.sec{padding:clamp(56px,8vw,104px) 0;position:relative}
+.sec::before{content:"";position:absolute;left:50%;top:0;width:min(1180px,100% - 2*var(--rail) - 32px);height:14px;transform:translateX(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 14' preserveAspectRatio='none'%3E%3Cpath d='M2 9C40 3 80 12 130 6S220 12 270 5S350 11 398 6' fill='none' stroke='%23D9D5C8' stroke-width='3' stroke-linecap='round' opacity='.45'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.head{display:grid;gap:12px;margin-bottom:clamp(28px,4vw,44px);max-width:760px}
+.head h2{font-size:clamp(38px,7vw,68px)}
+.head p{color:var(--chalk-2);font-size:clamp(17px,1.5vw,19px);max-width:40em}
+
+/* ---------- specials board ---------- */
+.cur{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 22px}
+.cur span{font:400 22px/1 var(--script);color:var(--chalk-green);margin-right:4px}
+.cur button{min-height:44px;padding:0 14px;border-radius:999px;border:2px solid rgba(244,241,232,.4);background:transparent;color:var(--chalk);font:700 15px/1 var(--body);cursor:pointer;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.cur button[aria-pressed="true"]{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+@media (hover:hover) and (pointer:fine){.cur button:not([aria-pressed="true"]):hover{border-color:var(--chalk)}}
+.menu{list-style:none;margin:0;padding:0;display:grid;gap:0 56px}
+.menu li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding:16px 0;border-bottom:2px dashed rgba(244,241,232,.22)}
+.menu h3{font:400 clamp(28px,6.4vw,36px)/1.05 var(--script);color:var(--chalk);display:flex;align-items:baseline;gap:10px}
+.menu h3::after{content:"";flex:1;border-bottom:3px dotted rgba(244,241,232,.35);transform:translateY(-6px);min-width:20px}
+.menu .price{font:400 clamp(26px,6vw,34px)/1.05 var(--script);color:var(--chalk-yellow);white-space:nowrap;font-variant-numeric:tabular-nums}
+.menu .price small{font-size:.62em;color:var(--chalk-2)}
+.menu p{grid-column:1/-1;color:var(--chalk-2);font-size:16px}
+.note{margin-top:18px;font-size:14px;color:var(--chalk-dim)}
+.freebies{margin-top:30px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 26px}
+.freebies h3{font:400 clamp(28px,6.4vw,36px)/1 var(--script);color:var(--chalk-yellow)}
+.freebies ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 22px}
+.freebies li{display:inline-flex;align-items:center;gap:8px;font:400 24px/1.1 var(--script);color:var(--chalk)}
+.freebies svg{width:22px;height:22px;color:var(--chalk-green)}
+@media (min-width:900px){.menu{grid-template-columns:1fr 1fr}}
+
+/* ---------- set menus ---------- */
+.sets{display:grid;gap:0}
+.set{position:relative;display:grid;gap:12px;align-content:start;padding:26px 0}
+.set + .set{border-top:2px dashed rgba(244,241,232,.22)}
+.set h3{font-size:clamp(40px,9vw,56px)}
+.set h3 small{display:block;margin-top:6px;font:400 22px/1 var(--script);color:var(--chalk-green)}
+.set .amt{font:400 clamp(40px,9vw,52px)/1 var(--script);color:var(--chalk-yellow);font-variant-numeric:tabular-nums}
+.set ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.set li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;align-items:start;color:var(--chalk-2)}
+.set li svg{width:22px;height:22px;margin-top:2px}
+.set .btn{justify-self:start;margin-top:6px}
+.set.fav .ring{position:absolute;pointer-events:none;overflow:visible}
+.circled{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.circ{position:relative;padding:4px 10px}
+.circ .circle{position:absolute;left:-6px;top:-8px;width:calc(100% + 12px);height:calc(100% + 16px);pointer-events:none;overflow:visible}
+.pick-note{display:inline-flex;align-items:center;gap:6px;font:400 22px/1 var(--script);color:var(--chalk-pink)}
+.pick-note svg{width:40px;height:22px}
+@media (min-width:900px){
+  .sets{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .set{padding:6px 32px 10px}
+  .set + .set{border-top:0;border-left:2px dashed rgba(244,241,232,.22)}
+  .set:first-child{padding-left:0}
+}
+.sets-foot{margin-top:26px;color:var(--chalk-2)}
+.sets-foot a{color:var(--chalk-yellow);font-weight:700}
+
+/* ---------- how it usually goes ---------- */
+.versus{display:grid;gap:36px}
+.versus h3{font:400 clamp(30px,6.6vw,40px)/1 var(--script);margin-bottom:14px}
+.versus .them h3{color:var(--chalk-pink)}
+.versus .us h3{color:var(--chalk-green)}
+.versus ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.them li{position:relative;font:400 clamp(22px,5.4vw,28px)/1.2 var(--script);color:var(--chalk-dim)}
+.them li em{display:block;font:400 16px/1.4 var(--body);font-style:normal;color:var(--chalk-2);margin-top:4px}
+.them li s{text-decoration:line-through;text-decoration-color:var(--chalk-pink);text-decoration-thickness:3px;color:var(--chalk-2)}
+.us li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start}
+.us li svg{width:26px;height:26px;margin-top:2px}
+.us li b{display:block;font:400 clamp(24px,5.6vw,30px)/1.1 var(--script);color:var(--chalk)}
+.us li span{color:var(--chalk-2)}
+@media (min-width:900px){.versus{grid-template-columns:1fr 1fr;gap:64px}}
+
+/* ---------- steps ---------- */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:26px;position:relative}
+.steps li{display:grid;grid-template-columns:58px minmax(0,1fr);gap:16px;align-items:start}
+.steps svg.ico{width:58px;height:58px}
+.steps b{display:block;font:400 clamp(28px,6vw,34px)/1.05 var(--script);color:var(--chalk);margin-bottom:4px}
+.steps span{color:var(--chalk-2)}
+.steps-wrap{position:relative}
+.steps-wrap .arrow{display:none}
+@media (min-width:900px){
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+  .steps li{grid-template-columns:auto;gap:12px}
+  .steps-wrap .arrow{display:block;position:absolute;top:12px;left:72px;right:24px;width:calc(100% - 96px);height:40px;pointer-events:none}
+}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid;max-width:860px}
+.faq details{border-bottom:2px dashed rgba(244,241,232,.22)}
+.faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:16px;align-items:center;padding:18px 0;min-height:56px;font:400 clamp(24px,5.4vw,30px)/1.15 var(--script);color:var(--chalk)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary svg{width:26px;height:26px;transition:transform .25s var(--ease-out)}
+.faq details[open] summary svg{transform:rotate(45deg)}
+.faq details p{padding:0 40px 20px 0;color:var(--chalk-2)}
+:root{interpolate-size:allow-keywords}
+.faq details::details-content{block-size:0;overflow:hidden;transition:block-size .3s var(--ease-out),content-visibility .3s allow-discrete}
+.faq details[open]::details-content{block-size:auto}
+
+/* ---------- order slip: the one paper thing pinned to the board ---------- */
+.slip-wrap{display:grid;gap:32px;align-items:start}
+.slip{position:relative;background:var(--paper);color:var(--ink);border-radius:6px;padding:34px clamp(22px,4vw,36px) 30px;box-shadow:0 18px 40px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);transform:rotate(-.6deg);caret-color:var(--brand-green)}
+.slip::before{content:"";position:absolute;top:-14px;left:50%;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF7A8E,#C8102E 70%);box-shadow:0 4px 6px rgba(0,0,0,.35)}
+.slip ::selection{background:var(--brand-yellow);color:var(--ink)}
+.slip :focus-visible{outline:3px solid var(--brand-green);outline-offset:3px}
+.slip h3{font:700 30px/1.05 var(--hand);color:var(--ink);margin-bottom:6px}
+.slip > form > p.sub{color:#55504A;margin-bottom:18px}
+.f{display:grid;gap:6px;margin-bottom:16px}
+.f label,.f legend{font-weight:700;font-size:15px;color:var(--ink);padding:0}
+.f input[type=text],.f input[type=email],.f input:not([type]){min-height:50px;padding:0 14px;border:2px solid #CFC5AE;border-radius:10px;background:#fff;color:var(--ink);font:400 17px/1.2 var(--body)}
+.f input::placeholder{color:#7A7366}
+.f input:focus{border-color:var(--brand-green);outline:none;box-shadow:0 0 0 3px rgba(0,106,78,.2)}
+.f input[aria-invalid="true"]{border-color:#B3261E}
+fieldset.f{border:0;margin:0 0 16px;padding:0;min-width:0}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.picks label{position:relative;cursor:pointer}
+.picks input{position:absolute;opacity:0;pointer-events:none}
+.picks span{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:2px solid #CFC5AE;border-radius:999px;background:#fff;font-weight:700;font-size:15px;transition:background-color .15s ease,border-color .15s ease}
+.picks input:checked + span{background:var(--brand-yellow);border-color:var(--ink)}
+.picks input:focus-visible + span{outline:3px solid var(--brand-green);outline-offset:2px}
+.two{display:grid;gap:0 14px}
+@media (min-width:640px){.two{grid-template-columns:1fr 1fr}}
+.err{color:#B3261E;font-size:14px;font-weight:700}
+.err:empty{display:none}
+.send{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:6px}
+.send small{color:#55504A;font-size:14px}
+.done{text-align:center;display:grid;gap:12px;justify-items:center;padding:18px 0}
+.done .stamp{font:700 26px/1 var(--hand);color:var(--brand-green);border:3px solid var(--brand-green);border-radius:10px;padding:10px 16px;transform:rotate(-5deg)}
+.done p{color:#55504A}
+.aside{display:grid;gap:18px;align-content:start}
+.aside p{color:var(--chalk-2)}
+.aside .big{font:400 clamp(28px,6vw,36px)/1.15 var(--script);color:var(--chalk)}
+.promise{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.promise li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:10px;color:var(--chalk-2)}
+.promise svg{width:22px;height:22px;margin-top:3px}
+@media (min-width:900px){.slip-wrap{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:56px}}
+
+/* ---------- chalk tray footer ---------- */
+.tray{margin-top:24px;background:var(--wood);box-shadow:0 -8px 20px rgba(0,0,0,.35);padding:22px 0 calc(110px + env(safe-area-inset-bottom,0px))}
+.tray .wrap{display:grid;gap:18px}
+.tray-items{height:34px}
+.tray-items svg{height:34px;width:auto}
+.tray .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:center}
+.tray nav{display:flex;flex-wrap:wrap;gap:0 18px}
+.tray nav a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;font-weight:700}
+@media (hover:hover) and (pointer:fine){.tray nav a:hover{text-decoration:underline}}
+.tray .fine{font-size:14px;color:#F1E3CF}
+@media (min-width:861px){.tray{padding-bottom:28px}}
+
+/* ---------- phone bar: appears once the board's own quote line scrolls away ---------- */
+.pbar{display:none}
+@media (max-width:860px){
+  .rail nav{display:none}
+  .pbar{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px calc(var(--rail) + 8px) calc(10px + env(safe-area-inset-bottom,0px));background:var(--wood);box-shadow:0 -8px 20px rgba(0,0,0,.35);transform:translateY(calc(100% + 16px));transition:transform .4s var(--ease-drawer)}
+  .pbar.show{transform:translateY(0)}
+  .pbar .btn{flex:1;min-height:48px;padding:0 12px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .btn,.faq summary svg,.cur button{transition:none}
+  .faq details::details-content{transition:none}
+  .pbar{transition:opacity .2s ease;opacity:0}.pbar.show{opacity:1}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 24 24"><path d="M3 13c3 1 5 4 6 6 3-7 7-11 12-14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4c.3 5 .2 11-.2 16M4 12.3c5-.4 11-.3 16 .1" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-logo" viewBox="0 0 40 40"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><path d="M15 9l7 18 3-7 7-3z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/><path d="M11 31c0-5 3-8 8-9-1 5-4 8-8 9z" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="rail">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Click and Grow, back to top"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>Click <b>&amp;</b> Grow</span></a>
+    <nav aria-label="Main"><ul><li><a href="#menu">Menu</a></li><li><a href="#sets">Set menus</a></li><li><a href="#how">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <a class="btn btn-chalk" href="#order">Free quote</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= HERO: the board outside the shut shop ================= -->
+  <section class="hero" aria-labelledby="t-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1 id="t-hero" class="chalk">Shop’s shut. <span>Website’s open.</span></h1>
+        <svg class="underline" viewBox="0 0 420 18" aria-hidden="true"><path class="draw" pathLength="1" d="M4 12C90 4 180 15 270 8S380 6 416 10" stroke="#FFD54A" stroke-width="5"/></svg>
+        <p class="lede">People still shop at 2 AM, on their phones. A Click &amp; Grow website takes their orders while you sleep, so <b>every click grows your shop a little</b>.</p>
+      </div>
+        <div class="night">
+          <div class="night-board">
+            <svg class="frame" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M22 18C120 10 280 14 382 20C390 90 386 180 380 242C270 250 130 246 18 240C12 170 14 80 22 18" fill="none" stroke="#D9D5C8" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity=".55"/></svg>
+            <svg class="plant" viewBox="0 0 150 220" role="img" aria-label="A chalk plant in a pot marked C&amp;G that grows a leaf as orders come in">
+              <g class="stem-g"><path class="draw stem" pathLength="1" d="M75 160C66 130 86 112 74 86S80 44 76 18" stroke="#93DDB2" stroke-width="5"/></g>
+              <g class="leaves"></g>
+              <g class="flower" opacity="0"><g fill="none" stroke="#F7A8B8" stroke-width="4"><circle cx="76" cy="6" r="9"/><circle cx="90" cy="16" r="9"/><circle cx="62" cy="16" r="9"/></g><circle cx="76" cy="16" r="5" fill="#FFD54A"/></g>
+              <path class="draw pot" pathLength="1" d="M38 160h76l-10 56H48zM32 152h88v12H32z" stroke="#F4F1E8" stroke-width="4"/>
+              <text x="76" y="196" text-anchor="middle" font-family="Caveat Brush, cursive" font-size="22" fill="#F4F1E8">C&amp;G</text>
+            </svg>
+            <div class="tally-wrap">
+              <p class="label">Tonight’s orders <small>an example night</small></p>
+              <svg class="tally" viewBox="0 0 320 96" aria-hidden="true"></svg>
+              <p class="sum"><b id="sumAmt">৳0</b><span id="sumTime">since closing</span></p>
+              <p class="sr" id="sumSr">14 orders overnight, about ৳31,190 in sales, in this example.</p>
+            </div>
+          </div>
+        </div>
+      <form class="order-line" id="heroForm" novalidate>
+        <label for="heroShop"><svg viewBox="0 0 38 30" aria-hidden="true"><path d="M4 4C8 16 18 22 32 22M24 14l9 8-9 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Write your shop’s name on the board</label>
+        <div class="row">
+          <input class="chalk-input" id="heroShop" name="shop" autocomplete="organization" placeholder="Rahman Traders" maxlength="40">
+          <button class="btn btn-chalk" type="submit">Get my free quote <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+        <p class="alt">Already have a site? <a href="#order" data-checkup>Get a free check-up</a> or <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp us</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= SPECIALS ================= -->
+  <section class="sec" id="menu" aria-labelledby="t-menu">
+    <div class="wrap">
+      <div class="head"><h2 id="t-menu" class="chalk">Today on the board</h2><p>Everything a small shop needs online, priced like a menu. The price is fixed before we start, so nothing gets added on later.</p></div>
+      <div class="cur" role="group" aria-label="Show prices in"><span>Prices in</span>
+        <button type="button" data-cur="bdt" aria-pressed="true">৳ Taka</button><button type="button" data-cur="gbp" aria-pressed="false">£ Pounds</button><button type="button" data-cur="aed" aria-pressed="false">AED Dirhams</button><button type="button" data-cur="usd" aria-pressed="false">$ Dollars</button>
+      </div>
+      <ul class="menu">
+        <li><h3>Business website</h3><span class="price">from <span data-p="web">৳25,000</span></span><p>Look as good online as you do behind the counter.</p></li>
+        <li><h3>Online shop</h3><span class="price">from <span data-p="shop">৳45,000</span></span><p>Card and mobile payments. Customers pay, you sleep.</p></li>
+        <li><h3>Social page to website</h3><span class="price">from <span data-p="social">৳18,000</span></span><p>Stop answering “how much?” two hundred times a day.</p></li>
+        <li><h3>Mobile app</h3><span class="price">from <span data-p="app">৳1,20,000</span></span><p>Your shop, on their home screen.</p></li>
+        <li><h3>Google and SEO</h3><span class="price"><span data-p="seo">৳12,000</span> <small>a month</small></span><p>Get found when people search, not only when you post.</p></li>
+        <li><h3>Facebook and Google ads</h3><span class="price"><span data-p="ads">৳10,000</span> <small>a month</small></span><p>Ads that bring orders, not just likes from your aunts.</p></li>
+        <li><h3>Logo and branding</h3><span class="price">from <span data-p="logo">৳8,000</span></span><p>A logo people remember. Not one made in Paint at 2 AM.</p></li>
+        <li><h3>Website care</h3><span class="price"><span data-p="care">৳3,000</span> <small>a month</small></span><p>Updates, backups and fixes, so you never think about them.</p></li>
+      </ul>
+      <div class="freebies">
+        <h3>Free with every website</h3>
+        <ul><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Your logo</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Google and SEO set-up</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Support after launch</li><li><svg aria-hidden="true"><use href="#i-tick"/></svg>Pay in parts</li></ul>
+      </div>
+      <p class="note">Sample prices for this concept. Every real quote is fixed before we start.</p>
+    </div>
+  </section>
+
+  <!-- ================= SET MENUS ================= -->
+  <section class="sec" id="sets" aria-labelledby="t-sets">
+    <div class="wrap">
+      <div class="head"><h2 id="t-sets" class="chalk">Set menus</h2><p>Three combos, named after what we order for lunch. Each one comes with a phone-first design, hosting set up and a WhatsApp button that works.</p></div>
+      <div class="sets">
+        <article class="set">
+          <h3 class="chalk">Singara <small>the starter</small></h3>
+          <p class="amt" data-p="singara">৳18,000</p>
+          <ul><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>A one-page website</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>WhatsApp and call buttons</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Your shop on Google Maps</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Live in about 7 days*</li></ul>
+          <a class="btn btn-line" href="#order" data-set="0">Order the Singara</a>
+        </article>
+        <article class="set fav">
+          <h3 class="chalk">Biryani <small>the main</small></h3>
+          <p class="amt circled"><span class="circ"><span data-p="biryani">৳35,000</span><svg class="circle" viewBox="0 0 220 80" preserveAspectRatio="none" aria-hidden="true"><path d="M30 14C80 2 170 4 205 22S200 72 120 76 6 66 10 40 60 10 112 8" fill="none" stroke="#F7A8B8" stroke-width="4" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span><span class="pick-note"><svg viewBox="0 0 46 24" aria-hidden="true"><path d="M44 18C34 6 20 4 6 10M14 3L6 10l8 6" fill="none" stroke="#F7A8B8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>the one we’d pick</span></p>
+          <ul><li><svg style="color:#FFD54A" aria-hidden="true"><use href="#i-tick"/></svg>Up to 6 pages</li><li><svg style="color:#FFD54A" aria-hidden="true"><use href="#i-tick"/></svg>Google set-up and basic SEO</li><li><svg style="color:#FFD54A" aria-hidden="true"><use href="#i-tick"/></svg>Analytics and ad pixels</li><li><svg style="color:#FFD54A" aria-hidden="true"><use href="#i-tick"/></svg>Free support after launch</li><li><svg style="color:#FFD54A" aria-hidden="true"><use href="#i-tick"/></svg>Live in about 14 days*</li></ul>
+          <a class="btn btn-chalk" href="#order" data-set="1">Order the Biryani</a>
+        </article>
+        <article class="set">
+          <h3 class="chalk">Kacchi <small>the feast</small></h3>
+          <p class="amt" data-p="kacchi">৳65,000</p>
+          <ul><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Online shop, up to 50 products</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Card and mobile payments</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Order dashboard and alerts</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>SEO and your first ad campaign</li><li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>Live in about 21 days*</li></ul>
+          <a class="btn btn-line" href="#order" data-set="2">Order the Kacchi</a>
+        </article>
+      </div>
+      <p class="sets-foot">Not hungry for a set? <a href="#order">Ask for a custom quote</a> or a free website check-up. We take a few new projects each month, so every shop gets the whole team.</p>
+      <p class="note">* Sample timelines and prices for this concept, confirmed in your quote.</p>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT USUALLY GOES ================= -->
+  <section class="sec" id="usual" aria-labelledby="t-usual">
+    <div class="wrap">
+      <div class="head"><h2 id="t-usual" class="chalk">You’ve heard these before</h2><p>Most shop owners come to us after one of these. We rubbed them off our board.</p></div>
+      <div class="versus">
+        <div class="them">
+          <h3>Elsewhere</h3>
+          <ul>
+            <li><s>“Website in one day, only <span data-p="cheap">৳4,999</span>.”</s><em>Hosting extra. Domain extra. Every change extra.</em></li>
+            <li><s>“My cousin will build it this weekend.”</s><em>That weekend was in 2017.</em></li>
+            <li><s>“For price, please inbox.”</s><em>Your customers didn’t. They left.</em></li>
+            <li><s>“We reply within 3 to 5 business days.”</s><em>Your customer bought elsewhere on day one.</em></li>
+          </ul>
+        </div>
+        <div class="us">
+          <h3>On our board</h3>
+          <ul>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg><div><b>A fixed price before we start</b><span>You agree it once. It doesn’t grow, your shop does.</span></div></li>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg><div><b>Real people on WhatsApp</b><span>Not a bot, and never “sir is in a meeting”.</span></div></li>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg><div><b>Built for phones first</b><span>Because that’s where your customers are at 2 AM.</span></div></li>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg><div><b>Free support after launch</b><span>Something looks off once you’re live? We fix it.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="sec" id="how" aria-labelledby="t-how">
+    <div class="wrap">
+      <div class="head"><h2 id="t-how" class="chalk">From hello to launch day</h2><p>Four stops, and you always know which one we’re at.</p></div>
+      <div class="steps-wrap">
+        <svg class="arrow" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path d="M4 22C200 6 400 34 600 18S850 10 990 20M970 8l22 12-22 12" fill="none" stroke="#D9D5C8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 12" opacity=".5"/></svg>
+        <ol class="steps">
+        <li><svg class="ico" viewBox="0 0 58 58" aria-hidden="true"><path d="M12 22h28v14a10 10 0 0 1-10 10h-8a10 10 0 0 1-10-10zM40 26h4a6 6 0 0 1 0 12h-4M20 10c-3 4 3 6 0 10M30 10c-3 4 3 6 0 10" fill="none" stroke="#FFD54A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Tea and a chat</b><span>A free call. Tell us what you sell and who buys it.</span></div></li>
+        <li><svg class="ico" viewBox="0 0 58 58" aria-hidden="true"><path d="M6 29s9-15 23-15 23 15 23 15-9 15-23 15S6 29 6 29z" fill="none" stroke="#FFD54A" stroke-width="3" stroke-linejoin="round"/><circle cx="29" cy="29" r="7" fill="none" stroke="#FFD54A" stroke-width="3"/></svg><div><b>See it first</b><span>Click through your design and change what you like before we build.</span></div></li>
+        <li><svg class="ico" viewBox="0 0 58 58" aria-hidden="true"><path d="M18 18L8 29l10 11M40 18l10 11-10 11M33 12l-8 34" fill="none" stroke="#FFD54A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Build and test</b><span>Tested on real phones, slow internet included.</span></div></li>
+        <li><svg class="ico" viewBox="0 0 58 58" aria-hidden="true"><path d="M29 50V24M29 30c-8-1-13-7-13-15 8 1 13 7 13 15zM29 34c7-1 12-6 12-13-7 1-12 6-12 13z" fill="none" stroke="#93DDB2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 50h22" stroke="#FFD54A" stroke-width="3" stroke-linecap="round"/></svg><div><b>Launch and grow</b><span>You go live. Then ads and Google bring the crowd.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="sec" id="faq" aria-labelledby="t-faq">
+    <div class="wrap">
+      <div class="head"><h2 id="t-faq" class="chalk">Questions people ask</h2><p>And a few they’re too polite to.</p></div>
+      <div class="faq">
+        <details><summary>Can you make it like Amazon, for the price of lunch, by tomorrow?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>We love the energy. Not the timeline. Let’s start with what you need, then pick the set that fits.</p></details>
+        <details><summary>Why only a few projects a month?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>A small batch gets the whole team. When the month is full, the next batch starts the month after.</p></details>
+        <details><summary>I’m in London and you’re in Dhaka. Does that work?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Calls in your working hours, updates on WhatsApp or email, invoices in your currency. Most clients only notice the price.</p></details>
+        <details><summary>How do I pay?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>Card, bank transfer or PayPal, and bKash or Nagad in Bangladesh. You can pay in parts.</p></details>
+        <details><summary>What if I don’t like the design?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p>You see it before we build anything, and we change it until you’re happy to show your family.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ORDER SLIP ================= -->
+  <section class="sec" id="order" aria-labelledby="t-order">
+    <div class="wrap">
+      <div class="head"><h2 id="t-order" class="chalk">Pin your order to the board</h2><p>One short form. A fixed price and a plan on WhatsApp or email, usually within one working day*. No payment now.</p></div>
+      <div class="slip-wrap">
+        <div class="slip">
+          <form id="quote" novalidate>
+            <div id="formBody">
+              <h3>Order slip</h3>
+              <p class="sub">Takes about a minute.</p>
+              <div class="two">
+                <div class="f"><label for="f-biz">Shop or business name</label><input id="f-biz" autocomplete="organization" maxlength="40" aria-describedby="e-biz"><p class="err" id="e-biz"></p></div>
+                <div class="f"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+              </div>
+              <fieldset class="f"><legend>What do you need?</legend>
+                <div class="picks" id="needs">
+                  <label><input type="checkbox" name="need" value="Website"><span>Website</span></label>
+                  <label><input type="checkbox" name="need" value="Online shop"><span>Online shop</span></label>
+                  <label><input type="checkbox" name="need" value="Ads and Google"><span>Ads and Google</span></label>
+                  <label><input type="checkbox" name="need" value="Mobile app"><span>Mobile app</span></label>
+                  <label><input type="checkbox" name="need" value="Free website check-up" id="needCheck"><span>Free website check-up</span></label>
+                  <label><input type="checkbox" name="need" value="Not sure"><span>Not sure yet</span></label>
+                </div><p class="err" id="e-need"></p></fieldset>
+              <fieldset class="f"><legend>Which set sounds right?</legend>
+                <div class="picks" id="setPick">
+                  <label><input type="radio" name="set" value="Singara"><span>Singara</span></label>
+                  <label><input type="radio" name="set" value="Biryani" checked><span>Biryani</span></label>
+                  <label><input type="radio" name="set" value="Kacchi"><span>Kacchi</span></label>
+                  <label><input type="radio" name="set" value="Custom"><span>Something custom</span></label>
+                </div></fieldset>
+              <div class="f"><label for="f-contact">WhatsApp number or email</label><input id="f-contact" autocomplete="email" inputmode="email" placeholder="+880 1XXX XXXXXX or you@shop.com" aria-describedby="e-contact"><p class="err" id="e-contact"></p></div>
+              <div class="send"><button class="btn btn-green" type="submit" id="send">Pin my order <svg aria-hidden="true"><use href="#i-arrow"/></svg></button><small>No payment now. * Reply time is a sample for this concept.</small></div>
+            </div>
+            <div class="done" id="done" hidden><span class="stamp">PINNED</span><h3 id="doneTitle">Your order is on our board.</h3><p>This is a design preview, so nothing was sent yet.</p></div>
+            <p class="sr" role="status" aria-live="polite" id="live"></p>
+          </form>
+        </div>
+        <aside class="aside" aria-label="What happens next">
+          <p class="big">Rather talk it through?</p>
+          <a class="btn btn-line" href="https://wa.me/" target="_blank" rel="noopener"><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-wa"/></svg>Message us on WhatsApp</a>
+          <ul class="promise">
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>A fixed price before any work</li>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>A free website check-up if you already have a site</li>
+            <li><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-tick"/></svg>No payment until you say yes</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="tray">
+  <div class="wrap">
+    <div class="tray-items" aria-hidden="true"><svg viewBox="0 0 260 34"><rect x="4" y="18" width="70" height="12" rx="6" fill="#F4F1E8"/><rect x="84" y="20" width="44" height="10" rx="5" fill="#FFD54A"/><rect x="136" y="19" width="56" height="11" rx="5.5" fill="#93DDB2"/><rect x="202" y="8" width="54" height="22" rx="4" fill="#3B2A1E"/><rect x="202" y="8" width="54" height="9" rx="3" fill="#C9C1AE"/></svg></div>
+    <div class="row">
+      <a class="logo" href="#top" aria-label="Click and Grow, back to top"><svg aria-hidden="true"><use href="#i-logo"/></svg><span>Click <b>&amp;</b> Grow</span></a>
+      <nav aria-label="Footer"><a href="#menu">Menu</a><a href="#sets">Set menus</a><a href="#how">How it works</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav>
+    </div>
+    <p class="fine">Websites, online shops and ads for small businesses in Dhaka, London, Dubai, New York and anywhere with Wi-Fi. Sample prices for this concept. © 2026 Click &amp; Grow.</p>
+  </div>
+</footer>
+
+<div class="pbar" aria-label="Quick actions"><a class="btn btn-line" href="https://wa.me/" target="_blank" rel="noopener"><svg style="color:#93DDB2" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a><a class="btn btn-chalk" href="#order">Free quote</a></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+
+  /* ---------- currency: prices follow the visitor's choice, guessed from their time zone ---------- */
+  const CUR = { bdt: { i: 0, f: n => '৳' + n.toLocaleString('en-IN') }, gbp: { i: 1, f: n => '£' + n.toLocaleString('en-GB') }, aed: { i: 2, f: n => 'AED ' + n.toLocaleString('en-US') }, usd: { i: 3, f: n => '$' + n.toLocaleString('en-US') } };
+  const PRICES = { web: ['৳25,000', '£199', 'AED 899', '$249'], shop: ['৳45,000', '£359', 'AED 1,649', '$449'], social: ['৳18,000', '£149', 'AED 659', '$179'], app: ['৳1,20,000', '£949', 'AED 4,399', '$1,190'], seo: ['৳12,000', '£95', 'AED 439', '$119'], ads: ['৳10,000', '£79', 'AED 369', '$99'], logo: ['৳8,000', '£65', 'AED 289', '$79'], care: ['৳3,000', '£25', 'AED 109', '$29'], singara: ['৳18,000', '£149', 'AED 659', '$179'], biryani: ['৳35,000', '£279', 'AED 1,279', '$349'], kacchi: ['৳65,000', '£519', 'AED 2,379', '$649'], cheap: ['৳4,999', '£49', 'AED 199', '$49'] };
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  let cur = store.get('cg14-cur');
+  if (!CUR[cur]) { let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {} cur = /^Europe\//.test(tz) ? 'gbp' : /Dubai|Muscat|Qatar|Riyadh|Kuwait|Bahrain/.test(tz) ? 'aed' : /^America\//.test(tz) ? 'usd' : 'bdt'; }
+  const conv = b => cur === 'bdt' ? b : Math.max(5, Math.round(b * RATE[cur] / 5) * 5);
+  const fmt = b => CUR[cur].f(conv(b));
+  function setCur(c) {
+    cur = c; store.set('cg14-cur', c);
+    $$('.cur button').forEach(b => b.setAttribute('aria-pressed', b.dataset.cur === c));
+    $$('[data-p]').forEach(el => el.textContent = PRICES[el.dataset.p][CUR[c].i]);
+    paintSum();
+  }
+  $$('.cur button').forEach(b => b.addEventListener('click', () => setCur(b.dataset.cur)));
+
+  /* ---------- the hero's one moment: tonight's orders, chalked one mark at a time ---------- */
+  const ORDERS = [2400, 1200, 3200, 850, 1750, 2250, 4100, 990, 2600, 1500, 3800, 1100, 2050, 3400];
+  const TIMES = ['11:42 PM', '11:58 PM', '12:20 AM', '12:47 AM', '1:15 AM', '1:39 AM', '2:04 AM', '2:31 AM', '3:08 AM', '3:36 AM', '4:02 AM', '4:44 AM', '5:21 AM', '6:08 AM'];
+  const tally = $('.tally'), leaves = $('.leaves'), stem = $('.stem'), flower = $('.flower');
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+  const markPath = i => { const g = Math.floor(i / 5), j = i % 5, x0 = 14 + g * 104; return j < 4 ? `M${x0 + j * 18} ${14 + (j % 2) * 3}C${x0 + j * 18 + 2} 40 ${x0 + j * 18 - 1} 62 ${x0 + j * 18 + 1} ${82 - (j % 2) * 2}` : `M${x0 - 10} 70C${x0 + 20} 54 ${x0 + 50} 34 ${x0 + 74} 22`; };
+  const LEAF = [[74, 140, -1], [80, 124, 1], [72, 106, -1], [78, 88, 1], [74, 70, -1], [79, 52, 1], [76, 34, -1]];
+  let shown = 0, total = 0;
+  function paintSum() {
+    $('#sumAmt').textContent = fmt(total);
+    $('#sumTime').textContent = shown ? `last order ${TIMES[shown - 1]}` : 'since closing';
+  }
+  function step(animate) {
+    const i = shown;
+    const p = mk('path', { d: markPath(i), pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': animate ? 1 : 0 }, tally);
+    if (animate) p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 380, easing: OUT, fill: 'forwards' });
+    total += ORDERS[i]; shown++; paintSum();
+    const lf = shown % 2 === 0 ? LEAF[shown / 2 - 1] : null;
+    const grow = shown / ORDERS.length;
+    if (animate) stem.animate([{ strokeDashoffset: 1 - (shown - 1) / ORDERS.length }, { strokeDashoffset: 1 - grow }], { duration: 600, easing: OUT, fill: 'forwards' });
+    else stem.style.strokeDashoffset = 1 - grow;
+    if (lf) {
+      const [x, y, s] = lf, g = mk('g', { transform: `translate(${x} ${y}) rotate(${s * -34})` }, leaves);
+      const e = mk('path', { d: `M0 0C${s * 10} -12 ${s * 26} -10 ${s * 32} 0C${s * 26} 10 ${s * 10} 12 0 0z`, fill: 'none', stroke: '#93DDB2', 'stroke-width': 4, 'stroke-linejoin': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': animate ? 1 : 0 }, g);
+      if (animate) e.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 500, delay: 200, easing: OUT, fill: 'forwards' });
+    }
+    if (shown === ORDERS.length) {
+      if (animate) flower.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 600, easing: OUT, fill: 'forwards' });
+      else flower.setAttribute('opacity', 1);
+    }
+  }
+  const draws = $$('.underline .draw, .pot');
+  draws.forEach(d => { d.style.strokeDasharray = 1; });
+  stem.style.strokeDasharray = 1; stem.style.strokeDashoffset = 1;
+  setCur(cur);
+  if (reduce) { while (shown < ORDERS.length) step(false); }
+  else {
+    draws.forEach((d, i) => d.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 900, delay: 150 + i * 120, easing: OUT, fill: 'both' }));
+    const go = () => { if (shown >= ORDERS.length) return; step(true); setTimeout(go, 1900); };
+    setTimeout(go, 1300);
+  }
+
+  /* ---------- the board's quote line hands the shop name to the order slip ---------- */
+  $('#heroForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('#heroShop').value.trim();
+    if (v) $('#f-biz').value = v;
+    $('#order').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    setTimeout(() => (v ? $('#f-name') : $('#f-biz')).focus({ preventScroll: true }), reduce ? 0 : 600);
+  });
+  $$('[data-checkup]').forEach(a => a.addEventListener('click', () => { $('#needCheck').checked = true; }));
+  $$('[data-set]').forEach(a => a.addEventListener('click', () => { const r = $$('#setPick input')[+a.dataset.set]; if (r) r.checked = true; }));
+
+  /* ---------- order slip ---------- */
+  const form = $('#quote'), live = $('#live');
+  const okContact = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) || /^\+?\d{8,15}$/.test(v.replace(/[\s()-]/g, ''));
+  const rules = [
+    ['#f-biz', '#e-biz', v => v ? '' : 'What’s the shop called? Even “Bhai’s shop” works.'],
+    ['#f-name', '#e-name', v => v ? '' : 'What should we call you?'],
+    ['#f-contact', '#e-contact', v => okContact(v) ? '' : 'Add a WhatsApp number or an email we can reply to.']
+  ];
+  form.addEventListener('input', e => {
+    const r = rules.find(x => x[0] === '#' + e.target.id);
+    if (r && $(r[1]).textContent && !r[2](e.target.value.trim())) { $(r[1]).textContent = ''; e.target.setAttribute('aria-invalid', 'false'); }
+    if (e.target.name === 'need') $('#e-need').textContent = '';
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let first = null;
+    rules.forEach(([id, eid, check]) => { const el = $(id), msg = check(el.value.trim()); $(eid).textContent = msg; el.setAttribute('aria-invalid', !!msg); if (msg && !first) first = el; });
+    const needMsg = $$('#needs input:checked').length ? '' : 'Pick at least one. “Not sure yet” counts.';
+    $('#e-need').textContent = needMsg; if (needMsg && !first) first = $('#needs input');
+    if (first) { first.focus(); live.textContent = 'Please check the highlighted fields.'; return; }
+    const btn = $('#send'); btn.disabled = true; btn.firstChild.textContent = 'Pinning… ';
+    setTimeout(() => {
+      $('#formBody').hidden = true; $('#done').hidden = false;
+      $('#doneTitle').textContent = `Thanks, ${$('#f-name').value.trim().split(' ')[0]}. ${$('#f-biz').value.trim()} is on our board.`;
+      live.textContent = 'Order pinned. This is a design preview, so nothing was sent yet.';
+      if (!reduce) $('.stamp').animate([{ opacity: 0, transform: 'rotate(-14deg) scale(1.4)' }, { opacity: 1, transform: 'rotate(-5deg) scale(1)' }], { duration: 420, easing: OUT });
+    }, 600);
+  });
+
+  /* ---------- phone bar: hidden while the board's own quote line is on screen, and over the slip and tray ---------- */
+  const bar = $('.pbar'), line = $('#heroForm');
+  if ('IntersectionObserver' in window && bar) {
+    const seen = { line: true, order: false, tray: false };
+    const sync = () => { const on = !seen.line && line.getBoundingClientRect().bottom < 0 && !seen.order && !seen.tray; bar.classList.toggle('show', on); bar.toggleAttribute('inert', !on); };
+    const watch = (el, k, t = 0) => new IntersectionObserver(es => { seen[k] = es[es.length - 1].isIntersecting; sync(); }, { threshold: t }).observe(el);
+    watch(line, 'line'); watch($('#order'), 'order', .2); watch($('.tray'), 'tray'); sync();
+  }
+})();
+</script>
+</body>
+</html>
