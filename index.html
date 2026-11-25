@@ -569,6 +569,35 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .final.shut::after{transform:scaleY(1)}
 .final.rolling::after{transition:transform .9s cubic-bezier(0.77, 0, 0.175, 1)}
 @media (prefers-reduced-motion:reduce){.faq details::details-content{transition:none}.final::after{display:none}}
+
+/* ---------- hero headline: one word keeps changing ---------- */
+.hero h1{font-size:clamp(42px,5.2vw,74px)}
+.hx-swap{display:inline-block;position:relative;color:var(--green);white-space:nowrap;vertical-align:bottom;overflow:hidden;padding:0 .04em .12em;margin-bottom:-.12em}
+.hx-swap .hx-ch{display:inline-block;white-space:pre}
+.hx-swap.hx-hand{color:var(--red-d);font-style:italic;transform:rotate(-3deg)}
+.hx-strike{position:absolute;left:0;right:0;top:52%;height:.11em;background:var(--red);border-radius:9px;transform-origin:left;pointer-events:none}
+
+/* ---------- statement band: the words fill in as you read down ---------- */
+.sx{background:var(--yellow);border-block:2.5px solid var(--ink);overflow:hidden;position:relative}
+.sx p{font:800 clamp(34px,6.4vw,88px)/1.02 var(--display);letter-spacing:-.01em;color:var(--ink);max-width:16em;text-wrap:balance}
+.sx-w{display:inline-block;margin-right:.24em;transition:none}
+.sx-w.sx-hi{color:var(--green)}
+.sx small{display:block;margin-top:22px;font:600 clamp(16px,1.6vw,19px)/1.4 var(--body);color:#3D3520;max-width:36em}
+
+/* ---------- set menus: plates stacked on the counter ---------- */
+@media (max-width:860px){
+  .pack-grid{gap:0;padding-bottom:20px}
+  .pack{position:sticky;top:calc(var(--head) + 18px);margin-bottom:26px;transform:none!important}
+  .pack:nth-child(2){top:calc(var(--head) + 34px)}
+  .pack:nth-child(3){top:calc(var(--head) + 50px)}
+}
+
+/* ---------- doodles that drift behind the page ---------- */
+.dz{position:absolute;z-index:0;pointer-events:none;opacity:.55;width:var(--s,54px);height:auto}
+.sec{position:relative}
+.sec > .wrap{position:relative;z-index:1}
+@media (max-width:860px){.dz:nth-of-type(n+2){display:none}}
+@media (prefers-reduced-motion:reduce){.hx-strike{display:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -662,7 +691,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
-        <h1 id="t-hero">Pull up the shutter. Let the <span class="u">customers</span> in.</h1>
+        <h1 id="t-hero">Your website sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep</span>.</h1>
         <p class="lede">Your shop opens at 10. Your website should never close. We build websites and online shops that actually sell, wherever you trade.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -790,6 +819,14 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
         <span class="harmed" aria-hidden="true">NO COUSINS<br>WERE HARMED</span>
       </div>
       <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us the site he started. We’ll tell you what to keep, free.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= STATEMENT: the words fill in as you scroll ================= -->
+  <section class="sec sx" aria-label="What you get with Click and Grow">
+    <div class="wrap">
+      <p>Fixed price before we start. Real people on WhatsApp. Built for your customers’ phones. Zero cousins involved.</p>
+      <small>No surprise extras, no “sir is in a meeting”, and nobody learning to code on your shop.</small>
     </div>
   </section>
 
@@ -1203,9 +1240,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   $$('.quote, .logos .slot').forEach(q => q.style.opacity = 0);
   inView('#proof', () => { animate('.logos .slot', { opacity: [0, 1], y: [12, 0] }, { duration: .35, delay: stagger(.05) }); animate('.quote', { opacity: [0, 1], y: [30, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.1, { startDelay: .2 }) }); }, { amount: .25 });
 
-  /* ---- 6 PACKS ---- */
-  $$('.pack').forEach(p => p.style.opacity = 0);
-  inView('.pack-grid', () => { animate('.pack', { opacity: [0, 1], y: [40, 0] }, { type: 'spring', bounce: .25, duration: .7, delay: stagger(.1) }); animate('.pack .badge', { scale: [.5, 1], rotate: [-15, -3] }, { type: 'spring', bounce: .55, duration: .6, delay: .45 }); }, { amount: .2 });
+  /* ---- 6 PACKS: set menus land like plates, driven by the script below ---- */
 
   /* ---- 7 ROUTE: forward, stops light as it passes ---- */
   const stops = $$('#stops li'); stops.forEach(s => s.classList.remove('on'));
@@ -1586,6 +1621,149 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   if (fin && fin.getBoundingClientRect().top > innerHeight) {
     fin.classList.add('shut');
     once(fin, () => { fin.classList.add('rolling'); requestAnimationFrame(() => fin.classList.remove('shut')); }, .45);
+  }
+})();
+</script>
+<script>
+(() => {
+  /* ===== Random, creative motion: the hero's changing word, the statement band, stacked set menus and drifting doodles ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
+
+  /* ---------- 1. the hero headline swaps its last word, in a random order with a random effect ---------- */
+  const sw = $('.hx-swap');
+  if (sw) {
+    const WORDS = ['sleep', 'eat biryani', 'pray', 'watch cricket', 'sit in traffic', 'drink cha', 'nap after lunch', 'go to a wedding'];
+    let bag = [], last = 'sleep', lastFx = '', timer = 0, paused = false, onScreen = true, busy = false;
+    const next = () => { if (!bag.length) bag = WORDS.filter(w => w !== last).sort(() => Math.random() - .5); return bag.pop(); };
+    const letters = w => { sw.textContent = ''; return [...w].map(c => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); return s; }); };
+    const plain = w => { sw.classList.remove('hx-hand'); sw.textContent = w; };
+    const FX = {
+      scramble(w, done) {
+        plain(w); const pool = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz৳#%&*';
+        let f = 0; const total = 14;
+        const id = setInterval(() => {
+          f++; const keep = Math.floor(w.length * f / total);
+          sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join('');
+          if (f >= total) { clearInterval(id); sw.textContent = w; done(); }
+        }, 38);
+      },
+      slide(w, done) {
+        A(sw, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-60%)', opacity: 0 }], { duration: 220, easing: 'ease-in-out' }).onfinish = () => {
+          plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }).onfinish = done;
+        };
+      },
+      drop(w, done) {
+        sw.classList.remove('hx-hand');
+        const ls = letters(w);
+        ls.forEach((s, i) => A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: i * 32, easing: 'cubic-bezier(.34,1.56,.64,1)' }));
+        setTimeout(done, 420 + ls.length * 32);
+      },
+      strike(w, done) {
+        const bar = document.createElement('span'); bar.className = 'hx-strike'; sw.appendChild(bar);
+        A(bar, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 260 }).onfinish = () => {
+          sw.classList.add('hx-hand'); sw.textContent = w;
+          A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 300 }).onfinish = done;
+        };
+      }
+    };
+    const swap = () => {
+      if (paused || !onScreen || busy) { schedule(); return; }
+      busy = true;
+      const w = next(); last = w;
+      const names = Object.keys(FX).filter(n => n !== lastFx); const fx = names[Math.floor(Math.random() * names.length)]; lastFx = fx;
+      FX[fx](w, () => { busy = false; schedule(); });
+    };
+    const schedule = () => { clearTimeout(timer); timer = setTimeout(swap, rnd(2200, 3200)); };
+    if (!reduce) {
+      const h1 = sw.closest('h1');
+      h1.addEventListener('mouseenter', () => { paused = true; });
+      h1.addEventListener('mouseleave', () => { paused = false; });
+      new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; }).observe(h1);
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+      schedule();
+    }
+  }
+
+  /* ---------- 2. statement band: each word fills in as it scrolls past, in reading order ---------- */
+  const band = $('.sx p');
+  if (band) {
+    const words = band.textContent.trim().split(/\s+/);
+    const hi = new Set(['Fixed', 'price', 'Real', 'people', 'phones.', 'Zero', 'cousins']);
+    band.innerHTML = words.map(w => `<span class="sx-w${hi.has(w) ? ' sx-hi' : ''}">${w}</span>`).join(' ');
+    const ws = $$('.sx-w', band);
+    if (!reduce) {
+      const paint = () => {
+        const r = band.getBoundingClientRect(), vh = innerHeight;
+        const p = Math.max(0, Math.min(1, (vh * .85 - r.top) / (r.height + vh * .35)));
+        const lit = p * ws.length;
+        ws.forEach((w, i) => { const t = Math.max(0, Math.min(1, lit - i)); w.style.opacity = (.16 + t * .84).toFixed(3); w.style.transform = `translateY(${((1 - t) * 10).toFixed(1)}px)`; });
+      };
+      let ticking = false;
+      addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
+      addEventListener('resize', paint); paint();
+    }
+  }
+
+  /* ---------- 3. set menus land like plates: each drops in with its own tilt as the section scrolls in ---------- */
+  const grid = $('.pack-grid');
+  if (grid && !reduce && matchMedia('(min-width:861px)').matches) {
+    const packs = $$('.pack', grid);
+    const tilt = packs.map(() => rnd(-7, 7)), lift = packs.map((_, i) => 140 + i * 50);
+    const base = packs.map(p => p.classList.contains('hot') ? -12 : 0);
+    const paint = () => {
+      const r = grid.getBoundingClientRect(), vh = innerHeight;
+      const p = Math.max(0, Math.min(1, (vh - r.top) / (vh * .75)));
+      packs.forEach((el, i) => {
+        const local = Math.max(0, Math.min(1, p * 1.6 - i * .28)), e = 1 - Math.pow(1 - local, 3);
+        el.style.transform = `translateY(${(base[i] + (1 - e) * lift[i]).toFixed(1)}px) rotate(${((1 - e) * tilt[i]).toFixed(2)}deg)`;
+        el.style.opacity = Math.min(1, local * 1.6).toFixed(3);
+      });
+    };
+    let ticking = false;
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
+    addEventListener('resize', paint); paint();
+  }
+
+  /* ---------- 4. doodles: a few brand scribbles placed at random each visit, drifting at their own speed ---------- */
+  const DOODLES = [
+    '<svg viewBox="0 0 40 48"><path d="M4 3l13 37 5-14 14-5z" fill="#fff" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 48 60"><path d="M24 58V24M24 32c-10-1-16-8-16-18 10 1 16 8 16 18zM24 38c9-1 15-7 15-16-9 1-15 7-15 16z" fill="#93DDB2" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 44 56"><path d="M4 4h36v48l-6-4-6 4-6-4-6 4-6-4-6 4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/><path d="M11 16h22M11 25h16M11 34h20" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 48 48"><path d="M24 3l6 14 15 1-12 10 4 15-13-8-13 8 4-15L3 18l15-1z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" fill="#FF4F8B" stroke="#1C1A17" stroke-width="3"/><text x="26" y="35" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26" fill="#fff">৳</text></svg>'
+  ];
+  const homes = ['#menu', '#seats', '#packs', '#route', '#faq', '#proof'].map(s => $(s)).filter(Boolean);
+  const drifters = [];
+  homes.forEach(sec => {
+    const n = Math.random() < .5 ? 1 : 2;
+    for (let k = 0; k < n; k++) {
+      const d = document.createElement('div'); d.className = 'dz'; d.setAttribute('aria-hidden', 'true');
+      d.innerHTML = DOODLES[Math.floor(Math.random() * DOODLES.length)];
+      const size = Math.round(rnd(38, 64)), wrap = sec.querySelector('.wrap'), gutter = wrap ? wrap.getBoundingClientRect().left : 0;
+      if (gutter < size + 24) continue;
+      const side = Math.random() < .5, x = `${Math.round(rnd(8, Math.max(9, gutter - size - 12)))}px`;
+      d.style.left = side ? x : 'auto'; d.style.right = side ? 'auto' : x;
+      d.style.top = `${rnd(6, 80)}%`; d.style.setProperty('--s', `${size}px`);
+      sec.appendChild(d);
+      drifters.push({ el: d, sec, speed: rnd(-90, 90), spin: rnd(-30, 30) });
+    }
+  });
+  if (!reduce && drifters.length) {
+    const paint = () => {
+      const vh = innerHeight;
+      drifters.forEach(({ el, sec, speed, spin }) => {
+        const r = sec.getBoundingClientRect(); if (r.bottom < -200 || r.top > vh + 200) return;
+        const p = (vh - r.top) / (vh + r.height) - .5;
+        el.style.transform = `translateY(${(p * speed * 2).toFixed(1)}px) rotate(${(p * spin * 2).toFixed(1)}deg)`;
+      });
+    };
+    let ticking = false;
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
+    paint();
   }
 })();
 </script>
