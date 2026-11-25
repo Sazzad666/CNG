@@ -449,13 +449,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 
 /* ---------- SEARCH SLOT + SPEED RACE ---------- */
 .stage{min-height:420px}
-.race .stage{min-height:0}
-/* 1 search */
-.v1slot{display:grid;grid-template-rows:1fr;transition:grid-template-rows .5s var(--ease-out)}
-.v1slot.closed{grid-template-rows:0fr}
-.v1slot-in{min-height:0;overflow:hidden}
-.v1slot.open .v1slot-in{overflow:visible}
-.v1slot-in > .res.ours{margin:18px 6px 10px}
 /* shared phone */
 .ph{border:2.5px solid var(--ink);border-radius:28px;background:#fff;box-shadow:6px 6px 0 var(--ink);overflow:hidden;display:flex;flex-direction:column;width:100%;max-width:400px;justify-self:center}
 .ph-top{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#075E54;color:#fff}
@@ -497,7 +490,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 }
 @media (prefers-reduced-motion:reduce){
   .spin{animation:none}
-  .v1slot,.ppl svg,.v4-load{transition:none}
+  .ppl svg,.v4-load{transition:none}
 }
 </style>
 
@@ -687,7 +680,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   <!-- ================= YOUR SEARCH ENDS HERE: a search everyone has typed ================= -->
   <section class="sec searchsec" id="search" aria-labelledby="t-search">
     <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-search">Your search ends here.</h2></div><p>We’ve all typed this one. Here’s what usually comes back.</p></div>
+      <div class="sec-head"><div><h2 id="t-search">Your search ends here.</h2></div><p>Your customer taps your link. Same shop, same phone, two websites. Watch who waits.</p></div>
       <div id="searchStage" class="stage"></div>
       <div class="tiles">
           <div class="tile"><svg class="tico" viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="6" width="22" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M8 14h12M8 18h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><b>Price fixed before we start</b><span>The meter is on. No surprise extras.</span></div>
@@ -730,14 +723,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
         </table>
       </div>
       <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us your old site. We’ll tell you what to fix, free.</p></div>
-    </div>
-  </section>
-
-  <!-- ================= SPEED RACE: the cousin's site against ours, on a phone ================= -->
-  <section class="sec race" id="race" aria-labelledby="t-race" style="padding-top:20px">
-    <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-race">Your customer taps your link.</h2></div><p>Same shop, same phone, two websites. Watch who waits.</p></div>
-      <div id="raceStage" class="stage"></div>
     </div>
   </section>
 
@@ -1166,7 +1151,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const heroVeh = $('#heroVeh');
   onScrollScene($('.hero'), r => -r.top / r.height, p => css(heroVeh, `translateX(${900 * p}px)`));
 
-  /* ---- 2 SEARCH and the SPEED RACE are mounted by the script below ---- */
+  /* ---- 2 SEARCH: the speed race is mounted by the script below ---- */
   $$('.tile').forEach(t => t.style.opacity = 0);
   inView('.tiles', () => { animate('.tile', { opacity: [0, 1], y: [16, 0] }, { duration: .4, delay: stagger(.07), ease: OUT }); }, { amount: .4 });
 
@@ -1239,50 +1224,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const again = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const bag = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.5 13h-11z" fill="currentColor"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
 
-  /* ---------- 1 SEARCH: results land as one wave, strikes speed up, ours opens the slot at #1 and pushes them down ---------- */
-  const v1 = {
-    name: 'Search', sub: () => 'We’ve all typed this one. Here’s what usually comes back.',
-    html: () => {
-      const bad = [
-        ['<b>Sponsored</b> · cheapsite.example', `Website in 1 day, only ${G().C.cheap}!!!`, 'Pick one of 3 templates. Hosting extra. Domain extra. Changes extra.', 'Extra, extra, extra.', 'M4 26C120 12 240 34 360 20S600 30 696 14'],
-        ['pixelpro-solutions.example', 'PixelPro Solutions | No.1 Best Top Agency', '★★★★★ 3 reviews, all from the owner’s family.', isBD() ? 'Thanks, Ammu.' : 'Thanks, Mum.', 'M4 18C140 30 260 10 380 24S580 12 696 26'],
-        ['digitaldreams.example', 'Digital Dreams Agency · Contact us', 'Thanks for your message. We reply within 3 to 5 business months.', 'Still waiting.', 'M4 24C130 14 250 30 370 18S590 28 696 16'],
-        ['mycousin.blogspot.example', 'My cousin’s portfolio (under construction)', 'Coming soon. Since 2017.', 'Love you, cousin.', 'M4 20C120 30 260 12 380 26S600 14 696 22']
-      ];
-      return `<div class="serp v1">
-        <div class="sbar">${mag}<span class="q"><span class="v1q">best web agency in ${G().C.name}</span><i class="caret" aria-hidden="true"></i></span><button class="again" data-again type="button" aria-label="Search again">${again}<span>Search again</span></button></div>
-        <p class="meta v1meta">About 2,340,000 results (0.42 seconds)</p>
-        <ol class="results">
-          <li class="v1slot open"><div class="v1slot-in"><div class="res ours"><span class="rank" aria-hidden="true">#1</span><div class="body"><span class="url">clickandgrow.example</span><span class="t">Click &amp; Grow · Websites, online shops and ads that sell</span><p>Fixed price before we start. Real people on WhatsApp. A free quote within a day, ${G().C.serpCity}.</p><div class="ours-row"><a class="btn btn--green" href="#order">Get my free quote</a><span class="chips"><span>Fixed price</span><span>Replies same day</span><span>30 days of free fixes</span></span></div></div><span class="stamp-end" aria-hidden="true">YOUR SEARCH<br>ENDS HERE</span></div></div></li>
-          ${bad.map(b => `<li class="res bad struck"><div class="body"><span class="url">${b[0]}</span><span class="t">${b[1]}</span><p>${b[2]}</p></div><svg class="strike" viewBox="0 0 700 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="${b[4]}"/></svg><span class="scrib">${b[3]}</span></li>`).join('')}
-        </ol></div>`;
-    },
-    setup(r, ok) {
-      $('[data-again]', r).addEventListener('click', () => mount(r, v1));
-      const q = $('.v1q', r), slot = $('.v1slot', r), bad = $$('.res.bad', r), meta = $('.v1meta', r), ours = $('.res.ours', r), stamp = $('.stamp-end', r);
-      return {
-        final() {},
-        prep() { bad.forEach(b => { b.classList.remove('struck'); b.style.opacity = 0; }); meta.style.opacity = 0; slot.classList.remove('open'); slot.classList.add('closed'); ours.style.opacity = 0; stamp.style.opacity = 0; q.textContent = ''; },
-        async play() {
-          const query = 'best web agency in ' + G().C.name;
-          await wait(250, ok);
-          for (let i = 1; i <= query.length; i++) { q.textContent = query.slice(0, i); await wait(30 + Math.random() * 45, ok); }
-          an($('.sbar', r), { scale: [1, .985, 1] }, { duration: .2 });
-          an(meta, { opacity: [0, 1] }, { duration: .25, delay: .1 });
-          [0, .07, .12, .15].forEach((d, i) => an(bad[i], { opacity: [0, 1], y: [10, 0] }, { duration: .4, delay: .12 + d, ease: OUT }));
-          await wait(850, ok);
-          const gaps = [0, 620, 500, 420];
-          for (let i = 0; i < bad.length; i++) { await wait(gaps[i], ok); bad[i].classList.add('struck'); }
-          await wait(500, ok);
-          slot.classList.remove('closed');
-          an(ours, { opacity: [0, 1], y: [-14, 0] }, { duration: .5, ease: OUT });
-          an(stamp, { scale: [1.8, 1], opacity: [0, 1], rotate: [-10, 6] }, { type: 'spring', bounce: .5, duration: .6, delay: .38 });
-          await wait(520, ok); slot.classList.add('open');
-        }
-      };
-    }
-  };
-
   /* ---------- 4 SPEED RACE: two phones open the same link; one loads before the customer gets bored ---------- */
   const v4 = {
     name: 'Speed race', sub: () => 'Your customer taps your link. Watch who waits.',
@@ -1340,8 +1281,8 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); Promise.resolve(ctl.play()).catch(() => {}); } }, { threshold: .3 });
     observers.set(stage, io); io.observe(stage);
   }
-  const searchStage = $('#searchStage'), raceStage = $('#raceStage');
-  const all = () => { mount(searchStage, v1); mount(raceStage, v4); };
+  const searchStage = $('#searchStage');
+  const all = () => mount(searchStage, v4);
   document.addEventListener('cg:city', all);
   all();
 })();
