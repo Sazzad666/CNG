@@ -545,6 +545,11 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .hx-swap{display:inline-block;position:relative;color:var(--green);white-space:nowrap;vertical-align:bottom;overflow:hidden;padding:0 .04em .12em;margin-bottom:-.12em}
 .hx-swap .hx-ch{display:inline-block;white-space:pre}
 .hx-swap.hx-hand{color:var(--red-d);font-style:italic;transform:rotate(-3deg)}
+.hx-swap .hx-caret{display:inline-block;width:.08em;height:.9em;margin-left:.04em;background:currentColor;vertical-align:-.05em}
+.hx-swap .hx-mark{position:absolute;left:0;right:0;bottom:.08em;height:.5em;background:var(--pink);opacity:.85;z-index:-1;border-radius:.12em;transform-origin:left center}
+.hx-swap{isolation:isolate}
+.hx-swap .hx-st{display:inline-block;white-space:pre}
+@media (max-width:560px){.hx-swap{white-space:normal}}
 .hx-strike{position:absolute;left:0;right:0;top:52%;height:.11em;background:var(--red);border-radius:9px;transform-origin:left;pointer-events:none}
 
 /* ---------- statement band: the words fill in as you read down ---------- */
@@ -814,7 +819,7 @@ body{caret-color:var(--red)}
   <section class="hero" aria-labelledby="t-hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-                <h1 id="t-hero">Your website sells while you get on with life.</h1>
+                <h1 id="t-hero">Your website sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep, eat, watch cricket or sit in traffic</span>.</h1>
         <p class="lede">We build websites and online shops that take orders day and night, so you can sleep, eat and watch the match in peace.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -1615,12 +1620,16 @@ body{caret-color:var(--red)}
   const at = (ms, fn) => { const t = token; timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); };
 
   /* the headline word's entrance: a different effect each time */
-  const plain = w => { if (!sw) return; sw.classList.remove('hx-hand'); sw.textContent = w; };
+  let fxTimer = 0;
+  const plain = w => { if (!sw) return; clearInterval(fxTimer); sw.classList.remove('hx-hand'); sw.getAnimations({ subtree: true }).forEach(a => a.cancel()); sw.textContent = w; };
   const FX = {
-    scramble(w) { plain(w); const pool = 'abcdefghkmnpqrstuvwxyz৳#%&*'; let f = 0; const id = setInterval(() => { f++; const keep = Math.floor(w.length * f / 12); sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join(''); if (f >= 12) { clearInterval(id); sw.textContent = w; } }, 34); },
+    scramble(w) { plain(w); const pool = 'abcdefghkmnpqrstuvwxyz৳#%&*'; let f = 0; fxTimer = setInterval(() => { f++; const keep = Math.floor(w.length * f / 12); sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join(''); if (f >= 12) { clearInterval(fxTimer); sw.textContent = w; } }, 34); },
     slide(w) { plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }); },
-    drop(w) { sw.classList.remove('hx-hand'); sw.textContent = ''; [...w].forEach((c, i) => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: i * 28, easing: 'cubic-bezier(.34,1.56,.64,1)' }); }); },
-    hand(w) { sw.classList.add('hx-hand'); sw.textContent = w; A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 320 }); }
+    drop(w) { plain(''); [...w].forEach((c, i) => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: i * 28, easing: 'cubic-bezier(.34,1.56,.64,1)' }); }); },
+    hand(w) { plain(w); sw.classList.add('hx-hand'); A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 320 }); },
+    type(w) { plain(''); const txt = document.createTextNode(''), caret = document.createElement('span'); caret.className = 'hx-caret'; sw.append(txt, caret); let n = 0; fxTimer = setInterval(() => { txt.data = w.slice(0, ++n); if (n >= w.length) { clearInterval(fxTimer); A(caret, [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 900, easing: 'steps(1,end)' }); } }, 55); },
+    marker(w) { plain(w); const m = document.createElement('span'); m.className = 'hx-mark'; m.setAttribute('aria-hidden', 'true'); sw.appendChild(m); A(m, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 420, easing: 'cubic-bezier(.65,0,.35,1)' }); A(sw, [{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 420, delay: 120, easing: 'cubic-bezier(.65,0,.35,1)' }); },
+    stickers(w) { plain(''); [...w].forEach((c, i) => { const s = document.createElement('span'); s.className = 'hx-st'; s.textContent = c; sw.appendChild(s); const r = rnd(-14, 14); A(s, [{ opacity: 0, transform: `scale(0) rotate(${r * 3}deg)` }, { opacity: 1, transform: `scale(1.25) rotate(${r}deg)`, offset: .6 }, { opacity: 1, transform: 'scale(1) rotate(0deg)' }], { duration: 480, delay: i * 40, easing: 'cubic-bezier(.34,1.56,.64,1)' }); }); }
   };
 
   function ding() {
