@@ -1,0 +1,39 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main">
+  <section class="wrap pb-12 pt-16 sm:pt-24">
+    <div class="flex flex-wrap items-center gap-3" data-enter data-enter-step="0"><a class="eyebrow ulink" href="/work">Work</a><span class="sample-tag text-sage">Sample project</span></div>
+    <h1 class="mt-4 max-w-4xl text-5xl font-bold sm:text-7xl" data-enter data-enter-step="1"><%= p.client %></h1>
+    <p class="mt-4 text-xl text-cream/75" data-enter data-enter-step="2"><%= p.type %> · <%= p.services.map(function (k) { return (content.service(k) || {}).short; }).join(', ') %></p>
+  </section>
+  <div class="wrap" data-enter data-enter-step="2">
+    <div class="relative aspect-[16/9] overflow-hidden rounded-3xl"><%- img(p.photos[0], { cls: 'absolute inset-0 h-full w-full object-cover', eager: true }) %></div>
+  </div>
+  <section class="wrap grid gap-12 py-20 lg:grid-cols-12" data-reveal>
+    <div class="lg:col-span-4">
+      <p class="eyebrow">Result</p>
+      <p class="mt-4 font-display text-4xl font-bold text-lime"><%= p.result %></p>
+    </div>
+    <div class="grid gap-10 lg:col-span-8 sm:grid-cols-2">
+      <div><h2 class="text-2xl font-bold">The challenge</h2><p class="mt-3 text-cream/75"><%= p.challenge %></p></div>
+      <div><h2 class="text-2xl font-bold">What we did</h2><p class="mt-3 text-cream/75"><%= p.approach %></p></div>
+    </div>
+  </section>
+  <section class="border-y border-cream/10 bg-ink-2 py-14" data-reveal>
+    <dl class="wrap grid gap-8 sm:grid-cols-3">
+      <% p.metrics.forEach(function (m) { %><div><dt class="order-2 mt-2 text-cream/70"><%= m[1] %></dt><dd class="font-display text-5xl font-bold tabular-nums"><%= m[0] %></dd></div><% }) %>
+    </dl>
+  </section>
+  <% if (p.photos.length > 1) { %>
+  <section class="wrap grid gap-6 py-20 <%= p.photos.length > 2 ? 'md:grid-cols-2' : '' %>" data-reveal>
+    <% p.photos.slice(1).forEach(function (ph) { %><div class="relative aspect-[4/3] overflow-hidden rounded-3xl" data-reveal-item><%- img(ph, { cls: 'absolute inset-0 h-full w-full object-cover', sizes: '(min-width: 768px) 50vw, 100vw' }) %></div><% }) %>
+  </section>
+  <% } %>
+  <section class="wrap flex flex-wrap items-center justify-between gap-6 border-t border-cream/10 py-12">
+    <p class="text-cream/70">Next project</p>
+    <a href="/work/<%= nextProject.slug %>" class="group inline-flex items-center gap-4 font-display text-3xl font-bold sm:text-4xl"><%= nextProject.client %> <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lime text-base text-ink transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">→</span></a>
+  </section>
+  <%- include('partials/plant-cta', { service: p.services[0], heading: 'Want results like *these?*' }) %>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>

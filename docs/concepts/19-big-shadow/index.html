@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="en" data-region="US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Click &amp; Grow</title>
+<meta name="description" content="Customers can't see how big you are. They only see your website. Click &amp; Grow builds websites and online shops for growing businesses worldwide.">
+<meta name="theme-color" content="#121B2B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --paper:#FFFBF2;--paper-2:#FFF1D6;--ink:#1C1A17;--ink-2:#55504A;--line:#EADFC8;
+  --green:#006A4E;--green-2:#0E8A62;--green-lite:#D7F2E4;--red:#E8283F;--red-lite:#FFE1E5;--yellow:#FFC72C;--pink:#FF4F8B;--teal:#13A8A0;
+  --night:#121B2B;--night-2:#1B2840;--night-3:#26365A;--night-txt:#EEF1F7;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;--body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1);--head:64px;--r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.01em}
+p{margin:0}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1200px,100% - 32px);margin-inline:auto}
+@media (min-width:700px){.wrap{width:min(1200px,100% - 64px)}}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:6px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 22px;border:2.5px solid var(--ink);border-radius:14px;background:var(--yellow);color:var(--ink);font:700 17px/1 var(--display);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out);user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.btn svg{width:20px;height:20px}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}}
+.btn--green{background:var(--green);color:#fff}
+.btn--white{background:#fff}
+.btn--wa{background:#25D366}
+.btn--sm{min-height:40px;padding:8px 14px;font-size:15px;border-width:2px;box-shadow:3px 3px 0 var(--ink)}
+.btn--ghost{background:transparent;color:var(--night-txt);border-color:var(--night-txt);box-shadow:4px 4px 0 var(--night-txt)}
+.eyebrow{font:700 13px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+
+.strip{background:var(--green);color:#fff;text-align:center;font-size:14px;padding:8px 16px}
+.strip a{color:var(--yellow);font-weight:700}
+.head{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:2.5px solid var(--ink)}
+.head .wrap{display:flex;align-items:center;gap:20px;height:var(--head)}
+.logo{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--display);text-decoration:none;white-space:nowrap}
+.logo svg{width:36px;height:36px}
+.head nav{margin-left:auto}
+.head nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.head nav a{text-decoration:none;font-weight:600;font-size:15px;background:linear-gradient(var(--ink),var(--ink)) 0 100%/0 2px no-repeat;transition:background-size 200ms var(--ease-out)}
+@media (hover:hover){.head nav a:hover{background-size:100% 2px}}
+.acts{display:flex;align-items:center;gap:10px}
+.region{position:relative}
+.region select{appearance:none;-webkit-appearance:none;font:600 14px/1 var(--body);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:9px 30px 9px 14px;cursor:pointer;min-height:40px}
+.region::after{content:"";position:absolute;right:13px;top:50%;width:7px;height:7px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+@media (max-width:1060px){.head nav{display:none}.acts{margin-left:auto}}
+@media (max-width:640px){.acts .btn{display:none}.region select{font-size:13px;padding:8px 26px 8px 12px}}
+
+/* ---------- hero: the big shadow ---------- */
+.hero{background:var(--night);color:var(--night-txt);position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:40px;align-items:center;min-height:calc(100svh - var(--head) - 36px);padding:40px 0 56px}
+.hero .eyebrow{color:var(--yellow)}
+.hero h1{font-weight:800;font-size:clamp(40px,5.2vw,76px);line-height:.98;margin:16px 0 20px}
+.hero h1 .l2{display:block;color:var(--yellow)}
+.u{background:linear-gradient(transparent 70%,rgba(255,199,44,.45) 70% 94%,transparent 94%) 0 0/100% 100% no-repeat}
+html.motion .u{background-size:0% 100%}
+.hero .sub{font-size:clamp(17px,1.5vw,20px);max-width:30em;color:#C9D1E0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.slots{margin-top:22px;font:500 13.5px/1.5 var(--mono);color:#AEB8CC;display:flex;gap:10px;align-items:flex-start}
+.slots i{flex:none;width:9px;height:9px;margin-top:5px;border-radius:50%;background:var(--red)}
+.stage{position:relative}
+.stage svg{width:100%;height:auto;overflow:visible}
+.replay{position:absolute;right:6px;bottom:6px;font:700 13px/1 var(--body);color:var(--night-txt);background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 14px;cursor:pointer;min-height:38px}
+@media (hover:hover){.replay:hover{background:rgba(255,255,255,.16)}}
+.shadow-stage{transform-box:fill-box;transform-origin:50% 100%}
+@media (max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:24px;min-height:0;padding:28px 0 56px}.stage{order:-1}}
+
+/* ---------- shared section bits ---------- */
+.sec{padding:clamp(80px,10vw,128px) 0;position:relative}
+.sec-head{display:grid;gap:14px;max-width:780px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(36px,4.8vw,64px);font-weight:800}
+.sec-head p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:36em}
+.card{background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:6px 6px 0 var(--ink)}
+.note{margin-top:18px;font-size:14px;color:var(--ink-2)}
+html.motion [data-rise]{opacity:0;transform:translateY(22px)}
+
+/* ---------- judged in 0.05 seconds ---------- */
+.judged-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:center}
+.mock{position:relative;border:2.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);background:#fff;aspect-ratio:3/2}
+.mock .bar{display:flex;gap:6px;align-items:center;padding:8px 12px;border-bottom:2.5px solid var(--ink);background:#F1ECE2}
+.mock .bar i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink)}
+.mock .bar span{margin-left:8px;font:500 12px/1 var(--mono);background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:4px 10px}
+.view{position:absolute;inset:38px 0 0 0;transition:opacity .35s ease}
+.mock[data-mode="old"] .v-new,.mock[data-mode="new"] .v-old{opacity:0;pointer-events:none}
+.v-old{background:#FFFF80 repeating-linear-gradient(45deg,transparent 0 16px,rgba(0,0,0,.05) 16px 32px);font-family:"Times New Roman",serif;color:#0000CC;padding:4% 5%;display:grid;align-content:start;gap:3%;text-align:center}
+.v-old .mq{background:#F0F;color:#FF0;font:700 clamp(12px,1.6vw,19px)/1.5 "Comic Sans MS",cursive;border:3px ridge #999;white-space:nowrap;overflow:hidden}
+.v-old h4{margin:0;font:700 clamp(18px,2.8vw,34px)/1 "Times New Roman",serif;color:#E00;text-decoration:underline}
+.v-old .uc{justify-self:center;background:#000;color:#FF0;font:700 clamp(10px,1.2vw,14px)/1 "Courier New",monospace;padding:.6em 1em;border:3px dashed #FF0}
+.v-old .blur{height:22%;width:56%;justify-self:center;background:linear-gradient(135deg,#999,#ccc);filter:blur(3px);border:3px outset #ccc}
+.v-old small{font-size:clamp(9px,1vw,12px)}
+.v-new{background:#FFFBF2;padding:4% 5%;display:grid;grid-template-rows:auto 1fr auto;gap:4%}
+.v-new .nav{display:flex;align-items:center;gap:3%;font:800 clamp(12px,1.4vw,16px)/1 var(--display)}
+.v-new .nav .lg{width:clamp(18px,2.2vw,28px);aspect-ratio:1;border-radius:8px;background:var(--pink);border:2px solid var(--ink)}
+.v-new .nav em{margin-left:auto;font:600 clamp(10px,1.1vw,13px)/1 var(--body);font-style:normal;color:var(--ink-2)}
+.v-new .hz{display:grid;grid-template-columns:1.2fr .8fr;gap:4%;align-items:center}
+.v-new .hz strong{display:block;font:800 clamp(17px,2.6vw,34px)/1 var(--display)}
+.v-new .hz p{font-size:clamp(10px,1.1vw,13px);color:var(--ink-2);margin-top:.5em}
+.v-new .stars{font:700 clamp(10px,1.1vw,13px)/1 var(--body);margin-top:.6em;color:#B7791F}
+.v-new .art{aspect-ratio:1;border-radius:16px;border:2px solid var(--ink);background:var(--yellow);position:relative;overflow:hidden}
+.v-new .art::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:var(--pink);border:2px solid var(--ink);right:-15%;bottom:-18%}
+.v-new .row{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:3%;align-items:center}
+.v-new .row div{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:.5em .6em;font:700 clamp(9px,1.05vw,13px)/1.2 var(--display)}
+.v-new .buy{font:800 clamp(11px,1.3vw,15px)/1 var(--display);background:var(--green);color:#fff;border:2px solid var(--ink);border-radius:10px;padding:.7em 1em;box-shadow:3px 3px 0 var(--ink);white-space:nowrap}
+.eyes{position:absolute;inset:38px 0 0 0;width:100%;height:calc(100% - 38px);pointer-events:none}
+.watch{position:absolute;left:12px;top:50px;z-index:3;font:700 clamp(18px,2.2vw,28px)/1 var(--mono);background:var(--ink);color:var(--yellow);border-radius:12px;padding:8px 12px;box-shadow:3px 3px 0 rgba(0,0,0,.25)}
+.stamp{position:absolute;right:6%;top:30%;z-index:4;font:800 clamp(26px,4.4vw,58px)/1 var(--display);padding:.12em .3em;border:.09em solid currentColor;border-radius:.18em;transform:rotate(-12deg);background:rgba(255,255,255,.75);white-space:nowrap}
+.stamp.nope{color:var(--red)}.stamp.yes{color:var(--green)}
+.judge-copy{display:grid;gap:16px}
+.judge-copy .verdict{font:800 clamp(24px,2.6vw,34px)/1.1 var(--display)}
+.judge-copy p{color:var(--ink-2)}
+.src{font-size:13px;color:var(--ink-2)}
+@media (max-width:900px){.judged-grid{grid-template-columns:minmax(0,1fr)}.mock{aspect-ratio:4/5}.v-new .hz{grid-template-columns:1fr}.v-new .art{display:none}.v-new .row{grid-template-columns:1fr 1fr}.v-new .row div:nth-child(3){display:none}}
+
+/* ---------- truths ---------- */
+.truths{background:var(--paper-2)}
+.tgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;perspective:1200px}
+.truth{padding:24px;display:grid;align-content:space-between;gap:20px;min-height:260px}
+.truth q{quotes:none;font:800 clamp(22px,2vw,27px)/1.1 var(--display)}
+.truth .fix{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-2);border-top:2px dashed var(--line);padding-top:14px}
+.truth .fix b{flex:none;font:700 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--green-lite);color:var(--green);border-radius:6px;padding:5px 6px;margin-top:2px}
+@media (max-width:1000px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.tgrid{grid-template-columns:minmax(0,1fr)}.truth{min-height:0}}
+
+/* ---------- compare ---------- */
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.col{padding:24px;display:grid;align-content:start;gap:14px;position:relative}
+.col h3{font-size:26px}
+.col .who{font:700 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.col li{position:relative;padding-left:28px;font-size:16px}
+.col li::before{content:"";position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);background:#fff}
+.col.bad li{color:var(--ink-2)}
+.col.bad li .st{position:absolute;left:24px;right:0;top:52%;height:2.5px;background:var(--red);transform:scaleX(0);transform-origin:left;border-radius:2px}
+html:not(.motion) .col.bad li .st{transform:none}
+.col.good{background:var(--green);color:#fff;box-shadow:6px 6px 0 var(--yellow)}
+.col.good .who{color:var(--yellow)}
+.col.good li::before{background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.5 3.5L15 7' fill='none' stroke='%231C1A17' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.col .price{font:600 15px/1 var(--body);margin-top:6px;color:#D7F2E4}
+.col.good .price b{font:800 24px/1 var(--display);color:var(--yellow)}
+.col .tag{position:absolute;top:-16px;right:18px;font:800 16px/1 var(--display);background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:10px;padding:7px 12px;transform:rotate(4deg);box-shadow:3px 3px 0 var(--ink)}
+@media (max-width:900px){.cgrid{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- services ---------- */
+.svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.svc a{display:grid;align-content:start;gap:8px;padding:20px;text-decoration:none;background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);box-shadow:4px 4px 0 var(--ink);transition:transform 200ms var(--ease-out),box-shadow 200ms var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.svc a:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}}
+.svc .ico{width:52px;height:52px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center;background:var(--bg)}
+.svc .ico svg{width:30px;height:30px}
+.svc h3{font-size:21px;margin-top:6px}
+.svc p{font-size:15px;color:var(--ink-2);line-height:1.4}
+.price{margin-top:6px;font-size:14px;color:var(--ink-2)}
+.price b{font:800 20px/1 var(--display);color:var(--ink)}
+.price .free{font:800 16px/1 var(--display);color:var(--green)}
+@media (max-width:1000px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.svc{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- world ---------- */
+.world{background:var(--night);color:var(--night-txt)}
+.world .eyebrow{color:var(--yellow)}.world .sec-head p{color:#C9D1E0}
+.map{position:relative;border:2px solid var(--night-3);border-radius:22px;background:var(--night-2);padding:2%}
+.map svg{width:100%;height:auto}
+.clocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.clock{background:var(--night-2);border:1.5px solid var(--night-3);border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.clock b{font:700 15px/1.2 var(--display)}
+.clock span{font:700 15px/1 var(--mono);color:var(--yellow)}
+.pin{transform-box:fill-box;transform-origin:50% 50%}
+@media (max-width:760px){.clocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- included ---------- */
+.inc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.inc{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.inc li{display:flex;gap:14px;align-items:center;background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:14px 18px;box-shadow:4px 4px 0 var(--ink);font:700 18px/1.25 var(--display)}
+.inc li small{display:block;font:500 14px/1.35 var(--body);color:var(--ink-2)}
+.inc .ok{flex:none;width:34px;height:34px;border-radius:50%;background:var(--green-2);border:2.5px solid var(--ink);display:grid;place-items:center}
+.inc .ok svg{width:18px;height:18px}
+.inc .ok path{stroke-dasharray:24;stroke-dashoffset:0}
+html.motion .inc .ok path{stroke-dashoffset:24}
+@media (max-width:900px){.inc-grid{grid-template-columns:minmax(0,1fr);gap:28px}}
+
+/* ---------- how ---------- */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
+.steps::before{content:"";position:absolute;left:4%;right:4%;top:28px;height:4px;background:var(--line);border-radius:4px}
+.steps .ln{position:absolute;left:4%;right:4%;top:28px;height:4px;background:var(--green-2);border-radius:4px;transform-origin:left}
+html.motion .steps .ln{transform:scaleX(0)}
+.steps li{position:relative;display:grid;gap:10px;align-content:start}
+.steps .n{width:60px;height:60px;border-radius:50%;background:var(--yellow);border:2.5px solid var(--ink);display:grid;place-items:center;font:800 24px/1 var(--display);box-shadow:3px 3px 0 var(--ink)}
+.steps h3{font-size:22px}
+.steps p{font-size:15px;color:var(--ink-2)}
+@media (max-width:860px){.steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:28px}.steps::before,.steps .ln{display:none}}
+
+/* ---------- faq ---------- */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{background:#fff;border:2.5px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink)}
+.faq summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:center;padding:18px 20px;font:700 clamp(18px,1.6vw,21px)/1.25 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;font:700 24px/1 var(--mono);transition:transform 200ms var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 20px 20px;color:var(--ink-2);overflow:hidden}
+
+/* ---------- order form ---------- */
+.order{background:var(--paper-2)}
+.of{max-width:820px;padding:26px}
+.of-prog{height:10px;border-radius:9px;background:var(--line);overflow:hidden;margin-bottom:6px}
+.of-prog i{display:block;height:100%;background:var(--green-2);transform:scaleX(.25);transform-origin:left;transition:transform 400ms var(--ease-out)}
+.of-no{font:700 13px/1 var(--mono);color:var(--ink-2);margin-bottom:18px}
+.err-sum{background:var(--red-lite);border:2px solid var(--red);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-weight:600;color:#8E1022}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:6px}
+legend h3{font-size:clamp(24px,2.4vw,30px)}
+.help{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.opts label{position:relative;cursor:pointer}
+.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opts .o{display:grid;gap:3px;height:100%;padding:12px 14px;border:2px solid var(--ink);border-radius:12px;background:#fff;font:700 16px/1.2 var(--display);transition:background-color 160ms ease,box-shadow 160ms var(--ease-out)}
+.opts .o small{font:500 13px/1.3 var(--body);color:var(--ink-2)}
+.opts input:checked+.o{background:var(--green-lite);box-shadow:3px 3px 0 var(--ink)}
+.opts input:focus-visible+.o{outline:3px solid var(--pink);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+.field label{display:block;font-weight:700;font-size:15px;margin-bottom:6px}
+input[type=text],input[type=email],input[type=tel],input:not([type]){font:500 16px/1.2 var(--body);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:12px;padding:13px 14px;min-height:50px;width:100%}
+input[aria-invalid=true]{border-color:var(--red);box-shadow:0 0 0 3px var(--red-lite)}
+.phone{display:flex;border:2px solid var(--ink);border-radius:12px;background:#fff;overflow:hidden}
+.phone .ccx{display:grid;place-items:center;padding:0 12px;font:700 15px/1 var(--mono);background:#F1ECE2;border-right:2px solid var(--ink)}
+.phone input{border:0;border-radius:0}
+.phone:focus-within{outline:3px solid var(--pink);outline-offset:2px}
+.phone input:focus-visible{outline:0}
+.err{color:var(--red);font-size:14px;font-weight:600;margin:6px 0 0}
+.err:empty{display:none}
+.of-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.of-nav .next{margin-left:auto}
+.done{text-align:center;display:grid;justify-items:center;gap:10px;padding:20px 0}
+.done .big{width:84px;height:84px;border-radius:50%;background:var(--green-2);border:2.5px solid var(--ink);display:grid;place-items:center}
+.done .big svg{width:44px;height:44px;color:#fff}
+@media (max-width:700px){.two{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- final + footer ---------- */
+.final{background:var(--night);color:var(--night-txt);text-align:center;overflow:hidden}
+.final h2{font-size:clamp(40px,6.4vw,92px);font-weight:800}
+.final p{font-size:clamp(17px,1.5vw,20px);max-width:32em;margin:16px auto 0;color:#C9D1E0}
+.final .hero-cta{justify-content:center}
+.final .fart{width:min(420px,80%);margin:0 auto 18px;height:auto}
+footer{padding:36px 0 110px;font-size:14px;color:var(--ink-2)}
+.foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:18px}
+.foot a{text-decoration:none;font-weight:600}
+@media (min-width:901px){footer{padding-bottom:36px}}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:2.5px solid var(--ink)}
+.mbar .btn{flex:1;min-height:48px}
+@media (max-width:900px){.mbar{display:flex}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view,.faq summary::after,.of-prog i{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="tick" viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+</defs></svg>
+
+<p class="strip"><span id="stripText">Free website check-up for every business.</span> <a href="#order" data-need="Free website check-up">Claim yours</a></p>
+<header class="head"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><circle cx="27" cy="13" r="5" fill="#FFC72C" stroke="#1C1A17" stroke-width="2"/><path d="M11 9l7 20 3.5-8 8-3.5z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></svg>Click &amp; Grow</a>
+  <nav aria-label="Main"><ul><li><a href="#judged">First impressions</a></li><li><a href="#compare">Why us</a></li><li><a href="#services">Services</a></li><li><a href="#world">Worldwide</a></li><li><a href="#how">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+  <div class="acts">
+    <div class="region"><label class="sr" for="region">Your region (sets prices and phone code)</label>
+      <select id="region"><option value="US">USA · $</option><option value="CA">Canada · C$</option><option value="UK">UK · £</option><option value="EU">Europe · €</option><option value="AE">UAE &amp; Gulf · AED</option><option value="AU">Australia · A$</option><option value="BD">Bangladesh · ৳</option><option value="XX">Elsewhere · $</option></select></div>
+    <a class="btn btn--sm btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+    <a class="btn btn--sm" href="#order">Free quote</a>
+  </div>
+</div></header>
+
+<main id="top">
+<!-- ================= HERO: THE BIG SHADOW ================= -->
+<section class="hero" id="hero" aria-labelledby="t-hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Websites and online shops for growing businesses</p>
+      <h1 id="t-hero">Customers can’t see how big you are.<span class="l2">They only see your <span class="u">website</span>.</span></h1>
+      <p class="sub">We build websites and online shops that make a small business look as trusted as a big one. Then we help it sell like one.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#order">Make me look big</a>
+        <a class="btn btn--ghost" href="#order" data-need="Free website check-up">Free website check-up</a>
+      </div>
+      <p class="slots"><i aria-hidden="true"></i><span id="slotsLine">We only take a few projects each month.</span></p>
+    </div>
+    <div class="stage">
+      <svg viewBox="0 0 640 540" role="img" aria-label="A small shop at night. A spotlight comes on and the shop's shadow on the wall grows into a skyscraper with a glowing logo.">
+        <defs>
+          <radialGradient id="spot" cx="58%" cy="48%" r="58%"><stop offset="0" stop-color="#FFE7A0" stop-opacity=".55"/><stop offset=".55" stop-color="#FFD45C" stop-opacity=".18"/><stop offset="1" stop-color="#FFD45C" stop-opacity="0"/></radialGradient>
+          <linearGradient id="beam" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFE7A0" stop-opacity=".55"/><stop offset="1" stop-color="#FFE7A0" stop-opacity="0"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <rect x="0" y="0" width="640" height="450" rx="18" fill="#1B2840"/>
+        <g opacity=".35" stroke="#26365A" stroke-width="2"><path d="M0 90h640M0 180h640M0 270h640M0 360h640M80 0v450M200 0v450M320 0v450M440 0v450M560 0v450"/></g>
+        <rect id="spotPool" x="0" y="0" width="640" height="450" rx="18" fill="url(#spot)"/>
+        <path id="beamShape" d="M86 420L260 40L640 40L640 450L150 450z" fill="url(#beam)"/>
+        <!-- the shadow on the wall, three stages -->
+        <g fill="#0B1220">
+          <g class="shadow-stage" id="sh1" data-scene-step><path d="M300 450v-120h-14l40-40h168l40 40h-14v120z"/><rect x="350" y="316" width="120" height="16" rx="3"/></g>
+          <g class="shadow-stage" id="sh2" data-scene-step><path d="M300 450V200h40v-30h140v30h40v250z"/><rect x="380" y="140" width="60" height="30"/></g>
+          <g class="shadow-stage" id="sh3" data-scene-step><path d="M310 450V150h30V90h40V40h60v50h40v60h30v300z"/><rect x="406" y="0" width="8" height="40"/>
+            <g id="topLogo" filter="url(#glow)"><rect x="378" y="96" width="64" height="40" rx="10" fill="#FFC72C" stroke="#1C1A17" stroke-width="3"/><path d="M398 104l8 22 4-9 9-4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></g>
+            <g fill="#26365A"><rect x="330" y="180" width="22" height="16"/><rect x="368" y="180" width="22" height="16"/><rect x="430" y="180" width="22" height="16"/><rect x="468" y="180" width="22" height="16"/><rect x="330" y="230" width="22" height="16"/><rect x="430" y="230" width="22" height="16"/><rect x="468" y="280" width="22" height="16"/><rect x="368" y="280" width="22" height="16"/><rect x="330" y="330" width="22" height="16"/><rect x="430" y="380" width="22" height="16"/></g></g>
+        </g>
+        <!-- floor -->
+        <rect x="0" y="450" width="640" height="90" fill="#0F1726"/>
+        <path d="M0 450h640" stroke="#26365A" stroke-width="3"/>
+        <!-- the real shop: small -->
+        <g id="shop">
+          <ellipse cx="200" cy="472" rx="96" ry="10" fill="#000" opacity=".35"/>
+          <rect x="128" y="380" width="144" height="90" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
+          <g stroke="#1C1A17" stroke-width="3"><path d="M120 380l12-26h136l12 26z" fill="#FFC72C"/><path d="M152 354l-8 26M176 354l-4 26M200 354v26M224 354l4 26M248 354l8 26" fill="none"/></g>
+          <rect x="146" y="398" width="44" height="34" fill="#FFE7A0" stroke="#1C1A17" stroke-width="3"/>
+          <rect x="212" y="404" width="40" height="66" fill="#006A4E" stroke="#1C1A17" stroke-width="3"/><circle cx="244" cy="438" r="3" fill="#FFC72C"/>
+          <rect x="150" y="338" width="100" height="18" rx="4" fill="#1C1A17"/><text x="200" y="351" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="11" fill="#FFC72C">YOUR SHOP</text>
+        </g>
+        <!-- lamp -->
+        <g id="lamp"><path d="M60 540V470" stroke="#3A4A6A" stroke-width="8"/><path d="M40 540h40" stroke="#3A4A6A" stroke-width="8" stroke-linecap="round"/>
+          <g id="lampHead"><path d="M58 474l22-40 22 10-16 42z" fill="#3A4A6A" stroke="#1C1A17" stroke-width="3"/><circle id="bulb" cx="88" cy="452" r="8" fill="#FFE7A0"/></g></g>
+      </svg>
+      <button class="replay" type="button" id="replay">↺ Replay</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JUDGED IN 0.05 SECONDS ================= -->
+<section class="sec" id="judged" aria-labelledby="t-judged">
+  <div class="wrap">
+    <div class="sec-head" data-rise>
+      <p class="eyebrow">First impressions</p>
+      <h2 id="t-judged">You get 0.05 seconds.</h2>
+      <p>That’s how fast people decide what they think of a website. Before they read a word, check a price or see how good you really are.</p>
+    </div>
+    <div class="judged-grid">
+      <div class="mock" id="mock" data-mode="old" role="img" aria-label="The same business shown with an old website, judged Nope, and with a new website, judged Take my money.">
+        <div class="bar"><i style="background:#E8283F"></i><i style="background:#FFC72C"></i><i style="background:#0E8A62"></i><span id="mockUrl">northsidebakery.freesite.biz</span></div>
+        <div class="view v-old" aria-hidden="true">
+          <div class="mq">*** WELCOME TO OUR WEBSITE!!! *** CALL FOR PRICES ***</div>
+          <h4>Northside Bakery Homepage</h4>
+          <div class="blur"></div>
+          <div class="uc">UNDER CONSTRUCTION</div>
+          <small>Best viewed in Internet Explorer · Visitors: 000041</small>
+        </div>
+        <div class="view v-new" aria-hidden="true">
+          <div class="nav"><span class="lg"></span>Northside Bakery<em>Menu · Catering · Visit</em></div>
+          <div class="hz"><div><strong>Fresh from the oven, at your door by 9.</strong><p>Order before midnight. Pay online. Pick up or delivery.</p><p class="stars">★★★★★ Loved by locals</p></div><div class="art"></div></div>
+          <div class="row"><div>Sourdough</div><div>Croissants</div><div>Party box</div><span class="buy">Order now</span></div>
+        </div>
+        <svg class="eyes" viewBox="0 0 600 362" preserveAspectRatio="none" aria-hidden="true">
+          <path id="eyeOld" d="M60 40L540 50L90 150L520 175L120 260L320 300" fill="none" stroke="#E8283F" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round" opacity="0"/>
+          <path id="eyeNew" d="M60 40Q300 30 520 50L80 120Q250 140 330 170L540 330" fill="none" stroke="#0E8A62" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round" opacity="0"/>
+          <circle id="eyeDot" r="12" fill="#FFC72C" stroke="#1C1A17" stroke-width="3" opacity="0"/>
+        </svg>
+        <span class="watch" id="watch">0.00s</span>
+        <span class="stamp nope" id="stamp">Nope.</span>
+      </div>
+      <div class="judge-copy" data-rise>
+        <p class="verdict" id="verdict">Same bakery. Same bread. Gone in 0.05 seconds.</p>
+        <p id="verdictSub">Your customer doesn’t know your bread is the best in town. They only know your website looks like 2004.</p>
+        <div><button class="btn btn--green" type="button" id="judgeBtn">Show me with Click &amp; Grow</button></div>
+        <p class="src">Source: Lindgaard, Fernandes, Dudek and Brown (2006), “Attention web designers: You have 50 milliseconds to make a good first impression!”, <i>Behaviour &amp; Information Technology</i>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUTHS ================= -->
+<section class="sec truths" id="truths" aria-labelledby="t-truths">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">Well, that’s true</p><h2 id="t-truths">Things every owner already knows.</h2></div>
+    <div class="tgrid">
+      <article class="card truth"><q>People look you up before they pay you.</q><p class="fix"><b>Fix</b>We make sure what they find looks like a business worth paying.</p></article>
+      <article class="card truth"><q>Nobody trusts a “Coming soon” page from 2019.</q><p class="fix"><b>Fix</b>A real site, kept up to date, with free support after launch.</p></article>
+      <article class="card truth"><q>“DM for price” loses the impatient ones.</q><p class="fix"><b>Fix</b>Prices on the page and an Order button that works at midnight.</p></article>
+      <article class="card truth"><q>If Google can’t find you, your competitor says thanks.</q><p class="fix"><b>Fix</b>Free Google and SEO setup with every website.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARE ================= -->
+<section class="sec" id="compare" aria-labelledby="t-compare">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">The difference between cheap and good</p><h2 id="t-compare">Three ways to get a website. Pick wisely.</h2></div>
+    <div class="cgrid">
+      <div class="card col bad"><span class="who">Option 1</span><h3>The free template</h3>
+        <ul><li>Looks like 4,000 other sites<span class="st"></span></li><li>You’re the designer, the developer and the help desk<span class="st"></span></li><li>Free, until you count your weekends<span class="st"></span></li></ul></div>
+      <div class="card col bad"><span class="who">Option 2</span><h3>The big agency</h3>
+        <ul><li>Gorgeous, eventually<span class="st"></span></li><li>Three meetings before anyone says a price<span class="st"></span></li><li>You pay for their office view<span class="st"></span></li></ul></div>
+      <div class="card col good"><span class="tag">This one.</span><span class="who">Option 3</span><h3>Click &amp; Grow</h3>
+        <ul><li>Designed around your customers</li><li>One quote, agreed before we start</li><li>Logo, Google setup and support included</li></ul>
+        <p class="price">from <b data-usd="249">$249</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec" id="services" aria-labelledby="t-svc" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">What we build</p><h2 id="t-svc">Everything a growing business needs online.</h2></div>
+    <div class="svc">
+      <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M3 12h26" stroke="#1C1A17" stroke-width="2.5"/><rect x="7" y="16" width="10" height="3" fill="#006A4E"/></svg></span><h3>Business website</h3><p>Fast, built for phones, easy to update.</p><span class="price">from <b data-usd="249">$249</b></span></a>
+      <a href="#order" data-need="Online shop"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 11c0-6 10-6 10 0" fill="none" stroke="#1C1A17" stroke-width="2.5"/></svg></span><h3>Online shop</h3><p>Cart, checkout and payments, so people buy without asking.</p><span class="price">from <b data-usd="449">$449</b></span></a>
+      <a href="#order" data-need="Google & SEO"><span class="ico" style="--bg:#D6F4F1"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M20 20l7 7" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg></span><h3>Google &amp; SEO</h3><p>Show up when people search for what you sell.</p><span class="price">from <b data-usd="119">$119</b>/mo</span></a>
+      <a href="#order" data-need="Ads"><span class="ico" style="--bg:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Google &amp; social ads</h3><p>Ads that bring orders, not just likes.</p><span class="price">from <b data-usd="99">$99</b>/mo</span></a>
+      <a href="#order" data-need="Mobile app"><span class="ico" style="--bg:var(--red-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="16" cy="14" r="4" fill="#E8283F"/></svg></span><h3>Mobile app</h3><p>Your business on their home screen.</p><span class="price">from <b data-usd="1190">$1,190</b></span></a>
+      <a href="#order" data-need="Logo & branding"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.5 8 8.5.7-6.5 5.6 2 8.4L16 22.3 8.5 26.7l2-8.4L4 12.7l8.5-.7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Logo &amp; branding</h3><p>A logo people remember.</p><span class="price"><span class="free">Free with any website</span></span></a>
+      <a href="#order" data-need="Website care"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12-6-2-10-6-10-12V8z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l4 4 6-7" fill="none" stroke="#006A4E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Website care</h3><p>Updates, backups and fixes, handled.</p><span class="price">from <b data-usd="29">$29</b>/mo</span></a>
+      <a href="#order" data-need="Free website check-up"><span class="ico" style="--bg:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 18h5l3-8 5 14 3-6h8" fill="none" stroke="#1C1A17" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Free check-up</h3><p>We look at what you have and tell you what’s costing you customers.</p><span class="price"><span class="free">Free, no strings</span></span></a>
+    </div>
+    <p class="note">Sample prices. You agree the quote before we start, and you can pay in parts.</p>
+  </div>
+</section>
+
+<!-- ================= WORLDWIDE ================= -->
+<section class="sec world" id="world" aria-labelledby="t-world">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">We work worldwide</p><h2 id="t-world">Your customers are everywhere. So are we.</h2><p>We work remotely with businesses across North America, the UK and Europe, the Gulf and Australia. Calls in your time zone, prices in your currency.</p></div>
+    <div class="map">
+      <svg viewBox="0 0 1000 470" role="img" aria-label="A world map with lines from our studio to New York, Toronto, London, Berlin, Dubai, Riyadh, Doha and Sydney." id="mapSvg">
+        <g fill="#26365A" stroke="#3A4A6A" stroke-width="2" stroke-linejoin="round">
+          <path d="M120 70L250 55L330 60L360 95L330 120L300 150L275 175L250 210L225 235L200 215L165 170L130 130Z"/><path d="M360 40L420 35L410 80L370 85Z"/>
+          <path d="M270 250L320 255L355 285L340 340L310 390L290 410L280 360L265 300Z"/>
+          <path d="M470 70L560 60L590 90L560 120L520 135L480 130L465 105Z"/>
+          <path d="M470 150L560 150L600 190L620 230L590 300L560 350L535 360L520 300L490 240L460 200Z"/>
+          <path d="M570 60L800 45L900 70L930 110L880 150L830 200L780 220L740 200L700 190L650 170L610 140L590 110Z"/><path d="M800 230L860 240L850 260L810 255Z"/>
+          <path d="M860 300L940 300L960 340L930 380L880 375L850 340Z"/>
+        </g>
+        <g id="arcs" fill="none" stroke="#FFC72C" stroke-width="3" stroke-linecap="round"></g>
+        <g id="pins"></g>
+      </svg>
+    </div>
+    <div class="clocks" id="clocks"></div>
+  </div>
+</section>
+
+<!-- ================= INCLUDED ================= -->
+<section class="sec" id="included" aria-labelledby="t-inc">
+  <div class="wrap inc-grid">
+    <div data-rise>
+      <div class="sec-head" style="margin-bottom:24px"><p class="eyebrow">Everything included</p><h2 id="t-inc">The extras other agencies charge for. Free.</h2><p>Every website comes with all of this. No add-ons later, no surprise invoice.</p></div>
+      <div class="hero-cta" style="margin-top:0"><a class="btn btn--green" href="#order">Get my free quote</a><a class="btn btn--white" href="#order" data-need="Free website check-up">Free website check-up</a></div>
+    </div>
+    <ul class="inc">
+      <li><span class="ok"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Free logo<small>with every website</small></span></li>
+      <li><span class="ok"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Free Google and SEO setup<small>so people can find you</small></span></li>
+      <li><span class="ok"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Free support after launch<small>something breaks, we fix it</small></span></li>
+      <li><span class="ok"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Pay in parts<small>agreed with you before we start</small></span></li>
+      <li><span class="ok"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Quote agreed upfront<small>the quote you agree is the quote you pay</small></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="sec" id="how" aria-labelledby="t-how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">How it works</p><h2 id="t-how">Four steps from small to serious.</h2></div>
+    <ol class="steps"><li class="ln" aria-hidden="true"></li>
+      <li><span class="n">1</span><h3>Free check-up</h3><p>Send us your site or page. We tell you what’s costing you customers.</p></li>
+      <li><span class="n">2</span><h3>Agree the quote</h3><p>One clear price before we start. Pay in parts if you like.</p></li>
+      <li><span class="n">3</span><h3>We build it</h3><p>You see it and click through it while it’s being built.</p></li>
+      <li><span class="n">4</span><h3>Launch and grow</h3><p>We go live, set up Google and stay on with free support.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq" aria-labelledby="t-faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">FAQ</p><h2 id="t-faq">Questions, including the awkward ones.</h2></div>
+    <div class="faq">
+      <details><summary>Will a better website really bring more customers?</summary><p>A website can’t sell something nobody wants. What it does is stop you losing the people who are already looking for you: the ones who judge you in a glance, search you on Google, or want to buy without waiting for a reply.</p></details>
+      <details><summary>Can you work with me if I’m in the US, UK, Europe, the Gulf or Australia?</summary><p>Yes. We work remotely and schedule calls in your time zone. Prices on this page switch to your currency.</p></details>
+      <details><summary>What’s in the free website check-up?</summary><p>We look at your website or social page and send you a short list of what’s costing you customers. It’s free, and you don’t have to hire us afterwards.</p></details>
+      <details><summary>Can I pay in parts?</summary><p>Yes. We agree the split with you before we start.</p></details>
+      <details><summary>Will the price go up halfway through?</summary><p>No. The quote you agree is the quote you pay. If you ask for something new later, we quote it separately and you decide.</p></details>
+      <details><summary>How do I pay?</summary><p>By card, bank transfer or PayPal. Clients in Bangladesh can also pay with bKash or Nagad.</p></details>
+      <details><summary>I’m not a tech person. Is that a problem?</summary><p>Not at all. If you can send an email, you can run your website. We show you how.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ORDER FORM ================= -->
+<section class="sec order" id="order" aria-labelledby="t-order">
+  <div class="wrap">
+    <div class="sec-head" data-rise><p class="eyebrow">Free quote</p><h2 id="t-order">Let’s make you look big.</h2><p>Four quick steps. You get a plan and a quote. No payment now.</p></div>
+    <form class="card of" id="of" novalidate>
+      <div class="of-prog" aria-hidden="true"><i id="ofProg"></i></div>
+      <p class="of-no" id="ofNo">Step 1 of 4</p>
+      <div class="err-sum" id="errSum" role="alert" tabindex="-1" hidden></div>
+      <fieldset class="fstep" data-step="1"><legend><h3 tabindex="-1">What do you need?</h3></legend><p class="help">Pick as many as you like.</p>
+        <div class="opts" id="needs">
+          <label><input type="checkbox" name="need" value="Website"><span class="o">Website<small>New or redesign</small></span></label>
+          <label><input type="checkbox" name="need" value="Online shop"><span class="o">Online shop<small>Sell without DMs</small></span></label>
+          <label><input type="checkbox" name="need" value="Google & SEO"><span class="o">Google &amp; SEO<small>Get found</small></span></label>
+          <label><input type="checkbox" name="need" value="Ads"><span class="o">Ads<small>Google and social</small></span></label>
+          <label><input type="checkbox" name="need" value="Logo & branding"><span class="o">Logo &amp; branding<small>Free with a website</small></span></label>
+          <label><input type="checkbox" name="need" value="Mobile app"><span class="o">Mobile app<small>iOS and Android</small></span></label>
+          <label><input type="checkbox" name="need" value="Website care"><span class="o">Website care<small>Updates and fixes</small></span></label>
+          <label><input type="checkbox" name="need" value="Free website check-up"><span class="o">Free check-up<small>Start here, it’s free</small></span></label>
+          <label><input type="checkbox" name="need" value="Not sure"><span class="o">Not sure yet<small>We’ll suggest</small></span></label>
+        </div><p class="err" id="e1"></p></fieldset>
+      <fieldset class="fstep" data-step="2" hidden><legend><h3 tabindex="-1">How soon?</h3></legend>
+        <div class="opts">
+          <label><input type="radio" name="when" value="No rush" checked><span class="o">No rush<small>In 1 to 2 months</small></span></label>
+          <label><input type="radio" name="when" value="This month"><span class="o">This month<small>Let’s get going</small></span></label>
+          <label><input type="radio" name="when" value="Urgent"><span class="o">Urgent<small>Yesterday, ideally</small></span></label>
+        </div></fieldset>
+      <fieldset class="fstep" data-step="3" hidden><legend><h3 tabindex="-1">Rough budget?</h3></legend><p class="help">In your currency. Every budget gets an honest answer.</p>
+        <div class="opts">
+          <label><input type="radio" name="budget" value="b1"><span class="o" data-b="0,250">Under $250</span></label>
+          <label><input type="radio" name="budget" value="b2"><span class="o" data-b="250,1000">$250 to $1,000</span></label>
+          <label><input type="radio" name="budget" value="b3"><span class="o" data-b="1000,3000">$1,000 to $3,000</span></label>
+          <label><input type="radio" name="budget" value="b4"><span class="o" data-b="3000,">$3,000 and up</span></label>
+          <label><input type="radio" name="budget" value="Not sure" checked><span class="o">Not sure yet</span></label>
+        </div></fieldset>
+      <fieldset class="fstep" data-step="4" hidden><legend><h3 tabindex="-1">Where do we send the plan?</h3></legend>
+        <div class="two">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+          <div class="field"><label for="f-biz">Business name</label><input id="f-biz" autocomplete="organization"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-wa">WhatsApp or phone</label><div class="phone"><span class="ccx" id="cc">+1</span><input id="f-wa" type="tel" inputmode="tel" autocomplete="tel-national" aria-describedby="e-wa"></div><p class="err" id="e-wa"></p></div>
+          <div class="field"><label for="f-mail">Email (optional)</label><input id="f-mail" type="email" autocomplete="email" aria-describedby="e-mail"><p class="err" id="e-mail"></p></div>
+        </div></fieldset>
+      <div class="done" id="done" hidden><span class="big"><svg><use href="#tick"/></svg></span><h3 tabindex="-1" id="doneTitle" style="font-size:30px">You’re on the list.</h3><p style="color:var(--ink-2);max-width:28em">We’ll get back to you with a plan and a quote. This is a preview, so nothing was sent yet.</p></div>
+      <div class="of-nav" id="ofNav"><button class="btn btn--white" type="button" id="backBtn" hidden>Back</button><button class="btn btn--green next" type="button" id="nextBtn">Next</button></div>
+      <p class="sr" role="status" aria-live="polite" id="live"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FINAL ================= -->
+<section class="sec final" aria-labelledby="t-final">
+  <div class="wrap">
+    <svg class="fart" viewBox="0 0 420 200" aria-hidden="true"><rect width="420" height="170" rx="14" fill="#1B2840"/><g fill="#0B1220"><path class="fsh" id="fsh1" d="M170 170v-50h-8l18-18h60l18 18h-8v50z"/><path class="fsh" id="fsh2" d="M176 170V50h16V26h36v24h16v120z"/></g><rect y="170" width="420" height="30" fill="#0F1726"/><g><rect x="70" y="140" width="60" height="38" fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"/><path d="M66 140l6-12h56l6 12z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3"/></g></svg>
+    <h2 id="t-final">Ready to cast a bigger shadow?</h2>
+    <p>Tell us about your business today. You’ll have a plan and a quote agreed before we start.</p>
+    <div class="hero-cta"><a class="btn" href="#order">Make me look big</a><a class="btn btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap foot"><span>© 2026 Click &amp; Grow. A remote team building for businesses worldwide.</span><nav aria-label="Footer"><a href="#judged">First impressions</a><a href="#services">Services</a><a href="#world">Worldwide</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav></div></footer>
+<div class="mbar" aria-label="Quick actions"><a class="btn btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a><a class="btn" href="#order">Free quote</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = window.gsap, motion = !!(G && window.ScrollTrigger) && !reduce;
+  root.classList.add(motion ? 'motion' : 'no-motion');
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const el = (t, a, p) => { const e = document.createElementNS(SVGNS, t); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+
+  /* ---------- slots (placeholder numbers: confirm each month) ---------- */
+  const SLOTS = { total: 6, taken: 4 };
+  const month = new Date().toLocaleString('en', { month: 'long' }), left = Math.max(0, SLOTS.total - SLOTS.taken);
+  $('#slotsLine').textContent = left ? `${left} of ${SLOTS.total} project slots left for ${month}.` : `${month} is fully booked. We’re taking bookings for next month.`;
+  $('#stripText').textContent = `Free website check-up for every business. ${left ? `${left} project slots left for ${month}.` : ''}`;
+
+  /* ---------- region: currency and phone code ---------- */
+  const REG = { US: ['$', 1, '+1'], CA: ['C$', 1.37, '+1'], UK: ['£', .8, '+44'], EU: ['€', .92, '+'], AE: ['AED ', 3.67, '+971'], AU: ['A$', 1.52, '+61'], BD: ['৳', 100, '+880'], XX: ['$', 1, '+'] };
+  let region = 'US';
+  const money = usd => { const [sym, rate] = REG[region]; let v = usd * rate;
+    if (region === 'BD') v = Math.max(1000, Math.round(v / 1000) * 1000); else if (v >= 50) v = Math.round(v / 10) * 10 - 1; else v = Math.round(v);
+    return sym + v.toLocaleString(region === 'BD' ? 'en-IN' : 'en-US'); };
+  function applyRegion(r) {
+    region = REG[r] ? r : 'US'; root.dataset.region = region; $('#region').value = region;
+    $$('[data-usd]').forEach(e => e.textContent = money(+e.dataset.usd));
+    $$('[data-b]').forEach(e => { const [a, b] = e.dataset.b.split(',').map(Number); e.textContent = !a ? `Under ${money(b)}` : !b ? `${money(a)} and up` : `${money(a)} to ${money(b)}`; });
+    $('#cc').textContent = REG[region][2];
+    try { localStorage.setItem('cg-region', region); } catch (e) {}
+  }
+  function guessRegion() {
+    try { const s = localStorage.getItem('cg-region'); if (s) return s; } catch (e) {}
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (/^America\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Regina|St_Johns|Montreal)/.test(tz)) return 'CA';
+    if (tz.startsWith('America/')) return 'US';
+    if (tz === 'Europe/London') return 'UK';
+    if (tz.startsWith('Europe/')) return 'EU';
+    if (/^Asia\/(Dubai|Riyadh|Qatar|Bahrain|Kuwait|Muscat)/.test(tz)) return 'AE';
+    if (tz.startsWith('Australia/')) return 'AU';
+    if (tz === 'Asia/Dhaka') return 'BD';
+    return 'XX';
+  }
+  $('#region').addEventListener('change', e => applyRegion(e.target.value));
+  applyRegion(guessRegion());
+
+  /* ---------- form ---------- */
+  const form = $('#of'), steps = $$('.fstep'), next = $('#nextBtn'), back = $('#backBtn');
+  let step = 1;
+  const tick = need => { const i = $(`#needs input[value="${need}"]`) || $('#needs input[value="Website"]'); if (i) i.checked = true; };
+  document.addEventListener('click', e => { const a = e.target.closest('a[data-need]'); if (a) tick(a.dataset.need); });
+  function show(n) {
+    steps.forEach(s => s.hidden = +s.dataset.step !== n); step = n; back.hidden = n === 1;
+    next.textContent = n === 4 ? 'Send my request' : 'Next';
+    $('#ofNo').textContent = `Step ${n} of 4`; $('#ofProg').style.transform = `scaleX(${n / 4})`; $('#live').textContent = `Step ${n} of 4`;
+    if (motion) G.fromTo(steps[n - 1], { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: .3, ease: 'power3.out' });
+    $('legend h3', steps[n - 1]).focus({ preventScroll: true });
+  }
+  const setErr = (id, input, msg) => { $('#' + id).textContent = msg; if (input) msg ? $('#' + input).setAttribute('aria-invalid', 'true') : $('#' + input).removeAttribute('aria-invalid'); };
+  function valid() {
+    const errs = [];
+    if (step === 1) { const ok = $$('#needs input:checked').length > 0; setErr('e1', null, ok ? '' : 'Pick at least one, or choose "Not sure yet".'); if (!ok) errs.push(['needs', 'Pick what you need']); }
+    if (step === 4) {
+      const n = $('#f-name').value.trim(), w = $('#f-wa').value.replace(/\D/g, ''), m = $('#f-mail').value.trim();
+      setErr('e-name', 'f-name', n ? '' : 'Tell us your name.'); if (!n) errs.push(['f-name', 'Your name is missing']);
+      const wOk = w.length >= 6 && w.length <= 15; setErr('e-wa', 'f-wa', wOk ? '' : 'Add a number we can reach you on.'); if (!wOk) errs.push(['f-wa', 'Phone number is missing or too short']);
+      const mOk = !m || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m); setErr('e-mail', 'f-mail', mOk ? '' : 'That email doesn’t look right.'); if (!mOk) errs.push(['f-mail', 'Email looks wrong']);
+    }
+    const sum = $('#errSum');
+    if (errs.length) { sum.hidden = false; sum.innerHTML = 'Fix this to continue: ' + errs.map(([id, t]) => `<a href="#${id}">${t}</a>`).join(', '); sum.focus(); return false; }
+    sum.hidden = true; return true;
+  }
+  next.addEventListener('click', () => {
+    if (!valid()) return;
+    if (step < 4) return show(step + 1);
+    next.disabled = true; next.textContent = 'Sending…'; $('#ofProg').style.transform = 'scaleX(1)';
+    setTimeout(() => { steps.forEach(s => s.hidden = true); $('#ofNav').hidden = true; $('#ofNo').textContent = 'Done'; $('#done').hidden = false; $('#doneTitle').focus({ preventScroll: true }); $('#live').textContent = 'Request received.'; }, 600);
+  });
+  back.addEventListener('click', () => step > 1 && show(step - 1));
+  form.addEventListener('submit', e => { e.preventDefault(); next.click(); });
+
+  /* ---------- 0.05 seconds: works with or without GSAP ---------- */
+  const mock = $('#mock'), stamp = $('#stamp'), watch = $('#watch'), dot = $('#eyeDot');
+  const COPY = {
+    old: ['Same bakery. Same bread. Gone in 0.05 seconds.', 'Your customer doesn’t know your bread is the best in town. They only know your website looks like 2004.', 'Show me with Click & Grow', 'Nope.', 'nope', 'northsidebakery.freesite.biz'],
+    new: ['Same bakery. Now it looks like the best in town.', 'In the same 0.05 seconds, people see a business they trust, and their eyes land on the Order button.', 'Show me the old one', 'Take my money.', 'yes', 'northsidebakery.com']
+  };
+  let judging = null;
+  function judge(mode) {
+    const c = COPY[mode]; mock.dataset.mode = mode;
+    $('#verdict').textContent = c[0]; $('#verdictSub').textContent = c[1]; $('#judgeBtn').textContent = c[2]; $('#mockUrl').textContent = c[5];
+    stamp.textContent = c[3]; stamp.className = 'stamp ' + c[4];
+    const path = $(mode === 'old' ? '#eyeOld' : '#eyeNew'), other = $(mode === 'old' ? '#eyeNew' : '#eyeOld');
+    other.setAttribute('opacity', 0);
+    if (!motion) { path.setAttribute('opacity', 1); watch.textContent = '0.05s'; return; }
+    if (judging) judging.kill();
+    const L = path.getTotalLength(), p = { t: 0 }, w = { v: 0 };
+    judging = G.timeline()
+      .set(stamp, { opacity: 0 }).set(path, { attr: { opacity: 1 }, strokeDashoffset: 0 })
+      .to(dot, { attr: { opacity: 1 }, duration: .1 })
+      .to(p, { t: 1, duration: 1.1, ease: 'power1.inOut', onUpdate: () => { const pt = path.getPointAtLength(p.t * L); dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y); } }, '<')
+      .to(w, { v: .05, duration: 1.1, ease: 'none', onUpdate: () => { watch.textContent = w.v.toFixed(2) + 's'; } }, '<')
+      .fromTo(stamp, { opacity: 0, scale: 1.8, rotation: -24 }, { opacity: 1, scale: 1, rotation: -12, duration: .35, ease: 'back.out(2.4)' })
+      .to(mock, { x: -5, duration: .05, yoyo: true, repeat: 3, ease: 'none' }, '<.15');
+  }
+  $('#judgeBtn').addEventListener('click', () => judge(mock.dataset.mode === 'old' ? 'new' : 'old'));
+  if (!motion) judge('new');
+
+  /* ---------- world map: arcs, pins and clocks (static without GSAP) ---------- */
+  const home = [751, 184];
+  const CITIES = [['New York', 294, 137, 'America/New_York'], ['Toronto', 279, 129, 'America/Toronto'], ['London', 500, 107, 'Europe/London'], ['Berlin', 537, 104, 'Europe/Berlin'],
+                  ['Dubai', 654, 180, 'Asia/Dubai'], ['Riyadh', 630, 181, 'Asia/Riyadh'], ['Doha', 643, 180, 'Asia/Qatar'], ['Sydney', 920, 344, 'Australia/Sydney']];
+  const arcsG = $('#arcs'), pinsG = $('#pins');
+  const arcs = CITIES.map(([n, x, y]) => { const mx = (home[0] + x) / 2, my = Math.min(home[1], y) - Math.abs(home[0] - x) * .28 - 20; return el('path', { d: `M${home[0]} ${home[1]}Q${mx} ${my} ${x} ${y}` }, arcsG); });
+  const pins = CITIES.map(([n, x, y], i) => { const g = el('g', { class: 'pin' }, pinsG); el('circle', { cx: x, cy: y, r: 8, fill: '#FFC72C', stroke: '#1C1A17', 'stroke-width': 3 }, g);
+    if (!['Riyadh', 'Doha', 'Toronto', 'Berlin'].includes(n)) { const t = el('text', { x: n === 'London' ? x - 10 : x, y: y - 16, 'text-anchor': n === 'London' ? 'end' : 'middle', 'font-family': 'Archivo, sans-serif', 'font-weight': 700, 'font-size': 18, fill: '#EEF1F7' }, g); t.textContent = n; } return g; });
+  { const g = el('g', {}, pinsG); el('circle', { cx: home[0], cy: home[1], r: 11, fill: '#0E8A62', stroke: '#EEF1F7', 'stroke-width': 3 }, g); const t = el('text', { x: home[0] + 18, y: home[1] + 6, 'font-family': 'Archivo, sans-serif', 'font-weight': 700, 'font-size': 16, fill: '#9FB0CC' }, g); t.textContent = 'Our studio'; }
+  const clocks = $('#clocks');
+  const CLOCKS = [['New York', 'America/New_York'], ['Toronto', 'America/Toronto'], ['London', 'Europe/London'], ['Berlin', 'Europe/Berlin'], ['Dubai', 'Asia/Dubai'], ['Riyadh', 'Asia/Riyadh'], ['Doha', 'Asia/Qatar'], ['Sydney', 'Australia/Sydney']];
+  clocks.innerHTML = CLOCKS.map(([n]) => `<div class="clock"><b>${n}</b><span></span></div>`).join('');
+  const tickClocks = () => $$('.clock span', clocks).forEach((s, i) => { s.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: CLOCKS[i][1], hour: '2-digit', minute: '2-digit' }); });
+  tickClocks(); setInterval(tickClocks, 30000);
+
+  /* ---------- FAQ: smooth open/close with GSAP, native otherwise ---------- */
+  if (motion) $$('.faq details').forEach(d => { const sm = $('summary', d), p = $('p', d);
+    sm.addEventListener('click', e => { e.preventDefault(); G.killTweensOf(p);
+      if (d.open) G.to(p, { height: 0, paddingBottom: 0, opacity: 0, duration: .2, ease: 'power2.out', onComplete: () => { d.open = false; G.set(p, { clearProps: 'height,paddingBottom,opacity' }); } });
+      else { d.open = true; G.from(p, { height: 0, paddingBottom: 0, opacity: 0, duration: .26, ease: 'expo.out', clearProps: 'height,paddingBottom,opacity' }); } }); });
+
+  if (!motion) return;   // everything below is motion only; the page is complete without it
+  G.registerPlugin(ScrollTrigger);
+  const OUT = 'expo.out';
+
+  /* ---------- hero: the shadow grows (beats: light on, shop shadow, mid-rise, skyscraper) ---------- */
+  const heroTl = G.timeline({ paused: true });
+  heroTl.set(['#sh1', '#sh2', '#sh3'], { scaleY: 0, opacity: 0 }).set(['#spotPool', '#beamShape'], { opacity: 0 }).set('#bulb', { attr: { fill: '#3A4A6A' } }).set('#topLogo', { opacity: 0 }).set('.u', { backgroundSize: '0% 100%' })
+    .fromTo('#lampHead', { rotation: 25, svgOrigin: '60 474' }, { rotation: 0, svgOrigin: '60 474', duration: .6, ease: 'back.out(1.6)' }, .2)
+    .set('#bulb', { attr: { fill: '#FFE7A0' } }).to(['#spotPool', '#beamShape'], { opacity: 1, duration: .25, ease: 'power2.out' })
+    .to('#sh1', { scaleY: 1, opacity: 1, duration: .5, ease: 'back.out(1.5)' }, '+=.1')
+    .to('#sh2', { scaleY: 1, opacity: 1, duration: .55, ease: 'back.out(1.4)' }, '+=.35').to('#sh1', { opacity: 0, duration: .3 }, '<.2')
+    .to('#sh3', { scaleY: 1, opacity: 1, duration: .7, ease: 'back.out(1.3)' }, '+=.35').to('#sh2', { opacity: 0, duration: .3 }, '<.25')
+    .fromTo('#topLogo', { opacity: 0, scale: .6, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .4, ease: 'back.out(2.5)' }, '-=.15')
+    .to('#topLogo', { opacity: .55, duration: .06, yoyo: true, repeat: 3, ease: 'none' })
+    .to('.u', { backgroundSize: '100% 100%', duration: .5, ease: 'power2.out' }, '<');
+  G.from('.hero-copy > *', { y: 22, opacity: 0, duration: .6, ease: 'power3.out', stagger: i => [0, .06, .18, .26, .32][i] || .32 });
+  G.delayedCall(.5, () => heroTl.play(0));
+  $('#replay').addEventListener('click', () => heroTl.play(0));
+
+  /* ---------- section heads and copy rise once ---------- */
+  $$('[data-rise]').forEach(e => G.to(e, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: e, start: 'top 86%', once: true } }));
+
+  /* ---------- 0.05s: plays once when it comes into view ---------- */
+  G.set(stamp, { opacity: 0 });
+  ScrollTrigger.create({ trigger: mock, start: 'top 70%', once: true, onEnter: () => judge('old') });
+
+  /* ---------- truths flip in ---------- */
+  G.from('.truth', { rotationY: -70, opacity: 0, transformOrigin: '0 50%', duration: .6, ease: OUT, stagger: i => [0, .08, .18, .24][i], scrollTrigger: { trigger: '.tgrid', start: 'top 80%', once: true } });
+  G.from('.truth .fix', { y: 10, opacity: 0, duration: .4, ease: OUT, stagger: .08, delay: .45, scrollTrigger: { trigger: '.tgrid', start: 'top 80%', once: true } });
+
+  /* ---------- compare: bad lines get struck, ours gets the tag ---------- */
+  G.timeline({ scrollTrigger: { trigger: '.cgrid', start: 'top 72%', once: true } })
+    .from('.col', { y: 26, opacity: 0, duration: .5, ease: OUT, stagger: .1 })
+    .to('.col.bad .st', { scaleX: 1, duration: .25, ease: 'power2.out', stagger: .09 }, '+=.15')
+    .fromTo('.col .tag', { scale: 1.8, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 4, duration: .35, ease: 'back.out(2.4)' });
+
+  /* ---------- services ---------- */
+  G.from('.svc a', { y: 20, opacity: 0, duration: .45, ease: 'power3.out', stagger: i => [0, .04, .09, .12, .17, .2, .25, .28][i], scrollTrigger: { trigger: '.svc', start: 'top 82%', once: true } });
+
+  /* ---------- map: arcs draw out from the studio, pins pop ---------- */
+  arcs.forEach(a => { const L = a.getTotalLength(); a.style.strokeDasharray = L; a.style.strokeDashoffset = L; });
+  G.set(pins, { scale: 0 });
+  G.timeline({ scrollTrigger: { trigger: '.map', start: 'top 72%', once: true } })
+    .to(arcs, { strokeDashoffset: 0, duration: .8, ease: 'power2.inOut', stagger: .12 })
+    .to(pins, { scale: 1, duration: .35, ease: 'back.out(2.6)', stagger: .12 }, .55)
+    .from('.clock', { y: 12, opacity: 0, duration: .35, ease: OUT, stagger: .05 }, .6);
+
+  /* ---------- included: ticks draw in ---------- */
+  G.timeline({ scrollTrigger: { trigger: '.inc', start: 'top 78%', once: true } })
+    .from('.inc li', { x: 30, opacity: 0, duration: .45, ease: OUT, stagger: .08 })
+    .to('.inc .ok path', { strokeDashoffset: 0, duration: .25, ease: 'power2.out', stagger: .08 }, .2);
+
+  /* ---------- how it works: the line runs, numbers pop ---------- */
+  G.timeline({ scrollTrigger: { trigger: '.steps', start: 'top 78%', once: true } })
+    .to('.steps .ln', { scaleX: 1, duration: 1, ease: 'power2.inOut' })
+    .from('.steps .n', { scale: 0, duration: .35, ease: 'back.out(2.4)', stagger: .22 }, 0)
+    .from('.steps li > :not(.n)', { y: 10, opacity: 0, duration: .35, ease: OUT, stagger: .06 }, .15);
+
+  /* ---------- final: the small shadow grows again ---------- */
+  G.set('#fsh2', { scaleY: 0, transformOrigin: '50% 100%' });
+  G.timeline({ scrollTrigger: { trigger: '.final', start: 'top 70%', once: true } })
+    .from('#fsh1', { scaleY: 0, transformOrigin: '50% 100%', duration: .4, ease: 'back.out(1.6)' })
+    .to('#fsh2', { scaleY: 1, duration: .6, ease: 'back.out(1.4)' }, '+=.2').to('#fsh1', { opacity: 0, duration: .3 }, '<.2');
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>

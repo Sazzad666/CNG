@@ -1,0 +1,13 @@
+<%- include('_top', { title: 'Sign in' }) %>
+<div class="mx-auto mt-16 max-w-sm">
+  <p class="font-display text-2xl font-bold">Click <em class="accent text-lime">&amp;</em> Grow</p>
+  <h1 class="mt-6 text-3xl font-bold">Sign in</h1>
+  <% if (error) { %><p class="mt-4 rounded-xl border border-error/40 bg-error/10 px-4 py-3 text-sm" role="alert"><%= error %></p><% } %>
+  <form method="post" action="/admin/login" class="mt-6 grid gap-4">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <div class="field"><label for="u">Username or email</label><input class="input" id="u" name="username" autocomplete="username" required value="<%= username %>"></div>
+    <div class="field"><label for="p">Password</label><input class="input" id="p" name="password" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-lime mt-2">Sign in</button>
+  </form>
+</div>
+<%- include('_bottom') %>

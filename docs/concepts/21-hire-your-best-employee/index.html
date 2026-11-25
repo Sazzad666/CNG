@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en" data-region="US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Click &amp; Grow</title>
+<meta name="description" content="Your website talks to more customers than you do. Click &amp; Grow builds websites and online shops for small businesses worldwide.">
+<meta name="theme-color" content="#FFFBF2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+:root{
+  --paper:#FFFBF2;--paper-2:#F6ECD6;--desk:#C98B5E;--desk-2:#B07547;--cork:#C9A27A;--ink:#1C1A17;--ink-2:#57514A;--line:#E6D9BF;
+  --green:#006A4E;--green-2:#0E8A62;--green-lite:#D7F2E4;--red:#D9263B;--red-lite:#FFE1E5;--yellow:#FFC72C;--note:#FFE680;
+  --display:"Bricolage Grotesque","Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--type:"Courier Prime","Courier New",monospace;
+  --ease-out:cubic-bezier(.23,1,.32,1);--head:66px;--r:16px;
+  --lift:0 1px 0 rgba(28,26,23,.06),0 14px 28px -14px rgba(28,26,23,.38);
+  --lift-hi:0 2px 0 rgba(28,26,23,.06),0 22px 36px -16px rgba(28,26,23,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-tap-highlight-color:transparent;overflow-x:clip}
+::selection{background:var(--yellow);color:var(--ink)}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-underline-offset:3px}
+h1,h2,h3{font-family:var(--display);line-height:1;margin:0;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+@media (min-width:700px){.wrap{width:min(1180px,100% - 64px)}}
+:focus-visible{outline:3px solid var(--green-2);outline-offset:3px;border-radius:8px}
+
+/* buttons: solid, soft lift, press feedback */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:12px 22px;border:0;border-radius:12px;background:var(--yellow);color:var(--ink);font:700 17px/1 var(--display);letter-spacing:0;text-decoration:none;cursor:pointer;box-shadow:var(--lift);transition:transform 160ms var(--ease-out),box-shadow 160ms var(--ease-out),background-color 160ms ease;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.btn svg{width:20px;height:20px}
+.btn:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translateY(-2px);box-shadow:var(--lift-hi)}.btn:active{transform:scale(.97)}}
+.btn--green{background:var(--green);color:#fff}
+.btn--white{background:#fff}
+.btn--wa{background:#25D366}
+.btn--sm{min-height:42px;padding:9px 15px;font-size:15px}
+
+/* header */
+.strip{background:var(--green);color:#fff;text-align:center;font-size:14px;padding:8px 16px}
+.strip a{color:#fff;font-weight:700;text-decoration:underline}
+.head{position:sticky;top:0;z-index:60;background:rgba(255,251,242,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.head .wrap{display:flex;align-items:center;gap:20px;height:var(--head)}
+.logo{display:flex;align-items:center;gap:10px;font:800 21px/1 var(--display);text-decoration:none;white-space:nowrap}
+.logo svg{width:34px;height:34px}
+.head nav{margin-left:auto}
+.head nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+.head nav a{text-decoration:none;font-weight:600;font-size:15px;background:linear-gradient(var(--ink),var(--ink)) 0 100%/0 2px no-repeat;transition:background-size 200ms var(--ease-out)}
+@media (hover:hover){.head nav a:hover{background-size:100% 2px}}
+.acts{display:flex;align-items:center;gap:10px}
+.region{position:relative}
+.region select{appearance:none;-webkit-appearance:none;font:600 14px/1 var(--body);color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 30px 10px 12px;cursor:pointer;min-height:42px}
+.region::after{content:"";position:absolute;right:12px;top:50%;width:7px;height:7px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+@media (max-width:1080px){.head nav{display:none}.acts{margin-left:auto}}
+@media (max-width:640px){.acts .btn{display:none}}
+
+/* sections */
+.sec{padding:clamp(80px,10vw,124px) 0;position:relative}
+.sec-head{display:grid;gap:12px;max-width:760px;margin-bottom:40px}
+.sec-head h2{font-size:clamp(38px,5vw,66px);font-weight:800}
+.sec-head p{font-size:clamp(17px,1.4vw,19px);color:var(--ink-2);max-width:34em}
+html.motion [data-rise]{opacity:0;transform:translateY(20px)}
+.paper{background:#fff;border-radius:var(--r);box-shadow:var(--lift)}
+
+/* ---------- hero: the interview ---------- */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:44px;align-items:center;min-height:calc(100svh - var(--head) - 36px);padding:36px 0 56px}
+.hero h1{font-size:clamp(42px,5.4vw,78px);font-weight:800;margin-bottom:18px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--yellow) 62% 92%,transparent 92%)}
+.hero .sub{font-size:clamp(18px,1.5vw,21px);color:var(--ink-2);max-width:28em}
+.checkup{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;max-width:560px}
+.checkup label{flex-basis:100%;font-weight:700;font-size:15px}
+.checkup input{flex:1 1 240px}
+.hero-alt{margin-top:14px;font-size:15px;color:var(--ink-2)}
+.hero-alt a{font-weight:700;color:var(--green)}
+.stage{position:relative}
+.stage svg{width:100%;height:auto;overflow:visible}
+.stage .hint{position:absolute;right:2%;top:2%;font:700 14px/1.2 var(--body);background:var(--ink);color:#fff;padding:8px 12px;border-radius:10px;opacity:0;pointer-events:none}
+.replay{position:absolute;left:2%;bottom:0;font:600 13px/1 var(--body);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer;min-height:38px}
+#stamp{cursor:grab;touch-action:none}
+#stamp:active{cursor:grabbing}
+#stamp:focus-visible{outline:none}
+#stamp:focus-visible .st-base{stroke:var(--green-2);stroke-width:5}
+.lap,.paperbit,.ink{transform-box:fill-box}
+@media (max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:20px;min-height:0;padding:20px 0 56px}.stage{order:-1}}
+
+/* ---------- candidates ---------- */
+.cork{background:var(--cork) radial-gradient(rgba(90,56,24,.22) 1.2px,transparent 1.6px) 0 0/14px 14px;border-radius:22px;padding:34px;box-shadow:inset 0 0 0 10px #8C5A3C,inset 0 0 0 12px #6B4429}
+.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.cand{position:relative;background:#fff;border-radius:6px;padding:16px 16px 20px;box-shadow:var(--lift);display:grid;gap:10px;align-content:start;touch-action:pan-y}
+.cand:nth-child(1){transform:rotate(-2deg)}.cand:nth-child(2){transform:rotate(1.5deg)}.cand:nth-child(3){transform:rotate(-1deg)}.cand:nth-child(4){transform:rotate(2deg)}
+.pin{position:absolute;top:-8px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff8a8a,var(--red));box-shadow:0 3px 4px rgba(0,0,0,.3)}
+.cand:nth-child(4) .pin{background:radial-gradient(circle at 35% 35%,#8fe3bf,var(--green-2))}
+.cand svg.face{width:100%;height:auto;border-radius:4px;background:var(--paper-2)}
+.cand h3{font-size:22px}
+.cand p{font-size:15px;color:var(--ink-2);line-height:1.4}
+.verdict{position:absolute;right:10px;top:34%;font:800 26px/1 var(--display);color:var(--red);border:4px solid currentColor;border-radius:8px;padding:6px 10px;transform:rotate(-14deg);background:rgba(255,255,255,.7);pointer-events:none}
+.verdict.yes{color:var(--green)}
+html.motion .verdict{opacity:0}
+.stack-ctrl{display:none;gap:10px;justify-content:center;margin-top:18px}
+@media (max-width:760px){
+  .cork{padding:22px 18px 26px}
+  .board{display:block;position:relative;height:430px}
+  .cand{position:absolute;inset:0 0 auto 0;transform:none!important;height:410px;overflow:hidden}
+  .cand .btn{position:absolute;left:16px;right:16px;bottom:16px}
+  .stack-ctrl{display:flex}
+}
+
+/* ---------- a day at work ---------- */
+.day{background:var(--paper-2)}
+.day-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.clockwrap svg{width:min(440px,100%);margin:0 auto}
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.note{background:var(--note);padding:20px 18px 22px;box-shadow:0 10px 18px -10px rgba(28,26,23,.45);font-size:16px;line-height:1.4}
+.note:nth-child(1){transform:rotate(-2deg)}.note:nth-child(2){transform:rotate(1.6deg)}.note:nth-child(3){transform:rotate(1deg)}.note:nth-child(4){transform:rotate(-1.4deg)}
+.note time{display:block;font:700 15px/1 var(--type);margin-bottom:8px}
+@media (max-width:860px){.day-grid{grid-template-columns:minmax(0,1fr)}.notes{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- benefits ---------- */
+.ben-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
+.boxwrap svg{width:min(380px,100%);margin:0 auto;overflow:visible}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.perks li{display:flex;gap:16px;align-items:center;background:#fff;border-radius:14px;padding:14px 18px;box-shadow:var(--lift)}
+.perks svg{width:44px;height:44px;flex:none}
+.perks b{display:block;font:800 19px/1.2 var(--display)}
+.perks span{color:var(--ink-2);font-size:15px}
+@media (max-width:860px){.ben-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- offers ---------- */
+.offers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.offer{position:relative;display:grid;gap:8px;align-content:start;text-decoration:none;background:#fff;border-radius:10px;padding:46px 18px 18px;box-shadow:var(--lift);transition:transform 200ms var(--ease-out),box-shadow 200ms var(--ease-out);overflow:hidden}
+.offer::before{content:"";position:absolute;inset:0 0 auto 0;height:34px;background:var(--paper-2);clip-path:polygon(0 0,100% 0,50% 100%)}
+.offer .seal{position:absolute;top:16px;left:50%;width:30px;height:30px;margin-left:-15px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.offer .seal svg{width:16px;height:16px}
+.offer h3{font-size:20px}
+.offer .amt{font:800 26px/1 var(--display)}
+.offer .amt small{font:600 14px/1 var(--body);color:var(--ink-2)}
+.offer .free{font:800 18px/1.2 var(--display);color:var(--green)}
+@media (hover:hover) and (pointer:fine){.offer:hover{transform:translateY(-3px);box-shadow:var(--lift-hi)}}
+.fine{margin-top:18px;font-size:14px;color:var(--ink-2)}
+@media (max-width:1000px){.offers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.offers{gap:12px}.offer{padding:42px 12px 14px}.offer h3{font-size:17px}.offer .amt{font-size:22px}}
+
+/* ---------- remote ---------- */
+.remote{background:#1B2840;color:#EEF1F7}
+.remote .sec-head p{color:#C3CCDD}
+.cvline{font:700 clamp(16px,1.8vw,22px)/1.3 var(--type);color:var(--yellow);margin-bottom:18px;min-height:1.3em}
+.map{border-radius:20px;background:#22314F;padding:2%}
+.map svg{width:100%;height:auto}
+.clocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.clocks div{background:#22314F;border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:baseline}
+.clocks b{font:700 15px/1.2 var(--display)}
+.clocks span{font:700 15px/1 var(--type);color:var(--yellow)}
+@media (max-width:760px){.clocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- onboarding ---------- */
+.clip{position:relative;max-width:720px;background:#fff;border-radius:14px;padding:58px 30px 30px;box-shadow:var(--lift)}
+.clip::before{content:"";position:absolute;top:-16px;left:50%;width:150px;height:40px;margin-left:-75px;border-radius:10px;background:linear-gradient(#B9C1C9,#8C939B);box-shadow:0 4px 8px rgba(0,0,0,.25)}
+.todo{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.todo li{display:flex;gap:16px;align-items:center;padding:14px 10px;border-bottom:1px dashed var(--line);font:700 clamp(18px,1.8vw,22px)/1.25 var(--display)}
+.todo li:last-child{border-bottom:0}
+.box{flex:none;width:30px;height:30px;border:2.5px solid var(--ink);border-radius:6px;display:grid;place-items:center}
+.box svg{width:20px;height:20px}
+.box path{stroke-dasharray:26;stroke-dashoffset:0}
+html.motion .box path{stroke-dashoffset:26}
+.pencil{position:absolute;left:0;top:0;width:90px;pointer-events:none}
+html:not(.motion) .pencil{display:none}
+
+/* ---------- FAQ as an interview ---------- */
+.chat{display:grid;gap:14px;max-width:820px}
+.chat details{display:grid}
+.chat summary{list-style:none;cursor:pointer;justify-self:end;max-width:88%;background:var(--green);color:#fff;border-radius:18px 18px 4px 18px;padding:14px 18px;font:700 clamp(17px,1.5vw,19px)/1.3 var(--display);box-shadow:var(--lift);display:flex;gap:10px;align-items:center}
+.chat summary::-webkit-details-marker{display:none}
+.chat summary::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(45deg);transition:transform 200ms var(--ease-out);margin-left:6px}
+.chat details[open] summary::after{transform:rotate(-135deg)}
+.reply{display:flex;gap:10px;align-items:flex-end;margin-top:10px;max-width:88%}
+.reply svg{width:40px;height:40px;flex:none}
+.bubble{background:#fff;border-radius:18px 18px 18px 4px;padding:14px 18px;box-shadow:var(--lift);color:var(--ink-2)}
+.typing{display:none;gap:5px;padding:16px 18px}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--ink-2);opacity:.4}
+
+/* ---------- application form ---------- */
+.apply{background:var(--paper-2)}
+.app{position:relative;max-width:820px;background:#fff;border-radius:14px;padding:64px 28px 28px;box-shadow:var(--lift)}
+.app::before{content:"";position:absolute;top:-16px;left:50%;width:150px;height:40px;margin-left:-75px;border-radius:10px;background:linear-gradient(#B9C1C9,#8C939B);box-shadow:0 4px 8px rgba(0,0,0,.25)}
+.clipbar{position:absolute;left:28px;right:28px;top:30px;height:4px;border-radius:4px;background:var(--line)}
+.paperclip{position:absolute;left:0;top:-14px;width:34px;transition:transform 400ms var(--ease-out)}
+.step-no{font:700 14px/1 var(--type);color:var(--ink-2);margin-bottom:14px}
+.err-sum{background:var(--red-lite);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-weight:600;color:#8E1022}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px}
+legend h3{font-size:clamp(26px,2.6vw,32px)}
+.help{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.opts label{position:relative;cursor:pointer}
+.opts input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.opts .o{display:grid;gap:3px;height:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:700 16px/1.2 var(--display);transition:background-color 160ms ease,border-color 160ms ease,transform 160ms var(--ease-out)}
+.opts .o small{font:500 13px/1.3 var(--body);color:var(--ink-2)}
+.opts input:checked+.o{background:var(--green-lite);border-color:var(--green-2)}
+.opts input:active+.o{transform:scale(.98)}
+.opts input:focus-visible+.o{outline:3px solid var(--green-2);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+.field label{display:block;font-weight:700;font-size:15px;margin-bottom:6px}
+input[type=text],input[type=email],input[type=tel],input[type=url],input:not([type]){font:500 16px/1.2 var(--body);color:var(--ink);background:#fff;border:1.5px solid #CFC2A6;border-radius:12px;padding:13px 14px;min-height:50px;width:100%;transition:border-color 160ms ease}
+input:focus{border-color:var(--green-2)}
+input[aria-invalid=true]{border-color:var(--red);box-shadow:0 0 0 3px var(--red-lite)}
+.phone{display:flex;border:1.5px solid #CFC2A6;border-radius:12px;background:#fff;overflow:hidden}
+.phone .cc{display:grid;place-items:center;padding:0 12px;font:700 15px/1 var(--type);background:var(--paper-2)}
+.phone input{border:0;border-radius:0}
+.phone:focus-within{outline:3px solid var(--green-2);outline-offset:2px}
+.phone input:focus-visible{outline:0}
+.err{color:var(--red);font-size:14px;font-weight:600;margin:6px 0 0}
+.err:empty{display:none}
+.app-nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.app-nav .next{margin-left:auto}
+.done{text-align:center;display:grid;justify-items:center;gap:10px;padding:10px 0}
+.done svg{width:180px}
+.done h3{font-size:32px}
+@media (max-width:700px){.two{grid-template-columns:minmax(0,1fr)}.app{padding:60px 18px 22px}}
+
+/* ---------- final + footer ---------- */
+.final{text-align:center}
+.final svg{width:min(360px,80%);margin:0 auto 18px}
+.final h2{font-size:clamp(40px,6vw,84px);font-weight:800}
+.final .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+footer{padding:30px 0 110px;font-size:14px;color:var(--ink-2);border-top:1px solid var(--line)}
+.foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+.foot nav{display:flex;flex-wrap:wrap;gap:16px}
+.foot a{text-decoration:none;font-weight:600}
+@media (min-width:901px){footer{padding-bottom:30px}}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,251,242,.96);border-top:1px solid var(--line)}
+.mbar .btn{flex:1;min-height:48px}
+@media (max-width:900px){.mbar{display:flex}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.offer,.paperclip,.opts .o,.chat summary::after{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="tick" viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+  <symbol id="lapface" viewBox="0 0 48 48"><rect x="4" y="6" width="40" height="28" rx="5" fill="#1C1A17"/><rect x="7" y="9" width="34" height="22" rx="3" fill="#FFFBF2"/><circle cx="18" cy="18" r="3" fill="#1C1A17"/><circle cx="30" cy="18" r="3" fill="#1C1A17"/><path d="M18 24q6 5 12 0" fill="none" stroke="#1C1A17" stroke-width="2.2" stroke-linecap="round"/><path d="M2 36h44l-3 6H5z" fill="#8C939B"/></symbol>
+</defs></svg>
+
+<p class="strip"><span id="stripText">Free website check-up for every business.</span> <a href="#apply" data-need="Free website check-up">Claim yours</a></p>
+<header class="head"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E"/><path d="M12 9l7 20 3.5-8 8-3.5z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/><circle cx="28" cy="13" r="4.5" fill="#FFC72C"/></svg>Click &amp; Grow</a>
+  <nav aria-label="Main"><ul><li><a href="#candidates">Candidates</a></li><li><a href="#day">A day at work</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#offer">Prices</a></li><li><a href="#interview">FAQ</a></li></ul></nav>
+  <div class="acts">
+    <div class="region"><label class="sr" for="region">Your region (sets prices and phone code)</label>
+      <select id="region"><option value="US">USA · $</option><option value="CA">Canada · C$</option><option value="UK">UK · £</option><option value="EU">Europe · €</option><option value="AE">UAE &amp; Gulf · AED</option><option value="AU">Australia · A$</option><option value="BD">Bangladesh · ৳</option><option value="XX">Elsewhere · $</option></select></div>
+    <a class="btn btn--sm btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a>
+    <a class="btn btn--sm btn--green" href="#apply">Hire mine</a>
+  </div>
+</div></header>
+
+<main id="top">
+<!-- ================= HERO: THE INTERVIEW ================= -->
+<section class="hero" id="hero" aria-labelledby="t-hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1 id="t-hero">Your website talks to more customers <em>than you do</em>.</h1>
+      <p class="sub">So hire a good one. It works nights, speaks every language and has never asked for a raise.</p>
+      <form class="checkup" id="checkup" novalidate>
+        <label for="site">Start with a free website check-up</label>
+        <input id="site" type="url" inputmode="url" placeholder="yourbusiness.com or @yourinstagram" autocomplete="url">
+        <button class="btn btn--green" type="submit">Check my website</button>
+      </form>
+      <p class="hero-alt">No website yet? <a href="#apply">Hire one from scratch</a></p>
+    </div>
+    <div class="stage" id="stage">
+      <svg id="office" viewBox="0 0 680 500" role="img" aria-label="A job interview. A laptop with a smiling website face sits in the candidate's chair, its CV types out, and a HIRED stamp lands on it.">
+        <defs><clipPath id="cvClip"><rect x="368" y="150" width="226" height="200" rx="6"/></clipPath></defs>
+        <!-- wall, window, clock, plant -->
+        <rect x="0" y="0" width="680" height="352" rx="20" fill="#F3E7CF"/>
+        <g><rect x="470" y="34" width="176" height="150" rx="8" fill="#CFE6F2" stroke="#E6D9BF" stroke-width="8"/><path d="M478 184v-46h20v-24h18v24h14v-40h22v40h16v-20h18v66z" fill="#A9CBE0"/><path d="M558 34v150M470 109h176" stroke="#E6D9BF" stroke-width="6"/></g>
+        <g id="wallclock"><circle cx="92" cy="86" r="44" fill="#fff" stroke="#1C1A17" stroke-width="4"/><g stroke="#1C1A17" stroke-width="3"><path d="M92 48v8M92 116v8M54 86h8M122 86h8"/></g>
+          <path id="clockH" d="M92 86V62" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/><path id="clockM" d="M92 86h22" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round"/><path id="clockS" d="M92 86v-34" stroke="#D9263B" stroke-width="2" stroke-linecap="round"/><circle cx="92" cy="86" r="4" fill="#1C1A17"/></g>
+        <g><path d="M622 300c-30-40-10-70 0-80 10 10 32 40 0 80z" fill="#0E8A62"/><path d="M622 300c20-30 44-30 48-28-4 14-20 30-48 28z" fill="#006A4E"/><rect x="600" y="296" width="44" height="48" rx="6" fill="#D9263B"/></g>
+        <!-- the candidate's chair -->
+        <rect x="116" y="150" width="196" height="210" rx="26" fill="#006A4E"/>
+        <rect x="132" y="128" width="164" height="34" rx="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/>
+        <rect x="132" y="128" width="164" height="12" rx="6" fill="#D9263B"/>
+        <text x="214" y="138" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="9" fill="#fff">HELLO</text>
+        <text x="214" y="155" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="12" fill="#1C1A17">I’M YOUR WEBSITE</text>
+        <!-- the candidate: a laptop -->
+        <g id="lapOuter"><g class="lap" id="lap">
+          <rect x="130" y="186" width="168" height="116" rx="12" fill="#1C1A17"/>
+          <rect x="140" y="196" width="148" height="96" rx="6" fill="#FFFBF2"/>
+          <g id="eyes"><circle cx="188" cy="234" r="14" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="240" cy="234" r="14" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
+            <circle id="pupL" cx="188" cy="234" r="6" fill="#1C1A17"/><circle id="pupR" cx="240" cy="234" r="6" fill="#1C1A17"/>
+            <rect class="lid" x="172" y="218" width="32" height="32" rx="16" fill="#FFFBF2"/><rect class="lid" x="224" y="218" width="32" height="32" rx="16" fill="#FFFBF2"/></g>
+          <g id="happy" opacity="0"><rect x="170" y="216" width="88" height="36" fill="#FFFBF2"/><path d="M176 240q12-16 24 0M228 240q12-16 24 0" fill="none" stroke="#1C1A17" stroke-width="4" stroke-linecap="round"/></g>
+          <path id="smile" d="M196 264q18 14 36 0" fill="none" stroke="#1C1A17" stroke-width="4" stroke-linecap="round"/>
+          <path d="M116 302h196l-12 16H128z" fill="#8C939B"/>
+          <g id="tie"><path d="M206 318h16l-3 8h-10z" fill="#B01E30"/><path d="M209 326h10l6 30-11 10-11-10z" fill="#D9263B"/></g>
+        </g></g>
+        <g id="bubble" opacity="0"><rect x="6" y="178" width="118" height="44" rx="14" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M122 192l16 8-16 6" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M120 194v10" stroke="#fff" stroke-width="4"/><text x="64" y="206" text-anchor="middle" font-family="Bricolage Grotesque,Figtree,system-ui,sans-serif" font-weight="800" font-size="17" fill="#1C1A17">Thank you!</text></g>
+        <!-- the CV -->
+        <g id="cv">
+          <rect x="368" y="150" width="226" height="200" rx="6" fill="#fff" stroke="#E6D9BF" stroke-width="2"/>
+          <rect x="452" y="140" width="58" height="18" rx="5" fill="#8C939B"/>
+          <text x="384" y="182" font-family="Courier Prime,Courier New,monospace" font-weight="700" font-size="13" fill="#1C1A17">CURRICULUM VITAE</text>
+          <g font-family="Courier Prime,Courier New,monospace" font-size="11.5" fill="#1C1A17" id="cvLines">
+            <text data-scene-step x="384" y="206" font-weight="700" data-t="Availability:">Availability:</text><text x="384" y="220" data-t="24/7, holidays included">24/7, holidays included</text>
+            <text data-scene-step x="384" y="240" font-weight="700" data-t="Languages:">Languages:</text><text x="384" y="254" data-t="All of them">All of them</text>
+            <text data-scene-step x="384" y="274" font-weight="700" data-t="Lunch breaks:">Lunch breaks:</text><text x="384" y="288" data-t="None">None</text>
+            <text data-scene-step x="384" y="308" font-weight="700" data-t="Last job:">Last job:</text><text x="384" y="322" data-t="A free template (let go)">A free template (let go)</text>
+            <text data-scene-step x="384" y="342" font-weight="700" data-t="Salary:">Salary:</text><text x="440" y="342" data-t="agreed upfront">agreed upfront</text>
+          </g>
+          <g id="inks" clip-path="url(#cvClip)"><g class="ink" id="ink0" transform="translate(500 250) rotate(-14)"><rect x="-62" y="-22" width="124" height="44" rx="6" fill="none" stroke="#D9263B" stroke-width="5"/><text x="0" y="11" text-anchor="middle" font-family="Bricolage Grotesque,Figtree,system-ui,sans-serif" font-weight="800" font-size="32" fill="#D9263B">HIRED</text></g></g>
+        </g>
+        <!-- desk -->
+        <g id="desk"><rect x="30" y="350" width="620" height="22" rx="6" fill="#C98B5E"/><rect x="54" y="372" width="572" height="104" fill="#B07547"/><rect x="430" y="398" width="160" height="56" rx="6" fill="#C98B5E"/><rect x="494" y="420" width="32" height="8" rx="4" fill="#8C5A3C"/></g>
+        <g id="mug"><path class="steam" d="M318 316c-6-10 6-14 0-24" fill="none" stroke="#B9AFA0" stroke-width="3" stroke-linecap="round"/><path class="steam" d="M332 316c-6-10 6-14 0-24" fill="none" stroke="#B9AFA0" stroke-width="3" stroke-linecap="round"/><rect x="306" y="320" width="38" height="32" rx="6" fill="#FFC72C"/><path d="M344 328c12 0 12 16 0 16" fill="none" stroke="#FFC72C" stroke-width="5"/></g>
+        <g id="bits"></g>
+        <!-- the stamp: drag it onto the CV, or press Enter -->
+        <g id="stamp" tabindex="0" role="button" aria-label="Stamp the CV: hired">
+          <g id="stampIn"><circle cx="612" cy="290" r="13" fill="#1C1A17"/><rect x="606" y="294" width="12" height="26" fill="#57514A"/><rect class="st-base" x="586" y="320" width="52" height="16" rx="4" fill="#D9263B"/><rect x="590" y="336" width="44" height="5" rx="2" fill="#8E1022"/></g>
+        </g>
+        <path id="hintArrow" d="M592 300C560 250 560 240 520 236" fill="none" stroke="#1C1A17" stroke-width="2.5" stroke-dasharray="6 6" opacity="0"/>
+        <rect x="0" y="476" width="680" height="24" fill="#E2D2B3" rx="8"/>
+      </svg>
+      <span class="hint" id="hint">Drag the stamp onto the CV</span>
+      <button class="replay" id="replay" type="button">Replay the interview</button>
+      <p class="sr" aria-live="polite" id="heroLive"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE OTHER CANDIDATES ================= -->
+<section class="sec" id="candidates" aria-labelledby="t-cand">
+  <div class="wrap">
+    <div class="sec-head" data-rise><h2 id="t-cand">The other candidates.</h2><p>We interviewed them so you don’t have to.</p></div>
+    <div class="cork">
+      <div class="board" id="board">
+        <article class="cand" data-bad>
+          <span class="pin" aria-hidden="true"></span>
+          <svg class="face" viewBox="0 0 160 100" aria-hidden="true"><g opacity=".55"><circle cx="40" cy="44" r="16" fill="#B9B2A4"/><path d="M18 96c0-24 10-34 22-34s22 10 22 34z" fill="#B9B2A4"/><circle cx="80" cy="44" r="16" fill="#B9B2A4"/><path d="M58 96c0-24 10-34 22-34s22 10 22 34z" fill="#B9B2A4"/><circle cx="120" cy="44" r="16" fill="#B9B2A4"/><path d="M98 96c0-24 10-34 22-34s22 10 22 34z" fill="#B9B2A4"/></g><circle cx="80" cy="44" r="16" fill="#8C939B"/><path d="M58 96c0-24 10-34 22-34s22 10 22 34z" fill="#8C939B"/></svg>
+          <h3>The free template</h3><p>Turned up in the same outfit as 4,000 other candidates.</p>
+          <span class="verdict" aria-hidden="true">NEXT</span>
+        </article>
+        <article class="cand" data-bad>
+          <span class="pin" aria-hidden="true"></span>
+          <svg class="face" viewBox="0 0 160 100" aria-hidden="true"><circle cx="80" cy="42" r="18" fill="#F1C6A0"/><path d="M62 40c0-18 36-18 36 0" fill="#3A2A1E"/><path d="M58 42a22 22 0 0 1 44 0" fill="none" stroke="#2F5DFF" stroke-width="5"/><rect x="54" y="38" width="10" height="16" rx="4" fill="#2F5DFF"/><rect x="96" y="38" width="10" height="16" rx="4" fill="#2F5DFF"/><path d="M54 100c0-24 12-36 26-36s26 12 26 36z" fill="#FFC72C"/><rect x="104" y="70" width="38" height="26" rx="2" fill="#fff" stroke="#57514A" stroke-width="2"/><path d="M110 78h26M110 85h20" stroke="#57514A" stroke-width="2"/></svg>
+          <h3>Your nephew</h3><p>Very talented. Available after exams.</p>
+          <span class="verdict" aria-hidden="true">NEXT</span>
+        </article>
+        <article class="cand" data-bad>
+          <span class="pin" aria-hidden="true"></span>
+          <svg class="face" viewBox="0 0 160 100" aria-hidden="true"><circle cx="70" cy="42" r="17" fill="#C98B5E"/><path d="M53 38c2-16 32-16 34 0" fill="#1C1A17"/><path d="M44 100c0-24 12-36 26-36s26 12 26 36z" fill="#2F3A44"/><path d="M66 64l4 10 4-10" fill="#fff"/><path d="M70 74l-3 18h6z" fill="#D9263B"/><g transform="translate(112 52)"><path d="M0 0h24M0 36h24M3 0c0 12 18 12 18 18S3 24 3 36M21 0c0 12-18 12-18 18s18 6 18 18" fill="none" stroke="#57514A" stroke-width="2.5"/><path d="M7 30h10l-5-6z" fill="#FFC72C"/></g></svg>
+          <h3>The big agency</h3><p>Brilliant. Can start in March. Bills for the meeting about the meeting.</p>
+          <span class="verdict" aria-hidden="true">NEXT</span>
+        </article>
+        <article class="cand" id="ours">
+          <span class="pin" aria-hidden="true"></span>
+          <svg class="face" viewBox="0 0 160 100" aria-hidden="true" style="background:#D7F2E4"><use href="#lapface" x="44" y="14" width="72" height="72"/></svg>
+          <h3>Click &amp; Grow</h3><p>Ready to start. One quote, agreed first. Brings a logo and Google setup on day one.</p>
+          <span class="verdict yes" aria-hidden="true">HIRED</span>
+          <a class="btn btn--green btn--sm" href="#apply">Hire this one</a>
+        </article>
+      </div>
+      <div class="stack-ctrl"><button class="btn btn--white btn--sm" type="button" id="nextCand">Next candidate</button><button class="btn btn--white btn--sm" type="button" id="resetCand">Start over</button></div>
+      <p class="sr" aria-live="polite" id="candLive"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= A DAY AT WORK ================= -->
+<section class="sec day" id="day" aria-labelledby="t-day">
+  <div class="wrap day-grid">
+    <div class="clockwrap">
+      <svg viewBox="0 0 400 400" aria-hidden="true">
+        <clipPath id="faceClip"><circle cx="200" cy="200" r="170"/></clipPath>
+        <g clip-path="url(#faceClip)"><rect id="sky" x="0" y="0" width="400" height="400" fill="#CFE6F2"/><circle id="sun" cx="90" cy="150" r="26" fill="#FFC72C"/><g id="moon" opacity="0"><circle cx="300" cy="140" r="22" fill="#FFF3C4"/><circle cx="312" cy="132" r="20" fill="#1B2840" id="moonCut"/></g><circle cx="200" cy="200" r="120" fill="#fff"/></g>
+        <circle cx="200" cy="200" r="170" fill="none" stroke="#1C1A17" stroke-width="8"/>
+        <circle cx="200" cy="200" r="120" fill="none" stroke="#E6D9BF" stroke-width="2"/>
+        <g id="ticks" stroke="#1C1A17" stroke-width="4" stroke-linecap="round"></g>
+        <path id="dayH" d="M200 200V128" stroke="#1C1A17" stroke-width="10" stroke-linecap="round"/>
+        <path id="dayM" d="M200 200V96" stroke="#57514A" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="200" cy="200" r="10" fill="#D9263B"/>
+        <text id="dayT" x="200" y="262" text-anchor="middle" font-family="Courier Prime,Courier New,monospace" font-weight="700" font-size="22" fill="#1C1A17">9:00 am</text>
+      </svg>
+    </div>
+    <div>
+      <div class="sec-head" data-rise style="margin-bottom:28px"><h2 id="t-day">A day in the life of your new hire.</h2></div>
+      <div class="notes">
+        <p class="note"><time>9:02 am</time>Answered “What are your prices?” for the 40th time. Didn’t sigh once.</p>
+        <p class="note"><time>1:15 pm</time>Took a booking from Dubai.</p>
+        <p class="note"><time>11:48 pm</time>Sold a gift box to someone in Sydney.</p>
+        <p class="note"><time>3:00 am</time>Still open for business. Coffee untouched.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BENEFITS ================= -->
+<section class="sec" id="benefits" aria-labelledby="t-ben">
+  <div class="wrap ben-grid">
+    <div class="boxwrap">
+      <svg viewBox="0 0 340 300" aria-hidden="true">
+        <g id="sparks" stroke="#FFC72C" stroke-width="6" stroke-linecap="round" opacity="0"><path d="M170 40v-30M120 56l-18-22M220 56l18-22M90 96H60M250 96h30"/></g>
+        <g id="welcome">
+          <rect x="70" y="130" width="200" height="140" rx="8" fill="#C98B5E"/><rect x="70" y="130" width="200" height="22" fill="#B07547"/><rect x="158" y="130" width="24" height="140" fill="#D9263B"/>
+          <text x="170" y="222" text-anchor="middle" font-family="Bricolage Grotesque,Figtree,system-ui,sans-serif" font-weight="800" font-size="22" fill="#FFFBF2" transform="rotate(-90 170 222)">WELCOME</text>
+        </g>
+        <g id="lid"><rect x="58" y="104" width="224" height="30" rx="6" fill="#B07547"/><rect x="158" y="104" width="24" height="30" fill="#D9263B"/><path d="M170 104c-30-34-60-10-40 0zM170 104c30-34 60-10 40 0z" fill="#D9263B"/></g>
+      </svg>
+    </div>
+    <div>
+      <div class="sec-head" data-rise style="margin-bottom:24px"><h2 id="t-ben">The benefits package, all included.</h2></div>
+      <ul class="perks">
+        <li><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M14 8l8 5 8-5 10 7-5 7-3-2v18H12V20l-3 2-5-7z" fill="#006A4E"/><path d="M18 9l4 7 4-7" fill="#FFC72C"/></svg><div><b>Free logo</b><span>The company uniform.</span></div></li>
+        <li><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="11" width="36" height="22" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="14" cy="22" r="4" fill="#FFC72C"/><path d="M22 19h12M22 25h8" stroke="#1C1A17" stroke-width="2.5"/></svg><div><b>Free Google and SEO setup</b><span>Business cards people can find on Google.</span></div></li>
+        <li><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M30 6a8 8 0 0 0-7 11L9 31a4 4 0 0 0 6 6l14-14a8 8 0 0 0 11-7l-5 3-4-4z" fill="#8C939B" stroke="#1C1A17" stroke-width="2"/></svg><div><b>Free support after launch</b><span>Regular check-ups.</span></div></li>
+        <li><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="15" cy="22" r="10" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/><circle cx="29" cy="22" r="10" fill="#FFE680" stroke="#1C1A17" stroke-width="2.5"/></svg><div><b>Pay in parts</b><span>Salary in instalments.</span></div></li>
+        <li><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="9" y="19" width="26" height="19" rx="4" fill="#D9263B"/><path d="M14 19v-5a8 8 0 0 1 16 0v5" fill="none" stroke="#1C1A17" stroke-width="3"/><circle cx="22" cy="28" r="3" fill="#fff"/></svg><div><b>Quote agreed upfront</b><span>No surprise pay rises.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE JOB OFFER ================= -->
+<section class="sec" id="offer" aria-labelledby="t-offer" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise><h2 id="t-offer">The job offer.</h2><p>Pick the role. Prices show in your currency.</p></div>
+    <!-- PLACEHOLDER prices (USD base): confirm before launch -->
+    <div class="offers">
+      <a class="offer" href="#apply" data-need="Website"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Business website</h3><p class="amt"><small>from </small><b data-usd="249">$249</b></p></a>
+      <a class="offer" href="#apply" data-need="Online shop"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Online shop</h3><p class="amt"><small>from </small><b data-usd="449">$449</b></p></a>
+      <a class="offer" href="#apply" data-need="Google & SEO"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Google &amp; SEO</h3><p class="amt"><small>from </small><b data-usd="119">$119</b><small>/mo</small></p></a>
+      <a class="offer" href="#apply" data-need="Ads"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Ads</h3><p class="amt"><small>from </small><b data-usd="99">$99</b><small>/mo</small></p></a>
+      <a class="offer" href="#apply" data-need="Mobile app"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Mobile app</h3><p class="amt"><small>from </small><b data-usd="1190">$1,190</b></p></a>
+      <a class="offer" href="#apply" data-need="Logo & branding"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Logo &amp; branding</h3><p class="free">Free with any website</p></a>
+      <a class="offer" href="#apply" data-need="Website care"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Website care</h3><p class="amt"><small>from </small><b data-usd="29">$29</b><small>/mo</small></p></a>
+      <a class="offer" href="#apply" data-need="Free website check-up"><span class="seal"><svg><use href="#tick" style="color:#fff"/></svg></span><h3>Free check-up</h3><p class="free">Free, no strings</p></a>
+    </div>
+    <p class="fine">Sample prices. The quote you agree is the quote you pay, and you can pay in parts.</p>
+  </div>
+</section>
+
+<!-- ================= WORKS REMOTELY ================= -->
+<section class="sec remote" id="remote" aria-labelledby="t-remote">
+  <div class="wrap">
+    <p class="cvline" id="cvline" aria-hidden="true">Location: wherever your customers are</p>
+    <div class="sec-head" data-rise><h2 id="t-remote">Works remotely.</h2><p>Clients in North America, the UK, Europe, the Gulf and Australia. Calls in your time zone.</p></div>
+    <div class="map">
+      <svg viewBox="0 0 1000 470" role="img" aria-label="A world map with routes from our studio to New York, Toronto, London, Berlin, Dubai, Riyadh, Doha and Sydney.">
+        <g fill="#2E4166"><path d="M120 70L250 55L330 60L360 95L330 120L300 150L275 175L250 210L225 235L200 215L165 170L130 130Z"/><path d="M360 40L420 35L410 80L370 85Z"/><path d="M270 250L320 255L355 285L340 340L310 390L290 410L280 360L265 300Z"/><path d="M470 70L560 60L590 90L560 120L520 135L480 130L465 105Z"/><path d="M470 150L560 150L600 190L620 230L590 300L560 350L535 360L520 300L490 240L460 200Z"/><path d="M570 60L800 45L900 70L930 110L880 150L830 200L780 220L740 200L700 190L650 170L610 140L590 110Z"/><path d="M800 230L860 240L850 260L810 255Z"/><path d="M860 300L940 300L960 340L930 380L880 375L850 340Z"/></g>
+        <g id="arcs" fill="none" stroke="#FFC72C" stroke-width="3" stroke-linecap="round"></g><g id="planes"></g><g id="pins"></g>
+      </svg>
+    </div>
+    <div class="clocks" id="clocks"></div>
+  </div>
+</section>
+
+<!-- ================= ONBOARDING ================= -->
+<section class="sec" id="onboarding" aria-labelledby="t-onb">
+  <div class="wrap">
+    <div class="sec-head" data-rise><h2 id="t-onb">Onboarding takes four steps.</h2></div>
+    <div class="clip" id="clip">
+      <ol class="todo">
+        <li><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#0E8A62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free check-up</li>
+        <li><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#0E8A62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Agree the quote</li>
+        <li><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#0E8A62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>We build it, you click through it</li>
+        <li><span class="box"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#0E8A62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Launch day, with free support after</li>
+      </ol>
+      <svg class="pencil" id="pencil" viewBox="0 0 90 24" aria-hidden="true"><path d="M8 12l14-9h58v18H22z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2"/><path d="M8 12l14-9v18z" fill="#F1C6A0" stroke="#1C1A17" stroke-width="2"/><path d="M8 12l5-3v6z" fill="#1C1A17"/><rect x="74" y="3" width="10" height="18" fill="#FF8FA3" stroke="#1C1A17" stroke-width="2"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE INTERVIEW QUESTIONS ================= -->
+<section class="sec" id="interview" aria-labelledby="t-faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head" data-rise><h2 id="t-faq">The interview questions.</h2><p>You ask. The candidate answers.</p></div>
+    <div class="chat">
+      <details><summary>Will you actually bring in customers?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">I won’t sell something nobody wants. I stop you losing the people who already came looking.</p></div></details>
+      <details><summary>Can you work with me if I’m abroad?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">Yes. I work remotely and take calls in your time zone.</p></div></details>
+      <details><summary>What’s the free check-up?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">We look at your current site or page and tell you what’s costing you customers. It’s free, and you don’t have to hire us.</p></div></details>
+      <details><summary>Can I pay in parts?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">Yes. We agree the split before we start.</p></div></details>
+      <details><summary>Will the price go up later?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">No. The quote you agree is the quote you pay.</p></div></details>
+      <details><summary>How do I pay you?</summary><div class="reply"><svg aria-hidden="true"><use href="#lapface"/></svg><div class="bubble typing"><i></i><i></i><i></i></div><p class="bubble ans">Card, bank transfer or PayPal. Clients in Bangladesh can also use bKash or Nagad.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= START THE HIRING (form) ================= -->
+<section class="sec apply" id="apply" aria-labelledby="t-apply">
+  <div class="wrap">
+    <div class="sec-head" data-rise><h2 id="t-apply">Start the hiring.</h2><p>Four quick questions. No payment now.</p></div>
+    <form class="app" id="app" novalidate>
+      <div class="clipbar" aria-hidden="true"><svg class="paperclip" id="paperclip" viewBox="0 0 34 30"><path d="M6 22V8a6 6 0 0 1 12 0v14a4 4 0 0 1-8 0V10" fill="none" stroke="#57514A" stroke-width="3" stroke-linecap="round" transform="rotate(90 17 15)"/></svg></div>
+      <p class="step-no" id="stepNo">Question 1 of 4</p>
+      <div class="err-sum" id="errSum" role="alert" tabindex="-1" hidden></div>
+      <fieldset class="fstep" data-step="1"><legend><h3 tabindex="-1">The role</h3></legend><p class="help">What do you need? Pick as many as you like.</p>
+        <div class="opts" id="needs">
+          <label><input type="checkbox" name="need" value="Website"><span class="o">Website<small>New or redesign</small></span></label>
+          <label><input type="checkbox" name="need" value="Online shop"><span class="o">Online shop<small>Sell without DMs</small></span></label>
+          <label><input type="checkbox" name="need" value="Google & SEO"><span class="o">Google &amp; SEO<small>Get found</small></span></label>
+          <label><input type="checkbox" name="need" value="Ads"><span class="o">Ads<small>Google and social</small></span></label>
+          <label><input type="checkbox" name="need" value="Logo & branding"><span class="o">Logo &amp; branding<small>Free with a website</small></span></label>
+          <label><input type="checkbox" name="need" value="Mobile app"><span class="o">Mobile app<small>iOS and Android</small></span></label>
+          <label><input type="checkbox" name="need" value="Website care"><span class="o">Website care<small>Updates and fixes</small></span></label>
+          <label><input type="checkbox" name="need" value="Free website check-up"><span class="o">Free check-up<small>Start here, it’s free</small></span></label>
+          <label><input type="checkbox" name="need" value="Not sure"><span class="o">Not sure yet<small>We’ll suggest</small></span></label>
+        </div><p class="err" id="e1"></p></fieldset>
+      <fieldset class="fstep" data-step="2" hidden><legend><h3 tabindex="-1">Start date</h3></legend>
+        <div class="opts">
+          <label><input type="radio" name="when" value="No rush" checked><span class="o">No rush<small>In 1 to 2 months</small></span></label>
+          <label><input type="radio" name="when" value="This month"><span class="o">This month<small>Let’s get going</small></span></label>
+          <label><input type="radio" name="when" value="Urgent"><span class="o">Urgent<small>Yesterday, ideally</small></span></label>
+        </div></fieldset>
+      <fieldset class="fstep" data-step="3" hidden><legend><h3 tabindex="-1">Budget</h3></legend><p class="help">A rough number in your currency is fine.</p>
+        <div class="opts">
+          <label><input type="radio" name="budget" value="b1"><span class="o" data-b="0,250">Under $250</span></label>
+          <label><input type="radio" name="budget" value="b2"><span class="o" data-b="250,1000">$250 to $1,000</span></label>
+          <label><input type="radio" name="budget" value="b3"><span class="o" data-b="1000,3000">$1,000 to $3,000</span></label>
+          <label><input type="radio" name="budget" value="b4"><span class="o" data-b="3000,">$3,000 and up</span></label>
+          <label><input type="radio" name="budget" value="Not sure" checked><span class="o">Not sure yet</span></label>
+        </div></fieldset>
+      <fieldset class="fstep" data-step="4" hidden><legend><h3 tabindex="-1">Your details</h3></legend>
+        <div class="two">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+          <div class="field"><label for="f-biz">Business name</label><input id="f-biz" autocomplete="organization"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-wa">WhatsApp or phone</label><div class="phone"><span class="cc" id="cc">+1</span><input id="f-wa" type="tel" inputmode="tel" autocomplete="tel-national" aria-describedby="e-wa"></div><p class="err" id="e-wa"></p></div>
+          <div class="field"><label for="f-mail">Email (optional)</label><input id="f-mail" type="email" autocomplete="email" aria-describedby="e-mail"><p class="err" id="e-mail"></p></div>
+        </div>
+        <div class="field"><label for="f-site">Current website or Instagram (optional)</label><input id="f-site" type="url" inputmode="url" autocomplete="url"></div>
+      </fieldset>
+      <div class="done" id="done" hidden>
+        <svg viewBox="0 0 180 110" aria-hidden="true"><use href="#lapface" x="50" y="4" width="80" height="80"/><g class="ink" id="doneInk" transform="translate(132 30) rotate(-12)"><rect x="-38" y="-14" width="76" height="28" rx="5" fill="none" stroke="#D9263B" stroke-width="4"/><text x="0" y="8" text-anchor="middle" font-family="Bricolage Grotesque,Figtree,system-ui,sans-serif" font-weight="800" font-size="20" fill="#D9263B">HIRED</text></g></svg>
+        <h3 tabindex="-1" id="doneTitle">Offer sent.</h3>
+        <p style="color:var(--ink-2);max-width:28em">We’ll reply with a plan and a quote. This is a preview, so nothing was sent yet.</p>
+      </div>
+      <div class="app-nav" id="appNav"><button class="btn btn--white" type="button" id="backBtn" hidden>Back</button><button class="btn btn--green next" type="button" id="nextBtn">Next</button></div>
+      <p class="sr" role="status" aria-live="polite" id="live"></p>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FINAL ================= -->
+<section class="sec final" aria-labelledby="t-final">
+  <div class="wrap">
+    <svg viewBox="0 0 360 200" aria-hidden="true"><rect x="20" y="150" width="320" height="16" rx="4" fill="#C98B5E"/><rect x="40" y="166" width="280" height="30" fill="#B07547"/><use href="#lapface" x="110" y="40" width="120" height="120"/><g id="fsteam" stroke="#B9AFA0" stroke-width="3" fill="none" stroke-linecap="round"><path d="M276 122c-5-8 5-11 0-19"/><path d="M288 122c-5-8 5-11 0-19"/></g><rect x="266" y="124" width="32" height="26" rx="5" fill="#FFC72C"/><rect x="60" y="128" width="92" height="22" rx="4" fill="#1C1A17"/><text x="106" y="143" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="700" font-size="9" fill="#FFC72C">YOUR BEST EMPLOYEE</text></svg>
+    <h2 id="t-final">Your new hire is ready when you are.</h2>
+    <div class="row"><a class="btn btn--green" href="#apply">Hire mine</a><a class="btn btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>Chat on WhatsApp</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap foot"><span>© 2026 Click &amp; Grow. A remote team in Dhaka. No laptops were overworked in the making of this site.</span><nav aria-label="Footer"><a href="#candidates">Candidates</a><a href="#offer">Prices</a><a href="#interview">FAQ</a><a href="#apply">Hire mine</a></nav></div></footer>
+<div class="mbar" aria-label="Quick actions"><a class="btn btn--wa" href="https://wa.me/8801732508485" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa"/></svg>WhatsApp</a><a class="btn btn--green" href="#apply">Hire mine</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = window.gsap, motion = !!(G && window.ScrollTrigger) && !reduce;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  root.classList.add(motion ? 'motion' : 'no-motion');
+  const NS = 'http://www.w3.org/2000/svg', el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+
+  /* PLACEHOLDER: monthly project slots, confirm each month */
+  const SLOTS = { total: 6, taken: 4 };
+  const month = new Date().toLocaleString('en', { month: 'long' }), left = Math.max(0, SLOTS.total - SLOTS.taken);
+  $('#stripText').textContent = `Free website check-up for every business.${left ? ` ${left} of ${SLOTS.total} project slots left for ${month}.` : ''}`;
+
+  /* ---------- region ---------- */
+  const REG = { US: ['$', 1, '+1'], CA: ['C$', 1.37, '+1'], UK: ['£', .8, '+44'], EU: ['€', .92, '+'], AE: ['AED ', 3.67, '+971'], AU: ['A$', 1.52, '+61'], BD: ['৳', 100, '+880'], XX: ['$', 1, '+'] };
+  let region = 'US';
+  const money = usd => { const [sym, rate] = REG[region]; let v = usd * rate;
+    if (region === 'BD') v = Math.max(1000, Math.round(v / 1000) * 1000); else if (v >= 50) v = Math.round(v / 10) * 10 - 1; else v = Math.round(v);
+    return sym + v.toLocaleString(region === 'BD' ? 'en-IN' : 'en-US'); };
+  function applyRegion(r) {
+    region = REG[r] ? r : 'US'; root.dataset.region = region; $('#region').value = region;
+    $$('[data-usd]').forEach(e => e.textContent = money(+e.dataset.usd));
+    $$('[data-b]').forEach(e => { const [a, b] = e.dataset.b.split(',').map(Number); e.textContent = !a ? `Under ${money(b)}` : !b ? `${money(a)} and up` : `${money(a)} to ${money(b)}`; });
+    $('#cc').textContent = REG[region][2];
+    try { localStorage.setItem('cg-region', region); } catch (e) {}
+  }
+  function guessRegion() {
+    try { const s = localStorage.getItem('cg-region'); if (s) return s; } catch (e) {}
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    if (/^America\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|Regina|St_Johns|Montreal)/.test(tz)) return 'CA';
+    if (tz.startsWith('America/')) return 'US'; if (tz === 'Europe/London') return 'UK'; if (tz.startsWith('Europe/')) return 'EU';
+    if (/^Asia\/(Dubai|Riyadh|Qatar|Bahrain|Kuwait|Muscat)/.test(tz)) return 'AE'; if (tz.startsWith('Australia/')) return 'AU'; if (tz === 'Asia/Dhaka') return 'BD';
+    return 'XX';
+  }
+  $('#region').addEventListener('change', e => applyRegion(e.target.value));
+  applyRegion(guessRegion());
+
+  /* ---------- application form ---------- */
+  const form = $('#app'), steps = $$('.fstep'), next = $('#nextBtn'), back = $('#backBtn');
+  let step = 1;
+  const tick = need => { const i = $(`#needs input[value="${need}"]`) || $('#needs input[value="Website"]'); if (i) i.checked = true; };
+  document.addEventListener('click', e => { const a = e.target.closest('a[data-need]'); if (a) tick(a.dataset.need); });
+  const moveClip = n => { const bar = $('.clipbar'), clip = $('#paperclip'); clip.style.transform = `translateX(${(bar.clientWidth - 34) * (n - 1) / 3}px)`; };
+  addEventListener('resize', () => moveClip(step));
+  function show(n) {
+    steps.forEach(s => s.hidden = +s.dataset.step !== n); step = n; back.hidden = n === 1;
+    next.textContent = n === 4 ? 'Send the offer' : 'Next';
+    $('#stepNo').textContent = `Question ${n} of 4`; $('#live').textContent = `Question ${n} of 4`; moveClip(n);
+    if (motion) G.fromTo(steps[n - 1], { x: 18, opacity: 0 }, { x: 0, opacity: 1, duration: .28, ease: 'power3.out' });
+    $('legend h3', steps[n - 1]).focus({ preventScroll: true });
+  }
+  const setErr = (id, input, msg) => { $('#' + id).textContent = msg; if (input) msg ? $('#' + input).setAttribute('aria-invalid', 'true') : $('#' + input).removeAttribute('aria-invalid'); };
+  function valid() {
+    const errs = [];
+    if (step === 1) { const ok = $$('#needs input:checked').length > 0; setErr('e1', null, ok ? '' : 'Pick at least one, or choose "Not sure yet".'); if (!ok) errs.push(['needs', 'Pick what you need']); }
+    if (step === 4) {
+      const n = $('#f-name').value.trim(), w = $('#f-wa').value.replace(/\D/g, ''), m = $('#f-mail').value.trim();
+      setErr('e-name', 'f-name', n ? '' : 'Tell us your name.'); if (!n) errs.push(['f-name', 'Your name is missing']);
+      const wOk = w.length >= 6 && w.length <= 15; setErr('e-wa', 'f-wa', wOk ? '' : 'Add a number we can reach you on.'); if (!wOk) errs.push(['f-wa', 'Phone number is missing or too short']);
+      const mOk = !m || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m); setErr('e-mail', 'f-mail', mOk ? '' : 'That email doesn’t look right.'); if (!mOk) errs.push(['f-mail', 'Email looks wrong']);
+    }
+    const sum = $('#errSum');
+    if (errs.length) { sum.hidden = false; sum.innerHTML = 'Fix this to continue: ' + errs.map(([id, t]) => `<a href="#${id}">${t}</a>`).join(', '); sum.focus(); return false; }
+    sum.hidden = true; return true;
+  }
+  next.addEventListener('click', () => {
+    if (!valid()) return;
+    if (step < 4) return show(step + 1);
+    next.disabled = true; next.textContent = 'Sending…';
+    setTimeout(() => {
+      steps.forEach(s => s.hidden = true); $('#appNav').hidden = true; $('#stepNo').textContent = 'Done'; $('#done').hidden = false;
+      $('#doneTitle').focus({ preventScroll: true }); $('#live').textContent = 'Offer sent.';
+      if (motion) G.timeline().fromTo('#doneInk', { scale: 1.6, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.out' }).fromTo('#done svg', { x: -4 }, { keyframes: { x: [4, -3, 2, 0] }, duration: .24, ease: 'none' }, '<.05');
+    }, 600);
+  });
+  back.addEventListener('click', () => step > 1 && show(step - 1));
+  form.addEventListener('submit', e => { e.preventDefault(); next.click(); });
+  moveClip(1);
+  // hero check-up: a working first step
+  $('#checkup').addEventListener('submit', e => {
+    e.preventDefault(); tick('Free website check-up'); $('#f-site').value = $('#site').value.trim();
+    $('#apply').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => $('legend h3', steps[0]).focus({ preventScroll: true }), reduce ? 0 : 700);
+  });
+
+  /* ---------- map, clocks (static without GSAP) ---------- */
+  const home = [751, 184];
+  const CITIES = [['New York', 294, 137, 'America/New_York'], ['Toronto', 279, 129, 'America/Toronto'], ['London', 500, 107, 'Europe/London'], ['Berlin', 537, 104, 'Europe/Berlin'], ['Dubai', 654, 180, 'Asia/Dubai'], ['Riyadh', 630, 181, 'Asia/Riyadh'], ['Doha', 643, 180, 'Asia/Qatar'], ['Sydney', 920, 344, 'Australia/Sydney']];
+  const arcs = CITIES.map(([, x, y]) => { const mx = (home[0] + x) / 2, my = Math.min(home[1], y) - Math.abs(home[0] - x) * .28 - 20; return el('path', { d: `M${home[0]} ${home[1]}Q${mx} ${my} ${x} ${y}` }, $('#arcs')); });
+  const pins = CITIES.map(([n, x, y]) => { const g = el('g', { class: 'mpin' }, $('#pins')); el('circle', { cx: x, cy: y, r: 8, fill: '#FFC72C' }, g);
+    if (['New York', 'London', 'Dubai', 'Sydney'].includes(n)) { const t = el('text', { x: n === 'London' ? x - 10 : x, y: y - 16, 'text-anchor': n === 'London' ? 'end' : 'middle', 'font-family': 'Figtree, sans-serif', 'font-weight': 700, 'font-size': 18, fill: '#EEF1F7' }, g); t.textContent = n; } return g; });
+  { const g = el('g', {}, $('#pins')); el('circle', { cx: home[0], cy: home[1], r: 11, fill: '#0E8A62', stroke: '#EEF1F7', 'stroke-width': 3 }, g); const t = el('text', { x: home[0] + 18, y: home[1] + 6, 'font-family': 'Figtree, sans-serif', 'font-weight': 700, 'font-size': 16, fill: '#A9B6CF' }, g); t.textContent = 'Our studio'; }
+  const CL = [['New York', 'America/New_York'], ['London', 'Europe/London'], ['Dubai', 'Asia/Dubai'], ['Sydney', 'Australia/Sydney']];
+  $('#clocks').innerHTML = CL.map(([n]) => `<div><b>${n}</b><span></span></div>`).join('');
+  const tickClocks = () => $$('#clocks span').forEach((s, i) => { s.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: CL[i][1], hour: '2-digit', minute: '2-digit' }); });
+  tickClocks(); setInterval(tickClocks, 30000);
+  // day clock ticks
+  for (let i = 0; i < 12; i++) { const a = i * 30 * Math.PI / 180; el('path', { d: `M${200 + Math.sin(a) * 150} ${200 - Math.cos(a) * 150}L${200 + Math.sin(a) * 162} ${200 - Math.cos(a) * 162}` }, $('#ticks')); }
+
+  /* ---------- FAQ: typing, then the answer (native details without GSAP) ---------- */
+  if (motion) $$('.chat details').forEach(d => {
+    const sm = $('summary', d), typing = $('.typing', d), ans = $('.ans', d); let t = null;
+    sm.addEventListener('click', e => { e.preventDefault(); clearTimeout(t); G.killTweensOf([ans, typing]);
+      if (d.open) { d.open = false; return; }
+      d.open = true; typing.style.display = 'flex'; ans.style.display = 'none';
+      G.fromTo(typing.children, { y: 0 }, { y: -4, duration: .18, yoyo: true, repeat: 3, stagger: .08, ease: 'power2.out' });
+      t = setTimeout(() => { typing.style.display = 'none'; ans.style.display = ''; G.fromTo(ans, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: .26, ease: 'power3.out' }); }, 420); });
+  });
+
+  /* ---------- candidate stack on phones: swipe, buttons, keyboard (works without GSAP too) ---------- */
+  const board = $('#board'), cands = $$('.cand', board), mqStack = matchMedia('(max-width: 760px)');
+  let topIdx = 0;
+  function layoutStack() {
+    if (!mqStack.matches) { cands.forEach(c => { c.style.zIndex = ''; c.style.visibility = ''; if (motion) G.set(c, { clearProps: 'x,y,rotation,scale' }); }); return; }
+    cands.forEach((c, i) => { const d = i - topIdx; c.style.zIndex = 10 - i; c.style.visibility = d < 0 ? 'hidden' : '';
+      const v = $('.verdict', c); if (v && c.hasAttribute('data-bad')) v.style.opacity = d < 0 ? 1 : 0;
+      if (d >= 0) { const s = { y: d * 10, scale: 1 - d * .04, rotation: 0, x: 0 }; motion ? G.to(c, { ...s, duration: .3, ease: 'power3.out' }) : (c.style.transform = `translateY(${s.y}px) scale(${s.scale})`); } });
+    $('#nextCand').disabled = topIdx >= cands.length - 1;
+  }
+  function reject(dir = -1, vel = 0) {
+    if (topIdx >= cands.length - 1) { const c = cands[topIdx]; if (motion) G.fromTo(c, { x: 0 }, { keyframes: { x: [-10, 10, -6, 0] }, duration: .3, ease: 'none' }); $('#candLive').textContent = 'This one stays. Hire it.'; return; }
+    const c = cands[topIdx], v = $('.verdict', c);
+    $('#candLive').textContent = `${$('h3', c).textContent}: next.`;
+    if (motion) { G.set(v, { opacity: 1 }); G.fromTo(v, { scale: 1.4 }, { scale: 1, duration: .16, ease: 'power3.out' });
+      G.to(c, { x: dir * (innerWidth + 120), rotation: dir * 18, duration: Math.max(.22, .5 - Math.min(vel, 2) * .12), ease: 'power2.out', delay: .12, onComplete: () => { topIdx++; layoutStack(); } }); }
+    else { topIdx++; layoutStack(); }
+  }
+  $('#nextCand').addEventListener('click', () => reject(-1));
+  $('#resetCand').addEventListener('click', () => { topIdx = 0; cands.forEach(c => { const v = $('.verdict', c); if (v && c.hasAttribute('data-bad')) v.style.opacity = 0; }); layoutStack(); });
+  board.addEventListener('pointerdown', e => {
+    if (!mqStack.matches || e.target.closest('a,button')) return;
+    const c = cands[topIdx]; if (!c || !c.contains(e.target)) return;
+    const x0 = e.clientX, t0 = performance.now(); let dx = 0, lastX = x0, lastT = t0, vx = 0;
+    c.setPointerCapture(e.pointerId);
+    const mv = ev => { dx = ev.clientX - x0; const now = performance.now(); vx = (ev.clientX - lastX) / Math.max(1, now - lastT); lastX = ev.clientX; lastT = now;
+      const ours = topIdx === cands.length - 1, d = ours ? dx * .25 : dx; motion ? G.set(c, { x: d, rotation: d / 20 }) : (c.style.transform = `translateX(${d}px)`); };
+    const up = () => { c.removeEventListener('pointermove', mv); c.removeEventListener('pointerup', up); c.removeEventListener('pointercancel', up);
+      if (Math.abs(dx) > 110 || Math.abs(vx) > .5) reject(dx < 0 ? -1 : 1, Math.abs(vx)); else motion ? G.to(c, { x: 0, rotation: 0, duration: .45, ease: 'back.out(1.8)' }) : (c.style.transform = ''); };
+    c.addEventListener('pointermove', mv); c.addEventListener('pointerup', up); c.addEventListener('pointercancel', up);
+  });
+  mqStack.addEventListener('change', layoutStack); layoutStack();
+
+  if (!motion) { $$('.verdict').forEach(v => { if (!mqStack.matches) v.style.opacity = 1; }); return; }   // the page is complete without the motion below
+  G.registerPlugin(ScrollTrigger);
+  const OUT = 'expo.out';
+  const loopsFor = (trigger, loops) => { loops.forEach(l => l.pause()); ScrollTrigger.create({ trigger, start: 'top bottom', end: 'bottom top', onToggle: s => loops.forEach(l => s.isActive ? l.resume() : l.pause()) }); };
+
+  /* ================= HERO: the interview =================
+     Beats: 1 candidate sits down (anticipation, settle)  2 CV types  3 waits for the stamp (hint)  4 stamp lands (squash, ink, follow-through bits, laptop jumps)  */
+  const svg = $('#office'), stamp = $('#stamp'), stampIn = $('#stampIn'), lines = $$('#cvLines text');
+  const REST = { x: 612, y: 336 };
+  let hired = false, typingDone = false, autoTimer = null, inkCount = 0;
+  const toSvg = (cx, cy) => { const p = svg.createSVGPoint(); p.x = cx; p.y = cy; return p.matrixTransform(svg.getScreenCTM().inverse()); };
+  const onCV = (x, y) => x > 372 && x < 590 && y > 160 && y < 348;
+  G.set('#ink0', { opacity: 0 });
+  G.set('.lid', { scaleY: 0, transformOrigin: '50% 0%' });
+
+  function resetHero() {
+    clearTimeout(autoTimer); hired = false; typingDone = false;
+    G.killTweensOf([stamp, stampIn, '#lap', '#lapOuter', '#bubble', '#happy']);
+    G.set(stamp, { x: 0, y: 0 }); G.set(stampIn, { scaleY: 1 });
+    $$('#inks .ink').forEach((n, i) => i ? n.remove() : G.set(n, { opacity: 0 })); inkCount = 0;
+    G.set(['#bubble', '#happy', '#hintArrow'], { opacity: 0 }); G.set('#hint', { opacity: 0 });
+    lines.forEach(t => t.textContent = '');
+  }
+  function typeCV() {
+    const tl = G.timeline({ onComplete: () => { typingDone = true; showHint(); autoTimer = setTimeout(() => !hired && autoStamp(), 2600); } });
+    lines.forEach((t, i) => { const full = t.dataset.t, o = { n: 0 };
+      tl.to(o, { n: full.length, duration: Math.min(.36, .04 + full.length * .013), ease: 'none', onUpdate: () => { t.textContent = full.slice(0, Math.round(o.n)); } }, i ? `>${[.04, .09, .03, .12, .05, .08, .04, .1, .06][i - 1]}` : 0); });
+    return tl;
+  }
+  function showHint() { if (hired) return; G.to('#hint', { opacity: 1, duration: .25 }); G.fromTo('#hintArrow', { attr: { 'stroke-dashoffset': 24 }, opacity: 1 }, { attr: { 'stroke-dashoffset': 0 }, duration: .6, ease: 'none', repeat: 2 }); }
+  function intro() {
+    resetHero();
+    return G.timeline()
+      .fromTo('#lapOuter', { x: -240 }, { x: 0, duration: .7, ease: OUT })
+      .fromTo('#lap', { rotation: -6, svgOrigin: '214 318' }, { rotation: 0, svgOrigin: '214 318', duration: .6, ease: 'back.out(2.2)' }, '-=.45')   // anticipation then settle
+      .fromTo('#tie', { rotation: 14, svgOrigin: '214 318' }, { rotation: 0, svgOrigin: '214 318', duration: .7, ease: 'elastic.out(1,.4)' }, '<')  // follow-through
+      .to('.lid', { scaleY: 1, duration: .07, yoyo: true, repeat: 1 }, '>-.1')
+      .add(typeCV(), '>.1');
+  }
+  function burst(x, y) {
+    for (let i = 0; i < 7; i++) { const b = el('rect', { x: x - 4, y: y - 3, width: 8, height: 6, rx: 1.5, fill: ['#FFC72C', '#FFFBF2', '#D9263B', '#0E8A62'][i % 4], class: 'paperbit' }, $('#bits'));
+      const a = (-160 + i * 22) * Math.PI / 180;
+      G.timeline({ onComplete: () => b.remove() }).to(b, { x: Math.cos(a) * (40 + i * 6), y: Math.sin(a) * (30 + i * 5), rotation: 200 + i * 40, duration: .4, ease: 'power3.out' })
+        .to(b, { y: '+=70', opacity: 0, duration: .6, ease: 'none' }); }   // follow-through: the bits fall after the burst
+  }
+  function land(x, y) {
+    hired = true; clearTimeout(autoTimer); G.to(['#hint', '#hintArrow'], { opacity: 0, duration: .2 });
+    let ink = $('#ink0');
+    if (inkCount++ > 0) { ink = $('#ink0').cloneNode(true); ink.removeAttribute('id'); $('#inks').appendChild(ink); }
+    ink.setAttribute('transform', `translate(${x} ${y}) rotate(${-14 + (inkCount % 3) * 9})`);
+    const tl = G.timeline();
+    tl.to(stampIn, { scaleY: .82, svgOrigin: '612 340', duration: .06, ease: 'power3.out' })               // squash on impact
+      .fromTo(ink, { opacity: 0, scale: 1.25, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: .16, ease: 'power4.out' }, '<')
+      .to(['#desk', '#cv'], { keyframes: { x: [-4, 4, -3, 2, 0] }, duration: .26, ease: 'none' }, '<')
+      .call(() => burst(x, y), null, '<')
+      .to(stampIn, { scaleY: 1, duration: .3, ease: 'back.out(3)' }, '>')
+      .to(stamp, { x: 0, y: 0, duration: .6, ease: 'back.out(1.5)' }, '>.1')
+      // the candidate celebrates: squash, stretch, land
+      .to('#lap', { scaleY: .9, scaleX: 1.06, svgOrigin: '214 318', duration: .1, ease: 'power2.out' }, .1)
+      .to('#lap', { scaleY: 1.07, scaleX: .96, y: -22, duration: .2, ease: 'power3.out' })
+      .to('#lap', { scaleY: 1, scaleX: 1, y: 0, duration: .55, ease: 'bounce.out' })
+      .to('#happy', { opacity: 1, duration: .1 }, .2)
+      .fromTo('#bubble', { opacity: 0, scale: .92, transformOrigin: '100% 50%' }, { opacity: 1, scale: 1, duration: .3, ease: 'back.out(2.2)' }, .3).to('#bubble', { opacity: 0, duration: .3 }, 3.2)
+      .to('#happy', { opacity: 0, duration: .2 }, 2.6);
+    $('#heroLive').textContent = 'Hired.';
+  }
+  function autoStamp() {
+    if (hired && stamp.dataset.busy) return;
+    const tx = 500 - REST.x, ty = 262 - REST.y;
+    G.timeline().to(stamp, { x: tx, y: ty - 40, duration: .45, ease: 'power3.inOut' })
+      .to(stamp, { y: ty - 58, duration: .16, ease: 'power2.out' })     // anticipation: lift before the slam
+      .to(stamp, { y: ty, duration: .09, ease: 'none' })
+      .call(() => land(500, 262));
+  }
+  // drag the stamp (pointer), or press Enter / Space
+  stamp.addEventListener('pointerdown', e => {
+    e.preventDefault(); clearTimeout(autoTimer); G.killTweensOf(stamp);
+    stamp.setPointerCapture(e.pointerId);
+    const p0 = toSvg(e.clientX, e.clientY), sx = G.getProperty(stamp, 'x'), sy = G.getProperty(stamp, 'y');
+    G.to(stampIn, { scale: 1.08, svgOrigin: '612 336', duration: .15, ease: 'power3.out' });
+    const mv = ev => { const p = toSvg(ev.clientX, ev.clientY); G.set(stamp, { x: sx + p.x - p0.x, y: sy + p.y - p0.y }); };
+    const up = () => { stamp.removeEventListener('pointermove', mv); stamp.removeEventListener('pointerup', up); stamp.removeEventListener('pointercancel', up);
+      G.to(stampIn, { scale: 1, duration: .15 });
+      const x = REST.x + G.getProperty(stamp, 'x'), y = REST.y + G.getProperty(stamp, 'y');
+      if (onCV(x, y)) G.timeline().to(stamp, { y: '-=16', duration: .1, ease: 'power2.out' }).to(stamp, { y: '+=16', duration: .07, ease: 'none' }).call(() => land(x, y - 4));
+      else G.to(stamp, { x: 0, y: 0, duration: .5, ease: 'back.out(1.6)' }); };
+    stamp.addEventListener('pointermove', mv); stamp.addEventListener('pointerup', up); stamp.addEventListener('pointercancel', up);
+  });
+  stamp.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); autoStamp(); } });
+  $('#replay').addEventListener('click', () => intro());
+  // idle life: blink, steam, the second hand; eyes follow the pointer
+  const heroLoops = [
+    G.timeline({ repeat: -1, repeatDelay: 3.1 }).to('.lid', { scaleY: 1, duration: .07 }).to('.lid', { scaleY: 0, duration: .09 }),
+    G.fromTo('#mug .steam', { y: 6, opacity: 0 }, { y: -10, opacity: .9, duration: 1.4, ease: 'sine.out', stagger: .7, repeat: -1 }),
+    G.to('#clockS', { rotation: '+=6', svgOrigin: '92 86', duration: .14, ease: 'back.out(3)', repeat: -1, repeatDelay: .86, repeatRefresh: true })
+  ];
+  loopsFor('.hero', heroLoops); heroLoops.forEach(l => l.resume());
+  if (finePointer) {
+    const qx = [G.quickTo('#pupL', 'x', { duration: .3, ease: 'power3.out' }), G.quickTo('#pupR', 'x', { duration: .3, ease: 'power3.out' })];
+    const qy = [G.quickTo('#pupL', 'y', { duration: .3, ease: 'power3.out' }), G.quickTo('#pupR', 'y', { duration: .3, ease: 'power3.out' })];
+    addEventListener('pointermove', e => { const r = svg.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      const p = toSvg(e.clientX, e.clientY), dx = p.x - 214, dy = p.y - 234, d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 200) * 5;
+      qx.forEach(q => q(dx / d * k)); qy.forEach(q => q(dy / d * k)); });
+  }
+  G.from('.hero-copy > *', { y: 20, opacity: 0, duration: .6, ease: 'power3.out', stagger: i => [0, .08, .17, .22][i] });
+  G.delayedCall(.25, intro);
+
+  /* ---------- rises ---------- */
+  $$('[data-rise]').forEach(e => G.to(e, { y: 0, opacity: 1, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: e, start: 'top 86%', once: true } }));
+
+  /* ---------- candidates: pinned, then judged ---------- */
+  if (!mqStack.matches) G.timeline({ scrollTrigger: { trigger: '#board', start: 'top 72%', once: true } })
+    .from('.cand', { y: -40, opacity: 0, duration: .5, ease: 'back.out(1.6)', stagger: i => [0, .07, .16, .22][i] })
+    .from('.cand .pin', { scale: 1.8, opacity: 0, duration: .2, ease: 'power3.out', stagger: .06 }, '-=.3')
+    .to('.cand[data-bad] .verdict', { opacity: 1, duration: .01, stagger: .38 }, '+=.2')
+    .from('.cand[data-bad] .verdict', { scale: 1.6, duration: .16, ease: 'power4.out', stagger: .38 }, '<')
+    .to('#ours .verdict', { opacity: 1, duration: .01 }, '+=.2')
+    .from('#ours .verdict', { scale: 1.6, duration: .18, ease: 'power4.out' }, '<')
+    .to('#ours', { rotation: 4, duration: .12, yoyo: true, repeat: 1, ease: 'power2.out' }, '<.05');
+  else { G.set('#ours .verdict', { opacity: 1 }); G.from('#board', { y: 30, opacity: 0, duration: .5, ease: OUT, scrollTrigger: { trigger: '#board', start: 'top 80%', once: true } }); }
+
+  /* ---------- a day at work: one sweep of the clock, notes pop in on the hour ---------- */
+  const fmt = h => { const hh = ((Math.floor(h) % 24) + 24) % 24, mm = Math.floor((h % 1) * 60); return `${hh % 12 || 12}:${String(mm).padStart(2, '0')} ${hh < 12 ? 'am' : 'pm'}`; };
+  const day = { h: 9 };
+  const dayTl = G.timeline({ scrollTrigger: { trigger: '#day', start: 'top 62%', once: true } });
+  dayTl.to(day, { h: 27, duration: 3, ease: 'power1.inOut', onUpdate: () => {
+      G.set('#dayH', { rotation: day.h * 30, svgOrigin: '200 200' }); G.set('#dayM', { rotation: day.h * 360, svgOrigin: '200 200' });
+      $('#dayT').textContent = fmt(day.h);
+      const night = day.h > 18 ? Math.min(1, (day.h - 18) / 2) : 0;
+      G.set('#sky', { fill: G.utils.interpolate('#CFE6F2', '#1B2840', night) }); G.set('#sun', { opacity: 1 - night, y: night * 60 }); G.set('#moon', { opacity: night }); } }, 0)
+    .from('.note', { scale: .9, y: 18, opacity: 0, duration: .4, ease: 'back.out(2)', stagger: i => [0, .7, 2.1, 2.7][i] }, .05);
+  G.set('#dayH', { rotation: 270, svgOrigin: '200 200' }); G.set('#dayM', { rotation: 0, svgOrigin: '200 200' });
+
+  /* ---------- benefits: the box wobbles, the lid pops, perks land ---------- */
+  G.timeline({ scrollTrigger: { trigger: '#benefits', start: 'top 65%', once: true } })
+    .to('#welcome, #lid', { rotation: 3, svgOrigin: '170 270', duration: .07, yoyo: true, repeat: 5, ease: 'none' })     // anticipation
+    .to('#lid', { y: -110, x: -70, rotation: -40, svgOrigin: '170 118', duration: .55, ease: 'power3.out' })
+    .to('#lid', { y: 150, x: -150, rotation: -90, duration: .6, ease: 'bounce.out' })                                       // follow-through: it lands beside the box
+    .fromTo('#sparks', { opacity: 0, scale: .6, transformOrigin: '50% 100%' }, { opacity: 1, scale: 1, duration: .25, ease: 'power3.out' }, .45)
+    .to('#sparks', { opacity: 0, duration: .3 }, .9)
+    .from('.perks li', { x: -40, y: 16, rotation: -3, opacity: 0, duration: .45, ease: 'back.out(1.6)', stagger: i => [0, .07, .15, .2, .3][i] }, .5);
+
+  /* ---------- offers: letters slide up, prices count up in the current currency ---------- */
+  G.timeline({ scrollTrigger: { trigger: '.offers', start: 'top 80%', once: true } })
+    .from('.offer', { y: 40, opacity: 0, duration: .5, ease: OUT, stagger: i => [0, .04, .09, .12, .17, .2, .25, .28][i] })
+    .from('.offer .seal', { scale: 1.6, opacity: 0, duration: .18, ease: 'power4.out', stagger: .05 }, .25)
+    .call(() => $$('.offer [data-usd]').forEach((b, i) => { const o = { v: 0 }, usd = +b.dataset.usd;
+      G.to(o, { v: usd, duration: .8, delay: i * .05, ease: 'power2.out', onUpdate: () => { b.textContent = money(o.v); }, onComplete: () => { b.textContent = money(usd); } }); }), null, .2);
+
+  /* ---------- remote: the CV line types, routes draw, planes fly ---------- */
+  const cvl = $('#cvline'), cvFull = cvl.textContent; cvl.textContent = '';
+  arcs.forEach(a => { const L = a.getTotalLength(); a.style.strokeDasharray = L; a.style.strokeDashoffset = L; });
+  G.set(pins, { scale: .4, opacity: 0, transformOrigin: '50% 50%' });
+  G.timeline({ scrollTrigger: { trigger: '#remote', start: 'top 65%', once: true } })
+    .to({ n: 0 }, { n: cvFull.length, duration: .9, ease: 'none', onUpdate() { cvl.textContent = cvFull.slice(0, Math.round(this.targets()[0].n)); } })
+    .to(arcs, { strokeDashoffset: 0, duration: .8, ease: 'power2.inOut', stagger: .1 }, .5)
+    .to(pins, { scale: 1, opacity: 1, duration: .3, ease: 'back.out(2.6)', stagger: .1 }, 1)
+    .from('#clocks > div', { y: 12, opacity: 0, duration: .35, ease: OUT, stagger: .06 }, 1.1);
+  const planeLoops = arcs.map((a, i) => { const pl = el('circle', { r: 5, fill: '#fff', opacity: 0 }, $('#planes')), L = a.getTotalLength(), p = { t: 0 };
+    return G.timeline({ repeat: -1, delay: 2 + i * .35, repeatDelay: .6 }).set(pl, { attr: { opacity: 1 } })
+      .to(p, { t: 1, duration: 2.6, ease: 'power1.inOut', onUpdate: () => { const pt = a.getPointAtLength(p.t * L); pl.setAttribute('cx', pt.x); pl.setAttribute('cy', pt.y); } }).set(pl, { attr: { opacity: 0 } }); });
+  loopsFor('.map', planeLoops);
+
+  /* ---------- onboarding: the pencil ticks each box ---------- */
+  ScrollTrigger.create({ trigger: '#clip', start: 'top 68%', once: true, onEnter: () => {
+    const clip = $('#clip'), cr = clip.getBoundingClientRect(), tl = G.timeline();
+    $$('.todo li').forEach((li, i) => { const b = $('.box', li).getBoundingClientRect(), x = b.left - cr.left + b.width - 4, y = b.top - cr.top - 2;
+      tl.to('#pencil', { x, y, opacity: 1, duration: i ? .38 : .01, ease: 'power2.inOut' })
+        .to($('.box path', li), { strokeDashoffset: 0, duration: .22, ease: 'power2.out' })
+        .to('#pencil', { rotation: -8, duration: .08, yoyo: true, repeat: 1 }, '<'); });
+    tl.to('#pencil', { x: '+=160', opacity: 0, duration: .5, ease: 'power2.inOut' }, '+=.2');
+  } });
+  G.set('#pencil', { opacity: 0 });
+
+  /* ---------- final: steam ---------- */
+  loopsFor('.final', [G.fromTo('#fsteam path', { y: 4, opacity: 0 }, { y: -8, opacity: .9, duration: 1.4, stagger: .7, ease: 'sine.out', repeat: -1 })]);
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>

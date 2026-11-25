@@ -1,0 +1,44 @@
+<%- include('_top', { title: 'Leads', nav: 'leads' }) %>
+<% var qs = new URLSearchParams(Object.entries(f).filter(function (e) { return e[0] !== 'page' && e[1]; })).toString(); %>
+<div class="flex flex-wrap items-end justify-between gap-4">
+  <h1 class="text-3xl font-bold">Leads <span class="text-lg font-normal text-sage tabular-nums">(<%= list.total %>)</span></h1>
+  <a href="/admin/leads.csv<%= qs ? '?' + qs : '' %>" class="btn btn-outline !min-h-[40px] text-sm">Export CSV</a>
+</div>
+<form method="get" class="mt-6 grid gap-3 rounded-2xl border border-cream/10 bg-ink-2 p-4 sm:grid-cols-2 lg:grid-cols-6">
+  <input class="input lg:col-span-2" name="q" placeholder="Search name, phone, email, site" value="<%= f.q || '' %>" aria-label="Search">
+  <select class="input" name="type" aria-label="Type"><option value="">All types</option><% ['enquiry','estimate','audit'].forEach(function (t) { %><option value="<%= t %>"<%= f.type === t ? ' selected' : '' %>><%= t %></option><% }) %></select>
+  <select class="input" name="status" aria-label="Status"><option value="">All statuses</option><% STATUSES.forEach(function (s) { %><option value="<%= s %>"<%= f.status === s ? ' selected' : '' %>><%= s %></option><% }) %></select>
+  <select class="input" name="service" aria-label="Service"><option value="">All services</option><% site.services.forEach(function (s) { %><option value="<%= s.key %>"<%= f.service === s.key ? ' selected' : '' %>><%= s.label %></option><% }) %></select>
+  <div class="flex gap-2"><button class="btn btn-lime !min-h-[48px] flex-1">Filter</button><% if (qs) { %><a href="/admin/leads" class="btn btn-outline !min-h-[48px] !px-4" aria-label="Clear filters">✕</a><% } %></div>
+</form>
+<% if (!list.rows.length) { %>
+  <p class="mt-10 text-center text-sage"><%= qs ? 'No leads match these filters.' : 'No leads yet. They’ll appear here as soon as someone sends a form.' %></p>
+<% } else { %>
+<div class="mt-6 overflow-x-auto rounded-2xl border border-cream/10">
+  <table class="w-full min-w-[760px] table-fixed text-left">
+    <thead class="bg-ink-2 text-xs uppercase tracking-wider text-sage">
+      <tr><th class="w-[130px] px-4 py-3">Received</th><th class="px-4 py-3">Name</th><th class="w-[130px] px-4 py-3">Phone</th><th class="w-[90px] px-4 py-3">Type</th><th class="w-[190px] px-4 py-3">Service</th><th class="w-[110px] px-4 py-3">Status</th></tr>
+    </thead>
+    <tbody>
+      <% list.rows.forEach(function (r) { %>
+      <tr class="border-t border-cream/10 hover:bg-ink-2">
+        <td class="px-4 py-3 text-sm text-sage tabular-nums"><%= r.created_at.slice(0, 16) %></td>
+        <td class="px-4 py-3"><a href="/admin/leads/<%= r.id %>" class="block truncate font-medium hover:text-lime" title="<%= r.name %>"><%= r.name %></a><% if (r.email) { %><span class="block truncate text-xs text-sage"><%= r.email %></span><% } %></td>
+        <td class="px-4 py-3 tabular-nums"><a href="tel:<%= r.phone %>" class="hover:text-lime"><%= r.phone %></a></td>
+        <td class="px-4 py-3 text-sm capitalize"><%= r.type %></td>
+        <td class="truncate px-4 py-3 text-sm"><%= r.service ? serviceLabel(r.service) : (r.website || '—') %></td>
+        <td class="px-4 py-3"><%- include('_pill', { s: r.status }) %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<% if (list.pages > 1) { %>
+<nav class="mt-6 flex items-center justify-between text-sm" aria-label="Pages">
+  <% if (list.page > 1) { %><a class="btn btn-outline !min-h-[40px]" href="?<%= qs ? qs + '&' : '' %>page=<%= list.page - 1 %>">← Newer</a><% } else { %><span></span><% } %>
+  <span class="text-sage">Page <%= list.page %> of <%= list.pages %></span>
+  <% if (list.page < list.pages) { %><a class="btn btn-outline !min-h-[40px]" href="?<%= qs ? qs + '&' : '' %>page=<%= list.page + 1 %>">Older →</a><% } else { %><span></span><% } %>
+</nav>
+<% } %>
+<% } %>
+<%- include('_bottom') %>

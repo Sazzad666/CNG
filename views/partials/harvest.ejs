@@ -1,0 +1,16 @@
+<%# Projects hanging from a branch. Params: list (projects), three (bool) %>
+<div class="branch">
+  <%- include('../garden/branch') %>
+  <div class="fruit<%= typeof three !== 'undefined' && three ? ' three' : '' %>">
+    <% var swings = [['4.6s','2.6deg'],['5.4s','-2deg'],['4.2s','2.2deg'],['5s','-2.8deg'],['4.8s','2.4deg'],['5.2s','-2.2deg']];
+       list.forEach(function (p, i) { var m = p.metrics[0]; %>
+      <div class="hang" style="--d:<%= swings[i % 6][0] %>;--a:<%= swings[i % 6][1] %>" data-services="<%= p.services.join(' ') %>">
+        <a class="frame" href="/work/<%= p.slug %>">
+          <%- img(p.photos[0], { sizes: '(min-width: 860px) 25vw, 50vw', alt: p.client + ', ' + p.type }) %>
+          <span class="tag">Sample</span><span class="who"><%= p.client %></span>
+          <span class="res"><strong><%= m[0] %></strong><span><%= m[1] %></span></span>
+        </a>
+      </div>
+    <% }) %>
+  </div>
+</div>

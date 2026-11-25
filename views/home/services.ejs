@@ -1,0 +1,14 @@
+<section id="garden" class="g-section">
+  <div class="wrap">
+    <div class="g-head"><h2>Pick a <em class="s">plant.</em></h2><p>Five things we grow. Hover or tap one to watch it bloom.</p></div>
+    <div class="beds">
+      <% var tagline = { 'web-design': 'that sell while you sleep', branding: 'logos people remember', video: 'that stops the scroll', apps: 'people keep on their phones', growth: 'ads, social and SEO' };
+         content.services().forEach(function (s) { %>
+        <a class="bed" href="/services/<%= s.key %>" data-bed>
+          <%- include('../garden/plant', { key: s.key }) %>
+          <b><%= s.short === 'Growth' ? 'Growth' : s.short %></b><small><%= tagline[s.key] %></small>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>

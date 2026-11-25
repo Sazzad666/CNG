@@ -1,0 +1,23 @@
+<%- include('layout/head') %>
+<%- include('layout/header') %>
+<main id="main">
+  <section class="wrap pb-16 pt-16 sm:pt-24">
+    <p class="eyebrow" data-enter data-enter-step="0">Services</p>
+    <h1 class="mt-4 max-w-4xl text-5xl font-bold sm:text-7xl" data-enter data-enter-step="1">Everything your brand needs to <em class="accent text-lime">grow</em>, under one roof.</h1>
+    <p class="mt-6 max-w-2xl text-lg text-cream/75" data-enter data-enter-step="2">One senior team for design, build and marketing, so nothing gets lost between agencies.</p>
+  </section>
+  <section class="wrap pb-24">
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <% content.services().forEach(function (s) { %>
+        <a href="/services/<%= s.key %>" class="bed group" style="align-items:stretch;padding:28px">
+          <div class="flex justify-center"><%- include('garden/plant', { key: s.key }) %></div>
+          <h2 class="mt-4 text-3xl font-bold"><%= s.label %></h2>
+          <ul class="mt-4 flex flex-wrap gap-2"><% s.items.slice(0, 4).forEach(function (it) { %><li class="rounded-full border border-cream/15 px-3 py-1 text-sm text-cream/80"><%= it.title %></li><% }) %></ul>
+        </a>
+      <% }) %>
+    </div>
+  </section>
+  <%- include('partials/plant-cta') %>
+</main>
+<%- include('layout/footer') %>
+<%- include('layout/foot') %>

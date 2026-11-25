@@ -1,0 +1,963 @@
+<title>Click &amp; Grow Dhaka</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=Bungee&display=swap">
+<style>
+/* Layout: a sales page told as a Dhaka street day out. Story chapters, each ending in a small call to action:
+   hero (shutter goes up) → your search ends here (CNG in the rain) → your cousin tried (switch + comparison)
+   → services menu (৳ / $) → packs (Singara, Biryani, Kacchi) → the route (rickshaw process) → FAQ → order like cha (form) → final CTA.
+   Every scene's finished state is the CSS default; GSAP only adds "before" states when it loads and motion is allowed. */
+:root{
+  --paper:#FFFBF2; --paper-2:#FFF1D6; --card:#FFFFFF;
+  --ink:#1C1A17; --ink-2:#55504A; --line:#EADFC8;
+  --green:#006A4E; --green-2:#0E8A62; --green-lite:#D7F2E4;   /* flag green */
+  --red:#E8283F; --red-lite:#FFE1E5;                          /* flag red */
+  --yellow:#FFC72C; --pink:#FF4F8B; --teal:#13A8A0; --slate:#22313B;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sign:"Bungee","Arial Black",Impact,sans-serif;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --head:64px; --r:20px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:calc(var(--head) + 40px)}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1;letter-spacing:-.01em;margin:0;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:8px}
+main{overflow-x:clip}
+.wrap{max-width:1220px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:700 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--red)}
+.sec{padding-block:96px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:end;margin-bottom:40px}
+.sec-head h2{font-size:clamp(38px,5vw,64px);margin-top:12px}
+.sec-head p{color:var(--ink-2);font-size:clamp(16px,1.4vw,19px);max-width:32em}
+.bn{font-size:.82em;color:var(--ink-2);font-style:italic}
+
+/* bunting: festival flags strung across section tops */
+.bunting{height:30px;background:
+  linear-gradient(135deg,transparent 50%,var(--paper) 50%) 0 0/30px 30px,
+  conic-gradient(from -45deg at 50% 0,var(--red) 0 90deg,transparent 0) 0 0/30px 30px;
+  position:relative}
+.bunting{background:none;display:flex;overflow:hidden;gap:6px;padding:0 4px;border-top:2px solid var(--ink)}
+.bunting i{flex:none;width:26px;height:24px;clip-path:polygon(0 0,100% 0,50% 100%);background:var(--c)}
+
+/* buttons: step on hover, press on click */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:14px;border:2.5px solid var(--ink);background:var(--yellow);color:var(--ink);font:800 17px/1 var(--display);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .16s var(--ease-out),box-shadow .16s var(--ease-out)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}}
+.btn--green{background:var(--green);color:#fff}
+.btn--white{background:#fff}
+.btn svg{width:20px;height:20px;flex:none}
+.wa{background:#25D366;color:#0B2A17}
+
+/* ---------- top strip + header ---------- */
+.strip{background:var(--green);color:#fff;font:600 14px/1.3 var(--body);text-align:center;padding:9px 16px}
+.strip a{color:var(--yellow);font-weight:700}
+.head{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:rgba(255,251,242,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:61;background:var(--paper)}
+.head .wrap{height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 22px/1 var(--display);min-height:44px}
+.logo svg{width:38px;height:38px}
+.head nav ul{display:flex;list-style:none;margin:0;padding:0;gap:2px}
+.head nav a{display:flex;align-items:center;min-height:44px;padding:0 11px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px}
+.head nav a:hover{background:var(--paper-2)}
+.head .acts{display:flex;gap:10px}
+.head .btn{min-height:44px;padding:0 16px;font-size:15px;box-shadow:3px 3px 0 var(--ink)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:linear-gradient(#FFE8B5,#FFF6E3 60%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:24px;align-items:center;padding-block:48px 0}
+.hero h1{font-size:clamp(46px,6.2vw,86px);margin:14px 0 18px}
+.hero h1 .u{background:linear-gradient(transparent 62%,var(--yellow) 62% 92%,transparent 92%)}
+.hero .lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink-2);max-width:28em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font:600 14px/1.3 var(--body);color:var(--ink-2)}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.trust span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green-2)}
+.hero-art{position:relative;aspect-ratio:1100/780;min-height:0}
+.hero-art svg{width:100%;height:100%;display:block}
+.hero-art .hint{position:absolute;left:55%;top:50%;font:700 15px/1 var(--body);background:var(--ink);color:#fff;padding:8px 12px;border-radius:999px;pointer-events:none;opacity:0}
+.shutter-btn{position:absolute;left:52%;top:42%;width:24%;height:35%;border:0;background:transparent;cursor:pointer;border-radius:8px}
+.steam{animation:steam 2.6s ease-in-out infinite}
+.steam:nth-of-type(2){animation-delay:.8s}
+@keyframes steam{0%{opacity:0;transform:translateY(8px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-16px)}}
+
+/* ---------- SEARCH ENDS HERE ---------- */
+.search{background:var(--slate);color:#F3F0E8}
+.search .eyebrow{color:var(--yellow)}
+.search .sec-head p{color:#C9D3DA}
+.rainbox{position:relative;border-radius:var(--r);overflow:hidden;border:2.5px solid #0E151A;aspect-ratio:1440/620;background:#2B3B46}
+.rainbox svg{position:absolute;inset:0;width:100%;height:100%}
+.rain{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(transparent 0 70%,rgba(200,225,240,.45) 70% 100%);background-size:3px 26px;mask-image:repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 23px);-webkit-mask-image:repeating-linear-gradient(90deg,#000 0 1px,transparent 1px 23px);animation:rain .6s linear infinite;transform:skewX(-12deg) scale(1.2);opacity:.7}
+@keyframes rain{to{background-position:0 26px}}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:28px}
+.tile{background:#2B3B46;border:2px solid #3E5260;border-radius:16px;padding:18px;display:grid;gap:8px}
+.tile svg{width:36px;height:36px}
+.tile b{font:800 20px/1.15 var(--display)}
+.tile span{color:#C9D3DA;font-size:15px}
+.sec-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:32px}
+.sec-cta p{font-weight:600}
+.search .sec-cta p{color:#F3F0E8}
+
+/* ---------- COUSIN ---------- */
+.cousin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.switch{display:inline-flex;align-items:center;gap:12px;background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:5px;margin-bottom:16px;box-shadow:3px 3px 0 var(--ink)}
+.switch button{border:0;background:none;border-radius:999px;min-height:44px;padding:0 16px;font:800 15px/1 var(--display);cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.mock{border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;box-shadow:6px 6px 0 var(--ink);position:relative}
+.mock .chrome{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:2.5px solid var(--ink);background:var(--paper-2)}
+.mock .chrome i{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink)}
+.mock .chrome span{margin-left:8px;font:500 12px/1 var(--body);color:var(--ink-2)}
+.mock-body{position:relative;aspect-ratio:4/3.1}
+.v-cousin,.v-pro{position:absolute;inset:0;transition:opacity .45s var(--ease-out),transform .45s var(--ease-out)}
+.mock[data-v="pro"] .v-cousin{opacity:0;transform:scale(.97) rotate(-1deg);pointer-events:none}
+.mock[data-v="cousin"] .v-pro{opacity:0;transform:scale(1.02);pointer-events:none}
+/* the cousin special */
+.v-cousin{background:#000080 radial-gradient(#fff 1px,transparent 1.4px) 0 0/22px 22px;color:#FFFF00;font-family:"Comic Sans MS","Comic Neue",cursive;padding:14px;display:flex;flex-direction:column;gap:10px;text-align:center}
+.v-cousin .t{font-size:clamp(18px,2.2vw,26px);color:#FF00FF;text-shadow:2px 2px #00FFFF;font-weight:700}
+.v-cousin .uc{background:repeating-linear-gradient(45deg,#FFD400 0 12px,#111 12px 24px);color:#fff;font:700 13px/1 Arial,sans-serif;padding:8px;text-shadow:1px 1px #000}
+.v-cousin .row{display:flex;gap:8px;justify-content:center}
+.v-cousin .row i{width:28%;aspect-ratio:1/1;background:#C0C0C0;border:3px outset #fff}
+.v-cousin .ctr{font:700 12px/1 "Courier New",monospace;color:#0F0;background:#000;align-self:center;padding:4px 8px;border:2px inset #888}
+.v-cousin .blink{animation:blink 1s steps(1) infinite;color:#FF7070;font-weight:700}
+@keyframes blink{50%{opacity:0}}
+.v-cousin small{font-size:11px;color:#ccc}
+/* our version */
+.v-pro{background:#fff;padding:16px 18px;display:grid;grid-template-rows:auto 1fr auto;gap:12px}
+.v-pro .nav{display:flex;justify-content:space-between;align-items:center;font:800 16px/1 var(--display)}
+.v-pro .nav span{font:600 12px/1 var(--body);color:var(--ink-2);display:flex;gap:12px}
+.v-pro .hero2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:12px;align-items:center}
+.v-pro .hero2 b{font:800 clamp(18px,2.2vw,26px)/1.05 var(--display);display:block}
+.v-pro .hero2 p{font-size:12px;color:var(--ink-2);margin:6px 0 10px}
+.v-pro .hero2 .go{display:inline-flex;min-height:30px;align-items:center;padding:0 12px;border-radius:8px;background:var(--green);color:#fff;font:700 12px/1 var(--body)}
+.v-pro .pic{aspect-ratio:1/1;border-radius:12px;background:conic-gradient(from 30deg,var(--pink),var(--yellow),var(--teal),var(--pink));opacity:.85}
+.v-pro .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.v-pro .cards div{border-radius:10px;background:var(--paper-2);padding:8px;font:600 11px/1.2 var(--body)}
+.v-pro .cards small{display:block;color:var(--green);font-weight:700;margin-top:2px}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;border:2.5px solid var(--ink);border-radius:16px;overflow:hidden;background:#fff;font-size:15px}
+.cmp th,.cmp td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1.5px solid var(--line)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{font:800 16px/1.1 var(--display);background:var(--paper-2);border-bottom:2.5px solid var(--ink)}
+.cmp thead th:last-child{background:var(--green);color:#fff}
+.cmp td:first-child{font-weight:700;width:24%}
+.cmp td:nth-child(2){color:#8A2F3A;background:#FFF6F7}
+.cmp td:nth-child(3){color:#0A4D39;background:#F3FBF7;font-weight:600}
+.footnote{margin-top:12px;font-size:14px;color:var(--ink-2)}
+
+/* ---------- SERVICES ---------- */
+.cur{display:inline-flex;border:2.5px solid var(--ink);border-radius:999px;padding:4px;background:#fff}
+.cur button{border:0;background:none;border-radius:999px;min-height:44px;min-width:52px;font:800 16px/1 var(--display);cursor:pointer}
+.cur button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.svc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.svc a{display:flex;flex-direction:column;gap:10px;text-decoration:none;background:#fff;border:2.5px solid var(--ink);border-radius:var(--r);padding:20px;box-shadow:4px 4px 0 var(--ink);transition:transform .18s var(--ease-out),box-shadow .18s var(--ease-out);min-height:100%}
+@media (hover:hover) and (pointer:fine){.svc a:hover{transform:translate(-2px,-3px);box-shadow:6px 7px 0 var(--ink)}.svc a:hover .ico{transform:rotate(-6deg) scale(1.06)}}
+.svc .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--bg);border:2.5px solid var(--ink);transition:transform .25s var(--ease-out)}
+.svc .ico svg{width:32px;height:32px}
+.svc h3{font-size:22px}
+.svc p{color:var(--ink-2);font-size:15px;line-height:1.45;flex:1}
+.svc .price{display:flex;justify-content:space-between;align-items:baseline;border-top:2px dashed var(--line);padding-top:10px;font-size:13px;color:var(--ink-2)}
+.svc .price b{font:800 21px/1 var(--display);color:var(--ink)}
+.svc .price em{font-style:normal;font-weight:700;color:var(--green)}
+.note{margin-top:14px;font-size:13px;color:var(--ink-2)}
+
+/* ---------- PACKS ---------- */
+.packs{background:var(--paper-2)}
+.pack-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.pack{position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:5px 5px 0 var(--ink)}
+.pack.hot{background:var(--green);color:#fff;transform:translateY(-12px);box-shadow:5px 5px 0 var(--ink),0 0 0 6px var(--yellow)}
+.pack .badge{position:absolute;top:-16px;left:50%;transform:translateX(-50%) rotate(-3deg);background:#C8102E;color:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:6px 14px;font:800 14px/1 var(--display);white-space:nowrap}
+.pack .food{height:110px;display:grid;place-items:center}
+.pack .food svg{height:110px;width:auto;max-width:100%;overflow:visible}
+.pack h3{font-size:30px}
+.pack .tag{font-weight:600;opacity:.85}
+.pack .amt{font:800 40px/1 var(--display)}
+.pack .amt small{font:600 14px/1 var(--body);opacity:.8;margin-left:6px}
+.pack ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px;flex:1}
+.pack li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px}
+.pack li svg{width:18px;height:18px;margin-top:3px}
+.pack.hot .btn{background:var(--yellow)}
+.packs .custom{text-align:center;margin-top:34px;font-weight:600}
+.packs .custom a{color:var(--green);font-weight:800}
+
+/* ---------- ROUTE (process) ---------- */
+.route-box{position:relative}
+.route-box svg{width:100%;height:auto;display:block}
+.stops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;margin:18px 0 0;padding:0}
+.stops li{border:2.5px solid var(--ink);border-radius:18px;padding:16px;background:#fff;transition:background .3s ease,transform .3s var(--ease-out)}
+.stops li b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--paper-2);border:2.5px solid var(--ink);font:800 16px/1 var(--display);margin-bottom:8px}
+.stops li strong{display:block;font:800 20px/1.15 var(--display)}
+.stops li span{color:var(--ink-2);font-size:15px}
+.stops li.on{background:var(--yellow)}
+.stops li.on b{background:var(--ink);color:#fff}
+
+/* ---------- LOGOS + FAQ ---------- */
+.logos{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.logos div{border:2.5px dashed #C9BEA6;border-radius:14px;min-height:76px;display:grid;place-items:center;text-align:center;font:700 13px/1.3 var(--body);color:var(--ink-2);padding:10px}
+.logos div:first-child{border-style:solid;border-color:var(--ink);background:var(--yellow);color:var(--ink)}
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{border:2.5px solid var(--ink);border-radius:16px;background:#fff;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:16px 56px 16px 18px;font:800 19px/1.25 var(--display);position:relative;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;width:30px;height:30px;margin-top:-15px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:800 20px/1 var(--body);transition:transform .25s var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--yellow)}
+.faq details p{padding:0 18px 18px;color:var(--ink-2)}
+
+/* ---------- ORDER FORM (order like cha) ---------- */
+.order{background:var(--green);color:#fff}
+.order .eyebrow{color:var(--yellow)}
+.order .eyebrow::before{background:var(--yellow)}
+.order .sec-head p{color:#D7F2E4}
+.order-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:28px;align-items:stretch}
+.slip{background:var(--paper);color:var(--ink);border:2.5px solid var(--ink);border-radius:24px;padding:26px;box-shadow:8px 8px 0 #013a2b;position:relative;overflow:hidden}
+.slip::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:radial-gradient(circle at 10px -2px,var(--green) 8px,transparent 9px) 0 0/20px 10px repeat-x}
+.progress{display:flex;align-items:center;gap:8px;margin:6px 0 20px}
+.progress span{flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden;position:relative}
+.progress span i{position:absolute;inset:0;background:var(--green-2);transform-origin:left;transform:scaleX(0);transition:transform .4s var(--ease-out)}
+.progress span.done i{transform:scaleX(1)}
+.progress b{font:700 13px/1 var(--body);color:var(--ink-2);white-space:nowrap}
+.step{display:grid;gap:14px}
+.step[hidden]{display:none!important}
+.step h3{font-size:clamp(24px,2.6vw,32px)}
+.step .help{color:var(--ink-2);font-size:15px}
+.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.choices label{position:relative;cursor:pointer}
+.choices input{position:absolute;opacity:0;pointer-events:none}
+.choices .c{display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-height:88px;padding:12px;border:2.5px solid var(--ink);border-radius:14px;background:#fff;font:800 16px/1.15 var(--display);transition:background .15s ease,transform .15s var(--ease-out),box-shadow .15s ease}
+.choices .c small{font:500 13px/1.3 var(--body);color:var(--ink-2)}
+.choices .c svg{width:26px;height:26px}
+.choices input:checked + .c{background:var(--yellow);box-shadow:3px 3px 0 var(--ink);transform:translate(-1px,-1px)}
+.choices input:focus-visible + .c{outline:3px solid var(--teal);outline-offset:2px}
+.budget{display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;align-items:center}
+.budget svg{width:120px;height:140px}
+.range-wrap{display:grid;gap:8px}
+.range-wrap input{width:100%;accent-color:var(--green);min-height:44px}
+.range-wrap output{font:800 30px/1 var(--display)}
+.range-wrap .lvl{font-weight:700;color:var(--green)}
+.field{display:grid;gap:6px}
+.field label{font:700 14px/1.2 var(--body)}
+.field input{border:2.5px solid var(--ink);border-radius:12px;padding:12px 14px;min-height:50px;background:#fff;width:100%}
+.field input:focus{outline:3px solid var(--teal);outline-offset:1px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.err{color:var(--red);font-size:14px;font-weight:600}
+.err:empty{display:none}
+.nav-steps{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+.nav-steps .back{background:#fff;box-shadow:3px 3px 0 var(--ink)}
+.nav-steps .back[hidden]{visibility:hidden;display:inline-flex!important}
+.ticket{border:2.5px dashed rgba(255,255,255,.6);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.ticket h3{font-size:26px;color:var(--yellow)}
+.ticket dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;margin:0;font-size:15px}
+.ticket dt{color:#BFE6D3}
+.ticket dd{margin:0;font-weight:700}
+.ticket .pay{margin-top:auto;font-size:14px;color:#BFE6D3}
+.done-card{text-align:center;display:grid;gap:12px;justify-items:center;padding:20px 0}
+.done-card[hidden]{display:none!important}
+.stamp{font:400 26px/1 var(--sign);color:var(--red);border:4px solid var(--red);border-radius:12px;padding:10px 16px;transform:rotate(-6deg)}
+.done-card svg{width:120px;height:120px}
+
+/* ---------- FINAL + FOOTER ---------- */
+.final{background:var(--yellow);border-top:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);text-align:center}
+.final h2{font-size:clamp(44px,7vw,96px)}
+.final p{font-size:19px;margin:12px auto 26px;max-width:34em;color:#3D3520}
+.final .hero-cta{justify-content:center}
+footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+.foot nav{display:flex;flex-wrap:wrap;gap:4px 18px}
+.foot a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.foot a:hover{color:var(--ink);text-decoration:underline}
+.mbar{display:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1060px){
+  .svc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .head nav{display:none}
+}
+@media (max-width:860px){
+  .hero-grid,.sec-head,.cousin-grid,.order-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{padding-top:28px}
+  .pack-grid{grid-template-columns:minmax(0,1fr);gap:30px}
+  .pack.hot{transform:none}
+  .stops{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .logos{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .logos div:first-child{grid-column:1/-1}
+  .rainbox{aspect-ratio:4/3}
+  .sec{padding-block:72px}
+  .head .acts .btn:not(.wa){display:none}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:10px;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:var(--paper);border-top:2.5px solid var(--ink)}
+  .mbar .btn{flex:1;min-height:48px;font-size:16px;box-shadow:3px 3px 0 var(--ink)}
+}
+@media (max-width:560px){
+  .head .acts{display:none}
+  .svc,.tiles{grid-template-columns:minmax(0,1fr)}
+  .choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two{grid-template-columns:minmax(0,1fr)}
+  .budget{grid-template-columns:84px minmax(0,1fr)}
+  .budget svg{width:84px;height:100px}
+  .cmp{font-size:13.5px}
+  .cmp th,.cmp td{padding:10px}
+  .stops{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  .steam,.rain,.v-cousin .blink{animation:none}
+  .btn,.svc a,.v-cousin,.v-pro,.faq summary::after,.progress span i{transition:none}
+}
+</style>
+
+<!-- shared drawings -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="tick" viewBox="0 0 20 20"><path d="M3 10.5l4.5 4.5L17 5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="wa-ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.2.5.2.5.4.1.1.1.7-.1 1.3z" fill="currentColor"/></symbol>
+    <!-- a green Dhaka CNG auto-rickshaw -->
+    <symbol id="cng" viewBox="0 0 240 170">
+      <ellipse cx="120" cy="162" rx="105" ry="8" fill="#000" opacity=".25"/>
+      <path d="M30 128V70c0-28 26-50 70-50h40c44 0 70 22 70 50v58z" fill="currentColor" stroke="#111" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M46 70c0-18 20-34 54-34h44c30 0 48 14 50 34z" fill="#BFE3F0" stroke="#111" stroke-width="4"/>
+      <path d="M118 36v34" stroke="#111" stroke-width="4"/>
+      <rect x="30" y="96" width="180" height="32" fill="#111" opacity=".15"/>
+      <path d="M140 70h70v58h-70z" fill="#111" opacity=".12"/>
+      <circle cx="58" cy="134" r="20" fill="#222" stroke="#111" stroke-width="5"/><circle cx="58" cy="134" r="7" fill="#999"/>
+      <circle cx="186" cy="134" r="20" fill="#222" stroke="#111" stroke-width="5"/><circle cx="186" cy="134" r="7" fill="#999"/>
+      <circle cx="72" cy="58" r="10" fill="#C98B5E"/><path d="M62 54c2-8 18-8 20 0z" fill="#2A1A12"/>
+    </symbol>
+    <!-- rickshaw for the route -->
+    <symbol id="rickshaw" viewBox="0 0 260 200">
+      <path d="M120 40c0-22 30-34 70-34s58 16 58 40v34H120z" fill="#E8283F" stroke="#111" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M134 44c10-14 70-18 98 0" fill="none" stroke="#FFC72C" stroke-width="6"/>
+      <circle cx="160" cy="28" r="5" fill="#FF4F8B"/><circle cx="190" cy="22" r="5" fill="#13A8A0"/><circle cx="220" cy="28" r="5" fill="#FFC72C"/>
+      <rect x="126" y="80" width="118" height="26" rx="6" fill="#13A8A0" stroke="#111" stroke-width="5"/>
+      <path d="M244 106v40M130 106l-60 40" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+      <path d="M70 146h174" stroke="#111" stroke-width="6"/>
+      <g class="wheel" style="transform-origin:208px 160px"><circle cx="208" cy="160" r="34" fill="none" stroke="#111" stroke-width="6"/><path d="M208 126v68M174 160h68M184 136l48 48M232 136l-48 48" stroke="#111" stroke-width="2.5"/></g>
+      <g class="wheel" style="transform-origin:46px 168px"><circle cx="46" cy="168" r="26" fill="none" stroke="#111" stroke-width="6"/><path d="M46 142v52M20 168h52" stroke="#111" stroke-width="2.5"/></g>
+      <circle cx="60" cy="96" r="14" fill="#8C5A3C"/><path d="M50 108c0 0 4 26 14 36" stroke="#2F5DFF" stroke-width="16" stroke-linecap="round"/>
+      <path d="M48 90c2-10 22-10 24 0z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<p class="strip">Free website check-up for your business this month. <a href="#order">Claim yours</a></p>
+
+<header class="head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Click and Grow home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><circle cx="27" cy="13" r="5" fill="#E8283F"/><path d="M11 9l7 20 3.5-8 8-3.5z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></svg>
+      Click &amp; Grow
+    </a>
+    <nav aria-label="Main"><ul><li><a href="#services">Services</a></li><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <div class="acts">
+      <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a>
+      <a class="btn" href="#order">Free quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= HERO: the shutter goes up ================= -->
+  <section class="hero" aria-labelledby="t-hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Websites · online shops · Facebook &amp; Google ads</p>
+        <h1 id="t-hero">Pull up the shutter. Let the <span class="u">customers</span> in.</h1>
+        <p class="lede">Your shop opens at 10. Your website should never close. We build websites and online shops that actually sell.</p>
+        <div class="hero-cta">
+          <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
+        </div>
+        <div class="trust"><span>Fixed price before we start</span><span>Pay with bKash, Nagad or card</span><span>Clients in and outside Bangladesh</span></div>
+      </div>
+
+      <div class="hero-art" id="heroArt">
+        <svg viewBox="60 90 1100 780" role="img" aria-label="A busy Dhaka street. A hand clicks a shop's rolling shutter, it rolls up, the shop lights up, a rickshaw passes and customers walk in.">
+          <!-- sky + sun -->
+          <rect width="1440" height="860" fill="#FFE8B5"/>
+          <circle cx="1210" cy="140" r="74" fill="#E8283F"/>
+          <!-- buildings -->
+          <g stroke="#1C1A17" stroke-width="4">
+            <rect x="0" y="170" width="300" height="520" fill="#F4C9A0"/><rect x="300" y="110" width="250" height="580" fill="#C9E6D8"/>
+            <rect x="900" y="130" width="260" height="560" fill="#F6D9E2"/><rect x="1160" y="230" width="280" height="460" fill="#D7E3F6"/>
+          </g>
+          <!-- windows + balconies -->
+          <g fill="#FFFBF2" stroke="#1C1A17" stroke-width="3">
+            <rect x="40" y="220" width="70" height="80"/><rect x="170" y="220" width="70" height="80"/><rect x="40" y="340" width="70" height="80"/><rect x="170" y="340" width="70" height="80"/>
+            <rect x="340" y="160" width="60" height="70"/><rect x="450" y="160" width="60" height="70"/><rect x="340" y="270" width="60" height="70"/><rect x="450" y="270" width="60" height="70"/><rect x="340" y="380" width="60" height="70"/><rect x="450" y="380" width="60" height="70"/>
+            <rect x="940" y="180" width="70" height="80"/><rect x="1060" y="180" width="70" height="80"/><rect x="940" y="300" width="70" height="80"/><rect x="1060" y="300" width="70" height="80"/>
+            <rect x="1200" y="280" width="70" height="80"/><rect x="1330" y="280" width="70" height="80"/><rect x="1200" y="400" width="70" height="80"/><rect x="1330" y="400" width="70" height="80"/>
+          </g>
+          <g stroke="#1C1A17" stroke-width="4" fill="none"><path d="M30 310h100M160 310h100M330 250h90M440 250h90M930 280h100M1050 280h100"/></g>
+          <!-- clothes drying on a balcony -->
+          <g stroke="#1C1A17" stroke-width="3"><rect x="350" y="250" width="16" height="22" fill="#FF4F8B"/><rect x="374" y="250" width="16" height="26" fill="#13A8A0"/><rect x="1060" y="280" width="18" height="24" fill="#FFC72C"/></g>
+          <!-- rooftop water tanks -->
+          <g fill="#2F2F2F" stroke="#1C1A17" stroke-width="3"><rect x="60" y="130" width="54" height="40" rx="6"/><rect x="380" y="70" width="54" height="40" rx="6"/><rect x="1000" y="90" width="54" height="40" rx="6"/></g>
+          <!-- the famous Dhaka wire tangle -->
+          <g fill="none" stroke="#1C1A17" stroke-width="2.5">
+            <path d="M0 470 Q 300 520 610 470"/><path d="M0 480 Q 320 540 610 478"/><path d="M0 492 Q 300 560 610 486"/>
+            <path d="M850 478 Q 1150 540 1440 470"/><path d="M850 486 Q 1150 560 1440 482"/>
+            <path d="M600 470c10-14 30 10 18 18s-28-4-12-20 30 4 22 16" stroke-width="3"/>
+          </g>
+          <rect x="604" y="440" width="10" height="250" fill="#5A5A5A" stroke="#1C1A17" stroke-width="3"/>
+          <!-- ground -->
+          <rect y="690" width="1440" height="50" fill="#DCCBAA" stroke="#1C1A17" stroke-width="4"/>
+          <rect y="740" width="1440" height="120" fill="#454545"/>
+          <path d="M0 800h1440" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="60 50"/>
+          <!-- tea stall -->
+          <g id="chaStall">
+            <rect x="80" y="560" width="200" height="130" fill="#13A8A0" stroke="#1C1A17" stroke-width="4"/>
+            <rect x="70" y="540" width="220" height="26" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/>
+            <text x="180" y="560" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="18" fill="#1C1A17">CHA · 10৳</text>
+            <path d="M150 520h60l-6 22h-48z" fill="#C0C0C0" stroke="#1C1A17" stroke-width="4"/><path d="M210 524c16 0 16 14 0 14" fill="none" stroke="#1C1A17" stroke-width="4"/>
+            <path class="steam" d="M168 512c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <path class="steam" d="M188 512c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <g fill="#fff" stroke="#1C1A17" stroke-width="3"><rect x="100" y="590" width="20" height="24"/><rect x="128" y="590" width="20" height="24"/></g>
+          </g>
+          <!-- THE SHOP -->
+          <g id="shop">
+            <rect x="620" y="300" width="290" height="390" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
+            <!-- rickshaw-art sign -->
+            <g id="shopSign">
+              <rect x="600" y="316" width="330" height="84" rx="10" fill="#E8283F" stroke="#1C1A17" stroke-width="4"/>
+              <text x="765" y="370" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="30" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.5" paint-order="stroke">YOUR BUSINESS</text>
+              <g class="bulbs"><circle cx="616" cy="332" r="7" fill="#FFC72C"/><circle cx="914" cy="332" r="7" fill="#13A8A0"/><circle cx="616" cy="384" r="7" fill="#13A8A0"/><circle cx="914" cy="384" r="7" fill="#FFC72C"/></g>
+            </g>
+            <!-- inside, behind the shutter -->
+            <g id="inside">
+              <rect x="640" y="420" width="250" height="270" fill="#FFE7A3"/>
+              <g stroke="#1C1A17" stroke-width="3"><path d="M650 470h230M650 530h230" /></g>
+              <g stroke="#1C1A17" stroke-width="2.5"><rect x="660" y="440" width="26" height="30" fill="#FF4F8B"/><rect x="692" y="446" width="22" height="24" fill="#13A8A0"/><rect x="720" y="436" width="30" height="34" fill="#FFC72C"/><rect x="800" y="444" width="24" height="26" fill="#2F5DFF"/><rect x="830" y="438" width="34" height="32" fill="#E8283F"/>
+                <rect x="660" y="500" width="34" height="30" fill="#0E8A62"/><rect x="700" y="506" width="24" height="24" fill="#FF4F8B"/></g>
+              <!-- shopkeeper -->
+              <g id="keeper"><circle cx="800" cy="560" r="26" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M774 556c0-20 12-28 26-28s26 8 26 28c-6-8-14-11-26-11s-20 3-26 11z" fill="#1C1A17"/><circle cx="791" cy="562" r="3.5" fill="#1C1A17"/><circle cx="809" cy="562" r="3.5" fill="#1C1A17"/><path d="M790 574c6 6 14 6 20 0" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/><path d="M766 640c0-34 14-50 34-50s34 16 34 50z" fill="#fff" stroke="#1C1A17" stroke-width="3"/><path id="arm" d="M830 604l26-34" stroke="#C98B5E" stroke-width="12" stroke-linecap="round" style="transform-origin:830px 604px"/></g>
+              <!-- counter with laptop showing a website -->
+              <rect x="640" y="630" width="250" height="60" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
+              <rect x="664" y="586" width="80" height="50" rx="4" fill="#1C1A17"/><rect x="669" y="591" width="70" height="40" fill="#fff"/><rect x="674" y="597" width="38" height="5" fill="#006A4E"/><rect x="674" y="607" width="26" height="4" fill="#bbb"/><rect x="674" y="616" width="22" height="8" rx="4" fill="#E8283F"/>
+            </g>
+            <!-- rolling shutter -->
+            <rect x="630" y="404" width="270" height="22" rx="6" fill="#6E777C" stroke="#1C1A17" stroke-width="4"/>
+            <g id="shutter">
+              <rect x="636" y="420" width="258" height="270" fill="#A7B0B5" stroke="#1C1A17" stroke-width="4"/>
+              <g stroke="#7D868B" stroke-width="3"><path d="M636 436h258M636 452h258M636 468h258M636 484h258M636 500h258M636 516h258M636 532h258M636 548h258M636 564h258M636 580h258M636 596h258M636 612h258M636 628h258M636 644h258M636 660h258"/></g>
+              <rect x="636" y="672" width="258" height="18" fill="#6E777C" stroke="#1C1A17" stroke-width="3"/>
+              <rect x="750" y="664" width="30" height="14" rx="4" fill="#3B3B3B"/>
+              <text x="765" y="560" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="22" fill="#5A6368">CLOSED</text>
+            </g>
+          </g>
+          <!-- customers who walk in -->
+          <g id="crowd">
+            <g class="cust"><circle cx="980" cy="610" r="18" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3"/><path d="M958 690c0-40 8-56 22-56s22 16 22 56z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="3"/></g>
+            <g class="cust"><circle cx="1040" cy="606" r="18" fill="#F1C6A0" stroke="#1C1A17" stroke-width="3"/><path d="M1018 690c0-40 8-58 22-58s22 18 22 58z" fill="#13A8A0" stroke="#1C1A17" stroke-width="3"/><path d="M1022 600c0-14 8-22 18-22s18 8 18 22c-4-6-10-8-18-8s-14 2-18 8z" fill="#1C1A17"/></g>
+            <g class="cust"><circle cx="1100" cy="612" r="18" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M1078 690c0-38 8-54 22-54s22 16 22 54z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3"/></g>
+          </g>
+          <!-- passing rickshaw -->
+          <use id="heroRick" href="#rickshaw" x="1080" y="640" width="200" height="154"/>
+          <!-- the click -->
+          <circle id="ripple" cx="765" cy="672" r="16" fill="none" stroke="#1C1A17" stroke-width="4" opacity="0"/>
+          <g id="hand" opacity="0"><path d="M0 0l20 56 9-22 22-9z" fill="#fff" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/></g>
+        </svg>
+        <span class="hint" id="hint">Tap the shutter</span>
+        <button class="shutter-btn" id="shutterBtn" type="button" aria-label="Pull the shutter up or down again"></button>
+      </div>
+    </div>
+    <div class="bunting" aria-hidden="true" id="bunt1"></div>
+  </section>
+
+  <!-- ================= YOUR SEARCH ENDS HERE ================= -->
+  <section class="sec search" id="search" aria-labelledby="t-search">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Your search ends here</p><h2 id="t-search">Finding a good web agency feels like finding a CNG in the rain.</h2></div>
+        <p>Everyone says no, asks for extra, or promises to come “later”. Then one pulls up and just says yes.</p>
+      </div>
+      <div class="rainbox" id="rainbox" role="img" aria-label="On a rainy Dhaka street, four CNG drivers refuse in turn: won't go, 500 taka extra, see you in 3 months, shall I use a template? Then a green Click and Grow CNG stops and says: Get in, fixed price, meter on.">
+        <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <rect width="1440" height="620" fill="#2B3B46"/>
+          <g fill="#1F2B33"><rect x="0" y="120" width="220" height="380"/><rect x="230" y="60" width="180" height="440"/><rect x="1020" y="90" width="200" height="410"/><rect x="1230" y="150" width="210" height="350"/></g>
+          <g fill="#FFC72C" opacity=".55"><rect x="40" y="170" width="30" height="34"/><rect x="120" y="250" width="30" height="34"/><rect x="270" y="120" width="30" height="34"/><rect x="340" y="220" width="30" height="34"/><rect x="1060" y="140" width="30" height="34"/><rect x="1150" y="240" width="30" height="34"/><rect x="1280" y="200" width="30" height="34"/></g>
+          <rect y="500" width="1440" height="120" fill="#38464F"/>
+          <g fill="#4C6170" opacity=".7"><ellipse cx="300" cy="570" rx="120" ry="10"/><ellipse cx="900" cy="590" rx="160" ry="12"/><ellipse cx="1250" cy="565" rx="90" ry="8"/></g>
+          <!-- you, waiting with an umbrella -->
+          <g id="you"><path d="M150 470c0-26 24-46 54-46s54 20 54 46z" fill="#E8283F" stroke="#111" stroke-width="4"/><path d="M204 470v40" stroke="#111" stroke-width="4"/><circle cx="204" cy="500" r="16" fill="#C98B5E" stroke="#111" stroke-width="3"/><path d="M186 578c0-46 8-62 18-62s18 16 18 62z" fill="#FFC72C" stroke="#111" stroke-width="3"/><text x="204" y="410" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="20" fill="#F3F0E8">You</text></g>
+          <!-- the refusals -->
+          <g class="cngs">
+            <g class="ride" style="color:#2E8B57"><use href="#cng" x="560" y="400" width="240" height="170"/><g class="say"><rect x="430" y="300" width="300" height="78" rx="20" fill="#fff" stroke="#111" stroke-width="4"/><text x="580" y="333" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="28" fill="#111">“Jabo na.”</text><text x="580" y="362" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" fill="#555">I won’t go.</text></g></g>
+            <g class="ride" style="color:#3E9A63"><use href="#cng" x="560" y="400" width="240" height="170"/><g class="say"><rect x="400" y="300" width="360" height="78" rx="20" fill="#fff" stroke="#111" stroke-width="4"/><text x="580" y="333" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="28" fill="#111">“500 taka extra.”</text><text x="580" y="362" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" fill="#555">Hidden charges, from the start.</text></g></g>
+            <g class="ride" style="color:#2E8B57"><use href="#cng" x="560" y="400" width="240" height="170"/><g class="say"><rect x="400" y="300" width="360" height="78" rx="20" fill="#fff" stroke="#111" stroke-width="4"/><text x="580" y="333" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="28" fill="#111">“Ashbo. 3 mash por.”</text><text x="580" y="362" text-anchor="middle" font-family="Archivo, sans-serif" font-size="17" fill="#555">I’ll come. In three months.</text></g></g>
+            <g class="ride" style="color:#3E9A63"><use href="#cng" x="560" y="400" width="240" height="170"/><g class="say"><rect x="380" y="300" width="400" height="78" rx="20" fill="#fff" stroke="#111" stroke-width="4"/><text x="580" y="333" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="28" fill="#111">“Template diye dei?”</text><text x="580" y="362" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="500" font-size="17" fill="#555">Shall I just use a free template?</text></g></g>
+          </g>
+          <!-- ours -->
+          <g id="ours" style="color:#006A4E">
+            <use href="#cng" x="760" y="370" width="290" height="205"/>
+            <rect x="800" y="470" width="210" height="30" rx="6" fill="#FFC72C" stroke="#111" stroke-width="3"/><text x="905" y="492" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="17" fill="#111">CLICK &amp; GROW</text>
+            <g id="oursSay"><rect x="700" y="236" width="420" height="96" rx="22" fill="#FFC72C" stroke="#111" stroke-width="4"/><text x="910" y="276" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="32" fill="#111">“Uthen! Meter on.”</text><text x="910" y="310" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="600" font-size="18" fill="#111">Get in. Fixed price. Leaving now.</text></g>
+          </g>
+        </svg>
+        <div class="rain" aria-hidden="true"></div>
+      </div>
+      <div class="tiles">
+        <div class="tile"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="4" y="6" width="28" height="24" rx="4" fill="none" stroke="#FFC72C" stroke-width="3"/><path d="M10 15h16M10 22h10" stroke="#FFC72C" stroke-width="3" stroke-linecap="round"/></svg><b>Price fixed before we start</b><span>The meter is on. No “500 extra” later.</span></div>
+        <div class="tile"><svg viewBox="0 0 36 36" aria-hidden="true"><use href="#wa-ico" x="4" y="4" width="28" height="28" style="color:#25D366"/></svg><b>Real people on WhatsApp</b><span>Not a bot. Not “sir is in a meeting”.</span></div>
+        <div class="tile"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="10" y="3" width="16" height="30" rx="4" fill="none" stroke="#FFC72C" stroke-width="3"/><path d="M15 28h6" stroke="#FFC72C" stroke-width="3" stroke-linecap="round"/></svg><b>Built for phones first</b><span>Because your customers live on them.</span></div>
+        <div class="tile"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M18 4l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z" fill="none" stroke="#FFC72C" stroke-width="3" stroke-linejoin="round"/></svg><b>30 days of free fixes</b><span>Something looks off after launch? We fix it.</span></div>
+      </div>
+      <div class="sec-cta"><a class="btn" href="#order">Hop in. Get a free quote</a><p>Usually a reply within the hour.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= YOUR COUSIN TRIED ================= -->
+  <section class="sec" id="cousin" aria-labelledby="t-cousin">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">An honest comparison</p><h2 id="t-cousin">Your cousin tried his best.</h2></div>
+        <p>We love him too. But your customers deserve more than a 2017 template and a visitor counter.</p>
+      </div>
+      <div class="cousin-grid">
+        <div>
+          <div class="switch" role="group" aria-label="Show the website made by">
+            <button type="button" data-v="cousin" aria-pressed="true">Your cousin</button>
+            <button type="button" data-v="pro" aria-pressed="false">Click &amp; Grow</button>
+          </div>
+          <div class="mock" id="mock" data-v="cousin">
+            <div class="chrome"><i></i><i></i><i></i><span id="mockUrl">rahmantraders.blogspot.com</span></div>
+            <div class="mock-body">
+              <div class="v-cousin" aria-hidden="false">
+                <div class="t">★ WELCOME TO RAHMAN TRADERS OFFICIAL WEBSITE ★</div>
+                <div class="uc">⚠ UNDER CONSTRUCTION SINCE 2017 ⚠</div>
+                <div class="row"><i></i><i></i><i></i></div>
+                <div><span class="blink">BEST PRICE!!!</span> For price please inbox</div>
+                <div class="ctr">VISITORS: 000047</div>
+                <small>♫ now playing: auto-play music you can’t stop · Best viewed in Internet Explorer</small>
+              </div>
+              <div class="v-pro">
+                <div class="nav">Rahman Traders <span><span>Fabrics</span><span>Wholesale</span><span>Cart (2)</span></span></div>
+                <div class="hero2"><div><b>Quality fabric, delivered anywhere in Bangladesh.</b><p>Order before 6pm, ships today. Pay with bKash or cash.</p><span class="go">Shop fabrics</span></div><div class="pic"></div></div>
+                <div class="cards"><div>Cotton lawn<small>৳ 450 / yd</small></div><div>Katan silk<small>৳ 1,200 / yd</small></div><div>Muslin<small>৳ 900 / yd</small></div></div>
+              </div>
+            </div>
+          </div>
+          <p class="footnote">No cousins were harmed. He’s welcome to join our internship.</p>
+        </div>
+        <table class="cmp">
+          <caption class="sr">Your cousin's website compared with a Click and Grow website</caption>
+          <thead><tr><th scope="col"></th><th scope="col">Your cousin</th><th scope="col">Click &amp; Grow</th></tr></thead>
+          <tbody>
+            <tr><td>Built with</td><td>Free template, cracked plugin</td><td>Designed around your customers</td></tr>
+            <tr><td>Loading time</td><td>Long enough to finish a cup of cha</td><td>A couple of seconds, tops</td></tr>
+            <tr><td>On a phone</td><td>Pinch, zoom, give up</td><td>Made for phones first</td></tr>
+            <tr><td>Asking the price</td><td>“Inbox for price”</td><td>Prices on the page, Buy button ready</td></tr>
+            <tr><td>On Google</td><td>Page 47, behind a 2014 blog</td><td>Set up to be found</td></tr>
+            <tr><td>Support</td><td>He’s at a wedding till Sunday</td><td>WhatsApp, same day</td></tr>
+            <tr><td>Cost</td><td>Free (plus one plate of biryani)</td><td>A fixed price you agree first</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us your old site. We’ll tell you what to fix, free.</p></div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES ================= -->
+  <section class="sec" id="services" aria-labelledby="t-svc" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">The menu</p><h2 id="t-svc">Everything you need to sell online.</h2></div>
+        <div style="display:grid;gap:12px;justify-items:start"><p>Pick one, or let us sort it out for you.</p>
+          <div class="cur" role="group" aria-label="Show prices in"><button type="button" data-cur="bdt" aria-pressed="true">৳ BDT</button><button type="button" data-cur="usd" aria-pressed="false">$ USD</button></div></div>
+      </div>
+      <div class="svc" id="svc">
+        <a href="#order" data-need="Website"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M3 12h26" stroke="#1C1A17" stroke-width="2.5"/><rect x="7" y="16" width="10" height="3" fill="#006A4E"/></svg></span><h3>Business website</h3><p>Look as good online as you do in person.</p><span class="price">from <b data-bdt="৳25,000" data-usd="$249">৳25,000</b></span></a>
+        <a href="#order" data-need="Online shop"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 11c0-6 10-6 10 0" fill="none" stroke="#1C1A17" stroke-width="2.5"/></svg></span><h3>Online shop</h3><p>bKash, Nagad, card. Customers pay, you sleep.</p><span class="price">from <b data-bdt="৳45,000" data-usd="$449">৳45,000</b></span></a>
+        <a href="#order" data-need="Facebook page to website"><span class="ico" style="--bg:#DCE6FF"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22v14H14l-6 5v-5H5z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><text x="16" y="18" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="9" fill="#1C1A17">৳?</text></svg></span><h3>Facebook page → website</h3><p>Stop answering “price koto?” 200 times a day.</p><span class="price">from <b data-bdt="৳18,000" data-usd="$179">৳18,000</b></span></a>
+        <a href="#order" data-need="Mobile app"><span class="ico" style="--bg:var(--red-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><circle cx="16" cy="14" r="4" fill="#E8283F"/><path d="M13 24h6" stroke="#1C1A17" stroke-width="2.5" stroke-linecap="round"/></svg></span><h3>Mobile app</h3><p>Your shop, on their home screen.</p><span class="price">from <b data-bdt="৳1,20,000" data-usd="$1,190">৳1,20,000</b></span></a>
+        <a href="#order" data-need="Google & SEO"><span class="ico" style="--bg:#D6F4F1"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8" fill="#fff" stroke="#1C1A17" stroke-width="2.5"/><path d="M20 20l7 7" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/></svg></span><h3>Google &amp; SEO</h3><p>Get found when people search, not only when you post.</p><span class="price">from <b data-bdt="৳12,000" data-usd="$119">৳12,000</b><em>/mo</em></span></a>
+        <a href="#order" data-need="Facebook & Google ads"><span class="ico" style="--bg:#FFE0EC"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M23 12c2 2 2 6 0 8" fill="none" stroke="#1C1A17" stroke-width="2.5" stroke-linecap="round"/></svg></span><h3>Facebook &amp; Google ads</h3><p>Ads that bring orders, not just likes from your aunts.</p><span class="price">from <b data-bdt="৳10,000" data-usd="$99">৳10,000</b><em>/mo</em></span></a>
+        <a href="#order" data-need="Logo & branding"><span class="ico" style="--bg:#FFF1C2"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.5 8 8.5.7-6.5 5.6 2 8.4L16 22.3 8.5 26.7l2-8.4L4 12.7l8.5-.7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/></svg></span><h3>Logo &amp; branding</h3><p>A logo people remember. Not one made in Paint at 2am.</p><span class="price">from <b data-bdt="৳8,000" data-usd="$79">৳8,000</b></span></a>
+        <a href="#order" data-need="Website care"><span class="ico" style="--bg:var(--green-lite)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l10 4v8c0 6-4 10-10 12-6-2-10-6-10-12V8z" fill="#fff" stroke="#1C1A17" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 16l4 4 6-7" fill="none" stroke="#006A4E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Website care</h3><p>Updates, backups and fixes. We worry so you don’t.</p><span class="price">from <b data-bdt="৳3,000" data-usd="$29">৳3,000</b><em>/mo</em></span></a>
+      </div>
+      <p class="note">Sample prices for this concept. Every quote is fixed before we start.</p>
+    </div>
+  </section>
+
+  <!-- ================= PACKS ================= -->
+  <section class="sec packs" id="packs" aria-labelledby="t-packs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Ready-made packs</p><h2 id="t-packs">Pick a plate. We’ll serve it hot.</h2></div>
+        <p>Every pack comes with mobile design, hosting set-up and a WhatsApp button that actually works.</p>
+      </div>
+      <div class="pack-grid">
+        <article class="pack">
+          <div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="96" rx="70" ry="10" fill="#E9DCC0"/><path d="M40 92L80 20l40 72z" fill="#E7A94A" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M60 70l20-34 20 34" fill="none" stroke="#B9782A" stroke-width="3"/><circle cx="80" cy="74" r="4" fill="#B9782A"/></svg></div>
+          <h3>Singara</h3><p class="tag">Small, quick and satisfying.</p>
+          <p class="amt" data-bdt="৳18,000" data-usd="$179">৳18,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>One-page website</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>WhatsApp and call buttons</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Google Maps listing</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 7 days</li></ul>
+          <a class="btn btn--white" href="#order" data-pack="Singara">Order Singara</a>
+        </article>
+        <article class="pack hot">
+          <span class="badge">Most ordered</span>
+          <div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><ellipse cx="80" cy="84" rx="72" ry="20" fill="#fff" stroke="#1C1A17" stroke-width="4"/><path d="M24 80c4-28 26-44 56-44s52 16 56 44z" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><g fill="#fff"><circle cx="60" cy="56" r="3"/><circle cx="80" cy="50" r="3"/><circle cx="100" cy="58" r="3"/><circle cx="70" cy="66" r="3"/><circle cx="92" cy="68" r="3"/></g><ellipse cx="96" cy="60" rx="14" ry="11" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="96" cy="60" r="6" fill="#FFC72C"/><circle cx="62" cy="66" r="10" fill="#D9A25A" stroke="#1C1A17" stroke-width="3"/><path class="steam" d="M60 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path class="steam" d="M96 30c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+          <h3>Biryani</h3><p class="tag">The crowd favourite. Feeds a growing business.</p>
+          <p class="amt" data-bdt="৳35,000" data-usd="$349">৳35,000</p>
+          <ul><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Up to 6 pages</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Google set-up and basic SEO</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Facebook pixel and analytics</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>30 days of free fixes</li><li><svg style="color:#FFC72C"><use href="#tick"/></svg>Live in about 14 days</li></ul>
+          <a class="btn" href="#order" data-pack="Biryani">Order Biryani</a>
+        </article>
+        <article class="pack">
+          <div class="food"><svg viewBox="0 0 160 110" aria-hidden="true"><path d="M30 46h100l-8 52H38z" fill="#9A9FA6" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><path d="M24 46h112" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/><path d="M40 46c4-18 20-28 40-28s36 10 40 28" fill="#F6D98B" stroke="#1C1A17" stroke-width="4"/><path d="M60 20c10-10 30-10 40 0" fill="none" stroke="#C0392B" stroke-width="4"/><rect x="72" y="60" width="16" height="12" rx="3" fill="#E8283F"/><path d="M30 60h-10M130 60h10" stroke="#1C1A17" stroke-width="6" stroke-linecap="round"/></svg></div>
+          <h3>Kacchi</h3><p class="tag">The full feast. For serious online sellers.</p>
+          <p class="amt" data-bdt="৳65,000" data-usd="$649">৳65,000</p>
+          <ul><li><svg style="color:#006A4E"><use href="#tick"/></svg>Online shop with up to 50 products</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>bKash, Nagad and card payments</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Order dashboard and SMS alerts</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>SEO and first ad campaign set up</li><li><svg style="color:#006A4E"><use href="#tick"/></svg>Live in about 21 days</li></ul>
+          <a class="btn btn--white" href="#order" data-pack="Kacchi">Order Kacchi</a>
+        </article>
+      </div>
+      <p class="custom">Not hungry for a pack? <a href="#order">Get a custom quote</a>.</p>
+    </div>
+  </section>
+
+  <!-- ================= THE ROUTE (process) ================= -->
+  <section class="sec" id="route" aria-labelledby="t-route">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">How it works</p><h2 id="t-route">From “bhai, ekta website lagbe” to launch day.</h2></div>
+        <p>Four stops. No traffic jams. You can see where we are at every step.</p>
+      </div>
+      <div class="route-box">
+        <svg viewBox="0 0 1200 170" aria-hidden="true">
+          <rect y="120" width="1200" height="40" rx="20" fill="#454545"/>
+          <path d="M20 140h1160" stroke="#F3F0E8" stroke-width="4" stroke-dasharray="30 26"/>
+          <g class="pins" fill="#E8283F" stroke="#1C1A17" stroke-width="3"><circle cx="150" cy="140" r="11"/><circle cx="450" cy="140" r="11"/><circle cx="750" cy="140" r="11"/><circle cx="1050" cy="140" r="11"/></g>
+          <use id="rick" href="#rickshaw" x="0" y="28" width="150" height="116"/>
+        </svg>
+        <ol class="stops" id="stops">
+          <li class="on"><b>1</b><strong>Cha &amp; chat</strong><span>A free call. Tell us what you sell and who buys it.</span></li>
+          <li class="on"><b>2</b><strong>See it first</strong><span>A clickable design you can change before we build.</span></li>
+          <li class="on"><b>3</b><strong>Build &amp; test</strong><span>Tested on real phones, slow internet included.</span></li>
+          <li class="on"><b>4</b><strong>Launch &amp; grow</strong><span>Go live, then ads and Google to bring the crowd.</span></li>
+        </ol>
+      </div>
+
+      <div style="margin-top:72px">
+        <p class="eyebrow">Our wall of fame</p>
+        <h2 style="font-size:clamp(30px,3.6vw,44px);margin:12px 0 22px">This spot is saved for your logo.</h2>
+        <div class="logos"><div>Your logo here. Seriously, we saved the best spot.</div><div>Client logo</div><div>Client logo</div><div>Client logo</div><div>Client logo</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="sec" id="faq" aria-labelledby="t-faq" style="padding-top:24px">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow">FAQ</p><h2 id="t-faq">Questions people ask (and some they’re too shy to).</h2></div></div>
+      <div class="faq">
+        <details><summary>Can you make it like Daraz, for 5,000 taka, by tomorrow?</summary><p>We love the energy. Not the timeline. Let’s start with what you actually need, then pick the pack that fits.</p></details>
+        <details><summary>I’m not a tech person. Is that a problem?</summary><p>Not at all. If you can use WhatsApp, you can run your website. We show you how, and we’re a message away.</p></details>
+        <details><summary>Do you take bKash?</summary><p>Yes. bKash, Nagad, bank transfer or card. Clients abroad can pay by card or wire.</p></details>
+        <details><summary>Do you work with businesses outside Bangladesh?</summary><p>Yes. We schedule calls in your time zone and invoice in USD, GBP or EUR.</p></details>
+        <details><summary>What if I don’t like the design?</summary><p>You see and click through it before we build anything. We change it until you’re happy to show it to your family.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ORDER LIKE CHA (form) ================= -->
+  <section class="sec order" id="order" aria-labelledby="t-order">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">Free quote</p><h2 id="t-order">Order your website like you order cha.</h2></div>
+        <p>Four quick questions. Takes less time than the cha takes to cool.</p>
+      </div>
+      <div class="order-grid">
+        <form class="slip" id="slip" novalidate>
+          <div class="progress" aria-hidden="true"><span class="done"><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><b id="stepNo">Step 1 of 4</b></div>
+
+          <fieldset class="step" data-step="1" style="border:0;padding:0;margin:0">
+            <legend><h3>What are you having?</h3></legend>
+            <p class="help">Pick as many as you like.</p>
+            <div class="choices" id="needs">
+              <label><input type="checkbox" name="need" value="Website"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="20" rx="3" fill="#D7F2E4" stroke="#1C1A17" stroke-width="2.5"/></svg>Website<small>The classic</small></span></label>
+              <label><input type="checkbox" name="need" value="Online shop"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 11h20l-2 16H8z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/></svg>Online shop<small>Sell while you sleep</small></span></label>
+              <label><input type="checkbox" name="need" value="Facebook page to website"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 7h22v14H14l-6 5v-5H5z" fill="#DCE6FF" stroke="#1C1A17" stroke-width="2.5"/></svg>Page → website<small>Bye, “inbox for price”</small></span></label>
+              <label><input type="checkbox" name="need" value="Mobile app"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="9" y="3" width="14" height="26" rx="3.5" fill="#FFE1E5" stroke="#1C1A17" stroke-width="2.5"/></svg>Mobile app<small>Home-screen fame</small></span></label>
+              <label><input type="checkbox" name="need" value="Ads & SEO"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 13v6h5l9 6V7l-9 6z" fill="#FFE0EC" stroke="#1C1A17" stroke-width="2.5"/></svg>Ads &amp; Google<small>Bring the crowd</small></span></label>
+              <label><input type="checkbox" name="need" value="Not sure"><span class="c"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="#FFF1C2" stroke="#1C1A17" stroke-width="2.5"/><text x="16" y="21" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="14" fill="#1C1A17">?</text></svg>Not sure yet<small>We’ll suggest</small></span></label>
+            </div>
+            <p class="err" id="e1"></p>
+          </fieldset>
+
+          <fieldset class="step" data-step="2" style="border:0;padding:0;margin:0" hidden>
+            <legend><h3>How hot do you want it?</h3></legend>
+            <div class="choices">
+              <label><input type="radio" name="when" value="No rush" checked><span class="c">Normal cha<small>No rush, 1 to 2 months</small></span></label>
+              <label><input type="radio" name="when" value="This month"><span class="c">Hot cha<small>This month, please</small></span></label>
+              <label><input type="radio" name="when" value="Urgent"><span class="c">Exam-night urgent<small>Yesterday, ideally</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="3" style="border:0;padding:0;margin:0" hidden>
+            <legend><h3>How full is the cup?</h3></legend>
+            <p class="help">Your rough budget. No judgement, every size gets a good cup.</p>
+            <div class="budget">
+              <svg viewBox="0 0 120 140" aria-hidden="true">
+                <defs><clipPath id="cupClip"><path d="M18 30h84l-10 96H28z"/></clipPath></defs>
+                <g clip-path="url(#cupClip)"><rect id="chaFill" x="0" y="30" width="120" height="100" fill="#C98B4A" style="transform-origin:60px 126px;transform:scaleY(.35);transition:transform .35s var(--ease-out)"/><rect x="0" y="30" width="120" height="100" fill="url(#none)" opacity="0"/></g>
+                <path d="M18 30h84l-10 96H28z" fill="none" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M100 50c22 0 22 40-4 40" fill="none" stroke="#1C1A17" stroke-width="5"/>
+                <path class="steam" d="M48 22c-6-10 6-14 0-22" fill="none" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round" opacity=".5"/>
+                <path class="steam" d="M70 22c-6-10 6-14 0-22" fill="none" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round" opacity=".5"/>
+              </svg>
+              <div class="range-wrap">
+                <label class="sr" for="budget">Budget</label>
+                <output id="budgetOut" for="budget">৳35,000</output>
+                <input id="budget" type="range" min="10000" max="200000" step="5000" value="35000">
+                <span class="lvl" id="budgetLvl">Biryani range</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="4" style="border:0;padding:0;margin:0" hidden>
+            <legend><h3>Where do we deliver the plan?</h3></legend>
+            <div class="two">
+              <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
+              <div class="field"><label for="f-biz">Business name</label><input id="f-biz" autocomplete="organization"></div>
+            </div>
+            <div class="two">
+              <div class="field"><label for="f-wa">WhatsApp number</label><input id="f-wa" type="tel" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX" aria-describedby="e-wa"><p class="err" id="e-wa"></p></div>
+              <div class="field"><label for="f-mail">Email (optional)</label><input id="f-mail" type="email" autocomplete="email"></div>
+            </div>
+          </fieldset>
+
+          <div class="done-card" id="doneCard" hidden>
+            <span class="stamp">ORDER RECEIVED</span>
+            <svg viewBox="0 0 120 140" aria-hidden="true"><path d="M18 30h84l-10 96H28z" fill="#C98B4A" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/><path d="M100 50c22 0 22 40-4 40" fill="none" stroke="#1C1A17" stroke-width="5"/><path class="steam" d="M48 22c-6-10 6-14 0-22" fill="none" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round"/><path class="steam" d="M70 22c-6-10 6-14 0-22" fill="none" stroke="#1C1A17" stroke-width="3.5" stroke-linecap="round"/></svg>
+            <h3 id="doneTitle" style="font-size:28px">Your plan is brewing.</h3>
+            <p id="doneMsg" style="color:var(--ink-2)">This is a preview, so nothing was sent yet.</p>
+          </div>
+
+          <div class="nav-steps" id="navSteps">
+            <button class="btn back" type="button" id="backBtn" hidden>← Back</button>
+            <button class="btn btn--green" type="button" id="nextBtn">Next →</button>
+          </div>
+          <p class="sr" role="status" aria-live="polite" id="live"></p>
+        </form>
+
+        <aside class="ticket" aria-label="Your order so far">
+          <h3>Your order</h3>
+          <dl>
+            <dt>Having</dt><dd id="tNeed">Pick something →</dd>
+            <dt>Speed</dt><dd id="tWhen">Normal cha</dd>
+            <dt>Budget</dt><dd id="tBudget">৳35,000 (Biryani range)</dd>
+            <dt>Reply on</dt><dd id="tWa">WhatsApp</dd>
+          </dl>
+          <p class="pay">Free quote. No payment now. You’ll get a fixed price and a plan on WhatsApp.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL CTA ================= -->
+  <section class="sec final" aria-labelledby="t-final">
+    <div class="wrap">
+      <h2 id="t-final">Shutter’s up. Let’s sell.</h2>
+      <p>Tell us about your business today. You’ll have a plan and a fixed price before your next cha break.</p>
+      <div class="hero-cta">
+        <a class="btn btn--green" href="#order">Get my free quote</a>
+        <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Click &amp; Grow · Made in Dhaka with too much cha.</span>
+    <nav aria-label="Footer"><a href="#services">Services</a><a href="#packs">Prices</a><a href="#route">How it works</a><a href="#faq">FAQ</a><a href="#order">Free quote</a></nav>
+  </div>
+</footer>
+
+<div class="mbar" aria-label="Quick actions">
+  <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>WhatsApp</a>
+  <a class="btn" href="#order">Free quote</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* bunting flags */
+  const cols = ['#E8283F', '#FFC72C', '#006A4E', '#FF4F8B', '#13A8A0'];
+  $$('.bunting').forEach(b => { for (let i = 0; i < 70; i++) { const f = document.createElement('i'); f.style.setProperty('--c', cols[i % cols.length]); b.appendChild(f); } });
+
+  /* ---------- currency switch ---------- */
+  $$('.cur button').forEach(btn => btn.addEventListener('click', () => {
+    const c = btn.dataset.cur;
+    $$('.cur button').forEach(b => b.setAttribute('aria-pressed', b === btn));
+    $$('[data-bdt]').forEach(el => { el.textContent = el.dataset[c]; });
+  }));
+
+  /* ---------- cousin switch ---------- */
+  const mock = $('#mock'), url = $('#mockUrl');
+  let touched = false;
+  function setV(v) {
+    mock.dataset.v = v;
+    $$('.switch button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v));
+    url.textContent = v === 'pro' ? 'rahmantraders.com' : 'rahmantraders.blogspot.com';
+    mock.querySelector('.v-cousin').setAttribute('aria-hidden', v === 'pro');
+    mock.querySelector('.v-pro').setAttribute('aria-hidden', v !== 'pro');
+  }
+  $$('.switch button').forEach(b => b.addEventListener('click', () => { touched = true; setV(b.dataset.v); }));
+  setV('cousin');
+
+  /* ---------- pre-fill the order from service cards and packs ---------- */
+  $$('#svc a').forEach(a => a.addEventListener('click', () => {
+    const v = a.dataset.need;
+    $$('#needs input').forEach(i => { if (i.value === v || (v.includes('SEO') || v.includes('ads')) && i.value === 'Ads & SEO') i.checked = true; });
+    syncTicket();
+  }));
+  const packBudget = { Singara: 20000, Biryani: 35000, Kacchi: 65000 };
+  $$('[data-pack]').forEach(a => a.addEventListener('click', () => {
+    const p = a.dataset.pack; $('#budget').value = packBudget[p];
+    $$('#needs input').forEach(i => { if (i.value === (p === 'Kacchi' ? 'Online shop' : 'Website')) i.checked = true; });
+    updBudget(); syncTicket();
+  }));
+
+  /* ---------- order form: 4 steps ---------- */
+  const steps = $$('.step'), bars = $$('.progress span'), next = $('#nextBtn'), back = $('#backBtn'), live = $('#live');
+  let cur = 0;
+  const fmt = n => '৳' + n.toLocaleString('en-IN');
+  function lvl(n) { return n < 25000 ? 'Singara range' : n < 55000 ? 'Biryani range' : n < 120000 ? 'Kacchi range' : 'Wedding-feast range'; }
+  function updBudget() {
+    const n = +$('#budget').value;
+    $('#budgetOut').textContent = fmt(n) + (n >= 200000 ? '+' : '');
+    $('#budgetLvl').textContent = lvl(n);
+    $('#chaFill').style.transform = `scaleY(${(.2 + .8 * (n - 10000) / 190000).toFixed(3)})`;
+    syncTicket();
+  }
+  function syncTicket() {
+    const needs = $$('#needs input:checked').map(i => i.value);
+    $('#tNeed').textContent = needs.length ? needs.join(', ') : 'Pick something →';
+    const w = $('input[name="when"]:checked'); $('#tWhen').textContent = w ? w.closest('label').querySelector('.c').firstChild.textContent.trim() : '';
+    const n = +$('#budget').value; $('#tBudget').textContent = `${fmt(n)} (${lvl(n)})`;
+    const wa = $('#f-wa').value.trim(); $('#tWa').textContent = wa || 'WhatsApp';
+  }
+  $('#budget').addEventListener('input', updBudget);
+  $('#slip').addEventListener('change', syncTicket);
+  $('#f-wa').addEventListener('input', syncTicket);
+  function show(i, dir) {
+    steps[cur].hidden = true; cur = i; const s = steps[cur]; s.hidden = false;
+    bars.forEach((b, k) => b.classList.toggle('done', k <= cur));
+    $('#stepNo').textContent = `Step ${cur + 1} of 4`;
+    back.hidden = cur === 0;
+    next.textContent = cur === 3 ? 'Place my order' : 'Next →';
+    live.textContent = `Step ${cur + 1} of 4: ${s.querySelector('h3').textContent}`;
+    if (!reduce && window.gsap) gsap.fromTo(s, { opacity: 0, x: dir * 24 }, { opacity: 1, x: 0, duration: .35, ease: 'expo.out' });
+    const f = s.querySelector('input'); if (f) f.focus({ preventScroll: true });
+  }
+  next.addEventListener('click', () => {
+    if (cur === 0 && !$$('#needs input:checked').length) { $('#e1').textContent = 'Pick at least one. “Not sure yet” counts.'; return; }
+    $('#e1').textContent = '';
+    if (cur < 3) { show(cur + 1, 1); return; }
+    const name = $('#f-name'), wa = $('#f-wa');
+    $('#e-name').textContent = name.value.trim() ? '' : 'What should we call you?';
+    $('#e-wa').textContent = /^(\+?880|0)1\d{9}$/.test(wa.value.replace(/[\s-]/g, '')) || /^\+?\d{8,15}$/.test(wa.value.replace(/[\s-]/g, '')) ? '' : 'Add a WhatsApp number, like 01XXXXXXXXX.';
+    name.setAttribute('aria-invalid', !!$('#e-name').textContent); wa.setAttribute('aria-invalid', !!$('#e-wa').textContent);
+    if ($('#e-name').textContent) { name.focus(); return; }
+    if ($('#e-wa').textContent) { wa.focus(); return; }
+    next.disabled = true; next.textContent = 'Brewing…';
+    setTimeout(() => {
+      steps[cur].hidden = true; $('#navSteps').hidden = true; $('.progress').hidden = true;
+      const d = $('#doneCard'); d.hidden = false;
+      $('#doneTitle').textContent = `Thanks, ${name.value.trim().split(' ')[0]}! Your plan is brewing.`;
+      live.textContent = 'Order received. This is a preview, so nothing was sent yet.';
+      if (!reduce && window.gsap) gsap.from('.stamp', { scale: 1.6, opacity: 0, rotate: -20, duration: .45, ease: 'back.out(2)' });
+    }, 700);
+  });
+  back.addEventListener('click', () => show(cur - 1, -1));
+  updBudget();
+
+  /* ================= MOTION (only with GSAP + motion allowed) ================= */
+  if (reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+  const OUT = 'expo.out';
+
+  /* hero: the click pulls the shutter up (lead); light, sign, keeper follow */
+  gsap.set('#shutter', { transformOrigin: '50% 0%' });
+  gsap.set('#crowd .cust', { x: 260, opacity: 0 });
+  gsap.set('#heroRick', { x: -1300 });
+  gsap.set('#shopSign .bulbs circle', { opacity: .25 });
+  let open = false;
+  function openShutter(withHand) {
+    const tl = gsap.timeline();
+    if (withHand) tl.fromTo('#hand', { opacity: 0, x: 980, y: 520 }, { opacity: 1, x: 772, y: 676, duration: .9, ease: OUT })
+                    .to('#hand', { scale: .85, transformOrigin: '0 0', duration: .1, yoyo: true, repeat: 1 })
+                    .fromTo('#ripple', { opacity: 1, scale: .5, transformOrigin: '50% 50%' }, { opacity: 0, scale: 3, duration: .5, ease: OUT }, '<');
+    tl.to('#shutter', { scaleY: .04, duration: .9, ease: 'power3.inOut' }, withHand ? '<+.05' : 0)
+      .to('#hand', { opacity: 0, y: '-=40', duration: .4 }, '<+.2')
+      .to('#shopSign .bulbs circle', { opacity: 1, duration: .08, stagger: { each: .07, repeat: 3, yoyo: true } }, '>-.3')
+      .to('#shopSign .bulbs circle', { opacity: 1, duration: .1 })
+      .fromTo('#arm', { rotate: 0 }, { rotate: -24, duration: .25, yoyo: true, repeat: 3, ease: 'sine.inOut' }, '<-.3')
+      .to('#crowd .cust', { x: 0, opacity: 1, duration: .8, stagger: .15, ease: OUT }, '<');
+    open = true; return tl;
+  }
+  function closeShutter() { open = false; return gsap.timeline().to('#crowd .cust', { x: 260, opacity: 0, duration: .4, stagger: .05 }).to('#shutter', { scaleY: 1, duration: .6, ease: 'power3.inOut' }, '<').to('#shopSign .bulbs circle', { opacity: .25, duration: .2 }, '<'); }
+  gsap.delayedCall(.6, () => openShutter(true));
+  $('#shutterBtn').addEventListener('click', () => { open ? closeShutter() : openShutter(false); });
+  gsap.fromTo('#hint', { opacity: 0 }, { opacity: 1, duration: .3, delay: 3.4, onComplete: () => gsap.to('#hint', { opacity: 0, delay: 2.5, duration: .3 }) });
+  // a rickshaw rings past as you start scrolling
+  gsap.to('#heroRick', { x: 400, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+  gsap.to('#heroRick', { y: '+=3', duration: .18, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+  /* search: four refusals, then ours */
+  const rides = $$('.cngs .ride');
+  gsap.set(rides, { x: 1000 });
+  gsap.set('.cngs .say', { opacity: 0, scale: .8, transformOrigin: '50% 100%' });
+  gsap.set('#ours', { x: 900 });
+  gsap.set('#oursSay', { opacity: 0, scale: .8, transformOrigin: '50% 100%' });
+  gsap.set('.tile', { opacity: 0, y: 24 });
+  const mm = gsap.matchMedia();
+  const searchTl = st => {
+    const tl = gsap.timeline({ scrollTrigger: st });
+    rides.forEach((r, i) => {
+      const say = r.querySelector('.say');
+      tl.to(r, { x: 0, duration: .6, ease: 'power3.out' })
+        .to(say, { opacity: 1, scale: 1, duration: .2, ease: 'back.out(2)' })
+        .to(say, { opacity: 0, duration: .15 }, '+=.35')
+        .to(r, { x: -1200, duration: .5, ease: 'power2.in' }, '<');
+    });
+    tl.to('#ours', { x: 0, duration: .7, ease: 'power3.out' })
+      .to('#oursSay', { opacity: 1, scale: 1, duration: .25, ease: 'back.out(2)' })
+      .to('.tile', { opacity: 1, y: 0, duration: .4, stagger: .08, ease: OUT }, '<');
+    return tl;
+  };
+  mm.add('(min-width: 861px)', () => { searchTl({ trigger: '#rainbox', start: 'center center', end: '+=220%', scrub: .5, pin: '#search' }); });
+  mm.add('(max-width: 860px)', () => { searchTl({ trigger: '#rainbox', start: 'top 70%', end: '+=900', scrub: .5 }); });
+
+  /* cousin: flip to our version once, unless the visitor already did */
+  ScrollTrigger.create({ trigger: '#mock', start: 'top 60%', once: true, onEnter: () => {
+    setTimeout(() => { if (!touched) { setV('pro'); gsap.fromTo('.v-pro > *', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: .07, ease: OUT }); } }, 1400);
+  } });
+  gsap.from('.cmp tbody tr', { opacity: 0, x: 20, duration: .4, stagger: .06, ease: OUT, scrollTrigger: { trigger: '.cmp', start: 'top 75%' } });
+
+  /* services: one wave as the grid arrives */
+  gsap.from('#svc a', { opacity: 0, y: 30, duration: .55, ease: OUT, stagger: { each: .06, from: 'start' }, scrollTrigger: { trigger: '#svc', start: 'top 80%' } });
+
+  /* packs: plates land, the favourite last and loudest */
+  gsap.from('.pack', { opacity: 0, y: 40, duration: .6, ease: OUT, stagger: .1, scrollTrigger: { trigger: '.pack-grid', start: 'top 80%' } });
+  gsap.from('.pack .badge', { scale: 0.6, opacity: 0, duration: .45, ease: 'back.out(2.5)', delay: .4, scrollTrigger: { trigger: '.pack-grid', start: 'top 80%' } });
+
+  /* route: the rickshaw drives, stops light up */
+  const stops = $$('#stops li');
+  stops.forEach(s => s.classList.remove('on'));
+  gsap.timeline({ scrollTrigger: { trigger: '.route-box', start: 'top 75%', end: 'bottom 45%', scrub: .5,
+    onUpdate: s => stops.forEach((li, i) => li.classList.toggle('on', s.progress >= [.1, .37, .63, .9][i])) } })
+    .fromTo('#rick', { x: 0 }, { x: 1040, ease: 'none', duration: 1 });
+  gsap.to('#rick', { y: '+=3', duration: .2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
