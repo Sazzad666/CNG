@@ -2,7 +2,7 @@
 
 Every prototype built while exploring the Click & Grow homepage, oldest first. Each folder holds one self-contained `index.html` (fonts and scripts load from Google Fonts and CDNs). Open it in a browser to view it.
 
-The current direction is **09-search-results**. It is the default page (`../index.html`) and is live at https://claude.ai/artifact/8jLBGYLQbVKDMm3N84PabU, version 8).
+The current direction is **09-search-results**. It is the default page (`../index.html`) and is live at https://claude.ai/artifact/8jLBGYLQbVKDMm3N84PabU, version 8.
 
 | Folder | Concept | Published preview |
 |---|---|---|
