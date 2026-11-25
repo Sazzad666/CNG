@@ -19,7 +19,7 @@ The current direction is **13-dhaka-slides**.
 | `10-claw-machine` | Claw machine game for "Your search ends here" | same link, version 5 |
 | `11-night-mela` | Night street, neon stalls, claw machine, cousin slider | same link, version 6 |
 | `12-daytime-compare` | Daytime street (from version 3), cousin vs us drag slider as section 2, calmer motion | same link, version 7 |
-| `13-dhaka-slides` | **Current:** back to the Dhaka daytime template (05). Rickshaws face forward, and the CNG in the rain scene is now a swipeable 5-slide story. Works on phones first | https://claude.ai/artifact/SPdTAU9vXaXSN8qYTrDgS1 (version 2) |
+| `13-dhaka-slides` | **Current:** back to the Dhaka daytime template (05). Rickshaws face forward, and the CNG in the rain scene is now a swipeable 5-slide story. Works on phones first | https://claude.ai/artifact/SPdTAU9vXaXSN8qYTrDgS1 (version 4) |
 
 The published previews are private until shared from their Share menu.
 

@@ -226,10 +226,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .progress span i{position:absolute;inset:0;background:var(--green-2);transform-origin:left;transform:scaleX(0);transition:transform .4s var(--ease-out)}
 .progress span.done i{transform:scaleX(1)}
 .progress b{font:700 13px/1 var(--body);color:var(--ink-2);white-space:nowrap}
-.step{display:grid;gap:14px}
-.step[hidden]{display:none!important}
-.step h3{font-size:clamp(24px,2.6vw,32px)}
-.step .help{color:var(--ink-2);font-size:15px}
+.ostep{display:grid;gap:14px}
+.ostep[hidden]{display:none!important}
+.ostep h3{font-size:clamp(24px,2.6vw,32px)}
+.ostep .help{color:var(--ink-2);font-size:15px}
 .choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .choices label{position:relative;cursor:pointer}
 .choices input{position:absolute;opacity:0;pointer-events:none}
@@ -324,7 +324,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
 .dslides{display:grid}
 .dslide{grid-area:1/1;display:grid;gap:6px;align-content:start}
 .dslide[aria-hidden="true"]{visibility:hidden}
-.dslide .step{font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.dslide .dstep{font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .dslide .q{font:800 clamp(32px,7vw,46px)/1.02 var(--display);margin-top:4px}
 .dslide .means{font:600 17px/1.35 var(--body);color:#3D3830}
 .dslide .lesson{font-size:15.5px;line-height:1.45;border-top:2px dashed var(--line);padding-top:10px;margin-top:4px}
@@ -552,11 +552,11 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
         </div>
         <div class="deck-cap" id="deckCap">
           <div class="dslides" aria-live="polite">
-            <article class="dslide" data-color="#2E8B57"><span class="step">Ride 1 of 5</span><p class="q">“Jabo na.”</p><p class="means">“I won’t go.”</p><p class="lesson">The agency that only wants big clients.</p></article>
-            <article class="dslide" data-color="#4FA36F"><span class="step">Ride 2 of 5</span><p class="q">“500 taka extra.”</p><p class="means">The price goes up after you say yes.</p><p class="lesson">Hidden costs, before you’ve even started.</p></article>
-            <article class="dslide" data-color="#2E8B57"><span class="step">Ride 3 of 5</span><p class="q">“Ashbo. 3 mash por.”</p><p class="means">“I’ll come. In three months.”</p><p class="lesson">A waiting list and no real date.</p></article>
-            <article class="dslide" data-color="#4FA36F"><span class="step">Ride 4 of 5</span><p class="q">“Template diye dei?”</p><p class="means">“Shall I just use a free template?”</p><p class="lesson">A site that looks like 4,000 others.</p></article>
-            <article class="dslide ours" data-color="#006A4E"><span class="step">Ride 5 of 5</span><p class="q">“Uthen. Meter on.”</p><p class="means">Get in. Fixed price. Leaving now.</p><p class="lesson">That’s us. You agree the price first, and we usually reply within the hour.</p><a class="btn btn--green" href="#order">Hop in. Get a free quote</a></article>
+            <article class="dslide" data-color="#2E8B57"><span class="dstep">Ride 1 of 5</span><p class="q">“Jabo na.”</p><p class="means">“I won’t go.”</p><p class="lesson">The agency that only wants big clients.</p></article>
+            <article class="dslide" data-color="#4FA36F"><span class="dstep">Ride 2 of 5</span><p class="q">“500 taka extra.”</p><p class="means">The price goes up after you say yes.</p><p class="lesson">Hidden costs, before you’ve even started.</p></article>
+            <article class="dslide" data-color="#2E8B57"><span class="dstep">Ride 3 of 5</span><p class="q">“Ashbo. 3 mash por.”</p><p class="means">“I’ll come. In three months.”</p><p class="lesson">A waiting list and no real date.</p></article>
+            <article class="dslide" data-color="#4FA36F"><span class="dstep">Ride 4 of 5</span><p class="q">“Template diye dei?”</p><p class="means">“Shall I just use a free template?”</p><p class="lesson">A site that looks like 4,000 others.</p></article>
+            <article class="dslide ours" data-color="#006A4E"><span class="dstep">Ride 5 of 5</span><p class="q">“Uthen. Meter on.”</p><p class="means">Get in. Fixed price. Leaving now.</p><p class="lesson">That’s us. You agree the price first, and we usually reply within the hour.</p><a class="btn btn--green" href="#order">Hop in. Get a free quote</a></article>
           </div>
           <div class="deck-nav">
             <button type="button" class="dbtn" id="dPrev" aria-label="Previous ride"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -738,7 +738,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
         <form class="slip" id="slip" novalidate>
           <div class="progress" aria-hidden="true"><span class="done"><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><b id="stepNo">Step 1 of 4</b></div>
 
-          <fieldset class="step" data-step="1" style="border:0;padding:0;margin:0">
+          <fieldset class="ostep" data-step="1" style="border:0;padding:0;margin:0">
             <legend><h3>What are you having?</h3></legend>
             <p class="help">Pick as many as you like.</p>
             <div class="choices" id="needs">
@@ -752,7 +752,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
             <p class="err" id="e1"></p>
           </fieldset>
 
-          <fieldset class="step" data-step="2" style="border:0;padding:0;margin:0" hidden>
+          <fieldset class="ostep" data-step="2" style="border:0;padding:0;margin:0" hidden>
             <legend><h3>How hot do you want it?</h3></legend>
             <div class="choices">
               <label><input type="radio" name="when" value="No rush" checked><span class="c">Normal cha<small>No rush, 1 to 2 months</small></span></label>
@@ -761,7 +761,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
             </div>
           </fieldset>
 
-          <fieldset class="step" data-step="3" style="border:0;padding:0;margin:0" hidden>
+          <fieldset class="ostep" data-step="3" style="border:0;padding:0;margin:0" hidden>
             <legend><h3>How full is the cup?</h3></legend>
             <p class="help">Your rough budget. No judgement, every size gets a good cup.</p>
             <div class="budget">
@@ -782,7 +782,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
             </div>
           </fieldset>
 
-          <fieldset class="step" data-step="4" style="border:0;padding:0;margin:0" hidden>
+          <fieldset class="ostep" data-step="4" style="border:0;padding:0;margin:0" hidden>
             <legend><h3>Where do we deliver the plan?</h3></legend>
             <div class="two">
               <div class="field"><label for="f-name">Your name</label><input id="f-name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name"></p></div>
@@ -892,7 +892,7 @@ footer{padding-block:48px 110px;font-size:14px;color:var(--ink-2)}
   }));
 
   /* ---------- order form: 4 steps ---------- */
-  const steps = $$('.step'), bars = $$('.progress span'), next = $('#nextBtn'), back = $('#backBtn'), live = $('#live');
+  const steps = $$('.ostep'), bars = $$('.progress span'), next = $('#nextBtn'), back = $('#backBtn'), live = $('#live');
   let cur = 0;
   const fmt = n => '৳' + n.toLocaleString('en-IN');
   function lvl(n) { return n < 25000 ? 'Singara range' : n < 55000 ? 'Biryani range' : n < 120000 ? 'Kacchi range' : 'Wedding-feast range'; }
