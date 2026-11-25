@@ -492,6 +492,83 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   .spin{animation:none}
   .ppl svg,.v4-load{transition:none}
 }
+
+/* ---------- HERO: a day in 10 seconds ---------- */
+.hero-art.hp{aspect-ratio:auto;display:flex;flex-direction:column;cursor:pointer}
+.hp-scene{position:relative}
+.hp-svg{width:100%;height:auto;display:block;border:2.5px solid var(--ink);border-radius:22px;background:#BFE6FF;box-shadow:6px 6px 0 var(--ink)}
+.hp-cap{margin:16px 0 0;min-height:46px;display:flex;justify-content:center;align-items:flex-start;pointer-events:none}
+.hp-cap span{background:var(--ink);color:#fff;font:700 clamp(15px,1.5vw,18px)/1.3 var(--body);padding:10px 18px;border-radius:999px;text-align:center;max-width:100%;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.hp-cap span:empty{display:none}
+.hp-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:4% 5% 0;pointer-events:none;opacity:0}
+.lock-time{font:800 clamp(30px,5.2vw,62px)/1 var(--display);color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.3)}
+.lock-sub{color:#DCE4F2;font:600 clamp(13px,1.3vw,16px)/1.2 var(--body);margin:4px 0 10px}
+.lock-list{list-style:none;margin:0;padding:0;width:min(100%,460px);display:grid;gap:8px}
+.nt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:1px 12px;align-items:center;background:rgba(255,255,255,.96);border:2.5px solid var(--ink);border-radius:16px;padding:9px 14px 10px 10px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.nt i{grid-row:span 3;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:2px solid var(--ink)}
+.nt i svg{width:22px;height:22px}
+.nt .app{display:flex;justify-content:space-between;gap:8px;font:600 13px/1.2 var(--body);color:var(--ink-2)}
+.nt b{font:800 17px/1.2 var(--display);color:var(--ink)}
+.nt .body{font:500 15px/1.3 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lock-count{margin-top:12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:7px 16px;font:800 clamp(14px,1.4vw,18px)/1 var(--display)}
+.lock-count:empty{display:none}
+@media (max-width:560px){
+  .hp-lock{padding-top:3%}
+  .lock-sub{display:none}
+  .lock-time{margin-bottom:6px}
+  .lock-list{gap:5px}
+  .nt{grid-template-columns:28px minmax(0,1fr);gap:0 8px;padding:5px 9px 6px 6px;border-radius:12px;border-width:2px}
+  .nt i{width:28px;height:28px;border-radius:8px}.nt i svg{width:16px;height:16px}
+  .nt .app{font-size:10.5px}.nt b{font-size:13px}.nt .body{font-size:11.5px}
+  .lock-count{margin-top:6px;padding:5px 12px;font-size:12px;border-width:2px}
+}
+
+/* ---------- COUSIN: a four-panel comic ---------- */
+.saga{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
+.panel{position:relative;margin:0;background:var(--bg);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column}
+.panel > svg{display:block;width:100%;height:auto;border-radius:13px 13px 0 0}
+.when{position:absolute;top:10px;left:10px;z-index:2;background:var(--ink);color:#fff;font:800 15px/1 var(--display);padding:7px 11px;border-radius:9px;transform:rotate(-3deg)}
+.bub{position:relative;margin:4px 12px 14px;background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:11px 14px;font:700 17px/1.35 var(--body);transform-origin:30% 0}
+.bub::before{content:"";position:absolute;top:-11px;left:30%;width:18px;height:18px;background:#fff;border-left:2.5px solid var(--ink);border-top:2.5px solid var(--ink);transform:rotate(45deg)}
+.meanwhile{position:relative;margin-top:24px;background:var(--green);color:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--ink);padding:26px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}
+.meanwhile h3{font-size:clamp(26px,2.8vw,36px);color:var(--yellow);margin-bottom:14px}
+.steps-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps-list li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start;font-size:clamp(16px,1.5vw,18px);line-height:1.4}
+.steps-list i{width:28px;height:28px;border-radius:50%;background:var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5' fill='none' stroke='%231C1A17' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/70% no-repeat;border:2px solid var(--ink)}
+.steps-list b{color:var(--yellow)}
+.harmed{font:400 clamp(16px,1.6vw,20px)/1.1 var(--sign);color:#fff;border:3px solid #fff;border-radius:12px;padding:10px 14px;text-align:center;transform:rotate(6deg)}
+@media (prefers-reduced-motion:no-preference){
+  .crawl{transform-box:fill-box;transform-origin:left;animation:crawl 4s var(--ease-out) infinite}
+  .buzz{transform-box:fill-box;transform-origin:center;animation:buzz 2.4s linear infinite}
+  .buzzlines{animation:buzzl 2.4s linear infinite}
+  .dance{transform-box:fill-box;transform-origin:50% 100%;animation:dance .9s ease-in-out infinite alternate}
+  .lights circle{animation:twinkle 1.2s ease-in-out infinite alternate}
+  .lights circle:nth-child(2n){animation-delay:-.6s}
+  .plane{animation:fly 4.5s linear infinite}
+  .wave{transform-box:fill-box;transform-origin:100% 100%;animation:wave .7s ease-in-out infinite alternate}
+  .spark path{transform-box:fill-box;transform-origin:center;animation:spark 1.6s ease-in-out infinite alternate}
+  .spark path:nth-child(2){animation-delay:-.8s}
+}
+@keyframes crawl{0%{transform:scaleX(0)}45%,100%{transform:scaleX(.12)}}
+@keyframes buzz{0%,66%,100%{transform:rotate(0)}70%{transform:rotate(-9deg)}74%{transform:rotate(9deg)}78%{transform:rotate(-7deg)}82%{transform:rotate(7deg)}86%{transform:rotate(0)}}
+@keyframes buzzl{0%,66%,90%,100%{opacity:0}70%,86%{opacity:1}}
+@keyframes dance{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-6px) rotate(3deg)}}
+@keyframes twinkle{from{opacity:1}to{opacity:.35}}
+@keyframes fly{from{transform:translate(-120px,60px)}to{transform:translate(360px,-40px)}}
+@keyframes wave{from{transform:rotate(-8deg)}to{transform:rotate(10deg)}}
+@keyframes spark{from{transform:scale(.8) rotate(0)}to{transform:scale(1.1) rotate(20deg)}}
+@media (max-width:1000px){.saga{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.saga{grid-template-columns:minmax(0,1fr)}.meanwhile{grid-template-columns:minmax(0,1fr);padding:22px 18px}.harmed{justify-self:start}}
+
+/* ---------- page-wide motion ---------- */
+:root{interpolate-size:allow-keywords}
+.faq details::details-content{block-size:0;overflow:hidden;opacity:0;transition:block-size .3s var(--ease-out),opacity .25s ease,content-visibility .3s allow-discrete}
+.faq details[open]::details-content{block-size:auto;opacity:1}
+.final{position:relative;overflow:hidden}
+.final::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(#A7B0B5 0 15px,#7D868B 15px 18px);transform-origin:50% 0;transform:scaleY(0)}
+.final.shut::after{transform:scaleY(1)}
+.final.rolling::after{transition:transform .9s cubic-bezier(0.77, 0, 0.175, 1)}
+@media (prefers-reduced-motion:reduce){.faq details::details-content{transition:none}.final::after{display:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -601,78 +678,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
           </div>
         </div>
       </div>
-      <div class="hero-art" id="heroArt">
-        <svg viewBox="60 90 1100 780" role="img" aria-label="A busy high street. A hand clicks a shop's rolling shutter, it rolls up, the shop lights up and customers walk in while traffic drives past.">
-          <rect x="0" y="0" width="1440" height="860" fill="#FFE8B5"/>
-          <circle cx="1080" cy="170" r="62" fill="#E8283F"/>
-          <!-- city landmarks, swapped by the city picker -->
-          <g class="landmark" data-lm="dhaka" fill="#F3B59A" stroke="#1C1A17" stroke-width="3">
-            <path d="M690 300v-120l30-26v146z"/><path d="M738 300v-150l28-30 28 30v150z"/><path d="M812 300v-120l-30-26v146z" transform="translate(30 0)"/>
-            <path d="M650 300v-80l22-16v96zM860 300v-80l-22-16v96z" transform="translate(28 0)"/><circle cx="766" cy="190" r="44" fill="#E8283F" stroke="none" opacity=".9"/><path d="M738 300v-150l28-30 28 30v150z" fill="#F7C8B2"/>
-          </g>
-          <g class="landmark" data-lm="london" fill="#D8C8A8" stroke="#1C1A17" stroke-width="3" opacity="0">
-            <rect x="740" y="160" width="56" height="140"/><rect x="732" y="150" width="72" height="16"/><circle cx="768" cy="196" r="20" fill="#FFFBF2"/><path d="M768 196v-12M768 196l8 6" stroke="#1C1A17" stroke-width="3"/><path d="M736 150l32-46 32 46z"/><path d="M768 104v-22" stroke-width="3"/>
-          </g>
-          <g class="landmark" data-lm="dubai" fill="#BFD3DE" stroke="#1C1A17" stroke-width="3" opacity="0">
-            <path d="M740 300v-60h10v-50h8v-60h8v-40h4v-40l4 40h4v40h8v60h8v50h10v60z"/>
-          </g>
-          <g class="landmark" data-lm="ny" fill="#C9C2D6" stroke="#1C1A17" stroke-width="3" opacity="0">
-            <path d="M730 300v-90h14v-30h14v-30h20v30h14v30h14v90z"/><path d="M764 150v-40h12v40z"/><path d="M770 110v-30" stroke-width="3"/>
-          </g>
-          <!-- buildings -->
-          <g stroke="#1C1A17" stroke-width="4"><rect x="0" y="170" width="300" height="520" fill="#F4C9A0"/><rect x="300" y="110" width="250" height="580" fill="#C9E6D8"/><rect x="900" y="130" width="260" height="560" fill="#F6D9E2"/><rect x="1160" y="230" width="280" height="460" fill="#D7E3F6"/></g>
-          <g fill="#FFFBF2" stroke="#1C1A17" stroke-width="3"><rect x="40" y="220" width="70" height="80"/><rect x="170" y="220" width="70" height="80"/><rect x="40" y="340" width="70" height="80"/><rect x="170" y="340" width="70" height="80"/><rect x="340" y="160" width="60" height="70"/><rect x="450" y="160" width="60" height="70"/><rect x="340" y="270" width="60" height="70"/><rect x="450" y="270" width="60" height="70"/><rect x="340" y="380" width="60" height="70"/><rect x="450" y="380" width="60" height="70"/><rect x="940" y="180" width="70" height="80"/><rect x="1060" y="180" width="70" height="80"/><rect x="940" y="300" width="70" height="80"/><rect x="1060" y="300" width="70" height="80"/></g>
-          <g stroke="#1C1A17" stroke-width="3"><rect x="350" y="250" width="16" height="22" fill="#FF4F8B"/><rect x="374" y="250" width="16" height="26" fill="#13A8A0"/><rect x="1060" y="280" width="18" height="24" fill="#FFC72C"/></g>
-          <g fill="#2F2F2F" stroke="#1C1A17" stroke-width="3"><rect x="60" y="130" width="54" height="40" rx="6"/><rect x="380" y="70" width="54" height="40" rx="6"/><rect x="1000" y="90" width="54" height="40" rx="6"/></g>
-          <g fill="none" stroke="#1C1A17" stroke-width="2.5"><path d="M0 470 Q 300 520 610 470"/><path d="M0 482 Q 320 540 610 478"/><path d="M850 478 Q 1150 540 1440 470"/></g>
-          <!-- ground -->
-          <rect y="690" width="1440" height="50" fill="#DCCBAA" stroke="#1C1A17" stroke-width="4"/>
-          <rect y="740" width="1440" height="130" fill="#454545"/>
-          <path d="M0 806h1440" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="60 50"/>
-          <!-- the stall: cha in Dhaka, tea in London, karak in Dubai, coffee in NYC -->
-          <g>
-            <rect x="80" y="560" width="200" height="130" fill="#13A8A0" stroke="#1C1A17" stroke-width="4"/>
-            <rect x="70" y="540" width="220" height="26" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/>
-            <text x="180" y="560" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="17" fill="#1C1A17" data-city-text="stall">CHA · ৳10</text>
-            <path d="M150 520h60l-6 22h-48z" fill="#C0C0C0" stroke="#1C1A17" stroke-width="4"/><path d="M210 524c16 0 16 14 0 14" fill="none" stroke="#1C1A17" stroke-width="4"/>
-            <path class="steam" d="M168 512c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path class="steam" d="M188 512c-6-10 6-14 0-24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-          </g>
-          <!-- THE SHOP -->
-          <g>
-            <rect x="620" y="300" width="290" height="390" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
-            <rect x="600" y="316" width="330" height="84" rx="10" fill="#E8283F" stroke="#1C1A17" stroke-width="4"/>
-            <text x="765" y="370" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="30" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.5" paint-order="stroke">YOUR BUSINESS</text>
-            <g id="bulbs" fill="#FFC72C"><circle cx="616" cy="332" r="7"/><circle cx="914" cy="332" r="7"/><circle cx="616" cy="384" r="7"/><circle cx="914" cy="384" r="7"/></g>
-            <g id="inside">
-              <rect x="640" y="420" width="250" height="270" fill="#FFE7A3"/>
-              <g stroke="#1C1A17" stroke-width="3"><path d="M650 470h230M650 530h230"/></g>
-              <g stroke="#1C1A17" stroke-width="2.5"><rect x="660" y="440" width="26" height="30" fill="#FF4F8B"/><rect x="692" y="446" width="22" height="24" fill="#13A8A0"/><rect x="720" y="436" width="30" height="34" fill="#FFC72C"/><rect x="800" y="444" width="24" height="26" fill="#2F5DFF"/><rect x="830" y="438" width="34" height="32" fill="#E8283F"/><rect x="660" y="500" width="34" height="30" fill="#0E8A62"/></g>
-              <g><circle cx="800" cy="560" r="26" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M774 556c0-20 12-28 26-28s26 8 26 28c-6-8-14-11-26-11s-20 3-26 11z" fill="#1C1A17"/><circle cx="791" cy="562" r="3.5" fill="#1C1A17"/><circle cx="809" cy="562" r="3.5" fill="#1C1A17"/><path d="M790 574c6 6 14 6 20 0" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/><path d="M766 640c0-34 14-50 34-50s34 16 34 50z" fill="#fff" stroke="#1C1A17" stroke-width="3"/><path id="arm" class="anim-box" d="M830 604l26-34" stroke="#C98B5E" stroke-width="12" stroke-linecap="round" style="transform-origin:0% 100%"/></g>
-              <rect x="640" y="630" width="250" height="60" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
-              <rect x="664" y="586" width="80" height="50" rx="4" fill="#1C1A17"/><rect x="669" y="591" width="70" height="40" fill="#fff"/><rect x="674" y="597" width="38" height="5" fill="#006A4E"/><rect x="674" y="616" width="22" height="8" rx="4" fill="#E8283F"/>
-            </g>
-            <rect x="630" y="404" width="270" height="22" rx="6" fill="#6E777C" stroke="#1C1A17" stroke-width="4"/>
-            <g id="shutter" class="anim-box" style="transform-origin:50% 0%;transform:scaleY(.04)">
-              <rect x="636" y="420" width="258" height="270" fill="#A7B0B5" stroke="#1C1A17" stroke-width="4"/>
-              <g stroke="#7D868B" stroke-width="3"><path d="M636 436h258M636 452h258M636 468h258M636 484h258M636 500h258M636 516h258M636 532h258M636 548h258M636 564h258M636 580h258M636 596h258M636 612h258M636 628h258M636 644h258M636 660h258"/></g>
-              <rect x="636" y="672" width="258" height="18" fill="#6E777C" stroke="#1C1A17" stroke-width="3"/>
-              <text x="765" y="560" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="22" fill="#5A6368">CLOSED</text>
-            </g>
-          </g>
-          <!-- customers -->
-          <g id="crowd">
-            <g class="cust"><circle cx="980" cy="610" r="18" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3"/><path d="M958 690c0-40 8-56 22-56s22 16 22 56z" fill="#FF4F8B" stroke="#1C1A17" stroke-width="3"/></g>
-            <g class="cust"><circle cx="1040" cy="606" r="18" fill="#F1C6A0" stroke="#1C1A17" stroke-width="3"/><path d="M1018 690c0-40 8-58 22-58s22 18 22 58z" fill="#13A8A0" stroke="#1C1A17" stroke-width="3"/><path d="M1022 600c0-14 8-22 18-22s18 8 18 22c-4-6-10-8-18-8s-14 2-18 8z" fill="#1C1A17"/></g>
-            <g class="cust"><circle cx="1100" cy="612" r="18" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M1078 690c0-38 8-54 22-54s22 16 22 54z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3"/></g>
-          </g>
-          <!-- traffic: always faces right, drives right -->
-          <g id="heroVehWrap"><use id="heroVeh" href="#veh-dhaka" x="140" y="690" width="210" height="162"/></g>
-          <circle id="ripple" class="anim-box" cx="765" cy="672" r="16" fill="none" stroke="#1C1A17" stroke-width="4" opacity="0" style="transform-origin:50% 50%"/>
-          <g id="hand" opacity="0"><path d="M0 0l20 56 9-22 22-9z" fill="#fff" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/></g>
-        </svg>
-        <span class="hint" id="hint">Tap the shutter</span>
-        <button class="tap" id="tap" type="button" aria-label="Close and reopen the shop's shutter"></button>
-      </div>
+      <div class="hero-art hp" id="heroStage" title="Click to replay the day"></div>
     </div>
     <div class="bunting" aria-hidden="true"></div>
   </section>
@@ -691,38 +697,99 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     </div>
   </section>
 
-  <!-- ================= YOUR COUSIN TRIED ================= -->
+  <!-- ================= YOUR COUSIN TRIED: a four-panel comic, then what happens with us ================= -->
   <section class="sec" id="cousin" aria-labelledby="t-cousin">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <symbol id="cz" viewBox="0 0 90 150">
+        <path d="M33 106v38M57 106v38" stroke="#1C1A17" stroke-width="8" stroke-linecap="round"/>
+        <path d="M17 110c0-42 10-60 28-60s28 18 28 60z" fill="#FFC72C" stroke="#1C1A17" stroke-width="3.5"/>
+        <path d="M37 76l8 8 8-8" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="45" cy="30" r="20" fill="#C98B5E" stroke="#1C1A17" stroke-width="3.5"/>
+        <path d="M24 27c0-17 10-24 21-24s23 7 21 24l-6-9-5 8-5-10-5 9-5-9-5 10z" fill="#1C1A17"/>
+        <circle cx="37" cy="32" r="6.5" fill="#fff" stroke="#1C1A17" stroke-width="3"/><circle cx="54" cy="32" r="6.5" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
+        <circle cx="38" cy="33" r="2" fill="#1C1A17"/><circle cx="55" cy="33" r="2" fill="#1C1A17"/><path d="M43.5 32h4" stroke="#1C1A17" stroke-width="3"/>
+        <path d="M37 42q8 7 16 0" fill="none" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+    </defs></svg>
     <div class="wrap">
-      <div class="sec-head"><div><h2 id="t-cousin">Your cousin tried his best.</h2></div><p>We love him too. But your customers deserve more than a 2017 template and a visitor counter.</p></div>
-      <div class="cousin-grid">
-        <div>
-          <div class="switch" role="group" aria-label="Show the website made by"><button type="button" data-v="cousin" aria-pressed="true">Your cousin</button><button type="button" data-v="pro" aria-pressed="false">Click &amp; Grow</button></div>
-          <div class="mock" id="mock" data-v="cousin">
-            <div class="chrome"><i></i><i></i><i></i><span id="mockUrl">rahmantraders.blogspot.com</span></div>
-            <div class="mock-body">
-              <div class="v-cousin"><div class="t">★ WELCOME TO RAHMAN TRADERS OFFICIAL WEBSITE ★</div><div class="uc">⚠ UNDER CONSTRUCTION SINCE 2017 ⚠</div><div class="row"><i></i><i></i><i></i></div><div><span class="blink">BEST PRICE!!!</span> For price please inbox</div><div class="ctr">VISITORS: 000047</div><small>♫ now playing: auto-play music you can’t stop · Best viewed in Internet Explorer</small></div>
-              <div class="v-pro"><div class="nav">Rahman Traders <span><span>Fabrics</span><span>Wholesale</span><span>Cart (2)</span></span></div><div class="hero2"><div><b>Quality fabric, delivered anywhere.</b><p>Order before 6pm, ships today. Pay by card, bKash or cash.</p><span class="go">Shop fabrics</span></div><div class="pic"></div></div><div class="cards"><div>Cotton lawn<small data-price="lawn">৳450 / yd</small></div><div>Katan silk<small data-price="silk">৳1,200 / yd</small></div><div>Muslin<small data-price="muslin">৳900 / yd</small></div></div></div>
-            </div>
-          </div>
-          <p class="footnote">No cousins were harmed. He’s welcome to join our internship.</p>
-        </div>
-        <table class="cmp">
-          <caption class="sr">Your cousin's website compared with a Click and Grow website</caption>
-          <thead><tr><th scope="col"></th><th scope="col">Your cousin</th><th scope="col">Click &amp; Grow</th></tr></thead>
-          <tbody>
-            <tr><td>Built with</td><td>Free template, cracked plugin</td><td>Designed around your customers</td></tr>
-            <tr><td>Loading time</td><td>Long enough to finish a cup of tea</td><td>A couple of seconds, tops</td></tr>
-            <tr><td>On a phone</td><td>Pinch, zoom, give up</td><td>Made for phones first</td></tr>
-            <tr><td>Asking the price</td><td>“Inbox for price”</td><td>Prices on the page, Buy button ready</td></tr>
-            <tr><td>On Google</td><td>Page 47, behind a 2014 blog</td><td>Set up to be found</td></tr>
-            <tr><td>Support</td><td>He’s at a wedding till Sunday</td><td>WhatsApp, same day</td></tr>
-            <tr><td>Busy days</td><td>Crashes the minute a sale goes viral</td><td>Proper hosting. Stays up.</td></tr>
-            <tr><td>Cost</td><td>Free (plus one plate of biryani)</td><td>A fixed price you agree first</td></tr>
-          </tbody>
-        </table>
+      <div class="sec-head"><div><h2 id="t-cousin">Your cousin tried his best.</h2></div><p>We love him too. Here’s how “I’ll make your website for free” usually goes.</p></div>
+      <div class="saga">
+        <figure class="panel" style="--bg:#FFF1C2">
+          <span class="when">Day 1</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <g class="spark" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"><path d="M60 40l5 11 11 5-11 5-5 11-5-11-11-5 11-5z"/><path d="M262 60l4 8 8 4-8 4-4 8-4-8-8-4 8-4z"/></g>
+            <use href="#cz" x="112" y="40" width="96" height="160"/>
+            <path d="M200 132l26-26" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/><circle cx="230" cy="100" r="9" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M230 91v-10" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/>
+            <rect x="40" y="150" width="240" height="20" rx="4" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3.5"/>
+            <path d="M84 150l8-44h76l8 44z" fill="#C0C8CC" stroke="#1C1A17" stroke-width="3.5" stroke-linejoin="round"/><rect x="98" y="114" width="64" height="28" rx="3" fill="#13A8A0"/>
+            <path d="M104 122h30M104 130h44M104 136h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M60 170v52M260 170v52" stroke="#1C1A17" stroke-width="5"/>
+          </svg>
+          <figcaption class="bub" data-cz="0">Website? Easy, bhai. I’ll do it this weekend. Free!</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#DDF0F4">
+          <span class="when">Week 3</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <use href="#cz" x="182" y="40" width="96" height="160"/>
+            <path d="M206 128l-20-6" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <path d="M168 110h22l-3 24h-16z" fill="#fff" stroke="#1C1A17" stroke-width="3"/><path d="M190 116c8 0 8 10 0 10" fill="none" stroke="#1C1A17" stroke-width="3"/>
+            <path class="steam" d="M174 102c-5-8 5-12 0-20" fill="none" stroke="#9FB4C0" stroke-width="3.5" stroke-linecap="round"/><path class="steam" d="M184 102c-5-8 5-12 0-20" fill="none" stroke="#9FB4C0" stroke-width="3.5" stroke-linecap="round"/>
+            <rect x="20" y="150" width="280" height="20" rx="4" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3.5"/>
+            <path d="M30 150l8-90h120l8 90z" fill="#C0C8CC" stroke="#1C1A17" stroke-width="3.5" stroke-linejoin="round"/>
+            <rect x="44" y="68" width="108" height="74" rx="4" fill="#fff"/>
+            <text x="52" y="86" font-family="Archivo, sans-serif" font-size="12" font-weight="700" fill="#55504A">Pick a font:</text>
+            <text x="52" y="104" font-family="Georgia, serif" font-size="13" fill="#1C1A17">Georgia</text>
+            <rect x="48" y="109" width="98" height="18" rx="3" fill="#FFC72C"/>
+            <text x="52" y="122" font-family="'Comic Sans MS','Comic Neue',cursive" font-size="13" font-weight="700" fill="#1C1A17">Comic Sans ✓</text>
+            <rect x="52" y="132" width="92" height="6" rx="3" fill="#EADFC8"/><rect class="crawl" x="52" y="132" width="92" height="6" rx="3" fill="#E8283F"/>
+            <path d="M40 170v52M280 170v52" stroke="#1C1A17" stroke-width="5"/>
+          </svg>
+          <figcaption class="bub">Almost done. Just choosing a font. 12% there.</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#FFE0EC">
+          <span class="when">Month 4</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <path d="M0 26Q80 58 160 26T320 26" fill="none" stroke="#1C1A17" stroke-width="2.5"/>
+            <g class="lights" stroke="#1C1A17" stroke-width="2"><circle cx="30" cy="36" r="6" fill="#FFC72C"/><circle cx="76" cy="44" r="6" fill="#FF4F8B"/><circle cx="122" cy="38" r="6" fill="#13A8A0"/><circle cx="198" cy="38" r="6" fill="#FFC72C"/><circle cx="244" cy="44" r="6" fill="#FF4F8B"/><circle cx="290" cy="36" r="6" fill="#13A8A0"/></g>
+            <g class="dance">
+              <path d="M144 112l-22-40M196 112l22-40" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+              <use href="#cz" x="122" y="56" width="96" height="160"/>
+              <g fill="#FF8A1F" stroke="#1C1A17" stroke-width="1.5"><circle cx="150" cy="110" r="6"/><circle cx="158" cy="120" r="6"/><circle cx="170" cy="124" r="6"/><circle cx="182" cy="120" r="6"/><circle cx="190" cy="110" r="6"/></g>
+            </g>
+            <rect x="12" y="176" width="92" height="12" rx="3" fill="#8C5A3C" stroke="#1C1A17" stroke-width="3"/><path d="M24 188v34M92 188v34" stroke="#1C1A17" stroke-width="4"/>
+            <g class="buzz"><rect x="38" y="128" width="40" height="48" rx="7" fill="#1C1A17"/><rect x="43" y="134" width="30" height="34" rx="3" fill="#E8283F"/><text x="58" y="157" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="15" fill="#fff">14</text></g>
+            <path class="buzzlines" d="M28 140l-8-4M28 152h-9M88 140l8-4M88 152h9" stroke="#1C1A17" stroke-width="3" stroke-linecap="round"/>
+            <text x="58" y="122" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="12" fill="#C8102E">missed calls</text>
+          </svg>
+          <figcaption class="bub">Can’t talk, I’m at a wedding till Sunday!</figcaption>
+        </figure>
+        <figure class="panel" style="--bg:#E4E9FF">
+          <span class="when">Month 9</span>
+          <svg viewBox="0 0 320 230" aria-hidden="true">
+            <g class="plane"><path d="M10 40l60-6 18-16h10l-8 18 28-2 8-8h8l-4 12 4 12h-8l-8-8-28-2 8 18H88L70 46z" fill="#fff" stroke="#1C1A17" stroke-width="3" stroke-linejoin="round"/></g>
+            <rect x="190" y="70" width="112" height="30" rx="5" fill="#22313B" stroke="#1C1A17" stroke-width="3"/><text x="246" y="90" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="13" fill="#FFC72C" letter-spacing="1">DEPARTURES</text>
+            <use href="#cz" x="96" y="56" width="96" height="160"/>
+            <path class="wave" d="M118 116l-26-34" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <path d="M172 118l18 26" stroke="#C98B5E" stroke-width="10" stroke-linecap="round"/>
+            <rect x="182" y="144" width="56" height="70" rx="8" fill="#E8283F" stroke="#1C1A17" stroke-width="3.5"/><path d="M196 144v-12h28v12" fill="none" stroke="#1C1A17" stroke-width="3.5"/><path d="M182 168h56" stroke="#1C1A17" stroke-width="3"/>
+            <circle cx="196" cy="216" r="5" fill="#1C1A17"/><circle cx="226" cy="216" r="5" fill="#1C1A17"/>
+          </svg>
+          <figcaption class="bub">Moved to Toronto! Your password? No idea, sorry.</figcaption>
+        </figure>
       </div>
-      <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us your old site. We’ll tell you what to fix, free.</p></div>
+      <div class="meanwhile">
+        <div>
+          <h3>Meanwhile, at Click &amp; Grow</h3>
+          <ol class="steps-list">
+            <li><i aria-hidden="true"></i><span><b>Day 1.</b> A free call. The tea’s on us.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Day 3.</b> You click through your design and change whatever you like.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Day 14.</b> Your site goes live on your own domain, and you get the password.</span></li>
+            <li><i aria-hidden="true"></i><span><b>Every day after.</b> We pick up the phone. Even during wedding season.</span></li>
+          </ol>
+        </div>
+        <span class="harmed" aria-hidden="true">NO COUSINS<br>WERE HARMED</span>
+      </div>
+      <div class="sec-cta"><a class="btn btn--green" href="#order">Upgrade from cousin mode</a><p>Send us the site he started. We’ll tell you what to keep, free.</p></div>
     </div>
   </section>
 
@@ -1038,10 +1105,10 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     if (animate && canAnim) M.animate('[data-price]', { opacity: [0, 1], y: [8, 0] }, { duration: .35, delay: M.stagger(.02) });
     // landmark
     $$('.landmark').forEach(g => { const on = g.dataset.lm === C.lm; g.style.opacity = on ? 1 : 0; });
-    if (animate && canAnim) M.animateMini(`.landmark[data-lm="${C.lm}"]`, { transform: ['translateY(30px)', 'translateY(0px)'] }, { type: 'spring', bounce: .35, duration: .7 });
+    if (animate && canAnim && $('.landmark')) M.animateMini(`.landmark[data-lm="${C.lm}"]`, { transform: ['translateY(30px)', 'translateY(0px)'] }, { type: 'spring', bounce: .35, duration: .7 });
     // vehicles
-    ['#heroVeh', '#routeVeh'].forEach(id => { const u = $(id); u.setAttribute('href', C.veh); u.style.color = C.vehColor; });
-    if (animate && canAnim) M.animateMini('#heroVehWrap', { transform: ['translateX(-420px)', 'translateX(0px)'] }, { duration: .9, ease: [.23, 1, .32, 1] });
+    ['#heroVeh', '#routeVeh'].forEach(id => { const u = $(id); if (!u) return; u.setAttribute('href', C.veh); u.style.color = C.vehColor; });
+    if (animate && canAnim && $('#heroVehWrap')) M.animateMini('#heroVehWrap', { transform: ['translateX(-420px)', 'translateX(0px)'] }, { duration: .9, ease: [.23, 1, .32, 1] });
     window.__cg = { c, C, cur, fmt: CUR[cur].fmt }; document.dispatchEvent(new Event('cg:city'));
     // bus
     $('.bus svg').style.setProperty('--busColor', C.bus.color); $('#upper').toggleAttribute('hidden', !C.bus.double);
@@ -1051,12 +1118,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     updBudget();
   }
   $$('.city-btns button').forEach(b => b.addEventListener('click', () => setCity(b.dataset.city, true)));
-
-  /* ---------- cousin switch ---------- */
-  const mock = $('#mock'); let touched = false;
-  function setV(v) { mock.dataset.v = v; $$('.switch button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); $('#mockUrl').textContent = v === 'pro' ? 'rahmantraders.com' : 'rahmantraders.blogspot.com'; mock.querySelector('.v-cousin').setAttribute('aria-hidden', v === 'pro'); mock.querySelector('.v-pro').setAttribute('aria-hidden', v !== 'pro'); }
-  $$('.switch button').forEach(b => b.addEventListener('click', () => { touched = true; setV(b.dataset.v); }));
-  setV('cousin');
 
   /* ---------- one-step quote form ---------- */
   const BUDGET = { bdt: ['Under ৳25k', '৳25k to ৳60k', '৳60k to ৳1.5 lakh', '৳1.5 lakh+'], gbp: ['Under £200', '£200 to £500', '£500 to £1,200', '£1,200+'], aed: ['Under AED 900', 'AED 900 to 2,200', 'AED 2,200 to 5,500', 'AED 5,500+'], usd: ['Under $250', '$250 to $600', '$600 to $1,500', '$1,500+'] };
@@ -1119,46 +1180,9 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
   addEventListener('resize', run);
 
-  /* ---- 1 HERO: the click leads; the shutter, light, bulbs and customers land on it ---- */
-  const shutter = $('#shutter'), cust = $$('#crowd .cust'), bulbs = $$('#bulbs circle');
-  function closedState() { css(shutter, 'scaleY(1)'); $('#inside').style.opacity = 0; cust.forEach(c => css(c, 'translateX(220px)', 0)); bulbs.forEach(b => b.style.opacity = .25); }
-  closedState();
-  let open = false;
-  function openShop(withHand) {
-    open = true; const t0 = withHand ? 1.0 : 0;
-    if (withHand) {
-      A('#hand', { opacity: [0, 1], transform: ['translate(1000px,520px)', 'translate(772px,676px)'] }, { duration: .9, ease: OUT });
-      A('#hand', { transform: ['translate(772px,676px) scale(1)', 'translate(772px,676px) scale(.85)', 'translate(772px,676px) scale(1)'] }, { duration: .2, delay: .9 });
-      A('#ripple', { opacity: [1, 0], transform: ['scale(.5)', 'scale(3)'] }, { duration: .5, delay: .95, ease: OUT });
-      A('#hand', { opacity: [1, 0] }, { duration: .4, delay: t0 + .3 });
-    }
-    A(shutter, { transform: ['scaleY(1)', 'scaleY(.04)'] }, { duration: .9, ease: INOUT, delay: t0 });
-    A('#inside', { opacity: [0, 1] }, { duration: .5, delay: t0 + .1 });
-    bulbs.forEach((b, i) => A(b, { opacity: [.25, 1, .4, 1] }, { duration: .5, delay: t0 + .55 + i * .08 }));
-    A('#arm', { transform: ['rotate(0deg)', 'rotate(-24deg)', 'rotate(0deg)', 'rotate(-24deg)', 'rotate(0deg)'] }, { duration: .9, delay: t0 + .6 });
-    cust.forEach((c, i) => A(c, { opacity: [0, 1], transform: ['translateX(220px)', 'translateX(0px)'] }, { type: 'spring', bounce: .3, duration: .8, delay: t0 + .45 + i * .15 }));
-  }
-  function closeShop() {
-    open = false;
-    cust.forEach((c, i) => A(c, { opacity: [1, 0], transform: ['translateX(0px)', 'translateX(220px)'] }, { duration: .3, delay: i * .05 }));
-    A('#inside', { opacity: [1, 0] }, { duration: .3, delay: .25 });
-    return A(shutter, { transform: ['scaleY(.04)', 'scaleY(1)'] }, { duration: .55, ease: INOUT }).finished;
-  }
-  setTimeout(() => openShop(true), 600);
-  $('#tap').addEventListener('click', async () => { if (open) { await closeShop(); setTimeout(() => openShop(false), 250); } });
-  setTimeout(() => A('#hint', { opacity: [0, 1, 1, 0] }, { duration: 3, offset: [0, .1, .85, 1] }), 3800);
-  // traffic always drives forward, linked to scroll
-  const heroVeh = $('#heroVeh');
-  onScrollScene($('.hero'), r => -r.top / r.height, p => css(heroVeh, `translateX(${900 * p}px)`));
-
   /* ---- 2 SEARCH: the speed race is mounted by the script below ---- */
   $$('.tile').forEach(t => t.style.opacity = 0);
   inView('.tiles', () => { animate('.tile', { opacity: [0, 1], y: [16, 0] }, { duration: .4, delay: stagger(.07), ease: OUT }); }, { amount: .4 });
-
-  /* ---- 3 COUSIN ---- */
-  inView('#mock', () => { setTimeout(() => { if (!touched) { setV('pro'); animate('.v-pro > *', { y: [14, 0], opacity: [0, 1] }, { duration: .5, delay: stagger(.07), ease: OUT }); } }, 1400); }, { amount: .5 });
-  $$('.cmp tbody tr').forEach(tr => tr.style.opacity = 0);
-  inView('.cmp', () => { animate('.cmp tbody tr', { opacity: [0, 1], x: [20, 0] }, { duration: .4, delay: stagger(.05), ease: OUT }); }, { amount: .3 });
 
   /* ---- 4 MENU: one springy wave ---- */
   $$('#svc a').forEach(a => a.style.opacity = 0);
@@ -1285,5 +1309,283 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const all = () => mount(searchStage, v4);
   document.addEventListener('cg:city', all);
   all();
+})();
+</script>
+<script>
+(() => {
+  /* ===== HERO: a shop's day on fast-forward. At night the shutter is down, the street becomes a lock screen, and orders keep arriving. ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const stage = $('#heroStage');
+  let token = 0, timers = [];
+  const G = () => window.__cg || { c: 'dhaka', cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
+  const money = b => G().fmt(conv(b));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  function mk(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  // Easing on a multi-step effect goes on each step; on the effect it would warp the whole timeline.
+  const A = (el, kf, o = {}) => {
+    if (!el) return null;
+    const opts = Object.assign({ fill: 'both', easing: OUT }, o);
+    if (kf.length > 2 && opts.easing !== 'linear') { kf = kf.map(k => Object.assign({ easing: opts.easing }, k)); opts.easing = 'linear'; }
+    return el.animate(kf, opts);
+  };
+  const stop = el => el && el.getAnimations().forEach(a => a.cancel());
+
+  const SKIN = ['#C98B5E', '#8C5A3C', '#F1C6A0', '#A86F4C'];
+  const SHIRT = ['#FF4F8B', '#13A8A0', '#2F5DFF', '#FFC72C', '#9B6BFF', '#E8283F', '#0E8A62'];
+  const wins = (x0, y0, cols, rows, dx, dy) => { let s = ''; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) s += `<rect x="${x0 + c * dx}" y="${y0 + r * dy}" width="44" height="54"/>`; return s; };
+  const slats = () => { let s = ''; for (let y = 396; y < 612; y += 16) s += `M430 ${y}h240`; return s; };
+
+  const html = () => `<div class="hp-scene"><svg class="hp-svg" viewBox="0 0 1100 780" role="img" aria-label="A shop’s whole day on fast-forward. Customers queue with their phones during the day. At night the shutter closes, and the street turns into a phone lock screen where new orders keep arriving.">
+    <defs><symbol id="hp-p" viewBox="0 0 40 100">
+      <path d="M14 62v34M26 62v34" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/>
+      <path d="M8 64c0-26 5-38 12-38s12 12 12 38z" fill="currentColor" stroke="#1C1A17" stroke-width="2.5"/>
+      <circle cx="20" cy="13" r="10" fill="var(--skin,#C98B5E)" stroke="#1C1A17" stroke-width="2.5"/>
+      <path d="M28 36l2 14-6 4" fill="none" stroke="var(--skin,#C98B5E)" stroke-width="5" stroke-linecap="round"/>
+      <rect x="21" y="43" width="9" height="15" rx="2" fill="#1C1A17"/><rect x="22.5" y="45" width="6" height="11" rx="1" fill="#9FB4C0"/>
+    </symbol></defs>
+    <rect width="1100" height="780" fill="#BFE6FF"/><rect class="dusk" width="1100" height="780" fill="#FFB38A" opacity="0"/><rect class="night" width="1100" height="780" fill="#1B2440" opacity="0"/>
+    <g class="stars" fill="#FFF7C2" opacity="0"><circle cx="90" cy="90" r="3"/><circle cx="260" cy="60" r="2.5"/><circle cx="360" cy="110" r="3"/><circle cx="760" cy="70" r="2.5"/><circle cx="880" cy="130" r="3"/><circle cx="1010" cy="80" r="2.5"/><circle cx="180" cy="160" r="2"/><circle cx="980" cy="190" r="2"/></g>
+    <g class="sun" style="transform:translate(200px,100px)"><circle r="50" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/></g>
+    <g class="moon" style="transform:translate(60px,200px)" opacity="0"><circle r="36" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/><circle cx="15" cy="-11" r="30" fill="#1B2440"/></g>
+    <g stroke="#1C1A17" stroke-width="4"><rect x="-10" y="210" width="210" height="430" fill="#F4C9A0"/><rect x="200" y="140" width="200" height="500" fill="#C9E6D8"/><rect x="700" y="170" width="200" height="470" fill="#F6D9E2"/><rect x="900" y="250" width="210" height="390" fill="#D7E3F6"/></g>
+    <g fill="#FFFBF2" stroke="#1C1A17" stroke-width="3">${wins(30, 250, 2, 4, 90, 90)}${wins(240, 180, 2, 5, 90, 86)}${wins(730, 210, 2, 4, 90, 90)}${wins(940, 290, 2, 3, 90, 90)}</g>
+    <rect x="410" y="250" width="280" height="390" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
+    <rect x="392" y="262" width="316" height="96" rx="12" fill="#E8283F" stroke="#1C1A17" stroke-width="4"/>
+    <text x="550" y="308" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="32" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.5" paint-order="stroke">YOUR BUSINESS</text>
+    <text class="signsub" x="550" y="343" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="24" fill="#fff" letter-spacing=".5">OPEN · 10:00 AM</text>
+    <g class="bulbs" fill="#FFC72C"><circle cx="408" cy="278" r="7"/><circle cx="692" cy="278" r="7"/><circle cx="408" cy="342" r="7"/><circle cx="692" cy="342" r="7"/></g>
+    <g class="inside">
+      <rect x="430" y="380" width="240" height="250" fill="#FFE7A3"/>
+      <path d="M440 432h220M440 486h110" stroke="#1C1A17" stroke-width="3"/>
+      <g stroke="#1C1A17" stroke-width="2.5"><rect x="448" y="400" width="24" height="32" fill="#FF4F8B"/><rect x="478" y="408" width="22" height="24" fill="#13A8A0"/><rect x="560" y="402" width="30" height="30" fill="#FFC72C"/><rect x="620" y="406" width="26" height="26" fill="#2F5DFF"/><rect x="450" y="456" width="30" height="30" fill="#0E8A62"/></g>
+      <circle cx="610" cy="500" r="22" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M588 496c0-18 10-26 22-26s22 8 22 26c-6-6-12-9-22-9s-16 3-22 9z" fill="#1C1A17"/>
+      <path d="M582 572c0-34 12-48 28-48s28 14 28 48z" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
+      <rect x="430" y="572" width="240" height="58" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
+    </g>
+    <rect x="420" y="364" width="260" height="20" rx="6" fill="#6E777C" stroke="#1C1A17" stroke-width="4"/>
+    <g class="shutter" style="transform-origin:550px 382px">
+      <rect x="430" y="380" width="240" height="250" fill="#A7B0B5" stroke="#1C1A17" stroke-width="4"/>
+      <path d="${slats()}" stroke="#7D868B" stroke-width="3"/>
+      <text x="550" y="520" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="28" fill="#5A6368">CLOSED</text>
+    </g>
+    <g class="nwin" fill="#FFD36B" opacity="0"><rect x="30" y="250" width="44" height="54"/><rect x="330" y="266" width="44" height="54"/><rect x="820" y="300" width="44" height="54"/><rect x="940" y="380" width="44" height="54"/></g>
+    <rect x="-10" y="630" width="1120" height="42" fill="#DCCBAA" stroke="#1C1A17" stroke-width="4"/>
+    <rect x="-10" y="672" width="1120" height="120" fill="#454545"/>
+    <path d="M0 728h1100" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="60 50"/>
+    <g class="peds"></g>
+    <rect class="dim" width="1100" height="780" fill="#0B1226" opacity="0" pointer-events="none"/>
+  </svg>
+  <div class="hp-lock"><p class="lock-time">11:42 PM</p><p class="lock-sub">Shutter’s down. The shop isn’t.</p><ol class="lock-list"></ol><p class="lock-count"></p></div></div>
+  <p class="hp-cap" aria-live="polite"><span></span></p>`;
+
+  function person(parent, x, i, flip) {
+    const o = mk('g', { transform: `translate(${x} 516) scale(1.15)` }, parent);
+    const mv = mk('g', {}, o), bob = mk('g', {}, mv);
+    const inner = mk('g', flip ? { transform: 'translate(44 0) scale(-1 1)' } : {}, bob);
+    mk('use', { href: '#hp-p', width: 44, height: 110 }, inner);
+    inner.style.color = SHIRT[i % SHIRT.length]; inner.style.setProperty('--skin', SKIN[i % SKIN.length]);
+    const glow = mk('rect', { x: 24, y: 49, width: 7, height: 12, rx: 1.5, fill: '#5BF09A', opacity: 0 }, inner);
+    return { mv, bob, glow, inner };
+  }
+  const bobbing = p => A(p.bob, [{ transform: 'translateY(0px)' }, { transform: 'translateY(-3px)' }], { duration: 320, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+  function bubble(parent, x, y, text) {
+    const size = 22, h = 44, w = text.length * size * .58 + 30, g = mk('g', {}, parent);
+    mk('rect', { x: x - w / 2, y: y - h, width: w, height: h, rx: h / 2, fill: '#D7F2E4', stroke: '#1C1A17', 'stroke-width': 3 }, g);
+    mk('text', { x, y: y - 14, 'text-anchor': 'middle', 'font-family': 'Archivo, sans-serif', 'font-weight': 800, 'font-size': size, fill: '#0A4D39' }, g, text);
+    g.style.transformBox = 'fill-box'; g.style.transformOrigin = '50% 100%';
+    A(g, [{ opacity: 0, transform: 'translateY(8px) scale(0.92)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 260 });
+    A(g, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 900, easing: 'ease', fill: 'forwards' }).onfinish = () => g.remove();
+  }
+  function shutter(r, open, instant) {
+    const sh = $('.shutter', r), ins = $('.inside', r), bulbs = $$('.bulbs circle', r);
+    if (instant) { sh.style.transform = open ? 'scaleY(0.04)' : 'none'; ins.style.opacity = open ? 1 : 0; bulbs.forEach(b => b.style.opacity = open ? 1 : .25); return; }
+    stop(sh); stop(ins);
+    A(sh, open ? [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.04)' }] : [{ transform: 'scaleY(0.04)' }, { transform: 'scaleY(1)' }], { duration: open ? 900 : 700, easing: INOUT });
+    A(ins, open ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: 0 }], { duration: 500, delay: open ? 100 : 300, easing: 'ease' });
+    bulbs.forEach((b, i) => { stop(b); A(b, open ? [{ opacity: .25 }, { opacity: 1 }, { opacity: .4 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: .25 }], { duration: 500, delay: open ? 550 + i * 80 : 400, easing: 'linear' }); });
+  }
+  function caption(r, text, instant) {
+    const s = $('.hp-cap span', r); if (!s) return;
+    if (instant) { s.textContent = text; return; }
+    const show = () => { s.textContent = text; A(s, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 260 }); };
+    if (s.textContent) A(s, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease' }).onfinish = show; else show();
+  }
+
+  const BUYER = { dhaka: 'Rahima', london: 'Sarah', dubai: 'Fatima', ny: 'Mike' };
+  const ICON = {
+    bag: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.5 13h-11z" fill="#fff"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="#fff" stroke-width="2"/></svg>',
+    pay: '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M3 10h18" stroke="#fff" stroke-width="2.2"/></svg>',
+    star: '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z" fill="#fff"/></svg>'
+  };
+  const NOTES = () => {
+    const bd = G().c === 'dhaka';
+    return [
+      { t: '11:42 PM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1043', body: `2 × Katan silk · ${money(2400)}` },
+      { t: '1:15 AM', app: bd ? 'bKash' : 'Card payments', icon: 'pay', bg: bd ? '#E2136E' : '#2F5DFF', title: 'Payment received', body: `${money(2400)} from ${BUYER[G().c] || 'Rahima'}` },
+      { t: '3:08 AM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1044', body: `Cotton lawn, 5 yards · ${money(2250)}` },
+      { t: '6:30 AM', app: 'Google', icon: 'star', bg: '#F2A600', title: 'New 5★ review', body: '“Ordered at 3am. It arrived by lunch!”' }
+    ];
+  };
+  const noteHTML = n => `<li class="nt"><i style="background:${n.bg}" aria-hidden="true">${ICON[n.icon]}</i><span class="app">${esc(n.app)}<time>${n.t}</time></span><b>${esc(n.title)}</b><span class="body">${esc(n.body)}</span></li>`;
+
+  function run(r, T, instant) {
+    const C = 13000;
+    const tt = h => (h - 10) / 24 * C;
+    const at = (h, fn) => T.at(tt(h), fn);
+    const sub = $('.signsub', r), peds = $('.peds', r), lock = $('.hp-lock', r), list = $('.lock-list', r), ltime = $('.lock-time', r), lcount = $('.lock-count', r);
+    const maxCards = matchMedia('(max-width:560px)').matches ? 3 : 4;
+    const clock = h => { h = ((h % 24) + 24) % 24; const hh = Math.floor(h), mm = Math.floor((h - hh) * 6) * 10; return `${((hh + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${hh < 12 ? 'AM' : 'PM'}`; };
+
+    if (instant) {
+      shutter(r, false, true);
+      ['.night', '.stars', '.nwin'].forEach(s => $(s, r).setAttribute('opacity', 1));
+      $('.dim', r).setAttribute('opacity', .55); $('.sun', r).setAttribute('opacity', 0);
+      const moon = $('.moon', r); moon.setAttribute('opacity', 1); moon.style.transform = 'translate(820px,84px)';
+      sub.textContent = 'CLOSED · 6:30 AM';
+      list.innerHTML = NOTES().slice(4 - maxCards).reverse().map(noteHTML).join('');
+      ltime.textContent = '6:30 AM'; lcount.textContent = '3 orders while you slept'; lock.style.opacity = 1;
+      caption(r, 'Your shop opens at 10. Your website never closes.', true);
+      return;
+    }
+
+    shutter(r, false, true);
+    const t0 = performance.now();
+    T.every(130, () => { const h = 10 + ((performance.now() - t0) % C) / C * 24, hm = h % 24; sub.textContent = (hm >= 21 || hm < 10 ? 'CLOSED · ' : 'OPEN · ') + clock(h); });
+    A($('.sun', r), [{ transform: 'translate(200px,100px)' }, { transform: 'translate(550px,62px)', offset: .35 }, { transform: 'translate(900px,100px)', offset: .75 }, { transform: 'translate(1070px,340px)' }], { duration: tt(19.5), easing: 'linear' });
+    A($('.dusk', r), [{ opacity: 0 }, { opacity: .85 }, { opacity: 0 }], { duration: tt(20.5) - tt(17), delay: tt(17), easing: 'ease-in-out' });
+    const nightKf = v => [{ opacity: 0 }, { opacity: v, offset: .14 }, { opacity: v, offset: .86 }, { opacity: 0 }];
+    [$('.night', r), $('.stars', r), $('.nwin', r)].forEach(el => A(el, nightKf(1), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' }));
+    A($('.dim', r), nightKf(.55), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' });
+    A($('.moon', r), [{ opacity: 0, transform: 'translate(80px,190px)' }, { opacity: 1, transform: 'translate(260px,100px)', offset: .15 }, { opacity: 1, transform: 'translate(820px,84px)', offset: .85 }, { opacity: 0, transform: 'translate(1040px,190px)' }], { duration: tt(30.5) - tt(20), delay: tt(20), easing: 'linear' });
+
+    caption(r, '10 AM. You pull up the shutter.');
+    T.at(150, () => shutter(r, true));
+    const walk = (i, from, to, dur, delay, after) => {
+      const p = person(peds, 0, i, to < from); bobbing(p);
+      A(p.mv, [{ transform: `translateX(${from}px)`, opacity: 0 }, { opacity: 1, offset: .1 }, { transform: `translateX(${to}px)`, opacity: 1 }], { duration: dur, delay, easing: 'linear' });
+      T.at(delay + dur, () => { stop(p.bob); after && after(p); });
+      return p;
+    };
+    const vanish = p => A(p.mv, [{ opacity: 1 }, { opacity: 0 }], { duration: 250, easing: 'ease' });
+    walk(0, -60, 470, 2000, 300, vanish);
+    walk(1, 1160, 600, 1800, 700, vanish);
+    at(13, () => caption(r, 'Afternoon. A queue, and everyone’s on their phone.'));
+    const spots = [330, 385, 680, 735, 275, 790];
+    const crowd = spots.map((x, i) => walk(i + 2, x < 550 ? -80 - i * 40 : 1180 + i * 40, x, 1500, tt(12.5) + i * 140, p => A(p.glow, [{ opacity: 0 }, { opacity: .95 }], { duration: 200, easing: 'ease' })));
+    [13.6, 14.6, 15.6, 16.6].forEach((h, k) => at(h, () => bubble(crowd[[0, 3, 1, 2][k]].mv, 22, -6, k % 2 ? 'Paid!' : 'Ordered!')));
+    at(18.4, () => crowd.forEach((p, i) => {
+      const x = spots[i], away = x < 550 ? -120 : 1220;
+      stop(p.mv); p.inner.setAttribute('transform', x < 550 ? 'translate(44 0) scale(-1 1)' : ''); bobbing(p);
+      A(p.mv, [{ transform: `translateX(${x}px)` }, { transform: `translateX(${away}px)` }], { duration: 1400, delay: i * 60, easing: 'linear' });
+    }));
+    at(21, () => { shutter(r, false); caption(r, '9 PM. You lock up and go home.'); });
+
+    // Night: the dimmed street becomes a lock screen; each order lands on top and pushes the rest down together.
+    let n = 0;
+    at(22.4, () => {
+      caption(r, 'Your website is still open.');
+      ltime.textContent = '11:30 PM'; lcount.textContent = '';
+      A(lock, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease' });
+      A(ltime, [{ opacity: 0, transform: 'scale(0.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 400 });
+    });
+    NOTES().forEach((note, k) => at([23.7, 25.2, 27.1, 29.5][k], () => {
+      const before = new Map($$('.nt', list).map(el => [el, el.getBoundingClientRect().top]));
+      list.insertAdjacentHTML('afterbegin', noteHTML(note));
+      const fresh = list.firstElementChild;
+      const extra = $$('.nt', list)[maxCards];
+      if (extra) { extra.remove(); before.delete(extra); }
+      before.forEach((top, el) => { const dy = top - el.getBoundingClientRect().top; if (dy) A(el, [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0px)' }], { duration: 320 }); });
+      A(fresh, [{ opacity: 0, transform: 'translateY(-14px) scale(0.97)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 360 });
+      ltime.textContent = note.t;
+      if (k < 3) { n++; lcount.textContent = `${n} order${n > 1 ? 's' : ''} while you slept`; if (n === 1) A(lcount, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 300 }); }
+      if (k === 1) caption(r, 'After midnight. The orders keep coming.');
+      if (k === 3) caption(r, 'And a 5★ review before breakfast.');
+    }));
+    at(31.2, () => { caption(r, 'Your shop opens at 10. Your website never closes.'); A(lock, [{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'ease' }); });
+    T.at(C + 1200, () => mount(true));
+  }
+
+  function mount(sync) {
+    const t = ++token; timers.forEach(clearTimeout); timers = [];
+    const T = {
+      at(ms, fn) { timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); },
+      every(ms, fn) { const id = setInterval(() => { if (t === token) fn(); else clearInterval(id); }, ms); timers.push(id); }
+    };
+    const go = () => { if (t !== token) return; stage.innerHTML = html(); run(stage, T, reduce); };
+    if (sync) go(); else { stage.innerHTML = ''; requestAnimationFrame(go); }
+  }
+  stage.addEventListener('click', () => mount());
+  document.addEventListener('cg:city', () => mount());
+  mount();
+})();
+</script>
+<script>
+(() => {
+  /* ===== Page-wide entrances: headings, the cousin comic and the closing shutter. Each plays once, the first time it scrolls into view. ===== */
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
+
+  const NICK = { dhaka: 'bhai', london: 'mate', dubai: 'habibi', ny: 'buddy' };
+  const nick = () => { const b = $('[data-cz="0"]'); if (b) b.textContent = `Website? Easy, ${NICK[(window.__cg || {}).c] || 'bhai'}. I’ll do it this weekend. Free!`; };
+  nick(); document.addEventListener('cg:city', nick);
+
+  if (reduce || !('IntersectionObserver' in window)) return;
+  const once = (el, fn, threshold = .3) => { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); fn(); } }, { threshold }); io.observe(el); };
+  const hide = els => els.forEach(e => { e.style.opacity = 0; });
+
+  // Section headings: the title leads, the line beside it follows 80ms later.
+  $$('.sec .sec-head').forEach(head => {
+    if (head.closest('#cousin')) return;
+    const h = $('h2, h3', head), p = $(':scope > p', head);
+    if (!h || head.getBoundingClientRect().top < innerHeight) return;
+    hide([h, p].filter(Boolean));
+    once(head, () => {
+      A(h, [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 600 });
+      if (p) A(p, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 500, delay: 80 });
+    }, .5);
+  });
+
+  // The comic reads left to right, so panels land in reading order; each speech bubble pops just after its panel.
+  const saga = $('.saga');
+  if (saga) {
+    const head = $('#cousin .sec-head'), h = $('h2', head), p = $(':scope > p', head);
+    const panels = $$('.panel', saga), bubs = $$('.bub', saga), mw = $('.meanwhile'), steps = $$('.steps-list li'), harmed = $('.harmed');
+    hide([h, p, ...panels, ...bubs, mw, ...steps, harmed]);
+    once(saga, () => {
+      A(h, [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 600 });
+      A(p, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 500, delay: 80 });
+      const gaps = [200, 520, 820, 1100];
+      panels.forEach((el, i) => {
+        A(el, [{ opacity: 0, transform: 'translateY(22px) rotate(-2deg)' }, { opacity: 1, transform: 'translateY(0px) rotate(0deg)' }], { duration: 500, delay: gaps[i] });
+        A(bubs[i], [{ opacity: 0, transform: 'scale(0.9)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, delay: gaps[i] + 280 });
+      });
+    }, .2);
+    once(mw, () => {
+      A(mw, [{ opacity: 0, transform: 'translateY(20px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 550 });
+      steps.forEach((li, i) => A(li, [{ opacity: 0, transform: 'translateX(-10px)' }, { opacity: 1, transform: 'translateX(0px)' }], { duration: 400, delay: 250 + [0, 110, 200, 270][i] }));
+      A(harmed, [{ opacity: 0, transform: 'rotate(-10deg) scale(1.5)' }, { opacity: 1, transform: 'rotate(6deg) scale(1)' }], { duration: 500, delay: 700, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+    }, .4);
+  }
+
+  // The closing section sits behind a shutter that rolls up as you reach it: "Shutter's up. Let's sell."
+  const fin = $('.final');
+  if (fin && fin.getBoundingClientRect().top > innerHeight) {
+    fin.classList.add('shut');
+    once(fin, () => { fin.classList.add('rolling'); requestAnimationFrame(() => fin.classList.remove('shut')); }, .45);
+  }
 })();
 </script>
