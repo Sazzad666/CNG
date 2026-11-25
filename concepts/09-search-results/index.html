@@ -540,69 +540,45 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .final.rolling::after{transition:transform .9s cubic-bezier(0.77, 0, 0.175, 1)}
 @media (prefers-reduced-motion:reduce){.faq details::details-content{transition:none}.final::after{display:none}}
 
-/* ---------- HERO: the shutter is the page ---------- */
-.shut{position:relative;overflow:hidden;background:#FFE2A0;min-height:clamp(680px,calc(100svh - 96px),860px);isolation:isolate}
-@media (min-width:900px){.shut{min-height:clamp(720px,54vw,860px)}.shut h1{font-size:clamp(46px,4.6vw,66px)}}
-.shut-box{position:absolute;left:0;right:0;top:0;height:38px;z-index:5;background:linear-gradient(#69737A,#4B5358);border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,.25)}
-.neon24{font:800 15px/1 var(--display);letter-spacing:.14em;color:#3C4348;transition:color .2s ease,text-shadow .2s ease}
-.neon24.on{color:#FFF0F6;text-shadow:0 0 6px #FF4F8B,0 0 16px #FF4F8B}
-.inside{position:absolute;left:0;right:0;top:38px;bottom:0;z-index:1;cursor:pointer}
-.inside{background:#FFE2A0}
-.inside > svg{position:absolute;inset:0;width:100%;height:100%;display:block}
-@media (max-width:899px){.inside > svg{top:auto;bottom:0;height:62%}.plantg{transform:translate(172px,0)}}
-.screen{position:absolute;left:50%;bottom:clamp(14px,3.5%,40px);transform:translateX(-50%);width:min(420px,86%);background:#1C1A17;border-radius:18px;padding:10px 10px 12px;box-shadow:0 14px 30px rgba(28,26,23,.35)}
-.screen-in{background:#FFFBF2;border-radius:10px;padding:10px 12px 8px;display:grid;gap:8px}
-.screen-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:700 13px/1.2 var(--body);color:var(--ink-2)}
-.screen-top b{font:800 clamp(18px,2vw,22px)/1 var(--display);color:var(--green);font-variant-numeric:tabular-nums}
-.feed{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.ord{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:2px 10px;align-items:center;background:#fff;border:2px solid var(--ink);border-radius:10px;padding:6px 10px 6px 6px}
-.ord i{grid-row:span 2;width:30px;height:30px;border-radius:8px;background:var(--green);display:grid;place-items:center}
-.ord i svg{width:18px;height:18px}
-.ord b{font:800 14px/1.2 var(--display);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ord span{font:500 13px/1.2 var(--body);color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ord em{grid-row:span 2;font:800 15px/1 var(--display);font-style:normal;color:var(--green);font-variant-numeric:tabular-nums}
-.screen-foot{font:600 11.5px/1 var(--body);color:var(--ink-2);text-align:center}
-.shutter{position:absolute;left:0;right:0;top:38px;bottom:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;background-color:#C5CCD0;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.45) 0 2px,transparent 2px 15px,rgba(28,26,23,.16) 15px 18px),linear-gradient(90deg,rgba(28,26,23,.07),transparent 18%,transparent 82%,rgba(28,26,23,.09));box-shadow:0 10px 24px rgba(28,26,23,.3);will-change:transform}
-.shutter-paint{position:relative;width:min(1220px,100%);margin:0 auto;padding:22px max(16px,env(safe-area-inset-left,0px)) 18px}
-.shut h1{font:800 clamp(38px,9.6vw,80px)/.98 var(--display);color:var(--ink);letter-spacing:-.01em;transform:rotate(-1.5deg);transform-origin:left bottom;max-width:12em;text-shadow:0 0 1px rgba(28,26,23,.6)}
-.shut h1 span{display:block;color:var(--green)}
-.spray{display:block;width:min(360px,70%);height:18px;margin:6px 0 14px;overflow:visible}
-.shut .eyebrow{color:var(--ink);margin-bottom:8px}
-.shut .lede{color:#2A2723;font-size:clamp(16px,1.5vw,19px);max-width:32em}
-.shut .hero-cta{margin-top:16px}
-.shut .city{margin-top:16px}
-.shut .city > span{color:var(--ink)}
-.rail-bar{position:relative;height:30px;background:linear-gradient(#7C868C,#5D666B);border-top:3px solid var(--ink)}
-.padlock{position:absolute;left:50%;top:-6px;width:44px;height:48px;margin-left:-22px;padding:0;border:0;background:none;cursor:pointer}
-.padlock svg{width:44px;height:48px;overflow:visible}
-.padlock .shackle{transform-box:fill-box;transform-origin:100% 100%;transition:transform .3s var(--ease-out)}
-.shut.open .padlock .shackle{transform:translateY(-6px) rotate(28deg)}
-.flyer{display:none}
-.click-cursor{position:absolute;z-index:6;width:40px;height:48px;pointer-events:none;opacity:0;left:0;top:0}
-.click-ring{position:absolute;z-index:6;width:40px;height:40px;margin:-20px 0 0 -20px;border:4px solid var(--yellow);border-radius:50%;pointer-events:none;opacity:0;left:0;top:0}
-@media (min-width:900px){
-  .shutter-paint{padding:30px 40px 24px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0 56px;align-items:end}
-  .shut .spray{margin-bottom:0}
-  .flyer{display:block;position:absolute;right:clamp(24px,6vw,90px);top:clamp(40px,10%,110px);width:220px;background:#FFFBF2;color:var(--ink);padding:16px 18px;transform:rotate(4deg);box-shadow:0 8px 18px rgba(28,26,23,.25);font:700 17px/1.35 var(--body)}
-  .flyer::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:22px;margin-left:-35px;background:rgba(255,232,150,.85);transform:rotate(-3deg)}
-  .flyer b{display:block;font:800 24px/1.05 var(--display);margin-bottom:6px}
-}
+/* ---------- HERO: the night shift ---------- */
+.night{position:relative;overflow:hidden;background:#141C36;color:#F3F0E8;min-height:clamp(640px,56.25vw,900px)}
+.night-svg{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:pointer}
+.night-copy{position:relative;z-index:2;width:min(520px,40vw);margin-left:max(16px,calc((100vw - 1220px) / 2 + 16px));padding:clamp(36px,5vw,72px) 0 40px;pointer-events:none}
+.night-copy > *{pointer-events:auto}
+.night .eyebrow{color:var(--yellow)}
+.neon{position:relative;display:inline-block;margin:0 0 18px;padding:16px 22px 18px;font:800 clamp(36px,4.4vw,64px)/1.02 var(--display);color:#FFF0F6;background:rgba(14,20,48,.72);border:3px solid #FF8FB8;border-radius:18px;text-shadow:0 0 6px #FF4F8B,0 0 18px #FF4F8B,0 0 34px rgba(255,79,139,.6);box-shadow:0 0 18px rgba(255,79,139,.5),inset 0 0 18px rgba(255,79,139,.3)}
+.neon span{display:block;color:#FFF7D6;text-shadow:0 0 6px #FFC72C,0 0 18px #FFC72C,0 0 34px rgba(255,199,44,.55)}
+.neon::before,.neon::after{content:"";position:absolute;bottom:100%;width:0;height:400px;border-left:2px solid #55607F}
+.neon::before{left:16%}.neon::after{right:16%}
+.night .eyebrow{margin-bottom:10px}
+.night .lede{color:#D6DCEE;font-size:clamp(17px,1.5vw,20px);max-width:30em}
+.night .city > span{color:#fff}
+.night .city-btns button{color:var(--ink)}
+.night .city-btns button[aria-pressed="true"]{color:#fff}
+.night .eyebrow,.night .lede,.night .city > span{transition:color .6s ease}
+.night.is-dawn .eyebrow{color:var(--green)}.night.is-dawn .lede{color:#3D3520;text-shadow:none}
+.night-hint{margin-top:14px;font-size:13px;color:#9FB4D8}
+@media (prefers-reduced-motion:no-preference){.neon{animation:flick 1.2s linear .3s both}}
+@keyframes flick{0%{opacity:0}8%{opacity:.9}12%{opacity:.15}20%{opacity:1}28%{opacity:.4}36%,100%{opacity:1}}
 @media (max-width:899px){
-  .shut .eyebrow{display:none}
-  .shut .hero-cta{flex-wrap:nowrap;gap:10px}
-  .shut .hero-cta .btn--green{flex:1;padding:0 16px}
-  .shut .hero-cta .wa{flex:none;width:52px;padding:0;font-size:0;gap:0}
-  .shut .hero-cta .wa svg{width:24px;height:24px}
-  .shut .city{margin-top:12px;gap:6px}
-  .shut .city > span{font-size:13px}
-  .shut .city-btns{flex-wrap:nowrap;gap:6px}
-  .shut .city-btns button{padding:0 12px;font-size:14px}
-  .shut .city-btns svg{display:none}
-  .ord{padding:5px 8px 5px 5px}.ord b{font-size:13px}.ord span{font-size:12px}.ord em{font-size:14px}
-  .screen{left:auto;right:3%;transform:none;width:72%}
+  .night{display:block;min-height:clamp(720px,calc(100svh - 96px),900px)}
+  .night-svg{position:absolute;inset:0;width:100%;height:100%}
+  .night-copy{position:static;width:auto;margin:0;padding:20px max(16px,env(safe-area-inset-left,0px)) 0}
+  .night-copy > *{position:relative;z-index:2}
+  .neon{margin:0 0 12px;padding:11px 15px 13px;font-size:clamp(32px,9.4vw,46px)}
+  .neon::before,.neon::after{height:40px}
+  .night .eyebrow{display:none}
+  .night .lede{font-size:16px;line-height:1.5;text-shadow:0 1px 10px rgba(20,28,54,.9)}
+  .night .hero-cta{flex-wrap:nowrap;gap:10px;margin-top:14px}
+  .night .hero-cta .btn--green{flex:1;padding:0 16px}
+  .night .hero-cta .wa{flex:none;width:52px;padding:0;font-size:0;gap:0}
+  .night .hero-cta .wa svg{width:24px;height:24px}
+  .night .city{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:16px;bottom:12px;margin:0;gap:6px}
+  .night .city > span{font-size:13px}
+  .night .city-btns{flex-wrap:nowrap;gap:6px}
+  .night .city-btns button{padding:0 12px;font-size:14px}
+  .night .city-btns svg{display:none}
 }
-@media (prefers-reduced-motion:reduce){.padlock .shackle,.neon24{transition:none}}
-@media (min-width:900px){.shut .shutter-paint h1{font-size:clamp(44px,4.4vw,64px)}}
 
 /* ---------- phone action bar: appears once the hero buttons are gone, steps aside for the form and footer ---------- */
 @media (max-width:860px){
@@ -702,50 +678,15 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 
 <main id="top">
   <!-- ================= HERO ================= -->
-  <section class="shut" aria-labelledby="t-hero">
-    <div class="shut-box"><span class="neon24" aria-hidden="true">OPEN 24/7 ONLINE</span></div>
-    <div class="inside" title="Click to replay the night">
-      <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Behind the shutter, the lit shop: a screen on the counter keeps taking orders, a bell rings for each one, and a plant in a Click and Grow pot grows a leaf per order.">
-        <defs><radialGradient id="lampGlow" cx="50%" cy="0%" r="70%"><stop offset="0" stop-color="#FFF6D8"/><stop offset="1" stop-color="#FFE2A0" stop-opacity="0"/></radialGradient></defs>
-        <rect width="1600" height="600" fill="#FFE2A0"/>
-        <ellipse class="glow" cx="800" cy="250" rx="520" ry="300" fill="url(#lampGlow)" opacity="0"/>
-        <g stroke="#1C1A17" stroke-width="4">
-          <path d="M140 210h500M960 210h500M140 330h500M960 330h500" />
-          <g stroke-width="3"><rect x="160" y="160" width="40" height="50" fill="#FF4F8B"/><rect x="210" y="172" width="34" height="38" fill="#13A8A0"/><rect x="254" y="150" width="46" height="60" fill="#FFC72C"/><rect x="320" y="166" width="40" height="44" fill="#2F5DFF"/><rect x="1000" y="160" width="44" height="50" fill="#E8283F"/><rect x="1056" y="170" width="36" height="40" fill="#0E8A62"/><rect x="1110" y="154" width="48" height="56" fill="#FF4F8B"/>
-            <rect x="170" y="280" width="44" height="50" fill="#0E8A62"/><rect x="226" y="290" width="40" height="40" fill="#FFC72C"/><rect x="290" y="276" width="52" height="54" fill="#E8283F"/><rect x="520" y="284" width="44" height="46" fill="#13A8A0"/><rect x="980" y="282" width="42" height="48" fill="#2F5DFF"/><rect x="1300" y="276" width="48" height="54" fill="#FFC72C"/><rect x="1360" y="288" width="40" height="42" fill="#FF4F8B"/></g>
-        </g>
-        <g class="lamp"><path d="M800 0v226" stroke="#1C1A17" stroke-width="3"/><path d="M766 256c0-22 15-32 34-32s34 10 34 32z" fill="#006A4E" stroke="#1C1A17" stroke-width="4"/><circle cx="800" cy="262" r="9" fill="#FFF6D8" stroke="#1C1A17" stroke-width="3"/></g>
-        <g class="bell" style="transform-box:fill-box;transform-origin:50% 0%"><path d="M1150 236v14" stroke="#1C1A17" stroke-width="3"/><path d="M1130 290c0-26 8-40 20-40s20 14 20 40z" fill="#FFC72C" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><circle cx="1150" cy="294" r="6" fill="#1C1A17"/></g>
-        <g class="open-sign"><rect x="1075" y="336" width="120" height="50" rx="10" fill="#1C1A17"/><text x="1135" y="371" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="30" fill="#5A4048" class="open-txt">OPEN</text></g>
-        <rect x="640" y="452" width="460" height="90" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
-        <rect y="540" width="1600" height="60" fill="#C98B5E" stroke="#1C1A17" stroke-width="4"/>
-        <g class="plantg" transform="translate(100 0)">
-        <path class="vine" d="M455 472C432 430 478 404 452 362S430 300 456 270" pathLength="1" fill="none" stroke="#0E8A62" stroke-width="6" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset=".9"/>
-        <g class="leaves"></g>
-        <g class="bloom" opacity="0"><g fill="#FF4F8B" stroke="#1C1A17" stroke-width="2"><circle cx="456" cy="252" r="9"/><circle cx="472" cy="264" r="9"/><circle cx="440" cy="264" r="9"/></g><circle cx="456" cy="264" r="6" fill="#FFC72C" stroke="#1C1A17" stroke-width="2"/></g>
-        <g><path d="M422 470h66l-8 70h-50z" fill="#C86B3C" stroke="#1C1A17" stroke-width="4" stroke-linejoin="round"/><rect x="416" y="460" width="78" height="16" rx="4" fill="#A8552C" stroke="#1C1A17" stroke-width="4"/><text x="455" y="516" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="20" fill="#FFF1D6">C&amp;G</text></g>
-        </g>
-      </svg>
-      <div class="screen" aria-live="polite">
-        <div class="screen-in">
-          <p class="screen-top"><span>Orders while you sleep</span><b id="nightTotal">৳0</b></p>
-          <ol class="feed" id="feed"></ol>
-          <p class="screen-foot">yourshop.com · built by Click &amp; Grow</p>
-        </div>
-      </div>
-    </div>
-    <div class="shutter" id="shutter">
-      <div class="shutter-paint">
-        <div class="paint-a">
-        <h1 id="t-hero">Your shop is closed. <span>Your website isn’t.</span></h1>
-        <svg class="spray" viewBox="0 0 360 18" aria-hidden="true"><path d="M4 12C80 4 170 15 250 8S330 6 356 10" fill="none" stroke="#E8283F" stroke-width="6" stroke-linecap="round" opacity=".85"/></svg>
-        </div>
-        <div class="paint-b">
-        <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
-        <p class="lede">It’s 2 AM and people are still shopping on their phones. We build the website that takes their orders while you sleep.</p>
+  <section class="night" aria-labelledby="t-hero">
+    <svg class="night-svg" id="nightScene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Night on a city street. The shop is shut and the owner is asleep upstairs, but windows across the city light up as people order on their phones. Each order flies into the shop’s letterbox, a note drops into the cash box and the sign counts up what the shop earned tonight. At dawn the owner wakes and rolls up the shutter onto a pile of orders."><title>Click to replay the night</title></svg>
+    <div class="night-copy">
+      <h1 id="t-hero" class="neon">Your shop is closed. <span>Your website isn’t.</span></h1>
+      <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
+      <p class="lede">It’s 2 AM and people are still shopping on their phones. We build the website that catches every click, so your shop keeps growing while you sleep.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
+          <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
         </div>
         <div class="city" role="group" aria-labelledby="cityLbl">
           <span id="cityLbl">Where’s your shop?</span>
@@ -756,13 +697,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
             <button type="button" data-city="ny" aria-pressed="false"><svg aria-hidden="true" style="color:#C79100"><use href="#pin"/></svg>New York</button>
           </div>
         </div>
-        </div>
-      </div>
-      <p class="flyer" aria-hidden="true"><b>Back at 10 AM.</b>The website never left.</p>
-      <div class="rail-bar"><button class="padlock" type="button" aria-label="Unlock the shutter again"><svg viewBox="0 0 44 48" aria-hidden="true"><path class="shackle" d="M12 22v-8a10 10 0 0 1 20 0v8" fill="none" stroke="#1C1A17" stroke-width="5"/><rect x="5" y="20" width="34" height="26" rx="6" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/><circle cx="22" cy="32" r="4" fill="#1C1A17"/></svg></button></div>
     </div>
-    <svg class="click-cursor" viewBox="0 0 40 48" aria-hidden="true"><path d="M4 3l13 37 5-14 14-5z" fill="#fff" stroke="#1C1A17" stroke-width="3.5" stroke-linejoin="round"/><path d="M22 41c0-6 3-9 8-10-1 6-4 9-8 10z" fill="#FFC72C" stroke="#1C1A17" stroke-width="2" stroke-linejoin="round"/></svg>
-    <span class="click-ring" aria-hidden="true"></span>
   </section>
   <div class="bunting" aria-hidden="true"></div>
 
@@ -1396,119 +1331,294 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 </script>
 <script>
 (() => {
-  /* ===== HERO: the shutter is the page. The logo's cursor unlocks it, it rolls up partway, and the lit shop behind keeps taking orders all night. ===== */
-  const hero = document.querySelector('.shut');
-  if (!hero) return;
+  /* ===== HERO: the night shift. The shop is shut and the owner is asleep; orders fly in from across the city and the takings add up until dawn. ===== */
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
-  const $ = s => hero.querySelector(s), $$ = s => [...hero.querySelectorAll(s)];
-  const shutter = $('#shutter'), paint = $('.shutter-paint'), feed = $('#feed'), totalEl = $('#nightTotal');
-  const cursor = $('.click-cursor'), ring = $('.click-ring'), lock = $('.padlock');
   const NS = 'http://www.w3.org/2000/svg';
-  const G = () => window.__cg || { cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const svg = $('#nightScene');
+  if (!svg) return;
+  let token = 0, timers = [], raf = new Set();
+  const G = () => window.__cg || { c: 'dhaka', cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
   const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
   const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
-  const ITEMS = [['2 × Katan silk', 2400], ['Cotton lawn, 5 yards', 2250], ['Muslin scarf', 900], ['Gift box, Eid set', 1500], ['3 × Lawn suits', 3600], ['Silk dupatta', 1200], ['Bulk order, 10 metres', 4100], ['Bedsheet set', 1750], ['Georgette saree', 3200], ['Kids’ kurta', 850]];
-  const BAG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.5 13h-11z" fill="#fff"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="#fff" stroke-width="2"/></svg>';
-  let token = 0, timers = [], opened = false, total = 0, count = 0, minutes = 23 * 60 + 38;
 
-  const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
-  const at = (ms, fn) => { const t = token; timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); };
-  const clock = () => { const h = Math.floor(minutes / 60) % 24, m = minutes % 60; return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
-  // The shutter rolls up until its painted text and rail sit at the top; the lit shop fills the rest.
-  const target = () => -(shutter.offsetHeight - paint.offsetHeight - 30);
-
-  const vine = $('.vine'), leaves = $('.leaves');
-  function grow(n, animate) {
-    const f = Math.min(1, .1 + n * .09);
-    if (animate) A(vine, [{ strokeDashoffset: 1 - Math.max(.1, f - .09) }, { strokeDashoffset: 1 - f }], { duration: 500 });
-    else vine.setAttribute('stroke-dashoffset', 1 - f);
-    if (n > 10) return;
-    const L = vine.getTotalLength(), p = vine.getPointAtLength(L * Math.min(.96, f)), side = n % 2 ? 1 : -1;
-    const g = document.createElementNS(NS, 'g'); g.setAttribute('transform', `translate(${p.x} ${p.y}) rotate(${side * -30})`);
-    const e = document.createElementNS(NS, 'ellipse');
-    [['cx', side * 13], ['cy', 0], ['rx', 14], ['ry', 7], ['fill', '#3FB27F'], ['stroke', '#1C1A17'], ['stroke-width', 2]].forEach(([k, v]) => e.setAttribute(k, v));
-    g.appendChild(e); leaves.appendChild(g);
-    if (animate) { e.style.transformBox = 'fill-box'; e.style.transformOrigin = side > 0 ? '0% 50%' : '100% 50%'; A(e, [{ opacity: 0, scale: '0.3' }, { opacity: 1, scale: '1' }], { duration: 400, delay: 150 }); }
-    if (n === 10) { const b = $('.bloom'); if (animate) A(b, [{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: 300 }); else b.setAttribute('opacity', 1); }
+  function mk(tag, attrs = {}, parent, text) {
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
   }
+  const A = (el, kf, o = {}) => {
+    if (!el) return null;
+    const opts = Object.assign({ fill: 'both', easing: OUT }, o);
+    if (kf.length > 2 && opts.easing !== 'linear') { kf = kf.map(k => Object.assign({ easing: opts.easing }, k)); opts.easing = 'linear'; }
+    return el.animate(kf, opts);
+  };
 
-  function order(animate) {
-    const [what, base] = ITEMS[count % ITEMS.length], amt = conv(base);
-    count++; minutes += 6 + ((count * 7) % 11); total += amt;
-    const li = document.createElement('li'); li.className = 'ord';
-    li.innerHTML = `<i>${BAG}</i><b>New order · ${clock()}</b><em>${G().fmt(amt)}</em><span>${what}</span>`;
-    const before = new Map([...feed.children].map(el => [el, el.getBoundingClientRect().top]));
-    feed.prepend(li);
-    const extra = feed.children[3];
-    if (extra) { before.delete(extra); extra.remove(); }
-    totalEl.textContent = G().fmt(total);
-    grow(count, animate);
-    if (!animate) return;
-    before.forEach((top, el) => { const dy = top - el.getBoundingClientRect().top; if (dy) A(el, [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0px)' }], { duration: 320 }); });
-    A(li, [{ opacity: 0, transform: 'translateY(-12px) scale(0.97)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 340 });
-    A(totalEl, [{ transform: 'scale(1)' }, { transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' });
-    totalEl.style.display = 'inline-block';
-    A($('.bell'), [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-16deg)' }, { transform: 'rotate(13deg)' }, { transform: 'rotate(-8deg)' }, { transform: 'rotate(0deg)' }], { duration: 600, easing: 'ease-out' });
+  /* ---------- the street ---------- */
+  const BLOCKS = [[1150, 330, 180, '#2A3358'], [1330, 260, 150, '#323E69'], [1480, 380, 140, '#283152']];
+  const HOUSES = [[-10, 650, 170, '#2E2A4A'], [160, 600, 170, '#35315A'], [330, 660, 140, '#2B2847'], [470, 630, 150, '#332F55'], [620, 690, 130, '#2E2A4A']];
+  const WINDOWS = [];
+  BLOCKS.forEach(([x, top, w]) => { for (let y = top + 34; y < 760; y += 82) for (let c = 0; c < 2; c++) WINDOWS.push({ x: x + 26 + c * (w - 96 + 26), y, w: 44, h: 54 }); });
+  HOUSES.forEach(([x, top, w]) => { WINDOWS.push({ x: x + 28, y: top + 46, w: 44, h: 50 }); if (w > 150) WINDOWS.push({ x: x + w - 72, y: top + 46, w: 44, h: 50 }); });
+  const win = (bx, row, col) => WINDOWS.find(w => w.x >= bx && w.x < bx + 200 && w.y === row && (col == null || (col === 0 ? w.x < bx + 60 : w.x >= bx + 60)));
+  const slats = () => { let s = ''; for (let y = 664; y < 816; y += 14) s += `M895 ${y}h205`; return s; };
+  const stars = [[60, 60], [210, 120], [330, 40], [470, 150], [620, 70], [760, 130], [880, 40], [1010, 110], [1140, 60], [1260, 150], [1560, 60], [1380, 200], [540, 240], [120, 260], [990, 250]];
+  const pile = () => { let s = ''; for (let i = 0; i < 26; i++) { const x = 905 + (i * 37) % 180, y = 792 - (i % 5) * 7 - Math.floor(i / 9) * 6; s += `<rect x="${x}" y="${y}" width="30" height="19" rx="2" transform="rotate(${(i * 23) % 50 - 25} ${x + 15} ${y + 10})"/>`; } return s; };
+
+  const scene = () => `
+    <defs>
+      <linearGradient id="nsSky" x1="0" y1="0" x2="0" gradientUnits="userSpaceOnUse" y2="900"><stop offset="0" stop-color="#141C36"/><stop offset="1" stop-color="#2C3A6B"/></linearGradient>
+      <linearGradient id="nsDawn" x1="0" y1="-200" x2="0" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#F7A27E"/><stop offset=".6" stop-color="#FFD9A8"/><stop offset="1" stop-color="#FFEFD0"/></linearGradient>
+    </defs>
+    <rect x="-400" y="-400" width="2400" height="1500" fill="url(#nsSky)"/>
+    <rect class="dawn" x="-400" y="-400" width="2400" height="1500" fill="url(#nsDawn)" opacity="0"/>
+    <g class="stars" fill="#FFF7C2">${stars.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="${i % 3 ? 2.2 : 3.2}"/>`).join('')}</g>
+    <g class="moon"><circle cx="1460" cy="120" r="46" fill="#FFF3B0"/><circle cx="1480" cy="106" r="40" fill="#1A2342"/></g>
+    <path d="M0 640V580h60v-30h50v40h70v-50h40v60h90v-36h60v30h80v-44h50v56h90v-30h70v40h90v-60h40v50h100v-26h70v36h60v-46h50v60h80v-30h70v40h80v-50h40v70H0z" fill="#1E2748"/>
+    <g class="plane-wrap"><g class="plane"><path d="M0 0l46-5 14-12h8l-6 13 22-1 6-6h6l-3 9 3 9h-6l-6-6-22-1 6 13h-8L46 5z" fill="#C9D3EA"/><circle class="blink" cx="88" cy="0" r="4" fill="#FF4F8B"/><text x="40" y="34" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="700" font-size="20" fill="#9FB4D8">from London</text></g></g>
+    <g stroke="#0E1430" stroke-width="4">${BLOCKS.map(([x, top, w, f]) => `<rect x="${x}" y="${top}" width="${w}" height="${880 - top}" fill="${f}"/>`).join('')}${HOUSES.map(([x, top, w, f]) => `<rect x="${x}" y="${top}" width="${w}" height="${880 - top}" fill="${f}"/><rect x="${x - 8}" y="${top - 12}" width="${w + 16}" height="16" fill="#252141"/>`).join('')}</g>
+    <g fill="#1A2140" stroke="#0E1430" stroke-width="3">${WINDOWS.map(w => `<rect x="${w.x}" y="${w.y}" width="${w.w}" height="${w.h}"/>`).join('')}</g>
+    <g class="lit"></g>
+    <g class="newfloor" style="transform:translateY(130px)">
+      <rect x="772" y="262" width="336" height="112" fill="#2F6B55" stroke="#0E1430" stroke-width="4"/>
+      <rect x="760" y="250" width="360" height="18" fill="#1F4A3A" stroke="#0E1430" stroke-width="4"/>
+      <g fill="#FFE2A0" stroke="#0E1430" stroke-width="3"><rect x="792" y="284" width="56" height="46"/><rect x="1032" y="284" width="56" height="46"/></g>
+      <rect x="862" y="286" width="156" height="42" rx="6" fill="#FFC72C" stroke="#0E1430" stroke-width="3"/>
+      <text x="940" y="314" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="17" fill="#0E1430">GROWN</text>
+      <text x="940" y="346" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="15" fill="#D7F2E4" letter-spacing="1">OVERNIGHT</text>
+    </g>
+    <g class="shop">
+      <rect x="760" y="380" width="360" height="470" fill="#3A3550" stroke="#0E1430" stroke-width="4"/>
+      <rect x="748" y="368" width="384" height="22" fill="#2A2540" stroke="#0E1430" stroke-width="4"/>
+      <rect x="790" y="398" width="300" height="52" rx="8" fill="#C8102E" stroke="#0E1430" stroke-width="4"/>
+      <text x="940" y="434" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="30" fill="#FFC72C">YOUR BUSINESS</text>
+      <rect x="790" y="464" width="130" height="76" fill="#1A2140" stroke="#0E1430" stroke-width="3"/><path d="M790 464q32 40 0 76M920 464q-32 40 0 76" fill="#5A3A6B"/>
+      <rect class="upwin" x="950" y="464" width="140" height="76" fill="#232B4D" stroke="#0E1430" stroke-width="3"/>
+      <g class="sleeper"><ellipse cx="985" cy="520" rx="22" ry="10" fill="#E9E3F5"/><circle cx="990" cy="510" r="13" fill="#8C5A3C"/><path d="M1000 512c20-10 60-10 84 2v24h-84z" fill="#13A8A0"/></g>
+      <g class="zzz" font-family="Baloo 2, sans-serif" font-weight="800" fill="#DCE4F2"><text x="1012" y="494" font-size="20">z</text><text x="1030" y="482" font-size="25">z</text><text x="1050" y="470" font-size="30">Z</text></g>
+      <g class="waker" opacity="0"><circle cx="1020" cy="500" r="14" fill="#8C5A3C"/><path d="M1000 540c0-24 8-28 20-28s20 4 20 28z" fill="#fff"/><path d="M1004 518l-14-26M1036 518l14-26" stroke="#8C5A3C" stroke-width="7" stroke-linecap="round"/></g>
+      <rect class="glow" x="784" y="546" width="312" height="92" rx="14" fill="none" stroke="#FF4F8B" stroke-width="10" opacity=".3"/>
+      <rect x="790" y="552" width="300" height="80" rx="10" fill="#0E1430" stroke="#FF8FB8" stroke-width="3"/>
+      <text class="ctop" x="940" y="578" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="17" letter-spacing="1.5" fill="#FF9FC4">EARNED TONIGHT · 11:30 PM</text>
+      <text class="camt" x="940" y="621" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="36" fill="#FFE27A">${G().fmt(0)}</text>
+      <rect x="780" y="655" width="100" height="165" fill="#FFE2A0" stroke="#0E1430" stroke-width="4"/>
+      <path d="M800 655l-8 24h56l-8-24z" fill="#FFC72C" stroke="#0E1430" stroke-width="2"/>
+      <rect x="784" y="766" width="92" height="50" fill="#8C5A3C" stroke="#0E1430" stroke-width="3"/>
+      <g class="notes"></g>
+      <rect x="796" y="734" width="68" height="32" rx="4" fill="#6B3F22" stroke="#0E1430" stroke-width="3"/><rect x="818" y="740" width="24" height="4" rx="2" fill="#0E1430"/>
+      <text x="830" y="760" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="10" fill="#FFD9A8">GALLA</text>
+      <g class="inside"><rect x="895" y="650" width="205" height="170" fill="#FFE7A3"/><path d="M905 690h185M905 730h90" stroke="#8C5A3C" stroke-width="4"/><g fill="#FFF8E6" stroke="#0E1430" stroke-width="2">${pile()}</g></g>
+      <rect x="888" y="640" width="219" height="14" rx="4" fill="#4E5660" stroke="#0E1430" stroke-width="3"/>
+      <g class="shutter" style="transform-origin:997px 652px">
+        <rect x="895" y="650" width="205" height="170" fill="#7D868B" stroke="#0E1430" stroke-width="4"/>
+        <path d="${slats()}" stroke="#646C72" stroke-width="3"/>
+        <rect class="slot" x="958" y="694" width="78" height="12" rx="3" fill="#0E1430"/>
+        <g class="tag" style="transform-box:fill-box;transform-origin:50% 0%"><path d="M997 744v10" stroke="#0E1430" stroke-width="3"/><rect x="954" y="754" width="86" height="30" rx="5" fill="#E8283F" stroke="#0E1430" stroke-width="3"/><text x="997" y="776" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="17" fill="#fff">CLOSED</text></g>
+      </g>
+    </g>
+    <rect x="-10" y="820" width="1620" height="38" fill="#4A4560" stroke="#0E1430" stroke-width="4"/>
+    <path class="vine" d="M752 826C722 772 784 742 754 690S722 604 752 560S786 470 754 404" pathLength="1" fill="none" stroke="#3FB27F" stroke-width="7" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+    <g class="leaves"></g>
+    <g class="bloom" opacity="0" style="transform-box:fill-box;transform-origin:center"><g fill="#FF4F8B" stroke="#0E1430" stroke-width="2"><circle cx="754" cy="384" r="10"/><circle cx="772" cy="398" r="10"/><circle cx="736" cy="398" r="10"/><circle cx="764" cy="416" r="10"/><circle cx="744" cy="416" r="10"/></g><circle cx="754" cy="402" r="8" fill="#FFC72C" stroke="#0E1430" stroke-width="2"/></g>
+    <g class="pot"><path d="M730 818h46l-6 34h-34z" fill="#C86B3C" stroke="#0E1430" stroke-width="3"/><rect x="726" y="810" width="54" height="12" rx="3" fill="#A8552C" stroke="#0E1430" stroke-width="3"/><text x="753" y="842" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="12" fill="#FFF1D6">C&amp;G</text></g>
+    <rect x="-10" y="858" width="1620" height="260" fill="#23233A"/><path d="M0 882h1600" stroke="#6C6A86" stroke-width="5" stroke-dasharray="50 40"/>
+    <g class="cat" transform="translate(1160 790)">
+      <path class="tail" d="M-22 22c-22 0-26-24-14-34" fill="none" stroke="#0B0B12" stroke-width="7" stroke-linecap="round" style="transform-box:fill-box;transform-origin:100% 100%"/>
+      <ellipse cx="0" cy="18" rx="26" ry="15" fill="#0B0B12"/>
+      <circle cx="24" cy="2" r="13" fill="#0B0B12"/><path d="M15-8l3-12 7 8M27-10l6-11 4 12" fill="#0B0B12"/>
+      <circle class="eye" cx="22" cy="0" r="2.6" fill="#FFE27A"/><circle class="eye" cx="30" cy="0" r="2.6" fill="#FFE27A"/>
+      <path class="paw" d="M22 26l10-14" stroke="#0B0B12" stroke-width="7" stroke-linecap="round" style="transform-box:fill-box;transform-origin:0% 100%"/>
+      <text class="huh" x="34" y="-22" font-family="Baloo 2, sans-serif" font-weight="800" font-size="26" fill="#FFE27A" opacity="0">!</text>
+    </g>
+    <g class="trails" fill="none" stroke-linecap="round"></g>
+    <g class="flights"></g>
+    <g class="pops"></g>`;
+
+  const BASE = [2400, 1200, 3200, 850, 1750, 2250, 4100, 990, 2600, 1500, 3800, 1100, 2050, 3400];
+  const TIMES = [600, 1900, 3100, 4200, 5200, 6100, 6900, 7600, 8200, 8750, 9250, 9700, 10100, 10450];
+  const SLOT = { x: 997, y: 700 };
+  const origins = () => [
+    win(1150, 528, 0), win(160, 646, 0), win(1330, 376, 1), win(1150, 692, 1), win(620, 736, null),
+    'plane', win(1480, 496, 0), win(-10, 696, null), win(1330, 540, 0), win(470, 676, 0), win(1480, 660, 1), win(1150, 364, 1), win(330, 706, null), win(1330, 704, 1)
+  ];
+  const clock = k => { const m = (23 * 60 + 42) + Math.round(k / 13 * (6 * 60 + 8)); const h = Math.floor(m / 60) % 24, mm = m % 60; return `${((h + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  function light(r, w, pyjamas) {
+    const g = mk('g', {}, $('.lit', r));
+    mk('rect', { x: w.x, y: w.y, width: w.w, height: w.h, fill: '#FFD36B', stroke: '#0E1430', 'stroke-width': 3 }, g);
+    const cx = w.x + w.w / 2;
+    mk('path', { d: `M${cx - 14} ${w.y + w.h}c0-14 6-20 14-20s14 6 14 20z`, fill: '#3A2E55' }, g);
+    mk('circle', { cx, cy: w.y + w.h - 26, r: 8, fill: '#3A2E55' }, g);
+    if (pyjamas) mk('path', { d: `M${cx - 9} ${w.y + w.h - 30}l9-16 9 16z`, fill: '#FF4F8B' }, g);
+    mk('rect', { x: cx + 3, y: w.y + w.h - 18, width: 7, height: 11, rx: 1.5, fill: '#5BF09A' }, g);
+    if (!reduce) A(g, [{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: 'ease' });
+    return g;
   }
+  function trail(r, from, c) { return mk('path', { d: `M${from.x} ${from.y}Q${c.x} ${c.y} ${SLOT.x} ${SLOT.y}`, pathLength: 1, stroke: '#FFE27A', 'stroke-width': 3, 'stroke-dasharray': 1, 'stroke-dashoffset': 1, opacity: .9 }, $('.trails', r)); }
 
-  function openShop(animate) {
-    opened = true; hero.classList.add('open');
-    $('.neon24').classList.add('on');
-    $('.open-txt').setAttribute('fill', '#FF4F8B');
-    $('.glow').setAttribute('opacity', 1);
-    const y = target();
-    if (!animate) { shutter.style.transform = `translateY(${y}px)`; return; }
-    A(shutter, [{ transform: 'translateY(0px)' }, { transform: `translateY(${y}px)` }], { duration: 1200, easing: INOUT });
-    A($('.glow'), [{ opacity: 0 }, { opacity: .4 }, { opacity: .1 }, { opacity: 1 }], { duration: 700, delay: 400, easing: 'linear' });
-    A($('.neon24'), [{ opacity: 1 }, { opacity: .3 }, { opacity: 1 }, { opacity: .5 }, { opacity: 1 }], { duration: 700, delay: 900, easing: 'linear' });
-    A($('.open-sign'), [{ opacity: .4 }, { opacity: 1 }, { opacity: .5 }, { opacity: 1 }], { duration: 600, delay: 1100, easing: 'linear' });
-  }
+  function run(r, T, instant) {
+    const camt = $('.camt', r), ctop = $('.ctop', r), notes = $('.notes', r), pops = $('.pops', r), flights = $('.flights', r);
+    const amounts = BASE.map(conv), O = origins();
+    let total = 0, shown = 0, stack = 0;
+    const addNote = animate => {
+      if (stack >= 12) return;
+      const n = mk('rect', { x: 800 + (stack % 2) * 4, y: 726 - stack * 5, width: 60, height: 9, rx: 2, fill: '#3FB27F', stroke: '#0E1430', 'stroke-width': 2 }, notes);
+      stack++;
+      if (animate) A(n, [{ opacity: 0, transform: 'translateY(-18px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 240 });
+    };
+    const vine = $('.vine', r), leaves = $('.leaves', r);
+    const grow = (n, animate) => {
+      const f = n / BASE.length;
+      if (animate) A(vine, [{ strokeDashoffset: 1 - (n - 1) / BASE.length }, { strokeDashoffset: 1 - f }], { duration: 500 });
+      else vine.setAttribute('stroke-dashoffset', 1 - f);
+      const L = vine.getTotalLength(), p = vine.getPointAtLength(L * Math.min(.98, f)), side = n % 2 ? 1 : -1;
+      const holder = mk('g', { transform: `translate(${p.x} ${p.y}) rotate(${side * -30})` }, leaves);
+      const leaf = mk('ellipse', { cx: side * 13, cy: 0, rx: 14, ry: 7, fill: '#5BD08F', stroke: '#0E1430', 'stroke-width': 2 }, holder);
+      if (animate) { leaf.style.transformBox = 'fill-box'; leaf.style.transformOrigin = side > 0 ? '0% 50%' : '100% 50%'; A(leaf, [{ opacity: 0, scale: '0.3' }, { opacity: 1, scale: '1' }], { duration: 400, delay: 250 }); }
+    };
+    const fromPt = o => o === 'plane' ? null : { x: o.x + o.w / 2, y: o.y + 10 };
+    const dawnState = () => {
+      $('.dawn', r).setAttribute('opacity', 1); ['.stars', '.moon', '.lit', '.zzz', '.sleeper', '.plane-wrap'].forEach(s => $(s, r).setAttribute('opacity', 0));
+      $('.waker', r).setAttribute('opacity', 1); $('.upwin', r).setAttribute('fill', '#FFE2A0');
+      $('.shutter', r).style.transform = 'scaleY(0.07)';
+      ctop.textContent = `WHILE YOU SLEPT · ${BASE.length} ORDERS`; camt.textContent = G().fmt(amounts.reduce((a, b) => a + b, 0));
+      $('.newfloor', r).style.transform = 'translateY(0px)'; $('.bloom', r).setAttribute('opacity', 1);
+    };
 
-  function clickAt(el, then) {
-    const hr = hero.getBoundingClientRect(), r = el.getBoundingClientRect();
-    const x = r.left - hr.left + r.width / 2, y = r.top - hr.top + r.height / 2;
-    const from = `translate(${hr.width - 40}px,${hr.height + 20}px)`, to = `translate(${x - 4}px,${y - 2}px)`;
-    A(cursor, [{ opacity: 0, transform: from }, { opacity: 1, transform: to }], { duration: 900 });
-    at(900, () => {
-      A(cursor, [{ transform: `${to} scale(1)` }, { transform: `${to} scale(0.85)` }, { transform: `${to} scale(1)` }], { duration: 200, easing: 'ease-out' });
-      ring.style.left = x + 'px'; ring.style.top = y + 'px';
-      A(ring, [{ opacity: 1, transform: 'scale(0.6)' }, { opacity: 0, transform: 'scale(2.6)' }], { duration: 520 });
-      then();
-      A(cursor, [{ opacity: 1 }, { opacity: 0 }], { duration: 350, delay: 400, easing: 'ease' });
+    if (instant) {
+      O.forEach((o, k) => { if (o !== 'plane') { const f = fromPt(o); const c = { x: (f.x + SLOT.x) / 2, y: Math.min(f.y, SLOT.y) - 220 }; const p = trail(r, f, c); p.setAttribute('stroke-dashoffset', 0); p.setAttribute('opacity', .35); } });
+      for (let i = 0; i < 12; i++) addNote(false);
+      for (let i = 1; i <= BASE.length; i++) grow(i, false);
+      dawnState();
+      svg.closest('.night').classList.add('is-dawn');
+      return;
+    }
+
+    $('.tag', r).animate([{ transform: 'rotate(-4deg)' }, { transform: 'rotate(4deg)' }], { duration: 1400, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+    $('.tail', r).animate([{ transform: 'rotate(-10deg)' }, { transform: 'rotate(12deg)' }], { duration: 900, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
+    $$('.zzz text', r).forEach((z, i) => z.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, offset: .3 }, { opacity: 0, transform: 'translateY(-14px)' }], { duration: 2400, iterations: Infinity, delay: i * 400, easing: 'linear' }));
+    $('.blink', r).animate([{ opacity: 1 }, { opacity: .1 }], { duration: 500, iterations: Infinity, direction: 'alternate', easing: 'steps(1, end)' });
+    const PLANE = { from: 1720, to: -160, y: 190, t0: 1500, dur: 9000 };
+    A($('.plane-wrap', r), [{ transform: `translate(${PLANE.from}px,${PLANE.y}px)` }, { transform: `translate(${PLANE.to}px,${PLANE.y - 40}px)` }], { duration: PLANE.dur, delay: PLANE.t0, easing: 'linear' });
+
+    TIMES.forEach((t, k) => T.at(t, () => {
+      const o = O[k];
+      let from;
+      if (o === 'plane') { const p = (t - PLANE.t0) / PLANE.dur; from = { x: PLANE.from + (PLANE.to - PLANE.from) * p + 40, y: PLANE.y - 40 * p + 6 }; }
+      else { light(r, o, k === 1); from = fromPt(o); click(from); }
+      const c = { x: (from.x + SLOT.x) / 2 + (k % 2 ? 60 : -60), y: Math.min(from.y, SLOT.y) - (o === 'plane' ? 40 : 230) };
+      T.at(o === 'plane' ? 0 : 260, () => fly(k, o, from, c));
+    }));
+
+    function click(at) {
+      const g = mk('g', {}, pops);
+      const ring = mk('circle', { cx: at.x, cy: at.y + 6, r: 12, fill: 'none', stroke: '#FFE27A', 'stroke-width': 4 }, g);
+      const cur = mk('path', { d: `M${at.x + 4} ${at.y + 8}l11 28 4-11 11-4z`, fill: '#fff', stroke: '#0E1430', 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
+      ring.style.transformBox = 'fill-box'; ring.style.transformOrigin = 'center';
+      A(cur, [{ opacity: 0, transform: 'translate(18px,18px)' }, { opacity: 1, transform: 'translate(0px,0px)' }], { duration: 200 });
+      A(cur, [{ transform: 'scale(1)' }, { transform: 'scale(0.85)' }, { transform: 'scale(1)' }], { duration: 160, delay: 200, easing: 'ease-out', composite: 'add' });
+      A(ring, [{ opacity: 1, transform: 'scale(0.6)' }, { opacity: 0, transform: 'scale(2.4)' }], { duration: 500, delay: 210 });
+      A(cur, [{ opacity: 1 }, { opacity: 0 }], { duration: 250, delay: 520, easing: 'ease', fill: 'forwards' }).onfinish = () => g.remove();
+    }
+
+    function fly(k, o, from, c) {
+      const path = trail(r, from, c), dur = o === 'plane' ? 1700 : 1400;
+      const slip = mk('g', {}, flights);
+      mk('circle', { r: 26, fill: '#FFE27A', opacity: .28 }, slip);
+      mk('rect', { x: -18, y: -12, width: 36, height: 24, rx: 3, fill: '#FFF8E6', stroke: '#0E1430', 'stroke-width': 2.5 }, slip);
+      mk('path', { d: 'M-11-4h16M-11 3h10', stroke: '#006A4E', 'stroke-width': 3, 'stroke-linecap': 'round' }, slip);
+      A(path, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: dur, easing: 'cubic-bezier(0.65, 0, 0.35, 1)' });
+      if (k === 3) T.at(dur * .55, () => {
+        A($('.paw', r), [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-55deg)' }, { transform: 'rotate(0deg)' }], { duration: 360, easing: 'ease-out' });
+        A($('.huh', r), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)', offset: .2 }, { opacity: 1, offset: .8 }, { opacity: 0 }], { duration: 1100, easing: 'ease-out' });
+      });
+      const s0 = performance.now(), id = token;
+      const step = now => {
+        if (id !== token) return;
+        const tt = Math.min(1, (now - s0) / dur), e = ease(tt), u = 1 - e;
+        const x = u * u * from.x + 2 * u * e * c.x + e * e * SLOT.x, y = u * u * from.y + 2 * u * e * c.y + e * e * SLOT.y;
+        slip.setAttribute('transform', `translate(${x} ${y}) rotate(${Math.sin(tt * 9) * 10})`);
+        if (tt < 1) { raf.add(requestAnimationFrame(step)); return; }
+        arrive(k, slip, path);
+      };
+      raf.add(requestAnimationFrame(step));
+    }
+
+    function arrive(k, slip, path) {
+      slip.animate([{ opacity: 1, transform: `translate(${SLOT.x}px,${SLOT.y}px) scale(1)` }, { opacity: 0, transform: `translate(${SLOT.x}px,${SLOT.y + 4}px) scale(0.3)` }], { duration: 160, easing: 'ease-in-out', fill: 'forwards' }).onfinish = () => slip.remove();
+      A(path, [{ opacity: .9 }, { opacity: .2 }], { duration: 600, easing: 'ease' });
+      A($('.slot', r), [{ fill: '#0E1430' }, { fill: '#FFE27A' }, { fill: '#0E1430' }], { duration: 320, easing: 'ease-out' });
+      T.at(120, () => {
+        addNote(true);
+        const amt = amounts[k], from = total; total += amt; shown++;
+        const pop = mk('text', { x: 830, y: 712, 'text-anchor': 'middle', 'font-family': 'Baloo 2, sans-serif', 'font-weight': 800, 'font-size': 30, fill: '#7CF0B0', stroke: '#0E1430', 'stroke-width': 4, 'paint-order': 'stroke' }, pops, '+' + G().fmt(amt));
+        A(pop, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(-10px)', offset: .25 }, { opacity: 0, transform: 'translateY(-46px)' }], { duration: 1100, easing: 'ease-out' }).onfinish = () => pop.remove();
+        const s0 = performance.now(), id = token;
+        const tick = now => { if (id !== token) return; const p = Math.min(1, (now - s0) / 420); camt.textContent = G().fmt(Math.round(from + amt * (1 - Math.pow(1 - p, 3)))); if (p < 1) raf.add(requestAnimationFrame(tick)); };
+        raf.add(requestAnimationFrame(tick));
+        ctop.textContent = `EARNED TONIGHT · ${clock(k)}`;
+        grow(shown, true);
+        A($('.glow', r), [{ opacity: .3 }, { opacity: .9 }, { opacity: .3 }], { duration: 360, easing: 'ease-out' });
+        if (k === 7) {
+          const zs = $$('.zzz text', r); zs.forEach(z => { z.textContent = '৳'; z.setAttribute('fill', '#FFE27A'); });
+          T.at(2200, () => zs.forEach((z, i) => { z.textContent = ['z', 'z', 'Z'][i]; z.setAttribute('fill', '#DCE4F2'); }));
+        }
+      });
+    }
+
+    // Dawn: the city goes quiet, the owner wakes and rolls up the shutter onto a pile of orders.
+    const D = 12600;
+    T.at(D, () => {
+      svg.closest('.night').classList.add('is-dawn');
+      A($('.dawn', r), [{ opacity: 0 }, { opacity: 1 }], { duration: 1400, easing: 'ease-in-out' });
+      ['.stars', '.moon', '.lit', '.zzz', '.sleeper', '.plane-wrap'].forEach(s => A($(s, r), [{ opacity: 1 }, { opacity: 0 }], { duration: 900, easing: 'ease' }));
+      A($('.trails', r), [{ opacity: 1 }, { opacity: 0 }], { duration: 1200, easing: 'ease' });
+    });
+    T.at(D + 900, () => { A($('.waker', r), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 400 }); $('.upwin', r).setAttribute('fill', '#FFE2A0'); });
+    T.at(D + 1500, () => {
+      const sh = $('.shutter', r); sh.getAnimations().forEach(a => a.cancel());
+      A(sh, [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.07)' }], { duration: 1000, easing: INOUT });
+    });
+    T.at(D + 2300, () => {
+      ctop.textContent = `WHILE YOU SLEPT · ${BASE.length} ORDERS`;
+      A($('.glow', r), [{ opacity: .3 }, { opacity: 1 }, { opacity: .5 }], { duration: 600, easing: 'ease-out' });
+      A(camt, [{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 400, easing: 'ease-out' });
+      camt.style.transformBox = 'fill-box'; camt.style.transformOrigin = 'center';
+    });
+    T.at(D + 2900, () => {
+      A($('.newfloor', r), [{ transform: 'translateY(130px)' }, { transform: 'translateY(0px)' }], { duration: 1000, easing: INOUT });
+      A($('.bloom', r), [{ opacity: 0, transform: 'scale(0.5)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 450, delay: 700, easing: 'cubic-bezier(.34,1.56,.64,1)' });
+    });
+    T.at(D + 7600, () => {
+      const f = svg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350, easing: 'ease', fill: 'forwards' });
+      f.onfinish = () => { mount(); svg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350, easing: 'ease' }); f.cancel(); };
     });
   }
 
-  function reset() {
-    token++; timers.forEach(clearTimeout); timers = [];
-    opened = false; hero.classList.remove('open'); total = 0; count = 0; minutes = 23 * 60 + 38;
-    feed.innerHTML = ''; leaves.innerHTML = ''; vine.setAttribute('stroke-dashoffset', .9); $('.bloom').setAttribute('opacity', 0);
-    [shutter, $('.glow'), $('.neon24'), $('.open-sign'), cursor, ring, $('.bloom'), vine].forEach(el => el.getAnimations().forEach(a => a.cancel()));
-    shutter.style.transform = ''; $('.neon24').classList.remove('on'); $('.open-txt').setAttribute('fill', '#5A4048'); $('.glow').setAttribute('opacity', 0);
-    totalEl.textContent = G().fmt(0);
+  function mount() {
+    svg.closest('.night').classList.remove('is-dawn');
+    token++; timers.forEach(clearTimeout); timers = []; raf.forEach(cancelAnimationFrame); raf = new Set();
+    const t = token;
+    const T = { at(ms, fn) { timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); } };
+    svg.innerHTML = scene();
+    run(svg, T, reduce);
   }
-
-  function play() {
-    reset();
-    if (reduce) { for (let i = 0; i < 10; i++) order(false); openShop(false); return; }
-    A($('.lamp'), [{ transform: 'rotate(-1.5deg)' }, { transform: 'rotate(1.5deg)' }], { duration: 2200, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
-    $('.lamp').style.transformBox = 'fill-box'; $('.lamp').style.transformOrigin = '50% 0%';
-    at(700, () => clickAt(lock, () => openShop(true)));
-    const tick = () => { order(true); at(1400 + (count % 3) * 300, tick); };
-    at(2500, tick);
-  }
-
-  window.addEventListener('resize', () => { if (opened) { shutter.getAnimations().forEach(a => a.cancel()); shutter.style.transform = `translateY(${target()}px)`; } });
-  $('.inside').addEventListener('click', play);
-  lock.addEventListener('click', play);
-  document.addEventListener('cg:city', () => { if (!opened) return; [...feed.children].forEach(li => li.remove()); total = 0; count = 0; minutes = 23 * 60 + 38; totalEl.textContent = G().fmt(0); });
-  play();
+  const mq = matchMedia('(max-width:899px)');
+  const frame = () => { svg.setAttribute('viewBox', mq.matches ? '620 -150 640 1130' : '0 0 1600 900'); svg.setAttribute('preserveAspectRatio', 'xMidYMax slice'); };
+  frame(); mq.addEventListener('change', frame);
+  svg.addEventListener('click', mount);
+  document.addEventListener('cg:city', mount);
+  mount();
 })();
 </script>
 <script>
 (() => {
   /* ===== Phone action bar: hidden while the hero's buttons are on screen, shown once they scroll away, tucked away again over the quote form and footer. ===== */
-  const bar = document.querySelector('.mbar'), cta = document.querySelector('.shut .hero-cta');
+  const bar = document.querySelector('.mbar'), cta = document.querySelector('.night .hero-cta');
   if (!bar || !cta || !('IntersectionObserver' in window)) { bar && bar.classList.add('show'); return; }
   const seen = { cta: true, order: false, foot: false };
   let shone = false;
