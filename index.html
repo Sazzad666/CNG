@@ -493,36 +493,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   .ppl svg,.v4-load{transition:none}
 }
 
-/* ---------- HERO: a day in 10 seconds ---------- */
-.hero-art.hp{aspect-ratio:auto;display:flex;flex-direction:column;cursor:pointer}
-.hp-scene{position:relative}
-.hp-svg{width:100%;height:auto;display:block;border:2.5px solid var(--ink);border-radius:22px;background:#BFE6FF;box-shadow:6px 6px 0 var(--ink)}
-.hp-cap{margin:16px 0 0;min-height:46px;display:flex;justify-content:center;align-items:flex-start;pointer-events:none}
-.hp-cap span{background:var(--ink);color:#fff;font:700 clamp(15px,1.5vw,18px)/1.3 var(--body);padding:10px 18px;border-radius:999px;text-align:center;max-width:100%;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-.hp-cap span:empty{display:none}
-.hp-lock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding:4% 5% 0;pointer-events:none;opacity:0}
-.lock-time{font:800 clamp(30px,5.2vw,62px)/1 var(--display);color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.3)}
-.lock-sub{color:#DCE4F2;font:600 clamp(13px,1.3vw,16px)/1.2 var(--body);margin:4px 0 10px}
-.lock-list{list-style:none;margin:0;padding:0;width:min(100%,460px);display:grid;gap:8px}
-.nt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:1px 12px;align-items:center;background:rgba(255,255,255,.96);border:2.5px solid var(--ink);border-radius:16px;padding:9px 14px 10px 10px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-.nt i{grid-row:span 3;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;border:2px solid var(--ink)}
-.nt i svg{width:22px;height:22px}
-.nt .app{display:flex;justify-content:space-between;gap:8px;font:600 13px/1.2 var(--body);color:var(--ink-2)}
-.nt b{font:800 17px/1.2 var(--display);color:var(--ink)}
-.nt .body{font:500 15px/1.3 var(--body);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lock-count{margin-top:12px;background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:7px 16px;font:800 clamp(14px,1.4vw,18px)/1 var(--display)}
-.lock-count:empty{display:none}
-@media (max-width:560px){
-  .hp-lock{padding-top:3%}
-  .lock-sub{display:none}
-  .lock-time{margin-bottom:6px}
-  .lock-list{gap:5px}
-  .nt{grid-template-columns:28px minmax(0,1fr);gap:0 8px;padding:5px 9px 6px 6px;border-radius:12px;border-width:2px}
-  .nt i{width:28px;height:28px;border-radius:8px}.nt i svg{width:16px;height:16px}
-  .nt .app{font-size:10.5px}.nt b{font-size:13px}.nt .body{font-size:11.5px}
-  .lock-count{margin-top:6px;padding:5px 12px;font-size:12px;border-width:2px}
-}
-
 /* ---------- COUSIN: a four-panel comic ---------- */
 .saga{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:start}
 .panel{position:relative;margin:0;background:var(--bg);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column}
@@ -598,6 +568,80 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 .sec > .wrap{position:relative;z-index:1}
 @media (max-width:860px){.dz:nth-of-type(n+2){display:none}}
 @media (prefers-reduced-motion:reduce){.hx-strike{display:none}}
+
+/* ---------- Sunny market palette: yellow owns the hero and the big bands, ink carries text, green carries the main action ---------- */
+:root{--paper:#FFF6DA;--paper-2:#FFE9A8;--line:#EBD9A6;--pink:#FF5A8A;--orange:#FF8A1F}
+.head{background:rgba(255,246,218,.96)}
+body::before{background:var(--paper)}
+.hero{background:var(--yellow)}
+.hero .eyebrow{color:var(--ink)}
+.hero .eyebrow::before{background:var(--pink)}
+.hero .lede{color:#3D3520}
+.hero .city > span{color:var(--ink)}
+.amp{color:var(--pink)}
+.logo .grow{color:var(--green)}
+.brandfoot .logo .grow{color:var(--yellow)}
+
+/* ---------- hero layout: the scene sits right beside the changing word ---------- */
+.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center}
+.hero-grid > .hero-copy{display:contents}
+.hero-copy > *{grid-column:1}
+.hv{grid-column:2;grid-row:1 / span 6;justify-self:center;width:min(470px,100%)}
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .hv{grid-column:1;grid-row:auto;width:min(276px,74vw);margin:2px auto 10px}
+  .hero .eyebrow{display:none}
+  .hv-meta{margin-top:12px;gap:4px 10px}.hv-pause{min-height:40px}.hv-seen{display:none}
+  .hero-copy > .eyebrow{order:1}.hero-copy > h1{order:2}.hv{order:3}.hero-copy > .hero-cta{order:4;margin-top:4px}.hero-copy > .lede{order:5;margin-top:16px}.hero-copy > .city{order:6}
+  .hero .lede{margin-top:0}
+}
+
+/* ---------- the scene sticker ---------- */
+.hv{position:relative;--hv-bg:#1E2A52}
+.hv-frame{display:block;width:100%;aspect-ratio:1;padding:0;border:3px solid var(--ink);border-radius:32px;overflow:hidden;background:var(--hv-bg);box-shadow:8px 8px 0 var(--ink);cursor:pointer;transition:transform .16s var(--ease-out),box-shadow .16s var(--ease-out)}
+.hv-frame:active{transform:translate(3px,3px);box-shadow:5px 5px 0 var(--ink)}
+@media (hover:hover) and (pointer:fine){.hv-frame:hover{transform:translate(-2px,-2px) rotate(-.6deg);box-shadow:10px 10px 0 var(--ink)}}
+.hv-svg{display:block;width:100%;height:100%}
+.hv-toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:min(88%,330px);display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:10px;align-items:center;background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:8px 12px 8px 8px;box-shadow:0 8px 18px rgba(28,26,23,.25);opacity:0;pointer-events:none}
+.hv-toast i{width:38px;height:38px;border-radius:11px;background:var(--yellow);border:2px solid var(--ink);display:grid;place-items:center}
+.hv-toast i svg{width:30px;height:30px}
+.hv-toast span{display:grid;line-height:1.2;min-width:0}
+.hv-toast b{font:800 15px/1.15 var(--display);color:var(--ink)}
+.hv-toast em{font:500 13px/1.2 var(--body);font-style:normal;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hv-toast strong{font:800 17px/1 var(--display);color:var(--green);font-variant-numeric:tabular-nums}
+.hv-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin-top:16px}
+.hv-count{font:800 clamp(17px,1.6vw,20px)/1.2 var(--display);color:var(--ink)}
+.hv-count b{display:inline-block;min-width:1.4em;font-variant-numeric:tabular-nums;color:var(--green)}
+.hv-pause{min-height:44px;padding:0 14px;border-radius:999px;border:2px solid var(--ink);background:var(--paper);font:700 14px/1 var(--body);cursor:pointer}
+.hv-seen{width:100%;font:600 14px/1.35 var(--body);color:#3D3520}
+
+/* idle loops, only in the scene on screen, and only while it plays */
+@media (prefers-reduced-motion:no-preference){
+  .sc.on .zz text{animation:hvZ 2.2s ease-in-out infinite}.sc.on .zz text:nth-child(2){animation-delay:.35s}.sc.on .zz text:nth-child(3){animation-delay:.7s}
+  .sc.on .spoon{transform-box:fill-box;transform-origin:0% 100%;animation:hvSpoon .7s ease-in-out infinite alternate}
+  .sc.on .cheer{transform-box:fill-box;transform-origin:50% 100%;animation:hvCheer .45s ease-in-out infinite alternate}
+  .sc.on .six{transform-box:fill-box;transform-origin:center;animation:hvSix .9s ease-in-out infinite alternate}
+  .sc.on .ball{animation:hvBall 1.4s ease-out infinite}
+  .sc.on .cng{animation:hvIdle .16s linear infinite alternate}
+  .sc.on .honk{animation:hvBlink 1s steps(1,end) infinite}
+  .sc.on .steam path{animation:hvSteam 1.8s ease-in-out infinite}.sc.on .steam path:nth-child(2){animation-delay:.6s}
+  .sc.on .sip{transform-box:fill-box;transform-origin:0% 100%;animation:hvSpoon 1.6s ease-in-out infinite alternate}
+  .sc.on .dance{transform-box:fill-box;transform-origin:50% 100%;animation:hvDance .5s ease-in-out infinite alternate}
+  .sc.on .lights circle{animation:hvBlink 1.2s steps(1,end) infinite}.sc.on .lights circle:nth-child(2n){animation-delay:.6s}
+  .sc.on .sleeper{transform-box:fill-box;transform-origin:center bottom;animation:hvBreathe 2.2s ease-in-out infinite}
+  .hv.is-paused .sc *,.hv.is-off .sc *{animation-play-state:paused!important}
+}
+@keyframes hvZ{0%{opacity:0;transform:translateY(8px)}30%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes hvSpoon{from{transform:rotate(0deg)}to{transform:rotate(-14deg)}}
+@keyframes hvCheer{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+@keyframes hvSix{from{transform:scale(1) rotate(-4deg)}to{transform:scale(1.12) rotate(4deg)}}
+@keyframes hvBall{0%{transform:translate(0,0)}100%{transform:translate(60px,-60px);opacity:0}}
+@keyframes hvIdle{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
+@keyframes hvBlink{0%{opacity:1}50%{opacity:.25}}
+@keyframes hvSteam{0%{opacity:0;transform:translateY(6px)}40%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+@keyframes hvDance{from{transform:rotate(-4deg) translateY(0)}to{transform:rotate(4deg) translateY(-6px)}}
+@keyframes hvBreathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
+@media (prefers-reduced-motion:reduce){.hv-frame{transition:none}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -675,7 +719,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 <p class="strip">Free website check-up this month. <a href="#order">Claim yours</a></p>
 <header class="head">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><path d="M7 9h26v5c0 2-1.6 3.4-3.3 3.4S26.4 16 26.4 14c0 2-1.6 3.4-3.3 3.4S19.8 16 19.8 14c0 2-1.6 3.4-3.3 3.4S13.2 16 13.2 14c0 2-1.6 3.4-3.1 3.4S7 16 7 14z" fill="#E8283F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 20l5.5 14 2.4-5.6 5.6-2.4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 33c0-4 2.4-6.4 6.2-7-.6 4-3 6.4-6.2 7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Click<b class="amp">&amp;</b>Grow</span></a>
+    <a class="logo" href="#top" aria-label="Click and Grow home"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="23" r="19.5" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/><path d="M15 10c-1-3 1-6 4-7" fill="none" stroke="#0E8A62" stroke-width="2.2" stroke-linecap="round"/><path d="M18 4c3-3 8-2 9 1-3 2-7 2-9-1z" fill="#3FB27F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 10v24l6-6 5 9 4-2-5-9h8z" fill="#fff" stroke="#1C1A17" stroke-width="2.2" stroke-linejoin="round"/><circle cx="18.2" cy="20" r="1.5" fill="#1C1A17"/><circle cx="22" cy="22.6" r="1.5" fill="#1C1A17"/><path d="M17.2 25.2q2.6 2.2 5.4.4" fill="none" stroke="#1C1A17" stroke-width="1.5" stroke-linecap="round"/><circle cx="31" cy="11" r="2.6" fill="#FF5A8A" stroke="#1C1A17" stroke-width="1.2"/></svg><span>Click<b class="amp">&amp;</b><span class="grow">Grow</span></span></a>
     <nav aria-label="Main"><ul><li><a href="#menu">Services</a></li><li><a href="#packs">Prices</a></li><li><a href="#route">How it works</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
     <div class="acts">
       <a class="seats-chip" href="#seats"><i aria-hidden="true"></i><span data-seats-chip>2 seats left this month</span></a>
@@ -689,10 +733,10 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   <!-- ================= HERO ================= -->
   <section class="hero" aria-labelledby="t-hero">
     <div class="wrap hero-grid">
-      <div>
+      <div class="hero-copy">
         <p class="eyebrow" data-city-text="eyebrow">Websites, online shops and ads for Dhaka businesses</p>
         <h1 id="t-hero">Your website sells while you <span class="hx-swap" aria-hidden="true">sleep</span><span class="sr">sleep</span>.</h1>
-        <p class="lede">Your shop opens at 10. Your website should never close. We build websites and online shops that actually sell, wherever you trade.</p>
+        <p class="lede">We build websites and online shops that take orders day and night, so you can sleep, eat and watch the match in peace.</p>
         <div class="hero-cta">
           <a class="btn btn--green" href="#order">Get my free quote <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn wa" href="https://wa.me/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#wa-ico"/></svg>Chat on WhatsApp</a>
@@ -707,7 +751,21 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
           </div>
         </div>
       </div>
-      <div class="hero-art hp" id="heroStage" title="Click to replay the day"></div>
+      <div class="hv" id="heroStage">
+        <button class="hv-frame" type="button" aria-label="Show the next scene">
+          <svg class="hv-svg" viewBox="0 0 400 400" role="img" aria-label="The shop owner gets on with life, sleeping, eating, watching cricket, stuck in traffic, drinking tea or dancing at a wedding, while the phone keeps taking orders.">
+            <rect class="hv-base" width="400" height="400" fill="#1E2A52"/>
+            <circle class="hv-reveal" cx="200" cy="200" r="290" fill="#1E2A52" style="transform:scale(0)"/>
+            <g class="hv-scenes"></g>
+          </svg>
+        </button>
+        <div class="hv-toast" aria-hidden="true"><i><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="23" r="19.5" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/><path d="M15 10c-1-3 1-6 4-7" fill="none" stroke="#0E8A62" stroke-width="2.2" stroke-linecap="round"/><path d="M18 4c3-3 8-2 9 1-3 2-7 2-9-1z" fill="#3FB27F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 10v24l6-6 5 9 4-2-5-9h8z" fill="#fff" stroke="#1C1A17" stroke-width="2.2" stroke-linejoin="round"/><circle cx="18.2" cy="20" r="1.5" fill="#1C1A17"/><circle cx="22" cy="22.6" r="1.5" fill="#1C1A17"/><path d="M17.2 25.2q2.6 2.2 5.4.4" fill="none" stroke="#1C1A17" stroke-width="1.5" stroke-linecap="round"/><circle cx="31" cy="11" r="2.6" fill="#FF5A8A" stroke="#1C1A17" stroke-width="1.2"/></svg></i><span><b>New order</b><em id="hvItem">2 × Katan silk</em></span><strong id="hvAmt">৳2,400</strong></div>
+        <div class="hv-meta">
+          <p class="hv-count" aria-live="polite">Orders while you <span id="hvWord">sleep</span>: <b id="hvNum">0</b></p>
+          <button class="hv-pause" type="button" aria-pressed="false">Pause</button>
+          <p class="hv-seen" id="hvSeen">1 of 6 seen. Tap the picture for the next one.</p>
+        </div>
+      </div>
     </div>
     <div class="bunting" aria-hidden="true"></div>
   </section>
@@ -1047,7 +1105,7 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 
 <footer class="brandfoot"><div class="wrap">
   <div class="bf-top">
-    <a class="logo big" href="#top" aria-label="Click and Grow, back to top"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#006A4E" stroke="#1C1A17" stroke-width="2.5"/><path d="M7 9h26v5c0 2-1.6 3.4-3.3 3.4S26.4 16 26.4 14c0 2-1.6 3.4-3.3 3.4S19.8 16 19.8 14c0 2-1.6 3.4-3.3 3.4S13.2 16 13.2 14c0 2-1.6 3.4-3.1 3.4S7 16 7 14z" fill="#E8283F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 20l5.5 14 2.4-5.6 5.6-2.4z" fill="#FFFBF2" stroke="#1C1A17" stroke-width="1.8" stroke-linejoin="round"/><path d="M24 33c0-4 2.4-6.4 6.2-7-.6 4-3 6.4-6.2 7z" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Click<b class="amp">&amp;</b>Grow</span></a>
+    <a class="logo big" href="#top" aria-label="Click and Grow, back to top"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="23" r="19.5" fill="#FFC72C" stroke="#1C1A17" stroke-width="2.5"/><path d="M15 10c-1-3 1-6 4-7" fill="none" stroke="#0E8A62" stroke-width="2.2" stroke-linecap="round"/><path d="M18 4c3-3 8-2 9 1-3 2-7 2-9-1z" fill="#3FB27F" stroke="#1C1A17" stroke-width="1.6" stroke-linejoin="round"/><path d="M15 10v24l6-6 5 9 4-2-5-9h8z" fill="#fff" stroke="#1C1A17" stroke-width="2.2" stroke-linejoin="round"/><circle cx="18.2" cy="20" r="1.5" fill="#1C1A17"/><circle cx="22" cy="22.6" r="1.5" fill="#1C1A17"/><path d="M17.2 25.2q2.6 2.2 5.4.4" fill="none" stroke="#1C1A17" stroke-width="1.5" stroke-linecap="round"/><circle cx="31" cy="11" r="2.6" fill="#FF5A8A" stroke="#1C1A17" stroke-width="1.2"/></svg><span>Click<b class="amp">&amp;</b><span class="grow">Grow</span></span></a>
     <p class="tagline">Get found. Get clicked. Grow.</p>
   </div>
   <div class="bf-row">
@@ -1348,226 +1406,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
 </script>
 <script>
 (() => {
-  /* ===== HERO: a shop's day on fast-forward. At night the shutter is down, the street becomes a lock screen, and orders keep arriving. ===== */
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const NS = 'http://www.w3.org/2000/svg';
-  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', INOUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
-  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const stage = $('#heroStage');
-  let token = 0, timers = [];
-  const G = () => window.__cg || { c: 'dhaka', cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
-  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
-  const conv = b => { const c = G().cur; return c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5); };
-  const money = b => G().fmt(conv(b));
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-
-  function mk(tag, attrs = {}, parent, text) {
-    const e = document.createElementNS(NS, tag);
-    for (const k in attrs) e.setAttribute(k, attrs[k]);
-    if (text != null) e.textContent = text;
-    if (parent) parent.appendChild(e);
-    return e;
-  }
-  // Easing on a multi-step effect goes on each step; on the effect it would warp the whole timeline.
-  const A = (el, kf, o = {}) => {
-    if (!el) return null;
-    const opts = Object.assign({ fill: 'both', easing: OUT }, o);
-    if (kf.length > 2 && opts.easing !== 'linear') { kf = kf.map(k => Object.assign({ easing: opts.easing }, k)); opts.easing = 'linear'; }
-    return el.animate(kf, opts);
-  };
-  const stop = el => el && el.getAnimations().forEach(a => a.cancel());
-
-  const SKIN = ['#C98B5E', '#8C5A3C', '#F1C6A0', '#A86F4C'];
-  const SHIRT = ['#FF4F8B', '#13A8A0', '#2F5DFF', '#FFC72C', '#9B6BFF', '#E8283F', '#0E8A62'];
-  const wins = (x0, y0, cols, rows, dx, dy) => { let s = ''; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) s += `<rect x="${x0 + c * dx}" y="${y0 + r * dy}" width="44" height="54"/>`; return s; };
-  const slats = () => { let s = ''; for (let y = 396; y < 612; y += 16) s += `M430 ${y}h240`; return s; };
-
-  const html = () => `<div class="hp-scene"><svg class="hp-svg" viewBox="0 0 1100 780" role="img" aria-label="A shop’s whole day on fast-forward. Customers queue with their phones during the day. At night the shutter closes, and the street turns into a phone lock screen where new orders keep arriving.">
-    <defs><symbol id="hp-p" viewBox="0 0 40 100">
-      <path d="M14 62v34M26 62v34" stroke="#1C1A17" stroke-width="5" stroke-linecap="round"/>
-      <path d="M8 64c0-26 5-38 12-38s12 12 12 38z" fill="currentColor" stroke="#1C1A17" stroke-width="2.5"/>
-      <circle cx="20" cy="13" r="10" fill="var(--skin,#C98B5E)" stroke="#1C1A17" stroke-width="2.5"/>
-      <path d="M28 36l2 14-6 4" fill="none" stroke="var(--skin,#C98B5E)" stroke-width="5" stroke-linecap="round"/>
-      <rect x="21" y="43" width="9" height="15" rx="2" fill="#1C1A17"/><rect x="22.5" y="45" width="6" height="11" rx="1" fill="#9FB4C0"/>
-    </symbol></defs>
-    <rect width="1100" height="780" fill="#BFE6FF"/><rect class="dusk" width="1100" height="780" fill="#FFB38A" opacity="0"/><rect class="night" width="1100" height="780" fill="#1B2440" opacity="0"/>
-    <g class="stars" fill="#FFF7C2" opacity="0"><circle cx="90" cy="90" r="3"/><circle cx="260" cy="60" r="2.5"/><circle cx="360" cy="110" r="3"/><circle cx="760" cy="70" r="2.5"/><circle cx="880" cy="130" r="3"/><circle cx="1010" cy="80" r="2.5"/><circle cx="180" cy="160" r="2"/><circle cx="980" cy="190" r="2"/></g>
-    <g class="sun" style="transform:translate(200px,100px)"><circle r="50" fill="#FFC72C" stroke="#1C1A17" stroke-width="4"/></g>
-    <g class="moon" style="transform:translate(60px,200px)" opacity="0"><circle r="36" fill="#FFF3B0" stroke="#1C1A17" stroke-width="3"/><circle cx="15" cy="-11" r="30" fill="#1B2440"/></g>
-    <g stroke="#1C1A17" stroke-width="4"><rect x="-10" y="210" width="210" height="430" fill="#F4C9A0"/><rect x="200" y="140" width="200" height="500" fill="#C9E6D8"/><rect x="700" y="170" width="200" height="470" fill="#F6D9E2"/><rect x="900" y="250" width="210" height="390" fill="#D7E3F6"/></g>
-    <g fill="#FFFBF2" stroke="#1C1A17" stroke-width="3">${wins(30, 250, 2, 4, 90, 90)}${wins(240, 180, 2, 5, 90, 86)}${wins(730, 210, 2, 4, 90, 90)}${wins(940, 290, 2, 3, 90, 90)}</g>
-    <rect x="410" y="250" width="280" height="390" fill="#FFFBF2" stroke="#1C1A17" stroke-width="4"/>
-    <rect x="392" y="262" width="316" height="96" rx="12" fill="#E8283F" stroke="#1C1A17" stroke-width="4"/>
-    <text x="550" y="308" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="32" fill="#FFC72C" stroke="#1C1A17" stroke-width="1.5" paint-order="stroke">YOUR BUSINESS</text>
-    <text class="signsub" x="550" y="343" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="24" fill="#fff" letter-spacing=".5">OPEN · 10:00 AM</text>
-    <g class="bulbs" fill="#FFC72C"><circle cx="408" cy="278" r="7"/><circle cx="692" cy="278" r="7"/><circle cx="408" cy="342" r="7"/><circle cx="692" cy="342" r="7"/></g>
-    <g class="inside">
-      <rect x="430" y="380" width="240" height="250" fill="#FFE7A3"/>
-      <path d="M440 432h220M440 486h110" stroke="#1C1A17" stroke-width="3"/>
-      <g stroke="#1C1A17" stroke-width="2.5"><rect x="448" y="400" width="24" height="32" fill="#FF4F8B"/><rect x="478" y="408" width="22" height="24" fill="#13A8A0"/><rect x="560" y="402" width="30" height="30" fill="#FFC72C"/><rect x="620" y="406" width="26" height="26" fill="#2F5DFF"/><rect x="450" y="456" width="30" height="30" fill="#0E8A62"/></g>
-      <circle cx="610" cy="500" r="22" fill="#C98B5E" stroke="#1C1A17" stroke-width="3"/><path d="M588 496c0-18 10-26 22-26s22 8 22 26c-6-6-12-9-22-9s-16 3-22 9z" fill="#1C1A17"/>
-      <path d="M582 572c0-34 12-48 28-48s28 14 28 48z" fill="#fff" stroke="#1C1A17" stroke-width="3"/>
-      <rect x="430" y="572" width="240" height="58" fill="#8C5A3C" stroke="#1C1A17" stroke-width="4"/>
-    </g>
-    <rect x="420" y="364" width="260" height="20" rx="6" fill="#6E777C" stroke="#1C1A17" stroke-width="4"/>
-    <g class="shutter" style="transform-origin:550px 382px">
-      <rect x="430" y="380" width="240" height="250" fill="#A7B0B5" stroke="#1C1A17" stroke-width="4"/>
-      <path d="${slats()}" stroke="#7D868B" stroke-width="3"/>
-      <text x="550" y="520" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="28" fill="#5A6368">CLOSED</text>
-    </g>
-    <g class="nwin" fill="#FFD36B" opacity="0"><rect x="30" y="250" width="44" height="54"/><rect x="330" y="266" width="44" height="54"/><rect x="820" y="300" width="44" height="54"/><rect x="940" y="380" width="44" height="54"/></g>
-    <rect x="-10" y="630" width="1120" height="42" fill="#DCCBAA" stroke="#1C1A17" stroke-width="4"/>
-    <rect x="-10" y="672" width="1120" height="120" fill="#454545"/>
-    <path d="M0 728h1100" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="60 50"/>
-    <g class="peds"></g>
-    <rect class="dim" width="1100" height="780" fill="#0B1226" opacity="0" pointer-events="none"/>
-  </svg>
-  <div class="hp-lock"><p class="lock-time">11:42 PM</p><p class="lock-sub">Shutter’s down. The shop isn’t.</p><ol class="lock-list"></ol><p class="lock-count"></p></div></div>
-  <p class="hp-cap" aria-live="polite"><span></span></p>`;
-
-  function person(parent, x, i, flip) {
-    const o = mk('g', { transform: `translate(${x} 516) scale(1.15)` }, parent);
-    const mv = mk('g', {}, o), bob = mk('g', {}, mv);
-    const inner = mk('g', flip ? { transform: 'translate(44 0) scale(-1 1)' } : {}, bob);
-    mk('use', { href: '#hp-p', width: 44, height: 110 }, inner);
-    inner.style.color = SHIRT[i % SHIRT.length]; inner.style.setProperty('--skin', SKIN[i % SKIN.length]);
-    const glow = mk('rect', { x: 24, y: 49, width: 7, height: 12, rx: 1.5, fill: '#5BF09A', opacity: 0 }, inner);
-    return { mv, bob, glow, inner };
-  }
-  const bobbing = p => A(p.bob, [{ transform: 'translateY(0px)' }, { transform: 'translateY(-3px)' }], { duration: 320, iterations: Infinity, direction: 'alternate', easing: 'ease-in-out' });
-  function bubble(parent, x, y, text) {
-    const size = 22, h = 44, w = text.length * size * .58 + 30, g = mk('g', {}, parent);
-    mk('rect', { x: x - w / 2, y: y - h, width: w, height: h, rx: h / 2, fill: '#D7F2E4', stroke: '#1C1A17', 'stroke-width': 3 }, g);
-    mk('text', { x, y: y - 14, 'text-anchor': 'middle', 'font-family': 'Archivo, sans-serif', 'font-weight': 800, 'font-size': size, fill: '#0A4D39' }, g, text);
-    g.style.transformBox = 'fill-box'; g.style.transformOrigin = '50% 100%';
-    A(g, [{ opacity: 0, transform: 'translateY(8px) scale(0.92)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 260 });
-    A(g, [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 900, easing: 'ease', fill: 'forwards' }).onfinish = () => g.remove();
-  }
-  function shutter(r, open, instant) {
-    const sh = $('.shutter', r), ins = $('.inside', r), bulbs = $$('.bulbs circle', r);
-    if (instant) { sh.style.transform = open ? 'scaleY(0.04)' : 'none'; ins.style.opacity = open ? 1 : 0; bulbs.forEach(b => b.style.opacity = open ? 1 : .25); return; }
-    stop(sh); stop(ins);
-    A(sh, open ? [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.04)' }] : [{ transform: 'scaleY(0.04)' }, { transform: 'scaleY(1)' }], { duration: open ? 900 : 700, easing: INOUT });
-    A(ins, open ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: 0 }], { duration: 500, delay: open ? 100 : 300, easing: 'ease' });
-    bulbs.forEach((b, i) => { stop(b); A(b, open ? [{ opacity: .25 }, { opacity: 1 }, { opacity: .4 }, { opacity: 1 }] : [{ opacity: 1 }, { opacity: .25 }], { duration: 500, delay: open ? 550 + i * 80 : 400, easing: 'linear' }); });
-  }
-  function caption(r, text, instant) {
-    const s = $('.hp-cap span', r); if (!s) return;
-    if (instant) { s.textContent = text; return; }
-    const show = () => { s.textContent = text; A(s, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 260 }); };
-    if (s.textContent) A(s, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: 'ease' }).onfinish = show; else show();
-  }
-
-  const BUYER = { dhaka: 'Rahima', london: 'Sarah', dubai: 'Fatima', ny: 'Mike' };
-  const ICON = {
-    bag: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1.5 13h-11z" fill="#fff"/><path d="M9 8c0-5 6-5 6 0" fill="none" stroke="#fff" stroke-width="2"/></svg>',
-    pay: '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3" fill="none" stroke="#fff" stroke-width="2.2"/><path d="M3 10h18" stroke="#fff" stroke-width="2.2"/></svg>',
-    star: '<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z" fill="#fff"/></svg>'
-  };
-  const NOTES = () => {
-    const bd = G().c === 'dhaka';
-    return [
-      { t: '11:42 PM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1043', body: `2 × Katan silk · ${money(2400)}` },
-      { t: '1:15 AM', app: bd ? 'bKash' : 'Card payments', icon: 'pay', bg: bd ? '#E2136E' : '#2F5DFF', title: 'Payment received', body: `${money(2400)} from ${BUYER[G().c] || 'Rahima'}` },
-      { t: '3:08 AM', app: 'Your shop', icon: 'bag', bg: '#006A4E', title: 'New order #1044', body: `Cotton lawn, 5 yards · ${money(2250)}` },
-      { t: '6:30 AM', app: 'Google', icon: 'star', bg: '#F2A600', title: 'New 5★ review', body: '“Ordered at 3am. It arrived by lunch!”' }
-    ];
-  };
-  const noteHTML = n => `<li class="nt"><i style="background:${n.bg}" aria-hidden="true">${ICON[n.icon]}</i><span class="app">${esc(n.app)}<time>${n.t}</time></span><b>${esc(n.title)}</b><span class="body">${esc(n.body)}</span></li>`;
-
-  function run(r, T, instant) {
-    const C = 13000;
-    const tt = h => (h - 10) / 24 * C;
-    const at = (h, fn) => T.at(tt(h), fn);
-    const sub = $('.signsub', r), peds = $('.peds', r), lock = $('.hp-lock', r), list = $('.lock-list', r), ltime = $('.lock-time', r), lcount = $('.lock-count', r);
-    const maxCards = matchMedia('(max-width:560px)').matches ? 3 : 4;
-    const clock = h => { h = ((h % 24) + 24) % 24; const hh = Math.floor(h), mm = Math.floor((h - hh) * 6) * 10; return `${((hh + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${hh < 12 ? 'AM' : 'PM'}`; };
-
-    if (instant) {
-      shutter(r, false, true);
-      ['.night', '.stars', '.nwin'].forEach(s => $(s, r).setAttribute('opacity', 1));
-      $('.dim', r).setAttribute('opacity', .55); $('.sun', r).setAttribute('opacity', 0);
-      const moon = $('.moon', r); moon.setAttribute('opacity', 1); moon.style.transform = 'translate(820px,84px)';
-      sub.textContent = 'CLOSED · 6:30 AM';
-      list.innerHTML = NOTES().slice(4 - maxCards).reverse().map(noteHTML).join('');
-      ltime.textContent = '6:30 AM'; lcount.textContent = '3 orders while you slept'; lock.style.opacity = 1;
-      caption(r, 'Your shop opens at 10. Your website never closes.', true);
-      return;
-    }
-
-    shutter(r, false, true);
-    const t0 = performance.now();
-    T.every(130, () => { const h = 10 + ((performance.now() - t0) % C) / C * 24, hm = h % 24; sub.textContent = (hm >= 21 || hm < 10 ? 'CLOSED · ' : 'OPEN · ') + clock(h); });
-    A($('.sun', r), [{ transform: 'translate(200px,100px)' }, { transform: 'translate(550px,62px)', offset: .35 }, { transform: 'translate(900px,100px)', offset: .75 }, { transform: 'translate(1070px,340px)' }], { duration: tt(19.5), easing: 'linear' });
-    A($('.dusk', r), [{ opacity: 0 }, { opacity: .85 }, { opacity: 0 }], { duration: tt(20.5) - tt(17), delay: tt(17), easing: 'ease-in-out' });
-    const nightKf = v => [{ opacity: 0 }, { opacity: v, offset: .14 }, { opacity: v, offset: .86 }, { opacity: 0 }];
-    [$('.night', r), $('.stars', r), $('.nwin', r)].forEach(el => A(el, nightKf(1), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' }));
-    A($('.dim', r), nightKf(.55), { duration: tt(31.5) - tt(19.5), delay: tt(19.5), easing: 'ease-in-out' });
-    A($('.moon', r), [{ opacity: 0, transform: 'translate(80px,190px)' }, { opacity: 1, transform: 'translate(260px,100px)', offset: .15 }, { opacity: 1, transform: 'translate(820px,84px)', offset: .85 }, { opacity: 0, transform: 'translate(1040px,190px)' }], { duration: tt(30.5) - tt(20), delay: tt(20), easing: 'linear' });
-
-    caption(r, '10 AM. You pull up the shutter.');
-    T.at(150, () => shutter(r, true));
-    const walk = (i, from, to, dur, delay, after) => {
-      const p = person(peds, 0, i, to < from); bobbing(p);
-      A(p.mv, [{ transform: `translateX(${from}px)`, opacity: 0 }, { opacity: 1, offset: .1 }, { transform: `translateX(${to}px)`, opacity: 1 }], { duration: dur, delay, easing: 'linear' });
-      T.at(delay + dur, () => { stop(p.bob); after && after(p); });
-      return p;
-    };
-    const vanish = p => A(p.mv, [{ opacity: 1 }, { opacity: 0 }], { duration: 250, easing: 'ease' });
-    walk(0, -60, 470, 2000, 300, vanish);
-    walk(1, 1160, 600, 1800, 700, vanish);
-    at(13, () => caption(r, 'Afternoon. A queue, and everyone’s on their phone.'));
-    const spots = [330, 385, 680, 735, 275, 790];
-    const crowd = spots.map((x, i) => walk(i + 2, x < 550 ? -80 - i * 40 : 1180 + i * 40, x, 1500, tt(12.5) + i * 140, p => A(p.glow, [{ opacity: 0 }, { opacity: .95 }], { duration: 200, easing: 'ease' })));
-    [13.6, 14.6, 15.6, 16.6].forEach((h, k) => at(h, () => bubble(crowd[[0, 3, 1, 2][k]].mv, 22, -6, k % 2 ? 'Paid!' : 'Ordered!')));
-    at(18.4, () => crowd.forEach((p, i) => {
-      const x = spots[i], away = x < 550 ? -120 : 1220;
-      stop(p.mv); p.inner.setAttribute('transform', x < 550 ? 'translate(44 0) scale(-1 1)' : ''); bobbing(p);
-      A(p.mv, [{ transform: `translateX(${x}px)` }, { transform: `translateX(${away}px)` }], { duration: 1400, delay: i * 60, easing: 'linear' });
-    }));
-    at(21, () => { shutter(r, false); caption(r, '9 PM. You lock up and go home.'); });
-
-    // Night: the dimmed street becomes a lock screen; each order lands on top and pushes the rest down together.
-    let n = 0;
-    at(22.4, () => {
-      caption(r, 'Your website is still open.');
-      ltime.textContent = '11:30 PM'; lcount.textContent = '';
-      A(lock, [{ opacity: 0 }, { opacity: 1 }], { duration: 400, easing: 'ease' });
-      A(ltime, [{ opacity: 0, transform: 'scale(0.96)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 400 });
-    });
-    NOTES().forEach((note, k) => at([23.7, 25.2, 27.1, 29.5][k], () => {
-      const before = new Map($$('.nt', list).map(el => [el, el.getBoundingClientRect().top]));
-      list.insertAdjacentHTML('afterbegin', noteHTML(note));
-      const fresh = list.firstElementChild;
-      const extra = $$('.nt', list)[maxCards];
-      if (extra) { extra.remove(); before.delete(extra); }
-      before.forEach((top, el) => { const dy = top - el.getBoundingClientRect().top; if (dy) A(el, [{ transform: `translateY(${dy}px)` }, { transform: 'translateY(0px)' }], { duration: 320 }); });
-      A(fresh, [{ opacity: 0, transform: 'translateY(-14px) scale(0.97)' }, { opacity: 1, transform: 'translateY(0px) scale(1)' }], { duration: 360 });
-      ltime.textContent = note.t;
-      if (k < 3) { n++; lcount.textContent = `${n} order${n > 1 ? 's' : ''} while you slept`; if (n === 1) A(lcount, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0px)' }], { duration: 300 }); }
-      if (k === 1) caption(r, 'After midnight. The orders keep coming.');
-      if (k === 3) caption(r, 'And a 5★ review before breakfast.');
-    }));
-    at(31.2, () => { caption(r, 'Your shop opens at 10. Your website never closes.'); A(lock, [{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'ease' }); });
-    T.at(C + 1200, () => mount(true));
-  }
-
-  function mount(sync) {
-    const t = ++token; timers.forEach(clearTimeout); timers = [];
-    const T = {
-      at(ms, fn) { timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); },
-      every(ms, fn) { const id = setInterval(() => { if (t === token) fn(); else clearInterval(id); }, ms); timers.push(id); }
-    };
-    const go = () => { if (t !== token) return; stage.innerHTML = html(); run(stage, T, reduce); };
-    if (sync) go(); else { stage.innerHTML = ''; requestAnimationFrame(go); }
-  }
-  stage.addEventListener('click', () => mount());
-  document.addEventListener('cg:city', () => mount());
-  mount();
-})();
-</script>
-<script>
-(() => {
   /* ===== Page-wide entrances: headings, the cousin comic and the closing shutter. Each plays once, the first time it scrolls into view. ===== */
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -1632,61 +1470,6 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const rnd = (a, b) => a + Math.random() * (b - a);
   const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
-
-  /* ---------- 1. the hero headline swaps its last word, in a random order with a random effect ---------- */
-  const sw = $('.hx-swap');
-  if (sw) {
-    const WORDS = ['sleep', 'eat biryani', 'pray', 'watch cricket', 'sit in traffic', 'drink cha', 'nap after lunch', 'go to a wedding'];
-    let bag = [], last = 'sleep', lastFx = '', timer = 0, paused = false, onScreen = true, busy = false;
-    const next = () => { if (!bag.length) bag = WORDS.filter(w => w !== last).sort(() => Math.random() - .5); return bag.pop(); };
-    const letters = w => { sw.textContent = ''; return [...w].map(c => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); return s; }); };
-    const plain = w => { sw.classList.remove('hx-hand'); sw.textContent = w; };
-    const FX = {
-      scramble(w, done) {
-        plain(w); const pool = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghkmnpqrstuvwxyz৳#%&*';
-        let f = 0; const total = 14;
-        const id = setInterval(() => {
-          f++; const keep = Math.floor(w.length * f / total);
-          sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join('');
-          if (f >= total) { clearInterval(id); sw.textContent = w; done(); }
-        }, 38);
-      },
-      slide(w, done) {
-        A(sw, [{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(-60%)', opacity: 0 }], { duration: 220, easing: 'ease-in-out' }).onfinish = () => {
-          plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }).onfinish = done;
-        };
-      },
-      drop(w, done) {
-        sw.classList.remove('hx-hand');
-        const ls = letters(w);
-        ls.forEach((s, i) => A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: i * 32, easing: 'cubic-bezier(.34,1.56,.64,1)' }));
-        setTimeout(done, 420 + ls.length * 32);
-      },
-      strike(w, done) {
-        const bar = document.createElement('span'); bar.className = 'hx-strike'; sw.appendChild(bar);
-        A(bar, [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 260 }).onfinish = () => {
-          sw.classList.add('hx-hand'); sw.textContent = w;
-          A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 300 }).onfinish = done;
-        };
-      }
-    };
-    const swap = () => {
-      if (paused || !onScreen || busy) { schedule(); return; }
-      busy = true;
-      const w = next(); last = w;
-      const names = Object.keys(FX).filter(n => n !== lastFx); const fx = names[Math.floor(Math.random() * names.length)]; lastFx = fx;
-      FX[fx](w, () => { busy = false; schedule(); });
-    };
-    const schedule = () => { clearTimeout(timer); timer = setTimeout(swap, rnd(2200, 3200)); };
-    if (!reduce) {
-      const h1 = sw.closest('h1');
-      h1.addEventListener('mouseenter', () => { paused = true; });
-      h1.addEventListener('mouseleave', () => { paused = false; });
-      new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; }).observe(h1);
-      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
-      schedule();
-    }
-  }
 
   /* ---------- 2. statement band: each word fills in as it scrolls past, in reading order ---------- */
   const band = $('.sx p');
@@ -1765,5 +1548,159 @@ footer{padding-block:56px 110px;font-size:14px;color:var(--ink-2)}
     addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; paint(); }); } }, { passive: true });
     paint();
   }
+})();
+</script>
+<script>
+(() => {
+  /* ===== HERO: one little scene per headline word. The word and the scene change together; the phone keeps taking orders in every scene. ===== */
+  const root = document.getElementById('heroStage'), sw = document.querySelector('.hx-swap');
+  if (!root || !sw) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const $ = s => root.querySelector(s), $$ = s => [...root.querySelectorAll(s)];
+  const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const G = () => window.__cg || { cur: 'bdt', fmt: n => '৳' + n.toLocaleString('en-IN') };
+  const RATE = { bdt: 1, gbp: .008, aed: .036, usd: .01 };
+  const money = b => { const c = G().cur; return G().fmt(c === 'bdt' ? b : Math.max(5, Math.round(b * RATE[c] / 5) * 5)); };
+
+  /* ---------- drawing ---------- */
+  const INK = '#1C1A17', SKIN = '#C98B5E';
+  const head = (x, y, eyes = 'open', mouth = 'smile') => {
+    const e = eyes === 'closed' ? `<path d="M${x - 16} ${y + 2}q5 4 10 0M${x + 6} ${y + 2}q5 4 10 0" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/>`
+      : eyes === 'happy' ? `<path d="M${x - 16} ${y + 3}q5 -5 10 0M${x + 6} ${y + 3}q5 -5 10 0" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/>`
+      : `<circle cx="${x - 10}" cy="${y + 2}" r="3.8" fill="${INK}"/><circle cx="${x + 10}" cy="${y + 2}" r="3.8" fill="${INK}"/>`;
+    const m = mouth === 'open' ? `<ellipse cx="${x}" cy="${y + 21}" rx="7" ry="6" fill="${INK}"/>` : mouth === 'flat' ? `<path d="M${x - 7} ${y + 21}h14" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/>` : `<path d="M${x - 8} ${y + 19}q8 7 16 0" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/>`;
+    return `<circle cx="${x}" cy="${y}" r="30" fill="${SKIN}" stroke="${INK}" stroke-width="4"/><path d="M${x - 30} ${y - 4}c2-22 16-30 30-30s28 8 30 30c-8-10-18-14-30-14s-22 4-30 14z" fill="${INK}"/>${e}<path d="M${x - 13} ${y + 12}q6.5-5 13 0q6.5-5 13 0" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round"/>${m}`;
+  };
+  const body = (x, y, h = 100) => `<path d="M${x - 42} ${y + 28 + h}C${x - 42} ${y + 60} ${x - 28} ${y + 26} ${x} ${y + 26}S${x + 42} ${y + 60} ${x + 42} ${y + 28 + h}z" fill="#fff" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>`;
+  const phone = (x, y, r = 0) => `<g class="ph" transform="translate(${x} ${y}) rotate(${r})"><g class="ph-buzz" opacity="0"><path d="M-24-12l-8-5M-25 4h-9M24-12l8-5M25 4h9" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></g><rect x="-14" y="-24" width="28" height="48" rx="6" fill="${INK}"/><rect class="ph-s" x="-10" y="-18" width="20" height="34" rx="3" fill="#5A6B7A"/></g>`;
+  const arm = (x1, y1, x2, y2, cls = '') => `<path class="${cls}" d="M${x1} ${y1}L${x2} ${y2}" stroke="${SKIN}" stroke-width="13" stroke-linecap="round"/>`;
+
+  const SCENES = [
+    { word: 'sleep', bg: '#1E2A52', svg: `
+      <g fill="#FFF3B0"><circle cx="40" cy="50" r="3"/><circle cx="92" cy="112" r="2.5"/><circle cx="168" cy="40" r="3"/><circle cx="236" cy="96" r="2.5"/><circle cx="380" cy="160" r="2.5"/></g>
+      <circle cx="322" cy="82" r="34" fill="#FFE27A"/><circle cx="338" cy="70" r="30" fill="#1E2A52"/>
+      <rect x="30" y="196" width="28" height="122" rx="6" fill="#8C5A3C" stroke="${INK}" stroke-width="4"/><rect x="30" y="290" width="284" height="26" rx="6" fill="#8C5A3C" stroke="${INK}" stroke-width="4"/>
+      <rect x="48" y="260" width="262" height="34" rx="10" fill="#fff" stroke="${INK}" stroke-width="4"/>
+      <ellipse cx="98" cy="250" rx="42" ry="18" fill="#fff" stroke="${INK}" stroke-width="4"/>
+      <g class="sleeper">${head(104, 230, 'closed', 'flat')}</g>
+      <path d="M132 300C132 240 292 236 306 262L306 300z" fill="#0E8A62" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>
+      <g class="zz" font-family="Baloo 2, sans-serif" font-weight="800" fill="#fff"><text x="146" y="196" font-size="24">z</text><text x="168" y="172" font-size="30">z</text><text x="194" y="144" font-size="38">Z</text></g>
+      <rect x="320" y="256" width="66" height="64" rx="6" fill="#8C5A3C" stroke="${INK}" stroke-width="4"/>${phone(352, 230, -8)}` },
+    { word: 'eat biryani', bg: '#FF8A1F', svg: `
+      ${body(200, 148)}${head(200, 148, 'happy', 'open')}
+      <g class="spoon">${arm(238, 228, 270, 176)}<path d="M270 176L286 146" stroke="${INK}" stroke-width="5" stroke-linecap="round"/><ellipse cx="289" cy="141" rx="9" ry="6" fill="#E9EEF0" stroke="${INK}" stroke-width="3"/></g>
+      ${arm(160, 228, 140, 262)}
+      <rect x="30" y="282" width="340" height="22" rx="4" fill="#8C5A3C" stroke="${INK}" stroke-width="4"/><path d="M60 304v66M340 304v66" stroke="${INK}" stroke-width="6"/>
+      <ellipse cx="188" cy="284" rx="104" ry="18" fill="#fff" stroke="${INK}" stroke-width="4"/>
+      <path d="M104 282C112 240 262 238 272 282z" fill="#F6D98B" stroke="${INK}" stroke-width="4"/>
+      <ellipse cx="214" cy="262" rx="16" ry="12" fill="#fff" stroke="${INK}" stroke-width="3"/><circle cx="214" cy="262" r="6" fill="#FFC72C"/><ellipse cx="156" cy="266" rx="17" ry="11" fill="#C98B5E" stroke="${INK}" stroke-width="3"/>
+      ${phone(334, 258, -12)}` },
+    { word: 'watch cricket', bg: '#13A8A0', svg: `
+      <rect x="34" y="56" width="186" height="126" rx="12" fill="${INK}"/><rect x="44" y="66" width="166" height="106" rx="6" fill="#2E9E5B"/><rect x="118" y="100" width="20" height="66" fill="#E8D59A"/>
+      <circle class="ball" cx="128" cy="120" r="6" fill="#fff" stroke="${INK}" stroke-width="2"/>
+      <text class="six" x="127" y="98" text-anchor="middle" font-family="Baloo 2, sans-serif" font-weight="800" font-size="34" fill="#FFC72C" stroke="${INK}" stroke-width="5" paint-order="stroke">SIX!</text>
+      <path d="M127 182v30M96 214h62" stroke="${INK}" stroke-width="6" stroke-linecap="round"/>
+      <rect x="196" y="214" width="190" height="52" rx="16" fill="#FF5A8A" stroke="${INK}" stroke-width="4"/>
+      ${body(290, 196, 96)}${head(290, 196, 'happy', 'open')}
+      <g class="cheer">${arm(262, 248, 236, 188)}${arm(318, 248, 344, 188)}</g>
+      <rect x="190" y="258" width="202" height="64" rx="16" fill="#FF5A8A" stroke="${INK}" stroke-width="4"/>${phone(372, 236, 10)}` },
+    { word: 'sit in traffic', bg: '#FF5A8A', svg: `
+      <rect y="318" width="400" height="82" fill="#454545"/><path d="M0 360h400" stroke="#F3F0E8" stroke-width="6" stroke-dasharray="40 30"/>
+      <g class="jam"><rect x="8" y="236" width="128" height="74" rx="14" fill="#FFC72C" stroke="${INK}" stroke-width="4"/><rect x="24" y="250" width="96" height="26" rx="6" fill="#BFD9E6" stroke="${INK}" stroke-width="3"/><circle cx="34" cy="314" r="14" fill="${INK}"/><circle cx="110" cy="314" r="14" fill="${INK}"/><rect x="14" y="286" width="16" height="10" rx="3" fill="#E8283F"/><rect x="114" y="286" width="16" height="10" rx="3" fill="#E8283F"/></g>
+      <g class="honk" font-family="Baloo 2, sans-serif" font-weight="800" fill="#fff"><text x="38" y="214" font-size="30">PEEP!</text></g>
+      <g class="cng"><path d="M154 318V244c0-46 26-62 66-64h70c46 4 62 30 70 60l14 34v44z" fill="#2E8B57" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M196 268v-30c2-26 16-36 40-38h38v68z" fill="#1E2A52" opacity=".85"/>
+      ${head(244, 236, 'open', 'flat')}${phone(312, 262, -6)}
+      <circle cx="188" cy="322" r="20" fill="#333" stroke="${INK}" stroke-width="4"/><circle cx="338" cy="322" r="20" fill="#333" stroke="${INK}" stroke-width="4"/></g>` },
+    { word: 'drink cha', bg: '#0E8A62', svg: `
+      ${body(212, 150)}${head(212, 150, 'closed', 'smile')}
+      <g class="sip">${arm(250, 236, 262, 196)}<path d="M246 168h30l-4 30h-22z" fill="#fff" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/><path d="M276 176c10 0 10 14 0 14" fill="none" stroke="${INK}" stroke-width="4"/></g>
+      <g class="steam" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M254 156c-6-10 6-14 0-24"/><path d="M268 156c-6-10 6-14 0-24"/></g>
+      <rect x="30" y="282" width="340" height="26" rx="4" fill="#8C5A3C" stroke="${INK}" stroke-width="4"/>
+      <path d="M70 282v-28c0-16 12-24 28-24s28 8 28 24v28z" fill="#C0C8CC" stroke="${INK}" stroke-width="4"/><path d="M126 252c16-2 22-12 24-22" fill="none" stroke="${INK}" stroke-width="4"/><path d="M88 230h20" stroke="${INK}" stroke-width="5"/>
+      ${phone(334, 258, -10)}` },
+    { word: 'go to a wedding', bg: '#E2136E', svg: `
+      <path d="M0 42Q200 96 400 42" fill="none" stroke="${INK}" stroke-width="2.5"/>
+      <g class="lights" stroke="${INK}" stroke-width="2"><circle cx="40" cy="54" r="8" fill="#FFC72C"/><circle cx="110" cy="70" r="8" fill="#fff"/><circle cx="180" cy="76" r="8" fill="#13A8A0"/><circle cx="250" cy="74" r="8" fill="#FFC72C"/><circle cx="320" cy="64" r="8" fill="#fff"/><circle cx="380" cy="50" r="8" fill="#13A8A0"/></g>
+      <g fill="#FFC72C"><rect x="60" y="140" width="10" height="5" transform="rotate(30 65 142)"/><rect x="330" y="170" width="10" height="5" transform="rotate(-20 335 172)"/><rect x="90" y="250" width="10" height="5" fill="#fff"/><rect x="320" y="110" width="10" height="5" fill="#fff"/></g>
+      <g class="dance">${body(200, 166)}${head(200, 166, 'happy', 'open')}${arm(170, 232, 138, 166)}${arm(230, 232, 262, 166)}
+      <g fill="#FF8A1F" stroke="${INK}" stroke-width="2"><circle cx="176" cy="212" r="8"/><circle cx="186" cy="226" r="8"/><circle cx="200" cy="232" r="8"/><circle cx="214" cy="226" r="8"/><circle cx="224" cy="212" r="8"/></g>
+      ${phone(228, 278, 14)}</g>` }
+  ];
+  const ORDERS = [['2 × Katan silk', 2400], ['Cotton lawn, 5 yards', 2250], ['Gift box', 1500], ['Silk dupatta', 1200], ['3 × Lawn suits', 3600], ['Muslin scarf', 900], ['Bedsheet set', 1750], ['Kids’ kurta', 850]];
+
+  const svg = $('.hv-svg'), base = $('.hv-base'), reveal = $('.hv-reveal'), layer = $('.hv-scenes');
+  layer.innerHTML = SCENES.map((s, i) => `<g class="sc" data-i="${i}" opacity="0">${s.svg}</g>`).join('');
+  const groups = $$('.sc');
+  const toast = $('.hv-toast'), tItem = $('#hvItem'), tAmt = $('#hvAmt'), word = $('#hvWord'), num = $('#hvNum'), seenEl = $('#hvSeen'), pauseBtn = $('.hv-pause');
+  let cur = -1, count = 0, ordIx = 0, timers = [], token = 0, paused = false, onScreen = true, lastFx = '';
+  const seen = new Set();
+  const at = (ms, fn) => { const t = token; timers.push(setTimeout(() => { if (t === token) fn(); }, ms)); };
+
+  /* the headline word's entrance: a different effect each time */
+  const plain = w => { sw.classList.remove('hx-hand'); sw.textContent = w; };
+  const FX = {
+    scramble(w) { plain(w); const pool = 'abcdefghkmnpqrstuvwxyz৳#%&*'; let f = 0; const id = setInterval(() => { f++; const keep = Math.floor(w.length * f / 12); sw.textContent = [...w].map((c, i) => c === ' ' || i < keep ? c : pool[Math.floor(Math.random() * pool.length)]).join(''); if (f >= 12) { clearInterval(id); sw.textContent = w; } }, 34); },
+    slide(w) { plain(w); A(sw, [{ transform: 'translateY(70%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: 380 }); },
+    drop(w) { sw.classList.remove('hx-hand'); sw.textContent = ''; [...w].forEach((c, i) => { const s = document.createElement('span'); s.className = 'hx-ch'; s.textContent = c; sw.appendChild(s); A(s, [{ opacity: 0, transform: `translateY(-0.7em) rotate(${rnd(-25, 25)}deg)` }, { opacity: 1, transform: 'translateY(0) rotate(0deg)' }], { duration: 420, delay: i * 28, easing: 'cubic-bezier(.34,1.56,.64,1)' }); }); },
+    hand(w) { sw.classList.add('hx-hand'); sw.textContent = w; A(sw, [{ opacity: 0, transform: 'rotate(-3deg) scale(.9)' }, { opacity: 1, transform: 'rotate(-3deg) scale(1)' }], { duration: 320 }); }
+  };
+
+  function ding() {
+    const g = groups[cur], ph = g.querySelector('.ph-s'), bz = g.querySelector('.ph-buzz');
+    const [item, amt] = ORDERS[ordIx++ % ORDERS.length];
+    count++; num.textContent = count; tItem.textContent = item; tAmt.textContent = money(amt);
+    if (reduce) { toast.style.opacity = 1; return; }
+    A(ph, [{ fill: '#5A6B7A' }, { fill: '#FFF3B0' }, { fill: '#BFF2D6' }], { duration: 500 });
+    A(bz, [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 600, easing: 'linear' });
+    A(toast, [{ opacity: 0, transform: 'translate(-50%, -14px) scale(.96)' }, { opacity: 1, transform: 'translate(-50%, 0) scale(1)' }], { duration: 300 });
+    A(num, [{ transform: 'scale(1)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out' });
+  }
+
+  function show(i, animate) {
+    const prev = cur; cur = i; const s = SCENES[i];
+    seen.add(i);
+    seenEl.textContent = seen.size === SCENES.length ? 'You’ve seen all 6. The website took orders through every one.' : `${seen.size} of 6 seen. Tap the picture for the next one.`;
+    word.textContent = s.word;
+    groups.forEach((g, k) => { g.classList.toggle('on', k === i); });
+    root.style.setProperty('--hv-bg', s.bg);
+    if (!animate) { groups.forEach((g, k) => g.setAttribute('opacity', k === i ? 1 : 0)); base.setAttribute('fill', s.bg); plain(s.word); return; }
+    const names = Object.keys(FX).filter(n => n !== lastFx); const fx = names[Math.floor(Math.random() * names.length)]; lastFx = fx; FX[fx](s.word);
+    reveal.setAttribute('fill', s.bg);
+    A(reveal, [{ transform: 'scale(0.04)' }, { transform: 'scale(1)' }], { duration: 460 }).onfinish = () => { base.setAttribute('fill', s.bg); reveal.getAnimations().forEach(a => a.cancel()); };
+    if (prev >= 0) A(groups[prev], [{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease' }).onfinish = () => groups[prev].setAttribute('opacity', 0);
+    const g = groups[i]; g.setAttribute('opacity', 1);
+    A(g, [{ opacity: 0, transform: 'scale(0.94)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 380, delay: 140 });
+    A(toast, [{ opacity: 1 }, { opacity: 0 }], { duration: 160, easing: 'ease' });
+  }
+
+  let order = [];
+  const nextIndex = () => { if (!order.length) order = SCENES.map((_, k) => k).filter(k => k !== cur).sort(() => Math.random() - .5); return order.shift(); };
+  function cycle(i) {
+    token++; timers.forEach(clearTimeout); timers = [];
+    show(i, true);
+    at(950, ding);
+    if (Math.random() < .55) at(2000, ding);
+    at(3500, () => { if (paused || !onScreen) { waitThenGo(); return; } cycle(nextIndex()); });
+  }
+  const waitThenGo = () => at(500, () => { if (paused || !onScreen) waitThenGo(); else cycle(nextIndex()); });
+
+  groups.forEach(g => { g.style.transformBox = 'fill-box'; g.style.transformOrigin = '50% 60%'; });
+  reveal.style.transformBox = 'fill-box'; reveal.style.transformOrigin = 'center';
+  if (reduce) {
+    show(0, false); ding(); ding(); ding();
+    $('.hv-frame').addEventListener('click', () => { show((cur + 1) % SCENES.length, false); ding(); });
+    pauseBtn.hidden = true;
+    return;
+  }
+  $('.hv-frame').addEventListener('click', () => cycle(nextIndex()));
+  pauseBtn.addEventListener('click', () => { paused = !paused; pauseBtn.setAttribute('aria-pressed', paused); pauseBtn.textContent = paused ? 'Play' : 'Pause'; root.classList.toggle('is-paused', paused); });
+  new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; root.classList.toggle('is-off', !onScreen); }).observe(root);
+  document.addEventListener('visibilitychange', () => { onScreen = !document.hidden; });
+  show(0, false);
+  at(600, ding);
+  at(3000, () => cycle(nextIndex()));
 })();
 </script>
