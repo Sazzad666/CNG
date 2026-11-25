@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=Bungee&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Baloo+Da+2:wght@700;800&family=Archivo:wght@400;500;600;700&family=Bungee&display=swap">
 <style>
 /* Layout: a daytime high street that becomes the visitor's own city (Dhaka, London, Dubai, New York).
    Hero (shutter goes up) → your search ends here (a ride in the rain, local to the city) → your cousin tried (comparison)
@@ -904,6 +904,20 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
 @media (max-width:420px){.jnote{grid-template-columns:28px minmax(0,1fr) auto;gap:7px;padding:6px 8px}.jnote i{width:28px;height:28px;font-size:13px}.jnote b{font-size:12.5px}.jnote em{font-size:11px}.jnote strong{font-size:13px}.notes{width:66%}}
 .searchsec .city{margin:0 0 18px}
 .vs-c.meh::before{background-color:#FFF4CC;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Ccircle cx='4.6' cy='5.2' r='1.1' fill='%232B1D0E'/%3E%3Ccircle cx='9.4' cy='5.2' r='1.1' fill='%232B1D0E'/%3E%3Cpath d='M4 9.6q3-1.2 6 0' fill='none' stroke='%232B1D0E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")}
+
+/* ---------- hero v3: smaller cards, Bengali stickers ---------- */
+.notes{left:3%;top:3%;width:44%;height:auto}
+.jnote{grid-template-columns:24px minmax(0,1fr) auto;gap:7px;padding:5px 8px;border-radius:10px;border-width:2px;box-shadow:2px 2px 0 var(--ink)}
+.jnote i{width:24px;height:24px;border-radius:7px;font-size:12px;border-width:1.5px}
+.jnote b{font-size:11.5px}.jnote em{font-size:10px}.jnote strong{font-size:12px}
+.till{right:3%;top:3%;padding:5px 9px;border-width:2.5px;border-radius:10px;box-shadow:3px 3px 0 var(--ink);transform:rotate(3deg)}
+.till small{font-size:9px}.till b{font-size:clamp(16px,1.7vw,20px)}
+.honk{font:800 clamp(12px,1.4vw,16px)/1 "Baloo Da 2","Baloo 2",sans-serif;padding:4px 8px;border-width:2px;border-radius:10px;box-shadow:2px 2px 0 var(--ink)}
+.honk.h1{left:30%;top:41%;transform:rotate(-7deg)}.honk.h2{left:2%;top:66%;transform:rotate(-4deg)}.honk.h3{right:3%;top:62%;transform:rotate(6deg)}
+.jam-svg .wheel,.jam-svg .parm,.jam-svg .crow,.jam-svg .laundry,.jam-svg .shut-tag{transform-box:fill-box}
+.jam-svg .wheel{transform-origin:center}.jam-svg .parm{transform-origin:0% 100%}.jam-svg .laundry{transform-origin:50% 0}
+@media (max-width:860px){.notes{width:52%}}
+@media (max-width:420px){.notes{width:56%}.jnote{grid-template-columns:20px minmax(0,1fr) auto;gap:5px;padding:4px 6px}.jnote i{width:20px;height:20px;font-size:10px}.jnote b{font-size:10.5px}.jnote em{font-size:9px}.jnote strong{font-size:10.5px}.till small{font-size:8px}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1002,28 +1016,64 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
         </div>
 
       </div>
-      <button type="button" class="jam" id="jam" aria-label="Stuck in Dhaka traffic while the shop keeps selling online. Tap for another order.">
+      <button type="button" class="jam" id="jam" aria-label="Stuck in Dhaka traffic in a CNG while Rahman Traders, shutter down, keeps selling online. Tap for another order.">
         <svg class="jam-svg" viewBox="0 0 520 520" aria-hidden="true">
           <rect width="520" height="520" fill="#A8EBDC"/>
-          <g class="city-bg" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round">
-            <rect x="-6" y="150" width="120" height="200" fill="#FFF4CC"/><rect x="108" y="96" width="96" height="254" fill="#EE8AA0"/><rect x="198" y="176" width="90" height="174" fill="#FFD23F"/><rect x="284" y="120" width="150" height="230" fill="#FFF4CC"/><rect x="428" y="190" width="100" height="160" fill="#EE8AA0"/>
-            <g fill="#2B1D0E" stroke="none" opacity=".75"><rect x="18" y="176" width="20" height="24" rx="3"/><rect x="58" y="176" width="20" height="24" rx="3"/><rect x="18" y="222" width="20" height="24" rx="3"/><rect x="58" y="222" width="20" height="24" rx="3"/><rect x="128" y="122" width="18" height="22" rx="3"/><rect x="166" y="122" width="18" height="22" rx="3"/><rect x="128" y="166" width="18" height="22" rx="3"/><rect x="166" y="166" width="18" height="22" rx="3"/><rect x="216" y="200" width="18" height="22" rx="3"/><rect x="252" y="200" width="18" height="22" rx="3"/><rect x="448" y="214" width="18" height="22" rx="3"/><rect x="486" y="214" width="18" height="22" rx="3"/></g>
-            <g class="bill"><rect x="296" y="136" width="126" height="78" rx="8" fill="#fff"/><text x="359" y="164" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="17" fill="#2B1D0E" stroke="none">YOUR SHOP</text><text x="359" y="186" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="700" font-size="12" fill="#C0183F" stroke="none">Open 24/7 online</text><text x="359" y="203" text-anchor="middle" font-family="Archivo,sans-serif" font-size="10" fill="#5C4632" stroke="none">order in one tap</text></g>
-            <path d="M284 230h150" fill="none"/>
+          <!-- tangled power lines and a crow -->
+          <g fill="none" stroke="#2B1D0E" stroke-width="2.5" stroke-linecap="round"><path d="M0 52Q260 110 520 44"/><path d="M0 70Q230 132 520 62"/><path d="M0 92Q300 118 520 90"/><path d="M372 80q18 34 40 4q-14-30-40-4z"/><path d="M380 86q30 10 26-16"/></g>
+          <g class="crow" transform="translate(170 80)"><path d="M-14-6q6-14 22-10l10 4-8 3q2 10-8 12l-14 2z" fill="#2B1D0E"/><circle cx="8" cy="-12" r="1.6" fill="#fff"/><path d="M-4 3v6M2 3v6" stroke="#2B1D0E" stroke-width="2"/></g>
+          <!-- old Dhaka buildings with laundry on the balcony -->
+          <g stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round">
+            <rect x="-6" y="118" width="128" height="230" fill="#FFF4CC"/><rect x="116" y="84" width="150" height="264" fill="#EE8AA0"/>
+            <g fill="#2B1D0E" stroke="none" opacity=".72"><rect x="16" y="140" width="22" height="26" rx="3"/><rect x="62" y="140" width="22" height="26" rx="3"/><rect x="16" y="190" width="22" height="26" rx="3"/><rect x="62" y="190" width="22" height="26" rx="3"/><rect x="136" y="104" width="20" height="24" rx="3"/><rect x="178" y="104" width="20" height="24" rx="3"/><rect x="220" y="104" width="20" height="24" rx="3"/></g>
+            <rect x="130" y="160" width="122" height="8" fill="#FFF4CC"/><path d="M134 172v26M248 172v26M134 186h114" fill="none" stroke-width="3"/>
+            <g class="laundry" stroke-width="2.5"><path d="M138 150h110" fill="none"/><rect x="146" y="150" width="16" height="22" fill="#FFD23F"/><rect x="170" y="150" width="20" height="16" fill="#3BCEAC"/><rect x="198" y="150" width="14" height="26" fill="#C0183F"/><rect x="220" y="150" width="20" height="18" fill="#fff"/></g>
+            <rect x="140" y="214" width="30" height="20" rx="3" fill="#E4E8EC"/><path d="M146 220h18M146 226h18" stroke-width="2"/>
+            <rect x="10" y="236" width="96" height="30" rx="5" fill="#FFD23F"/><text x="58" y="258" text-anchor="middle" font-family="Baloo Da 2,Baloo 2,sans-serif" font-weight="800" font-size="19" fill="#2B1D0E" stroke="none">চা · বিস্কুট</text>
           </g>
-          <g class="tlight"><rect x="472" y="236" width="8" height="114" fill="#2B1D0E"/><rect x="456" y="150" width="40" height="96" rx="10" fill="#2B1D0E"/><circle class="lr" cx="476" cy="172" r="12" fill="#EE4266"/><circle cx="476" cy="198" r="10" fill="#5C4632"/><circle cx="476" cy="224" r="10" fill="#5C4632"/></g>
-          <rect y="348" width="520" height="172" fill="#5A4E44"/><path d="M0 348h520" stroke="#2B1D0E" stroke-width="5"/><path class="lane" d="M0 430h520" stroke="#FFF4CC" stroke-width="5" stroke-dasharray="34 24"/>
-          <g class="veh v-bus"><rect x="14" y="262" width="250" height="120" rx="18" fill="#C0183F" stroke="#2B1D0E" stroke-width="5"/><rect x="14" y="336" width="250" height="18" fill="#0F7A63" stroke="#2B1D0E" stroke-width="4"/><g fill="#BFE6F0" stroke="#2B1D0E" stroke-width="4"><rect x="34" y="282" width="44" height="40" rx="6"/><rect x="88" y="282" width="44" height="40" rx="6"/><rect x="142" y="282" width="44" height="40" rx="6"/><rect x="196" y="282" width="50" height="40" rx="6"/></g><rect x="80" y="244" width="110" height="22" rx="6" fill="#FFD23F" stroke="#2B1D0E" stroke-width="4"/><text x="135" y="260" text-anchor="middle" font-family="Bungee,Impact,sans-serif" font-size="13" fill="#2B1D0E">MIRPUR 10</text><circle cx="66" cy="384" r="20" fill="#2B1D0E"/><circle cx="214" cy="384" r="20" fill="#2B1D0E"/><circle cx="66" cy="384" r="7" fill="#C9BEA6"/><circle cx="214" cy="384" r="7" fill="#C9BEA6"/></g>
-          <g class="veh v-car"><path d="M300 380v-34q4-20 26-24l24-26h76l26 26q22 4 26 24v34z" fill="#fff" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M354 300h62l18 24h-98z" fill="#BFE6F0" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round"/><circle cx="340" cy="384" r="18" fill="#2B1D0E"/><circle cx="452" cy="384" r="18" fill="#2B1D0E"/></g>
-          <g class="veh v-rick"><circle cx="58" cy="468" r="36" fill="none" stroke="#2B1D0E" stroke-width="6"/><path d="M58 432v72M22 468h72M33 443l50 50M83 443l-50 50" stroke="#2B1D0E" stroke-width="2.5"/><path d="M14 430q0-70 84-70v70z" fill="#EE4266" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M30 404h60M24 418h70" stroke="#FFD23F" stroke-width="5"/><g fill="#3BCEAC" stroke="#2B1D0E" stroke-width="2"><circle cx="44" cy="388" r="5"/><circle cx="70" cy="380" r="5"/></g><path d="M98 430h50l12 26" fill="none" stroke="#2B1D0E" stroke-width="6" stroke-linecap="round"/></g>
-          <g class="veh v-cng"><path d="M176 494v-94q0-56 70-60h52q72 4 72 60v94z" fill="#0F7A63" stroke="#2B1D0E" stroke-width="6" stroke-linejoin="round"/><path d="M200 494v-90q0-38 48-42h46q44 4 46 42v90" fill="#2B1D0E"/><path d="M176 360h194" stroke="#FFD23F" stroke-width="6"/>
-            <g class="owner"><path d="M226 494c0-48 18-70 46-70s46 22 46 70z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="4"/><circle cx="272" cy="402" r="26" fill="#C98B5E" stroke="#2B1D0E" stroke-width="4"/><path d="M246 396c2-22 16-30 28-30s26 8 26 26q-8-12-26-12t-28 16z" fill="#2B1D0E"/><path class="eyes" d="M260 404h8M280 404h8" stroke="#2B1D0E" stroke-width="4" stroke-linecap="round"/><path class="mouth" d="M264 416q8 6 16 0" fill="none" stroke="#2B1D0E" stroke-width="3.5" stroke-linecap="round"/><path d="M300 470l14-32" stroke="#C98B5E" stroke-width="12" stroke-linecap="round"/><rect class="jph" x="304" y="414" width="22" height="34" rx="5" fill="#5C4632" stroke="#2B1D0E" stroke-width="3.5"/></g>
-            <circle cx="212" cy="496" r="22" fill="#2B1D0E"/><circle cx="342" cy="496" r="22" fill="#2B1D0E"/><circle cx="212" cy="496" r="8" fill="#C9BEA6"/><circle cx="342" cy="496" r="8" fill="#C9BEA6"/></g>
-          <g class="veh v-taxi"><path d="M392 500v-46q4-22 28-26l30-30h80v102z" fill="#FFD23F" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M452 408h72v26h-96z" fill="#BFE6F0" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round"/><circle cx="428" cy="504" r="18" fill="#2B1D0E"/></g>
+          <!-- the shop: shutter down, still selling -->
+          <g class="shop" stroke="#2B1D0E" stroke-width="4" stroke-linejoin="round">
+            <rect x="262" y="118" width="262" height="240" fill="#FFE899"/>
+            <rect x="274" y="128" width="236" height="58" rx="7" fill="#0F7A63"/>
+            <text x="392" y="160" text-anchor="middle" font-family="Baloo Da 2,Baloo 2,sans-serif" font-weight="800" font-size="25" fill="#FFD23F" stroke="none">রহমান ট্রেডার্স</text>
+            <text x="392" y="178" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="700" font-size="10" letter-spacing="2" fill="#FFF4CC" stroke="none">RAHMAN TRADERS · FABRICS</text>
+            <g stroke-width="3"><rect x="268" y="190" width="42" height="20" fill="#EE4266"/><rect x="310" y="190" width="42" height="20" fill="#fff"/><rect x="352" y="190" width="42" height="20" fill="#EE4266"/><rect x="394" y="190" width="42" height="20" fill="#fff"/><rect x="436" y="190" width="42" height="20" fill="#EE4266"/><rect x="478" y="190" width="42" height="20" fill="#fff"/></g>
+            <rect x="286" y="212" width="214" height="146" fill="#B8BDC2"/>
+            <path d="M286 224h214M286 236h214M286 248h214M286 260h214M286 272h214M286 284h214M286 296h214M286 308h214M286 320h214M286 332h214M286 344h214" stroke="#8E959C" stroke-width="2"/>
+            <rect x="380" y="342" width="16" height="12" rx="2" fill="#FFD23F" stroke-width="2.5"/>
+            <g class="shut-tag" transform="rotate(-6 393 268)"><rect x="318" y="244" width="150" height="48" rx="8" fill="#FFD23F"/><text x="393" y="265" text-anchor="middle" font-family="Baloo Da 2,Baloo 2,sans-serif" font-weight="800" font-size="16" fill="#2B1D0E" stroke="none">অনলাইনে খোলা</text><text x="393" y="283" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="800" font-size="11" fill="#C0183F" stroke="none">OPEN ONLINE 24/7</text></g>
+          </g>
+          <g class="parcels"></g>
+          <!-- road -->
+          <rect y="352" width="520" height="168" fill="#5A4E44"/><path d="M0 352h520" stroke="#2B1D0E" stroke-width="5"/><path d="M0 438h520" stroke="#FFF4CC" stroke-width="4" stroke-dasharray="30 26"/>
+          <!-- local bus, dented, full, one passenger hanging off the door -->
+          <g class="veh v-bus"><path d="M8 392v-96q0-14 14-14h208q14 0 16 14l4 96z" fill="#C0183F" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M8 352h240" stroke="#0F7A63" stroke-width="14"/><path d="M8 345h240M8 359h240" stroke="#2B1D0E" stroke-width="3"/><path d="M60 370l8 6 6-4" fill="none" stroke="#2B1D0E" stroke-width="2.5"/>
+            <g fill="#BFE6F0" stroke="#2B1D0E" stroke-width="3.5"><rect x="22" y="298" width="40" height="36" rx="5"/><rect x="70" y="298" width="40" height="36" rx="5"/><rect x="118" y="298" width="40" height="36" rx="5"/><rect x="166" y="298" width="40" height="36" rx="5"/></g>
+            <g fill="#8C5A3C"><circle cx="34" cy="322" r="8"/><circle cx="50" cy="324" r="7"/><circle cx="90" cy="320" r="8"/><circle cx="138" cy="322" r="8"/><circle cx="182" cy="320" r="8"/><circle cx="196" cy="324" r="7"/></g>
+            <rect x="212" y="296" width="30" height="70" fill="#2B1D0E"/><g class="hanger"><circle cx="252" cy="304" r="8" fill="#C98B5E" stroke="#2B1D0E" stroke-width="2.5"/><path d="M246 314l-6 30 14 2 6-26z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="2.5"/><path d="M246 316l-8-10" stroke="#C98B5E" stroke-width="5" stroke-linecap="round"/></g>
+            <rect x="58" y="268" width="120" height="22" rx="6" fill="#FFD23F" stroke="#2B1D0E" stroke-width="3.5"/><text x="118" y="285" text-anchor="middle" font-family="Baloo Da 2,Baloo 2,sans-serif" font-weight="800" font-size="15" fill="#2B1D0E">মিরপুর ১০ · গুলিস্তান</text>
+            <circle cx="56" cy="394" r="18" fill="#2B1D0E"/><circle cx="206" cy="394" r="18" fill="#2B1D0E"/><circle cx="56" cy="394" r="6" fill="#C9BEA6"/><circle cx="206" cy="394" r="6" fill="#C9BEA6"/></g>
+          <!-- rickshaw with painted hood and back panel, the puller waiting -->
+          <g class="veh v-rick"><g class="wheel"><circle cx="54" cy="474" r="34" fill="none" stroke="#2B1D0E" stroke-width="6"/><path d="M54 440v68M20 474h68M30 450l48 48M78 450l-48 48" stroke="#2B1D0E" stroke-width="2.2"/></g>
+            <path d="M10 436q0-74 90-74v74z" fill="#EE4266" stroke="#2B1D0E" stroke-width="5" stroke-linejoin="round"/><path d="M22 410q30-26 70-28M16 424q40-30 84-30" fill="none" stroke="#FFD23F" stroke-width="4"/><g fill="#3BCEAC" stroke="#2B1D0E" stroke-width="2"><circle cx="40" cy="394" r="5"/><circle cx="66" cy="384" r="5"/><circle cx="88" cy="398" r="4"/></g>
+            <rect x="14" y="436" width="86" height="26" rx="4" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="3.5"/><g fill="#EE4266"><circle cx="34" cy="449" r="6"/><circle cx="80" cy="449" r="6"/></g><circle cx="57" cy="449" r="7" fill="#FFD23F" stroke="#2B1D0E" stroke-width="2"/><path d="M42 449h6M66 449h6" stroke="#0F7A63" stroke-width="3"/>
+            <path d="M100 450h46l10 24" fill="none" stroke="#2B1D0E" stroke-width="5" stroke-linecap="round"/>
+            <g class="puller"><circle cx="146" cy="402" r="11" fill="#8C5A3C" stroke="#2B1D0E" stroke-width="3"/><path d="M134 398q12-10 24 0" fill="none" stroke="#fff" stroke-width="4"/><path d="M138 414q8 26 2 34h16q4-20-4-34z" fill="#fff" stroke="#2B1D0E" stroke-width="3"/><path d="M140 448l-4 22h20l-2-22z" fill="#0F7A63" stroke="#2B1D0E" stroke-width="3"/><path d="M152 422l14 16" stroke="#8C5A3C" stroke-width="6" stroke-linecap="round"/></g>
+            <circle cx="160" cy="490" r="18" fill="none" stroke="#2B1D0E" stroke-width="5"/></g>
+          <!-- the CNG, cage doors, our shop owner inside on the phone -->
+          <g class="veh v-cng"><path d="M180 510v-90q0-56 66-60h50q70 4 70 60v90z" fill="#0F7A63" stroke="#2B1D0E" stroke-width="6" stroke-linejoin="round"/><path d="M202 510v-86q0-36 46-40h44q42 4 44 40v86" fill="#2B1D0E"/><path d="M180 380h190" stroke="#FFD23F" stroke-width="6"/>
+            <g class="owner"><path d="M228 510c0-46 18-66 44-66s44 20 44 66z" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="4"/><circle cx="270" cy="424" r="24" fill="#C98B5E" stroke="#2B1D0E" stroke-width="4"/><path d="M246 418c2-20 15-28 26-28s24 8 24 24q-8-11-24-11t-26 15z" fill="#2B1D0E"/><path d="M258 426q4 3 8 0M276 426q4 3 8 0" fill="none" stroke="#2B1D0E" stroke-width="3" stroke-linecap="round"/><path class="mouth" d="M262 436q8 6 16 0" fill="none" stroke="#2B1D0E" stroke-width="3.5" stroke-linecap="round"/><path d="M298 488l12-30" stroke="#C98B5E" stroke-width="11" stroke-linecap="round"/><rect class="jph" x="300" y="432" width="20" height="32" rx="5" fill="#5C4632" stroke="#2B1D0E" stroke-width="3"/></g>
+            <g stroke="#2B1D0E" stroke-width="3" opacity=".85"><path d="M206 430v80M336 430v80"/><path d="M216 450v60M326 450v60"/></g>
+            <circle cx="214" cy="512" r="20" fill="#2B1D0E"/><circle cx="340" cy="512" r="20" fill="#2B1D0E"/><circle cx="214" cy="512" r="7" fill="#C9BEA6"/><circle cx="340" cy="512" r="7" fill="#C9BEA6"/></g>
+          <!-- traffic police on his box, whistle ready -->
+          <g class="veh v-cop"><rect x="420" y="456" width="74" height="40" rx="4" fill="#FFF4CC" stroke="#2B1D0E" stroke-width="4"/><path d="M420 470h74" stroke="#EE4266" stroke-width="6"/><path d="M420 482h74" stroke="#fff" stroke-width="5"/>
+            <path d="M440 456v-30M474 456v-30" stroke="#2B1D0E" stroke-width="9" stroke-linecap="round"/><path d="M434 432q0-34 23-34t23 34z" fill="#F2F2EC" stroke="#2B1D0E" stroke-width="3.5"/><path d="M438 404h38v22h-38z" fill="#C5E84B" stroke="#2B1D0E" stroke-width="3"/>
+            <circle cx="457" cy="384" r="13" fill="#8C5A3C" stroke="#2B1D0E" stroke-width="3"/><path d="M442 378q15-14 30 0z" fill="#1E3A8A" stroke="#2B1D0E" stroke-width="2.5"/><path d="M440 378h34" stroke="#2B1D0E" stroke-width="3"/>
+            <g class="parm"><path d="M476 404l22-26" stroke="#F2F2EC" stroke-width="9" stroke-linecap="round"/><path d="M476 404l22-26" fill="none" stroke="#2B1D0E" stroke-width="1.5"/><path d="M498 378l2-12" stroke="#8C5A3C" stroke-width="7" stroke-linecap="round"/><rect x="494" y="358" width="12" height="7" rx="3" fill="#E4E8EC" stroke="#2B1D0E" stroke-width="2"/></g></g>
         </svg>
         <span class="notes" aria-hidden="true"></span>
-        <span class="honk h1" aria-hidden="true">PAAAP!</span><span class="honk h2" aria-hidden="true">PEEP PEEP</span><span class="honk h3" aria-hidden="true">BHOOO!</span>
-        <span class="till" aria-hidden="true"><small>Sold while stuck</small><b>৳<span id="tillAmt">0</span></b><em>Light: still red</em></span>
+        <span class="honk h1" aria-hidden="true">ভোঁওও!</span><span class="honk h2" aria-hidden="true">ট্রিং ট্রিং!</span><span class="honk h3" aria-hidden="true">ফুররর!</span>
+        <span class="till" aria-hidden="true"><small>Sold while stuck</small><b>৳<span id="tillAmt">0</span></b></span>
       </button>
     </div>
     <div class="ticker" aria-hidden="true"><div class="tk-track"><span>Websites</span><span>Online shops</span><span>Facebook ads</span><span>Google &amp; SEO</span><span>Branding</span><span>Mobile apps</span><span>Websites</span><span>Online shops</span><span>Facebook ads</span><span>Google &amp; SEO</span><span>Branding</span><span>Mobile apps</span></div></div>
@@ -2155,7 +2205,7 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
   const OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', SPRING = 'cubic-bezier(.34,1.56,.64,1)';
   const $ = s => jam.querySelector(s), $$ = s => [...jam.querySelectorAll(s)];
   const A = (el, kf, o = {}) => el.animate(kf, Object.assign({ fill: 'both', easing: OUT }, o));
-  const notes = $('.notes'), till = document.getElementById('tillAmt'), ph = $('.jph'), lr = $('.lr');
+  const notes = $('.notes'), till = document.getElementById('tillAmt'), ph = $('.jph');
   const ORDERS = [
     ['৳', 'New order', '2 × Katan silk', 2400, '#FFD23F'],
     ['✓', 'bKash received', 'Order #1042', 1500, '#3BCEAC'],
@@ -2167,10 +2217,10 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
   let n = 0, total = 0, shown = 0;
   const money = v => v.toLocaleString('en-US');
   const GAP = () => (notes.querySelector('.jnote') ? notes.querySelector('.jnote').offsetHeight : 54) + 8;
-  const layout = () => { const g = GAP(); [...notes.children].forEach((c, k) => { c.style.transform = `translateY(${k * g}px)`; c.style.opacity = k < 3 ? 1 : 0; if (k >= 3) setTimeout(() => c.remove(), 320); }); };
+  const layout = () => { const g = GAP(); [...notes.children].forEach((c, k) => { c.style.transform = `translateY(${k * g}px)`; c.style.opacity = k < 2 ? 1 : 0; if (k >= 2) setTimeout(() => c.remove(), 320); }); };
   const roll = (from, to) => { if (reduce) { till.textContent = money(to); return; } const t0 = performance.now(); const step = now => { const k = Math.min(1, (now - t0) / 520); till.textContent = money(Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
 
-  function order(withHonk) {
+  let order = function (withHonk) {
     const [ic, title, item, amt, col] = ORDERS[n++ % ORDERS.length];
     const el = document.createElement('span'); el.className = 'jnote';
     el.innerHTML = `<i style="background:${col}">${ic}</i><span><b>${title}</b><em>${item}</em></span><strong>${amt ? '৳' + money(amt) : ''}</strong>`;
@@ -2188,20 +2238,44 @@ figure.stk{padding:8px;background:#fff;border-radius:22px;box-shadow:6px 6px 0 v
     if (withHonk && !reduce) {
       const hs = $$('.honk'), h = hs[shown++ % hs.length], base = getComputedStyle(h).transform;
       A(h, [{ opacity: 0, transform: `${base} scale(.8)` }, { opacity: 1, transform: `${base} scale(1.12)`, offset: .25 }, { opacity: 1, transform: `${base} scale(1)`, offset: .4 }, { opacity: 1, transform: `${base} scale(1)`, offset: .85 }, { opacity: 0, transform: `${base} scale(.96)` }], { duration: 1300, delay: 380, fill: 'none' });
-      const v = jam.querySelector(['.v-bus', '.v-taxi', '.v-rick'][(shown - 1) % 3]);
+      const v = jam.querySelector(['.v-bus', '.v-rick', '.v-cop'][(shown - 1) % 3]);
       A(v, [{ transform: 'translateY(0)' }, { transform: 'translateY(-3px)' }, { transform: 'translateY(0)' }, { transform: 'translateY(-2px)' }, { transform: 'translateY(0)' }], { duration: 360, delay: 380, easing: 'linear', fill: 'none' });
     }
-  }
+  };
 
-  if (reduce) { order(); order(); order(); return; }
+  // each order: a parcel pops out from under the shutter and flies off to its buyer
+  const parcels = jam.querySelector('.parcels'), NS = 'http://www.w3.org/2000/svg';
+  const sendParcel = () => {
+    const g = document.createElementNS(NS, 'g');
+    g.innerHTML = '<rect x="-13" y="-11" width="26" height="22" rx="3" fill="#E7A94A" stroke="#2B1D0E" stroke-width="3"/><path d="M-13-3h26M0-11v22" stroke="#2B1D0E" stroke-width="2"/>';
+    parcels.appendChild(g);
+    const dx = [150, 120, 170][n % 3];
+    const an = g.animate([
+      { transform: 'translate(388px,352px) scale(.6) rotate(0deg)', opacity: 0 },
+      { transform: 'translate(388px,330px) scale(1) rotate(-8deg)', opacity: 1, offset: .2 },
+      { transform: `translate(${388 + dx * .5}px,250px) scale(1) rotate(10deg)`, opacity: 1, offset: .55 },
+      { transform: `translate(${388 + dx}px,170px) scale(.7) rotate(24deg)`, opacity: 0 }
+    ], { duration: 1100, easing: 'cubic-bezier(.3,.6,.4,1)' });
+    an.onfinish = () => g.remove();
+  };
+  const wave = () => {
+    A($('.parm'), [{ transform: 'rotate(0deg)' }, { transform: 'rotate(-28deg)' }, { transform: 'rotate(6deg)' }, { transform: 'rotate(-20deg)' }, { transform: 'rotate(0deg)' }], { duration: 760, easing: 'ease-in-out', fill: 'none' });
+    const x0 = crowX; crowX = crowX >= 300 ? 120 : crowX + 36; const y = x => { const u = x / 520; return (1 - u) * (1 - u) * 52 + 2 * u * (1 - u) * 110 + u * u * 44 - 2; };
+    A($('.crow'), [{ transform: `translate(${x0}px,${y(x0)}px)` }, { transform: `translate(${(x0 + crowX) / 2}px,${Math.min(y(x0), y(crowX)) - 18}px)` }, { transform: `translate(${crowX}px,${y(crowX)}px)` }], { duration: 420, easing: 'ease-out' });
+  };
+  let crowX = 170;
+  const origOrder = order;
+  order = withHonk => { origOrder(withHonk); if (!reduce) { setTimeout(sendParcel, 180); setTimeout(wave, 380); A($('.shut-tag'), [{ transform: 'scale(1)' }, { transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out', fill: 'none' }); } };
+
+  if (reduce) { order(); order(); return; }
 
   // 1. the jam forms: each vehicle rolls in and nose-dips to a stop (bigger ones first, gaps shrink)
-  const vehs = [['.v-bus', 0, 560], ['.v-car', 140, 260], ['.v-rick', 240, 220], ['.v-cng', 320, 300], ['.v-taxi', 420, 240]];
+  const vehs = [['.v-bus', 0, 560], ['.v-rick', 200, 240], ['.v-cng', 300, 320]];
   vehs.forEach(([s, d, dist]) => A($(s), [{ transform: `translateX(-${dist}px)` }, { transform: 'translateX(6px) rotate(.6deg)', offset: .78 }, { transform: 'translateX(0) rotate(0deg)' }], { duration: 760, delay: 300 + d, easing: 'cubic-bezier(.2,.8,.3,1)' }));
   // 2. the light snaps to red as the last car stops
-  A(lr, [{ fill: '#5C4632' }, { fill: '#EE4266' }], { duration: 90, delay: 1250, easing: 'linear' });
-  A($('.tlight'), [{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 300, delay: 1250, easing: 'ease-out', fill: 'none' });
-  A($('.bill'), [{ opacity: 0, transform: 'translateY(-10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 500, delay: 200 });
+  A($('.v-cop'), [{ opacity: 0, transform: 'translateY(30px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 480, delay: 900, easing: SPRING });
+  A($('.wheel'), [{ transform: 'rotate(-540deg)' }, { transform: 'rotate(0deg)' }], { duration: 960, delay: 500, easing: 'cubic-bezier(.2,.8,.3,1)' });
+  A($('.laundry'), [{ transform: 'rotate(0deg)' }, { transform: 'rotate(2deg)' }, { transform: 'rotate(-1.5deg)' }, { transform: 'rotate(0deg)' }], { duration: 2400, delay: 400, iterations: 2, easing: 'ease-in-out', fill: 'none' });
   A(jam.querySelector('.till'), [{ opacity: 0, transform: 'rotate(18deg) scale(1.3)' }, { opacity: 1, transform: 'rotate(4deg) scale(1)' }], { duration: 480, delay: 1350, easing: SPRING });
   // 3. orders arrive while nothing moves: six of them, then the scene rests
   let timer = 0, fired = 0, visible = true;
